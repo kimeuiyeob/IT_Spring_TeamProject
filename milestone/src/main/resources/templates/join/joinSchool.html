@@ -28,7 +28,7 @@
                 </div>
                 <input class="inputCos" name="email" id="email" type="email" placeholder="이메일을 입력해 주세요.">
                 <div class="flexRow margin-top-4" style="display: none;">
-                    <div class="warningMsg">이메일 형식이 유효하지 않습니다.</div>
+                    <div class="warningMsg">이메일을 입력해 주세요.</div>
                 </div>
             </div>
             <div class="inputWrap flexCol padding-bottom-8">
@@ -39,14 +39,14 @@
                 <input class="inputCos" name="password" id="password" type="password"
                        placeholder="비밀번호를 입력해 주세요.(8자리 이상)">
                 <div class="flexRow margin-top-4" style="display: none;">
-                    <div class="warningMsg">비밀번호 형식이 유효하지 않습니다.</div>
+                    <div class="warningMsg">비밀번호를 입력해 주세요.</div>
                 </div>
             </div>
             <div class="inputWrap flexCol">
                 <input class="inputCos" name="checkPassword" id="checkPassword" type="password"
                        placeholder="비밀번호를 한 번 더 입력해 주세요.">
                 <div class="flexRow margin-top-4" style="display: none;">
-                    <div class="warningMsg">비밀번호가 일치하지 않습니다.</div>
+                    <div class="warningMsg">비밀번호를 다시 입력해 주세요.</div>
                 </div>
             </div>
             <div class="inputWrap flexCol">
@@ -56,7 +56,7 @@
                 </div>
                 <input class="inputCos" name="name" id="name" type="text" placeholder="이름을 입력해 주세요.">
                 <div class="flexRow margin-top-4" style="display: none;">
-                    <div class="warningMsg">이름을 정확히 입력해 주세요.</div>
+                    <div class="warningMsg">이름을 입력해 주세요.</div>
                 </div>
             </div>
             <div class="inputWrap flexCol">
@@ -79,12 +79,13 @@
                     <input class="inputCos" name="address" id="address" type="text"
                            placeholder="주소 검색 버튼을 이용해 주세요"
                            value="" disabled>
+                    <input type="text" id="addressFocus">
                     <button type="button" class="searchAddressBtn" id="searchAddressBtn" onclick="find()">주소
                         검색
                     </button>
                 </div>
                 <div class="margin-top-4" style="display: none;">
-                    <div class="warningMsg">보육원 주소를 입력해 주세요.</div>
+                    <div class="warningMsg">보육원 주소를 검색해 주세요.</div>
                 </div>
             </div>
             <div class="inputWrap flexCol">
@@ -95,7 +96,7 @@
                 <input class="inputCos" name="addressDetail" id="addressDetail" type="text"
                        placeholder="상세 주소를 입력해 주세요">
                 <div class="margin-top-4" style="display: none;">
-                    <div class="warningMsg">이름을 정확히 입력해 주세요.</div>
+                    <div class="warningMsg">상세주소가 없다면 주소지의 특징을 입력해 주세요.</div>
                 </div>
             </div>
             <div class="inputWrap flexCol">
@@ -113,7 +114,7 @@
                 <input class="inputCos" name="childPersonnel" id="childPersonnel" type="text"
                        placeholder="0">
                 <div class="margin-top-6" style="display: none;">
-                    <div class="warningMsg">이름을 정확히 입력해 주세요.</div>
+                    <div class="warningMsg">보육원 아이들 수를 입력해 주세요.</div>
                 </div>
             </div>
             <div class="inputWrap flexCol">
@@ -150,7 +151,7 @@
                         </div>
                     </div>
                     <div class="margin-top-6" style="display: none;">
-                        <div class="warningMsg">이름을 정확히 입력해 주세요.</div>
+                        <div class="warningMsg">은행을 선택해 주세요.</div>
                     </div>
                 </div>
                 <div class="margin-bottom-8 flexRow">
@@ -160,7 +161,7 @@
                 <input class="inputCos" name="accountNumber" id="accountNumber" type="text"
                        placeholder=" - 를 제외한 숫자만 입력해 주세요">
                 <div class="margin-top-6" style="display: none;">
-                    <div class="warningMsg">이름을 정확히 입력해 주세요.</div>
+                    <div class="warningMsg">계좌 번호를 입력해 주세요.</div>
                 </div>
             </div>
             <div class="inputWrap flexCol padding-bottom-8">
@@ -173,14 +174,14 @@
                     <button type="button" class="certificationBtn"><span>인증번호 받기</span></button>
                 </div>
                 <div class="flexRow margin-top-4" style="display: none;">
-                    <div class="warningMsg">전화번호를 정확히 입력해 주세요</div>
+                    <div class="warningMsg">전화번호를 입력해 주세요.</div>
                 </div>
             </div>
             <div class="inputWrap flexCol">
                 <input class="inputCos" name="certification" id="certification" type="text"
                        placeholder="인증번호를 입력해 주세요." disabled>
                 <div class="flexRow margin-top-4" style="display: none;">
-                    <div class="warningMsg">인증번호가 일치하지 않습니다.</div>
+                    <div class="warningMsg">인증번호를 입력해 주세요.</div>
                 </div>
             </div>
             <div class="inputWrap flexCol">
@@ -191,7 +192,7 @@
                     <input class="inputCos" name="plusPhone" id="plusPhone" type="text" placeholder="전화번호를 입력해 주세요.">
                 </div>
                 <div class="flexRow margin-top-4" style="display: none;">
-                    <div class="warningMsg">전화번호를 정확히 입력해 주세요</div>
+                    <div class="warningMsg">전화번호를 정확히 입력해 주세요.</div>
                 </div>
             </div>
         </form>
@@ -248,7 +249,7 @@
                 </label>
             </div>
         </div>
-        <button class="joinBtn" form="joinForm">버튼만 누르면 가입완료!</button>
+        <button type = "button" class="joinBtn" form="joinForm">버튼만 누르면 가입완료!</button>
     </div>
     <div class="joinFooter">
         마일스톤은 회원님의 원할한 서비스 이용에 필요한 정보를
