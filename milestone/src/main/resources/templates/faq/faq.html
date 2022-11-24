@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>faq</title>
+</head>
+
+<!-- ======================================헤더/푸터======================================== -->
+
+<link href="/css/faq/faq.css" rel="stylesheet"/>
+<link rel="icon" href="/imgs/fix/favicon.png">
+
+<link rel="stylesheet" href="/css/fix/header.css">
+<link rel="stylesheet" href="/css/fix/footer.css">
+
+<!-- ================================================================================================================ -->
+<body>
+
+<header th:replace="/fix/header.html :: header"></header>
+
+<!-- ================================================================================================================ -->
+<main role="main">
+    <div class="container-divider"></div>
+    <div class="container">
+
+        <div class="category-container">
+            <div class="category-content">
+                <header class="page-header">
+                    <h1>
+                        <div class="page-title">FAQ</div>
+                    </h1>
+
+                </header>
+
+                <div class="section-tree">
+
+                    <section class="section" style="padding-top: 30px;">
+                        <h3 class="section-tree-title">
+                            <a href="javascirpt:void(0)" style="cursor: default">자주 묻는 질문</a>
+                        </h3>
+
+                        <ul class="article-list">
+
+                            <li class="article-list-item article-promoted">
+
+                                <span data-title="승격된 문서" class="icon-star"></span>
+                                <div>
+                                    <img src="/imgs/notice/notice.png" alt="이미지" width="20px" height="20px"
+                                         style=" margin-bottom :-3px; margin-right: -3px"/>
+                                    <a href="/faq/faq1" class="moveFaq1">&nbspMilestone 어떻게 이용하나요?</a>
+                                </div>
+
+                            </li>
+
+                            <li class="article-list-item article-promoted">
+
+                                <span data-title="승격된 문서" class="icon-star"></span>
+                                <div>
+                                    <img src="/imgs/notice/notice.png" alt="이미지" width="20px" height="20px"
+                                         style=" margin-bottom :-3px; margin-right: -3px"/>
+                                    <a href="/faq/faq2" class="moveFaq2">&nbspMilestone 닉네임은 어떻게 변경하나요?</a>
+                                </div>
+                            </li>
+
+                            <li class="article-list-item article-promoted">
+
+                                <span data-title="승격된 문서" class="icon-star"></span>
+                                <div>
+                                    <img src="/imgs/notice/notice.png" alt="이미지" width="20px" height="20px"
+                                         style=" margin-bottom :-3px; margin-right: -3px"/>
+                                    <a href="/faq/faq3" class="moveFaq3">&nbspMilestone 회원가입은 어떻게 진행하나요?</a>
+                                </div>
+                            </li>
+
+                            <li class="article-list-item article-promoted">
+
+                                <span data-title="승격된 문서" class="icon-star"></span>
+                                <div>
+                                    <img src="/imgs/notice/notice.png" alt="이미지" width="20px" height="20px"
+                                         style=" margin-bottom :-3px; margin-right: -3px"/>
+                                    <a href="/faq/faq4" class="moveFaq4">&nbspMilestone 휴대폰 재인증은 어떻게 하나요?</a>
+                                </div>
+                            </li>
+
+                            <li class="article-list-item article-promoted">
+
+                                <span data-title="승격된 문서" class="icon-star"></span>
+                                <div>
+                                    <img src="/imgs/notice/notice.png" alt="이미지" width="20px" height="20px"
+                                         style=" margin-bottom :-3px; margin-right: -3px"/>
+                                    <a href="/faq/faq5" class="moveFaq5">&nbspMilestone 개인정보는 안전하게 보호되나요?</a>
+                                </div>
+                            </li>
+
+                            <li class="article-list-item">
+                                <div>
+                                    <img src="/imgs/notice/notice.png" alt="이미지" width="20px" height="20px"
+                                         style=" margin-bottom :-3px; margin-right: -3px"/>
+                                    <a href="/faq/faq6" class="moveFaq6">&nbspMilestone 회원 탈퇴시 개인정보는 모두 삭제되나요?</a>
+                                </div>
+                            </li>
+
+                        </ul>
+
+
+                    </section>
+
+                    <a tabindex="0" class="see-all-sections-trigger" aria-hidden="true"
+                       id="see-all-sections-trigger" title="모든 섹션 보기…">모든 섹션 보기… </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- ================================================================================================================ -->
+
+<footer th:replace="/fix/footer.html :: footer"></footer>
+
+<!-- ================================================================================================================ -->
+</body>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script src="/js/fix/header.js"></script>
+<script th:inline="javascript">
+
+
+</script>
+
+</html>

@@ -1,0 +1,108 @@
+@font-face {
+    font-family: 'Metro Sans';
+    font-style: normal;
+    src: url(https://d2v80xjmx68n4w.cloudfront.net/assets/fonts/MetroSans/MetroSans-Bold.woff2) format('woff2'),
+    url(https://d2v80xjmx68n4w.cloudfront.net/assets/fonts/MetroSans/MetroSans-Bold.woff) format('woff'),
+    url(https://d2v80xjmx68n4w.cloudfront.net/assets/fonts/MetroSans/MetroSans-Bold.otf) format('truetype'), url(https://d2v80xjmx68n4w.cloudfront.net/assets/fonts/MetroSans/MetroSans-Bold.eot),
+    url(https://d2v80xjmx68n4w.cloudfront.net/assets/fonts/MetroSans/MetroSans-Bold.eot?#iefix) format('embedded-opentype');
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+.flex {
+    display: flex;
+}
+
+.flexRow {
+    display: flex;
+    align-items: center;
+}
+
+.flexBetween {
+    display: flex;
+    justify-content: space-between;
+}
+
+.flexPublic {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flexColNormal {
+    display: flex;
+    flex-direction: column;
+}
+
+.flexCol {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.margin-top-4 {
+    margin-top: 4px;
+}
+
+.margin-bottom-4 {
+    margin-bottom: 4px;
+}
+
+.margin-bottom-8 {
+    margin-bottom: 8px;
+}
+
+.margin-bottom-20 {
+    margin-bottom: 20px;
+}
+
+.margin-bottom-32 {
+    margin-bottom: 32px;
+}
+
+.margin-right-12 {
+    margin-right: 12px;
+}
+
+.margin-left-40 {
+    margin-left: 40px;
+}
+
+.padding-bottom-8 {
+    padding-bottom: 8px;
+}
+
+.margin-top-16 {
+    margin-top: 16px;
+}
+
+.margin-top-6 {
+    margin-top: 6px;
+}
+
+.width-100 {
+    width: 100%;
+}
+
+.inputCos::placeholder {
+    color: rgb(200, 201, 207);
+}
+
+.inputCos:hover {
+    border: 1px solid rgb(118, 118, 118);
+}
+
+.inputCos:focus {
+    outline: none;
+    border: 1px solid rgb(118, 118, 118);
+}
+
+.relative {
+    position: relative;
+}

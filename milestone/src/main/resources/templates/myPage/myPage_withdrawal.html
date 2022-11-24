@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/fix/header.css">
+    <link rel="stylesheet" href="/css/fix/footer.css">
+    <link rel="stylesheet" href="/css/myPage/myPageMain.css">
+    <link rel="stylesheet" href="/css/myPage/myPageWithdrawal.css">
+    <link rel="stylesheet" href="/css/myPage/myPageAside.css">
+    <link rel="stylesheet" href="/css/myPage/public.css">
+    <link rel="icon" href="/imgs/fix/favicon.png">
+    <title>마일스톤 | 회원탈퇴</title>
+</head>
+
+<body>
+<header th:replace="/fix/header.html :: header"></header>
+<div class="myPageWrap flex">
+    <!-- 어사이드 -->
+    <aside th:replace="/myPage/myPage_aside :: aside"></aside>
+    <!-- 메인 -->
+    <main class="main">
+        <div class="mainWrap flexCol">
+            <div class="mainTitle flexRow">회원 탈퇴</div>
+            <div class="mainBodyWrap flexColNormal">
+                <!-- 메인컨텐츠 -->
+                <form action="">
+                    <section class="flexColNormal">
+                        <div class="reasonHeader">
+                            마일스톤을 떠나는 이유를 알려주세요
+                        </div>
+                        <ul class="reasons flexColNormal">
+                            <li class="flexRow">
+                                <label class="flexPublic">
+                                    <div class="relative flexPublic">
+                                        <input type="radio" name="reasonRadio" value="이용하고 싶은 서비스가 없어요">
+                                        <span class="radioCos"></span>
+                                    </div>
+                                    <div class="reasonText">이용하고 싶은 서비스가 없어요</div>
+                                </label>
+                            </li>
+                            <li class="flexRow">
+                                <label class="flexPublic">
+                                    <div class="relative  flexPublic">
+                                        <input type="radio" name="reasonRadio" value="서비스 퀄리티가 낮아요">
+                                        <span class="radioCos"></span>
+                                    </div>
+                                    <div class="reasonText">서비스 퀄리티가 낮아요</div>
+                                </label>
+                            </li>
+
+                            <li class="flexRow">
+                                <label class="flexPublic">
+                                    <div class="relative flexPublic">
+                                        <input type="radio" name="reasonRadio" value="비매너 회원을 만났어요">
+                                        <span class="radioCos"></span>
+                                    </div>
+                                    <div class="reasonText">비매너 회원을 만났어요</div>
+                                </label>
+                            </li>
+                            <li class="flexRow">
+                                <label class="flexPublic">
+                                    <div class="relative flexPublic">
+                                        <input type="radio" name="reasonRadio" value="잦은 오류가 발생해요">
+                                        <span class="radioCos"></span>
+                                    </div>
+                                    <div class="reasonText">잦은 오류가 발생해요</div>
+                                </label>
+                            </li>
+                            <li class="flexRow">
+                                <label class="flexPublic">
+                                    <div class="relative flexPublic">
+                                        <input type="radio" name="reasonRadio" value="대체할 만한 서비스를 찾았어요">
+                                        <span class="radioCos"></span>
+                                    </div>
+                                    <div class="reasonText">대체할 만한 서비스를 찾았어요</div>
+                                </label>
+                            </li>
+                            <li class="flexRow">
+                                <label class="flexPublic">
+                                    <div class="relative flexPublic">
+                                        <input type="radio" name="reasonRadio">
+                                        <span class="radioCos"></span>
+                                    </div>
+                                    <div class="reasonText">기타</div>
+                                </label>
+                            </li>
+                            <div class="reasonInputWrap" style="display: none">
+                                <input type="text" class="reasonInput inputCos" placeholder="직접입력" value="">
+                            </div>
+                        </ul>
+                    </section>
+                    <section class="margin-top-32">
+                        <div>이메일 확인</div>
+                        <div class="margin-top-12">
+                            <input type="text" class="emailText inputCos" placeholder="마일스톤에 가입하신 이메일을 적어주세요">
+                        </div>
+                        <ul class="precautionsWrap">
+                            <li class="precaution">• 현재 사용중인 계정 정보는 회원 탈퇴 후 복구가 불가합니다.</li>
+                            <li class="precaution">• 탈퇴 후 회원님의 보육원 방문 예정 일자는 자동으로 취소됩니다.</li>
+                            <li class="precaution">• 보육원 등록을 했던 계정이라면 등록된 보육원이 사라집니다.</li>
+                        </ul>
+                        <div class="flexRow">
+                            <div class="precautionCheckWrap flexRow">
+                                <label class = "flexRow">
+                                    <input type="checkbox" class="precautionCheck">
+                                    <div class="precautionCheckCos"></div>
+                                    <div class="margin-left-8">
+                                        주의사항을 모두 확인했습니다
+                                    </div>
+                                </label>
+                            </div>
+                            <button class="withdrawalBtn" disabled>
+                                <div>회원 탈퇴</div>
+                            </button>
+                        </div>
+                    </section>
+                </form>
+            </div>
+        </div>
+    </main>
+</div>
+<footer th:replace="/fix/footer.html :: footer"></footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script src="/js/myPage/withdrawal.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="/js/fix/header.js"></script>
+
+</html>

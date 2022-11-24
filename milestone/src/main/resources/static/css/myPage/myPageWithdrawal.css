@@ -1,0 +1,194 @@
+section {
+    color: #303441;
+}
+
+.reasonHeader {
+    font-size: 16px;
+}
+
+.reasons {
+    padding: 8px;
+    margin: 4px 0px;
+}
+
+li {
+    list-style: none;
+    margin: 4px 0px;
+    font-size: 14px;
+}
+
+.reasons label {
+    cursor: pointer;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+/*.radioCos {*/
+/*    background-color: #fff;*/
+/*    display: inline-block;*/
+/*    vertical-align: middle;*/
+/*    appearance: none;*/
+/*    width: 16px;*/
+/*    height: 16px;*/
+/*    border: 1px solid #c8cad2;*/
+/*    border-radius: 50%;*/
+/*    transition: border-color 0.36s cubic-bezier(0.68, -0.55, 0.27, 1.55);*/
+/*}*/
+
+.radioCos {
+    position: relative;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #c8cad2;
+    border-radius: 50%;
+    background-color: #ffffff;
+}
+
+.radioCos:hover {
+    border: 1px solid rgb(154 155 167);
+}
+
+input[type="radio"]:checked + .radioCos {
+    border: 1px solid rgb(255, 212, 0);
+}
+
+/*input[type="radio"]:checked + .radioCos:after {*/
+/*    transition: background-color 0.36s cubic-bezier(0.68, -0.55, 0.27, 1.55), transform 0.36s cubic-bezier(0.68, -0.55, 0.27, 1.55);*/
+/*    top: 50%;*/
+/*    left: 50%;*/
+/*    position: absolute;*/
+/*    display: block;*/
+/*    content: "";*/
+/*    background-color: rgb(255, 212, 0);*/
+/*    width: 10px;*/
+/*    height: 10px;*/
+/*    border-radius: 50%;*/
+/*    transform: translate(-50%, -50%);*/
+/*}*/
+.radioCos:after {
+    position: absolute;
+    top: 15%;
+    left: 15%;
+    opacity: 0;
+    transform: scale(0);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    -webkit-transition: opacity 0.36s cubic-bezier(0.68, -0.55, 0.27, 1.55), -webkit-transform 0.36s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    transition: opacity 0.36s cubic-bezier(0.68, -0.55, 0.27, 1.55), transform 0.36s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    background-color: #ffd400;
+    content: " ";
+}
+
+input[type="radio"]:checked + .radioCos:after {
+    opacity: 1;
+    transform: scale(1);
+    content: " ";
+}
+
+.reasonText {
+    margin: 0 8px;
+}
+
+.reasonInputWrap {
+    margin-left: 24px;
+    margin-top: 4px;
+    height: 30px;
+    font-size: 13px;
+}
+
+.reasonInput {
+    width: calc(100% + 8px);
+    height: 30px;
+    padding: 0 10px;
+}
+
+.emailText {
+    width: 100%;
+    height: 36px;
+    padding: 0 12px;
+}
+
+.inputCos {
+    border: 1px solid #e4e5ed;
+    border-radius: 4px;
+}
+
+.precautionsWrap {
+    margin-top: 20px;
+    padding: 24px 40px 24px 47px;
+    background-color: rgb(242, 243, 247);
+    font-size: 14px;
+    color: rgb(114, 117, 133);
+}
+
+.precautionCheckWrap label {
+    cursor: pointer;
+}
+
+.precaution {
+    text-indent: -15px;
+    word-break: keep-all;
+}
+
+.precautionCheckCos {
+    background: url("/imgs/myPage/checkWhite.png");
+    background-size: 19px;
+    background-color: #ffffff;
+    border: 1px solid rgb(207, 208, 209);
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    transition: background-color 0.36s;
+}
+
+input[type = 'checkbox']:checked + .precautionCheckCos {
+    background-color: rgb(255, 212, 0);
+    border: 1px solid rgb(255, 212, 0);
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+}
+
+.precautionCheckWrap {
+    display: flex;
+    margin-top: 8px;
+    flex-grow: 1;
+    align-items: center;
+}
+
+.precautionCheckCos:hover {
+    border: 1px solid rgb(154 155 167);
+}
+
+.withdrawalBtn {
+    cursor: pointer;
+    height: 42px;
+    border: 1px solid rgb(228, 229, 237);
+    border-radius: 4px;
+    background-color: #fff;
+    color: rgb(154, 155, 167);
+    min-width: 64px;
+    max-width: 100%;
+    padding: 0 22px;
+    align-items: center;
+    transition: background-color 0.36s;
+}
+
+.withdrawalBtn:disabled {
+    background-color: rgb(228, 229, 237);
+    color: rgb(154, 155, 167);
+    cursor: no-drop;
+}
+
+.withdrawalBtn:not(:disabled):hover {
+    background-color: rgba(48, 52, 65, 0.1);
+}
+
+.withdrawalBtn:not(:disabled):active {
+    background-color: #30344133;
+    outline: 2px solid #30344133;
+}
+

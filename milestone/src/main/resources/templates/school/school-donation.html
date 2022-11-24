@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>보육원 | 결제</title>
+    <link rel="stylesheet" type="text/css"
+          href="//p25.zdassets.com/hc/theming_assets/9204604/360002309011/style.css?digest=12256508972825">
+</head>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
+
+<link href="/css/school/schoolDonation.css" rel="stylesheet"/>
+
+<link rel="stylesheet" href="/css/fix/header.css">
+<link rel="stylesheet" href="/css/fix/footer.css">
+<link rel="stylesheet" href="/css/fix/menu.css"/>
+<link rel="icon" href="/imgs/fix/favicon.png">
+
+<body>
+<header th:replace="/fix/header.html :: header"></header>
+
+<div class="wholePage">
+
+    <div class="title">결제하기</div>
+
+    <div class="wrapper">
+        <div class="long">
+            <section class="leftFirst">
+                <div style="width:736px">
+                    <h3 id="miniTitle">기부내역</h3>
+                    <div class="secWrapper">
+                        <div class="schoolImg">
+                            <img data-type="1-1" width="386px" height="auto" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQahV0-oS2Aq2g6lri5oICW5DbPtgb1Xa1Dew&usqp=CAU">
+                        </div>
+                        <div class="schoolInfo">
+                            <h4 id="schoolName">명륜보육원</h4>
+                            <h5 class="schoolAddress">
+                                <span class="schoolAddress">서울시 강남구 역삼동</span>
+                                <!-- <br> -->
+                                <span class="schoolAddress schoolAddressDetail">테헤란로 146 현익빌딩 3,4층</span>
+                            </h5>
+                            <div style="margin-left:10px">
+                                <div>
+                                    <ul>
+                                        <li>∙ 연 예산 : <span id="budget">100,000,000</span>&nbsp;원</li>
+                                        <li>∙ 계좌번호 : <span id="accountNum">394203-11-342423</span>&nbsp;<span id="bank">국민</span></li>
+                                        <li>∙ 교사 인원 : <span id="teacher">10</span>&nbsp;명</li>
+                                        <li>∙ 아이들 인원 : <span id="children">20</span>&nbsp;명</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <div class="rightLong">
+            <div class="innerRight">
+                <h5 class="innrRightIn">
+                    <span>총 기부 금액</span>
+                    <span class="pay"></span>
+                </h5>
+                <h5 class="innrRightIn">
+                    <span><input type="text" class="amountInput" id="amountInputMoney" placeholder="기부하실 금액을 입력하세요"></span>
+                    <span class="cash">원</span>
+                </h5>
+                <div id="justBorder"></div>
+                <h5 class="innrRightIn">
+                    <span>총 결제금액</span>
+                    <div>
+                        <span class="totalAmount" id="totalAmountMoney"></span>&nbsp;&nbsp;원
+                    </div>
+                </h5>
+                <div class="checkOk">
+                    <div>
+                        <input type="checkbox">
+                    </div>
+                    <div id="checkOk2">
+                        주문 내용을 확인하였으며, 결제에 동의합니다. (필수)
+                    </div>
+                </div>
+                <div>
+                    <button class="orderButton"><span id="payButton" style="font-weight:bolder;">결제하기</span></button>
+                </div>
+                <p class="endMent">결제하기 버튼을 누르시면 보육원에게 기부금이 전달됩니다.</p>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+</div>
+
+<footer th:replace="/fix/footer.html :: footer"></footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script src="/js/school/schoolDonation.js"></script>
+<script src="/js/fix/header.js"></script>
+</html>

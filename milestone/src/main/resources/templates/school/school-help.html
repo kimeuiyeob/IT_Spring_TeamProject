@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>보육원 | 도움이 필요한 보육원</title>
+</head>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
+
+<link rel="stylesheet" href="/css/fix/header.css">
+<link rel="stylesheet" href="/css/fix/footer.css">
+
+<link rel="stylesheet" href="/css/fix/menu.css">
+<link rel="stylesheet" href="/css/school/schoolHelp.css">
+<link rel="icon" href="/imgs/fix/favicon.png">
+<body>
+<header th:replace="/fix/header.html :: header"></header>
+
+<div class="wholePage">
+
+    <!-- 배너섹션 -->
+    <section class="topBanner">
+        <div id="banner">
+            <div id="banner2">
+                <h1 id="text">
+                    <span>도움이 필요한 보육원</span>
+                    <br>기부를 원활히 받지못한 보육원에서
+                    <br>도움을 요청합니다
+                </h1>
+            </div>
+        </div>
+    </section>
+
+    <!-- 지역섹션 -->
+    <section class="loc centerContent">
+        <div class="loactions" style="padding-top: 65px; display: flex;height: 150px;">
+            <div class="location wholeLocation">전체</div>
+            <div class="location location2">서울</div>
+            <div class="location location2">경기도</div>
+            <div class="location location2">강원도</div>
+            <div class="location location2">충청도</div>
+            <div class="location location2">전라도</div>
+            <div class="location location2">경상도</div>
+            <div class="location location2">제주도</div>
+        </div>
+
+        <div class="tAndS totalCount searchBox">
+            <!-- 총 검색 개수 -->
+            <!--                 <div class="totalCount">총 &nbsp;
+                                <span id="totalCountNumber">10</span>건
+                            </div> -->
+            <!-- 검색창 -->
+            <!--                 <div class="searchBox realSearhBox">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
+                                    focusable="false" preserveAspectRatio="xMidYMid meet" class="css-7kp13n e181xm9y0">
+                                    <path xmlns="http://www.w3.org/2000/svg"
+                                        d="M11.2307008,3.5 C15.5002489,3.5 18.9614015,6.96828437 18.9614015,11.24663 C18.9614015,13.0978372 18.3133954,14.7973826 17.2322825,16.1299241 L20.2742127,19.178378 C20.5762688,19.4810023 20.5764739,19.9714482 20.2746708,20.2738195 C19.9728678,20.5761908 19.4833433,20.5759857 19.1812873,20.2733614 L19.1812873,20.2733614 L16.1426973,17.2288066 C14.8071694,18.3312107 13.0960911,18.9932599 11.2307008,18.9932599 C6.96115262,18.9932599 3.5,15.5249756 3.5,11.24663 C3.5,6.96828437 6.96115262,3.5 11.2307008,3.5 Z M11.2307008,5.04932599 C7.81506225,5.04932599 5.04614015,7.82395349 5.04614015,11.24663 C5.04614015,14.6693064 7.81506225,17.4439339 11.2307008,17.4439339 C14.6463393,17.4439339 17.4152614,14.6693064 17.4152614,11.24663 C17.4152614,7.82395349 14.6463393,5.04932599 11.2307008,5.04932599 Z">
+                                    </path>
+                                </svg>
+                                <input type="text" placeholder=" &nbsp;보육원을 검색하세요" value="" style="border: solid white;">
+                            </div> -->
+        </div>
+
+        <!-- ==================반응형================ -->
+        <!-- 드롭다운 -->
+        <div class="dropdown" style="justify-content: flex-end; position: relative;">
+            <button class="dropbtn">
+                <span class="dropbtn_content placeholder">전체</span>
+                <span class="dropbtn_click" style=" font-size : 16px; color : #3b3b3b; float:right;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false" preserveAspectRatio="xMidYMid meet" class="css-7kp13n e181xm9y0"><polygon id="Triangle" transform="translate(12.000000, 12.000000) rotate(-180.000000) translate(-12.000000, -12.000000) " points="12 9 18 15 6 15"></polygon></svg>
+                </span>
+            </button>
+            <div class="dropdown-content" style="position: absolute;">
+                <div class="dropLoc checkSeoul">서울</div>
+                <div class="dropLoc checkKyungki">경기도</div>
+                <div class="dropLoc checkKangwon">강원도</div>
+                <div class="dropLoc checkChungcheong">충청도</div>
+                <div class="dropLoc checkJeolla">전라도</div>
+                <div class="dropLoc checkGyeong">경상도</div>
+                <div class="dropLoc checkJeju">제주도</div>
+            </div>
+        </div>
+        <!-- ====================================== -->
+    </section>
+
+
+
+    <!-- 목록섹션 -->
+    <section class="schoolList centerContent">
+
+        <!-- 보육원 하나 -->
+        <article>
+            <!-- 보육원 이미지 및 하트-->
+            <span class="schoolImg">
+                    <img
+                            src="https://kmong.com/_next/image?url=https%3A%2F%2Fd2v80xjmx68n4w.cloudfront.net%2Fassets%2Fenterprise%2Fquote-guide%2F1-3.jpg&w=320&q=75">
+                    <span class="heartWrap">
+                        <!-- 빈 하트 -->
+                        <span role="img" color="#ffffff" rotate="0" class="heart emptyHeart">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
+                                 focusable="false" preserveAspectRatio="xMidYMid meet" class="css-7kp13n e181xm9y0">
+                                <defs>
+                                    <path
+                                            d="M16.3680447,3 C14.8701244,3 13.434867,3.60809471 12.3788995,4.68835248 L11.999764,5.07602721 L11.6205012,4.68822239 C9.41974855,2.43790277 5.843218,2.4379028 3.64246538,4.68822244 C1.45251156,6.92750008 1.45251154,10.5501072 3.64246532,12.7893849 L11.4435969,20.7662195 C11.7484384,21.0779268 12.2510896,21.0779268 12.555931,20.7662195 L20.3570626,12.7893849 C21.4096395,11.7136062 22,10.2567327 22,8.73880364 C22,7.22093571 21.409687,5.76411845 20.3570626,4.68822238 C19.3011071,3.60804588 17.8659048,3 16.3680447,3 Z M11.999764,19.1166999 L4.75479942,11.7085588 C3.15293092,10.0706117 3.15293094,7.4069956 4.75479947,5.76904857 C6.34586921,4.14214354 8.91709737,4.14214352 10.5081671,5.76904852 L11.4435969,6.72554678 C11.7484384,7.0372541 12.2510896,7.0372541 12.555931,6.72554678 L13.4913608,5.76904851 C14.2561214,4.98669624 15.2906419,4.5483871 16.3680447,4.5483871 C17.4454474,4.5483871 18.4799679,4.98669624 19.2446013,5.76891842 C20.0136074,6.55487573 20.4466019,7.6234063 20.4466019,8.73880364 C20.4466019,9.85420097 20.0136074,10.9227315 19.2448557,11.7084287 L18.3092987,12.665057 L11.999764,19.1166999 Z"
+                                            id="heart-outlined-fill-icon"></path>
+                                </defs>
+                                <g id="Icons_Favorite_border_fill" stroke="none" stroke-width="1" fill-rule="evenodd">
+                                    <path
+                                            d="M16.3680447,3 C14.8701244,3 13.434867,3.60809471 12.3788995,4.68835248 L11.999764,5.07602721 L11.6205012,4.68822239 C9.41974855,2.43790277 5.843218,2.4379028 3.64246538,4.68822244 C1.45251156,6.92750008 1.45251154,10.5501072 3.64246532,12.7893849 L11.4435969,20.7662195 C11.7484384,21.0779268 12.2510896,21.0779268 12.555931,20.7662195 L20.3570626,12.7893849 C21.4096395,11.7136062 22,10.2567327 22,8.73880364 C22,7.22093571 21.409687,5.76411845 20.3570626,4.68822238 C19.3011071,3.60804588 17.8659048,3 16.3680447,3 Z"
+                                            id="Shape" fill="#212224" fill-rule="nonzero" opacity="0.2"></path>
+                                    <mask id="mask-2" fill="white">
+                                        <use xlink:href="#heart-outlined-fill-icon"></use>
+                                    </mask>
+                                    <use id="Shape" xlink:href="#heart-outlined-fill-icon"></use>
+                                </g>
+                            </svg>
+                        </span>
+                        <!-- 빨간 하트 -->
+                        <span role="img" color="#ff7262" rotate="0" class="heart redHeart">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="#ff7262" aria-hidden="true" focusable="false" preserveAspectRatio="xMidYMid meet" class="css-7kp13n e181xm9y0">
+                                <path xmlns="http://www.w3.org/2000/svg" d="M16.3680447,3 C14.8701244,3 13.434867,3.60809471 12.3788995,4.68835248 L11.999764,5.07602721 L11.6205012,4.68822239 C9.41974855,2.43790277 5.843218,2.4379028 3.64246538,4.68822244 C1.45251156,6.92750008 1.45251154,10.5501072 3.64246532,12.7893849 L11.4435969,20.7662195 C11.7484384,21.0779268 12.2510896,21.0779268 12.555931,20.7662195 L20.3570626,12.7893849 C21.4096395,11.7136062 22,10.2567327 22,8.73880364 C22,7.22093571 21.409687,5.76411845 20.3570626,4.68822238 C19.3011071,3.60804588 17.8659048,3 16.3680447,3 Z"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </span>
+            <!-- 보육원 이름 및 소개글 -->
+            <span class="schoolIntroduce">
+                    <h2 class="schoolName">새싹 보육원</h2>
+                    <div class="intro">
+                        안녕하세요 새싹보육원입니다.
+                        내용 채우기입니다.내용 채우기입니다.내용 채우기입니다.내용 채우기입니다.내용 채우기입니다.내용 채우기입니다.내용 채우기입니다.내용 채우기입니다.내용 채우기입니다.내용
+                        채우기입니다.내용 채우기입니다.내용 채우기입니다.내용 채우기입니다.내용 채우기입니다.내용 채우기입니다.내용 채우기입니다.내용 채우기입니다.내용 채우기입니다.내용
+                        채우기입니다.내용 채우기입니다.
+                    </div>
+                    <div class="miniLocationTag">
+                        <div class="schoolLocation1">
+                            <span class="schoolLocation2">서울</span>
+                            <span class="schoolLocation2 schoolName">새싹보육원</span>
+                        </div>
+                    </div>
+                </span>
+            <!-- QR코드 이미지 및 "기부하러가기" 버튼 -->
+            <div class="rightBox">
+                <div class="QR">
+                    <img
+                            src="https://ko.qr-code-generator.com/wp-content/themes/qr/new_structure/markets/basic_market/generator/dist/generator/assets/images/websiteQRCode_noFrame.png">
+                </div>
+                <a class="donationButton"><span>보육원 보러가기</span></a>
+            </div>
+        </article>
+
+    </section>
+
+
+    <!--페이징 처리-->
+    <div class="paging-number-box">
+        <div class="paging-number">
+            <div class="paging-number-flex">
+                <div class="prev-page page-number-padding">
+                    <a class="page-number-link" href="">
+                        <div class="prev-page-prevArrow"></div>
+                    </a>
+                </div>
+                <div class="page-number-padding">
+                    <a class="page-number-link" href="">1</a>
+                </div>
+                <div class="page-number-padding">
+                    <a class="page-number-link" href="">2</a>
+                </div>
+                <div class="page-number-padding">
+                    <a class="page-number-link" href="">3</a>
+                </div>
+                <div class="next-page page-number-padding">
+                    <a class="page-number-link" href="">
+                        <div class="prev-page-nextArrow"></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<footer th:replace="/fix/footer.html :: footer"></footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script src="/js/school/schoolHelp.js"></script>
+<script src="/js/fix/header.js"></script>
+</html>

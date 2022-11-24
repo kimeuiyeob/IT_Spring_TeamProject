@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/fix/header.css">
+    <link rel="stylesheet" href="/css/fix/footer.css">
+    <link rel="stylesheet" href="/css/myPage/myPageMain.css">
+    <link rel="stylesheet" href="/css/myPage/myPageAside.css">
+    <link rel="stylesheet" href="/css/myPage/myPageSchedule.css">
+    <link rel="stylesheet" href="/css/myPage/callender.css">
+    <link rel="stylesheet" href="/css/myPage/public.css">
+    <link rel="icon" href="/imgs/fix/favicon.png">
+    <title>마일스톤 | 일정 관리</title>
+</head>
+
+<body>
+<!-- 모달 -->
+<div class="modalWrap">
+    <div class="modalScope flexCol">
+        <div class="modalHead flexCol flexPublic">
+            <div class="exclamationMark flexPublic">
+                <div>!</div>
+            </div>
+            <h2 class="modalContent">황지수보육원 일정을 <br>
+                정말로 취소할까요?</h2>
+        </div>
+        <div class="modalFooter">
+            <button class="modalBtn">YES</button>
+            <button class="modalBtn">NO</button>
+        </div>
+    </div>
+</div>
+<header th:replace="/fix/header.html :: header"></header>
+<div class="myPageWrap flex">
+    <!-- 어사이드 -->
+    <aside th:replace="/myPage/myPage_aside :: aside"></aside>
+    <!-- 메인 -->
+    <main class="main">
+        <div class="mainWrap flexCol">
+            <div class="mainTitle flexRow">일정 관리</div>
+            <div class="mainBodyWrap flexCol flexPublic">
+                <!-- 메인컨텐츠 -->
+                <!-- 달력 -->
+                <div class="tempDiv">
+                    <div class="callenderWrap">
+                        <div class="callenderHead">
+                            <div class="prevMonth"></div>
+                            <div class="nowMonth"></div>
+                            <div class="nextMonth"></div>
+                        </div>
+                        <table class="callenderBody">
+                            <tr>
+                                <th>일</th>
+                                <th>월</th>
+                                <th>화</th>
+                                <th>수</th>
+                                <th>목</th>
+                                <th>금</th>
+                                <th>토</th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <!-- 일정 목록 -->
+                <div class="list flexCol">
+                    <div class="margin-top-16"></div>
+                    <div class="listItems flexBetween">
+                        <div class="items-names">보육원</div>
+                        <div class="items-locations">보육원 주소</div>
+                        <div class="items-dates">신청일</div>
+                        <div class="items-cancels">일정 취소</div>
+                    </div>
+                    <div class="listItems flexBetween">
+                        <div class="items-name flexCol">황지수보육원</div>
+                        <div class="items-location">서울특별시 금천구 시흥22동 시흥대로 154길 33</div>
+                        <div class="items-date flexCol">2022년 11월 11일</div>
+                        <div class="items-cancel flexCol">취소</div>
+                    </div>
+                    <div class="listItems flexBetween">
+                        <div class="items-name flexCol">황지수보육원</div>
+                        <div class="items-location">서울특별시 금천구 시흥22동<br>시흥대로 4길</div>
+                        <div class="items-date flexCol">2022년 11월 11일</div>
+                        <div class="items-cancel flexCol">취소</div>
+                    </div>
+                    <div class="listItems flexBetween">
+                        <div class="items-name flexCol">황지수보육원</div>
+                        <div class="items-location">서울특별시 금천구 시흥22동 시흥대로 154길 33</div>
+                        <div class="items-date flexCol">2022년 11월 11일</div>
+                        <div class="items-cancel flexCol">취소</div>
+                    </div>
+                    <div class="pageBtns flexPublic">
+                        <a class="pageBtn flexPublic">
+                            <svg class="prevNextBtn flexPublic">
+                                <path xmlns="http://www.w3.org/2000/svg"
+                                      d="M9.41421356,12 L15.7071068,5.70710678 C16.0976311,5.31658249 16.0976311,4.68341751 15.7071068,4.29289322 C15.3165825,3.90236893 14.6834175,3.90236893 14.2928932,4.29289322 L7.29289322,11.2928932 C6.90236893,11.6834175 6.90236893,12.3165825 7.29289322,12.7071068 L14.2928932,19.7071068 C14.6834175,20.0976311 15.3165825,20.0976311 15.7071068,19.7071068 C16.0976311,19.3165825 16.0976311,18.6834175 15.7071068,18.2928932 L9.41421356,12 Z"></path>
+                            </svg>
+                        </a>
+                        <code class="pageBtn flexPublic page">
+                            <div>1</div>
+                        </code>
+                        <a class="pageBtn flexPublic">
+                            <div>2</div>
+                        </a>
+                        <a class="pageBtn flexPublic">
+                            <div>3</div>
+                        </a>
+                        <a class="pageBtn flexPublic">
+                            <svg class="prevNextBtn flexPublic">
+                                <path xmlns="http://www.w3.org/2000/svg"
+                                      d="M9.41421356,12 L15.7071068,5.70710678 C16.0976311,5.31658249 16.0976311,4.68341751 15.7071068,4.29289322 C15.3165825,3.90236893 14.6834175,3.90236893 14.2928932,4.29289322 L7.29289322,11.2928932 C6.90236893,11.6834175 6.90236893,12.3165825 7.29289322,12.7071068 L14.2928932,19.7071068 C14.6834175,20.0976311 15.3165825,20.0976311 15.7071068,19.7071068 C16.0976311,19.3165825 16.0976311,18.6834175 15.7071068,18.2928932 L9.41421356,12 Z"
+                                      transform="translate(11.500000, 12.000000) scale(-1, 1) translate(-11.500000, -12.000000) "></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<footer th:replace="/fix/footer.html :: footer"></footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script src="/js/myPage/callender.js"></script>
+<script src="/js/myPage/modal.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="/js/fix/header.js"></script>
+</html>

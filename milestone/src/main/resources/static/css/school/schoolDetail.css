@@ -1,0 +1,747 @@
+@font-face {
+    font-family: 'Metro Sans';
+    font-style: normal;
+    src: url(https://d2v80xjmx68n4w.cloudfront.net/assets/fonts/MetroSans/MetroSans-Bold.woff2) format('woff2'),
+    url(https://d2v80xjmx68n4w.cloudfront.net/assets/fonts/MetroSans/MetroSans-Bold.woff) format('woff'),
+    url(https://d2v80xjmx68n4w.cloudfront.net/assets/fonts/MetroSans/MetroSans-Bold.otf) format('truetype'), url(https://d2v80xjmx68n4w.cloudfront.net/assets/fonts/MetroSans/MetroSans-Bold.eot),
+    url(https://d2v80xjmx68n4w.cloudfront.net/assets/fonts/MetroSans/MetroSans-Bold.eot?#iefix) format('embedded-opentype');
+}
+
+body{
+    margin: 0;
+}
+
+.wholePage{
+    width: 1200px;
+    padding: 0 16px;
+    margin: 0 auto;
+}
+
+.wholeSection{
+    width: 100%;
+    margin: 24px auto 70px;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+
+main{
+    flex: 0 0 auto;
+    width: 652px;
+    flex-direction: column;
+}
+
+aside{
+    margin-left: 58px;
+    width: 100%;
+}
+
+#category{
+    display: flex;
+    margin-bottom: 16px;
+    font-size: 14px;
+}
+
+#imgsSection{
+    position: relative;
+    margin-bottom: 36px;
+    border: 1px solid rgb(228, 229, 237);
+    max-width: 652px;
+}
+
+#mainImage{
+    width: 100%;
+    max-height: 488px;
+    height: 488px;
+    object-fit: cover;
+    object-position: center top;
+    background-color: gray;
+}
+
+.images{
+    line-height: normal;
+    -webkit-text-size-adjust: 100%;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    font-family: 'Metro Sans',sans-serif;
+    box-sizing: border-box;
+    position: relative;
+    top: 0;
+    left: 0;
+    margin-right: auto;
+    display: flex;
+    gap: 0px;
+    margin-left: 0px;
+    width: 3260px;
+    opacity: 1;
+    transform: translate3d(0px, 0px, 0px);
+}
+
+.longImages{
+    position: relative;
+    display: block;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    transition: .3s ease-out;
+}
+
+.miniImages{
+    outline: none;
+    width: 3260px;
+    display: flex;
+}
+
+.miniImage{
+    overflow: hidden;
+    height: 109px;
+    margin-bottom: 4px;
+}
+
+.miniImage>img{
+    cursor: pointer;
+    margin: 3px 5px 5px;
+    width: 152px;
+}
+
+#list{
+    line-height: normal;
+    -webkit-text-size-adjust: 100%;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    font-family: 'Metro Sans',sans-serif;
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    transform: translate3d(0, 0, 0);
+}
+
+/* 좌 우 버튼 */
+.emgxp40{
+    -webkit-text-size-adjust: 100%;
+    overflow: visible;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    border: 0px;
+    width: 40px;
+    height: 40px;
+    color: rgb(48, 52, 65);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transform: translateY(-50%);
+    box-shadow: transparent 0px 0px 0px 1px, transparent 0px 0px 0px 4px, rgb(0 0 0 / 18%) 0px 2px 4px;
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0.76);
+}
+
+#commentNavi{
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    z-index: 1;
+    position: sticky;
+    top: 0px;
+    margin-bottom: 40px;
+}
+
+#naviBar{
+    display: flex;
+}
+
+.navText{
+    margin-top: 121px;
+    line-height: normal;
+    -webkit-text-size-adjust: 100%;
+    font-family: 'Metro Sans',sans-serif;
+    box-sizing: border-box;
+    position: relative;
+    flex: 1 1 0%;
+    justify-content: space-around;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    color: rgb(85, 89, 105);
+    font-size: 14px;
+    background-color: rgb(250, 250, 252);
+    cursor: pointer;
+    height: 60px;
+    padding: 0px 4px;
+    border-top: 1px solid rgb(228, 229, 237);
+    border-right: 1px solid rgb(228, 229, 237);
+    border-bottom: 1px solid rgb(0, 0, 0);
+    border-left: 1px solid rgb(228, 229, 237);
+}
+
+#commentsCount{
+    line-height: normal;
+    -webkit-text-size-adjust: 100%;
+    font-size: 14px;
+    color: rgb(48, 52, 65);
+    font-weight: 700;
+    font-family: 'Metro Sans',sans-serif;
+    box-sizing: border-box;
+}
+
+#comments{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.commentsList{
+    line-height: normal;
+    -webkit-text-size-adjust: 100%;
+    font-family: 'Metro Sans',sans-serif;
+    box-sizing: border-box;
+}
+
+.comment{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid rgb(228, 229, 237);
+    padding: 40px 0px;
+}
+
+.profilePicture{
+    width: 32px;
+    height: 32px;
+}
+
+.profilePicture>img{
+    border-radius: 50px;
+    width: 100%;
+    height: 100%;
+}
+
+.nameAndDate{
+    margin-left: 8px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.commentsInfo{
+    display: flex;
+    font-size: 12px;
+}
+
+.commentContent{
+    margin-top: 20px;
+}
+
+.commentContent2{
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+
+.commentContent2>p{
+    margin: 0px;
+    white-space: pre-wrap;
+    font-size: 14px;
+    color: rgb(85, 89, 105);
+    line-height: 1.4;
+    width: 100%;
+}
+
+#latest{
+    display: inline-block;
+    font-style: normal;
+    line-height: 0;
+    text-align: center;
+    text-transform: none;
+    vertical-align: -0.125em;
+    text-rendering: optimizelegibility;
+    -webkit-font-smoothing: antialiased;
+    color: rgb(17, 106, 212);
+    font-weight: 500;
+}
+
+.more{
+    position: relative;
+    height: 40px;
+}
+
+.moreButton{
+    font: inherit;
+    background-color: transparent;
+    border-color:rgb(228 229 237);
+    margin: 0;
+    overflow: visible;
+    outline: none;
+    border-width: 1px;
+    border-style: solid;
+    box-sizing: border-box;
+    border-radius: 4px;
+    line-height: 1;
+    font-weight: 500;
+    text-decoration: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    width: 100%;
+    height: 42px;
+    font-size: 15px;
+    padding: 0px 22px;
+    min-width: 64px;
+    color: rgb(48, 52, 65);
+    background-color: transparent;
+    border-top: 0px;
+}
+
+#zzim{
+    display: flex;
+    justify-content: flex-end;
+    margin: 56px 0px 8px;
+}
+
+.zzimButton{
+    border: 0;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    font: inherit;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.zzimButton>svg{
+    width: 18px;
+    height: 18px;
+}
+
+.schoolName{
+    font-weight: 500;
+    color: rgb(48, 52, 65);
+    font-size: 20px;
+    word-break: keep-all;
+    line-height: 1.5;
+}
+
+.schoolName>h1{
+    font: inherit;
+    margin: 0px 0px 8px;
+}
+
+
+.introTotalRanking{
+    margin-bottom: 20px;
+}
+
+.introTotalRanking2{
+    position: relative;
+    display: flex;
+    width: 100%;
+    border-width: 1px 1px 0px;
+    border-style: solid solid none;
+    border-top-color: rgb(228, 229, 237);
+    border-right-color: rgb(228, 229, 237);
+    border-left-color: rgb(228, 229, 237);
+}
+
+#intro{
+    color:rgb(48, 52, 65);
+    font-weight:700;
+}
+
+.introTotalRanking3{
+    flex: 0 0 auto;
+    width: 156px;
+    height: 48px;
+    line-height: 48px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: normal;
+    color: rgb(154, 155, 167);
+}
+
+#pseudo{
+    content: "";
+    position: absolute;
+    z-index: 1;
+    left: 0px;
+    bottom: 0px;
+    width: 156px;
+    height: 4px;
+    background: #ffd400;
+    transform: translateX(0%);
+    transition: transform 300ms ease 0s;
+}
+
+.rightBox1{
+    color: rgb(48, 52, 65);
+    border: 1px solid rgb(228, 229, 237);
+    display: block;
+}
+
+.rightBox2{
+    padding: 24px 24px 0px;
+    margin-bottom: 24px;
+}
+
+.introTitle{
+    color: rgb(48, 52, 65);
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.introContent{
+    position: relative;
+    margin: 16px 0px;
+    padding: 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    background: rgb(250, 250, 252);
+    color: rgb(48, 52, 65);
+    height: 170px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+#donate{
+    outline: none;
+    border-width: 1px;
+    border-style: solid;
+    box-sizing: border-box;
+    border-radius: 4px;
+    line-height: 1;
+    font-weight: 500;
+    transition: background-color 0.3s ease 0s, border-color 0.3s ease 0s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+    white-space: nowrap;
+    width: 100%;
+    max-width: 100%;
+    height: 52px;
+    font-size: 16px;
+    padding: 0px 24px;
+    background-color: rgb(255, 212, 0);
+    border-color: rgb(255, 212, 0);
+    color: rgb(48, 52, 65);
+}
+
+#donate>span{
+    font: inherit;
+    line-height: 1;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.donateDIV{
+    padding: 0px 24px;
+}
+
+.QRgo{
+    display: flex;
+    justify-content: flex-end;
+    margin: 8px 24px 16px;
+}
+
+.QRButton{
+    outline: none;
+    border-width: 1px;
+    border-style: solid;
+    box-sizing: border-box;
+    border-radius: 4px;
+    line-height: 1;
+    font-weight: 500;
+    transition: background-color 0.3s ease 0s, border-color 0.3s ease 0s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    max-width: 100%;
+    height: 24px;
+    font-size: 12px;
+    padding: 0px 8px;
+    min-width: 48px;
+    background-color: transparent;
+    border-color: transparent;
+    color: rgb(48, 52, 65);
+}
+
+.QRButton>span{
+    font: inherit;
+    line-height: 1;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.calendar{
+    display: flex;
+    flex: 1 1 0%;
+    gap: 24px;
+    flex-direction: column;
+    margin-bottom: 20px;
+    border: 1px solid rgb(228, 229, 237);
+    padding: 0px;
+    background: rgb(255, 255, 255);
+}
+
+.calendarTitle{
+    padding: 12px 24px;
+    background-color: rgb(242, 243, 247);
+    position: relative;
+}
+
+.calendarTitle2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 47px;
+}
+
+.calendarTitle2>h1{
+    font-size: 18px;
+    color: rgb(48, 52, 65);
+    font-weight: bold;
+    margin: 0px;
+    font: inherit;
+}
+
+.calendarContent{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.calendarContent2{
+    margin-top: 4px;
+    font-size: 14px;
+    color: #555969;
+    overflow: hidden;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-height: 1.15;
+    line-height: 1.43;
+    margin: 8px 0 0;
+}
+
+.calendarContent3{
+    margin: 0 30px;
+    display: flex;
+    justify-content: center;
+    height: 30px;
+}
+
+.calendarContent3>h5{
+    color: rgb(85, 89, 105);
+    line-height: 1.3;
+    font-size: 15px;
+    font-weight: 400;
+    font:inherit;
+}
+
+.calendarContent3>img{
+    width: 20px;
+    height: 24px;
+    margin-right: 10px;
+}
+
+/* 캘린더 api넣고 지우면 됩니다 */
+.calendarContent2>div{
+    width: 100%;
+    height: 100%;
+}
+
+.rightFixButton{
+    z-index: 9999;
+    font-family: inherit;
+    margin: 0;
+    overflow: visible;
+    text-transform: none;
+    outline: none;
+    border-width: 1px;
+    border-style: solid;
+    box-sizing: border-box;
+    border-radius: 4px 4px 0px 0px;
+    line-height: 1;
+    font-weight: 500;
+    transition: background-color 0.3s ease 0s, border-color 0.3s ease 0s;
+    text-decoration: none;
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+    max-width: 100%;
+    height: 42px;
+    font-size: 15px;
+    padding: 0px 22px;
+    min-width: 64px;
+    background-color: rgb(255, 212, 0);
+    border-color: rgb(255, 212, 0);
+    color: rgb(48, 52, 65);
+    position: fixed;
+    right: 16%;
+    bottom: 0;
+}
+
+#modal{
+    display: none;
+    background-color: #ffff;
+    width: 500px;
+    height: 500px;
+    position: fixed;
+    z-index: 9999;
+    border-radius: 1%;
+    padding: 28px 40px 40px 40px;
+    /*     left: 34%;
+        top: 22%; */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 2px 2px 13px #dadada;
+}
+
+/* 모달닫기 버튼 ==========================*/
+.sect01 {
+    position: relative;
+    width: 30px; /* X 사이즈 */
+    height: 30px; /* X 세로 중앙 */
+    cursor: pointer;
+}
+
+.sect01 .line-box {
+    position: absolute;
+    top: 50%;
+    left: 1370%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+}
+
+.sect01 .line-box > span {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    height: 2px;
+    background-color: #000;
+}
+
+.sect01 .line-01 {
+    transform: rotate(135deg) translateX(0%);
+}
+
+.sect01 .line-02 {
+    transform: rotate(45deg) translateX(0%);
+}
+/* ================================= */
+
+
+#modalQR{
+    width: 370px;
+    height: 370px;
+    margin-left: 6%;
+}
+
+#modalQR>img{
+    width: 100%;
+    height: 100%;
+}
+
+#scanPlz{
+    display: flex;
+    justify-content: center;
+}
+
+.totalBox{
+    margin-top: 10px;
+}
+
+.rankingBox{
+    margin-top: 10px;
+}
+
+#totalRightBox{
+    display: none;
+}
+
+#rankingRightBox{
+    display: none;
+}
+
+.schoolInfo{
+    font-size: 14px;
+    padding-left:5px;
+    padding-top:5px;
+}
+
+.userTr{
+    font-weight: normal;
+}
+
+table#userTable{
+    width: 100%;
+}
+
+.userProfile{
+    width: 5%;
+}
+
+.userNickname{
+    padding: 5px;
+    width: 40%;
+    text-align: left;
+}
+
+.donation{
+    width: 55%;
+    text-align: right;
+}
+
+.rightBox{
+    line-height: normal;
+    -webkit-text-size-adjust: 100%;
+    font-size: 14px;
+    box-sizing: border-box;
+    cursor: default;
+    margin-top: 20px;
+    border-top: 1px solid rgb(48, 52, 65);
+}
+
+.thth{
+    font-weight: normal;
+    font-size: 15px;
+}
+
+table#userTable2{
+    height: 30px;
+    font-size: 15px;
+    border-top: 1px solid rgb(154, 154, 154);
+    border-bottom: 1px solid rgb(154, 154, 154);
+    width: 100%;
+}
+
+#rankingTHead>tr{
+    height: 40px;
+    border-color: rgb(250 250 252);
+}
+
+.oneUser{
+    border-top: 1px solid rgb(250 250 252);
+    border-bottom: 1px solid rgb(250 250 252);
+}
+
+#rankingTHead{
+    background-color: rgb(250 250 252);
+}

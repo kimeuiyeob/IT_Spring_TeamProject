@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/fix/header.css">
+    <link rel="stylesheet" href="/css/fix/footer.css">
+    <link rel="stylesheet" href="/css/myPage/myPageMain.css">
+    <link rel="stylesheet" href="/css/myPage/myPageInfo.css">
+    <link rel="stylesheet" href="/css/myPage/myPageAside.css">
+    <link rel="stylesheet" href="/css/myPage/public.css">
+    <link rel="icon" href="/imgs/fix/favicon.png">
+    <title>마일스톤 | 나의 정보</title>
+</head>
+
+<body>
+<header th:replace="/fix/header.html :: header"></header>
+<div class="myPageWrap flex">
+    <!-- 어사이드 -->
+    <aside th:replace="/myPage/myPage_aside :: aside"></aside>
+    <!-- 메인 -->
+    <main class="main">
+        <div class="mainWrap flexCol">
+            <div class="mainTitle flexRow">나의 정보</div>
+            <div class="mainBodyWrap flex">
+                <!-- 프로필 -->
+                <div class="profileWrap flexColNormal">
+                    <div class="profile"></div>
+                    <div class="updateProfileBtnWrap flexCol">
+                        <label class="updateProfileBtn flexPublic">
+                            <div>프로필 변경</div>
+                            <input type="file" name="profile" id="profile" style="display: none">
+                        </label>
+                    </div>
+                </div>
+                <!-- 메인컨텐츠 -->
+                <div class="inputWrap margin-left-40 flexCol">
+                    <form action="" name="updateForm">
+                        <div class="margin-bottom-20">
+                            <div class="margin-bottom-8 flexBetween">
+                                <div class="inputTitle">이메일</div>
+                            </div>
+                            <input class="inputCos" name="email" id="email" type="email" value="ghkdwltn5@naver.com" placeholder="">
+                            <div class="margin-top-6" style="display: none;">
+                                <div class="warningMsg">이름을 정확히 입력해 주세요.</div>
+                            </div>
+                        </div>
+                        <div class="margin-bottom-20">
+                            <div class="margin-bottom-8 flexBetween">
+                                <div class="inputTitle">이름</div>
+                            </div>
+                            <input class="inputCos" name="name" id="name" type="text" value="황지수" placeholder="">
+                            <div class="margin-top-6" style="display: none;">
+                                <div class="warningMsg">이름을 정확히 입력해 주세요.</div>
+                            </div>
+                        </div>
+                        <div class="margin-bottom-20">
+                            <div class="margin-bottom-8 flexBetween">
+                                <div class="inputTitle">닉네임</div>
+                            </div>
+                            <input class="inputCos" name="nickName" id="nickName" type="text" value = "지수박박쥐" placeholder="">
+                            <div class="margin-top-6" style="display: none;">
+                                <div class="warningMsg">사용중인 닉네임입니다</div>
+                            </div>
+                        </div>
+                        <div class="margin-bottom-20">
+                            <div class="margin-bottom-8 flexBetween">
+                                <div class="inputTitle">휴대전화</div>
+                            </div>
+                            <div class="margin-bottom-8 flexBetween">
+                                <input class="inputCos" name="phone" id="phone" type="text" style="width: 79%;"
+                                       value = "01012341234" placeholder="">
+                                <button type="button" class="certificationBtn" disabled>인증번호 받기</button>
+                            </div>
+                            <div class="margin-top-6" style="display: none;">
+                                <div class="warningMsg">이메일 형식이 유효하지 않습니다.</div>
+                            </div>
+                            <input class="inputCos" type="text" name="certification" id="certification"
+                                   placeholder="인증번호를 입력해주세요" disabled>
+                            <div class="margin-top-6" style="display: none;">
+                                <div class="warningMsg">이메일 형식이 유효하지 않습니다.</div>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <div style="flex-grow : 1"></div>
+                            <button class="submitBtn" disabled>수정하기</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<footer th:replace="/fix/footer.html :: footer"></footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script src="/js/fix/header.js"></script>
+<script src="/js/myPage/myInfo.js"></script>
+<script src="/js/myPage/thumbnail.js"></script>
+</html>

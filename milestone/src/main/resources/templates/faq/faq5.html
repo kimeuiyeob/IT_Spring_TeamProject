@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <title>faq5</title>
+</head>
+<!-- ===================================================================================================== -->
+
+<link href="/css/faq/faqs.css" rel="stylesheet"/>
+<link rel="stylesheet" href="/css/fix/menu.css"/>
+<link rel="icon" href="/imgs/fix/favicon.png">
+
+<link rel="stylesheet" href="/css/fix/header.css">
+<link rel="stylesheet" href="/css/fix/footer.css">
+
+<!-- ================================================================================================================ -->
+<body>
+
+<header th:replace="/fix/header.html :: header"></header>
+
+<!-- ================================================================================================================ -->
+
+<main role="main" style="padding-top:100px">
+    <div class="container-divider" style="border-top : none;"></div>
+    <div class="container">
+
+        <div class="article-container" id="article-container">
+            <section class="article-sidebar">
+
+                <section class="section-articles collapsible-sidebar">
+                    <h3 class="collapsible-sidebar-title sidenav-title" style="padding-left:10px;">이 섹션의 문서</h3>
+                    <ul>
+
+                        <li>
+                            <a href="/faq/faq1" class="sidenav-item ">
+                                <p class="sidenav-item-text">Milestone 어떻게 이용하나요?</p>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/faq/faq2" class="sidenav-item ">
+                                <p class="sidenav-item-text">Milestone 닉네임은 어떻게 변경하나요?</p>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/faq/faq3" class="sidenav-item ">
+                                <p class="sidenav-item-text">Milestone 회원가입은 어떻게 진행하나요?</p>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/faq/faq4" class="sidenav-item ">
+                                <p class="sidenav-item-text">Milestone 휴대폰 재인증은 어떻게 하나요?</p>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/faq/faq5" class="sidenav-item current-article">
+                                <p class="sidenav-item-text">Milestone 개인정보는 안전하게 보호되나요?</p>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/faq/faq6" class="sidenav-item ">
+                                <p class="sidenav-item-text">Milestone 회원 탈퇴시 모두 삭제되나요?</p>
+                            </a>
+                        </li>
+                    </ul>
+
+                </section>
+
+            </section>
+
+            <article class="article">
+                <header class="article-header">
+                    <h1 title="[개인정보] 개인정보는 안전하게 보호되나요?" class="article-title">
+                        Milestone 개인정보는 안전하게 보호되나요?
+
+                    </h1>
+
+                </header>
+
+                <section class="article-info">
+                    <div class="article-content">
+                        <div class="article-body">
+                            <div class="article-content">
+                                <div class="article-body">
+                                    <div>
+                                        <p>서비스를 안전하게 이용하실 수 있도록, Milestone은 회원 정보의 보호·보안을 위해 노력하고
+                                            있습니다.&nbsp;<br><br><span
+                                                    class="wysiwyg-color-orange80">■</span>&nbsp; SSL(Secure Sockets
+                                            Layer) 적용</p>
+                                        <p>Milestone 웹사이트의 모든 영역에는 SSL이 적용되어 있습니다. <br>SSL이란 브라우저와 서버 간 통신 과정에서 옮겨지는 정보를
+                                            암호화해주는 통신 프로토콜이며, SSL이 적용된 웹 사이트의 주소창에서는 자물쇠 모양의 아이콘(🔒)과 http로 시작되는 주소를
+                                            확인하실 수 있습니다.</p>
+                                        <p>&nbsp;</p>
+                                        <p>&nbsp;</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="article-attachments" style="padding-bottom:230px">
+                            <ul class="attachments">
+
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </article>
+        </div>
+    </div>
+
+</main>
+
+<!-- ========================================================================================== -->
+<footer th:replace="/fix/footer.html :: footer"></footer>
+
+<!-- ================================================================================================================ -->
+
+</body>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script src="/js/fix/header.js"></script>
+</html>

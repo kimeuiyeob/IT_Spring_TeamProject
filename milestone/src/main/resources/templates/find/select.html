@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/fix/header.css">
+    <link rel="stylesheet" href="/css/fix/footer.css">
+    <link rel="stylesheet" href="/css/find/public.css">
+    <link rel="stylesheet" href="/css/find/find.css">
+    <link rel="icon" href="/imgs/fix/favicon.png">
+    <title>마일스톤 | 아이디/비밀번호 찾기</title>
+</head>
+<body>
+<header th:replace="/fix/header.html :: header"></header>
+<!-- 모달 -->
+<div class="modalWrap">
+    <div class="modalScope flexCol">
+        <div class="modalHead flexCol flexPublic">
+            <div class="exclamationMark relative">
+                <div class = "modalIcon">┼</div>
+            </div>
+            <h2 class="modalContent">이메일 오류</h2>
+        </div>
+        <div class="modalFooter">
+            <div class = "detailMsg">해당 이메일은 마일스톤에 가입되어 있지 않습니다.</div>
+        </div>
+    </div>
+</div>
+<!-- 메인 -->
+<main class="mainWrapWrap">
+    <div class="mainWrap flexCol">
+        <h2>아이디/비밀번호 찾기</h2>
+        <div class="margin-top-15 flexCol">
+            <div class="itemBox flexCol">
+                <div class="itemTitle">아이디 찾기</div>
+                <div class="itemBody">
+                    <form action="">
+                        <input type="text" name = "name" placeholder="이름" class="inputCos margin-bottom-5" required>
+                        <input type="text" name = "nickName" placeholder="닉네임" class="inputCos margin-bottom-5" required>
+                        <div class="margin-top-15 margin-bottom-15">
+                            <small class="referenceMsg">가입하신 이름과 닉네임을 입력해 주세요.</small>
+                        </div>
+                        <button class="submitBtn">아이디 찾기</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="flexCol">
+            <div class="itemTitle">비밀번호 찾기</div>
+            <div class="itemBody">
+                <form action="">
+                    <input type="text" name = "nickName" placeholder="닉네임" class="inputCos margin-bottom-5" required>
+                    <input type="text" name = "email" placeholder="이메일" class="inputCos margin-bottom-5" required>
+                    <div class="margin-top-15 margin-bottom-15">
+                        <small class="referenceMsg">가입하신 닉네임과 이메일을 입력해 주세요.</small>
+                    </div>
+                    <button class="submitBtn">비밀번호 찾기</button>
+                </form>
+            </div>
+        </div>
+        <div class="margin-top-10 margin-bottom-20">
+            <div class="margin-top-10 margin-bottom-10 flexBetween">
+                <a href="" class="sign">로그인</a>
+                <a href="" class="sign">무료회원가입</a>
+            </div>
+        </div>
+    </div>
+</main>
+<footer th:replace="/fix/footer.html :: footer"></footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script src="/js/fix/header.js"></script>
+<script src="/js/find/find.js"></script>
+</html>
+

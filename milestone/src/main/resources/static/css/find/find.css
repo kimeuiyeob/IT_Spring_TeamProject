@@ -1,0 +1,190 @@
+h2{
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.mainWrapWrap {
+    width: 1024px;
+    margin: 20px auto 0;
+    padding: 0 15px;
+}
+
+.mainWrap {
+    width: 33.33333%;
+    margin: 0 33.33333%;
+    padding: 0 15px;
+}
+
+.itemBox {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.itemTitle {
+    border: 1px solid #e6e6e6;
+    border-radius: 5px 5px 0 0;
+    color: #4d4d4d;
+    background-color: #e8e8e8;
+    padding: 10px 12px;
+}
+
+.itemBody {
+    border: 1px solid #e6e6e6;
+    border-radius: 0 0 5px 5px;
+    padding: 20px;
+}
+
+.inputCos {
+    font-size: 13px;
+    color: #555;
+}
+
+.submitBtn {
+    width: 100%;
+    color: #303441;
+    font-size: 13px;
+    background-color: rgb(255, 212, 0);
+    border: 1px solid rgb(255, 212, 0);
+    border-radius: 4px;
+    padding: 11px 14px;
+    transition: background-color 0.3s;
+}
+
+.submitBtn:hover {
+    background-color: rgb(245, 193, 38);
+    border: 1px solid rgb(245, 193, 38);
+}
+
+.submitBtn:active {
+    background-color: #b88a03;
+    outline: 2px solid rgb(245, 193, 38);
+}
+
+.sign {
+    color: #303441;
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.sign:visited {
+    color: #303441;
+}
+
+.sign:hover {
+    text-decoration: underline;
+}
+
+.referenceMsg{
+    font-size: 84%;
+    color: #888;
+}
+
+.resultEmail{
+    height: 100px;
+    margin: auto 0;
+    text-align: center;
+}
+
+/*모달창*/
+
+.modalWrap {
+    display: none;
+    z-index: 21;
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 100%;
+    height: 100vw;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: display 0.3s;
+}
+
+.modalScope {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: auto;
+    padding: 20px;
+    border-radius: 5px;
+    background: #fff;
+    font-size: 1rem;
+    width: 32em;
+}
+
+.modalHead {
+    padding: 0 1.8rem;
+}
+
+.exclamationMark {
+    display: none;
+    color: #ee3b27;
+    width: 5.5rem;
+    height: 5.5rem;
+    margin: 1.25rem auto 1.875rem;
+    border: 0.25rem solid #ee3b27;
+    border-radius: 50%;
+    font-size: 3.75rem;
+    text-align: center;
+}
+
+.modalIcon {
+    position: absolute;
+    top: -6px;
+    left: 13px;
+    transform: rotate(45deg);
+    align-self: self-end;
+}
+
+.exclamationMarkSuccess{
+    display: none;
+    color: #a5dc86;
+    width: 5.5rem;
+    height: 5.5rem;
+    margin: 1.25rem auto 1.875rem;
+    border: 0.25rem solid #a5dc86;
+    border-radius: 50%;
+    font-size: 3.75rem;
+    text-align: center;
+}
+
+.modalIconSuccess{
+    background: url("/imgs/find/check.png");
+    background-size: 3.75rem;
+    height: 3.75rem;
+    width: 3.75rem;
+    filter: invert(86%) sepia(3%) saturate(4491%) hue-rotate(54deg) brightness(99%) contrast(81%);
+}
+
+.modalContent {
+    font-size: 1.875em;
+    margin: 0 0 0.4em;
+    color: #595959;
+}
+
+.modalFooter {
+    margin: 0 auto 1.25em;
+    padding: 0 1.6em;
+}
+
+.detailMsg{
+    font-size: 0.875em;
+    color: #888;
+}
+
+.modalBtn {
+    border: 0;
+    border-radius: 0.25em;
+    background-color: #2778c4;
+    color: #fff;
+    font-size: 1.0625em;
+    margin: 0.3125em;
+    padding: 0.625em 1.1em;
+    width: 4em;
+}
+
+.modalBtn:hover {
+    filter: brightness(90%);
+}
+

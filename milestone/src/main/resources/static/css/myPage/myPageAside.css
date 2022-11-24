@@ -1,0 +1,23 @@
+.asideTitle{
+    font-size: 18px;
+    color: rgb(48, 52, 65);
+    font-weight: 500;
+}
+
+.asideLine{
+    margin: 20px 0;
+    background-color: rgb(48, 52, 65);
+    height: 2px;
+}
+
+.asideItemWrap{
+    text-decoration: none;
+    color: rgb(48, 52, 65);
+    padding: 8px 20px;
+    font-size: 14px;
+    font-weight: 100;
+}
+
+.asideItemWrap:hover{
+    text-decoration: underline;
+}

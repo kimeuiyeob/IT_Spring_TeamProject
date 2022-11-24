@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/fix/header.css">
+    <link rel="stylesheet" href="/css/fix/footer.css">
+    <link rel="stylesheet" href="/css/find/public.css">
+    <link rel="stylesheet" href="/css/find/find.css">
+    <link rel="icon" href="/imgs/fix/favicon.png">
+    <title>마일스톤 | 아이디/비밀번호 찾기</title>
+</head>
+<body>
+<header th:replace="/fix/header.html :: header"></header>
+<!-- 메인 -->
+<main class="mainWrapWrap">
+    <div class="mainWrap flexCol">
+        <h2>이메일 찾기</h2>
+        <div class="margin-top-15 margin-bottom-24 flexCol">
+            <div class="itemBox flexCol">
+                <div class="itemTitle">이메일 찾기</div>
+                <div class="itemBody">
+                    <form action="">
+                        <div class="resultEmail flexPublic">
+                            회원님의 이메일은 <br>
+                            ghkdwltn9872@gmail.com<br>입니다
+                        </div>
+                        <button class="submitBtn">홈으로</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer th:replace="/fix/footer.html :: footer"></footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script src="/js/fix/header.js"></script>
+</html>

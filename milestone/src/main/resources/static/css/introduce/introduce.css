@@ -1,0 +1,238 @@
+/* =================슬라이드 배너====================== */
+body {
+    margin: 0;
+}
+.Banners {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 16px;
+    width: 1200px
+}
+
+.BannerContent {
+    display: inline-block;
+    /* 왼쪽 여백 */
+    padding-top: 155px;
+    /* 글내용 센터로 보낼때 */
+}
+
+.BannerSlides {
+    position: relative;
+    width: 50%;
+    height: 800px;
+    display: inline-block;
+}
+
+.swiper {
+    width: 100%;
+    /* 이쪽으로 배너 크기 조절 */
+    height: 70%;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+:root {
+    --swiper-theme-color: #ffd400;
+}
+
+/* ============================================= */
+
+
+
+/* =================카운트 업=================== */
+
+.count {
+    display: flex;
+    justify-content: space-between;
+    margin: 100px auto;
+    width: 40%;
+}
+
+.count-num {
+    text-align: center;
+    font-size: 45px;
+    font-weight: 700;
+}
+
+.countUp {
+    height: 240px;
+    margin-top: -150px;
+    margin-top: -285px;
+}
+
+/* ============================================= */
+
+/* ============도움이 필요한 보육원=============== */
+
+.helpSchool {
+    display: flex;
+    justify-content: space-between;
+}
+
+.helpSchoolVideo {
+    display: inline-block;
+}
+
+.helpSchools {
+    display: inline-block;
+    padding-top: 50px;
+}
+
+/* ============================================= */
+
+/* ===================랭킹====================== */
+
+
+.ranking {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 100px;
+    padding-bottom: 70px;
+}
+
+.rankings {
+    display: inline-block;
+    padding-top: 50px;
+}
+
+.rankingImg {
+    display: inline-block;
+}
+
+/* ============================================= */
+
+/* ================하단 큰 비디오================ */
+
+.BigVideo {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #303441;
+    padding-bottom: 100px;
+    padding: 120px;
+    padding-top: 65px;
+}
+
+.Big {
+    display: inline-block;
+    color: white;
+    text-align: center;
+}
+
+.BigVideos {
+    display: inline-block;
+}
+
+
+
+/* ============================================= */
+
+.introduceButton {
+    outline: none;
+    border-width: 1px;
+    border-style: solid;
+    box-sizing: border-box;
+    border-radius: 4px;
+    line-height: 1;
+    font-weight: bold;
+    background-color: #ffd400;
+    border-color: #ffd400;
+    color: #303441;
+    width: 238px;
+    white-space: nowrap;
+    max-width: 100%;
+    height: 52px;
+    font-size: 16px;
+    padding: 0 24px;
+    min-width: 80px;
+    cursor: pointer;
+    position: relative;
+    align-items: center;
+}
+
+.introduceButton:hover {
+    background-color: #d7b50c;
+    border-color: #d7b50c;
+}
+
+@font-face {
+    font-family: 'Metro Sans';
+    font-style: normal;
+    src: url(https://d2v80xjmx68n4w.cloudfront.net/assets/fonts/MetroSans/MetroSans-Bold.woff2) format('woff2'),
+    url(https://d2v80xjmx68n4w.cloudfront.net/assets/fonts/MetroSans/MetroSans-Bold.woff) format('woff'),
+    url(https://d2v80xjmx68n4w.cloudfront.net/assets/fonts/MetroSans/MetroSans-Bold.otf) format('truetype'), url(https://d2v80xjmx68n4w.cloudfront.net/assets/fonts/MetroSans/MetroSans-Bold.eot),
+    url(https://d2v80xjmx68n4w.cloudfront.net/assets/fonts/MetroSans/MetroSans-Bold.eot?#iefix) format('embedded-opentype');
+}
+
+/* ===============================왼쪽에서 오른쪽 css=============================================== */
+
+@keyframes fadeInLeft {
+    0% {
+        opacity: 0;
+        transform: translate3d(-50%, 0, 0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateZ(0);
+    }
+}
+
+.test_obj {
+    position: relative;
+    animation: fadeInLeft 1s;
+}
+
+/* ===============================왼쪽에서 오른쪽 css=============================================== */
+
+@keyframes fadeInRight {
+    0% {
+        opacity: 0;
+        transform: translate3d(50%, 0, 0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateZ(0);
+    }
+}
+
+.kest_obj {
+    position: relative;
+    animation: fadeInRight 1s;
+}
+
+/* ===========================순차적으로 생겨나는 css========================================= */
+
+.dov {
+    opacity: 0;
+    transition: all 2.5s;
+}
+
+/* ==============================마우스 온 사진 확대=========================================== */
+.bigbig {
+    transition: all 0.2s linear;
+}
+.bigbig:hover  {
+    transform: scale(1.1);
+}

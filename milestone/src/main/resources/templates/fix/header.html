@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>header</title>
+</head>
+<body>
+<header class="header1" id="mobile-header1">
+    <!--로그인 모달-->
+    <section class="loginModalWrap">
+        <div class="loginModalScope flexPublic">
+            <div class="loginModalBox flexRow">
+                <!--모달 창 X버튼-->
+                <div class="closeWrap">
+                    <button class="closeBackground flexPublic">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
+                             focusable="false" preserveAspectRatio="xMidYMid meet" class="css-7kp13n e181xm9y0">
+                            <path xmlns="http://www.w3.org/2000/svg"
+                                  d="M6.34314575,4.92893219 L12.000039,10.585039 L17.6568542,4.92893219 C18.0473785,4.5384079 18.6805435,4.5384079 19.0710678,4.92893219 C19.4615921,5.31945648 19.4615921,5.95262146 19.0710678,6.34314575 L13.415039,12.000039 L19.0710678,17.6568542 C19.4615921,18.0473785 19.4615921,18.6805435 19.0710678,19.0710678 C18.6805435,19.4615921 18.0473785,19.4615921 17.6568542,19.0710678 L12.000039,13.415039 L6.34314575,19.0710678 C5.95262146,19.4615921 5.31945648,19.4615921 4.92893219,19.0710678 C4.5384079,18.6805435 4.5384079,18.0473785 4.92893219,17.6568542 L10.585039,12.000039 L4.92893219,6.34314575 C4.5384079,5.95262146 4.5384079,5.31945648 4.92893219,4.92893219 C5.31945648,4.5384079 5.95262146,4.5384079 6.34314575,4.92893219 Z">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+                <!--사진,정보입력-->
+                <div class="imgWrap">
+                    <img src="/imgs/fix/loginBalloon(풍선).jpg"
+                         style="margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; border-radius: 8px 0 0 8px "
+                         alt="">
+                    <span class="imgText">현재 324,254,196명의 회원이 마일스톤에서 마음을 나누고 있습니다.
+                    <br>324,254,197번째 마일스톤회원이 되어 마음을 나눠보세요 :)</span>
+                </div>
+                <div class="loginWrap">
+                    <h2 class="loginTitle">로그인</h2>
+                    <div class="flexColNormal flexBetween loginBody">
+                        <form action="">
+                            <div class="margin-bottom-8">
+                                <input type="text" class="loginInputCos" placeholder="이메일을 입력해 주세요">
+                                <div class="warningMsg margin-top-4">이메일을 입력해 주세요</div>
+                            </div>
+                            <div class="margin-bottom-8">
+                                <input type="password" class="loginInputCos" placeholder="비밀번호를 입력해 주세요">
+                                <div class="warningMsg margin-top-4">비밀번호를 입력해 주세요</div>
+                            </div>
+                            <button class="loginButton">
+                                로그인
+                            </button>
+                            <div class="margin-top-8 flexBetween loginItemsWrap">
+                                <div class="flexBetween flexPublic">
+                                    <label class="flexPublic checkboxWrap">
+                                        <input type="checkbox">
+                                        <div class="checkboxCos"></div>
+                                        <div class="margin-left-8">로그인 유지</div>
+                                    </label>
+                                </div>
+                                <a href="" class="findLoginInfo">
+                                    아이디•비밀번호 찾기
+                                </a>
+                            </div>
+                        </form>
+                        <div class="loginItemBottom">
+                            <div class="margin-bottom-12 flexCol flexPublic">
+                                <span class="oAuthTitle">SNS계정으로 간편하게 로그인하세요.</span>
+                                <div class="oAuthesWrap margin-top-16 flexBetween width-100">
+                                    <a href="" class="oAuthBox flexPublic"></a>
+                                    <a href="" class="oAuthBox flexPublic" style="background-color: rgb(30, 200, 0);">
+                                        <img src="https://d2v80xjmx68n4w.cloudfront.net/assets/icon/naver_logo.png"
+                                             width="32"
+                                             height="32" alt="">
+                                    </a>
+                                    <a href="" class="oAuthBox flexPublic" style="background-color: rgb(249, 224, 0);">
+                                        <img src="https://d2v80xjmx68n4w.cloudfront.net/assets/icon/kakao_logo.png"
+                                             width="32"
+                                             height="32" alt="">
+                                    </a>
+                                    <a href="" class="oAuthBox flexPublic"
+                                       style="background-color: rgb(248, 249, 253);">
+                                        <img src="https://d2v80xjmx68n4w.cloudfront.net/assets/icon/google_logo.png"
+                                             width="32"
+                                             height="32" alt="">
+                                    </a>
+                                    <a href="" class="oAuthBox flexPublic"></a>
+                                </div>
+                            </div>
+                            <hr class="grayLine">
+                            <p class="loginFooterText">마일스톤의 회원이 되셔서<br>
+                                마음을 나눠보세요</p>
+                            <a href="" class="joinBtn flexPublic">
+                                마일스톤 회원가입 하기
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--진짜 헤더-->
+    <section class="header2" id="mobile-header2">
+        <div class="mobile-menu-icon1" id="mobile-menu-icon2">
+            <img id="menu-icon" src="/imgs/fix/menu_icon.png" alt="네비게이션 메뉴 아이콘" style="cursor:pointer">
+            <img id="close-icon" src="/imgs/fix/close_icon.png" alt="닫기 아이콘" style="cursor:pointer">
+        </div>
+        <a href="#" class="logo1" id="mobile-logo1">
+            <img src="/imgs/fix/logo.png" style="width: 120px; height: 120%;" class="logo2">
+        </a>
+        <div class="mobile-menu-icon2" id="mobile-search-icon1">
+            <img id="search-icon" src="/imgs/fix/search.png" alt="검색 아이콘" style="cursor:pointer">
+            <img id="close-icon-right" src="/imgs/fix/close_icon.png" alt="닫기 아이콘" style="cursor:pointer">
+        </div>
+        <div id="mobile-etc1" style="flex-grow: 1;"></div>
+        <div class="button1 login-header-button1" id="mobile-button1">
+            <button role="button" color="default" class="button2 button3" style="display: none;">
+                <span class="button4 button3">보육원 등록</span>
+            </button>
+            <button role="button" color="default" class="button2 button3" id="message-button">
+                <span class="button4 button3">알림</span>
+            </button>
+            <div class="message1" id="message-id1">
+                <div class="message2">
+                    <ul class="message3 list1">
+                        <li>봉사 알림</li>
+                    </ul>
+                </div>
+                <div class="message4 list1">
+                    <li class="message7">모든 메시지를 확인했습니다.</li>
+                </div>
+                <ul class="message5 list1">
+                    <a href="#" class="message8">
+                        <li class="message6">받은 전체 메시지 확인</li>
+                    </a>
+                </ul>
+            </div>
+            <button role="button" color="default" id = "loginBtn" class="button5 button3" style="display: none;">
+                <span class="button6 button3">로그인</span>
+            </button>
+            <button role="button" color="default" id = "loginBtn" class="button5 button3">
+                <span class="button6 button3">마이 크몽</span>
+            </button>
+            <a role="link" color="yellow" href="#" class="button7 button3" style="display: none;">
+                <span class="button8 button3">무료 회원가입</span>
+            </a>
+            <div class="profile1 profile2" id="profile1">
+                <a role="link" color="default" href="#" class="profile3 profile4" aria-expanded="false">
+                    <span class="profile5 profile6">
+                        <div size="32" shape="0" role="article" class="profile7 profile8">
+                            <img src="/imgs/fix/login.png" alt="avatar" shape="0" loading="lazy" class="profile9 profile10" id="login-profile9">
+                        </div>
+                    </span>
+                </a>
+                <div class="profile-menu1" id="login-profile-menu1">
+                    <div class="profile-menu2">
+                        <ul class="profile-menu3">
+                            <a href="#" class="line1">
+                                <li>프로필관리</li>
+                            </a>
+                        </ul>
+                        <ul class="profile-menu3">
+                            <a href="#" class="line1">
+                                <li>나의 찜목록</li>
+                            </a>
+                        </ul>
+                        <ul class="profile-menu3">
+                            <a href="#" class="line1">
+                                <li>마이페이지</li>
+                            </a>
+                        </ul>
+
+                        <ul class="profile-menu3">
+                            <a href="#" class="line1">
+                                <li>로그아웃</li>
+                            </a>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div id="wrapper">
+        <div class="topbar" style="position: absolute; top:0;">
+            <!-- 왼쪽 서브 메뉴 -->
+            <div class="left_sub_menu">
+                <div class="sub_menu">
+                    <ul class="big_menu">
+                        <a href="#">
+                            <li>로그인</li>
+                        </a>
+                    </ul>
+                    <ul class="big_menu">
+                        <a href="#">
+                            <li>무료 회원가입</li>
+                        </a>
+                    </ul>
+                    <ul class="big_menu">
+                        <a href="#">
+                            <li>보육원 등록</li>
+                        </a>
+                    </ul>
+                    <ul class="small_menu">
+                        <a href="#">
+                            <li style="padding-bottom: 5px; padding-top: 5px;">소개</li>
+                        </a>
+                    </ul>
+                    <ul class="small_menu">
+                        <a href="#">
+                            <li style="padding-bottom: 5px; padding-top: 5px;">보육원</li>
+                        </a>
+                    </ul>
+                    <ul class="small_menu">
+                        <a href="#">
+                            <li style="padding-bottom: 5px; padding-top: 5px;">도움이 필요해요</li>
+                        </a>
+                    </ul>
+                    <ul class="small_menu">
+                        <a href="#">
+                            <li style="padding-bottom: 5px; padding-top: 5px;">기부 랭킹</li>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="wrapper-right">
+        <div class="topbar-right" style="position: absolute; top:0;">
+            <!-- 오른쪽 검색 -->
+            <div class="right_sub_menu">
+                <div class="sub_menu-right">
+                    <form class="mobile-search1 mobile-search2">
+                        <div class="mobile-search3 mobile-search4">
+
+                            <div class="mobile-auto-text1">
+                                <h1 class="mobile-text" id="mobile-auto-text2"></h1>
+                            </div>
+
+                            <label for="mobile-search5" class="mobile-search-lable">
+                                <input id="mobile-search5" role="search" maxlength="15" autocomplete="off"
+                                       autocorrect="off" autocapitalize="off" class="mobile-search6 mobile-search7"
+                                       value="">
+                            </label>
+                            <div class="mobile-search9 mobile-search10">
+                                <span role="img" color="#ffffff" rotate="0" class="mobile-search11 mobile-search12">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"
+                                         aria-hidden="true" focusable="false" preserveAspectRatio="xMidYMid meet"
+                                         class="mobile-search13 mobile-search14">
+                                        <path xmlns="http://www.w3.org/2000/svg"
+                                              d="M11.2307008,3.5 C15.5002489,3.5 18.9614015,6.96828437 18.9614015,11.24663 C18.9614015,13.0978372 18.3133954,14.7973826 17.2322825,16.1299241 L20.2742127,19.178378 C20.5762688,19.4810023 20.5764739,19.9714482 20.2746708,20.2738195 C19.9728678,20.5761908 19.4833433,20.5759857 19.1812873,20.2733614 L19.1812873,20.2733614 L16.1426973,17.2288066 C14.8071694,18.3312107 13.0960911,18.9932599 11.2307008,18.9932599 C6.96115262,18.9932599 3.5,15.5249756 3.5,11.24663 C3.5,6.96828437 6.96115262,3.5 11.2307008,3.5 Z M11.2307008,5.04932599 C7.81506225,5.04932599 5.04614015,7.82395349 5.04614015,11.24663 C5.04614015,14.6693064 7.81506225,17.4439339 11.2307008,17.4439339 C14.6463393,17.4439339 17.4152614,14.6693064 17.4152614,11.24663 C17.4152614,7.82395349 14.6463393,5.04932599 11.2307008,5.04932599 Z">
+                                        </path>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="mobile-slide-text3">
+                        <div class="mobile-slide-text4">
+                            <a href="#" class="mobile-slide-text5">#
+                                <!-- -->도움이 필요한 보육원
+                            </a>
+                        </div>
+                        <div class="mobile-slide-text4">
+                            <a href="#" class="mobile-slide-text5">#
+                                <!-- -->도움이 필요한 보육원
+                            </a>
+                        </div>
+                        <div class="mobile-slide-text4">
+                            <a href="#" class="mobile-slide-text5">#
+                                <!-- -->도움이 필요한 보육원
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="header6" id="mobile-header3">
+        <div class="header7">
+            <div class="header8">
+                <nav>
+                    <ul class="nav1">
+                        <li class="nav2 nav3" style="padding-right: 10px">
+                            <a color="secondary" href="#" class="nav4 nav5 nav6" id="nav-text1">소개</a>
+                            <div class="nav7 nav8">
+                                <div class="nav9 nav10" id="yellow1"></div>
+                            </div>
+                        </li>
+                        <li class="nav2 nav3" style="padding-right: 10px">
+                            <a color="secondary" href="#" class="nav4 nav5 nav6" id="nav-text2">보육원</a>
+                            <div class="nav7 nav8">
+                                <div class="nav9 nav10" id="yellow2"></div>
+                            </div>
+                        </li>
+                        <li class="nav2 nav3" style="padding-right: 10px">
+                            <a color="secondary" href="#" class="nav4 nav5 nav6" id="nav-text3">도움이 필요해요</a>
+                            <div class="nav7 nav8">
+                                <div class="nav9 nav10" id="yellow3"></div>
+                            </div>
+                        </li>
+                        <li class="nav2 nav3" style="padding-right: 10px">
+                            <a color="secondary" href="#" class="nav4 nav5 nav6" id="nav-text4">기부랭킹</a>
+                            <div class="nav7 nav8">
+                                <div class="nav9 nav10" id="yellow4"></div>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="header9 header10" id="mobile-header4">
+                    <a href="/faq/faq" class="header11 header12">
+                        원하는 서비스를 못 찾겠다면, <b>FAQ를&nbsp</b>확인 하세요! &nbsp;&gt;
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</header>
+</body>
+</html>

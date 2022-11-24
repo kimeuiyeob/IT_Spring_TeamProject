@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/join/join.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/join/joinPublic.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/join/public.css" type="text/css"/>
+    <link rel="icon" href="/imgs/fix/favicon.png">
+    <title>마일스톤 | 회원가입</title>
+</head>
+
+<body>
+<div class="joinWrap flexCol">
+    <a class="joinHeader" href=""><img src="/imgs/fix/logo.png" alt=""
+                                       style="width: 114px; height: 31.5px;"></a>
+    <div class="joinBody flexCol">
+        <div class="joinTitleWrap" style="margin-top: 0; word-spacing: -5px;">
+            딱 이것만 체크하면 가입완료!
+        </div>
+        <form action="" id="joinForm" name="joinForm">
+            <div class="inputWrap flexCol">
+                <div class="flexRow margin-bottom-8">
+                    <div class="inputTitleWrap">이메일</div>
+                    <div class="essential">*</div>
+                </div>
+                <input class="inputCos" name="email" id="email" type="email" placeholder="이메일을 입력해 주세요.">
+                <div class="flexRow margin-top-4" style="display: none;">
+                    <div class="warningMsg">이메일 형식이 유효하지 않습니다.</div>
+                </div>
+            </div>
+            <div class="inputWrap flexCol padding-bottom-8">
+                <div class="flexRow margin-bottom-8">
+                    <div class="inputTitleWrap">비밀번호</div>
+                    <div class="essential">*</div>
+                </div>
+                <input class="inputCos" name="password" id="password" type="password"
+                       placeholder="비밀번호를 입력해 주세요.(8자리 이상)">
+                <div class="flexRow margin-top-4" style="display: none;">
+                    <div class="warningMsg">비밀번호 형식이 유효하지 않습니다.</div>
+                </div>
+            </div>
+            <div class="inputWrap flexCol">
+                <input class="inputCos" name="checkPassword" id="checkPassword" type="password"
+                       placeholder="비밀번호를 한 번 더 입력해 주세요.">
+                <div class="flexRow margin-top-4" style="display: none;">
+                    <div class="warningMsg">비밀번호가 일치하지 않습니다.</div>
+                </div>
+            </div>
+            <div class="inputWrap flexCol">
+                <div class="flexRow margin-bottom-8">
+                    <div class="inputTitleWrap">이름</div>
+                    <div class="essential">*</div>
+                </div>
+                <input class="inputCos" name="name" id="name" type="text" placeholder="이름을 입력해 주세요.">
+                <div class="flexRow margin-top-4" style="display: none;">
+                    <div class="warningMsg">이름을 정확히 입력해 주세요.</div>
+                </div>
+            </div>
+            <div class="inputWrap flexCol">
+                <div class="flexRow margin-bottom-8">
+                    <div class="inputTitleWrap">닉네임</div>
+                    <div class="essential">*</div>
+                </div>
+                <input class="inputCos" name="nickName" id="nickName" type="text" placeholder="닉네임 입력해 주세요.">
+                <div class="flexRow margin-top-4" style="display: none;">
+                    <div class="warningMsg">이미 마일스톤에 등록된 닉네임입니다.</div>
+                </div>
+            </div>
+            <div class="inputWrap flexCol padding-bottom-8">
+                <div class="flexRow margin-bottom-8">
+                    <div class="inputTitleWrap">휴대전화</div>
+                    <div class="essential">*</div>
+                </div>
+                <div class="flexBetween">
+                    <input class="inputCos" name="phone" id="phone" type="text" placeholder="전화번호를 입력해 주세요.">
+                    <button type="button" class="certificationBtn"><span>인증번호 받기</span></button>
+                </div>
+                <div class="flexRow margin-top-4" style="display: none;">
+                    <div class="warningMsg">전화번호를 정확히 입력해 주세요</div>
+                </div>
+            </div>
+            <div class="inputWrap flexCol">
+                <input class="inputCos" name="certification" id="certification" type="text"
+                       placeholder="인증번호를 입력해 주세요." disabled>
+                <div class="flexRow margin-top-4" style="display: none;">
+                    <div class="warningMsg">인증번호가 일치하지 않습니다.</div>
+                </div>
+            </div>
+        </form>
+        <div class="agreements">
+            <label>
+                <div class="agreeAllWrap flexRow">
+                    <input type="checkbox" class="allCheckbox">
+                    <div class="agreeBackground">
+                        <div class="checkImg"></div>
+                    </div>
+                    모두 동의합니다.
+                </div>
+            </label>
+            <div class="margin-top-16">
+                <label>
+                    <div class="flexRow margin-bottom-4 smallAgree">
+                        <input type="checkbox" class="smallCheckbox">
+                        <div class="smallAgreeBackground">
+                            <div class="smallCheckImg"></div>
+                        </div>
+                        만 14세 이상입니다.
+                        <div class="essentialAgree">(필수)</div>
+                    </div>
+                </label>
+                <label>
+                    <div class="flexRow margin-bottom-4 smallAgree">
+                        <input type="checkbox" class="smallCheckbox">
+                        <div class="smallAgreeBackground">
+                            <div class="smallCheckImg"></div>
+                        </div>
+                        <a href="">서비스 이용약관</a>에 동의합니다.
+                        <div class="essentialAgree">(필수)</div>
+                    </div>
+                </label>
+                <label>
+                    <div class="flexRow margin-bottom-4 smallAgree">
+                        <input type="checkbox" class="smallCheckbox">
+                        <div class="smallAgreeBackground">
+                            <div class="smallCheckImg"></div>
+                        </div>
+                        <a href="">개인정보 수집/이용</a>에 동의합니다.
+                        <div class="essentialAgree">(필수)</div>
+                    </div>
+                </label>
+                <label>
+                    <div class="flexRow margin-bottom-4 smallAgree">
+                        <input type="checkbox" class="smallCheckbox">
+                        <div class="smallAgreeBackground">
+                            <div class="smallCheckImg"></div>
+                        </div>
+                        <a href="">개인정보 제3자 제공</a>에 동의합니다.
+                        <div class="essentialAgree">(필수)</div>
+                    </div>
+                </label>
+            </div>
+        </div>
+        <button class="joinBtn" form="joinForm" disabled>버튼만 누르면 가입완료!</button>
+    </div>
+    <div class="joinFooter">
+        마일스톤은 회원님의 원할한 서비스 이용에 필요한 정보를
+        <br>적절한 전자적 수단을 통해 제공하고 있습니다.
+    </div>
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script src="/js/join/join.js"></script>
+</html>

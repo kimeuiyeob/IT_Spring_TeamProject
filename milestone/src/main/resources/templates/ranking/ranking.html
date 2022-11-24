@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <title>ranking</title>
+</head>
+
+<!-- ===================================================================================================== -->
+
+<link href="/css/ranking/ranking.css" rel="stylesheet"/>
+<link rel="icon" href="/imgs/fix/favicon.png">
+
+<link rel="stylesheet" href="/css/fix/header.css">
+<link rel="stylesheet" href="/css/fix/footer.css">
+
+<!-- ===================================================================================================== -->
+
+<body class="">
+
+<header th:replace="/fix/header.html :: header"></header>
+
+<!-- ===================================================================================================== -->
+
+<div class="css-1sz5ii e6hl9jl1" style="padding-top:70px">
+
+    <!--  <div class="txt">
+          <span style="color: rgb(33, 34, 36);font-size: 35px;">T</span>
+          <span style="color: rgb(33, 34, 36);font-size: 35px;">O</span>
+          <span style="color: rgb(33, 34, 36);font-size: 35px;">P</span>
+          <span style="color: rgb(33, 34, 36);font-size: 35px;">개</span>
+          <span style="color: rgb(33, 34, 36);font-size: 35px;">인</span>
+          <span style="color: rgb(33, 34, 36);font-size: 35px;">회</span>
+          <span style="color: rgb(33, 34, 36);font-size: 35px;">원</span>
+          <span style="color: rgb(33, 34, 36);font-size: 35px;">랭</span>
+          <span style="color: rgb(33, 34, 36);font-size: 35px;">킹</span>
+      </div>-->
+    <div data-aos="fade-right">
+        <h1 style="font-size: 32px; margin-bottom: -5px; cursor: default;">TOP개인회원랭킹</h1>
+        <h2 class="" style="margin-bottom:-5px; color: rgb(97 98 101); padding-bottom: 15px; cursor: default;">Milestone에 가장 많이 기부한 개인 랭킹
+            입니다.</h2>
+    </div>
+
+    <div class="css-x4imis enwv23o0" style="padding-bottom: 150px">
+
+        <!-- ======================첫번째 1등 쪽================================== -->
+        <div class="fade-in-box">
+            <div class="bigbig">
+                <div class="css-1j8r2w0 ezpuish0">
+
+                    <!--=====기부금랭킹 1등 DIV===== /======= 타임리프로 기부금랭킹 1등 VO 뽑아주기 =======-->
+
+                    <div class="css-7hg5zz ezpuish3">기부금 랭킹</div>
+                    <div class="css-udcuwn ezpuish2">
+                        <article class="css-1sbi2sv eegfgsa0">
+                                <span style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 40px; height: 40px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
+                                    <img src="/imgs/ranking/gold.png" style="position: absolute; width: 32px;"></span>
+                            <!--조건문 = 1등일시 금메달사진 경로-->
+                            <div class="css-1okqk0z eegfgsa1"><span class="css-r4d2us eegfgsa2">291,331,150원</span>
+                                <!--총기부금액-->
+                                <div class="css-65gs3l eegfgsa3"><span class="css-1raaqrb eegfgsa4">민성이는 바보</span>
+                                    <!--닉네임-->
+                                </div>
+                            </div>
+                            <div href="" class="css-65gs3l eegfgsa3">
+                                <div size="48" shape="0" role="article" class="css-1jm5h8a e1cdqjir2">
+                                    <img src="/imgs/ranking/normalProfile.png" class="css-on9gcz e1cdqjir1">
+                                    <!--해당회원 프로필사진-->
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+
+
+                    <!-- ============================================================== -->
+
+
+                    <div class="css-x4rf3n ezpuish1">
+
+                        <!--=====기부금랭킹 1등 DIV 하단2위부터 ~5위까지===== /======= 타임리프로 기부금랭킹 반복돌려서 뽑아주기 =======-->
+                        <!--이미지는 타임리프 조건문으로 해결하기-->
+                        <article class="css-1sbi2sv eegfgsa0">
+                                <span
+                                        style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 40px; height: 40px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
+                                    <img src="/imgs/ranking/silver.png" style="position: absolute; width: 32px;"></span>
+                            <!--조건문= 2등일시 은메달사진 경로-->
+                            <div class="css-1okqk0z eegfgsa1">
+                                <span class="css-1w82quq eegfgsa2">500원</span><!--총기부금액-->
+                                <div href="" class="css-65gs3l eegfgsa3">
+                                    <span class="css-1raaqrb eegfgsa4">나는야 킹왕짱 김의엽</span><!--닉네임-->
+                                </div>
+                            </div>
+                            <div href="" class="css-65gs3l eegfgsa3">
+                                <div size="48" shape="0" role="article" class="css-1jm5h8a e1cdqjir2">
+                                    <img src="/imgs/ranking/normalProfile.png" class="css-on9gcz e1cdqjir1">
+                                    <!--해당회원 프로필사진-->
+                                </div>
+                            </div>
+                        </article>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ==========================두번째 1등 쪽============================== -->
+
+        <div class="fade-in-box">
+            <div class="bigbig">
+                <div class="css-1j8r2w0 ezpuish0">
+
+                    <!--=====기부횟수 1등 DIV===== /======= 타임리프로 기부횟수 1등 VO 뽑아주기 =======-->
+
+                    <div class="css-7hg5zz ezpuish3">기부 횟수 랭킹</div>
+                    <div class="css-udcuwn ezpuish2">
+                        <article class="css-1sbi2sv eegfgsa0">
+                                <span
+                                        style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 40px; height: 40px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
+                                    <img src="/imgs/ranking/gold.png" style="position: absolute; width: 32px;"></span>
+                            <div class="css-1okqk0z eegfgsa1"><span class="css-r4d2us eegfgsa2">291,331,150원</span>
+                                <div class="css-65gs3l eegfgsa3"><span class="css-1raaqrb eegfgsa4">의엽 킹왕짱</span>
+                                </div>
+                            </div>
+                            <div href="" class="css-65gs3l eegfgsa3">
+                                <div size="48" shape="0" role="article" class="css-1jm5h8a e1cdqjir2">
+                                    <img src="/imgs/ranking/normalProfile.png" class="css-on9gcz e1cdqjir1">
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+
+                <div class="css-x4rf3n ezpuish1">
+
+
+                    <!--=====기부횟수 1등 DIV 하단2위부터 ~5위까지===== /======= 타임리프로 기부횟수 반복돌려서 뽑아주기 =======-->
+                    <!--이미지는 타임리프 조건문으로 해결하기-->
+                    <article class="css-1sbi2sv eegfgsa0">
+                            <span
+                                    style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 40px; height: 40px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
+                                <img src="/imgs/ranking/silver.png" style="position: absolute; width: 32px;"></span>
+                        <div class="css-1okqk0z eegfgsa1" style="cursor : default;">
+                            <span class="css-1w82quq eegfgsa2">500원</span>
+                            <div href="" class="css-65gs3l eegfgsa3">
+                                <span class="css-1raaqrb eegfgsa4">나는야 킹왕짱 김의엽</span>
+                            </div>
+                        </div>
+                        <div href="" class="css-65gs3l eegfgsa3">
+                            <div size="48" shape="0" role="article" class="css-1jm5h8a e1cdqjir2">
+                                <img src="/imgs/ranking/normalProfile.png" class="css-on9gcz e1cdqjir1">
+                            </div>
+                        </div>
+                    </article>
+
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ==========================세번째 1등 쪽============================== -->
+
+
+        <div class="fade-in-box">
+            <div class="bigbig">
+                <div class="css-1j8r2w0 ezpuish0">
+
+                    <!--=====개인회원래벨 1등 DIV===== /======= 타임리프로 개인회원래벨 1등 VO 뽑아주기 =======-->
+
+                    <div class="css-7hg5zz ezpuish3">개인 래벨 랭킹</div>
+                    <div class="css-udcuwn ezpuish2">
+                        <article class="css-1sbi2sv eegfgsa0">
+                                <span
+                                        style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 40px; height: 40px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
+                                    <img src="/imgs/ranking/gold.png" style="position: absolute; width: 32px;"></span>
+                            <div class="css-1okqk0z eegfgsa1"><span class="css-r4d2us eegfgsa2">291,331,150원</span>
+                                <div class="css-65gs3l eegfgsa3"><span class="css-1raaqrb eegfgsa4">의엽 킹왕짱</span>
+                                </div>
+                            </div>
+                            <div href="" class="css-65gs3l eegfgsa3">
+                                <div size="48" shape="0" role="article" class="css-1jm5h8a e1cdqjir2">
+                                    <img src="/imgs/ranking/normalProfile.png" class="css-on9gcz e1cdqjir1">
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- ============================================================== -->
+
+
+                    <div class="css-x4rf3n ezpuish1">
+
+
+                        <!--=====개인회원래벨 1등 DIV 하단2위부터 ~5위까지===== /======= 타임리프로 개인회원래벨 반복돌려서 뽑아주기 =======-->
+                        <!--이미지는 타임리프 조건문으로 해결하기-->
+
+                        <article class="css-1sbi2sv eegfgsa0">
+                                <span
+                                        style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 40px; height: 40px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
+                                    <img src="/imgs/ranking/silver.png" style="position: absolute; width: 32px;"></span>
+
+                            <div class="css-1okqk0z eegfgsa1">
+                                <span class="css-1w82quq eegfgsa2">500원</span>
+                                <div href="" class="css-65gs3l eegfgsa3">
+                                    <span class="css-1raaqrb eegfgsa4">나는야 킹왕짱 김의엽</span>
+                                </div>
+                            </div>
+
+                            <div href="" class="css-65gs3l eegfgsa3">
+                                <div size="48" shape="0" role="article" class="css-1jm5h8a e1cdqjir2">
+                                    <img src="/imgs/ranking/normalProfile.png" class="css-on9gcz e1cdqjir1">
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- =================================================================================================== -->
+
+</div>
+</div>
+<div style="display:flex;justify-content: center;">
+    <div>
+        <img src="/imgs/ranking/childrenn.png" style="margin-top: -50px;
+            width: 1000px;">
+    </div>
+</div>
+
+<!-- =========================================================================================================== -->
+
+<footer th:replace="/fix/footer.html :: footer"></footer>
+
+</body>
+<!-- =========================================================================================================== -->
+
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
+<!-- ==================================================================================== -->
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script th:inline="javascript"> /*타임리프 JS*/
+
+</script>
+<script src="/js/fix/header.js"></script>

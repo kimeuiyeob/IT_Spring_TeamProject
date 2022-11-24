@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>보육원 상세페이지</title>
+    <link rel="stylesheet" type="text/css"
+          href="//p25.zdassets.com/hc/theming_assets/9204604/360002309011/style.css?digest=12256508972825">
+</head>
+<!-- ======================================헤더/푸터======================================== -->
+
+<link href="/css/school/schoolDetail.css" rel="stylesheet"/>
+<link href="/css/school/calendar.css" rel="stylesheet"/>
+
+<link rel="stylesheet" href="/css/fix/header.css">
+<link rel="stylesheet" href="/css/fix/footer.css">
+<link rel="icon" href="/imgs/fix/favicon.png">
+
+<!-- ================================================================================================================ -->
+
+<body>
+<header th:replace="/fix/header.html :: header"></header>
+
+<div class="wholePage">
+
+    <section class="wholeSection">
+        <main>
+            <section id="category">
+                <div class="bigCategory">
+                    보육원
+                    <span role="img" color="#555969" rotate="0" class="css-46ifd7 e181xm9y1"><svg width="16"
+                                                                                                  height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"
+                                                                                                  preserveAspectRatio="xMidYMid meet" class="css-7kp13n e181xm9y0">
+                                <path xmlns="http://www.w3.org/2000/svg"
+                                      d="M9.41421356,12 L15.7071068,5.70710678 C16.0976311,5.31658249 16.0976311,4.68341751 15.7071068,4.29289322 C15.3165825,3.90236893 14.6834175,3.90236893 14.2928932,4.29289322 L7.29289322,11.2928932 C6.90236893,11.6834175 6.90236893,12.3165825 7.29289322,12.7071068 L14.2928932,19.7071068 C14.6834175,20.0976311 15.3165825,20.0976311 15.7071068,19.7071068 C16.0976311,19.3165825 16.0976311,18.6834175 15.7071068,18.2928932 L9.41421356,12 Z"
+                                      transform="translate(11.500000, 12.000000) scale(-1, 1) translate(-11.500000, -12.000000) ">
+                                </path>
+                            </svg></span>
+                </div>
+                <div class="smallCategory location">서울</div>
+            </section>
+
+            <!-- 이미지 -->
+            <section id="imgsSection">
+
+                <!-- 메인이미지 -->
+                <div class="mainImage">
+                    <img id ="mainImage" src="https://d2v80xjmx68n4w.cloudfront.net/gigs/QlD1o1641276709.jpg">
+                </div>
+
+
+                <!-- 작은 이미지들 보이는 div 1-->
+                <div id="list">
+                    <!-- 좌 버튼 -->
+<!--                    <button aria-label="carousel-arrow-button" data-testid="carousel-arrow" direction="prev"
+                            class="css-jrc4xu emgxp40 prevButton" style="left:1%">
+                            <span role="img" rotate="0" data-testid="left-icon" class="css-aah4od e181xm9y1">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
+                                     focusable="false" preserveAspectRatio="xMidYMid meet" class="css-7kp13n e181xm9y0"
+                                     style="padding-top: 3px;">
+                                    <path xmlns="http://www.w3.org/2000/svg"
+                                          d="M9.41421356,12 L15.7071068,5.70710678 C16.0976311,5.31658249 16.0976311,4.68341751 15.7071068,4.29289322 C15.3165825,3.90236893 14.6834175,3.90236893 14.2928932,4.29289322 L7.29289322,11.2928932 C6.90236893,11.6834175 6.90236893,12.3165825 7.29289322,12.7071068 L14.2928932,19.7071068 C14.6834175,20.0976311 15.3165825,20.0976311 15.7071068,19.7071068 C16.0976311,19.3165825 16.0976311,18.6834175 15.7071068,18.2928932 L9.41421356,12 Z">
+                                    </path>
+                                </svg>
+                            </span>
+                    </button>-->
+
+                    <!-- 작은 이미지들 보이는 div 2-->
+                    <div class="images">
+                        <!-- 긴 div -->
+                        <div class="longImages">
+                            <!-- 작은 이미지들 -->
+                            <div class="miniImages">
+                                <!-- 작은 이미지 하나 -->
+                                <div class="miniImage">
+                                    <img class="one" src="https://d2v80xjmx68n4w.cloudfront.net/gigs/QlD1o1641276709.jpg">
+                                </div>
+                                <div class="miniImage">
+                                    <img class="one" src="https://d2v80xjmx68n4w.cloudfront.net/gigs/x4YZO1667465133.jpg">
+                                </div>
+                                <div class="miniImage">
+                                    <img class="one" src="https://d2v80xjmx68n4w.cloudfront.net/gigs/QlD1o1641276709.jpg">
+                                </div>
+                                <div class="miniImage">
+                                    <img class="one" src="https://d2v80xjmx68n4w.cloudfront.net/gigs/x4YZO1667465133.jpg">
+                                </div>
+    <!--                                <div class="miniImage">
+                                        <img class="one" src="https://d2v80xjmx68n4w.cloudfront.net/gigs/QlD1o1641276709.jpg">
+                                    </div>
+                                    <div class="miniImage">
+                                        <img class="one" src="https://d2v80xjmx68n4w.cloudfront.net/gigs/x4YZO1667465133.jpg">
+                                    </div>-->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 우버튼 -->
+<!--                    <button aria-label="carousel-arrow-button" data-testid="carousel-arrow" direction="next"
+                            class="css-1ogxzj emgxp40 nextButton" style="right:1%">
+                                <span role="img" rotate="0" data-testid="right-icon" class="css-aah4od e181xm9y1">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"
+                                         aria-hidden="true" focusable="false" preserveAspectRatio="xMidYMid meet"
+                                         class="css-7kp13n e181xm9y0" style="padding-top: 3px;">
+                                        <path xmlns="http://www.w3.org/2000/svg"
+                                              d="M9.41421356,12 L15.7071068,5.70710678 C16.0976311,5.31658249 16.0976311,4.68341751 15.7071068,4.29289322 C15.3165825,3.90236893 14.6834175,3.90236893 14.2928932,4.29289322 L7.29289322,11.2928932 C6.90236893,11.6834175 6.90236893,12.3165825 7.29289322,12.7071068 L14.2928932,19.7071068 C14.6834175,20.0976311 15.3165825,20.0976311 15.7071068,19.7071068 C16.0976311,19.3165825 16.0976311,18.6834175 15.7071068,18.2928932 L9.41421356,12 Z"
+                                              transform="translate(11.500000, 12.000000) scale(-1, 1) translate(-11.500000, -12.000000) ">
+                                        </path>
+                                    </svg>
+                                </span>
+                    </button>-->
+                </div>
+            </section>
+
+            <nav id="commentNavi">
+                <div id="naviBar">
+                    <div class="navText">댓글</div>
+                </div>
+            </nav>
+
+            <section>
+                <div id="comments">
+                    <div>댓글<span id="commentsCount">3</span>개</div>
+                    <div>
+                            <span role="img" color="#116ad4" rotate="0" class="css-axxt53 e181xm9y1"><svg width="24"
+                                                                                                          height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
+                                                                                                          focusable="false" preserveAspectRatio="xMidYMid meet" class="css-7kp13n e181xm9y0">
+                                </svg>
+                            </span>
+                    </div>
+                </div>
+
+                <!-- 댓글리스트 -->
+                <div class="commentsList">
+                    <!-- 댓글 하나 -->
+                    <div class="comment">
+                        <!-- 프로필 사진, 닉네임, 날짜 -->
+                        <div class="commentsInfo">
+                            <!-- 프로필 사진-->
+                            <div class="profilePicture">
+                                <img src="/imgs/myPage/normalProfile.png">
+                            </div>
+                            <!-- 닉네임,날짜 -->
+                            <div class="nameAndDate">
+                                <div class="nickName">기부왕</div>
+                                <div class="regDate">2022.12.25</div>
+                            </div>
+                        </div>
+                        <!-- 댓글내용 -->
+                        <div class="commentContent">
+                            <div class="commentContent2">
+                                <p>기부하면서 랭킹도 올리고 재밌네요ㅋㅋ</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <div class="commentsInfo">
+                            <div class="profilePicture">
+                                <img src="/imgs/myPage/normalProfile.png">
+                            </div>
+                            <div class="nameAndDate">
+                                <div class="nickName">천사</div>
+                                <div class="regDate">2022.12.10</div>
+                            </div>
+                        </div>
+                        <div class="commentContent">
+                            <div class="commentContent2">
+                                <p>아이들이 너무 밝아 보여서 좋아요!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <div class="commentsInfo">
+                            <div class="profilePicture">
+                                <img src="/imgs/myPage/normalProfile.png">
+                            </div>
+                            <div class="nameAndDate">
+                                <div class="nickName">해피123</div>
+                                <div class="regDate">2022.12.05</div>
+                            </div>
+                        </div>
+                        <div class="commentContent">
+                            <div class="commentContent2">
+                                <p>다음에 또 봉사활동 하러 가겠습니다😁</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="more">
+                    <button color="default" class="moreButton">
+                        <span class="css-1oteowz eklkj751">더 보기</span>
+                    </button>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- 우측 어사이드 바 -->
+        <aside>
+            <!-- 찜하기 -->
+            <section id="zzim">
+                <button class="zzimButton">
+                    <!-- 빈 하트 -->
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
+                         focusable="false" preserveAspectRatio="xMidYMid meet" class="emptyHeart">
+                        <path xmlns="http://www.w3.org/2000/svg"
+                              d="M16.3680447,3 C14.8701244,3 13.434867,3.60809471 12.3788995,4.68835248 L11.999764,5.07602721 L11.6205012,4.68822239 C9.41974855,2.43790277 5.843218,2.4379028 3.64246538,4.68822244 C1.45251156,6.92750008 1.45251154,10.5501072 3.64246532,12.7893849 L11.4435969,20.7662195 C11.7484384,21.0779268 12.2510896,21.0779268 12.555931,20.7662195 L20.3570626,12.7893849 C21.4096395,11.7136062 22,10.2567327 22,8.73880364 C22,7.22093571 21.409687,5.76411845 20.3570626,4.68822238 C19.3011071,3.60804588 17.8659048,3 16.3680447,3 Z M11.999764,19.1166999 L4.75479942,11.7085588 C3.15293092,10.0706117 3.15293094,7.4069956 4.75479947,5.76904857 C6.34586921,4.14214354 8.91709737,4.14214352 10.5081671,5.76904852 L11.4435969,6.72554678 C11.7484384,7.0372541 12.2510896,7.0372541 12.555931,6.72554678 L13.4913608,5.76904851 C14.2561214,4.98669624 15.2906419,4.5483871 16.3680447,4.5483871 C17.4454474,4.5483871 18.4799679,4.98669624 19.2446013,5.76891842 C20.0136074,6.55487573 20.4466019,7.6234063 20.4466019,8.73880364 C20.4466019,9.85420097 20.0136074,10.9227315 19.2448557,11.7084287 L18.3092987,12.665057 L11.999764,19.1166999 Z">
+                        </path>
+                    </svg>
+                    <!-- 빨간 하트 -->
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="#ff7262" aria-hidden="true"
+                         focusable="false" preserveAspectRatio="xMidYMid meet" class="redHeart">
+                        <path xmlns="http://www.w3.org/2000/svg"
+                              d="M16.3680447,3 C14.8701244,3 13.434867,3.60809471 12.3788995,4.68835248 L11.999764,5.07602721 L11.6205012,4.68822239 C9.41974855,2.43790277 5.843218,2.4379028 3.64246538,4.68822244 C1.45251156,6.92750008 1.45251154,10.5501072 3.64246532,12.7893849 L11.4435969,20.7662195 C11.7484384,21.0779268 12.2510896,21.0779268 12.555931,20.7662195 L20.3570626,12.7893849 C21.4096395,11.7136062 22,10.2567327 22,8.73880364 C22,7.22093571 21.409687,5.76411845 20.3570626,4.68822238 C19.3011071,3.60804588 17.8659048,3 16.3680447,3 Z">
+                        </path>
+                    </svg>
+                    <span id="zzimCount">10</span>
+                </button>
+                </span>
+            </section>
+            <!-- 보육원 이름 -->
+            <section class="schoolName">
+                <h1>새싹보육원</h1>
+            </section>
+            <!-- 소개, 기부받은 금액, 랭킹 -->
+            <section class="introTotalRanking">
+                <div class="introTotalRanking2">
+                    <div class="intro introTotalRanking3" id="intro">INTRO</div>
+                    <div class="total introTotalRanking3">TOTAL</div>
+                    <div class="ranking introTotalRanking3">RANKING</div>
+                    <div id="pseudo"></div>
+                </div>
+
+                <div class="rightBox1">
+                    <!-- INTRO 박스 -->
+                    <div class="rightBox2" id="introRightBox">
+                        <span class="introTitle">안녕하세요, 새싹보육원입니다.</span>
+                        <!-- 보육원 정보 -->
+                        <div class="schoolInfo">
+                            <div class="address">주소 : <span class="addressIn">서울시 강남구 역삼동 테헤란로 146 현익빌딩 3,4층</div>
+                            <div class="phone">전화 : <span class="phoneIn">02 1234 1234</span></div>
+                            <div class="childCount">아이들 인원 : <span class="childCountIn">20명</span></div>
+                        </div>
+
+                        <div class="introContent">
+                            작업퀄리티가 정말 좋습니다! 제 주변에 다 물어봤는데 모든 분들이 만족할수준이었습니다.친절하시고 빠른 피드백 감사합니다.
+                            <br>제주변에서도 원하는분이 있으면 바로 소개주고 싶습니다!작업퀄리티가 정말 좋습니다! 제 주변에 다 물어봤는데 모든 분들이 만족할수준이었습니다.
+                            <br><br>친절하시고 빠른 피드백 감사합니다. 제주변에서도 원하는분이 있으면 바로 소개주고 싶습니다!
+                        </div>
+                    </div>
+                    <!-- TOTAL 박스 -->
+                    <div class="rightBox2" id="totalRightBox">
+                        <span class="introTitle totalTitle">최근기부</span>
+                        <div class="totalBox">
+                            <!-- 기부 내역 -->
+                            <table id="userTable">
+                                <!-- 유저 한명 -->
+                                <tr>
+                                    <!-- 프로필 사진 -->
+                                    <th  class="userTr userProfile">
+                                        <div class="profilePicture">
+                                            <img src="/imgs/myPage/normalProfile.png">
+                                        </div>
+                                    </th>
+                                    <!-- 닉네임 -->
+                                    <th  class="userTr userNickname">나는기부왕</th>
+                                    <!-- 기부금액 -->
+                                    <th  class="userTr donation"><span>2,000,000</span>원</th>
+                                </tr>
+
+                                <!-- 주석처리 ============================-->
+                                <tr>
+                                    <th  class="userTr userProfile">
+                                        <div class="profilePicture">
+                                            <img src="/imgs/myPage/normalProfile.png">
+                                        </div>
+                                    </th>
+                                    <th  class="userTr userNickname">천사</th>
+                                    <th  class="userTr donation"><span>700,000</span>원</th>
+                                </tr>
+                                <tr>
+                                    <th  class="userTr userProfile">
+                                        <div class="profilePicture">
+                                            <img src="/imgs/myPage/normalProfile.png">
+                                        </div>
+                                    </th>
+                                    <th  class="userTr userNickname">천사3</th>
+                                    <th  class="userTr donation"><span>1,000,000</span>원</th>
+                                </tr>
+                                <tr>
+                                    <th  class="userTr userProfile">
+                                        <div class="profilePicture">
+                                            <img src="/imgs/myPage/normalProfile.png">
+                                        </div>
+                                    </th>
+                                    <th  class="userTr userNickname">천사4</th>
+                                    <th  class="userTr donation"><span>10,000</span>원</th>
+                                </tr>
+                                <tr>
+                                    <th  class="userTr userProfile">
+                                        <div class="profilePicture">
+                                            <img src="/imgs/myPage/normalProfile.png">
+                                        </div>
+                                    </th>
+                                    <th  class="userTr userNickname">천사5</th>
+                                    <th  class="userTr donation"><span>60,000</span>원</th>
+                                </tr>
+                                <tr>
+                                    <th  class="userTr userProfile">
+                                        <div class="profilePicture">
+                                            <img src="/imgs/myPage/normalProfile.png">
+                                        </div>
+                                    </th>
+                                    <th  class="userTr userNickname">천사</th>
+                                    <th  class="userTr donation"><span>1,000,000</span>원</th>
+                                </tr>
+                                <!-- =================================-->
+                            </table>
+
+                        </div>
+                    </div>
+                    <!-- RANKING 박스 -->
+                    <div class="rightBox2" id="rankingRightBox">
+                        <span class="introTitle rankingTitle">기부랭킹</span>
+                        <div class="rankingBox">
+
+                            <table id="userTable2">
+                                <thead id="rankingTHead" style="border-top:1px solid gray">
+                                <th class="thth"></th>
+                                <th class="thth">닉네임</th>
+                                <th class="thth">기부금</th>
+                                </thead>
+                                <!-- 유저 한명 -->
+                                <tr class="oneUser">
+                                    <!-- 순위 -->
+                                    <th>1</th>
+                                    <!-- 닉네임 -->
+                                    <th  class="userTr userNickname">맑음</th>
+                                    <!-- 금액 -->
+                                    <th  class="userTr donation"><span class="amount">2,000,000</span>원</th>
+                                </tr>
+                                <tr class="oneUser">
+                                    <th>2</th>
+                                    <th  class="userTr userNickname">김코리아아이티아카데미</th>
+                                    <th  class="userTr donation"><span class="amount">1,900,000</span>원</th>
+                                </tr>
+                                <tr class="oneUser">
+                                    <th>3</th>
+                                    <th  class="userTr userNickname">해피123</th>
+                                    <th  class="userTr donation"><span class="amount">1,000,000</span>원</th>
+                                </tr>
+                                <tr class="oneUser">
+                                    <th>4</th>
+                                    <th  class="userTr userNickname">말스톤</th>
+                                    <th  class="userTr donation"><span class="amount">500,000</span>원</th>
+                                </tr>
+                                <tr class="oneUser">
+                                    <th>5</th>
+                                    <th  class="userTr userNickname">기부퀸</th>
+                                    <th  class="userTr donation amount"><span>100,000</span>원</th>
+                                </tr>
+
+                            </table>
+
+                        </div>
+                    </div>
+
+                    <div class="donateDIV">
+                        <button id="donate">
+                            <span>기부하기</span>
+                        </button>
+                    </div>
+                    <a href="#none" onclick="openModal()">
+                        <div class="QRgo">
+                            <button class="QRButton">
+                                <span>QR 보러가기</span>
+                            </button>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <!-- 일정관리 섹션 -->
+            <section class="calendar">
+                <div class="calendarTitle">
+                    <div class="calendarTitle2">
+                        <h1 style="font-size: 18px; font-weight: bold;">보육원 일정</h1>
+                    </div>
+                </div>
+                <div class="calendarContent">
+                    <!-- 예약 가능한 날짜는 검정색 글씨 -->
+                    <div class="calendarContent3">
+                        <img src="https://d2v80xjmx68n4w.cloudfront.net/assets/icon/ic_escro.png" alt="">
+                        <h5>지난 날짜는 선택하실수 없습니다.</h5>
+                    </div>
+                    <!-- 달력 -->
+                    <div class="calendarContent2">
+                        <div>
+
+                            <div class="tempDiv">
+                                <div class="callenderWrap">
+                                    <div class="callenderHead">
+                                        <div class="prevMonth"></div>
+                                        <div class="nowMonth"></div>
+                                        <div class="nextMonth"></div>
+                                    </div>
+                                    <table class="callenderBody">
+                                        <tr>
+                                            <th>일</th>
+                                            <th>월</th>
+                                            <th>화</th>
+                                            <th>수</th>
+                                            <th>목</th>
+                                            <th>금</th>
+                                            <th>토</th>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </aside>
+
+
+        <!-- 기부하기 우측 fix버튼 -->
+        <a href="" style="text-decoration: none; color:black">
+            <button color="yellow" class="e190ttj42 css-5l78y0 eklkj752 rightFixButton">
+                <span class="css-1oteowz eklkj751">기부하기</span>
+                <span class="css-0 ">
+                        <span role="img" rotate="0" class="css-aah4od e181xm9y1">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
+                                 focusable="false" preserveAspectRatio="xMidYMid meet" class="css-7kp13n e181xm9y0">
+                                <path xmlns="http://www.w3.org/2000/svg"
+                                      d="m16.2207159 5.10870583c.3709653-.36661304.3725805-.96261511.0036077-1.33120789s-.9688111-.37019768-1.3397764-.00358465l-7.10526311 7.15575681c-.37101087.3666581-.37257421.7742828-.00349159 1.1428571l7.1052631 7.1500909c.3690373.368529.9688759.3700303 1.339777.0033532.3709012-.3666771.3724122-.9626794.0033749-1.3312085l-6.4742075-6.3936642z"
+                                      transform="matrix(0 1 -1 0 23.5 -.5)">
+                                </path>
+                            </svg>
+                        </span>
+                    </span>
+            </button>
+        </a>
+
+    </section>
+
+</div>
+
+<!-- QR모달창 -->
+<div id="modal" style="box-shadow: rgb(0 0 0 / 50%) 0px 0px 0px 9999px">
+    <!-- X버튼 -->
+    <div class="sect01" onclick="closeModal()">
+        <div class="line-box">
+            <span class="line-01"></span>
+            <span class="line-02"></span>
+        </div>
+    </div>
+    <!-- QR 코드 -->
+    <div id="modalQR">
+        <img src="https://ko.qr-code-generator.com/wp-content/themes/qr/new_structure/markets/basic_market/generator/dist/generator/assets/images/websiteQRCode_noFrame.png">
+    </div>
+    <div id="scanPlz">QR코드를 스캔하세요!</div>
+</div>
+
+<footer th:replace="/fix/footer.html :: footer"></footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script src="/js/school/schoolDetail.js"></script>
+<script src="/js/school/calendar.js"></script>
+<script src="/js/fix/header.js"></script>
+</html>

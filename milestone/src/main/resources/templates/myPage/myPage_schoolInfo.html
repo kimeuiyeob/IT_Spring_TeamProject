@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/fix/header.css">
+    <link rel="stylesheet" href="/css/fix/footer.css">
+    <link rel="stylesheet" href="/css/myPage/myPageMain.css">
+    <link rel="stylesheet" href="/css/myPage/myPageInfo.css">
+    <link rel="stylesheet" href="/css/myPage/myPageSchool.css">
+    <link rel="stylesheet" href="/css/myPage/myPageAside.css">
+    <link rel="stylesheet" href="/css/myPage/public.css">
+    <link rel="icon" href="/imgs/fix/favicon.png">
+    <title>마일스톤 | 보육원 등록</title>
+</head>
+
+<body>
+<header th:replace="/fix/header.html :: header"></header>
+<div class="myPageWrap flex">
+    <!-- 어사이드 -->
+    <aside th:replace="/myPage/myPage_aside :: aside"></aside>
+    <!-- 메인 -->
+    <main class="main">
+        <div class="mainWrap flexCol">
+            <div class="mainTitle flexRow">보육원 정보</div>
+            <div class="mainBodyWrap flex">
+                <!-- 프로필 -->
+                <div class="profileWrap flexColNormal">
+                    <div class="profile"></div>
+                    <div class="updateProfileBtnWrap flexCol">
+                        <label class="updateProfileBtn flexPublic">
+                            <div>프로필 변경</div>
+                            <input type="file" name="profile" id="profile" style="display: none">
+                        </label>
+                    </div>
+                </div>
+                <!-- 메인컨텐츠 -->
+                <div class="inputWrap margin-left-40 flexCol">
+                    <form action="" name="updateForm">
+                        <div class="margin-bottom-20">
+                            <div class="margin-bottom-8 flexBetween">
+                                <div class="inputTitle">보육원 대표 사진</div>
+                            </div>
+                            <input type="file" class="tempImgBackground" name="schoolImg" id="schoolImg" multiple>
+                            <div class="imgBox">
+                                <div class="flexRow">
+                                    <div class="imgList flexRow">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="margin-bottom-20">
+                            <div class="margin-bottom-8 flexRow">
+                                <div class="inputTitle">보육원 주소</div>
+                                <div class="essential">*</div>
+                            </div>
+                            <div class="margin-bottom-8 flexBetween">
+                                <input name="zipCode" id="zipCode" type="hidden" value="">
+                                <input class="inputCos" name="address" id="address" type="text"
+                                       placeholder="주소 검색 버튼을 이용해 주세요"
+                                       value="" disabled>
+                                <button type="button" class="certificationBtn" id="searchAddressBtn" onclick="find()">주소
+                                    검색
+                                </button>
+                            </div>
+                            <div class="margin-top-6" style="display: none;">
+                                <div class="warningMsg">이름을 정확히 입력해 주세요.</div>
+                            </div>
+                            <div class="margin-bottom-8 flexRow">
+                                <div class="inputTitle">보육원 상세 주소</div>
+                                <div class="essential">*</div>
+                            </div>
+                            <input class="inputCos" name="addressDetail" id="addressDetail" type="text"
+                                   placeholder="상세 주소를 입력해 주세요">
+                            <div class="margin-top-6" style="display: none;">
+                                <div class="warningMsg">이름을 정확히 입력해 주세요.</div>
+                            </div>
+                        </div>
+                        <div class="margin-bottom-20">
+                            <div class="margin-bottom-8 flexRow">
+                                <div class="inputTitle">원장님 이름</div>
+                                <div class="essential">*</div>
+                            </div>
+                            <input class="inputCos" name="name" id="name" type="text" placeholder="원장님 이름을 입력해 주세요">
+                            <div class="margin-top-6" style="display: none;">
+                                <div class="warningMsg">이름을 정확히 입력해 주세요.</div>
+                            </div>
+                        </div>
+                        <div class="margin-bottom-20">
+                            <div class="margin-bottom-8 flexRow">
+                                <div class="inputTitle">연락처</div>
+                            </div>
+                            <input class="inputCos" name="phone" id="phone" type="text"
+                                   placeholder="보육원 연락처를 입력해 주세요. 미입력시 가입시 입력한 번호로 등록됩니다.">
+                            <div class="margin-top-6" style="display: none;">
+                                <div class="warningMsg">이름을 정확히 입력해 주세요.</div>
+                            </div>
+                        </div>
+                        <div class="margin-bottom-20">
+                            <div class="margin-bottom-8 flexRow">
+                                <div class="inputTitle">보육원 교사 수</div>
+                            </div>
+                            <input class="inputCos" name="teacherPersonnel" id="teacherPersonnel" type="text"
+                                   placeholder="0">
+                        </div>
+                        <div class="margin-bottom-20">
+                            <div class="margin-bottom-8 flexRow">
+                                <div class="inputTitle">보육원 아이들 수</div>
+                                <div class="essential">*</div>
+                            </div>
+                            <input class="inputCos" name="childPersonnel" id="childPersonnel" type="text"
+                                   placeholder="0">
+                            <div class="margin-top-6" style="display: none;">
+                                <div class="warningMsg">이름을 정확히 입력해 주세요.</div>
+                            </div>
+                        </div>
+                        <div class="margin-bottom-20">
+                            <div class="margin-bottom-8 flexRow">
+                                <div class="inputTitle">1년 예산</div>
+                            </div>
+                            <input class="inputCos" name="budget" id="budget" type="text" placeholder="0">
+                        </div>
+
+                        <div class="margin-bottom-20">
+                            <div class="margin-bottom-8 flexRow">
+                                <div class="inputTitle">은행</div>
+                                <div class="essential">*</div>
+                            </div>
+                            <div class="margin-bottom-8 relative">
+                                <div class="moreSelectWrap">
+                                    <div class="moreSelectItem">하나은행</div>
+                                    <div class="moreSelectItem">기업은행</div>
+                                    <div class="moreSelectItem">신한은행</div>
+                                    <div class="moreSelectItem">국민은행</div>
+                                    <div class="moreSelectItem">우리은행</div>
+                                    <div class="moreSelectItem">농협은행</div>
+                                </div>
+                                <div class="inputCos flex" style="padding: 0;">
+                                    <div class="inputSpace flexRow">
+                                        <input type=text name="bank" id="bank" placeholder="은행을 선택해주세요" disabled>
+                                        <input type=text id="bankFocus">
+                                    </div>
+                                    <div class="arrowWrap">
+                                        <svg height="20" width="20" class="arrowColor">
+                                            <path
+                                                    d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="margin-top-6" style="display: none;">
+                                    <div class="warningMsg">이름을 정확히 입력해 주세요.</div>
+                                </div>
+                            </div>
+                            <div class="margin-bottom-8 flexRow">
+                                <div class="inputTitle">보육원 계좌 번호</div>
+                                <div class="essential">*</div>
+                            </div>
+                            <input class="inputCos" name="accountNumber" id="accountNumber" type="text"
+                                   placeholder=" - 를 제외한 숫자만 입력해 주세요">
+                            <div class="margin-top-6" style="display: none;">
+                                <div class="warningMsg">이름을 정확히 입력해 주세요.</div>
+                            </div>
+                        </div>
+
+                        <div class="margin-bottom-20">
+                            <div class="margin-bottom-8 flexRow">
+                                <div class="inputTitle">소개글 제목</div>
+                                <div class="essential">*</div>
+                            </div>
+                            <div class="margin-bottom-8">
+                                <input class="inputCos" name="title" id="title" type="text" placeholder="제목을 입력해 주세요">
+                                <div class="margin-top-6" style="display: none;">
+                                    <div class="warningMsg">이름을 정확히 입력해 주세요.</div>
+                                </div>
+                            </div>
+                            <div class="margin-bottom-8 flexRow">
+                                <div class="inputTitle">소개글</div>
+                                <div class="essential">*</div>
+                            </div>
+                            <div class="relative">
+                                <div class="textareaCos">
+                                    <textarea name="content" id="content"></textarea>
+                                </div>
+                                <div class="maxContentLength"><span class="contentLength">0</span>/500</div>
+                            </div>
+                            <div class="margin-top-6" style="display: none;">
+                                <div class="warningMsg">이름을 정확히 입력해 주세요.</div>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <div style="flex-grow : 1"></div>
+                            <button type="button" onmousedown="" class="submitBtn" disabled>등록하기</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<footer th:replace="/fix/footer.html :: footer"></footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script src="/js/myPage/schoolInfo.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="/js/fix/header.js"></script>
+<!--<script src="/js/myPage/thumbnail.js"></script>-->
+</html>
