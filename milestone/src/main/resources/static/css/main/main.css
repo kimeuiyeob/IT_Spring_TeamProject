@@ -16,12 +16,14 @@ li {
     }
 
     #mobile-banner1{
-        width: 482px;
+
     }
     #mobile-banner2 {
         background-color: #00D3C7;
-        width: 100%;
+        width: 483px;
         height: 120%;
+        padding-left: 0;
+        padding-right: 0;
     }
 
     #mobile-swiper-button-next {

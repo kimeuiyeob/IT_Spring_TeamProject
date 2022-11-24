@@ -19,6 +19,8 @@ body {
     background-color: #00D3C7;
     width: 100%;
     height: 480px;
+    padding-left: 362px;
+    padding-right: 362px;
 }
 
 .swiper {
@@ -29,7 +31,7 @@ body {
 .mySwiper {
     width: 540px;
     height: 380px;
-    left: 300px;
+    left: 319px;
     top: 10%;
     border-radius: 8px;
 }
@@ -189,7 +191,6 @@ body {
     flex-direction: column;
     margin-top: 54px;
     position: absolute;
-    left: 370px;
     top: 40px;
 }
 
