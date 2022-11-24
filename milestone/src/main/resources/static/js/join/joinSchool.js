@@ -1,3 +1,4 @@
+console.log("반갑스비낭")
 /*--------------------------다음 우편 api------------------------------*/
 function find() {
     new daum.Postcode({
@@ -55,7 +56,7 @@ document.addEventListener('click', function (e) {
 /*---------------------------------유효성 검사-------------------------------*/
 /*----------------------------이메일 유효성 검사----------------------------*/
 const $email = $('#email');
-let emailFlag = false;
+let emailCheckFlag = false;
 let $warningMsg;
 
 function email_check(email) {
@@ -66,25 +67,20 @@ function email_check(email) {
 $email.on('blur', function () {
     var email = $(this).val();
     $warningMsg = $(this).next();
+    $warningMsg.show();
+    $warningMsg.find(".warningMsg").css("color", "rgb(255, 64, 43)");
+    emailCheckFlag = false;
     if (email == '' || email == 'undefined') {
-        $warningMsg.show();
-        $warningMsg.find(".warningMsg").css("color", "rgb(255, 64, 43)");
         $warningMsg.find(".warningMsg").text('이메일을 입력해 주세요');
-        emailFlag = false;
         return;
     }
     if (!email_check(email)) {
-        $warningMsg.show();
-        $warningMsg.find(".warningMsg").css("color", "rgb(255, 64, 43)");
         $warningMsg.find(".warningMsg").text('이메일 형식이 유효하지 않습니다.');
-        emailFlag = false;
         return false;
     }
-
-    $warningMsg.show();
     $warningMsg.find(".warningMsg").css("color", "rgb(79 189 18)");
     $warningMsg.find(".warningMsg").text('사용 가능한 이메일입니다.');
-    emailFlag = true;
+    emailCheckFlag = true;
 });
 /*------------------------비밀번호 안썻을 때와 유효성 검사----------------------*/
 const $password = $('#password');
@@ -262,6 +258,7 @@ $budget.on("keyup", function () {
 
 /*-------------------------계좌번호--------------------------*/
 const $accountNumber = $("#accountNumber");
+let accountNumberCheckFlag = false;
 
 $accountNumber.on("keyup", function () {
     let accountNumber = $accountNumber.val();
@@ -270,18 +267,256 @@ $accountNumber.on("keyup", function () {
 })
 
 $accountNumber.on('click', function () {
-    if(!$bank.val()){
+    if (!$bank.val()) {
         $('#bankFocus').focus();
     }
 })
 
 $accountNumber.on('blur', function () {
+    accountNumberCheckFlag = false;
     $warningMsg = $(this).next();
     if (!$accountNumber.val()) {
         $warningMsg.show();
         $warningMsg.find(".warningMsg").text("계좌번호를 입력해 주세요.");
         $accountNumber.val("");
     } else {
+        accountNumberCheckFlag = true;
         $warningMsg.hide();
     }
+})
+
+/*-------------------------핸드폰--------------------------*/
+const $phone = $('#phone');
+const $certificationBtn = $('.certificationBtn');
+const $certification = $('#certification');
+let phoneFlag = false;
+let phoneCheckFlag = false;
+let tempPhone;
+
+var phoneCheck = /^[0-9]{11,11}$/;
+
+$certificationBtn.on('click', function () {
+    $certification.attr("disabled", true);
+    var phone = $(this).prev().val();
+    phone = phone.replace(/-/g, "");
+    $(this).prev().val(phone);
+    phoneFlag = false;
+    $warningMsg = $(this).parent().next();
+    if (phone == '' || phone == 'undefined') {
+        $warningMsg.show();
+        $warningMsg.find(".warningMsg").css("color", "rgb(255, 64, 43)");
+        $warningMsg.find(".warningMsg").text('전화번호를 입력해 주세요');
+        $phone.focus();
+        return;
+    }
+    if (!phoneCheck.test(phone) || !phone.startsWith("010")) {
+        $warningMsg.show();
+        $warningMsg.find(".warningMsg").css("color", "rgb(255, 64, 43)");
+        $warningMsg.find(".warningMsg").text('전화번호를 정확히 입력해 주세요');
+        $phone.focus();
+        return false;
+    } else {
+        $warningMsg.show();
+        $warningMsg.find(".warningMsg").css("color", "rgb(79 189 18)");
+        $warningMsg.find(".warningMsg").text('입력하신 전화번호로 인증번호가 전송되었습니다.');
+        tempPhone = phone;
+        $certification.attr("disabled", false)
+        $certification.focus();
+        phoneFlag = true;
+    }
+});
+
+$phone.on('blur', function () {
+    var phone = $(this).val();
+    phone = phone.replace(/-/g, "");
+    $warningMsg = $(this).parent().next();
+    $nextWarningMsg = $(this).closest('.inputWrap').next().find('.warningMsg').parent()
+    if (tempPhone && !(phone == tempPhone)) {
+        $warningMsg.find(".warningMsg").css("color", "rgb(255, 64, 43)");
+        $warningMsg.find(".warningMsg").text('전화번호가 변경 되었습니다 인증을 다시 받아주세요');
+        phoneFlag = false;
+        tempPhone = "";
+        $nextWarningMsg.hide();
+        $nextWarningMsg.prev().val("");
+        $certification.attr("disabled", true);
+    }
+});
+/*인증번호*/
+$certification.on('blur', function () {
+    phoneCheckFlag = false;
+    if (phoneFlag) {
+        $warningMsg = $(this).closest(".inputWrap").find(".warningMsg");
+        if (!$certification.val()) {
+            $warningMsg.closest(".flexRow").show();
+            $warningMsg.css("color", "rgb(255, 64, 43)");
+            $warningMsg.text("인증번호를 입력해 주세요")
+        } else if ("1234" == $certification.val()) {
+            $warningMsg.closest(".flexRow").show();
+            phoneCheckFlag = true;
+            $warningMsg.css("color", "rgb(79 189 18)");
+            $warningMsg.text("인증번호가 일치합니다.")
+            joinSubmit();
+        } else {
+            $warningMsg.closest(".flexRow").show();
+            $warningMsg.css("color", "rgb(255, 64, 43)");
+            $warningMsg.text("인증번호가 일치하지 않습니다.")
+        }
+    }
+})
+
+/*-------------------------추가 연락처--------------------------*/
+const $plusPhone = $('#plusPhone');
+
+let plusPhoneCheckFlag = false;
+
+var plusPhoneCheck = /^[0-9]{7,}$/;
+
+$plusPhone.on('blur', function () {
+    plusPhoneCheckFlag = false;
+    var plusPhone = $(this).val();
+    plusPhone = plusPhone.replace(/-/g, "");
+    $(this).val(plusPhone);
+    $warningMsg = $(this).parent().next();
+    $warningMsg.show();
+    $warningMsg.find(".warningMsg").css("color", "rgb(255, 64, 43)");
+    if (plusPhone == '' || plusPhone == 'undefined') {
+        $warningMsg.find(".warningMsg").text('전화번호를 입력해 주세요');
+        return;
+    }
+    if (!plusPhoneCheck.test(plusPhone)) {
+        $warningMsg.find(".warningMsg").text('전화번호를 정확히 입력해 주세요');
+        return false;
+    } else {
+        $warningMsg.hide();
+        plusPhoneCheckFlag = true;
+    }
+})
+
+/*-------------------------체크 박스--------------------------*/
+let $allCheckbox = $('.allCheckbox');
+let allCheckboxFlag = false;
+let $smallCheckbox = $('.smallCheckbox');
+
+
+$allCheckbox.on('click', function () {
+    $smallCheckbox.prop('checked', $(this).is(':checked'));
+    allCheckboxFlag = $allCheckbox.is(':checked');
+})
+
+$smallCheckbox.on('click', function () {
+    $allCheckbox.prop('checked', $smallCheckbox.filter(':checked').length == $smallCheckbox.length);
+    allCheckboxFlag = $smallCheckbox.filter(':checked').length == $smallCheckbox.length;
+})
+
+/*-------------------------가입 버튼 활성화--------------------------*/
+const $joinBtn = $('.joinBtn');
+
+$joinBtn.on('click', function () {
+    if (!$email.val() || !emailCheckFlag) {
+        setTimeout(() => {
+            $email.focus();
+        }, 100)
+        $email.next().show();
+        return;
+    }
+    if (!$password.val() || !pwOk) {
+        setTimeout(() => {
+            $password.focus();
+        }, 100)
+        $password.next().show();
+        return;
+    }
+    if (!$checkPassword.val() || !passwordCheckFlag) {
+        setTimeout(() => {
+            $checkPassword.focus();
+        }, 100)
+        $checkPassword.next().show();
+        return;
+    }
+    if (!$name.val() || !nameCheckFlag) {
+        setTimeout(() => {
+            $name.focus();
+        }, 100)
+        $name.next().show();
+        return;
+    }
+    if (!$schoolName.val() || !schoolNameCheckFlag) {
+        setTimeout(() => {
+            $schoolName.focus();
+        }, 100)
+        $schoolName.next().show();
+        return;
+    }
+    if (!$address.val() || !addressCheckFlag) {
+        setTimeout(() => {
+            $('#addressFocus').focus();
+        }, 100)
+        $address.parent().next().show();
+        return;
+    }
+    if (!$addressDetail.val() || !addressDetailCheckFlag) {
+        setTimeout(() => {
+            $addressDetail.focus();
+        }, 100)
+        $addressDetail.next().show();
+        return;
+    }
+    if (!$childPersonnel.val() || !childPersonnelCheckFlag) {
+        setTimeout(() => {
+            $childPersonnel.focus();
+        }, 100)
+        $childPersonnel.next().show();
+        return;
+    }
+    if (!$bank.val()) {
+        setTimeout(() => {
+            $('#bankFocus').focus();
+        }, 100)
+        $bank.parent().parent().next().show();
+        return;
+    }
+    if (!$accountNumber.val() || !accountNumberCheckFlag) {
+        setTimeout(() => {
+            $accountNumber.focus();
+        }, 100)
+        $accountNumber.next().show();
+        return;
+    }
+    if ($phone.val() && !phoneFlag) {
+        setTimeout(() => {
+            $phone.focus();
+        }, 100)
+        $phone.parent().next().find('.warningMsg').text("인증번호를 받아주세요")
+        $phone.parent().next().show();
+        return;
+    }
+    if (!$phone.val() || !phoneFlag) {
+        setTimeout(() => {
+            $phone.focus();
+        }, 100)
+        $phone.parent().next().show();
+        return;
+    }
+    if (!$certification.val() || !phoneCheckFlag) {
+        setTimeout(() => {
+            $certification.focus();
+        }, 100)
+        $certification.next().show();
+        return;
+    }
+    if ($plusPhone.val()) {
+        if(!plusPhoneCheckFlag){
+            setTimeout(() => {
+                $plusPhone.focus();
+            }, 100)
+            $plusPhone.parent().next().show();
+            return;
+        }
+    }
+
+    if (!allCheckboxFlag) {
+        return;
+    }
+
+    joinForm.submit();
 })

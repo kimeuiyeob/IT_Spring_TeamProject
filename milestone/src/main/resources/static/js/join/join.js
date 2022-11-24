@@ -207,7 +207,7 @@ $certificationBtn.on('click', function () {
         $warningMsg.show();
         $warningMsg.find(".warningMsg").css("color", "rgb(255, 64, 43)");
         $warningMsg.find(".warningMsg").text('전화번호를 입력해 주세요');
-        $email.focus();
+        $phone.focus();
         phoneFlag = false;
         return;
     }
