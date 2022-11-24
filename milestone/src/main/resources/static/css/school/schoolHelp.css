@@ -1,0 +1,453 @@
+@font-face {
+    font-family: 'Metro Sans';
+    font-style: normal;
+    src: url(https://d2v80xjmx68n4w.cloudfront.net/assets/fonts/MetroSans/MetroSans-Bold.woff2) format('woff2'),
+    url(https://d2v80xjmx68n4w.cloudfront.net/assets/fonts/MetroSans/MetroSans-Bold.woff) format('woff'),
+    url(https://d2v80xjmx68n4w.cloudfront.net/assets/fonts/MetroSans/MetroSans-Bold.otf) format('truetype'), url(https://d2v80xjmx68n4w.cloudfront.net/assets/fonts/MetroSans/MetroSans-Bold.eot),
+    url(https://d2v80xjmx68n4w.cloudfront.net/assets/fonts/MetroSans/MetroSans-Bold.eot?#iefix) format('embedded-opentype');
+}
+
+
+div.dropdown{
+    display: flex;
+    justify-content: flex-end;
+}
+
+div.dropdown{
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+.dropdown-label{
+    font-size : 12px;
+    margin : 10px;
+    font-weight : bold;
+    color : rgb(50, 50, 50);
+}
+
+.dropdown{
+    position : relative;
+    display : inline-block;
+}
+
+.dropbtn_icon{
+    font-family : 'Material Icons';
+}
+
+.dropbtn_content{
+    color: #d7d9e0;
+}
+.dropbtn{
+    overflow: hidden;
+    display: flex;
+    min-width: 64px;
+    height: 40px;
+    display : block;
+    border: 1px solid #e3e5ed;
+    border-radius : 4px;
+    background-color: #ffffff;
+    font-weight: 400;
+    color : #303441;
+    padding: 0 12px;
+    width :auto;
+    text-align: left;
+    cursor : pointer;
+    font-size : 14px;
+    z-index :1;
+    position : relative;
+}
+
+
+.dropdown-content{
+    z-index: 999;
+    display : none;
+    font-weight: 400;
+    background-color: #fcfcfc;
+    min-width : 90px;
+    border-radius: 8px;
+    height : 160px;
+    overflow : scroll;
+    box-shadow: 0px 0px 10px 3px rgba(190, 190, 190, 0.6);
+    width: 30%;
+    z-index: 999;
+}
+.dropdown-content::-webkit-scrollbar{
+    width : 5px;
+    height : 10px;
+}
+.dropdown-content::-webkit-scrollbar-thumb{
+    border-radius : 2px;
+    background-color :rgb(194, 194, 194)
+}
+
+.dropdown-content div{
+    display : block;
+    text-decoration : none;
+    color : rgb(37, 37, 37);
+    font-size: 12px;
+    padding : 12px 20px;
+}
+.dropdown-content div:hover{
+    background-color: rgb(226, 226, 226);
+    cursor: pointer;
+}
+
+.dropdown-content.show{
+    display : block;
+}
+
+
+
+body{
+    margin:0;
+}
+
+.wholePage{
+    margin-bottom: 200px;
+}
+
+#banner{
+    width: 100%;
+    background-color: #071e36;
+    height: auto;
+}
+
+#banner2{
+    width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#text{
+    font: inherit;
+    font-weight: 400;
+    font-size: 26px;
+    color: #ffffff;
+    margin-top: 7%;
+    margin-bottom: 7%;
+}
+
+#text>span{
+    color: #ffd400;
+}
+
+
+.centerContent{
+    width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+.locations{
+    padding-top: 65px;
+    width: 100%;
+    height: 150px;
+}
+
+.location{
+    font-weight: 500;
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+    height: 44px;
+    background-color: #f2f3f7;
+    color: #727585;
+    border-radius: 4px;
+    padding: 0 16px;
+    cursor: pointer;
+    transition: all .2s ease;
+}
+
+.tAndS{
+    justify-content: space-between;
+}
+
+.totalCount{
+    display: flex;
+    align-items: center;
+}
+
+.realSearhBox{
+    display: flex;
+    cursor: text;
+    background-color: #ffffff;
+    color: #303441;
+    font-size: 14px;
+    padding: 0 12px;
+    min-width: 64px;
+    width: 250px;
+    height: 40px;
+    border: 1px solid #e3e5ed;
+    border-radius: 4px;
+    align-items: center;
+}
+
+.realSearhBox>input{
+    outline: none;
+    flex: 1;
+    width: 100%;
+    font-size: inherit;
+    border: none;
+    font-weight: inherit;
+    background-color: transparent;
+    color: rgb(77, 73, 73);
+}
+
+input::placeholder{
+    font-weight: 600;
+    color: #d7d9e0;
+}
+
+article{
+    width: 100%;
+    height: 295px;
+    border-bottom: 1px solid #e4e5ed;
+    display: flex;
+    flex-direction: row;
+    padding: 40px 0;
+}
+
+.schoolImg{
+    display: flex;
+    position:relative;
+}
+
+.heart{
+    position: absolute;
+    right: 5%;
+    top: 5%;
+    -webkit-text-size-adjust: 100%;
+    font-size: 100%;
+    cursor: pointer;
+    font-family: 'Metro Sans',sans-serif;
+    box-sizing: border-box;
+    display: inline-block;
+    font-style: normal;
+    line-height: 0;
+    text-align: center;
+    text-transform: none;
+    vertical-align: -0.125em;
+    text-rendering: optimizelegibility;
+    -webkit-font-smoothing: antialiased;
+    color: rgb(255, 255, 255);
+}
+
+.schoolImg>img{
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.schoolIntroduce{
+    width: 60%;
+    padding: 14px 24px 14px 28px;
+}
+
+h2.schoolName{
+    font:inherit;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+
+}
+
+.intro{
+    overflow: hidden;
+    height: 72px;
+    line-height: 1.15;
+    font-weight: 400;
+    font-size: 16px;
+    width: 100%;
+    line-height: 24px;
+    cursor: pointer;
+
+}
+
+.rightBox{
+    width: 18%;
+    margin-left: 5%;
+}
+
+.QR{
+    background-color: #fafafc;
+    padding: 18px;
+    height: 136px;
+    display: flex;
+    justify-content: center;
+}
+
+.QR>img{
+    width: 100px;
+}
+
+.donationButton{
+    outline: none;
+    border-radius: 4px;
+    font-weight: 500;
+    text-decoration: none;
+    text-align: center;
+    display: -webkit-inline-flex;
+    display: -ms-inline-flexbox;
+    align-items: center;
+    -ms-flex-align: center;
+    -ms-flex-pack: center;
+    height: 52px;
+    padding: 0 24px;
+    background-color: #ffd400;
+    border-color: #ffd400;
+    color: #303441;
+    display: flex;
+    margin-top: 13%;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.schoolLocation1{
+    margin-top: 5%;
+}
+
+.schoolLocation2{
+    padding: 8px 12px;
+    font-size: 13px;
+    border-radius: 20px;
+    background: #f2f3f7;
+    color: #555969;
+    line-height: normal;
+}
+
+.paging-number-box {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.paging-number {
+    margin-left: 6.5px;
+    padding: 13px 0;
+}
+
+.paging-number-flex {
+    display: flex;
+    font-size: 14px;
+}
+
+.page-number-padding {
+    height: 32.5px;
+    width: 32.5px;
+    margin-right: 6.5px;
+}
+
+.page-number-link {
+    border-radius: 7px;
+    display: flex;
+    box-sizing: border-box;
+    font-weight: 700;
+    color: #5e6278;
+    text-decoration: none;
+    height: 100%;
+    width: 100%;
+    padding: 5px 10px;
+    align-items: center;
+}
+
+.prev-page-prevArrow {
+    background: url(/imgs/admin/arrow.png) no-repeat;
+    background-size: 9px;
+    width: 9px;
+    height: 13px;
+    opacity: .5;
+    transform: scaleX(-1);
+}
+
+.page-number-padding {
+    height: 32.5px;
+    width: 32.5px;
+    margin-right: 6.5px;
+}
+
+.prev-page-nextArrow {
+    background: url(/imgs/admin/arrow.png) no-repeat;
+    background-size: 9px;
+    width: 9px;
+    height: 13px;
+    opacity: 1;
+}
+
+
+/* 반응형============================================ */
+@media screen and (max-width: 768px) {
+
+    div.wholePage {
+        margin-bottom: 50px;
+    }
+
+    section.centerContent{
+        width:100%;
+        margin-top: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        height: auto;
+    }
+
+    div.loactions{
+        display: none;
+    }
+
+    .dropdown{
+        display: block;
+    }
+
+    .totalCount{
+        margin: 10px 10px 10px 0;
+    }
+
+    div.rightBox{
+        margin-left: 0%;
+        width: 40%;
+    }
+
+    a.donationButton {
+        height: 66px;
+        padding: 7px 11px;
+    }
+
+    .totalCount2{
+        display: none;
+        margin: 10px 10px 10px 0;
+    }
+
+    div.dropdown{
+        margin: 10px 10px 10px 0;
+    }
+
+    .schoolLocation1{
+        margin-top: 11%;
+    }
+
+    .schoolLocation2{
+        margin-bottom: 3px;
+        display: inline-block;
+    }
+
+    .realSearhBox{
+        width: 205px;
+    }
+
+    article{
+        flex-wrap: wrap;
+        height: auto;
+        padding-top: 0px;
+    }
+
+    .schoolImg{
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+}
+/* ============================================ */

@@ -1,0 +1,74 @@
+.tempDiv {
+    padding: 20px;
+    width: 500px;
+    height: 403px;
+}
+
+.callenderWrap {
+    border-radius: 4px;
+    width: 100%;
+    box-shadow: 0px 0px 4px -2px;
+}
+
+.callenderHead {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 10%;
+}
+
+.prevMonth {
+    background: url('/imgs/myPage/arrow\(white\).png') no-repeat;
+    background-size: 80%;
+    width: 25px;
+    height: 30px;
+    transform: scaleX(-1);
+    filter: invert(13%) sepia(47%) saturate(4160%) hue-rotate(356deg) brightness(101%) contrast(107%);
+}
+
+.prevMonth:hover {
+    filter: invert(13%) sepia(47%) saturate(4160%) hue-rotate(356deg) brightness(90%) contrast(107%);
+}
+
+.nowMonth {
+    font-size: 200%;
+    color: #303441;
+    font-weight: 1000;
+}
+
+.nextMonth {
+    background: url('/imgs/myPage/arrow\(white\).png') no-repeat;
+    background-size: 80%;
+    width: 25px;
+    height: 30px;
+    filter: invert(13%) sepia(47%) saturate(4160%) hue-rotate(356deg) brightness(101%) contrast(107%);
+}
+
+.nextMonth:hover {
+    filter: invert(13%) sepia(47%) saturate(4160%) hue-rotate(356deg) brightness(90%) contrast(107%);
+}
+
+.callenderBody {
+    width: 100%;
+    padding: 10px;
+}
+
+.callenderBody th{
+}
+
+.callenderBody td {
+    text-align: center;
+    height: 40px;
+}
+
+.daysBackground{
+    width: 50%;
+    height: 80%;
+    border-radius: 50%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+}

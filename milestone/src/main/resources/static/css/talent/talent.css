@@ -1,0 +1,1306 @@
+@font-face {
+    font-family: 'Metro Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: url(https://d2v80xjmx68n4w.cloudfront.net/assets/fonts/MetroSans/MetroSans-Bold.woff2) format('woff2'),
+    url(https://d2v80xjmx68n4w.cloudfront.net/assets/fonts/MetroSans/MetroSans-Bold.woff) format('woff'),
+    url(https://d2v80xjmx68n4w.cloudfront.net/assets/fonts/MetroSans/MetroSans-Bold.otf) format('truetype'), url(https://d2v80xjmx68n4w.cloudfront.net/assets/fonts/MetroSans/MetroSans-Bold.eot),
+    url(https://d2v80xjmx68n4w.cloudfront.net/assets/fonts/MetroSans/MetroSans-Bold.eot?#iefix) format('embedded-opentype');
+}
+
+body {
+    margin: 0;
+}
+
+.main {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding-top: 80px;
+    padding-bottom: 110px;
+}
+
+/*================================글작성 버튼=============================*/
+
+.talentButton {
+    width: 127px;
+    outline: none;
+    border-width: 1px;
+    border-style: solid;
+    box-sizing: border-box;
+    border-radius: 4px;
+    line-height: 1;
+    font-weight: 500;
+    transition: background-color 0.3s ease 0s, border-color 0.3s ease 0s;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+    white-space: nowrap;
+    max-width: 100%;
+    height: 42px;
+    font-size: 15px;
+    padding: 0px 22px;
+    min-width: 64px;
+    background-color: rgb(255, 212, 0);
+    border-color: rgb(255, 212, 0);
+    color: rgb(48, 52, 65);
+}
+
+.talentButton:hover {
+    background-color: #d7b50c;
+    border-color: #d7b50c;
+}
+
+/*========================재능기부 선택===============================*/
+.talentChoice {
+    display: flex;
+    padding-bottom: 15px;
+    justify-content: space-between;
+}
+
+.talentChoicebar {
+    display: flex;
+    font-size: 20px;
+    align-items: center;
+    position: relative;
+}
+
+.all {
+    padding-left: 20px;
+    padding-right: 20px;
+    cursor: pointer;
+}
+
+.education {
+    padding-left: 20px;
+    padding-right: 20px;
+    cursor: pointer;
+}
+
+.exercise {
+    padding-left: 20px;
+    padding-right: 20px;
+    cursor: pointer;
+}
+
+.music {
+    padding-left: 20px;
+    padding-right: 20px;
+    cursor: pointer;
+}
+
+.art {
+    padding-left: 20px;
+    padding-right: 20px;
+    cursor: pointer;
+}
+
+.program {
+    padding-left: 25px;
+    cursor: pointer;
+}
+
+/*=============아래 노란줄 CSS 그리고 JS부분 참고====================*/
+
+#pseudo {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    left: 0px;
+    bottom: 0px;
+    width: 76px;
+    height: 4px;
+    background: #ffd400;
+    transform: translateX(0%);
+    transition: transform 300ms ease 0s;
+}
+
+/*========================재능기부 박스==============================*/
+
+.talentBoxAll {
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.talentBox {
+    width: 574px;
+    padding: 24px;
+    height: 180px;
+    border: 1px solid rgb(228, 229, 237);
+    border-radius: 8px;
+    cursor: pointer
+}
+
+.talentBox:hover {
+    border: 1px solid rgb(118, 118, 118);
+}
+
+.talentBox2 {
+    display: flex;
+    height: 100%;
+}
+
+.talentBox3 {
+    width: 132px;
+    height: 132px;
+    border-radius: 4px;
+    margin: 0 20px 0 0;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    position: relative;
+}
+
+.talentImg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    opacity: 1;
+}
+
+.talentBox4 {
+    display: flex;
+    flex: 1 1 0%;
+    flex-direction: column;
+    justify-content: space-between
+}
+
+.talentTitle {
+    font-size: 16px;
+    font-weight: bold;
+    color: rgb(48, 52, 65);
+    margin: 0px 0px 8px;
+    word-break: break-all;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    line-height: 1.15;
+}
+
+.talentContent {
+    font-size: 14px;
+    color: rgb(48, 52, 65);
+    word-break: break-all;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    line-height: normal;
+    margin: 0px;
+    padding-bottom: 22px;
+}
+
+.talentboxs {
+    display: flex;
+    justify-content: space-between
+}
+
+.talentType {
+    background-color: rgb(250, 250, 252);
+    color: black;
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    border-radius: 4px;
+    line-height: 2.5;
+    height: 40px;
+}
+
+.talentPlace {
+    background-color: rgb(250, 250, 252);
+    color: black;
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    border-radius: 4px;
+    line-height: 2.5;
+    height: 40px;
+}
+
+.talentTime {
+    background-color: rgb(250, 250, 252);
+    color: black;
+    width: 160px;
+    height: 30px;
+    text-align: center;
+    border-radius: 4px;
+    line-height: 2.5;
+    height: 40px;
+}
+
+
+/* =============================페이징 처리====================================== */
+
+.flexPublic {
+
+}
+
+.pageBtns {
+    margin-top: 48px;
+    font-size: 12px;
+}
+
+.pageBtns a {
+    border-radius: 4px;
+    align-items: center;
+    height: 36px;
+    min-width: 36px;
+    color: rgb(154, 155, 167);
+    transition: background-color 0.3s;
+}
+
+.pageBtns a:hover {
+    background-color: rgb(242, 243, 247);
+}
+
+.prevNextBtn {
+    height: 24px;
+    width: 24px;
+    fill: rgb(154, 155, 167);
+}
+
+.page {
+    height: 36px;
+    min-width: 36px;
+}
+
+/* ============================검색 하기============================================== */
+.searchingAll {
+    float: right;
+}
+
+.realSearhBox {
+    display: flex;
+    cursor: text;
+    background-color: #ffffff;
+    color: #303441;
+    font-size: 14px;
+    padding: 0 12px;
+    min-width: 64px;
+    width: 250px;
+    height: 40px;
+    border: 1px solid #e3e5ed;
+    border-radius: 4px;
+    align-items: center;
+}
+
+.realSearhBox > input {
+    outline: none;
+    flex: 1;
+    width: 100%;
+    font-size: inherit;
+    border: none;
+    font-weight: inherit;
+    background-color: transparent;
+    color: rgb(77, 73, 73);
+}
+
+input::placeholder {
+    font-weight: 600;
+    color: #d7d9e0;
+}
+
+/*=============================검색 옆 지역선택============================================*/
+
+div.dropdown {
+    display: flex;
+    justify-content: flex-end;
+}
+
+div.dropdown {
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+.dropdown-label {
+    font-size: 12px;
+    margin: 10px;
+    font-weight: bold;
+    color: rgb(50, 50, 50);
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn_icon {
+    font-family: 'Material Icons';
+}
+
+.dropbtn_content {
+    color: #d7d9e0;
+}
+
+.dropbtn {
+    display: flex;
+    min-width: 64px;
+    height: 40px;
+    display: block;
+    border: 1px solid #e3e5ed;
+    border-radius: 4px;
+    background-color: #ffffff;
+    font-weight: 400;
+    color: #303441;
+    padding: 0 12px;
+    width: auto;
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
+    z-index: 1;
+    position: relative;
+}
+
+
+.dropdown-content {
+    display: none;
+    font-weight: 400;
+    background-color: #fcfcfc;
+    min-width: 90px;
+    border-radius: 8px;
+    height: 160px;
+    overflow: scroll;
+    box-shadow: 0px 0px 10px 3px rgba(190, 190, 190, 0.6);
+    width: 30%;
+}
+
+.dropdown-content::-webkit-scrollbar {
+    width: 5px;
+    height: 10px;
+}
+
+.dropdown-content::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background-color: rgb(194, 194, 194)
+}
+
+.dropdown-content div {
+    display: block;
+    text-decoration: none;
+    color: rgb(37, 37, 37);
+    font-size: 12px;
+    padding: 12px 20px;
+}
+
+.dropdown-content div:hover {
+    background-color: rgb(226, 226, 226);
+    cursor: pointer;
+}
+
+.dropdown-content.show {
+    display: block;
+}
+
+
+/*=================================픽스 연필=============================================*/
+
+.rightFixButton {
+    top: 630px;
+    z-index: 9999;
+    margin: 0;
+    overflow: visible;
+    text-transform: none;
+    outline: none;
+    line-height: 1;
+    transition: background-color 0.3s ease 0s, border-color 0.3s ease 0s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+    max-width: 100%;
+    height: 42px;
+    padding: 0px 22px;
+    min-width: 64px;
+    position: fixed;
+    right: 20%;
+    bottom: 0;
+}
+
+a {
+    cursor: pointer;
+}
+
+/* ==============================연필 둥둥 효과===================================================== */
+.txt span {
+    position: relative;
+    display: inline-block;
+    color: blue;
+    letter-spacing: -0.8px;
+    animation: txtup 1.5s infinite;
+    -webkit-animation: txtup 1.5s infinite;
+    -ms-animation: txtup 1.5s infinite;
+    -moz-animation: txtup 1.5s infinite;
+}
+
+.txt span:nth-of-type(1) {
+    animation-delay: 0.1s;
+}
+
+@-webkit-keyframes txtup {
+    0% {
+        top: 1.5px;
+    }
+    20% {
+        top: -1.5rem;
+    }
+    40% {
+        top: 1.5px;
+    }
+    60% {
+        top: 1.5px;
+    }
+    80% {
+        top: 1.5px;
+    }
+    100% {
+        top: 1.5px
+    }
+}
+
+@keyframes txtup {
+    0% {
+        top: 1.5px;
+    }
+    20% {
+        top: -1.5rem;
+    }
+    40% {
+        top: 1.5px
+    }
+    60% {
+        top: 1.5px
+    }
+    80% {
+        top: 1.5px
+    }
+    100% {
+        top: 1.5px
+    }
+}
+
+/* ==============================모달 CSS===================================================== */
+
+.css-1ioszc5 {
+    width: 100%;
+    position: relative;
+    flex-direction: column;
+    text-align: left;
+    display: inline-block;
+    vertical-align: middle;
+    max-width: 828px;
+}
+
+.css-1i31rsc {
+    width: 100%;
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+    box-shadow: rgb(0 0 0 / 12%) 0px 3px 6px -4px, rgb(0 0 0 / 8%) 0px 6px 16px 0px, rgb(0 0 0 / 5%) 0px 9px 28px 8px;
+    display: flex;
+    flex-direction: column;
+    padding: 0px;
+    text-align: left;
+    margin: 32px auto;
+}
+
+.css-1wv77pg {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1;
+}
+
+.css-1u9286t {
+    top: 127px;
+    right: 523px;
+    outline: none;
+    border-width: 1px;
+    border-style: solid;
+    box-sizing: border-box;
+    line-height: 1;
+    font-weight: 500;
+    transition: background-color 0.3s ease 0s, border-color 0.3s ease 0s;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+    white-space: nowrap;
+    max-width: 100%;
+    height: 42px;
+    font-size: 15px;
+    min-width: 42px;
+    padding: 0px;
+    border-radius: 21px;
+    background-color: transparent;
+    border-color: transparent;
+    color: rgb(48, 52, 65);
+}
+
+.css-nh621w {
+    display: inline-block;
+    font-style: normal;
+    line-height: 0;
+    text-align: center;
+    text-transform: none;
+    vertical-align: -0.125em;
+    text-rendering: optimizelegibility;
+    -webkit-font-smoothing: antialiased;
+    color: rgb(228, 229, 237);
+}
+
+.css-1u9286t svg {
+    width: 28px;
+    height: 28px;
+}
+
+.css-i7qp {
+    width: 100%;
+    max-height: 680px;
+    padding: 40px;
+    color: rgb(48, 52, 65);
+}
+
+.css-9c1zud {
+    height: 90px;
+    border-bottom: 1px solid rgb(228, 229, 237);
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+
+.css-1gtanqs {
+    width: -moz-fit-content;
+    width: fit-content;
+}
+
+.css-14prtx6 {
+    padding: 8px 12px;
+    font-size: 15px;
+    border-radius: 20px;
+    background: #f2f3f7;
+    color: #555969;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    line-height: normal;
+    cursor: default;
+}
+
+.css-qe1g4v {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 6px 0px 0px;
+}
+
+.css-qi5zkp {
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    padding-top: 40px;
+}
+
+.css-pea598 {
+    height: 100px;
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+
+.css-pea598 > div {
+    height: 24px;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+
+.css-aah4od {
+    display: inline-block;
+    color: inherit;
+    font-style: normal;
+    line-height: 0;
+    text-align: center;
+    text-transform: none;
+    vertical-align: -0.125em;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.css-7kp13n {
+    display: inline-block;
+}
+
+.css-pea598 p {
+    font-weight: 600;
+    margin: 0px;
+}
+
+.css-pea598 > div {
+    height: 24px;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+
+.css-aah4od {
+    display: inline-block;
+    color: inherit;
+    font-style: normal;
+    line-height: 0;
+    text-align: center;
+    text-transform: none;
+    vertical-align: -0.125em;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.css-7kp13n {
+    display: inline-block;
+}
+
+.css-pea598 p {
+    font-weight: 600;
+    margin: 0px;
+}
+
+.css-pea598 > div {
+    height: 24px;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+
+.css-aah4od {
+    display: inline-block;
+    color: inherit;
+    font-style: normal;
+    line-height: 0;
+    text-align: center;
+    text-transform: none;
+    vertical-align: -0.125em;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.css-7kp13n {
+    display: inline-block;
+}
+
+.css-1438eek {
+    width: 400px;
+    height: 470px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 28px;
+   /* overflow-y: scroll;*/
+}
+
+.css-13mgtqc {
+    display: flex;
+    flex-direction: column;
+    row-gap: 4px;
+}
+
+.css-1re8ypy {
+    margin: 0px;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.css-d38zja {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+}
+
+.css-13mgtqc {
+    display: flex;
+    flex-direction: column;
+    row-gap: 4px;
+}
+
+.css-1re8ypy {
+    margin: 0px;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.css-d38zja {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+}
+
+.css-13mgtqc {
+    display: flex;
+    flex-direction: column;
+    row-gap: 4px;
+}
+
+.css-8x0gm {
+    outline: none;
+    border-width: 1px;
+    border-style: solid;
+    box-sizing: border-box;
+    border-radius: 4px;
+    line-height: 1;
+    font-weight: 500;
+    -webkit-transition: background-color 0.3s, border-color 0.3s;
+    transition: background-color 0.3s, border-color 0.3s;
+    -webkit-text-decoration: none;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    display: -webkit-inline-box;
+    display: -webkit-inline-flex;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    white-space: nowrap;
+    max-width: 100%;
+    height: 48px;
+    font-size: 16px;
+    padding: 0 24px;
+    min-width: 80px;
+    background-color: #ffd400;
+    border-color: #ffd400;
+    color: #303441;
+}
+
+.css-8x0gm:hover {
+    background-color: #d7b50c;
+    border-color: #d7b50c;
+}
+
+.abc {
+    box-sizing: border-box;
+    display: inline-block;
+    width: initial;
+    height: initial;
+    background: none;
+    opacity: 1;
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+    position: relative;
+    max-width: 100%;
+}
+
+.abcd {
+    box-sizing: border-box;
+    display: block;
+    width: initial;
+    height: initial;
+    background: none;
+    opacity: 1;
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+    max-width: 100%;
+}
+
+#talentModal {
+    z-index: 9999;
+    top: 7%;
+    display: block;
+    justify-content: center;
+    padding-top: 40px;
+    position: fixed;
+    right: 28%;
+}
+
+/*======================모달=====================================*/
+.modalWrap {
+    display: none;
+    z-index: 21;
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 100%;
+    height: 100vw;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.talentModal {
+    display: none;
+    z-index: 21;
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 100%;
+    height: 100vw;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.talentScope {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    padding: 20px;
+    border-radius: 5px;
+    background: #fff;
+    font-size: 1rem;
+    padding-bottom: 50px;
+}
+.talentHead {
+    padding: 0 1.8rem;
+}
+
+.modalScope {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    padding: 20px;
+    border-radius: 5px;
+    background: #fff;
+    font-size: 1rem;
+    padding-bottom: 50px;
+}
+
+.modalHead {
+    padding: 0 1.8rem;
+}
+
+.exclamationMark {
+    border-color: #facea8;
+    color: #f8bb86;
+    width: 5.5rem;
+    height: 5.5rem;
+    margin: 1.25rem auto 1.875rem;
+    border: 0.25rem solid #facea8;;
+    border-radius: 50%;
+    font-size: 3.75rem;
+    text-align: center;
+}
+
+.modalContent {
+    font-size: 1.875em;
+    margin: 0 0 0.4em;
+    color: #595959;
+}
+
+.modalFooter {
+    margin: 1.25em auto 0;
+    padding: 0 1.6em;
+}
+
+.modalBtn {
+    border: 0;
+    border-radius: 0.25em;
+    background-color: #2778c4;
+    color: #fff;
+    font-size: 1.0625em;
+    margin: 0.3125em;
+    padding: 0.625em 1.1em;
+    width: 4em;
+}
+
+.modalBtn:hover {
+    filter: brightness(90%);
+}
+
+/*==============카테고리=====================*/
+
+.inputCos {
+    width: 400px;
+    height: 42px;
+    background-color: rgb(250, 250, 252);
+    color: #303441;
+    border: 1px solid rgb(228, 229, 237);
+    border-radius: 4px;
+    padding: 0px 14px;
+}
+
+.moreSelectWrap{
+    display: none;
+    position: absolute;
+    top: 46px;
+    left: 0;
+    width: 400px;
+    background-color: #fff;
+    padding: 4px 0;
+    border-radius: 4px;
+    box-shadow: 0px 2px 7px -4px;
+}
+.moreSelectItem{
+    padding: 12px;
+    font-size: 15px;
+    color: #303441;
+    width: 100%;
+
+}
+
+.moreSelectItem:hover{
+    background-color: rgb(247, 245, 250);
+}
+
+.arrowWrap {
+    padding: 9px;
+}
+
+.arrowColor {
+    fill: rgb(200, 202, 210);
+}
+
+/*=================두번째 지역=======================*/
+
+#inputCos {
+    width: 400px;
+    height: 42px;
+    background-color: rgb(250, 250, 252);
+    color: #303441;
+    border: 1px solid rgb(228, 229, 237);
+    border-radius: 4px;
+    padding: 0px 14px;
+}
+
+#moreSelectWrap{
+    display: none;
+    position: absolute;
+    top: 46px;
+    left: 0;
+    width: 400px;
+    background-color: #fff;
+    padding: 4px 0;
+    border-radius: 4px;
+    box-shadow: 0px 2px 7px -4px;
+}
+.place{
+    padding: 12px;
+    font-size: 15px;
+    color: #303441;
+    width: 100%;
+
+}
+
+.place:hover{
+    background-color: rgb(247, 245, 250);
+}
+
+input[name = "talent"] {
+    outline: none;
+    width: 100%;
+    background-color: rgb(250, 250, 252);
+    border: none;
+}
+
+input[name = "talent"]::placeholder {
+    color: rgb(200, 201, 207);
+}
+
+#talentText {
+    width: 400px;
+    background-color: rgb(250, 250, 252);
+    color: #303441;
+    border: 1px solid rgb(228, 229, 237);
+    border-radius: 4px;
+    padding: 0px 14px;
+    height: 125px;
+    padding-top: 10px;
+    padding-bottom: 25px;
+}
+
+.inputCos:hover {
+    border: 1px solid rgb(118, 118, 118);
+}
+
+#inputCos:hover {
+    border: 1px solid rgb(118, 118, 118);
+}
+
+#kim2:hover {
+    border: 1px solid rgb(118, 118, 118);
+}
+#kim2:focus {
+    outline: none;
+    border: 1px solid rgb(118, 118, 118);
+}
+#kim2 {
+    width: 400px;
+    height: 42px;
+    background-color: rgb(250, 250, 252);
+    color: #303441;
+    border: 1px solid rgb(228, 229, 237);
+    border-radius: 4px;
+    padding: 0px 14px;
+}
+
+#dateTime {
+    width: 400px;
+    height: 42px;
+    background-color: rgb(250, 250, 252);
+    color: #303441;
+    border: 1px solid rgb(228, 229, 237);
+    border-radius: 4px;
+    padding: 0px 14px;
+}
+
+#dateTime:hover {
+    border: 1px solid rgb(118, 118, 118);
+}
+#dateTime:focus {
+    outline: none;
+    border: 1px solid rgb(118, 118, 118);
+}
+
+
+#talentText:hover {
+    border: 1px solid rgb(118, 118, 118);
+}
+
+#talentText:focus {
+    outline: none;
+    border: 1px solid rgb(118, 118, 118);
+}
+
+#kimeuiyeob::-webkit-scrollbar {
+    padding-right: 4px;
+    width: 4px;
+}
+
+#kimeuiyeob::-webkit-scrollbar-thumb {
+    height: 85%;
+    background: rgb(200, 201, 207);
+    border-radius: 10px;
+}
+#kimeuiyeob {
+    width: 370px;
+    height: 80px;
+    border: none;
+    background-color: rgb(250, 250, 252);
+    resize: none;
+}
+
+#kimeuiyeob:hover {
+    border:none;
+}
+#kimeuiyeob:focus {
+    outline: none;
+}
+
+/*========*/
+
+#euiyeob::-webkit-scrollbar {
+    padding-right: 4px;
+    width: 4px;
+}
+
+#euiyeob::-webkit-scrollbar-thumb {
+    height: 85%;
+    background: rgb(200, 201, 207);
+    border-radius: 10px;
+}
+#euiyeob {
+    width: 370px;
+    height: 80px;
+    border: none;
+    background-color: rgb(250, 250, 252);
+    resize: none;
+}
+
+#euiyeob:hover {
+    border:none;
+}
+#euiyeob:focus {
+    outline: none;
+}
+
+#talText:hover {
+    border: 1px solid rgb(118, 118, 118);
+}
+
+#talText:focus {
+    outline: none;
+    border: 1px solid rgb(118, 118, 118);
+}
+#talText {
+    width: 400px;
+    background-color: rgb(250, 250, 252);
+    color: #303441;
+    border: 1px solid rgb(228, 229, 237);
+    border-radius: 4px;
+    padding: 0px 14px;
+    height: 125px;
+    padding-top: 10px;
+    padding-bottom: 25px;
+}
+/*=========*/
+
+div.dropdown{
+    display: flex;
+    justify-content: flex-end;
+}
+
+div.dropdown{
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+.dropdown-label{
+    font-size : 12px;
+    margin : 10px;
+    font-weight : bold;
+    color : rgb(50, 50, 50);
+}
+
+.dropdown{
+    position : relative;
+    display : inline-block;
+}
+
+.dropbtn_icon{
+    font-family : 'Material Icons';
+}
+
+.dropbtn_content{
+    color: #d7d9e0;
+}
+.dropbtn{
+    overflow: hidden;
+    display: flex;
+    min-width: 64px;
+    height: 40px;
+    display : block;
+    border: 1px solid #e3e5ed;
+    border-radius : 4px;
+    background-color: #ffffff;
+    font-weight: 400;
+    color : #303441;
+    padding: 0 12px;
+    width :auto;
+    text-align: left;
+    cursor : pointer;
+    font-size : 14px;
+    z-index :1;
+    position : relative;
+}
+
+
+.dropdown-content{
+    display : none;
+    font-weight: 400;
+    background-color: #fcfcfc;
+    min-width : 90px;
+    border-radius: 8px;
+    height : 160px;
+    overflow : scroll;
+    box-shadow: 0px 0px 10px 3px rgba(190, 190, 190, 0.6);
+    width: 30%;
+}
+.dropdown-content::-webkit-scrollbar{
+    width : 5px;
+    height : 10px;
+}
+.dropdown-content::-webkit-scrollbar-thumb{
+    border-radius : 2px;
+    background-color :rgb(194, 194, 194)
+}
+
+.dropdown-content div{
+    display : block;
+    text-decoration : none;
+    color : rgb(37, 37, 37);
+    font-size: 12px;
+    padding : 12px 20px;
+}
+.dropdown-content div:hover{
+    background-color: rgb(226, 226, 226);
+    cursor: pointer;
+}
+
+.dropdown-content.show{
+    display : block;
+}
+
+/* =====================================가운데 fade in==================================================== */
+
+.fade-in-box {
+    display: inline-block;
+    animation: fadein 1.5s;
+    -moz-animation: fadein 1.5s; /* Firefox */
+    -webkit-animation: fadein 1.5s; /* Safari and Chrome */
+    -o-animation: fadein 1.5s; /* Opera */
+}
+@keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-moz-keyframes fadein { /* Firefox */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-o-keyframes fadein { /* Opera */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* ==============================마우스 온 사진 확대=========================================== */
+.bigbig {
+    transition: all 0.2s linear;
+}
+.bigbig:hover  {
+    transform: scale(1.1);
+}
+

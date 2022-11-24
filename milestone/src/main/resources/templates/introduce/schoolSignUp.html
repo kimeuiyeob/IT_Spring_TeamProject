@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>schoolSignUp</title>
+</head>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"/>
+<link rel="stylesheet" href="/css/introduce/introduce.css" type="text/css"/>
+<link rel="icon" href="/imgs/fix/favicon.png">
+
+<link rel="stylesheet" href="/css/fix/header.css">
+<link rel="stylesheet" href="/css/fix/footer.css">
+
+
+<style>
+    /* =================슬라이드 배너====================== */
+
+    body {
+        margin: 0px;
+    }
+
+    .Banners {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 16px;
+        width: 1000px
+    }
+
+    .BannerContent {
+        display: inline-block;
+        /* 왼쪽 여백 */
+        padding-top: 155px;
+        /* 글내용 센터로 보낼때 */
+    }
+
+    .BannerSlides {
+        position: relative;
+        width: 50%;
+        height: 800px;
+        display: inline-block;
+    }
+
+    .swiper {
+        width: 100%;
+        /* 이쪽으로 배너 크기 조절 */
+        height: 70%;
+    }
+
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+
+    .swiper-slide img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    :root {
+        --swiper-theme-color: #ffd400;
+    }
+
+    /* ============================================= */
+
+
+    /* =================카운트 업=================== */
+
+    .count {
+        display: flex;
+        justify-content: space-between;
+        margin: 100px auto;
+        width: 54%;
+    }
+
+    .count-num {
+        text-align: center;
+        font-size: 45px;
+        font-weight: 700;
+    }
+
+    .countUp {
+        height: 240px;
+        margin-top: -150px;
+        margin-top: -285px;
+    }
+
+    /* ============================================= */
+
+    /* ============도움이 필요한 보육원=============== */
+
+    .helpSchool {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .helpSchoolVideo {
+        display: inline-block;
+    }
+
+    .helpSchools {
+        display: inline-block;
+        padding-top: 50px;
+    }
+
+    /* ============================================= */
+
+    /* ===================랭킹====================== */
+
+
+    .ranking {
+        display: flex;
+        justify-content: space-between;
+        padding-top: 100px;
+        padding-bottom: 70px;
+    }
+
+    .rankings {
+        display: inline-block;
+        padding-top: 50px;
+    }
+
+    .rankingImg {
+        display: inline-block;
+    }
+
+    /* ============================================= */
+
+    /* ================하단 큰 비디오================ */
+
+    .BigVideo {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        background-color: #303441;
+        padding-bottom: 100px;
+        padding: 120px;
+        padding-top: 65px;
+    }
+
+    .Big {
+        display: inline-block;
+        color: white;
+        text-align: center;
+    }
+
+    .BigVideos {
+        display: inline-block;
+    }
+
+
+    /* ============================================= */
+
+    .introduceButton {
+        outline: none;
+        border-width: 1px;
+        border-style: solid;
+        box-sizing: border-box;
+        border-radius: 4px;
+        line-height: 1;
+        font-weight: bold;
+        background-color: #ffd400;
+        border-color: #ffd400;
+        color: #303441;
+        width: 238px;
+        white-space: nowrap;
+        max-width: 100%;
+        height: 52px;
+        font-size: 16px;
+        padding: 0 24px;
+        min-width: 80px;
+        cursor: pointer;
+        position: relative;
+        align-items: center;
+    }
+
+    .introduceButton:hover {
+        background-color: #d7b50c;
+        border-color: #d7b50c;
+    }
+
+    @font-face {
+        font-family: 'Metro Sans';
+        font-style: normal;
+        src: url(https://d2v80xjmx68n4w.cloudfront.net/assets/fonts/MetroSans/MetroSans-Bold.woff2) format('woff2'),
+        url(https://d2v80xjmx68n4w.cloudfront.net/assets/fonts/MetroSans/MetroSans-Bold.woff) format('woff'),
+        url(https://d2v80xjmx68n4w.cloudfront.net/assets/fonts/MetroSans/MetroSans-Bold.otf) format('truetype'), url(https://d2v80xjmx68n4w.cloudfront.net/assets/fonts/MetroSans/MetroSans-Bold.eot),
+        url(https://d2v80xjmx68n4w.cloudfront.net/assets/fonts/MetroSans/MetroSans-Bold.eot?#iefix) format('embedded-opentype');
+    }
+
+    /* ===============================왼쪽에서 오른쪽 css=============================================== */
+
+    @keyframes fadeInLeft {
+        0% {
+            opacity: 0;
+            transform: translate3d(-50%, 0, 0);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateZ(0);
+        }
+    }
+
+    .test_obj {
+        position: relative;
+        animation: fadeInLeft 1s;
+    }
+
+    /* ===============================왼쪽에서 오른쪽 css=============================================== */
+
+    @keyframes fadeInRight {
+        0% {
+            opacity: 0;
+            transform: translate3d(50%, 0, 0);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateZ(0);
+        }
+    }
+
+    .kest_obj {
+        position: relative;
+        animation: fadeInRight 1s;
+    }
+
+    /* ===========================순차적으로 생겨나는 css========================================= */
+
+    .dov {
+        opacity: 0;
+        transition: all 2.5s;
+    }
+
+    /* ==============================마우스 온 사진 확대=========================================== */
+    .bigbig {
+        transition: all 0.2s linear;
+    }
+
+    .bigbig:hover {
+        transform: scale(1.1);
+    }
+
+    /* ======================================보육원 등록 CSS=================================== */
+
+    .css-1v6gaik {
+        height: 584px;
+        width: 1200px;
+        margin: 0 auto;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        position: relative;
+    }
+
+    .css-8el2c7 {
+        margin-top: 80px;
+        text-align: center;
+    }
+
+    .css-mhi2jg {
+        font-size: 32px;
+        color: #303441;
+        font-weight: bold;
+        line-height: normal;
+        margin: 0 0 56px 0;
+    }
+
+    .css-e9bn8z {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 20px;
+    }
+
+    .css-1mijpj8 {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-align-items: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        width: 277px;
+        height: 320px;
+        box-shadow: 0 0 10px 0 rgb(0 0 0 / 10%);
+        border-radius: 8px;
+    }
+
+    .css-19uaq2c {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-align-items: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        width: 100px;
+        height: 100px;
+        background-color: #f2f3f7;
+        border-radius: 50%;
+        margin: 56px 0 32px 0;
+    }
+
+    .css-v6zj2k {
+        font-size: 20px;
+        line-height: normal;
+        margin-bottom: 11px;
+        color: #303441;
+    }
+
+    .css-icnyz6 {
+        display: block;
+        white-space: pre-wrap;
+        font-size: 16px;
+        line-height: normal;
+        color: #303441;
+    }
+
+    .css-19uaq2c {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-align-items: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        width: 100px;
+        height: 100px;
+        background-color: #f2f3f7;
+        border-radius: 50%;
+        margin: 56px 0 32px 0;
+    }
+
+    .css-v6zj2k {
+        font-size: 20px;
+        line-height: normal;
+        margin-bottom: 11px;
+        color: #303441;
+    }
+
+    .css-icnyz6 {
+        display: block;
+        white-space: pre-wrap;
+        font-size: 16px;
+        line-height: normal;
+        color: #303441;
+    }
+
+    .css-1mijpj8 {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-align-items: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        width: 277px;
+        height: 320px;
+        box-shadow: 0 0 10px 0 rgb(0 0 0 / 10%);
+        border-radius: 8px;
+    }
+
+    .css-19uaq2c {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-align-items: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        width: 100px;
+        height: 100px;
+        background-color: #f2f3f7;
+        border-radius: 50%;
+        margin: 56px 0 32px 0;
+    }
+
+    .css-v6zj2k {
+        font-size: 20px;
+        line-height: normal;
+        margin-bottom: 11px;
+        color: #303441;
+    }
+
+    .css-icnyz6 {
+        display: block;
+        white-space: pre-wrap;
+        font-size: 16px;
+        line-height: normal;
+        color: #303441;
+    }
+
+    .css-1rfihce {
+        background-color: #ffd400;
+    }
+
+    .css-crufly {
+        width: 1200px;
+        margin: 0 auto;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        position: relative;
+        height: 600px;
+        text-align: center;
+    }
+
+    .css-7t3vzb {
+        font-size: 30px;
+        color: #303441;
+        font-weight: bold;
+        line-height: normal;
+        margin: 79px 0 40px 0;
+    }
+
+    .css-wwjrta {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        grid-gap: 20px;
+    }
+
+    .css-1i8afs3 {
+        width: 543px;
+        height: 168px;
+        padding: 24px;
+        text-align: start;
+        background-color: #ffffff;
+        border-radius: 8px;
+        position: relative;
+    }
+
+    .css-13lxx6e {
+        position: absolute;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-align-items: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        font-weight: bold;
+        top: 24px;
+        right: 24px;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background-color: #ffd400;
+        color: #ffffff;
+    }
+
+    .css-sokzjn {
+        font-size: 20px;
+        font-weight: bold;
+        color: #303441;
+        line-height: normal;
+        margin-bottom: 12px;
+        white-space: pre-wrap;
+    }
+
+    .css-udcx8f {
+        font-size: 16px;
+        color: #303441;
+        line-height: normal;
+        white-space: pre-wrap;
+    }
+
+    /* ======================================================================================== */
+
+
+</style>
+
+
+<body>
+
+<header th:replace="/fix/header.html :: header"></header>
+<!-- ================================================================================================================ -->
+
+<div class="dov" style="padding-bottom: 200px;">
+    <div class="Banner" style="display: flex; justify-content: center; margin-bottom: -160px;">
+        <div class="Banners">
+            <div class="BannerContent">
+
+                <div data-aos="fade-right">
+                    <h1 style="color: #303441; font-size: 40px; ">Milestone <br> 보육원 등록하고,</h1>
+                    <h2 style="color: #303441; font-size: 30px; padding-bottom: 10px;
+                                  margin-top: -15px;">후원을 받아보세요.</h2>
+                    <input class="introduceButton" type="button" value="보육원 회원가입">
+                </div>
+
+            </div>
+
+            <div class="bigbig" style="padding-bottom:200px">
+                <div data-aos="fade-up">
+                    <div class="schoolImg" style="padding-top: 80px;">
+                        <img src="../imgs/introduce/school2.png" alt="이미지" width="600px" height="400px"/>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ================================================================================================================ -->
+<!-- 카운트업 -->
+
+<div style="text-align:center; padding-bottom: 55px;">
+    <h1 style="color:white;margin-bottom: -20px;">대한민국 No.1 마일스톤에서</h1>
+    <p style="color:#ffd711; display: inline-block; font-size: 30px; font-weight: bold;">기부 정보</p>
+    <p style="color:white;  display: inline-block; font-size: 30px; font-weight: bold;">를 확인하세요</p>
+</div>
+<div class="countUp">
+
+    <div style="background-color: #212224;
+            height: 430px;
+            margin-left: -351px;
+            padding-top: 80px;
+            padding-bottom: 50px;">
+
+
+        <div class="count" style="padding-left: 370px;">
+
+            <div class="col" style="display: inline-block;">
+                <p style="text-align:center; padding-top: 35px;color: #9a9ba7">개인 회원수</p>
+                <div style="margin-top: -45px;">
+                    <p class="count-num" data-count="4523" style="display: inline-block; color:white">
+                        <!-- data-count에 값넣으면됩니다 -->
+                    </p>
+                    <p style="display: inline-block; font-size: 40px; color: white;
+                    font-weight: 500;">명+</p>
+                </div>
+            </div>
+            <div class="col">
+                <p style="text-align:center; padding-top: 35px;color: #9a9ba7">보육원 회원수</p>
+                <div style="margin-top: -45px;">
+                    <p class="count-num" data-count="324" style="display: inline-block; color:white">
+                        <!-- data-count에 값넣으면됩니다 -->
+                    <p style="display: inline-block; font-size: 40px; color: white;
+                        font-weight: 500;">명+</p>
+                </div>
+            </div>
+            <div class="col">
+                <p style="text-align:center; padding-top: 35px;color: #9a9ba7">누적 기부 횟수</p>
+                <div style="margin-top: -45px;">
+                    <p class="count-num" data-count="64235" style="display: inline-block; color:white">
+                        <!-- data-count에 값넣으면됩니다 -->
+                    <p style="display: inline-block; font-size: 40px; color: white;
+                        font-weight: 500;">건+</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ================================================================================================================ -->
+
+
+<div class="dov">
+    <section class="css-0 e1c8mqgq0" style="padding-top:250px; padding-bottom: 100px;">
+        <div class="css-1v6gaik e1c8mqgq1">
+            <div class="css-8el2c7 e1c8mqgq2">
+                <h2 class="css-mhi2jg e1c8mqgq3">How it works</h2>
+                <div class="css-e9bn8z e1c8mqgq4">
+
+                    <div class="bigbig">
+                        <div class="css-1mijpj8 e1c8mqgq5">
+                            <div class="css-19uaq2c e1c8mqgq6"><img
+                                    src="https://d2v80xjmx68n4w.cloudfront.net/assets/desktop/modules/become-a-seller/icon-01@2x.png"
+                                    width="52" height="51" alt="process-card-icon" class="css-0 e1c8mqgq7"></div>
+                            <h2 class="css-v6zj2k e1c8mqgq8">보육원 회원가입</h2>
+                            <div class="css-icnyz6 e1c8mqgq9">보육원을 회원가입하고<br>마일스톤의 보육원이 되어 보세요.</div>
+                        </div>
+                    </div>
+
+                    <div class="bigbig">
+                        <div class="css-1mijpj8 e1c8mqgq5">
+                            <div class="css-19uaq2c e1c8mqgq6"><img
+                                    src="https://d2v80xjmx68n4w.cloudfront.net/assets/desktop/modules/become-a-seller/icon-02@2x.png"
+                                    width="51" height="45" alt="process-card-icon" class="css-0 e1c8mqgq7"></div>
+                            <h2 class="css-v6zj2k e1c8mqgq8" style="font-size: 20px">재능기부 이용</h2>
+                            <div class="css-icnyz6 e1c8mqgq9">재능기부 목록에서<br>원하는 재능을 아이들에게 나눠주세요.</div>
+                        </div>
+                    </div>
+
+                    <div class="bigbig">
+                        <div class="css-1mijpj8 e1c8mqgq5">
+                            <div class="css-19uaq2c e1c8mqgq6"><img
+                                    src="https://d2v80xjmx68n4w.cloudfront.net/assets/desktop/modules/become-a-seller/icon-03@2x.png"
+                                    width="50" height="50" alt="process-card-icon" class="css-0 e1c8mqgq7"></div>
+                            <h2 class="css-v6zj2k e1c8mqgq8">재능인과 연락하기</h2>
+                            <div class="css-icnyz6 e1c8mqgq9">마일스톤 알림함을 통해<br>재능인의 정보와 알림을 받아보세요.</div>
+                        </div>
+                    </div>
+
+                    <div class="bigbig">
+                        <div class="css-1mijpj8 e1c8mqgq5">
+                            <div class="css-19uaq2c e1c8mqgq6"><img
+                                    src="https://d2v80xjmx68n4w.cloudfront.net/assets/desktop/modules/become-a-seller/icon-04@2x.png"
+                                    width="52" height="47" alt="process-card-icon" class="css-0 e1c8mqgq7"></div>
+                            <h2 class="css-v6zj2k e1c8mqgq8">기부 내역</h2>
+                            <div class="css-icnyz6 e1c8mqgq9">개인의 후원 확정후,<br>계좌 또는 QR로 후원이 들어옵니다.</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ================================================================================================================ -->
+
+
+<div class="dov">
+    <section class="css-1rfihce e9us7zk0" style="padding-bottom: 100px;">
+        <div class="css-crufly e9us7zk1">
+            <h2 class="css-7t3vzb e9us7zk2">마일스톤과 함께 하면 좋은 이유</h2>
+            <div class="css-wwjrta e9us7zk3">
+                <div class="css-1i8afs3 e9us7zk4">
+                    <div class="css-13lxx6e e9us7zk5">1</div>
+                    <div class="css-sokzjn e9us7zk6">마일스톤에서 좋은 보육원을 만나보세요.</div>
+                    <div class="css-udcx8f e9us7zk7">어렵게 후원 하지 않으셔도 되요.<br>대한민국 No1 마일스톤이 안내하겠습니다.</div>
+                </div>
+                <div class="css-1i8afs3 e9us7zk4">
+                    <div class="css-13lxx6e e9us7zk5">2</div>
+                    <div class="css-sokzjn e9us7zk6">투명하게 후원하세요.</div>
+                    <div class="css-udcx8f e9us7zk7">해당보육원에 직접 후원을 통해<br>안전하고 쉽게 보육원에게 후원할수 있습니다.</div>
+                </div>
+                <div class="css-1i8afs3 e9us7zk4">
+                    <div class="css-13lxx6e e9us7zk5">3</div>
+                    <div class="css-sokzjn e9us7zk6">복잡한 후원과 불투명성에 걱정하지마세요.</div>
+                    <div class="css-udcx8f e9us7zk7">마일스톤이 후원에 집중할 수 있도록<br>후원의 편의성과 다양한 활동을 마일스톤이 해드립니다.</div>
+                </div>
+                <div class="css-1i8afs3 e9us7zk4">
+                    <div class="css-13lxx6e e9us7zk5">4</div>
+                    <div class="css-sokzjn e9us7zk6">보육원에 투명한 기부를 원하는 회원들의 <br>환경을 만들기 위해 노력합니다.</div>
+                    <div class="css-udcx8f e9us7zk7">마일스톤과 기부를 도와주신 모든분들께<br>마일스톤이 모두를 응원합니다.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ================================================================================================================ -->
+<footer th:replace="/fix/footer.html :: footer"></footer>
+
+<!-- ================================================================================================================ -->
+</body>
+
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
+<!-- ==================================================================================== -->
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
+
+<script>
+    /* ============================슬라이드 배너=================================== */
+
+    var swiper = new Swiper(".mySwiper", {
+        spaceBetween: 30,
+        centeredSlides: true,
+        autoplay: {
+            delay: 2000,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+    });
+
+    /* ================================카운트 업===================================== */
+
+    $('.count-num').each(function () {
+        var $this = $(this),
+            countTo = $this.attr('data-count');
+
+        $({countNum: $this.text()}).animate({
+                countNum: countTo
+            },
+            {
+                duration: 3000,
+                easing: 'linear',
+                step: function () {
+                    $this.text(Math.floor(this.countNum));
+                },
+                complete: function () {
+                    $this.text(this.countNum);
+                }
+            });
+    });
+
+    /* =========================화면============================================= */
+
+    let observer = new IntersectionObserver((e) => {
+        e.forEach((박스) => {
+            if (박스.isIntersecting) {
+                박스.target.style.opacity = 1;
+            } else {
+                박스.target.style.opacity = 0;
+            }
+        })
+    })
+
+    let dov = document.getElementsByClassName("dov");
+    observer.observe(dov[0])
+    observer.observe(dov[1])
+    observer.observe(dov[2])
+    observer.observe(dov[3])
+    observer.observe(dov[4])
+    observer.observe(dov[5])
+    observer.observe(dov[6])
+
+    /* =========================================================================== */
+
+</script>
+<script src="/js/fix/header.js"></script>
+</html>

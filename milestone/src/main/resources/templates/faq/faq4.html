@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <title>faq4</title>
+</head>
+<!-- ===================================================================================================== -->
+
+<link href="/css/faq/faqs.css" rel="stylesheet" />
+<link rel="stylesheet" href="/css/fix/menu.css"/>
+<link rel="icon" href="/imgs/fix/favicon.png">
+
+<link rel="stylesheet" href="/css/fix/header.css">
+<link rel="stylesheet" href="/css/fix/footer.css">
+
+<!-- ================================================================================================================ -->
+<body>
+
+<header th:replace="/fix/header.html :: header"></header>
+
+<!-- ================================================================================================================ -->
+
+<main role="main" style="padding-top:100px">
+    <div class="container-divider" style="border-top : none;"></div>
+    <div class="container">
+
+        <div class="article-container" id="article-container">
+            <section class="article-sidebar">
+
+                <section class="section-articles collapsible-sidebar">
+                    <h3 class="collapsible-sidebar-title sidenav-title" style="padding-left:10px;">이 섹션의 문서</h3>
+                    <ul>
+
+
+                        <li>
+                            <a href="/faq/faq1" class="sidenav-item ">
+                                <p class="sidenav-item-text">Milestone 어떻게 이용하나요?</p>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/faq/faq2" class="sidenav-item ">
+                                <p class="sidenav-item-text">Milestone 닉네임은 어떻게 변경하나요?</p>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/faq/faq3" class="sidenav-item ">
+                                <p class="sidenav-item-text">Milestone 회원가입은 어떻게 진행하나요?</p>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/faq/faq4" class="sidenav-item" style="background-color: #F2F3F7;
+                                    color: #333333;
+                                    font-weight: 400;
+                                    text-decoration: none;">
+                                <p class="sidenav-item-text">Milestone 휴대폰 재인증은 어떻게 하나요?</p>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/faq/faq5" class="sidenav-item ">
+                                <p class="sidenav-item-text">Milestone 개인정보는 안전하게 보호되나요?</p>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/faq/faq6" class="sidenav-item ">
+                                <p class="sidenav-item-text">Milestone 회원 탈퇴시 모두 삭제되나요?</p>
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </section>
+
+            </section>
+
+            <article class="article">
+                <header class="article-header">
+                    <h1 title="[가입/인증] 휴대폰 인증이 안되는 이유와 해결 방법은 무엇인가요?" class="article-title">
+                        Milestone 휴대폰 재인증은 어떻게 하나요?
+
+                    </h1>
+
+                </header>
+
+                <section class="article-info">
+                    <div class="article-content">
+                        <div class="article-body">
+                            <p>아래의 경우, 휴대폰 인증이 불가할 수 있습니다.<br><br></p>
+                            <p><strong><span class="wysiwyg-color-orange80">■&nbsp;</span>이미 인증된 정보가 있는 경우</strong>
+                            </p>
+                            <p>휴대폰 인증 단계에서 '이미 Milestone에 가입되어 있는 휴대폰 번호입니다'라는 안내가 보인다면, 이미 해당 명의자의 정보로 인증된 다른 계정이 존재한다는
+                                의미입니다.</p>
+                            <p>Milestone은 1인당 1개의 계정에만 휴대폰 인증을 진행하실 수 있어 다른 계정에 본인 인증을 추가로 진행하실 수 없습니다.</p>
+                            <p>🔎 해결 방법<br>해당 안내 화면에 가입하신 계정 정보를 일부 표기해드리고 있으니, 기존 가입 정보로 이용해 주세요.</p>
+                            <p>&nbsp;</p>
+                            <p><strong><span class="wysiwyg-color-orange80">■</span>&nbsp;법인 명의의 휴대폰인
+                                경우</strong><br></p>
+                            <p>🔎 해결 방법<br>Milestone은 '개인 실명 인증'을 원칙으로 합니다. 기업에서 이용하시는 경우, 담당자의 실명 인증 통해 이용해 주시기 바랍니다.</p>
+                            <p>&nbsp;</p>
+                            <p><strong><span class="wysiwyg-color-orange80">■</span>&nbsp;본인인증 모듈 사의 시스템 이슈가 있는 경우
+                            </strong></p>
+                            <p>🔎 해결 방법<br>모듈사의 서버 점검 등이 있는 경우, 일정 시간 후에 다시 한번 시도해 주시거나 KCB고객센터로(☎02-708-1000) 직접
+                                문의해 주시기 바랍니다.</p>
+                            <p>&nbsp;</p>
+                            <p><strong><span class="wysiwyg-color-orange80">■</span>&nbsp;통신사에서 제공하는 스팸 차단 서비스가 설정된
+                                경우</strong></p>
+                            <p>🔎 해결 방법<br>스팸 차단 서비스의 가입 여부를 통신사로 확인해 주시고, Milestone의 대표 번호(1544-6254)를 차단 대상에서 해제해 주세요.
+                            </p>
+                            <p>&nbsp;</p>
+                            <p><strong><span class="wysiwyg-color-orange80">■</span>&nbsp; 휴대폰 사용이 일시 정지된 경우(분실, 요금
+                                미납 등)&nbsp;</strong></p>
+                            <p><strong>🔎 </strong>해결 방법<br>통신사 정책에 따라 휴대폰 사용이 정상화된 이후 인증하실 수 있습니다.</p>
+                            <p>&nbsp;</p>
+                            <p>해결 방법을 참고하여 재시도하였음에도 서비스 이용이 불가한 경우, 고객센터(1544-6254, <a
+                                    href="https://support.kmong.com/hc/ko/requests/new" target="_blank"
+                                    rel="noopener"><span
+                                    class="wysiwyg-font-size-medium wysiwyg-color-blue"><span>1:1문의</span></span></a>)로
+                                문의를 접수해 주시면 신속하게 해결해드리겠습니다.&nbsp;</p>
+                        </div>
+
+                        <div class="article-attachments" style="padding-bottom:100px">
+                            <ul class="attachments">
+
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </article>
+        </div>
+    </div>
+</main>
+
+<!-- =========================================================================================================== -->
+<footer th:replace="/fix/footer.html :: footer"></footer>
+
+<!-- ================================================================================================================ -->
+
+</body>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script src="/js/fix/header.js"></script>
+</html>

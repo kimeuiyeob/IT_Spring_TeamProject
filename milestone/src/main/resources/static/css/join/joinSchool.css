@@ -1,0 +1,86 @@
+.moreSelectWrap {
+    display: none;
+    position: absolute;
+    top: 52px;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    padding: 4px 0;
+    border-radius: 4px;
+    box-shadow: 0px 2px 7px -4px;
+    z-index: 1;
+}
+
+.moreSelectItem {
+    padding: 12px;
+    font-size: 15px;
+    color: #303441;
+    width: 100%;
+
+}
+
+.moreSelectItem:hover {
+    background-color: rgb(247, 245, 250);
+}
+
+/*은행*/
+
+.arrowWrap {
+    padding: 9px;
+}
+
+.arrowColor {
+    fill: rgb(200, 202, 210);
+}
+
+#bank {
+    font-size: 16px;
+    outline: none;
+    width: 100%;
+    background-color: #fff;
+    border: none;
+}
+
+#bank::placeholder {
+    color: rgb(200, 201, 207);
+}
+
+.inputText {
+    font-size: 16px;
+    color: rgb(200, 201, 207);
+}
+
+.inputSpace {
+    padding: 0 16px;
+    flex-grow: 1;
+}
+
+#bankFocus {
+    height: 1px;
+    width: 1px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+/*주소 검색*/
+.searchAddressBtn {
+    border-radius: 4px;
+    border: none;
+    background-color: #E4E5ED;
+    border: 1px solid #E4E5ED;
+    font-size: 0.7em;
+    padding: 10px;
+    margin-left: 5px;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.searchAddressBtn:not(:disabled):hover {
+    background-color: #30344133;
+}
+
+.searchAddressBtn:not(:disabled):active {
+    background-color: #30344155;
+    outline: 2px solid #30344133;
+}

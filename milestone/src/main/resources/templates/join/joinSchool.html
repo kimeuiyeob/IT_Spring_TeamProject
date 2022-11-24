@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/join/joinSchool.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/join/joinPublic.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/join/public.css" type="text/css"/>
+    <link rel="icon" href="/imgs/fix/favicon.png">
+    <title>마일스톤 | 회원가입</title>
+</head>
+
+<body>
+<div class="joinWrap flexCol">
+    <a class="joinHeader" href=""><img src="/imgs/fix/logo.png" alt=""
+                                       style="width: 114px; height: 31.5px;"></a>
+    <div class="joinBody flexCol">
+        <div class="joinTitleWrap" style="margin-top: 0; word-spacing: -5px;">
+            딱 이것만 체크하면 가입완료!
+        </div>
+        <form action="" id="joinForm" name="joinForm">
+            <div class="inputWrap flexCol">
+                <div class="flexRow margin-bottom-8">
+                    <div class="inputTitle">이메일</div>
+                    <div class="essential">*</div>
+                </div>
+                <input class="inputCos" name="email" id="email" type="email" placeholder="이메일을 입력해 주세요.">
+                <div class="flexRow margin-top-4" style="display: none;">
+                    <div class="warningMsg">이메일 형식이 유효하지 않습니다.</div>
+                </div>
+            </div>
+            <div class="inputWrap flexCol padding-bottom-8">
+                <div class="flexRow margin-bottom-8">
+                    <div class="inputTitle">비밀번호</div>
+                    <div class="essential">*</div>
+                </div>
+                <input class="inputCos" name="password" id="password" type="password"
+                       placeholder="비밀번호를 입력해 주세요.(8자리 이상)">
+                <div class="flexRow margin-top-4" style="display: none;">
+                    <div class="warningMsg">비밀번호 형식이 유효하지 않습니다.</div>
+                </div>
+            </div>
+            <div class="inputWrap flexCol">
+                <input class="inputCos" name="checkPassword" id="checkPassword" type="password"
+                       placeholder="비밀번호를 한 번 더 입력해 주세요.">
+                <div class="flexRow margin-top-4" style="display: none;">
+                    <div class="warningMsg">비밀번호가 일치하지 않습니다.</div>
+                </div>
+            </div>
+            <div class="inputWrap flexCol">
+                <div class="flexRow margin-bottom-8">
+                    <div class="inputTitle">이름</div>
+                    <div class="essential">*</div>
+                </div>
+                <input class="inputCos" name="name" id="name" type="text" placeholder="이름을 입력해 주세요.">
+                <div class="flexRow margin-top-4" style="display: none;">
+                    <div class="warningMsg">이름을 정확히 입력해 주세요.</div>
+                </div>
+            </div>
+            <div class="inputWrap flexCol">
+                <div class="flexRow margin-bottom-8">
+                    <div class="inputTitle">보육원 이름</div>
+                    <div class="essential">*</div>
+                </div>
+                <input class="inputCos" name="schoolName" id="schoolName" type="text" placeholder="보육원이름을 입력해 주세요.">
+                <div class="flexRow margin-top-4" style="display: none;">
+                    <div class="warningMsg">보육원 이름을 입력해 주세요.</div>
+                </div>
+            </div>
+            <div class="inputWrap flexCol padding-bottom-8">
+                <div class="margin-bottom-8 flexRow">
+                    <div class="inputTitle">보육원 주소</div>
+                    <div class="essential">*</div>
+                </div>
+                <div class="flexBetween">
+                    <input name="zipCode" id="zipCode" type="hidden" value="">
+                    <input class="inputCos" name="address" id="address" type="text"
+                           placeholder="주소 검색 버튼을 이용해 주세요"
+                           value="" disabled>
+                    <button type="button" class="searchAddressBtn" id="searchAddressBtn" onclick="find()">주소
+                        검색
+                    </button>
+                </div>
+                <div class="margin-top-4" style="display: none;">
+                    <div class="warningMsg">보육원 주소를 입력해 주세요.</div>
+                </div>
+            </div>
+            <div class="inputWrap flexCol">
+                <div class="margin-bottom-8 flexRow">
+                    <div class="inputTitle">보육원 상세 주소</div>
+                    <div class="essential">*</div>
+                </div>
+                <input class="inputCos" name="addressDetail" id="addressDetail" type="text"
+                       placeholder="상세 주소를 입력해 주세요">
+                <div class="margin-top-4" style="display: none;">
+                    <div class="warningMsg">이름을 정확히 입력해 주세요.</div>
+                </div>
+            </div>
+            <div class="inputWrap flexCol">
+                <div class="margin-bottom-8 flexRow">
+                    <div class="inputTitle">보육원 교사 수</div>
+                </div>
+                <input class="inputCos" name="teacherPersonnel" id="teacherPersonnel" type="text"
+                       placeholder="0">
+            </div>
+            <div class="inputWrap flexCol">
+                <div class="margin-bottom-8 flexRow">
+                    <div class="inputTitle">보육원 아이들 수</div>
+                    <div class="essential">*</div>
+                </div>
+                <input class="inputCos" name="childPersonnel" id="childPersonnel" type="text"
+                       placeholder="0">
+                <div class="margin-top-6" style="display: none;">
+                    <div class="warningMsg">이름을 정확히 입력해 주세요.</div>
+                </div>
+            </div>
+            <div class="inputWrap flexCol">
+                <div class="margin-bottom-8 flexRow">
+                    <div class="inputTitle">1년 예산</div>
+                </div>
+                <input class="inputCos" name="budget" id="budget" type="text" placeholder="0">
+            </div>
+            <div class="inputWrap flexCol">
+                <div class="margin-bottom-8 flexRow">
+                    <div class="inputTitle">은행</div>
+                    <div class="essential">*</div>
+                </div>
+                <div class="margin-bottom-8 relative">
+                    <div class="moreSelectWrap">
+                        <div class="moreSelectItem">하나은행</div>
+                        <div class="moreSelectItem">기업은행</div>
+                        <div class="moreSelectItem">신한은행</div>
+                        <div class="moreSelectItem">국민은행</div>
+                        <div class="moreSelectItem">우리은행</div>
+                        <div class="moreSelectItem">농협은행</div>
+                    </div>
+                    <div class="inputCos flex" style="padding: 0;">
+                        <div class="inputSpace flexRow">
+                            <input type=text name="bank" id="bank" placeholder="은행을 선택해주세요" disabled>
+                            <input type=text id="bankFocus">
+                        </div>
+                        <div class="arrowWrap flexPublic">
+                            <svg height="20" width="20" class="arrowColor">
+                                <path
+                                        d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z">
+                                </path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="margin-top-6" style="display: none;">
+                        <div class="warningMsg">이름을 정확히 입력해 주세요.</div>
+                    </div>
+                </div>
+                <div class="margin-bottom-8 flexRow">
+                    <div class="inputTitle">보육원 계좌 번호</div>
+                    <div class="essential">*</div>
+                </div>
+                <input class="inputCos" name="accountNumber" id="accountNumber" type="text"
+                       placeholder=" - 를 제외한 숫자만 입력해 주세요">
+                <div class="margin-top-6" style="display: none;">
+                    <div class="warningMsg">이름을 정확히 입력해 주세요.</div>
+                </div>
+            </div>
+            <div class="inputWrap flexCol padding-bottom-8">
+                <div class="flexRow margin-bottom-8">
+                    <div class="inputTitle">휴대전화</div>
+                    <div class="essential">*</div>
+                </div>
+                <div class="flexBetween">
+                    <input class="inputCos" name="phone" id="phone" type="text" placeholder="전화번호를 입력해 주세요.">
+                    <button type="button" class="certificationBtn"><span>인증번호 받기</span></button>
+                </div>
+                <div class="flexRow margin-top-4" style="display: none;">
+                    <div class="warningMsg">전화번호를 정확히 입력해 주세요</div>
+                </div>
+            </div>
+            <div class="inputWrap flexCol">
+                <input class="inputCos" name="certification" id="certification" type="text"
+                       placeholder="인증번호를 입력해 주세요." disabled>
+                <div class="flexRow margin-top-4" style="display: none;">
+                    <div class="warningMsg">인증번호가 일치하지 않습니다.</div>
+                </div>
+            </div>
+            <div class="inputWrap flexCol">
+                <div class="flexRow margin-bottom-8">
+                    <div class="inputTitle">추가 연락처</div>
+                </div>
+                <div class="flexBetween">
+                    <input class="inputCos" name="plusPhone" id="plusPhone" type="text" placeholder="전화번호를 입력해 주세요.">
+                </div>
+                <div class="flexRow margin-top-4" style="display: none;">
+                    <div class="warningMsg">전화번호를 정확히 입력해 주세요</div>
+                </div>
+            </div>
+        </form>
+        <div class="agreements">
+            <label>
+                <div class="agreeAllWrap flexRow">
+                    <input type="checkbox" class="allCheckbox">
+                    <div class="agreeBackground">
+                        <div class="checkImg"></div>
+                    </div>
+                    모두 동의합니다.
+                </div>
+            </label>
+            <div class="margin-top-16">
+                <label>
+                    <div class="flexRow margin-bottom-4 smallAgree">
+                        <input type="checkbox" class="smallCheckbox">
+                        <div class="smallAgreeBackground">
+                            <div class="smallCheckImg"></div>
+                        </div>
+                        만 14세 이상입니다.
+                        <div class="essentialAgree">(필수)</div>
+                    </div>
+                </label>
+                <label>
+                    <div class="flexRow margin-bottom-4 smallAgree">
+                        <input type="checkbox" class="smallCheckbox">
+                        <div class="smallAgreeBackground">
+                            <div class="smallCheckImg"></div>
+                        </div>
+                        <a href="">서비스 이용약관</a>에 동의합니다.
+                        <div class="essentialAgree">(필수)</div>
+                    </div>
+                </label>
+                <label>
+                    <div class="flexRow margin-bottom-4 smallAgree">
+                        <input type="checkbox" class="smallCheckbox">
+                        <div class="smallAgreeBackground">
+                            <div class="smallCheckImg"></div>
+                        </div>
+                        <a href="">개인정보 수집/이용</a>에 동의합니다.
+                        <div class="essentialAgree">(필수)</div>
+                    </div>
+                </label>
+                <label>
+                    <div class="flexRow margin-bottom-4 smallAgree">
+                        <input type="checkbox" class="smallCheckbox">
+                        <div class="smallAgreeBackground">
+                            <div class="smallCheckImg"></div>
+                        </div>
+                        <a href="">개인정보 제3자 제공</a>에 동의합니다.
+                        <div class="essentialAgree">(필수)</div>
+                    </div>
+                </label>
+            </div>
+        </div>
+        <button class="joinBtn" form="joinForm">버튼만 누르면 가입완료!</button>
+    </div>
+    <div class="joinFooter">
+        마일스톤은 회원님의 원할한 서비스 이용에 필요한 정보를
+        <br>적절한 전자적 수단을 통해 제공하고 있습니다.
+    </div>
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="/js/join/joinSchool.js"></script>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <title>faq2</title>
+</head>
+<!-- ===================================================================================================== -->
+
+<link href="/css/faq/faqs.css" rel="stylesheet" />
+<link rel="stylesheet" href="/css/fix/menu.css"/>
+<link rel="icon" href="/imgs/fix/favicon.png">
+
+<link rel="stylesheet" href="/css/fix/header.css">
+<link rel="stylesheet" href="/css/fix/footer.css">
+
+<!-- ================================================================================================================ -->
+<body>
+
+<header th:replace="/fix/header.html :: header"></header>
+
+<!-- ================================================================================================================ -->
+
+<main role="main" style="padding-top:100px">
+    <div class="container-divider" style="border-top : none;"></div>
+    <div class="container">
+
+        <div class="article-container" id="article-container">
+            <section class="article-sidebar">
+
+                <section class="section-articles collapsible-sidebar">
+                    <h3 class="collapsible-sidebar-title sidenav-title" style="padding-left:10px;">이 섹션의 문서</h3>
+                    <ul>
+
+                        <li>
+                            <a href="/faq/faq1"
+                               class="sidenav-item ">
+                                <p class="sidenav-item-text">Milestone 어떻게 이용하나요?</p>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/faq/faq2"
+                               class="sidenav-item current-article">
+                                <p class="sidenav-item-text">Milestone 닉네임은 어떻게 변경하나요?</p>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/faq/faq3"
+                               class="sidenav-item ">
+                                <p class="sidenav-item-text">Milestone 회원가입은 어떻게 진행하나요?</p>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/faq/faq4"
+                               class="sidenav-item ">
+                                <p class="sidenav-item-text">Milestone 휴대폰 재인증은 어떻게 하나요?</p>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/faq/faq5"
+                               class="sidenav-item ">
+                                <p class="sidenav-item-text">Milestone 개인정보는 안전하게 보호되나요?</p>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/faq/faq6"
+                               class="sidenav-item ">
+                                <p class="sidenav-item-text">Milestone 회원 탈퇴시 모두 삭제되나요?</p>
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </section>
+
+            </section>
+
+            <article class="article">
+                <header class="article-header">
+                    <h1 title="[계정 정보/탈퇴] 닉네임은 어떻게 변경하나요?" class="article-title">
+                        Milestone 닉네임은 어떻게 변경하나요?
+
+                    </h1>
+
+                </header>
+
+                <section class="article-info">
+                    <div class="article-content">
+                        <p><strong><span class="wysiwyg-color-orange80">■ &nbsp;</span><span class="wysiwyg-color-black">닉네임 변경하기</span></strong></p>
+                        <p>닉네임은 아래 두 가지 방법으로 변경하실 수 있습니다.</p>
+                        <p>1) [계정 설정&gt; <span class="wysiwyg-color-black">나의 정보</span>]에서 변경<br><span class="wysiwyg-color-black"><span class="wysiwyg-font-size-medium">※ PC버전: 사이트 오른쪽 상단 '프로필&gt; 계정 설정&gt; 나의 정보&gt; 닉네임 수정'<br></span><span class="wysiwyg-font-size-medium">※ 모바일앱: 메인 페이지 하단 'Milestone&gt; 계정 설정&gt; 닉네임 클릭'</span></span></p>
+                        <p><span class="wysiwyg-color-black">2) [프로필]에서 변경<br><span class="wysiwyg-font-size-medium">※ PC버전: 사이트 오른쪽 상단 '프로필&gt; 프로필 관리&gt; 프로필 등록/수정&gt; 닉네임 클릭'<br></span><span class="wysiwyg-font-size-medium">※ 모바일앱: 메인 페이지 하단 'Milestone&gt; 프로필 사진 하단 편집 클릭&gt; 닉네임 클릭'</span><br></span></p>
+                        <p>&nbsp;</p>
+                        <p><strong><span class="wysiwyg-color-orange80">■ &nbsp;</span><span class="wysiwyg-color-black">닉네임 변경 시 유의사항</span></strong></p>
+                        <p>◾️ <span class="wysiwyg-color-black"><span>닉네임 변경은 <span class="wysiwyg-underline">가입 후 1회만 </span></span><span><span class="wysiwyg-underline">가능</span>하며, 이후 추가 변경이 불가하니 신중하게 진행해 주세요.<br>◾️ 닉네임 변경 이력이 있는 경우 [PC버전-수정 버튼 / 모바일앱-닉네임 입력란]이 비활성화됩니다.<br></span></span><span class="wysiwyg-color-black"><span>◾️ 다른 회원이 설정한 닉네임은 사용이 불가합니다.&nbsp;<br>◾️ 특수문자, Milestone과 관련된 키워드, 이메일 아이디와 동일한 문자열은 사용이 불가합니다.<br></span></span></p></div>
+
+                    <div class="article-attachments" style="padding-bottom:100px">
+                        <ul class="attachments">
+
+                        </ul>
+                    </div>
+
+
+</main>
+
+<!-- =========================================================================================================== -->
+<footer th:replace="/fix/footer.html :: footer"></footer>
+
+<!-- ================================================================================================================ -->
+</body>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script src="/js/fix/header.js"></script>
+</html>

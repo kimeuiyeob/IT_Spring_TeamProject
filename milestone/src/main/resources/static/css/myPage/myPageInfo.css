@@ -1,0 +1,124 @@
+.profile {
+    background-image: url('/imgs/myPage/normalProfile.png');
+    border-radius: 50%;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    width: 120px;
+    height: 120px;
+}
+
+.updateProfileBtnWrap {
+    margin-top: 12px;
+    padding: 4px;
+}
+
+.updateProfileBtn {
+    background-color: #fff;
+    border-radius: 4px;
+    border: 1px solid rgb(48, 52, 65);
+    height: 36px;
+    transition: filter 0.3s;
+}
+
+.updateProfileBtn:hover {
+    background-color: rgba(48, 52, 65, 0.1);
+}
+
+.updateProfileBtn:active {
+    background-color: #30344133;
+    outline: 2px solid #30344133;
+}
+
+.essential {
+    color: rgb(255, 114, 98);
+    line-height: 14px;
+    margin-left: 2px;
+}
+
+.inputWrap {
+    width: 100%;
+}
+
+.warningMsg{
+    color: rgb(255, 64, 43);
+}
+
+#certification:disabled{
+    cursor: no-drop;
+}
+
+#certification:disabled:hover{
+    border: 1px solid rgb(228, 229, 237);
+}
+
+.inputCos {
+    width: 100%;
+    height: 42px;
+    background-color: rgb(250, 250, 252);
+    color: #303441;
+    border: 1px solid rgb(228, 229, 237);
+    border-radius: 4px;
+    padding: 0px 14px;
+}
+
+.warninMsg {
+    font-size: 12px;
+    color: rgb(255, 64, 43);
+}
+
+.certificationBtn {
+    background-color: #fff;
+    border-radius: 4px;
+    border: 1px solid;
+    width: 20%;
+    transition: filter 0.2s;
+    margin-left: 6px;
+}
+
+.certificationBtn:not(:disabled):hover {
+    background-color: rgba(48, 52, 65, 0.1);
+}
+
+.certificationBtn:not(:disabled):active {
+    background-color: #30344133;
+    outline: 2px solid #30344133;
+}
+
+.arrowWrap {
+    padding: 9px;
+}
+
+.arrowColor {
+    fill: rgb(200, 202, 210);
+}
+
+input[name = "bank"] {
+    outline: none;
+    width: 100%;
+    background-color: rgb(250, 250, 252);
+    border: none;
+}
+
+input[name = "bank"]::placeholder {
+    color: rgb(200, 201, 207);
+}
+
+.inputText {
+    font-size: 16px;
+    color: rgb(200, 201, 207);
+}
+
+.inputSpace {
+    padding: 0 9px;
+    flex-grow: 1;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+.submitBtn:disabled:hover{
+
+}
+

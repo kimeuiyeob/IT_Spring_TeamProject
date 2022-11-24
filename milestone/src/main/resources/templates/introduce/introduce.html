@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>introduce</title>
+
+</head>
+<!-- ================================================================================================================ -->
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"/>
+<link rel="stylesheet" href="/css/introduce/introduce.css" type="text/css"/>
+<link rel="icon" href="/imgs/fix/favicon.png">
+
+<link rel="stylesheet" href="/css/fix/header.css">
+<link rel="stylesheet" href="/css/fix/footer.css">
+
+<!-- ================================================================================================================ -->
+<body>
+
+<header th:replace="/fix/header.html :: header"></header>
+
+<!-- ================================================================================================================ -->
+<!-- 슬라이드 배너 -->
+
+<div class="dov">
+    <div class="Banner" style="display: flex; justify-content: center;">
+        <div class="Banners">
+            <div class="BannerContent">
+
+                <div data-aos="fade-right">
+
+                    <h1 style="color: #303441; font-size: 45px; ">Milestone <br> 오신걸 환영합니다!</h1>
+                    <h2 style="color: #303441; font-size: 30px; padding-bottom: 10px;
+                                  margin-top: -15px;">아이들에게 사랑을 나누세요.</h2>
+
+
+                    <input class="introduceButton" type="button" value="Milestone 이용하기">
+
+
+                </div>
+
+            </div>
+            <div class="BannerSlides">
+                <div class="swiper mySwiper">
+
+                    <div class="swiper-wrapper">
+
+                        <div class="swiper-slide"><img src="/imgs/introduce/child3.webp">
+                        </div>
+                        <div class="swiper-slide"><img src="/imgs/introduce/child4.webp">
+                        </div>
+                        <div class="swiper-slide"><img src="/imgs/introduce/child3.webp">
+                        </div>
+                        <div class="swiper-slide"><img src="/imgs/introduce/child4.webp">
+                        </div>
+                        <div class="swiper-slide"><img src="/imgs/introduce/child2.webp">
+                        </div>
+                        <div class="swiper-slide"><img src="/imgs/introduce/child3.webp">
+                        </div>
+
+                    </div>
+
+                    <div class="swiper-button-next" style="display : none"></div>
+                    <div class="swiper-button-prev" style="display : none"></div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ================================================================================================================ -->
+<!-- 카운트업 -->
+
+
+<div class="dov">
+    <div class="countUp">
+
+        <div style="background-color : #f2f3f7; height:230px; margin-left: -351px; margin-right: -351px;">
+            <div class="count">
+                <div class="col" style="display: inline-block;">
+                    <p style="text-align:center; padding-top: 35px; font-weight: 550; color: #303441;">개인 회원수</p>
+                    <div style="margin-top: -45px;">
+                        <p class="count-num" data-count="4523" style="display: inline-block;">
+                            <!-- data-count에 값넣으면됩니다 -->
+                        </p>
+                        <p style="display: inline-block; font-size: 40px;
+                    font-weight: 500;">명+</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <p style="text-align:center; padding-top: 35px; font-weight: 550; color: #303441;">보육원 회원수</p>
+                    <div style="margin-top: -45px;">
+                        <p class="count-num" data-count="2324" style="display: inline-block;">
+                            <!-- data-count에 값넣으면됩니다 -->
+                        <p style="display: inline-block; font-size: 40px;
+                        font-weight: 500;">명+</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <p style="text-align:center; padding-top: 35px; font-weight: 550; color: #303441;">누적 기부 횟수</p>
+                    <div style="margin-top: -45px;">
+                        <p class="count-num" data-count="64235" style="display: inline-block;">
+                            <!-- data-count에 값넣으면됩니다 -->
+                        <p style="display: inline-block; font-size: 40px;
+                        font-weight: 500;">건+</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ================================================================================================================ -->
+<!-- 보육원 목록 -->
+
+<div class="dov">
+    <div style="display: flex; justify-content: center; padding-top: 100px;">
+        <div class="ranking" style="display: flex; justify-content: space-between; padding: 0 16px; width: 1200px">
+            <div class="rankings" style="padding-bottom:150px">
+
+                <div data-aos="fade-right">
+
+
+                    <h1 style="color: #303441; font-size: 35px; ">아이들의 아름다운<br>보금자리 놀러오세요.</h1>
+                    <h4 style="color: #303441; margin-top: -13px; padding-bottom: 20px;">사랑스런 아이들이 모여있어요.
+                    </h4>
+
+
+                    <input class="introduceButton" type="button" value="보육원 목록 이동하기">
+
+
+                </div>
+
+            </div>
+            <div class="bigbig">
+                <div data-aos="fade-up">
+                    <div class="schoolImg">
+                        <img src="/imgs/introduce/child2.webp" alt="이미지" width="700px" height="700px"
+                             style="margin-top: -160px;"/>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- ================================================================================================================ -->
+<!-- 도움이 필요한 보육원 -->
+
+<div class="dov">
+    <div style="display: flex; justify-content: center;">
+        <div class="helpSchool" style="display: flex;
+            justify-content: space-between; padding: 0 16px; width: 1200px">
+            <div class="helpSchoolVideo">
+                <div class="bigbig">
+                    <div data-aos="fade-down">
+                        <div class="video">
+                            <iframe style="border-radius: 8px;" width="560" height="400"
+                                    src="https://www.youtube.com/embed/Ko8-Uxdq9hA" title="YouTube video player"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="helpSchools">
+                <div data-aos="fade-left">
+                    <h1 style="color: #303441; font-size: 35px; margin-top: -10px;">도움이 필요한 아이들<br>따뜻한 나눔이 필요해요.
+                    </h1>
+                    <h4 style="color: #303441;  margin-top: -13px; padding-bottom: 50px;">사랑스런 아이들이 도움이
+                        필요해요.<br>아이들이
+                        건강하게 자랄 수 있도록 계속해서<br>많은 관심 부탁드립니다!</h4>
+
+                    <input class="introduceButton" type="button" value="도움이 필요한 보육원">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- ================================================================================================================ -->
+<!-- 보육원 랭킹 -->
+
+<div class="dov">
+    <div style="display: flex; justify-content: center; padding-top: 100px;">
+        <div class="ranking" style="display: flex;
+        justify-content: space-between; padding: 0 16px; width: 1200px">
+            <div class="rankings" style="padding-bottom:150px">
+                <div data-aos="fade-right">
+                    <h1 style="color: #303441; font-size: 35px; ">Milestone<br>기부왕에 도전하세요!</h1>
+                    <h4 style="color: #303441; margin-top: -13px; padding-bottom: 20px;">기부금액과 기부횟수 누적으로 랭킹이 이루어집니다.
+                    </h4>
+
+
+                    <input class="introduceButton" type="button" value="랭킹 이동하기"
+                           onClick="location.href='../ranking/ranking'">
+
+
+                </div>
+            </div>
+            <div class="bigbig">
+                <div data-aos="fade-up">
+                    <div class="rankingImg">
+                        <img src="/imgs/introduce/ranking.webp" alt="이미지" width="700px" height="400px"/>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- ================================================================================================================ -->
+<!-- 하단 큰 비디오 -->
+
+<div class="dov">
+    <div class="BigVideo" style="margin-left: -351px; margin-right: -351px;">
+
+        <div class="Big">
+            <h1 style="padding-bottom:60px; padding-top: 35px">기부 제대로 하고싶은데...</h1>
+            <h3 style="padding-bottom:30px; margin-top: -25px; font-weight: 500;letter-spacing: -0.5px;">여러분의
+                후원이
+                연결될 수
+                있도록 Milestone이 함께합니다.</h3>
+        </div>
+        <div class="bigbig">
+            <div data-aos="fade-up">
+                <div class="BigVideos">
+                    <iframe width="1050" height="700" src="https://www.youtube.com/embed/zWEk2PQKqgI"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ================================================================================================================ -->
+
+<footer th:replace="/fix/footer.html :: footer"></footer>
+
+</body>
+<!-- ================================================================================================================ -->
+
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
+<!-- ==================================================================================== -->
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
+<script>
+    /* ============================슬라이드 배너=================================== */
+
+    var swiper = new Swiper(".mySwiper", {
+        spaceBetween: 30,
+        centeredSlides: true,
+        autoplay: {
+            delay: 2000,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+    });
+
+    /* ================================카운트 업===================================== */
+
+    $('.count-num').each(function () {
+        var $this = $(this),
+            countTo = $this.attr('data-count');
+
+        $({countNum: $this.text()}).animate({
+                countNum: countTo
+            },
+            {
+                duration: 3000,
+                easing: 'linear',
+                step: function () {
+                    $this.text(Math.floor(this.countNum));
+                },
+                complete: function () {
+                    $this.text(this.countNum);
+                }
+            });
+    });
+
+    /* =========================화면 스크롤 내릴때 fade in============================= */
+
+    let observer = new IntersectionObserver((e) => {
+        e.forEach((박스) => {
+            if (박스.isIntersecting) {
+                박스.target.style.opacity = 1;
+            } else {
+                박스.target.style.opacity = 0;
+            }
+        })
+    })
+
+    let dov = document.getElementsByClassName("dov");
+    observer.observe(dov[0])
+    observer.observe(dov[1])
+    observer.observe(dov[2])
+    observer.observe(dov[3])
+    observer.observe(dov[4])
+    observer.observe(dov[5])
+    observer.observe(dov[6])
+
+    /* ================================================================================= */
+
+
+</script>
+<script src="/js/fix/header.js"></script>
+</html>

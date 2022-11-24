@@ -1,0 +1,94 @@
+/*----------------보육원 대표 사진------------------------*/
+.imgBox {
+    display: none;
+    border: 1px solid rgb(228, 229, 237);
+    width: 600px;
+    border-radius: 4px;
+}
+
+.imgsWrap {
+    margin: 8px;
+}
+
+.imgList {
+    overflow: auto;
+}
+
+.imgList::-webkit-scrollbar {
+    height: 8px;
+}
+
+.imgList::-webkit-scrollbar-thumb {
+    background: rgb(200, 201, 207);
+    border-radius: 4px;
+}
+
+/*-----------textarea 커스텀----------------*/
+.textareaCos {
+    width: 100%;
+    background-color: rgb(250, 250, 252);
+    color: #303441;
+    border: 1px solid rgb(228, 229, 237);
+    border-radius: 4px;
+    padding: 14px 16px 23px;
+    height: 200px;
+}
+
+.textareaCos:hover {
+    border: 1px solid rgb(118, 118, 118);
+}
+
+.textareaCos:focus {
+    outline: none;
+    border: 1px solid rgb(118, 118, 118);
+}
+
+.textareaCos::-webkit-scrollbar {
+    padding-right: 4px;
+    width: 4px;
+}
+
+.textareaCos::-webkit-scrollbar-thumb {
+    height: 85%;
+    background: rgb(200, 201, 207);
+    border-radius: 10px;
+}
+
+#content {
+    height: 100%;
+    width: 100%;
+    background-color: rgb(250, 250, 252);
+    border: none;
+    resize: none;
+
+}
+
+#content:focus {
+    outline: none;
+    /*border: 1px solid rgb(118, 118, 118);*/
+}
+
+#content::-webkit-scrollbar {
+    padding-right: 4px;
+    width: 4px;
+}
+
+#content::-webkit-scrollbar-thumb {
+    height: 85%;
+    background: rgb(200, 201, 207);
+    border-radius: 10px;
+}
+
+.maxContentLength {
+    position: absolute;
+    bottom: 4px;
+    right: 10px;
+}
+
+#bankFocus {
+    height: 1px;
+    width: 1px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
