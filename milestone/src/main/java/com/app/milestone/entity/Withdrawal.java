@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Getter
 @ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Withdrawal extends Period{
+public class Withdrawal extends Period {
     @Id
     @GeneratedValue
     private Long withdrawalId;

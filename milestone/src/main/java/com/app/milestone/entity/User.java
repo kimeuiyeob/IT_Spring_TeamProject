@@ -1,6 +1,9 @@
 package com.app.milestone.entity;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,6 +27,13 @@ public abstract class User extends Period {
 
 
     public User(String userEmail, String userName, String userPassword, String userPhoneNumber, String userProfile) {
+        this.userEmail = userEmail;
+        this.userName = userName;
+        this.userPassword = userPassword;
+        this.userPhoneNumber = userPhoneNumber;
+        this.userProfile = userProfile;
+    }
+    public void update(String userEmail, String userName, String userPassword, String userPhoneNumber, String userProfile) {
         this.userEmail = userEmail;
         this.userName = userName;
         this.userPassword = userPassword;

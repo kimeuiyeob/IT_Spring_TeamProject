@@ -1,6 +1,9 @@
 package com.app.milestone.entity;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -9,7 +12,7 @@ import javax.persistence.*;
 @Getter
 @ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Like extends Period{
+public class Like extends Period {
     @Id
     @GeneratedValue
     private Long likeId;

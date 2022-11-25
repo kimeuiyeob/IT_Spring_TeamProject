@@ -1,6 +1,7 @@
 package com.app.milestone.domain;
 
 import com.app.milestone.entity.Reply;
+import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -18,5 +19,13 @@ public class ReplyDTO {
         return Reply.builder()
                 .replyContent(replyContent)
                 .build();
+    }
+
+    @QueryProjection
+    public ReplyDTO(Long replyId, String replyContent, SchoolDTO schoolDTO, PeopleDTO peopleDTO) {
+        this.replyId = replyId;
+        this.replyContent = replyContent;
+        this.schoolDTO = schoolDTO;
+        this.peopleDTO = peopleDTO;
     }
 }

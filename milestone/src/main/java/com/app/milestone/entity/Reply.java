@@ -9,16 +9,14 @@ import javax.persistence.*;
 @Getter
 @ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Reply extends Period{
+public class Reply extends Period {
     @Id
     @GeneratedValue
-   private Long replyId;
-   private String replyContent;
-
+    private Long replyId;
+    private String replyContent;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
     private School school;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
     private People people;

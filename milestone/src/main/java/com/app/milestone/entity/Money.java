@@ -2,7 +2,6 @@ package com.app.milestone.entity;
 
 
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -12,7 +11,7 @@ import javax.persistence.Table;
 @Getter
 @ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Money extends Donation{
+public class Money extends Donation {
     private int moneyCash;
 
     @Builder

@@ -2,6 +2,7 @@ package com.app.milestone.domain;
 
 import com.app.milestone.entity.People;
 import com.app.milestone.entity.School;
+import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -16,5 +17,10 @@ public class PeopleDTO {
         return People.builder()
                 .peopleNickname(peopleNickname)
                 .build();
+    }
+
+    @QueryProjection
+    public PeopleDTO(String peopleNickname) {
+        this.peopleNickname = peopleNickname;
     }
 }
