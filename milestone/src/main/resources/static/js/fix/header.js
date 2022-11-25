@@ -11,29 +11,30 @@ let $myMenu = $("#login-profile-menu1");
 let $message = $("#message-button");
 let $myMessage = $("#message-id1");
 
-$profile.on("click", function(){
+$profile.click(function () {
     $myMenu.fadeToggle(300);
     $myMessage.hide();
 });
-$(window).scroll(function(){
+
+$(window).scroll(function () {
     $myMenu.hide();
 });
 
-$message.on("click", function(){
+$message.click(function () {
     $myMessage.fadeToggle(300);
     $myMenu.hide();
 });
-$(window).scroll(function(){
+$(window).scroll(function () {
     $myMessage.hide();
 });
 
-$(document).mouseup(function (e){
-    if($myMenu.has(e.target).length === 0){
+$(document).mouseup(function (e) {
+    if ($myMenu.has(e.target).length === 0) {
         $myMenu.hide();
     }
 });
-$(document).mouseup(function (e){
-    if($myMessage.has(e.target).length === 0){
+$(document).mouseup(function (e) {
+    if ($myMessage.has(e.target).length === 0) {
         $myMessage.hide();
     }
 });
