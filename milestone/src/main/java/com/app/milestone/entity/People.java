@@ -1,6 +1,7 @@
 package com.app.milestone.entity;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.util.List;
@@ -22,8 +23,8 @@ public class People extends User {
 
 
     @Builder
-
-    public People(String peopleNickname) {
+    public People(String userEmail, String userName, String userPassword, String userPhoneNumber, String userProfile, String peopleNickname) {
+        super(userEmail, userName, userPassword, userPhoneNumber, userProfile);
         this.peopleNickname = peopleNickname;
     }
 }

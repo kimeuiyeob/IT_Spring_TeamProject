@@ -3,6 +3,7 @@ package com.app.milestone.entity;
 import com.app.milestone.type.Category;
 import com.app.milestone.type.Place;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -25,7 +26,8 @@ public class Talent extends Donation{
     private Place place;
 
     @Builder
-    public Talent(String talentTitle, String talentContent, LocalDateTime talentAbleDate, Category category, Place place) {
+    public Talent(int donationCount, int donationReceiveCount, String talentTitle, String talentContent, LocalDateTime talentAbleDate, Category category, Place place) {
+        super(donationCount, donationReceiveCount);
         this.talentTitle = talentTitle;
         this.talentContent = talentContent;
         this.talentAbleDate = talentAbleDate;

@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Getter
 @ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Donation extends Period {
+public abstract class Donation extends Period {
     @Id
     @GeneratedValue
     private Long donationId;
@@ -22,8 +22,6 @@ public class Donation extends Period {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
     private People people;
-
-    @Builder
 
     public Donation(int donationCount, int donationReceiveCount) {
         this.donationCount = donationCount;

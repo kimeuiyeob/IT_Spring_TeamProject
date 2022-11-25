@@ -2,6 +2,7 @@ package com.app.milestone.entity;
 
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -15,7 +16,8 @@ public class Money extends Donation{
     private int moneyCash;
 
     @Builder
-    public Money(int moneyCash) {
+    public Money(int donationCount, int donationReceiveCount, int moneyCash) {
+        super(donationCount, donationReceiveCount);
         this.moneyCash = moneyCash;
     }
 }
