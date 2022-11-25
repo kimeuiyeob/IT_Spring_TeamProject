@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Getter
 @ToString(exclude = "userPassword")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class User extends Period {
+public abstract class User extends Period {
     @Id
     @GeneratedValue
     private Long userId;
@@ -22,7 +22,7 @@ public class User extends Period {
     private String userPhoneNumber;
     private String userProfile;
 
-    @Builder
+
     public User(String userEmail, String userName, String userPassword, String userPhoneNumber, String userProfile) {
         this.userEmail = userEmail;
         this.userName = userName;

@@ -3,6 +3,7 @@ package com.app.milestone.entity;
 import com.app.milestone.embeddable.Address;
 import com.app.milestone.embeddable.Introduce;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -40,9 +41,10 @@ public class School extends User {
 //    @OneToMany(mappedBy = "school", fetch = FetchType.LAZY)
 //    private List<Donation> donations;
 
-    @Builder
 
-    public School(String schoolName, Address address, int schoolTeachers, int schoolKids, int schoolBudget, String schoolBank, String schoolAccount, String schoolPhoneNumber, String schoolQR, Introduce introduce) {
+    @Builder
+    public School(String userEmail, String userName, String userPassword, String userPhoneNumber, String userProfile, String schoolName, Address address, int schoolTeachers, int schoolKids, int schoolBudget, String schoolBank, String schoolAccount, String schoolPhoneNumber, String schoolQR, Introduce introduce) {
+        super(userEmail, userName, userPassword, userPhoneNumber, userProfile);
         this.schoolName = schoolName;
         this.address = address;
         this.schoolTeachers = schoolTeachers;
