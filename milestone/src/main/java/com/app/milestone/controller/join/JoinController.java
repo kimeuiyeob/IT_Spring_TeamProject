@@ -23,5 +23,10 @@ public class JoinController {
         return "/join/joinWay";
     };
 
+    @GetMapping("/select")
+    public String select(){
+        return "/join/joinSelect";
+    };
+
 
 }
