@@ -10,9 +10,10 @@ li {
     #mobile-mySwiper {
         width: 440px;
         height: 280px;
-        left: 0%;
         top: 9%;
         border-radius: 8px;
+        position: relative;
+        margin: 0 auto;
     }
 
     #mobile-banner1{
@@ -22,8 +23,6 @@ li {
         background-color: #00D3C7;
         width: 483px;
         height: 120%;
-        padding-left: 0;
-        padding-right: 0;
     }
 
     #mobile-swiper-button-next {
@@ -356,7 +355,8 @@ li {
     grid-gap: 20px;
     display: flex;
     flex-direction: column;
-    margin-top: 54px;
+    margin: 71px 374px auto;
+    position: absolute;
 }
 
 .slide-text2 {
