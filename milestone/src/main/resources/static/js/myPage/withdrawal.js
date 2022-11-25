@@ -1,27 +1,31 @@
 const $precautionCheck = $('.precautionCheck');
 const $withdrawalBtn = $('.withdrawalBtn');
 const $reasonRadio = $('input[name = "reasonRadio"]');
-const $reasonInput = $('.reasonInputWrap');
+const $reasonInputWrap = $('.reasonInputWrap');
+const $reasonInput = $('.reasonInput');
 
-console.log($precautionCheck);
+const $radio = $("input[type = 'radio']");
+let reason = "";
 
-$precautionCheck.on('click',function(){
-    $withdrawalBtn.attr("disabled",!$precautionCheck.is(':checked'));
-    // if($precautionCheck.is(':checked')){
-    //     // $withdrawalBtn.css({"background-color":"#fff","color":"#303441","cursor":"pointer"})
-    //     $withdrawalBtn.attr("disabled",false);
-    // }else{
-    //     // $withdrawalBtn.css({"background-color":"rgb(228, 229, 237)","color":"rgb(154, 155, 167)","cursor":"no-drop"})
-    //     $withdrawalBtn.attr("disabled",true);
-    // }
-
+$radio.on('click', function () {
+    reason = $(this).parent().next().text();
+    $('#reason').val(reason);
+    console.log($('#reason').val())
 })
 
-$reasonRadio.on('click',function(){
-    if($reasonRadio.last().is(':checked')){
-        $reasonInput.show();
-    }else{
-        $reasonInput.hide();
-    }
+$reasonInput.on('blur', function () {
+    $('#reason').val($reasonInput.val());
+    console.log($('#reason').val())
+})
 
+$precautionCheck.on('click', function () {
+    $withdrawalBtn.attr("disabled", !$precautionCheck.is(':checked'));
+})
+
+$reasonRadio.on('click', function () {
+    if ($reasonRadio.last().is(':checked')) {
+        $reasonInputWrap.show();
+    } else {
+        $reasonInputWrap.hide();
+    }
 })
