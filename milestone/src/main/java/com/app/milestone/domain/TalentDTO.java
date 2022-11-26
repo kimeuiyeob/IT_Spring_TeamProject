@@ -4,6 +4,7 @@ import com.app.milestone.entity.Talent;
 import com.app.milestone.entity.User;
 import com.app.milestone.type.Category;
 import com.app.milestone.type.Place;
+import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -28,5 +29,14 @@ public class TalentDTO {
                 .category(category)
                 .place(place)
                 .build();
+    }
+
+    @QueryProjection
+    public TalentDTO(String talentTitle, String talentContent, LocalDateTime talentAbleDate, Category category, Place place) {
+        this.talentTitle = talentTitle;
+        this.talentContent = talentContent;
+        this.talentAbleDate = talentAbleDate;
+        this.category = category;
+        this.place = place;
     }
 }

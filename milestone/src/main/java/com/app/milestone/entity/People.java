@@ -1,10 +1,9 @@
 package com.app.milestone.entity;
 
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "TBL_PEOPLE")
@@ -21,10 +20,12 @@ public class People extends User {
 //    @OneToMany(mappedBy = "people", fetch = FetchType.LAZY)
 //    private List<Donation> donations;
 
-
     @Builder
     public People(String userEmail, String userName, String userPassword, String userPhoneNumber, String userProfile, String peopleNickname) {
         super(userEmail, userName, userPassword, userPhoneNumber, userProfile);
+        this.peopleNickname = peopleNickname;
+    }
+    public void update(String peopleNickname) {
         this.peopleNickname = peopleNickname;
     }
 }

@@ -1,6 +1,9 @@
 package com.app.milestone.entity;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -24,6 +27,10 @@ public abstract class Donation extends Period {
     private People people;
 
     public Donation(int donationCount, int donationReceiveCount) {
+        this.donationCount = donationCount;
+        this.donationReceiveCount = donationReceiveCount;
+    }
+    public void update(int donationCount, int donationReceiveCount) {
         this.donationCount = donationCount;
         this.donationReceiveCount = donationReceiveCount;
     }

@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Getter
 @ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class File extends Period{
+public class File extends Period {
     @Id
     @GeneratedValue
     private Long fileID;

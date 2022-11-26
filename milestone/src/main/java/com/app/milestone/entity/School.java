@@ -3,7 +3,6 @@ package com.app.milestone.entity;
 import com.app.milestone.embeddable.Address;
 import com.app.milestone.embeddable.Introduce;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -26,7 +25,6 @@ public class School extends User {
     private String schoolBank;
     private String schoolAccount;
     private String schoolPhoneNumber;
-
     @Column(name = "SCHOOL_QR")
     private String schoolQR;
     @Embedded
@@ -54,6 +52,17 @@ public class School extends User {
         this.schoolAccount = schoolAccount;
         this.schoolPhoneNumber = schoolPhoneNumber;
         this.schoolQR = schoolQR;
+        this.introduce = introduce;
+    }
+    public void update(String userEmail, String userName, String userPassword, String userPhoneNumber, String userProfile, String schoolName, Address address, int schoolTeachers, int schoolKids, int schoolBudget, String schoolBank, String schoolAccount, String schoolPhoneNumber, String schoolQR, Introduce introduce) {
+        this.schoolName = schoolName;
+        this.address = address;
+        this.schoolTeachers = schoolTeachers;
+        this.schoolKids = schoolKids;
+        this.schoolBudget = schoolBudget;
+        this.schoolBank = schoolBank;
+        this.schoolAccount = schoolAccount;
+        this.schoolPhoneNumber = schoolPhoneNumber;
         this.introduce = introduce;
     }
 }
