@@ -28,12 +28,13 @@ public class Talent extends Donation {
     private Place place;
 
     @Builder
-    public Talent(String talentTitle, String talentContent, LocalDateTime talentAbleDate, Category category, Place place) {
+    public Talent(String talentTitle, String talentContent, LocalDateTime talentAbleDate, Category category,Place place) {
         this.talentTitle = talentTitle;
         this.talentContent = talentContent;
         this.talentAbleDate = talentAbleDate;
         this.category = category;
         this.place = place;
+
     }
 
     public void update(String talentTitle, String talentContent, LocalDateTime talentAbleDate, Category category, Place place) {
