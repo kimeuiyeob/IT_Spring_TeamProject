@@ -14,10 +14,10 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 public class SchoolDTO {
     private String schoolName;
-    private Address address;
-    //    private String schoolZipcode;
-//    private String schoolAddress;
-//    private String schoolAddressDetail;
+    //    private Address address;
+    private String schoolZipcode;
+    private String schoolAddress;
+    private String schoolAddressDetail;
     private int schoolTeachers;
     private int schoolKids;
     private int schoolBudget;
@@ -25,9 +25,9 @@ public class SchoolDTO {
     private String schoolAccount;
     private String schoolPhoneNumber;
     private String schoolQR;
-    private Introduce introduce;
-//    private String schoolTitle;
-//    private String schoolContent;
+    //    private Introduce introduce;
+    private String schoolTitle;
+    private String schoolContent;
     private String userEmail;
     private String userName;
     private String userPassword;
@@ -37,6 +37,13 @@ public class SchoolDTO {
 
 
     public School toEntity() {
+        Address address = new Address();
+        Introduce introduce = new Introduce();
+        address.setSchoolZipcode(schoolZipcode);
+        address.setSchoolAddress(schoolAddress);
+        address.setSchoolAddressDetail(schoolAddressDetail);
+        introduce.setSchoolTitle(schoolTitle);
+        introduce.setSchoolContent(schoolContent);
         return School.builder()
                 .schoolName(schoolName)
                 .address(address)
@@ -62,9 +69,11 @@ public class SchoolDTO {
     }
 
     @QueryProjection
-    public SchoolDTO(String schoolName, Address address, int schoolTeachers, int schoolKids, int schoolBudget, String schoolBank, String schoolAccount, String schoolPhoneNumber, String schoolQR, Introduce introduce /*, String schoolTitle, String schoolContent*/, String userEmail,String userName, String userPassword,String userPhoneNumber,String userProfile, int donationCount) {
+    public SchoolDTO(String schoolName, String schoolAddress, String schoolAddressDetail, String schoolZipcode, int schoolTeachers, int schoolKids, int schoolBudget, String schoolBank, String schoolAccount, String schoolPhoneNumber, String schoolQR, String schoolTitle, String schoolContent, String userEmail, String userName, String userPassword, String userPhoneNumber, String userProfile, int donationCount) {
         this.schoolName = schoolName;
-        this.address = address;
+        this.schoolAddress = schoolAddress;
+        this.schoolAddressDetail = schoolAddressDetail;
+        this.schoolZipcode = schoolZipcode;
         this.schoolTeachers = schoolTeachers;
         this.schoolKids = schoolKids;
         this.schoolBudget = schoolBudget;
@@ -72,9 +81,8 @@ public class SchoolDTO {
         this.schoolAccount = schoolAccount;
         this.schoolPhoneNumber = schoolPhoneNumber;
         this.schoolQR = schoolQR;
-        this.introduce = introduce;
-//        this.schoolTitle = schoolTitle;
-//        this.schoolContent = schoolContent;
+        this.schoolTitle = schoolTitle;
+        this.schoolContent = schoolContent;
         this.userEmail = userEmail;
         this.userName = userName;
         this.userPassword = userPassword;
