@@ -4,14 +4,14 @@ import com.app.milestone.entity.File;
 import com.app.milestone.entity.School;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
-@Data
+@Getter
 @NoArgsConstructor
 public class FileDTO {
-    private Long fileID;
     private String fileName;
     private String filePath;
     private String fileUuid;
@@ -26,8 +26,7 @@ public class FileDTO {
     }
 
     @QueryProjection
-    public FileDTO(Long fileID, String fileName, String filePath, String fileUuid, int fileSize, boolean fileImageCheck, SchoolDTO schoolDTO) {
-        this.fileID = fileID;
+    public FileDTO(String fileName, String filePath, String fileUuid, int fileSize, boolean fileImageCheck, SchoolDTO schoolDTO) {
         this.fileName = fileName;
         this.filePath = filePath;
         this.fileUuid = fileUuid;

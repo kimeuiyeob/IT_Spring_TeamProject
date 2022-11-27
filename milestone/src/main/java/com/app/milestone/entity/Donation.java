@@ -1,5 +1,6 @@
 package com.app.milestone.entity;
 
+import com.sun.istack.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,10 +20,12 @@ public abstract class Donation extends Period {
     private Long donationId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "USER_ID")
+    @JoinColumn
+    @NotNull
     private School school;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "USER_ID")
+    @JoinColumn
+    @NotNull
     private People people;
 
     public Donation(School school, People people) {

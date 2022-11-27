@@ -1,5 +1,6 @@
 package com.app.milestone.entity;
 
+import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
@@ -7,18 +8,20 @@ import javax.persistence.*;
 @Entity
 @Table(name = "TBL_REPLY")
 @Getter
-@ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Reply extends Period {
     @Id
     @GeneratedValue
     private Long replyId;
+    @NotNull
     private String replyContent;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "USER_ID")
+    @JoinColumn
+    @NotNull
     private School school;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "USER_ID")
+    @JoinColumn
+    @NotNull
     private People people;
 
     @Builder

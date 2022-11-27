@@ -1,27 +1,30 @@
 package com.app.milestone.entity;
 
+import com.sun.istack.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "USER_TYPE")
 @Entity
 @Table(name = "TBL_USER")
 @Getter
-@ToString(exclude = "userPassword")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class User extends Period {
     @Id
     @GeneratedValue
     private Long userId;
+    @NotNull
     private String userEmail;
+    @NotNull
     private String userName;
+    @NotNull
     private String userPassword;
+    @NotNull
     private String userPhoneNumber;
     private String userProfile;
     private int donationCount;

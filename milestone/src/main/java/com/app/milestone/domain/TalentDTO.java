@@ -6,13 +6,14 @@ import com.app.milestone.type.Category;
 import com.app.milestone.type.Place;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
 @Component
-@Data
+@Getter
 @NoArgsConstructor
 public class TalentDTO {
     private String talentTitle;

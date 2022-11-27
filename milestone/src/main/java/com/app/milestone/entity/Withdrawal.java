@@ -1,5 +1,6 @@
 package com.app.milestone.entity;
 
+import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -10,12 +11,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "TBL_WITHDRAWAL")
 @Getter
-@ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Withdrawal extends Period {
     @Id
     @GeneratedValue
     private Long withdrawalId;
+    @NotNull
     private String withdrawalReason;
 
     @Builder

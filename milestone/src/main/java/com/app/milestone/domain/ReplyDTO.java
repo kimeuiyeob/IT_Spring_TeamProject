@@ -3,14 +3,14 @@ package com.app.milestone.domain;
 import com.app.milestone.entity.Reply;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
-@Data
+@Getter
 @NoArgsConstructor
 public class ReplyDTO {
-    private Long replyId;
     private String replyContent;
     private SchoolDTO schoolDTO;
     private PeopleDTO peopleDTO;
@@ -22,8 +22,7 @@ public class ReplyDTO {
     }
 
     @QueryProjection
-    public ReplyDTO(Long replyId, String replyContent, SchoolDTO schoolDTO, PeopleDTO peopleDTO) {
-        this.replyId = replyId;
+    public ReplyDTO(String replyContent, SchoolDTO schoolDTO, PeopleDTO peopleDTO) {
         this.replyContent = replyContent;
         this.schoolDTO = schoolDTO;
         this.peopleDTO = peopleDTO;
