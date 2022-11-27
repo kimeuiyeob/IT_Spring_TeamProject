@@ -4,14 +4,14 @@ import com.app.milestone.entity.User;
 import com.app.milestone.entity.Withdrawal;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
-@Data
+@Getter
 @NoArgsConstructor
 public class WithdrawalDTO {
-    private Long withdrawalId;
     private String withdrawalReason;
 
     public Withdrawal toEntity() {
@@ -21,8 +21,7 @@ public class WithdrawalDTO {
     }
 
     @QueryProjection
-    public WithdrawalDTO(Long withdrawalId, String withdrawalReason) {
-        this.withdrawalId = withdrawalId;
+    public WithdrawalDTO(String withdrawalReason) {
         this.withdrawalReason = withdrawalReason;
     }
 }

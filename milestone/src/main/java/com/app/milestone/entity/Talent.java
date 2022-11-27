@@ -2,6 +2,7 @@ package com.app.milestone.entity;
 
 import com.app.milestone.type.Category;
 import com.app.milestone.type.Place;
+import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
@@ -11,14 +12,18 @@ import java.time.LocalDateTime;
 @Table(name = "TBL_TALENT")
 @DiscriminatorValue("talent")
 @Getter
-@ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Talent extends Donation {
+    @NotNull
     private String talentTitle;
+    @NotNull
     private String talentContent;
+    @NotNull
     private LocalDateTime talentAbleDate;
+    @NotNull
     @Enumerated(EnumType.STRING)
     private Category category;
+    @NotNull
     @Enumerated(EnumType.STRING)
     private Place place;
 

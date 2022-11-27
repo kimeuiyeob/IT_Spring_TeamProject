@@ -1,5 +1,6 @@
 package com.app.milestone.entity;
 
+import com.sun.istack.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "TBL_LIKE")
 @Getter
-@ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Like extends Period {
     @Id
@@ -18,9 +18,11 @@ public class Like extends Period {
     private Long likeId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "USER_ID")
+    @JoinColumn
+    @NotNull
     private School school;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "USER_ID")
+    @JoinColumn
+    @NotNull
     private People people;
 }

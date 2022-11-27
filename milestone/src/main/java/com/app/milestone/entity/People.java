@@ -1,16 +1,19 @@
 package com.app.milestone.entity;
 
+import com.sun.istack.NotNull;
 import lombok.*;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "TBL_PEOPLE")
+@DiscriminatorValue("people")
 @Getter
-@ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class People extends User {
+    @NotNull
     private String peopleNickname;
 
 //    @OneToMany(mappedBy = "people", fetch = FetchType.LAZY)

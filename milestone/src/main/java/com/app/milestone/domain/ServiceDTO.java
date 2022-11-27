@@ -4,13 +4,14 @@ import com.app.milestone.entity.Service;
 import com.app.milestone.entity.Talent;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
 @Component
-@Data
+@Getter
 @NoArgsConstructor
 public class ServiceDTO{
     private LocalDateTime serviceVisitDate;

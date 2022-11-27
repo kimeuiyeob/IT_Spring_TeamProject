@@ -4,14 +4,14 @@ import com.app.milestone.entity.Notice;
 import com.app.milestone.entity.School;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
-@Data
+@Getter
 @NoArgsConstructor
 public class NoticeDTO {
-    private Long noticeId;
     private String noticeTitle;
     private String noticeContent;
 
@@ -23,8 +23,7 @@ public class NoticeDTO {
     }
 
     @QueryProjection
-    public NoticeDTO(Long noticeId, String noticeTitle, String noticeContent) {
-        this.noticeId = noticeId;
+    public NoticeDTO(String noticeTitle, String noticeContent) {
         this.noticeTitle = noticeTitle;
         this.noticeContent = noticeContent;
     }

@@ -1,5 +1,6 @@
 package com.app.milestone.entity;
 
+import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.DiscriminatorValue;
@@ -11,9 +12,9 @@ import java.time.LocalDateTime;
 @Table(name = "TBL_SERVICE")
 @DiscriminatorValue("service")
 @Getter
-@ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Service extends Donation {
+    @NotNull
     private LocalDateTime serviceVisitDate;
 
     @Builder

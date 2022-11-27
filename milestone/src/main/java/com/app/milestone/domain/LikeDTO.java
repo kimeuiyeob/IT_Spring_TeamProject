@@ -4,21 +4,20 @@ import com.app.milestone.entity.Like;
 import com.app.milestone.entity.School;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
-@Data
+@Getter
 @NoArgsConstructor
 public class LikeDTO {
-    private Long likeId;
     private SchoolDTO schoolDTO;
     private PeopleDTO peopleDTO;
 
 
     @QueryProjection
-    public LikeDTO(Long likeId, SchoolDTO schoolDTO, PeopleDTO peopleDTO) {
-        this.likeId = likeId;
+    public LikeDTO(SchoolDTO schoolDTO, PeopleDTO peopleDTO) {
         this.schoolDTO = schoolDTO;
         this.peopleDTO = peopleDTO;
     }

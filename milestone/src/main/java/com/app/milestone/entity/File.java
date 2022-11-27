@@ -1,5 +1,6 @@
 package com.app.milestone.entity;
 
+import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
@@ -7,16 +8,20 @@ import javax.persistence.*;
 @Entity
 @Table(name = "TBL_FILE")
 @Getter
-@ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class File extends Period {
     @Id
     @GeneratedValue
     private Long fileID;
+    @NotNull
     private String fileName;
+    @NotNull
     private String filePath;
+    @NotNull
     private String fileUuid;
+    @NotNull
     private int fileSize;
+    @NotNull
     private boolean fileImageCheck;
 
     @ManyToOne(fetch = FetchType.LAZY)
