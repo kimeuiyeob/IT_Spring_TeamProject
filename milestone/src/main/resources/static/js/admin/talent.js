@@ -70,12 +70,23 @@ $filters.on('mouseout', function () {
     })
 })
 
+/* 삭제 모달*/
 $filtersLast.on('click', function () {
-    deleteModal.classList.toggle('show');
-
-    if (deleteModal.classList.contains('show')) {
+    if ($('input:checkbox[name=check]:checked').length == 0) {
+        $(".delete-modal1").css('display', 'block');
         body.style.overflow = 'hidden';
+    } else {
+        if (deleteModal.classList.contains('show')) {
+            body.style.overflow = 'hidden';
+        }
+        deleteModal.classList.toggle('show');
     }
+});
+
+/* 확인 모달창 닫기 */
+$(".delete-modal-cancel1").on('click', function () {
+    $(".delete-modal1").css('display', 'none');
+    body.style.overflow = 'hidden';
 })
 
 /* ---------------------필터 서브-------------- */

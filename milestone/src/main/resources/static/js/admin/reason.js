@@ -2,7 +2,6 @@
 const $filter = $('.card-toolbar-item').eq(0);
 const $filterDropdown = $('.menu-sub-dropdown');
 const $filters = $('.card-toolbar-item');
-const $filtersLast = $('.card-toolbar-itemBox').children().last()
 let check1 = false;
 
 $body.on('click', function (e) {
@@ -69,24 +68,6 @@ $filters.on('mouseout', function () {
         'background-size': '13px'
     })
 })
-/* 삭제 모달*/
-$filtersLast.on('click', function () {
-    if ($('input:checkbox[name=check]:checked').length == 0) {
-        $(".delete-modal1").css('display', 'block');
-        body.style.overflow = 'hidden';
-    } else {
-        if (deleteModal.classList.contains('show')) {
-            body.style.overflow = 'hidden';
-        }
-        deleteModal.classList.toggle('show');
-    }
-});
-
-/* 확인 모달창 닫기 */
-$(".delete-modal-cancel1").on('click', function () {
-    $(".delete-modal1").css('display', 'none');
-    body.style.overflow = 'hidden';
-})
 
 /* ---------------------필터 서브-------------- */
 const $selectOption = $('.menu-sub-dropdown-option-box');
@@ -139,98 +120,15 @@ $subOptionApllyChoose.on('mouseout', function () {
     $(this).css('background-color', '#009ef7');
 })
 
-/* ----------------체크박스-------------------- */
-const $checkBox = $('.notice-checked');
-const $checkBoxAll = $('.notice-checked-all');
-
-$checkBoxAll.on('click', function () {
-    if ($checkBoxAll.is(':checked')) {
-        $checkBoxAll.closest('.card-body-title-user-checkbox').css('background-color', '#009ef7');
-        $checkBoxAll.prev().css('display', 'flex');
-        $checkBox.closest('.card-body-title-user-checkbox').css('background-color', '#009ef7');
-        $checkBox.prev().css('display', 'flex');
-        $checkBox.prop('checked', true);
-    } else {
-        $checkBoxAll.closest('.card-body-title-user-checkbox').css('background-color', '#eff2f5');
-        $checkBoxAll.prev().css('display', 'none');
-        $checkBox.closest('.card-body-title-user-checkbox').css('background-color', '#eff2f5');
-        $checkBox.prev().css('display', 'none');
-        $checkBox.prop('checked', false);
-    }
-})
-
-$checkBox.on('click', function (e) {
-
-    if ($(this).is(':checked')) {
-        $(this).closest('.card-body-title-user-checkbox').css('background-color', '#009ef7');
-        $(this).prev().css('display', 'flex')
-    } else {
-        $(this).closest('.card-body-title-user-checkbox').css('background-color', '#eff2f5')
-        $(this).prev().css('display', 'none')
-        $checkBoxAll.prop('checked', false);
-        $checkBoxAll.closest('.card-body-title-user-checkbox').css('background-color', '#eff2f5');
-        $checkBoxAll.prev().css('display', 'none');
-    }
-    if ($checkBox.filter(":checked").length == $checkBox.length) {
-        $checkBoxAll.prop('checked', true);
-        $checkBoxAll.closest('.card-body-title-user-checkbox').css('background-color', '#009ef7');
-        $checkBoxAll.prev().css('display', 'flex');
-    }
-})
-
-/* -----------삭제 모달창-------------- */
-const $delete = $('.donate-outBox');
-const $finalDelete = $('.delete-modal-delete');
-const $finalDeleteCancel = $('.delete-modal-cancel');
-const deleteModal = $('.delete-modal')[0];
-
-$finalDelete.on('click', function () {
-    deleteModal.classList.toggle('show');
-    body.style.overflow = 'auto';
-})
-
-$finalDeleteCancel.on('click', function () {
-    deleteModal.classList.toggle('show');
-    body.style.overflow = 'auto';
-})
-
-$delete.on('click', function () {
-    deleteModal.classList.toggle('show');
-
-    if (deleteModal.classList.contains('show')) {
-        body.style.overflow = 'hidden';
-    }
-})
-
-$delete.on('mouseover', function () {
-    $(this).css('color', '#009ef7');
-    $(this).css('background-color', '#f1faff');
-})
-$delete.on('mouseout', function () {
-    $(this).css('color', '#7e8299');
-    $(this).css('background-color', '#f5f8fa');
-})
-
-/* -------------- 페이지 이동 호버 ---------------- */
+/* -------------- 페이지 이동 ---------------- */
 const $pageNumberLink = $('.page-number-link');
 
-$pageNumberLink.on('mouseover', function () {
-    $(this).css('background-color', '#f4f6fa');
-    $(this).css('color', '#009ef7');
+$pageNumberLink.on('mouseover',function(){
+    $(this).css('background-color','#f4f6fa');
+    $(this).css('color','#009ef7');
 })
 
-$pageNumberLink.on('mouseout', function () {
-    $(this).css('background-color', '#fff');
-    $(this).css('color', '#5e6278');
-})
-
-/* ---------------메인 툴바 타입 호버----------------- */
-const $userType = $('.toolbar-choose-usertype-flex');
-
-$userType.on('mouseover', function () {
-    $(this).css('color', '#009ef7');
-})
-
-$userType.on('mouseout', function () {
-    $(this).css('color', '#5e6278');
+$pageNumberLink.on('mouseout',function(){
+    $(this).css('background-color','#fff');
+    $(this).css('color','#5e6278');
 })
