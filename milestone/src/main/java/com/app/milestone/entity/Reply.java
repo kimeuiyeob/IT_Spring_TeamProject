@@ -15,10 +15,10 @@ public class Reply extends Period {
     private Long replyId;
     private String replyContent;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn
+    @JoinColumn(name = "USER_ID")
     private School school;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn
+    @JoinColumn(name = "USER_ID")
     private People people;
 
     @Builder

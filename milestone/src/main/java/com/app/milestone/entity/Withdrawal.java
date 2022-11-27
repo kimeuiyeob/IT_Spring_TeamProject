@@ -19,7 +19,6 @@ public class Withdrawal extends Period {
     private String withdrawalReason;
 
     @Builder
-
     public Withdrawal(String withdrawalReason) {
         this.withdrawalReason = withdrawalReason;
     }

@@ -3,10 +3,12 @@ package com.app.milestone.entity;
 
 import lombok.*;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
+@DiscriminatorValue("money")
 @Table(name = "TBL_MONEY")
 @Getter
 @ToString
@@ -16,7 +18,6 @@ public class Money extends Donation {
 
     @Builder
     public Money(int donationCount, int donationReceiveCount, int moneyCash) {
-        super(donationCount, donationReceiveCount);
         this.moneyCash = moneyCash;
     }
 }
