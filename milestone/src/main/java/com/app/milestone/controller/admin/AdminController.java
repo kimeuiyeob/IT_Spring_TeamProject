@@ -27,7 +27,7 @@ public class AdminController {
     @GetMapping("user")
     public void user(){};
 
-    @GetMapping("evolution")
+    @GetMapping("school")
     public void evolution(){};
 
     @GetMapping("reason")
