@@ -4,14 +4,12 @@ import com.app.milestone.type.Category;
 import com.app.milestone.type.Place;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "TBL_TALENT")
+@DiscriminatorValue("talent")
 @Getter
 @ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -25,15 +23,15 @@ public class Talent extends Donation {
     private Place place;
 
     @Builder
-    public Talent(int donationCount, int donationReceiveCount, String talentTitle, String talentContent, LocalDateTime talentAbleDate, Category category, Place place) {
-        super(donationCount, donationReceiveCount);
+    public Talent(String talentTitle, String talentContent, LocalDateTime talentAbleDate, Category category, Place place) {
         this.talentTitle = talentTitle;
         this.talentContent = talentContent;
         this.talentAbleDate = talentAbleDate;
         this.category = category;
         this.place = place;
     }
-    public void update(int donationCount, int donationReceiveCount, String talentTitle, String talentContent, LocalDateTime talentAbleDate, Category category, Place place) {
+
+    public void update(String talentTitle, String talentContent, LocalDateTime talentAbleDate, Category category, Place place) {
         this.talentTitle = talentTitle;
         this.talentContent = talentContent;
         this.talentAbleDate = talentAbleDate;

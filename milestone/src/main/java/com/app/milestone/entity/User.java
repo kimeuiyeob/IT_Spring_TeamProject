@@ -24,15 +24,18 @@ public abstract class User extends Period {
     private String userPassword;
     private String userPhoneNumber;
     private String userProfile;
+    private int donationCount;
 
 
-    public User(String userEmail, String userName, String userPassword, String userPhoneNumber, String userProfile) {
+    public User(String userEmail, String userName, String userPassword, String userPhoneNumber, String userProfile, int donationCount) {
         this.userEmail = userEmail;
         this.userName = userName;
         this.userPassword = userPassword;
         this.userPhoneNumber = userPhoneNumber;
         this.userProfile = userProfile;
+        this.donationCount = donationCount;
     }
+
     public void update(String userEmail, String userName, String userPassword, String userPhoneNumber, String userProfile) {
         this.userEmail = userEmail;
         this.userName = userName;

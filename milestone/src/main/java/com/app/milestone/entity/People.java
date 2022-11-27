@@ -21,10 +21,11 @@ public class People extends User {
 //    private List<Donation> donations;
 
     @Builder
-    public People(String userEmail, String userName, String userPassword, String userPhoneNumber, String userProfile, String peopleNickname) {
-        super(userEmail, userName, userPassword, userPhoneNumber, userProfile);
+    public People(String userEmail, String userName, String userPassword, String userPhoneNumber, String userProfile, String peopleNickname, int donationCount) {
+        super(userEmail, userName, userPassword, userPhoneNumber, userProfile, donationCount);
         this.peopleNickname = peopleNickname;
     }
+
     public void update(String peopleNickname) {
         this.peopleNickname = peopleNickname;
     }

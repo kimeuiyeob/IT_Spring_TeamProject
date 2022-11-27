@@ -41,8 +41,8 @@ public class School extends User {
 
 
     @Builder
-    public School(String userEmail, String userName, String userPassword, String userPhoneNumber, String userProfile, String schoolName, Address address, int schoolTeachers, int schoolKids, int schoolBudget, String schoolBank, String schoolAccount, String schoolPhoneNumber, String schoolQR, Introduce introduce) {
-        super(userEmail, userName, userPassword, userPhoneNumber, userProfile);
+    public School(String userEmail, String userName, String userPassword, String userPhoneNumber, String userProfile, int donationCount, String schoolName, Address address, int schoolTeachers, int schoolKids, int schoolBudget, String schoolBank, String schoolAccount, String schoolPhoneNumber, String schoolQR, Introduce introduce) {
+        super(userEmail, userName, userPassword, userPhoneNumber, userProfile, donationCount);
         this.schoolName = schoolName;
         this.address = address;
         this.schoolTeachers = schoolTeachers;
@@ -54,6 +54,7 @@ public class School extends User {
         this.schoolQR = schoolQR;
         this.introduce = introduce;
     }
+
     public void update(String userEmail, String userName, String userPassword, String userPhoneNumber, String userProfile, String schoolName, Address address, int schoolTeachers, int schoolKids, int schoolBudget, String schoolBank, String schoolAccount, String schoolPhoneNumber, String schoolQR, Introduce introduce) {
         this.schoolName = schoolName;
         this.address = address;

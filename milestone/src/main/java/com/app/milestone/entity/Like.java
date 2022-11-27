@@ -18,9 +18,9 @@ public class Like extends Period {
     private Long likeId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn
+    @JoinColumn(name = "USER_ID")
     private School school;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn
+    @JoinColumn(name = "USER_ID")
     private People people;
 }
