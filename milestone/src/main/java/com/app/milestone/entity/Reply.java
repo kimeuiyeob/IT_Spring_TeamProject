@@ -1,5 +1,7 @@
 package com.app.milestone.entity;
 
+import com.app.milestone.embeddable.Address;
+import com.app.milestone.embeddable.Introduce;
 import com.sun.istack.NotNull;
 import lombok.*;
 
@@ -26,6 +28,10 @@ public class Reply extends Period {
 
     @Builder
     public Reply(String replyContent) {
+        this.replyContent = replyContent;
+    }
+
+    public void update(String replyContent) {
         this.replyContent = replyContent;
     }
 }

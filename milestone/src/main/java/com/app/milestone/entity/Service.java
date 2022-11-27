@@ -21,4 +21,7 @@ public class Service extends Donation {
     public Service(LocalDateTime serviceVisitDate) {
         this.serviceVisitDate = serviceVisitDate;
     }
+    public void update(LocalDateTime serviceVisitDate) {
+        this.serviceVisitDate = serviceVisitDate;
+    }
 }
