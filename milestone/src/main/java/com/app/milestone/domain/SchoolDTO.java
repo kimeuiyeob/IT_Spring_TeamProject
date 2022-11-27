@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
-@Getter
+@Data
 @NoArgsConstructor
 public class SchoolDTO {
     private String schoolName;

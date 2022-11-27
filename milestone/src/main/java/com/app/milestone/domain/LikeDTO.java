@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
-@Getter
+@Data
 @NoArgsConstructor
 public class LikeDTO {
     private SchoolDTO schoolDTO;
