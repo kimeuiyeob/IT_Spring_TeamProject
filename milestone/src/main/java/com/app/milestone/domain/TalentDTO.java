@@ -1,5 +1,7 @@
 package com.app.milestone.domain;
 
+import com.app.milestone.entity.People;
+import com.app.milestone.entity.School;
 import com.app.milestone.entity.Talent;
 import com.app.milestone.entity.User;
 import com.app.milestone.type.Category;
@@ -39,5 +41,6 @@ public class TalentDTO {
         this.talentAbleDate = talentAbleDate;
         this.category = category;
         this.place = place;
+
     }
 }

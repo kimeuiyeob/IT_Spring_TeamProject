@@ -6,4 +6,5 @@ import org.springframework.stereotype.Component;
 
 @Component
 public interface TalentRepository extends JpaRepository<Talent, Long> {
+
 }
