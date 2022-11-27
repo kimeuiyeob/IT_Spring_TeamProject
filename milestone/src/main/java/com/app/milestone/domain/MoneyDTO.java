@@ -16,7 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Component
-@Getter
+@Data
 @NoArgsConstructor
 public class MoneyDTO {
     private int moneyCash;

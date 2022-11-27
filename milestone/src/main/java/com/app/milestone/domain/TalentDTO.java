@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 
 @Component
-@Getter
+@Data
 @NoArgsConstructor
 public class TalentDTO {
     private String talentTitle;
