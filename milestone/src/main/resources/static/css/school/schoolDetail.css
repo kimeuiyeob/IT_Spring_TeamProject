@@ -745,3 +745,55 @@ table#userTable2{
 #rankingTHead{
     background-color: rgb(250 250 252);
 }
+
+
+
+/* ==========댓글============ */
+.replyRegisterButton:hover {
+    filter: brightness(90%);
+    cursor: pointer;
+    transition: all 0.2s ease 0s;
+}
+
+.modifyAndDelete {
+    display: flex;
+    margin-left: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.mAd{
+    cursor: pointer;
+}
+
+.reply {
+    resize: none;
+    color: black;
+    width: 85%;
+    font: inherit;
+    /* display: none; */
+}
+
+.replyRegisterButton {
+    margin-left: 5px;
+    width: 15%;
+    color: black;
+    border: 1px solid rgb(228 229 237);
+    background-color: rgb(242 243 247);
+    font: inherit;
+    border-radius: 3px;
+    font-weight: 400;
+}
+
+.cancel{
+    display: none;
+    cursor: pointer;
+}
+
+.modifyHide{
+    display: none;
+}
+
+#noBorderBottom{
+    border-bottom: 0px solid transparent;
+}

@@ -150,23 +150,9 @@
                             </div>
                         </div>
                     </div>
+                    <!-- 수정, 삭제 ready -->
                     <div class="comment">
-                        <div class="commentsInfo">
-                            <div class="profilePicture">
-                                <img src="/imgs/myPage/normalProfile.png">
-                            </div>
-                            <div class="nameAndDate">
-                                <div class="nickName">천사</div>
-                                <div class="regDate">2022.12.10</div>
-                            </div>
-                        </div>
-                        <div class="commentContent">
-                            <div class="commentContent2">
-                                <p>아이들이 너무 밝아 보여서 좋아요!</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="comment">
+                        <!-- show 부분 -->
                         <div class="commentsInfo">
                             <div class="profilePicture">
                                 <img src="/imgs/myPage/normalProfile.png">
@@ -175,14 +161,54 @@
                                 <div class="nickName">해피123</div>
                                 <div class="regDate">2022.12.05</div>
                             </div>
+                            <div class="modifyAndDelete">
+                                <span class="mAd modifyReady">수정</span>
+                                <span class="between">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                                <span class="mAd deleteReady">삭제</span>
+                                <span class="cancel">취소</span>
+                            </div>
                         </div>
-                        <div class="commentContent">
+                        <div class="commentContent modifyShow">
                             <div class="commentContent2">
-                                <p>다음에 또 봉사활동 하러 가겠습니다😁</p>
+                                <p class="commentContent3">아이들이 너무 밝아 보여서 좋아요!</p>
+                            </div>
+                        </div>
+                        <div class="commentContent modifyHide">
+                            <div class="commentContent2">
+                                <textarea name="" class="reply" cols="30" rows="3">아이들이 너무 밝아 보여서 좋아요!</textarea>
+                                <input type="button" class="replyRegisterButton" value ="수정">
                             </div>
                         </div>
                     </div>
-
+                    <div class="comment">
+                        <!-- show 부분 -->
+                        <div class="commentsInfo">
+                            <div class="profilePicture">
+                                <img src="/imgs/myPage/normalProfile.png">
+                            </div>
+                            <div class="nameAndDate">
+                                <div class="nickName">해피123</div>
+                                <div class="regDate">2022.12.05</div>
+                            </div>
+                            <div class="modifyAndDelete">
+                                <span class="mAd modifyReady">수정</span>
+                                <span class="between">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                                <span class="mAd deleteReady">삭제</span>
+                                <span class="cancel">취소</span>
+                            </div>
+                        </div>
+                        <div class="commentContent modifyShow">
+                            <div class="commentContent2">
+                                <p class="commentContent3">아이들이 너무 밝아 보여서 좋아요!</p>
+                            </div>
+                        </div>
+                        <div class="commentContent modifyHide">
+                            <div class="commentContent2">
+                                <textarea name="" class="reply" cols="30" rows="3">아이들이 너무 밝아 보여서 좋아요!</textarea>
+                                <input type="button" class="replyRegisterButton" value ="수정">
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="more">
@@ -190,6 +216,26 @@
                         <span class="css-1oteowz eklkj751">더 보기</span>
                     </button>
                 </div>
+
+                <!--============= 등록============== -->
+                <div class="comment" id="noBorderBottom" style="border-bottom: transparent;">
+                    <div class="commentsInfo">
+                        <div class="profilePicture">
+                            <img src="/imgs/myPage/normalProfile.png">
+                        </div>
+                        <div class="nameAndDate">
+                            <div class="nickName">해피123</div>
+                            <div class="regDate">2022.12.05</div>
+                        </div>
+                    </div>
+                    <div class="commentContent">
+                        <div class="commentContent2">
+                            <textarea name="" class="reply" cols="30" placeholder="댓글을 입력하세요" rows="3" style="resize:none; color:black; width: 85%; font:inherit"></textarea>
+                            <input type="button" class="replyRegisterButton" value ="등록" style="margin-left: 5px; width: 15%; color:black; border: 1px solid rgb(228 229 237); background-color:rgb(242 243 247); font: inherit; border-radius: 3px; font-weight: 400;">
+                        </div>
+                    </div>
+                </div>
+
             </section>
 
         </main>
