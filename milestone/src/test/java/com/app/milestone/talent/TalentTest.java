@@ -1,6 +1,7 @@
 package com.app.milestone.talent;
 
 import com.app.milestone.domain.TalentDTO;
+import com.app.milestone.entity.QTalent;
 import com.app.milestone.entity.Talent;
 import com.app.milestone.repository.TalentRepository;
 import com.app.milestone.type.Category;
@@ -26,10 +27,10 @@ public class TalentTest {
 
     private JPAQueryFactory jpaQueryFactory;
 
-
+/*
     @Test
     public void saveTest() {
-        TalentDTO talentDTO = new TalentDTO("제목","내용", LocalDateTime.now(), Category.IT, Place.강원도);
+        TalentDTO talentDTO = new TalentDTO(1L,1L,"제목","내용", LocalDateTime.now(), Category.IT, Place.강원도);
         talentRepository.save(talentDTO.toEntity());
     }
 
@@ -49,10 +50,11 @@ public class TalentTest {
            talentRepository.deleteById(1L);
     }
 
-   /* @Test
-    public void findTest2() {
-        List<Talent> talents = jpaQueryFactory.selectFrom(talent).fetch();
-        talents.forEach(o -> log.info("" + o));
+
+    @Test
+    public void queryDsl() {
+            Talent talent = jpaQueryFactory.select(QTalent.talent).fetchOne();
+
     }*/
 
 
