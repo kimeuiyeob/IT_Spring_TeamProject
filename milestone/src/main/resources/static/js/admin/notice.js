@@ -95,7 +95,7 @@ $filtersLast.on('click', function () {
 /* 확인 모달창 닫기 */
 $(".delete-modal-cancel1").on('click', function () {
     $(".delete-modal1").css('display','none');
-    body.style.overflow = 'hidden';
+    body.style.overflow = 'unset';
 })
 
 /* ---------------------필터 서브-------------- */
