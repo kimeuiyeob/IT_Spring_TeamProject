@@ -18,7 +18,8 @@ public class Money extends Donation {
     private int moneyCash;
 
     @Builder
-    public Money(int donationCount, int donationReceiveCount, int moneyCash) {
+    public Money(School school, People people, int moneyCash) {
+        super(school, people);
         this.moneyCash = moneyCash;
     }
 }

@@ -22,7 +22,8 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 public class TalentDTO {
-
+    private Long schoolId;
+    private Long peopleId;
     private String talentTitle;
     private String talentContent;
     private LocalDateTime talentAbleDate;
@@ -42,7 +43,9 @@ public class TalentDTO {
     }
 
     @QueryProjection //@QueryProjection은 생성자를 통해 DTO를 조회 -> Q파일 생성
-    public TalentDTO(String talentTitle, String talentContent, LocalDateTime talentAbleDate, Category category, Place place) {
+    public TalentDTO(Long schoolId, Long peopleId, String talentTitle, String talentContent, LocalDateTime talentAbleDate, Category category, Place place) {
+        this.schoolId = schoolId;
+        this.peopleId = peopleId;
         this.talentTitle = talentTitle;
         this.talentContent = talentContent;
         this.talentAbleDate = talentAbleDate;
