@@ -39,11 +39,12 @@ public abstract class User extends Period {
         this.donationCount = donationCount;
     }
 
-    public void update(String userEmail, String userName, String userPassword, String userPhoneNumber, String userProfile) {
+    public void update(String userEmail, String userName, String userPassword, String userPhoneNumber, String userProfile, int donationCount) {
         this.userEmail = userEmail;
         this.userName = userName;
         this.userPassword = userPassword;
         this.userPhoneNumber = userPhoneNumber;
         this.userProfile = userProfile;
+        this.donationCount = donationCount;
     }
 }

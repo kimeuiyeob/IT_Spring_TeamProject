@@ -19,6 +19,8 @@ import javax.persistence.ManyToOne;
 @Data
 @NoArgsConstructor
 public class MoneyDTO {
+    private Long peopleId;
+    private Long schoolId;
     private int moneyCash;
 
     public Money toEntity() {
@@ -28,7 +30,9 @@ public class MoneyDTO {
     }
 
     @QueryProjection
-    public MoneyDTO(int moneyCash) {
+    public MoneyDTO(Long peopleId, Long schoolId, int moneyCash) {
+        this.peopleId = peopleId;
+        this.schoolId = schoolId;
         this.moneyCash = moneyCash;
     }
 }

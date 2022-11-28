@@ -13,7 +13,9 @@ import java.time.LocalDateTime;
 @Component
 @Data
 @NoArgsConstructor
-public class ServiceDTO{
+public class ServiceDTO {
+    private Long schoolId;
+    private Long peopleId;
     private LocalDateTime serviceVisitDate;
 
     public Service toEntity() {
@@ -23,7 +25,9 @@ public class ServiceDTO{
     }
 
     @QueryProjection
-    public ServiceDTO(LocalDateTime serviceVisitDate) {
+    public ServiceDTO(Long schoolId, Long peopleId, LocalDateTime serviceVisitDate) {
+        this.peopleId = peopleId;
+        this.schoolId = schoolId;
         this.serviceVisitDate = serviceVisitDate;
     }
 }

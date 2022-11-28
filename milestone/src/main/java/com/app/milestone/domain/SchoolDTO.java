@@ -14,7 +14,6 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 public class SchoolDTO {
     private String schoolName;
-    //    private Address address;
     private String schoolZipcode;
     private String schoolAddress;
     private String schoolAddressDetail;
@@ -25,7 +24,6 @@ public class SchoolDTO {
     private String schoolAccount;
     private String schoolPhoneNumber;
     private String schoolQR;
-    //    private Introduce introduce;
     private String schoolTitle;
     private String schoolContent;
     private String userEmail;
@@ -39,6 +37,7 @@ public class SchoolDTO {
     public School toEntity() {
         Address address = new Address();
         Introduce introduce = new Introduce();
+
         address.setSchoolZipcode(schoolZipcode);
         address.setSchoolAddress(schoolAddress);
         address.setSchoolAddressDetail(schoolAddressDetail);
@@ -47,9 +46,6 @@ public class SchoolDTO {
         return School.builder()
                 .schoolName(schoolName)
                 .address(address)
-//                .schoolZipcode(schoolZipcode)
-//                .schoolAddress(schoolAddress)
-//                .schoolAddressDetail(schoolAddressDetail)
                 .schoolTeachers(schoolTeachers)
                 .schoolKids(schoolKids)
                 .schoolBudget(schoolBudget)
@@ -57,8 +53,6 @@ public class SchoolDTO {
                 .schoolAccount(schoolAccount)
                 .schoolPhoneNumber(schoolPhoneNumber)
                 .introduce(introduce)
-//                .schoolTitle(schoolTitle)
-//                .schoolContent(schoolContent)
                 .userEmail(userEmail)
                 .userName(userName)
                 .userPassword(userPassword)
