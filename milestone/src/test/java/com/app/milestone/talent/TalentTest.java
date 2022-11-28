@@ -15,6 +15,9 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
+
+import static com.app.milestone.entity.QTalent.talent;
 
 @SpringBootTest
 @Transactional
@@ -25,12 +28,13 @@ public class TalentTest {
     @Autowired //SpringBoot가 미리 생성해놓은 객체를 가져다가 자동으로 연결!, 빈에다가 등록, 이걸 해줌으로써 new TalentRepository안해도 된다.
     private TalentRepository talentRepository;
 
+    @Autowired
     private JPAQueryFactory jpaQueryFactory;
 
-/*
+
     @Test
     public void saveTest() {
-        TalentDTO talentDTO = new TalentDTO(1L,1L,"제목","내용", LocalDateTime.now(), Category.IT, Place.강원도);
+        TalentDTO talentDTO = new TalentDTO(1L, "제목", "내용", LocalDateTime.now(), Category.IT, Place.강원도);
         talentRepository.save(talentDTO.toEntity());
     }
 
@@ -40,22 +44,37 @@ public class TalentTest {
     }
 
     @Test
-    public void updateTest() {
+    public void save1Test() {
+        TalentDTO talentDTO = new TalentDTO();
+        talentDTO.setTalentContent(talentRepository.findById(1L).get().getTalentContent());
+    }
+
+    @Test
+    public void find2Test() {
         Talent talent = talentRepository.findById(1L).get();
-        talent.update("나는야제목","나는야내용",LocalDateTime.now(),Category.교육,Place.서울);
+        talent.getTalentTitle().contains("제목");
+    }
+
+    @Test
+    public void updateTest() {
+        Talent talent = talentRepository.findById(2L).get();
+        talent.update("나는야제목", "나는야내용", LocalDateTime.now(), Category.교육, Place.서울);
     }
 
     @Test
     public void deleteTest() {
-           talentRepository.deleteById(1L);
+        talentRepository.deleteById(1L);
     }
 
-
     @Test
-    public void queryDsl() {
-            Talent talent = jpaQueryFactory.select(QTalent.talent).fetchOne();
+    public void findQueryDsl() {
+        List<Talent> tals = jpaQueryFactory.selectFrom(talent).fetch();
+        for(Talent tal : tals) {
+            log.info("아이디넘버 : " + tal.getDonationId() + "제목 : " + tal.getTalentTitle() + "내용 : " + tal.getTalentContent() + "카테고리 : " + tal.getCategory() + "지역 : " + tal.getPlace());
+        }
 
-    }*/
+
+    }
 
 
 }

@@ -51,4 +51,16 @@ public class TalentDTO {
         this.place = place;
 
     }
+
+    @Override
+    public String toString() {
+        return "TalentDTO{" +
+                "userId=" + userId +
+                ", talentTitle='" + talentTitle + '\'' +
+                ", talentContent='" + talentContent + '\'' +
+                ", talentAbleDate=" + talentAbleDate +
+                ", category=" + category +
+                ", place=" + place +
+                '}';
+    }
 }
