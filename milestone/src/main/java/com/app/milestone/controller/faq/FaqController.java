@@ -11,6 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class FaqController {
 
     @GetMapping(value = {"faq", "faq1", "faq2", "faq3", "faq4", "faq5", "faq6"})
-    public void read(){
+    public void faq(){
     }
 }
