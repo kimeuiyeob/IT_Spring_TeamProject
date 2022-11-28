@@ -1,10 +1,7 @@
 package com.app.milestone.withdrawal;
 
-import com.app.milestone.domain.NoticeDTO;
 import com.app.milestone.domain.WithdrawalDTO;
-import com.app.milestone.entity.Notice;
 import com.app.milestone.entity.Withdrawal;
-import com.app.milestone.repository.NoticeRepository;
 import com.app.milestone.repository.WithdrawalRepository;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static com.app.milestone.entity.QWithdrawal.withdrawal;
 
 @SpringBootTest
 @Transactional
@@ -23,17 +20,22 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class WithdrawalTest {
     @Autowired
     private WithdrawalRepository withdrawalRepository;
-
+    @Autowired
     private JPAQueryFactory jpaQueryFactory;
 
     @Test
     public void saveTest() {
-        WithdrawalDTO withdrawalDTO = new WithdrawalDTO("이용하고 싶은 서비스가 없어요");
+        WithdrawalDTO withdrawalDTO = new WithdrawalDTO();
+        withdrawalDTO.setWithdrawalReason("서비스 퀄리티가 낮아요");
         withdrawalRepository.save(withdrawalDTO.toEntity());
     }
 
     @Test
     public void findTest() {
-        assertThat(withdrawalRepository.findById(3L).get().getWithdrawalId()).isEqualTo(3);
+        jpaQueryFactory
+                .selectFrom(withdrawal)
+                .where(withdrawal.withdrawalId.eq(1L))
+                .fetch().stream().map(Withdrawal::toString).forEach(log::info);
+
     }
 }
