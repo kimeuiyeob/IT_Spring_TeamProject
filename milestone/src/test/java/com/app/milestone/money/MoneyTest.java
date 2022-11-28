@@ -28,14 +28,14 @@ public class MoneyTest {
 
     private JPAQueryFactory jpaQueryFactory;
 
-    @Test
-    public void saveTest() {
-        MoneyDTO moneyDTO = new MoneyDTO(3000000);
-        moneyRepository.save(moneyDTO.toEntity());
-    }
-
-    @Test
-    public void findTest() {
-        assertThat(moneyRepository.findById(4L).get().getMoneyCash()).isEqualTo(3000000);
-    }
+//    @Test
+//    public void saveTest() {
+//        MoneyDTO moneyDTO = new MoneyDTO(3000000);
+//        moneyRepository.save(moneyDTO.toEntity());
+//    }
+//
+//    @Test
+//    public void findTest() {
+//        assertThat(moneyRepository.findById(4L).get().getMoneyCash()).isEqualTo(3000000);
+//    }
 }

@@ -11,9 +11,8 @@ import org.springframework.stereotype.Component;
 @Data
 @NoArgsConstructor
 public class ReplyDTO {
+    private Long userId;
     private String replyContent;
-    private Long schoolId;
-    private Long peopleId;
 
     public Reply toEntity() {
         return Reply.builder()
@@ -22,9 +21,8 @@ public class ReplyDTO {
     }
 
     @QueryProjection
-    public ReplyDTO(String replyContent, Long schoolId, Long peopleId) {
+    public ReplyDTO(String replyContent, Long userId) {
         this.replyContent = replyContent;
-        this.schoolId = schoolId;
-        this.peopleId = peopleId;
+        this.userId = userId;
     }
 }

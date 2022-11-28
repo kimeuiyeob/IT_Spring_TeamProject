@@ -17,7 +17,6 @@ public class PeopleDTO {
     private String userName;
     private String userPassword;
     private String userPhoneNumber;
-    private String userProfile;
     private int donationCount;
 
     public People toEntity() {
@@ -27,19 +26,17 @@ public class PeopleDTO {
                 .userName(userName)
                 .userPassword(userPassword)
                 .userPhoneNumber(userPhoneNumber)
-                .userProfile(userProfile)
                 .donationCount(donationCount)
                 .build();
     }
 
     @QueryProjection
-    public PeopleDTO(String peopleNickname , String userEmail,String userName, String userPassword,String userPhoneNumber,String userProfile, int donationCount) {
+    public PeopleDTO(String peopleNickname , String userEmail,String userName, String userPassword,String userPhoneNumber, int donationCount) {
         this.peopleNickname = peopleNickname;
         this.userEmail = userEmail;
         this.userName = userName;
         this.userPassword = userPassword;
         this.userPhoneNumber = userPhoneNumber;
-        this.userProfile = userProfile;
         this.donationCount = donationCount;
     }
 }

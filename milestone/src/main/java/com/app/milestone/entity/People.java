@@ -24,8 +24,8 @@ public class People extends User {
 //    private List<Donation> donations;
 
     @Builder
-    public People(String userEmail, String userName, String userPassword, String userPhoneNumber, String userProfile, String peopleNickname, int donationCount) {
-        super(userEmail, userName, userPassword, userPhoneNumber, userProfile, donationCount);
+    public People(String userEmail, String userName, String userPassword, String userPhoneNumber, String peopleNickname, int donationCount) {
+        super(userEmail, userName, userPassword, userPhoneNumber, donationCount);
         this.peopleNickname = peopleNickname;
     }
 

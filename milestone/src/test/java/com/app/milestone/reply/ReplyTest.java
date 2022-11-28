@@ -25,35 +25,35 @@ public class ReplyTest {
     private ReplyRepository replyRepository;
     private JPAQueryFactory jpaQueryFactory;
 
-    @Test
-    public void saveTest() {
-//        userRepository.findById(6L);
-//        SchoolDTO schoolDTO = schoolRepository.findById(6L);
-//        PeopleDTO peopleDTO = peopleRepository.findById(5L);
-
-        ReplyDTO replyDTO = new ReplyDTO();
-        replyDTO.setReplyContent("댓글내용");
-
-//        replyDTO.setPeopleDTO(peopleDTO);
-//        replyDTO.setSchoolDTO(schoolDTO);
-
-        replyRepository.save(replyDTO.toEntity());
-    }
-
-    @Test
-    public void findTest() {
-        assertThat(replyRepository.findById(7L).get().getReplyContent()).isEqualTo("댓글내용");
-    }
-
-    @Test
-    public void updateTest() {
-        //asserThat 오류가 났을 때 친절히 알려줌~~!!!
-        Reply reply = replyRepository.findById(7L).get();
-        reply.update("우린 백작업을 할 수 있다");
-    }
-
-    @Test
-    public void deleteTest() {
-        replyRepository.deleteById(7L);
-    }
+//    @Test
+//    public void saveTest() {
+////        userRepository.findById(6L);
+////        SchoolDTO schoolDTO = schoolRepository.findById(6L);
+////        PeopleDTO peopleDTO = peopleRepository.findById(5L);
+//
+//        ReplyDTO replyDTO = new ReplyDTO();
+//        replyDTO.setReplyContent("댓글내용");
+//
+////        replyDTO.setPeopleDTO(peopleDTO);
+////        replyDTO.setSchoolDTO(schoolDTO);
+//
+//        replyRepository.save(replyDTO.toEntity());
+//    }
+//
+//    @Test
+//    public void findTest() {
+//        assertThat(replyRepository.findById(7L).get().getReplyContent()).isEqualTo("댓글내용");
+//    }
+//
+//    @Test
+//    public void updateTest() {
+//        //asserThat 오류가 났을 때 친절히 알려줌~~!!!
+//        Reply reply = replyRepository.findById(7L).get();
+//        reply.update("우린 백작업을 할 수 있다");
+//    }
+//
+//    @Test
+//    public void deleteTest() {
+//        replyRepository.deleteById(7L);
+//    }
 }
