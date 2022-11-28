@@ -1,13 +1,7 @@
 package com.app.milestone.talent;
 
-import com.app.milestone.domain.SchoolDTO;
 import com.app.milestone.domain.TalentDTO;
-import com.app.milestone.embeddable.Address;
-import com.app.milestone.embeddable.Introduce;
-import com.app.milestone.entity.People;
-import com.app.milestone.entity.School;
 import com.app.milestone.entity.Talent;
-import com.app.milestone.repository.SchoolRepository;
 import com.app.milestone.repository.TalentRepository;
 import com.app.milestone.type.Category;
 import com.app.milestone.type.Place;
@@ -20,7 +14,6 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @SpringBootTest
 @Transactional
@@ -28,13 +21,10 @@ import java.util.List;
 @Slf4j
 public class TalentTest {
 
-    @Autowired
+    @Autowired //SpringBoot가 미리 생성해놓은 객체를 가져다가 자동으로 연결!, 빈에다가 등록, 이걸 해줌으로써 new TalentRepository안해도 된다.
     private TalentRepository talentRepository;
 
     private JPAQueryFactory jpaQueryFactory;
-
-    @Autowired
-    private SchoolRepository schoolRepository;
 
 
     @Test

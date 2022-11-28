@@ -22,6 +22,10 @@ public class FileDTO {
     public File toEntity() {
         return File.builder()
                 .fileName(fileName)
+                .filePath(filePath)
+                .fileUuid(fileUuid)
+                .fileSize(fileSize)
+                .fileImageCheck(fileImageCheck)
                 .build();
     }
 
