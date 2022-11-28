@@ -57,13 +57,12 @@ public class SchoolDTO {
                 .userName(userName)
                 .userPassword(userPassword)
                 .userPhoneNumber(userPhoneNumber)
-                .userProfile(userProfile)
                 .donationCount(donationCount)
                 .build();
     }
 
     @QueryProjection
-    public SchoolDTO(String schoolName, String schoolAddress, String schoolAddressDetail, String schoolZipcode, int schoolTeachers, int schoolKids, int schoolBudget, String schoolBank, String schoolAccount, String schoolPhoneNumber, String schoolQR, String schoolTitle, String schoolContent, String userEmail, String userName, String userPassword, String userPhoneNumber, String userProfile, int donationCount) {
+    public SchoolDTO(String schoolName, String schoolAddress, String schoolAddressDetail, String schoolZipcode, int schoolTeachers, int schoolKids, int schoolBudget, String schoolBank, String schoolAccount, String schoolPhoneNumber, String schoolQR, String schoolTitle, String schoolContent, String userEmail, String userName, String userPassword, String userPhoneNumber, int donationCount) {
         this.schoolName = schoolName;
         this.schoolAddress = schoolAddress;
         this.schoolAddressDetail = schoolAddressDetail;
@@ -81,7 +80,6 @@ public class SchoolDTO {
         this.userName = userName;
         this.userPassword = userPassword;
         this.userPhoneNumber = userPhoneNumber;
-        this.userProfile = userProfile;
         this.donationCount = donationCount;
     }
 }

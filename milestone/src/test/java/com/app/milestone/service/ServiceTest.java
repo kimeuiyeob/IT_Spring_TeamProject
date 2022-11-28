@@ -26,26 +26,26 @@ public class ServiceTest {
 
     private JPAQueryFactory jpaQueryFactory;
 
-    @Test
-    public void saveTest() {
-        ServiceDTO serviceDTO = new ServiceDTO(LocalDateTime.now());
-        serviceRepository.save(serviceDTO.toEntity());
-    }
-
-    @Test
-    public void updateTest() {
-        Service service = serviceRepository.findById(8L).get();
-
-        service.update(LocalDateTime.now());
-    }
-
-    @Test
-    public void findTest() {
-        assertThat(serviceRepository.findById(8L).get().getDonationId()).isEqualTo(8L);
-    }
-
-    @Test
-    public void deleteTest() {
-        serviceRepository.deleteById(8L);
-    }
+//    @Test
+//    public void saveTest() {
+//        ServiceDTO serviceDTO = new ServiceDTO(LocalDateTime.now());
+//        serviceRepository.save(serviceDTO.toEntity());
+//    }
+//
+//    @Test
+//    public void updateTest() {
+//        Service service = serviceRepository.findById(8L).get();
+//
+//        service.update(LocalDateTime.now());
+//    }
+//
+//    @Test
+//    public void findTest() {
+//        assertThat(serviceRepository.findById(8L).get().getDonationId()).isEqualTo(8L);
+//    }
+//
+//    @Test
+//    public void deleteTest() {
+//        serviceRepository.deleteById(8L);
+//    }
 }

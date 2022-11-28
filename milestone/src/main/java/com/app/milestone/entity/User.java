@@ -17,34 +17,31 @@ import javax.persistence.*;
 public abstract class User extends Period {
     @Id
     @GeneratedValue
-    private Long userId;
+    protected Long userId;
     @NotNull
-    private String userEmail;
+    protected String userEmail;
     @NotNull
-    private String userName;
+    protected String userName;
     @NotNull
-    private String userPassword;
+    protected String userPassword;
     @NotNull
-    private String userPhoneNumber;
-    private String userProfile;
-    private int donationCount;
+    protected String userPhoneNumber;
+    protected int donationCount;
 
 
-    public User(String userEmail, String userName, String userPassword, String userPhoneNumber, String userProfile, int donationCount) {
+    public User(String userEmail, String userName, String userPassword, String userPhoneNumber, int donationCount) {
         this.userEmail = userEmail;
         this.userName = userName;
         this.userPassword = userPassword;
         this.userPhoneNumber = userPhoneNumber;
-        this.userProfile = userProfile;
         this.donationCount = donationCount;
     }
 
-    public void update(String userEmail, String userName, String userPassword, String userPhoneNumber, String userProfile, int donationCount) {
+    public void update(String userEmail, String userName, String userPassword, String userPhoneNumber, int donationCount) {
         this.userEmail = userEmail;
         this.userName = userName;
         this.userPassword = userPassword;
         this.userPhoneNumber = userPhoneNumber;
-        this.userProfile = userProfile;
         this.donationCount = donationCount;
     }
 }

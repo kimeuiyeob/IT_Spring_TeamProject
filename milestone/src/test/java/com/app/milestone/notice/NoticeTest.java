@@ -26,26 +26,26 @@ public class NoticeTest {
 
     private JPAQueryFactory jpaQueryFactory;
 
-    @Test
-    public void saveTest() {
-        NoticeDTO noticeDTO = new NoticeDTO("제목", "내용");
-        noticeRepository.save(noticeDTO.toEntity());
-    }
-
-    @Test
-    public void updateTest() {
-        Notice notice = noticeRepository.findById(2L).get();
-
-        notice.update("수정 제목", "수정 내용");
-    }
-
-    @Test
-    public void findTest() {
-        assertThat(noticeRepository.findById(2L).get().getNoticeTitle()).isEqualTo("수정 제목");
-    }
-
-    @Test
-    public void deleteTest() {
-        noticeRepository.deleteById(2L);
-    }
+//    @Test
+//    public void saveTest() {
+//        NoticeDTO noticeDTO = new NoticeDTO("제목", "내용");
+//        noticeRepository.save(noticeDTO.toEntity());
+//    }
+//
+//    @Test
+//    public void updateTest() {
+//        Notice notice = noticeRepository.findById(2L).get();
+//
+//        notice.update("수정 제목", "수정 내용");
+//    }
+//
+//    @Test
+//    public void findTest() {
+//        assertThat(noticeRepository.findById(2L).get().getNoticeTitle()).isEqualTo("수정 제목");
+//    }
+//
+//    @Test
+//    public void deleteTest() {
+//        noticeRepository.deleteById(2L);
+//    }
 }

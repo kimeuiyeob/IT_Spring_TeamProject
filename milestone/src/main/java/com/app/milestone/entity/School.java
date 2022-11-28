@@ -1,5 +1,6 @@
 package com.app.milestone.entity;
 
+import com.app.milestone.domain.SchoolDTO;
 import com.app.milestone.embeddable.Address;
 import com.app.milestone.embeddable.Introduce;
 import com.sun.istack.NotNull;
@@ -45,8 +46,8 @@ public class School extends User {
 
 
     @Builder
-    public School(String userEmail, String userName, String userPassword, String userPhoneNumber, String userProfile, int donationCount, String schoolName, Address address, int schoolTeachers, int schoolKids, int schoolBudget, String schoolBank, String schoolAccount, String schoolPhoneNumber, String schoolQR, Introduce introduce) {
-        super(userEmail, userName, userPassword, userPhoneNumber, userProfile, donationCount);
+    public School(String userEmail, String userName, String userPassword, String userPhoneNumber, int donationCount, String schoolName, Address address, int schoolTeachers, int schoolKids, int schoolBudget, String schoolBank, String schoolAccount, String schoolPhoneNumber, String schoolQR, Introduce introduce) {
+        super(userEmail, userName, userPassword, userPhoneNumber, donationCount);
         this.schoolName = schoolName;
         this.address = address;
         this.schoolTeachers = schoolTeachers;
@@ -59,16 +60,20 @@ public class School extends User {
         this.introduce = introduce;
     }
 
-    public void update(String userEmail, String userName, String userPassword, String userPhoneNumber, String userProfile, int donationCount, String schoolName, Address address, int schoolTeachers, int schoolKids, int schoolBudget, String schoolBank, String schoolAccount, String schoolPhoneNumber, String schoolQR, Introduce introduce) {
-        update(userEmail, userName, userPassword, userPhoneNumber, userProfile, donationCount);
-        this.schoolName = schoolName;
-        this.address = address;
-        this.schoolTeachers = schoolTeachers;
-        this.schoolKids = schoolKids;
-        this.schoolBudget = schoolBudget;
-        this.schoolBank = schoolBank;
-        this.schoolAccount = schoolAccount;
-        this.schoolPhoneNumber = schoolPhoneNumber;
-        this.introduce = introduce;
+    public void update(SchoolDTO schoolDTO) {
+        School school = schoolDTO.toEntity();
+        this.userEmail = school.userEmail;
+        this.userName = school.userName;
+        this.userPassword = school.userPassword;
+        this.userPhoneNumber = school.userPhoneNumber;
+        this.schoolName = school.schoolName;
+        this.address = school.address;
+        this.schoolTeachers = school.schoolTeachers;
+        this.schoolKids = school.schoolKids;
+        this.schoolBudget = school.schoolBudget;
+        this.schoolBank = school.schoolBank;
+        this.schoolAccount = school.schoolAccount;
+        this.schoolPhoneNumber = school.schoolPhoneNumber;
+        this.introduce = school.introduce;
     }
 }

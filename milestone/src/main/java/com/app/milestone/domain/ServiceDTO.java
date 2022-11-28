@@ -1,5 +1,6 @@
 package com.app.milestone.domain;
 
+import com.app.milestone.entity.School;
 import com.app.milestone.entity.Service;
 import com.app.milestone.entity.Talent;
 import com.querydsl.core.annotations.QueryProjection;
@@ -14,8 +15,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 public class ServiceDTO {
-    private Long schoolId;
-    private Long peopleId;
+    private Long userId;
     private LocalDateTime serviceVisitDate;
 
     public Service toEntity() {
@@ -25,9 +25,8 @@ public class ServiceDTO {
     }
 
     @QueryProjection
-    public ServiceDTO(Long schoolId, Long peopleId, LocalDateTime serviceVisitDate) {
-        this.peopleId = peopleId;
-        this.schoolId = schoolId;
+    public ServiceDTO(Long userId, LocalDateTime serviceVisitDate) {
+        this.userId = userId;
         this.serviceVisitDate = serviceVisitDate;
     }
 }
