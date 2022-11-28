@@ -113,6 +113,31 @@ $(document).mouseup(function (e){
     }
 });
 
+
+/* 댓글 */
+$(".modifyReady").click(function(){
+    $(this).closest(".modifyAndDelete").closest(".commentsInfo").siblings(".modifyShow").hide();
+    $(this).closest(".modifyAndDelete").closest(".commentsInfo").siblings(".modifyHide").show();
+
+    $(this).css('display','none');
+    $(this).siblings(".deleteReady").css('display','none');
+    $(this).siblings(".between").css('display','none');
+    /* 취소버튼 */
+    $(this).siblings(".cancel").css('display','inline');
+})
+
+
+$(".cancel").click(function(){
+    $(this).closest(".modifyAndDelete").closest(".commentsInfo").siblings(".modifyShow").show();
+    $(this).closest(".modifyAndDelete").closest(".commentsInfo").siblings(".modifyHide").hide();
+
+    $(this).css('display','none');
+    $(this).siblings(".modifyReady").css('display','inline');
+    $(this).siblings(".between").css('display','inline');
+    $(this).siblings(".deleteReady").css('display','inline');
+})
+
+
 /* 슬라이드 */
 /* 클릭인덱스 */
 /*var i = 0;*/
