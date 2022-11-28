@@ -29,11 +29,12 @@ public class File extends Period {
     private School school;
 
     @Builder
-    public File(String fileName, String filePath, String fileUuid, int fileSize, boolean fileImageCheck) {
+    public File(String fileName, String filePath, String fileUuid, int fileSize, boolean fileImageCheck, School school) {
         this.fileName = fileName;
         this.filePath = filePath;
         this.fileUuid = fileUuid;
         this.fileSize = fileSize;
         this.fileImageCheck = fileImageCheck;
+        this.school = school;
     }
 }

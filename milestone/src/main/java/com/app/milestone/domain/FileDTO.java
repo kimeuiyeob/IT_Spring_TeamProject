@@ -17,7 +17,7 @@ public class FileDTO {
     private String fileUuid;
     private int fileSize;
     private boolean fileImageCheck;
-    private SchoolDTO schoolDTO;
+    private Long schoolId;
 
     public File toEntity() {
         return File.builder()
@@ -30,12 +30,12 @@ public class FileDTO {
     }
 
     @QueryProjection
-    public FileDTO(String fileName, String filePath, String fileUuid, int fileSize, boolean fileImageCheck, SchoolDTO schoolDTO) {
+    public FileDTO(String fileName, String filePath, String fileUuid, int fileSize, boolean fileImageCheck, Long schoolId) {
         this.fileName = fileName;
         this.filePath = filePath;
         this.fileUuid = fileUuid;
         this.fileSize = fileSize;
         this.fileImageCheck = fileImageCheck;
-        this.schoolDTO = schoolDTO;
+        this.schoolId = schoolId;
     }
 }
