@@ -6,4 +6,5 @@ import org.springframework.stereotype.Component;
 
 @Component
 public interface SchoolRepository extends JpaRepository<School, Long>, SchoolCustomRepository {
+    public Long countBy();
 }
