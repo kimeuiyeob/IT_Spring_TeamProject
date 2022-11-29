@@ -21,11 +21,9 @@ public class AdminController {
     @GetMapping("notice")
     public void notice(){};
 
-    @GetMapping("statistics")
-    public void statistics(){};
-
     @GetMapping("user")
-    public void user(){};
+    public void user(){
+    };
 
     @GetMapping("school")
     public void evolution(){};
