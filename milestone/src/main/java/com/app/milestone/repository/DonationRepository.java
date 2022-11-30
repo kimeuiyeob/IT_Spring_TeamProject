@@ -6,4 +6,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public interface DonationRepository extends JpaRepository<Donation, Long>, DonationCustomRepository {
+    public int countByPeopleUserId(Long userId);
+    public int countBySchoolUserId(Long userId);
 }

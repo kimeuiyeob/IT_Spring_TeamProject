@@ -3,9 +3,8 @@ package com.app.milestone.entity;
 import com.sun.istack.NotNull;
 import lombok.*;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "TBL_PEOPLE")
@@ -20,8 +19,8 @@ public class People extends User {
 //    private List<Reply> replies;
 //    @OneToMany(mappedBy = "people", fetch = FetchType.LAZY)
 //    private List<Like> likes;
-//    @OneToMany(mappedBy = "people", fetch = FetchType.LAZY)
-//    private List<Donation> donations;
+    @OneToMany(mappedBy = "people", fetch = FetchType.LAZY)
+    private List<Donation> donations;
 
     @Builder
     public People(String userEmail, String userName, String userPassword, String userPhoneNumber, String peopleNickname, int donationCount) {
