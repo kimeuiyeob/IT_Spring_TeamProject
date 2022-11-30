@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 public class NoticeDTO {
     private String noticeTitle;
     private String noticeContent;
-    private Maintenance maintenance;
 
     public Notice toEntity() {
         return Notice.builder()

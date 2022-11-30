@@ -4,8 +4,13 @@ import com.app.milestone.domain.SchoolDTO;
 import com.app.milestone.domain.Search;
 import com.app.milestone.embeddable.Address;
 import com.app.milestone.embeddable.Introduce;
+import com.app.milestone.entity.Money;
 import com.app.milestone.entity.School;
+import com.app.milestone.repository.DonationRepository;
+import com.app.milestone.repository.MoneyRepository;
+import com.app.milestone.repository.PeopleRepository;
 import com.app.milestone.repository.SchoolRepository;
+import com.querydsl.core.Tuple;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -102,19 +107,52 @@ public class SchoolTest {
         schoolRepository.findAllByCreatedDate(pageable, search).forEach(o -> log.info("보육원 이름" + o.getSchoolName() + "보육원 주소" + o.getAddress().getSchoolAddress() + "보육원 등록일" + o.getCreatedDate() + "기부 받은 횟수" + o.getDonationCount()));
     }
 
-//    총 보육원 수 조회
+    //    총 보육원 수 조회
     @Test
     public void countTest() {
         log.info("총 보육원 수" + schoolRepository.countBy());
     }
 
-//    보육원 상세보기
+    //   ================================================== 보육원 상세보기 ==============================================
+    @Autowired
+    private DonationRepository donationRepository;
+    @Autowired
+    private MoneyRepository moneyRepository;
+    @Autowired
+    private PeopleRepository peopleRepository;
+
     @Test
-    public void schoolDetailTest(){
+    public void schoolDetailTest() {
         School school = schoolRepository.findById(1L).get();
         log.info("보육원 이름 : " + school.getSchoolName() +
                 "보육원 제목 : " + school.getIntroduce().getSchoolTitle() +
                 "보육원 소개글 : " + school.getIntroduce().getSchoolContent());
+    }
+
+    //    보육원 상세보기의 최근기부
+    @Test
+    public void recentDonationTest() {
+        List<Money> recentMoney = moneyRepository.findByOrderByCreatedDateDesc();
+        String text = "";
+
+        for (Money money : recentMoney) {
+            String name = money.getPeople().getUserName();
+            text += "\n최근 기부일 : " + money.getCreatedDate() + " 기부자 : " + name + " 기부금 : " + money.getMoneyCash();
+        }
+        log.info(text);
+    }
+
+    //  하나의 보육원 기부금 랭킹
+    @Test
+    public void moneyRankingByOneTest() {
+        List<Tuple> tuples = moneyRepository.moneyRankingByOne(105L);
+        String text = "";
+
+        for (Tuple tuple : tuples) {
+            String name = peopleRepository.findById(tuple.get(1, Long.class)).get().getUserName();
+            text += "\n기부자 : " + name + "기부금 : " + tuple.get(0, Long.class);
+        }
+        log.info(text);
     }
 
 

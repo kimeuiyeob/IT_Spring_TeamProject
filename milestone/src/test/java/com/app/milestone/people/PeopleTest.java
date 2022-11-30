@@ -1,14 +1,11 @@
 package com.app.milestone.people;
 
 import com.app.milestone.domain.PeopleDTO;
-import com.app.milestone.domain.Rank;
-import com.app.milestone.domain.SchoolDTO;
 import com.app.milestone.entity.*;
 import com.app.milestone.repository.*;
 import com.querydsl.core.Tuple;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.extern.slf4j.Slf4j;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,7 +13,6 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -59,26 +55,29 @@ public class PeopleTest {
     @Autowired
     private LikeRepository likeRepository;
 
-//    좋아요 누름
+    //    좋아요 누름
     @Test
     public void likeTest() {
 //        세션에서 받음
         People people = peopleRepository.findById(67L).get();
 //        화면에서 받음
         School school = schoolRepository.findById(123L).get();
-        Like like = new Like(school,people);
+        Like like = new Like(school, people);
         likeRepository.save(like);
     }
 
     //   =======================================================기부 랭킹================================================
     @Autowired
-    private MoneyRepository moneyRepository;
-    @Autowired
     private SchoolRepository schoolRepository;
+    @Autowired
+    private DonationRepository donationRepository;
+    @Autowired
+    private MoneyRepository moneyRepository;
     @Autowired
     private ServiceRepository serviceRepository;
     @Autowired
-    private DonationRepository donationRepository;
+    private TalentRepository talentRepository;
+
 
     //    기부금 샘플 데이터
     @Test
@@ -88,7 +87,7 @@ public class PeopleTest {
         for (int i = 0; i < 30; i++) {
             // 기부자 피기부자 샘플
             Long giver = 1L + (i % 5);
-            Long taker = 105L;
+            Long taker = 106L;
             // 개인 총 기부 횟수 카운트
             People people = peopleRepository.findById(giver).get();
             donationCount = donationRepository.countByPeopleUserId(giver);
@@ -126,29 +125,69 @@ public class PeopleTest {
         }
     }
 
+    //    재능기부 샘플 데이터
+    @Test
+    public void talentTest() {
+        int donationCount = 0;
+
+        for (int i = 0; i < 18; i++) {
+            // 기부자 피기부자 샘플
+            Long giver = 1L + (i % 5);
+            Long taker = 110L;
+            // 개인 총 기부 횟수 카운트
+            People people = peopleRepository.findById(giver).get();
+            donationCount = donationRepository.countByPeopleUserId(giver);
+            people.update(donationCount);
+            // 보육원 총 기부받은 횟수 카운트
+            School school = schoolRepository.findById(taker).get();
+            donationCount = donationRepository.countBySchoolUserId(taker);
+            school.update(donationCount);
+
+            Talent talent = new Talent(school, people, "재능제목", "재능내용", LocalDateTime.now(), "교육", "서울");
+            talentRepository.save(talent);
+        }
+    }
+
+    //    =================================실제 기부===================================
+
     //    개인 기부금 랭킹 정보
     @Test
     public void moneyRankingTest() {
         List<Tuple> tests = peopleRepository.sortByMoneyCash();
+        String text = "";
+
         for (Tuple tuple : tests) {
             People people = peopleRepository.findById(tuple.get(1, Long.TYPE)).get();
-            log.info("기부금 : " + tuple.get(0, Long.class) + " 기부자 : " + people.getUserName());
+            text += "\n기부금 : " + tuple.get(0, Long.class) + " 기부자 : " + people.getUserName();
         }
+        log.info(text);
     }
 
     //    개인 보육원 방문기부 횟수 랭킹 정보
     @Test
     public void visitRankingTest() {
         List<Tuple> tests = peopleRepository.sortByVisitRank();
+        String text = "";
+
         for (Tuple tuple : tests) {
             People people = peopleRepository.findById(tuple.get(1, Long.TYPE)).get();
-            log.info("방문횟수 : " + tuple.get(0, Long.class) + " 기부자 : " + people.getUserName());
+            text += "\n방문횟수 : " + tuple.get(0, Long.class) + " 기부자 : " + people.getUserName();
         }
+        log.info(text);
     }
 
     //  재능 기부 횟수 랭킹 정보
-//    구현필요함
-
+    @Test
+    public void talentRankingTest() {
+        List<Tuple> tests = peopleRepository.sortBytalentRank();
+        String text = "";
+        for (Tuple tuple : tests) {
+            People people = peopleRepository.findById(tuple.get(1, Long.TYPE)).get();
+//            log.info("재능기부횟수 : " + tuple.get(0, Long.class) + " 기부자 : " + people.getUserName());
+            text += "\n재능기부횟수 : " + tuple.get(0, Long.class) + " 기부자 : " + people.getUserName();
+        }
+        log.info(text);
+    }
 
     //    =====================================================================================================================
     @Test
