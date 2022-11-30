@@ -1,12 +1,11 @@
 package com.app.milestone.entity;
 
+import com.app.milestone.type.Maintenance;
+import com.app.milestone.type.Place;
 import com.sun.istack.NotNull;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "TBL_NOTICE")
@@ -20,16 +19,21 @@ public class Notice extends Period {
     private String noticeTitle;
     @NotNull
     private String noticeContent;
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private Maintenance maintenance;
 
     @Builder
-    public Notice(String noticeTitle, String noticeContent) {
+    public Notice(String noticeTitle, String noticeContent, Maintenance maintenance) {
         this.noticeTitle = noticeTitle;
         this.noticeContent = noticeContent;
+        this.maintenance = maintenance;
     }
 
-    public void update(String noticeTitle, String noticeContent) {
+    public void update(String noticeTitle, String noticeContent, Maintenance maintenance) {
         this.noticeTitle = noticeTitle;
         this.noticeContent = noticeContent;
+        this.maintenance = maintenance;
     }
 
 }
