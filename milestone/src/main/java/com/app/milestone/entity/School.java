@@ -61,19 +61,37 @@ public class School extends User {
     }
 
     public void update(SchoolDTO schoolDTO) {
-        School school = schoolDTO.toEntity();
-        this.userEmail = school.userEmail;
-        this.userName = school.userName;
-        this.userPassword = school.userPassword;
-        this.userPhoneNumber = school.userPhoneNumber;
-        this.schoolName = school.schoolName;
-        this.address = school.address;
-        this.schoolTeachers = school.schoolTeachers;
-        this.schoolKids = school.schoolKids;
-        this.schoolBudget = school.schoolBudget;
-        this.schoolBank = school.schoolBank;
-        this.schoolAccount = school.schoolAccount;
-        this.schoolPhoneNumber = school.schoolPhoneNumber;
-        this.introduce = school.introduce;
+//        School school = schoolDTO.toEntity();
+
+
+        this.userEmail = schoolDTO.getUserEmail();
+        this.userName = schoolDTO.getUserName();
+        this.userPassword = schoolDTO.getUserPassword();
+        this.userPhoneNumber = schoolDTO.getUserPhoneNumber();
+        this.schoolName = schoolDTO.getSchoolName();
+        this.schoolTeachers = schoolDTO.getSchoolTeachers();
+        this.schoolKids = schoolDTO.getSchoolKids();
+        this.schoolBudget = schoolDTO.getSchoolBudget();
+        this.schoolBank = schoolDTO.getSchoolBank();
+        this.schoolAccount = schoolDTO.getSchoolAccount();
+        this.schoolPhoneNumber = schoolDTO.getSchoolPhoneNumber();
     }
+
+//    public void update(SchoolDTO schoolDTO) {
+//        School school = schoolDTO.toEntity();
+//        this.userEmail = school.userEmail;
+//        this.userName = school.userName;
+//        this.userPassword = school.userPassword;
+//        this.userPhoneNumber = school.userPhoneNumber;
+//        this.donationCount = school.donationCount;
+//        this.schoolName = school.schoolName;
+//        this.address = school.address;
+//        this.schoolTeachers = school.schoolTeachers;
+//        this.schoolKids = school.schoolKids;
+//        this.schoolBudget = school.schoolBudget;
+//        this.schoolBank = school.schoolBank;
+//        this.schoolAccount = school.schoolAccount;
+//        this.schoolPhoneNumber = school.schoolPhoneNumber;
+//        this.introduce = school.introduce;
+//    }
 }

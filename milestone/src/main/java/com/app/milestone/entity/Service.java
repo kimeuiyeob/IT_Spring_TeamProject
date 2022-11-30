@@ -22,7 +22,8 @@ public class Service extends Donation {
 
 
     @Builder
-    public Service(LocalDateTime serviceVisitDate) {
+    public Service(School school, People people, LocalDateTime serviceVisitDate) {
+        super(school, people);
         this.serviceVisitDate = serviceVisitDate;
     }
 
