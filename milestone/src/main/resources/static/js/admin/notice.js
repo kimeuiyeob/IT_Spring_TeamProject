@@ -209,18 +209,24 @@ $closeImg.on('click', function () {
 })
 
 $modalSubmit.on('click', function () {
-    console.log($(this).closest('.update-notice-modal'))
     if ($(this).closest('.update-notice-modal').length > 0) {
         updateNoticeModal.classList.toggle('show');
     }
     if ($(this).closest('.add-schedule-modal').length > 0) {
         addNoticeModal.classList.toggle('show');
     }
-
-    body.style.overflow = 'auto';
 })
 
+
 $updateNotice.on('click', function () {
+    updateNoticeModal.classList.toggle('show');
+
+    if (updateNoticeModal.classList.contains('show')) {
+        body.style.overflow = 'hidden';
+    }
+})
+
+$(".donate-info-text").on('click', function () {
     updateNoticeModal.classList.toggle('show');
 
     if (updateNoticeModal.classList.contains('show')) {
@@ -272,7 +278,7 @@ $delete.on('mouseout', function () {
 /* -----------------썸머노트-------------- */
 
 jb('.summernote').summernote({
-    placeholder: 'Hello stand alone ui',
+    placeholder: '공지사항을 작성하세요',
     tabsize: 2,
     height: 280,
     toolbar: [
@@ -281,8 +287,8 @@ jb('.summernote').summernote({
         ['color', ['color']],
         ['para', ['ul', 'ol', 'paragraph']],
         ['table', ['table']],
-        ['insert', ['link', 'picture', 'video']],
-        ['view', ['fullscreen', 'codeview', 'help']]
+        ['insert', ['link', 'picture']],
+        ['view', ['help']]
     ]
 });
 
