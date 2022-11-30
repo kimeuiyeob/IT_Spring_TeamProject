@@ -1,6 +1,6 @@
 package com.app.milestone.entity;
 
-import com.app.milestone.type.Category;
+import com.app.milestone.domain.TalentDTO;
 import com.app.milestone.type.Place;
 import com.sun.istack.NotNull;
 import lombok.*;
@@ -22,14 +22,14 @@ public class Talent extends Donation {
     @NotNull
     private LocalDateTime talentAbleDate;
     @NotNull
-    @Enumerated(EnumType.STRING) //enum클래스로 만든걸 여기서 @Enumerated사용, 타입구분지을때 사용
-    private Category category;
+    private String category;
     @NotNull
-    @Enumerated(EnumType.STRING)
-    private Place place;
+//    @Enumerated(EnumType.STRING) //enum클래스로 만든걸 여기서 @Enumerated사용, 타입구분지을때 사용
+    private String place;
 
     @Builder //Builder pattern을 사용하게 해주는 어노테이션!
-    public Talent(String talentTitle, String talentContent, LocalDateTime talentAbleDate, Category category,Place place) {
+    public Talent(School school, People people, String talentTitle, String talentContent, LocalDateTime talentAbleDate, String category,String place) {
+        super(school, people);
         this.talentTitle = talentTitle;
         this.talentContent = talentContent;
         this.talentAbleDate = talentAbleDate;
@@ -38,11 +38,12 @@ public class Talent extends Donation {
 
     }
 
-    public void update(String talentTitle, String talentContent, LocalDateTime talentAbleDate, Category category, Place place) {
-        this.talentTitle = talentTitle;
-        this.talentContent = talentContent;
-        this.talentAbleDate = talentAbleDate;
-        this.category = category;
-        this.place = place;
+    public void update(TalentDTO talentDTO) {
+        Talent talent = talentDTO.toEntity();
+        this.talentTitle = talent.talentTitle;
+        this.talentContent = talent.talentContent;
+        this.talentAbleDate = talent.talentAbleDate;
+        this.category = talent.category;
+        this.place = talent.place;
     }
 }

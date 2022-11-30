@@ -10,4 +10,6 @@ import java.util.List;
 public class Search {
     private List<String> schoolAddress;
     private String schoolName;
+    private String talentTitle;
+    private List<String> talentCategory;
 }
