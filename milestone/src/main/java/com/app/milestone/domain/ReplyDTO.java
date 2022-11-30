@@ -3,7 +3,6 @@ package com.app.milestone.domain;
 import com.app.milestone.entity.Reply;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -11,8 +10,9 @@ import org.springframework.stereotype.Component;
 @Data
 @NoArgsConstructor
 public class ReplyDTO {
-    private Long userId;
+//    private Long replyId;
     private String replyContent;
+    private Long userId;
 
     public Reply toEntity() {
         return Reply.builder()

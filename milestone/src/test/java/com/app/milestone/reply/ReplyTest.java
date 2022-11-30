@@ -2,10 +2,9 @@ package com.app.milestone.reply;
 
 import com.app.milestone.domain.ReplyDTO;
 import com.app.milestone.entity.Reply;
-import com.app.milestone.repository.PeopleRepository;
+import com.app.milestone.entity.School;
 import com.app.milestone.repository.ReplyRepository;
 import com.app.milestone.repository.SchoolRepository;
-import com.app.milestone.repository.UserRepository;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -14,7 +13,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import java.util.List;
+
+import static com.app.milestone.entity.QReply.reply;
 
 @SpringBootTest
 @Transactional
@@ -23,37 +24,57 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ReplyTest {
     @Autowired
     private ReplyRepository replyRepository;
+    @Autowired
+    private SchoolRepository schoolRepository;
+    @Autowired
     private JPAQueryFactory jpaQueryFactory;
 
-//    @Test
-//    public void saveTest() {
-////        userRepository.findById(6L);
-////        SchoolDTO schoolDTO = schoolRepository.findById(6L);
-////        PeopleDTO peopleDTO = peopleRepository.findById(5L);
-//
-//        ReplyDTO replyDTO = new ReplyDTO();
-//        replyDTO.setReplyContent("댓글내용");
-//
-////        replyDTO.setPeopleDTO(peopleDTO);
-////        replyDTO.setSchoolDTO(schoolDTO);
-//
-//        replyRepository.save(replyDTO.toEntity());
-//    }
-//
-//    @Test
-//    public void findTest() {
-//        assertThat(replyRepository.findById(7L).get().getReplyContent()).isEqualTo("댓글내용");
-//    }
-//
-//    @Test
-//    public void updateTest() {
-//        //asserThat 오류가 났을 때 친절히 알려줌~~!!!
-//        Reply reply = replyRepository.findById(7L).get();
-//        reply.update("우린 백작업을 할 수 있다");
-//    }
-//
-//    @Test
-//    public void deleteTest() {
-//        replyRepository.deleteById(7L);
-//    }
+    //    보육원에 댓글 달기
+    @Test
+    public void saveTest() {
+        School schoolId = schoolRepository.findById(11L).get();
+        ReplyDTO replyDTO = new ReplyDTO();
+        replyDTO.setReplyContent("새로운 댓글이에용");
+
+        Reply reply = replyDTO.toEntity();
+        replyRepository.save(reply);
+        reply.changeSchool(schoolId);
+    }
+
+    //    보육원에 달린 댓글 조회
+    @Test
+    public void findByUserIdTest() {
+        jpaQueryFactory
+                .select(reply)
+                .from(reply)
+                .where(reply.school.userId.eq(11L))
+                .fetch()
+                .forEach(reply -> log.info("댓글 : " + reply.getReplyContent()));
+    }
+
+    //    총 댓글 수 조회
+    @Test
+    public void countTest() {
+        List<Long> replyCount = jpaQueryFactory
+                .select(reply.count())
+                .from(reply)
+                .where(reply.school.userId.eq(11L))
+                .fetch();
+
+        log.info("댓글 수 : " + replyCount.get(0));
+    }
+
+    //    댓글 수정
+    @Test
+    public void updateTest() {
+        //asserThat 오류가 났을 때 친절히 알려줌~~!!!
+        Reply reply = replyRepository.findById(14L).get();
+        reply.update("댓글 수정 합니다");
+    }
+
+    //    댓글 삭제
+    @Test
+    public void deleteTest() {
+        replyRepository.deleteById(12L);
+    }
 }
