@@ -1,5 +1,6 @@
 package com.app.milestone.entity;
 
+import com.querydsl.jpa.impl.JPAQuery;
 import com.sun.istack.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -42,6 +43,9 @@ public abstract class User extends Period {
         this.userName = userName;
         this.userPassword = userPassword;
         this.userPhoneNumber = userPhoneNumber;
+        this.donationCount = donationCount;
+    }
+    public void update(int donationCount){
         this.donationCount = donationCount;
     }
 }

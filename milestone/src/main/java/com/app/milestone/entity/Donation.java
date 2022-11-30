@@ -39,4 +39,9 @@ public abstract class Donation extends Period {
         this.school = school;
         this.people = people;
     }
+
+    public void update(int donationCount){
+        this.school.donationCount = donationCount;
+        this.people.donationCount = donationCount;
+    }
 }
