@@ -2,14 +2,12 @@ package com.app.milestone.service;
 
 import com.app.milestone.domain.SchoolDTO;
 import com.app.milestone.domain.ServiceDTO;
-import com.app.milestone.entity.QDonation;
-import com.app.milestone.entity.School;
-import com.app.milestone.entity.Service;
-import com.app.milestone.entity.User;
+import com.app.milestone.entity.*;
 import com.app.milestone.repository.SchoolRepository;
 import com.app.milestone.repository.ServiceRepository;
 import com.app.milestone.repository.UserRepository;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,6 +21,7 @@ import java.util.stream.Collectors;
 @SpringBootTest
 @Transactional
 @Rollback(false)
+@Slf4j
 public class ServiceTest {
     @Autowired
     private ServiceRepository serviceRepository;
@@ -71,6 +70,39 @@ public class ServiceTest {
 //    SET DONATION_COUNT = (SELECT COUNT(DONATION_ID) FROM TBL_DONATION WHERE SCHOOL_USER_ID = 11)
 //    WHERE USER_ID = 11;
 
+    //    개인 일정관리
+    @Test
+    public void findVisitTest() {
+        jpaQueryFactory
+                .select(QSchool.school.schoolName, QSchool.school.address.schoolAddress, QSchool.school.address.schoolAddressDetail, QService.service.serviceVisitDate)
+                .from(QSchool.school, QService.service, QPeople.people, QDonation.donation)
+                .where(QDonation.donation.donationId.eq(QService.service.donationId))
+                .where(QDonation.donation.school.userId.eq(QSchool.school.userId))
+                .where(QDonation.donation.people.userId.eq(2L))
+                .fetch()
+                .stream().map(Object::toString).forEach(log::info);
+    }
+
+//    SELECT S.SCHOOL_NAME, S.SCHOOL_ADDRESS, S.SCHOOL_ADDRESS_DETAIL, SV.SERVICE_VISIT_DATE
+//    FROM TBL_DONATION D, TBL_SCHOOL S, TBL_SERVICE SV, TBL_PEOPLE P
+//    WHERE D.DONATION_ID = SV.DONATION_ID
+//    AND D.SCHOOL_USER_ID = S.USER_ID
+//    AND PEOPLE_USER_ID =2;
+
+    //    보육원 일정관리
+//    @Test
+//    public void findDonationTest() {
+//        jpaQueryFactory
+//                .select(QPeople.people.peopleNickname, QDonation.donation.getType()).
+//                .stream().map(Object::toString).forEach(log::info);
+//    }
+
+
+//    SELECT P.PEOPLE_NICKNAME, D.DONATION_TYPE, D.CREATED_DATE
+//    FROM TBL_DONATION D, TBL_SCHOOL S, TBL_PEOPLE P
+//    WHERE D.SCHOOL_USER_ID = S.USER_ID
+//    AND D.PEOPLE_USER_ID = P.USER_ID
+//    AND S.USER_ID = 11;
 
 //    @Test
 //    public void findTest() {

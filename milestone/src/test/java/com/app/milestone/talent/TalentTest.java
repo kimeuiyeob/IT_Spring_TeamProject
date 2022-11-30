@@ -60,7 +60,7 @@ public class TalentTest {
 
     @Test
     public void saveTest() {
-        People peopleId = peopleRepository.findById(12L).get();
+        People peopleId = peopleRepository.findById(2L).get();
         TalentDTO talentDTO = new TalentDTO();
         talentDTO.setTalentTitle("안녕");
         talentDTO.setTalentContent("하세용");
