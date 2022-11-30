@@ -1,10 +1,7 @@
 package com.app.milestone.entity;
 
 import com.sun.istack.NotNull;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -25,4 +22,12 @@ public class Like extends Period {
     @JoinColumn
     @NotNull
     private People people;
+
+    @Builder
+    public Like(School school, People people) {
+        this.school = school;
+        this.people = people;
+    }
+
+
 }

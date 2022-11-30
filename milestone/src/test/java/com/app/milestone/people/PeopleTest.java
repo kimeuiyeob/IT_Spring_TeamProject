@@ -56,9 +56,18 @@ public class PeopleTest {
     }
 
     //    ======================================================보육원 좋아요===================================================
+    @Autowired
+    private LikeRepository likeRepository;
+
+//    좋아요 누름
     @Test
     public void likeTest() {
-
+//        세션에서 받음
+        People people = peopleRepository.findById(67L).get();
+//        화면에서 받음
+        School school = schoolRepository.findById(123L).get();
+        Like like = new Like(school,people);
+        likeRepository.save(like);
     }
 
     //   =======================================================기부 랭킹================================================
