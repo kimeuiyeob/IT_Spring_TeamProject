@@ -129,9 +129,7 @@ $(".location").mouseout(function () {
 $(".wholeLocation").css({"background-color": "transparent"});
 $(".wholeLocation").css({"border": "solid 1px black"});
 
-
 /*===================글작성 선택 모달==========================*/
-
 
 let $cancels = $('#pencil');
 let $modalWrap = $('.modalWrap');
@@ -160,9 +158,8 @@ document.addEventListener('click', function (e) {
     console.log(e.target);
 })
 
-/*=================================================*/
+/*===================목록 클릭 상세페이지====================*/
 
-/*=================재능 기부 박스 클릭시 해당 상세페이지===========================================================================================*/
 let $talentBox = $('.talentBox');
 let $talentmodal = $('.talentModal');
 
@@ -196,9 +193,8 @@ document.addEventListener('click', function (e) {
     console.log(e.target);
 })
 
-/*==================================================================================================================================================*/
+/*==================모달 내부 카테고리 드랍다운====================*/
 
-/* ==========모달 내부 카테고리 목록 드롭다운=========== */
 const $moreSelect = $('div.inputCos');
 const $moreSelectList = $('div.moreSelectWrap');
 const $moreSelectItems = $('div.moreSelectItem');
@@ -223,7 +219,7 @@ document.addEventListener('click', function (e) {
     }
 })
 
-/* ==========모달 내부 지역 목록 드롭다운=========== */
+/*==================모달 내부 지역 드랍다운====================*/
 
 const $inputCos = $('#inputCos');
 const $moreSelectWrap = $('#moreSelectWrap');
@@ -247,7 +243,7 @@ document.addEventListener('click', function (e) {
         $moreSelectWrap.toggle();
     }
 })
-/*======================글자수 제한======================*/
+/*==================글자수 제한====================*/
 
 const $textareaCos = $('#kimeuiyeob');
 const $contentLength = $('.contentLength');
@@ -261,7 +257,39 @@ $textareaCos.keyup(function (e) {
     }
 })
 
-/*====================검색 옆지역 선택================*/
+/*================글 작성 모달 유효성 검사================ */
+
+let $writeFinish = $('#writeFinish');
+let $writePlease = $('#writePlease');
+
+let $category = $('input[name=bank]');
+let $telent = $('#talent');
+let $cateDate = $('#dateTime');
+let $cateTitle = $('#kim2');
+let $cateContent = $('#kimeuiyeob');
+
+
+$($writeFinish).on('click', function () {
+    if ($category.val() == "" || $telent.val() == "" || $cateDate.val() == "" || $cateTitle.val() == "" || $cateContent.val() == "") {
+        $writePlease.show();
+    } else {
+        $writePlease.hide();
+        $writeFinish.submit();
+        $category.val("") & $cateDate.val("") & $cateTitle.val("") & $cateContent.val("");
+        $telent.val("");
+        $modalWrap.hide();
+    }
+});
+
+/*===============재능기부 목록에서 신청하기 버튼==================*/
+
+let $writeApply = $('#writeApply');
+$($writeApply).on("click",function(){
+    $writeApply.submit();
+    $talentmodal.hide();
+})
+
+/*======================검색 옆지역 선택========================*/
 
 var checkDrop = false;
 var checkLocal = {
@@ -270,7 +298,8 @@ var checkLocal = {
 }
 var saveLocal = [];
 
-/*==================== 드롭다운 버튼==================== */
+
+/*================검색창 옆 지역 드롭다운 버튼=================== */
 
 $("button.dropbtn").on('click', function () {
     if (!checkDrop) {
@@ -307,33 +336,7 @@ $("button.dropbtn").on('click', function () {
     }
 })
 
-
-/*================글 작성 완료 모달 유효성 검사==================== */
-
-let $writeFinish = $('#writeFinish');
-let $writePlease = $('#writePlease');
-
-let $category = $('input[name=bank]');
-let $telent = $('#talent');
-let $cateDate = $('#dateTime');
-let $cateTitle = $('#kim2');
-let $cateContent = $('#kimeuiyeob');
-
-
-$($writeFinish).on('click', function () {
-    if ($category.val() == "" || $telent.val() == "" || $cateDate.val() == "" || $cateTitle.val() == "" || $cateContent.val() == "") {
-        $writePlease.show();
-    } else {
-        $writePlease.hide();
-        $writeFinish.submit();
-        $category.val("") & $cateDate.val("") & $cateTitle.val("") & $cateContent.val("");
-        $telent.val("");
-        $modalWrap.hide();
-    }
-});
-
-
-/*==================== 드롭다운 버튼 선택(중복가능)==================== */
+/*==============검색창 옆 드롭다운 버튼 선택(중복가능)============== */
 
 $(".dropLoc").on('click', function () {
 
