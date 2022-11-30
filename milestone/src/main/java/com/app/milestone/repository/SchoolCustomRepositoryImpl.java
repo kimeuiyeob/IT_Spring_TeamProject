@@ -18,13 +18,22 @@ import static com.app.milestone.entity.QSchool.school;
 public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
     private final JPAQueryFactory jpaQueryFactory;
 
+//    //  메인 도움이 필요해요
+//    @Override
+//    public List<School> findAllByDonationCount(Pageable pageable) {
+//        return jpaQueryFactory.selectFrom(school)
+//                .orderBy(school.donationCount.asc())
+//                .offset(pageable.getOffset())
+//                .limit(pageable.getPageSize())
+//                .fetch();
+//    }
     //  메인 도움이 필요해요
     @Override
-    public List<School> findAllByDonationCount(Pageable pageable) {
+    public List<School> findAllByDonationCount() {
         return jpaQueryFactory.selectFrom(school)
                 .orderBy(school.donationCount.asc())
-                .offset(pageable.getOffset())
-                .limit(pageable.getPageSize())
+                .offset(0)
+                .limit(5)
                 .fetch();
     }
 

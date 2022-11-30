@@ -1,4 +1,4 @@
-package com.app.milestone.service;
+package com.app.milestone.repository.service;
 
 import com.app.milestone.domain.SchoolDTO;
 import com.app.milestone.domain.ServiceDTO;

@@ -1,4 +1,4 @@
-package com.app.milestone.school;
+package com.app.milestone.repository.school;
 
 import com.app.milestone.domain.SchoolDTO;
 import com.app.milestone.domain.Search;
@@ -83,7 +83,7 @@ public class SchoolTest {
     @Test
     public void findAllByDonationCountTest() {
         Pageable pageable = PageRequest.of(0, 5);
-        schoolRepository.findAllByDonationCount(pageable).forEach(o -> log.info("보육원 이름" + o.getSchoolName() + "기부 받은 횟수" + o.getDonationCount()));
+//        schoolRepository.findAllByDonationCount(pageable).forEach(o -> log.info("보육원 이름" + o.getSchoolName() + "기부 받은 횟수" + o.getDonationCount()));
     }
 
     //  보육원 목록(10개, 지역과 보육원 이름 검색 조건추가 후 최신순)

@@ -1,4 +1,4 @@
-package com.app.milestone.people;
+package com.app.milestone.repository.people;
 
 import com.app.milestone.domain.PeopleDTO;
 import com.app.milestone.entity.*;

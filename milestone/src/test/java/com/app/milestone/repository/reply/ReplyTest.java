@@ -1,4 +1,4 @@
-package com.app.milestone.reply;
+package com.app.milestone.repository.reply;
 
 import com.app.milestone.domain.ReplyDTO;
 import com.app.milestone.entity.Reply;
