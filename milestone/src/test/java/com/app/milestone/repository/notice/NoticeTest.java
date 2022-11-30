@@ -1,4 +1,4 @@
-package com.app.milestone.notice;
+package com.app.milestone.repository.notice;
 
 import com.app.milestone.domain.NoticeDTO;
 import com.app.milestone.entity.Notice;

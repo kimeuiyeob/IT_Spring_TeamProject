@@ -1,4 +1,4 @@
-package com.app.milestone.withdrawal;
+package com.app.milestone.repository.withdrawal;
 
 import com.app.milestone.domain.WithdrawalDTO;
 import com.app.milestone.entity.Withdrawal;

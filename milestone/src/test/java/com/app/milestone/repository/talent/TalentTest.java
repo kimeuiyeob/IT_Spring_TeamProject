@@ -1,7 +1,5 @@
-package com.app.milestone.talent;
+package com.app.milestone.repository.talent;
 
-import com.app.milestone.domain.PeopleDTO;
-import com.app.milestone.domain.ReplyDTO;
 import com.app.milestone.domain.Search;
 import com.app.milestone.domain.TalentDTO;
 import com.app.milestone.entity.*;
@@ -9,7 +7,6 @@ import com.app.milestone.repository.PeopleRepository;
 import com.app.milestone.repository.TalentRepository;
 import com.app.milestone.type.Place;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import jdk.jfr.Category;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
