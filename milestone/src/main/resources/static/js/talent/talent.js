@@ -289,179 +289,157 @@ $($writeApply).on("click",function(){
     $talentmodal.hide();
 })
 
-/*======================검색 옆지역 선택========================*/
+/*==============검색창 옆 드롭다운 버튼 선택(중복가능)============== */
+var checkDrop=false;
+var checkLocal={checkSeoul:false,checkKyungki:false,checkKangwon:false,
+    checkChungcheong:false,checkJeolla:false,checkGyeongsang:false,checkJeju:false};
+/* 저장된 지역 */
+var saveLocal=[];
 
-var checkDrop = false;
-var checkLocal = {
-    checkSeoul: false, checkKyungki: false, checkKangwon: false,
-    checkChungcheong: false, checkJeolla: false, checheckGyeong: false, checkJeju: false
-}
-var saveLocal = [];
+/* 드롭다운 버튼 */
+$("button.dropbtn").on('click',function(){
 
-
-/*================검색창 옆 지역 드롭다운 버튼=================== */
-
-$("button.dropbtn").on('click', function () {
-    if (!checkDrop) {
+    if(!checkDrop){
         $(".dropdown-content").show();
-        checkDrop = true;
-    } else {
+        checkDrop=true;
+    }else{
+        var placeholderText="";
+
         $(".dropdown-content").hide();
-        checkDrop = false;
+        checkDrop=false;
 
         /* 눌린 값들 불러와서 검색창에 띄우기 */
-        var changedPlaceHolder = "";
-        console.log("saveLocal : " + saveLocal);
-        if (saveLocal.length) {
-            saveLocal.forEach(element => {
-                changedPlaceHolder += "-" + element;
-            });
-
-            placeHolderArr = changedPlaceHolder.split("-");
-            var text = "";
-
-            /* 저장한 지역들 placeholder에 띄워줌 */
-            placeHolderArr.forEach(element => {
-                /* element와 일치하는 className이 있으면 해당 값 가져옴 */
-                for (var i = 0; i < 7; i++) {
-                    if (element == $(".dropLoc").eq(i).attr('class').split(" ")[1]) {
-                        text += " " + $(".dropLoc").eq(i).text();
-                    }
-                }
-            });
-            $(".placeholder").text(text);
-        } else {
+        if(0<saveLocal.length && saveLocal.length<7){
+            for (let i = 0; i < saveLocal.length; i++) {
+                placeholderText += saveLocal[i]+" ";
+            }
+            $(".placeholder").text(placeholderText);
+        }else {
+            // console.log(saveLocal.length);
             $(".placeholder").text("전체");
         }
     }
 })
 
-/*==============검색창 옆 드롭다운 버튼 선택(중복가능)============== */
 
-$(".dropLoc").on('click', function () {
+/* 드롭다운 버튼 선택(중복가능) */
+$(".dropLoc").on('click',function(){
 
-    switch ($(this).attr('class').split(" ")[1] + "") {
-        case "checkSeoul" :
-            if (!checkLocal.checkSeoul && saveLocal) {
-                $(this).css('background-color', '#e2e2e2');
-                checkLocal.checkSeoul = true;
-                saveLocal.push("checkSeoul");
-            } else {
-                $(this).css('background-color', 'transparent');
-                if (saveLocal) {
-                    for (var i = 0; i < saveLocal.length; i++) {
-                        if (saveLocal[i] == "checkSeoul") {
-                            saveLocal.splice(i, 1);
-                            console.log("splice로 삭제하고 false로 바꿈")
-                            checkLocal.checkSeoul = false;
+    switch($(this).text()){
+        case "서울" :
+            if(!checkLocal.checkSeoul && saveLocal){
+                $(this).css('background-color','#e2e2e2');
+                checkLocal.checkSeoul=true;
+                saveLocal.push("서울");
+            }else{
+                $(this).css('background-color','transparent');
+                if(saveLocal){
+                    for(var i = 0; i<saveLocal.length; i++){
+                        if(saveLocal[i]=="서울"){
+                            saveLocal.splice(i,1);
+                            checkLocal.checkSeoul=false;
                         }
                     }
                 }
             }
             break;
-        case "checkKyungki" :
-            if (!checkLocal.checkKyungki && saveLocal) {
-                $(this).css('background-color', '#e2e2e2');
-                checkLocal.checkKyungki = true;
-                saveLocal.push("checkKyungki");
-            } else {
-                $(this).css('background-color', 'transparent');
-                if (saveLocal) {
-                    for (var i = 0; i < saveLocal.length; i++) {
-                        if (saveLocal[i] == "checkKyungki") {
-                            saveLocal.splice(i, 1);
-                            console.log("splice로 삭제하고 false로 바꿈")
-                            checkLocal.checkKyungki = false;
+        case "경기도" :
+            if(!checkLocal.checkKyungki && saveLocal){
+                $(this).css('background-color','#e2e2e2');
+                checkLocal.checkKyungki=true;
+                saveLocal.push("경기도");
+            }else{
+                $(this).css('background-color','transparent');
+                if(saveLocal){
+                    for(var i = 0; i<saveLocal.length; i++){
+                        if(saveLocal[i]=="경기도"){
+                            saveLocal.splice(i,1);
+                            checkLocal.checkKyungki=false;
                         }
                     }
                 }
             }
             break;
-        case "checkKangwon" :
-            if (!checkLocal.checkKangwon && saveLocal) {
-                $(this).css('background-color', '#e2e2e2');
-                checkLocal.checkKangwon = true;
-                saveLocal.push("checkKangwon");
-            } else {
-                $(this).css('background-color', 'transparent');
-                if (saveLocal) {
-                    for (var i = 0; i < saveLocal.length; i++) {
-                        if (saveLocal[i] == "checkKangwon") {
-                            saveLocal.splice(i, 1);
-                            console.log("splice로 삭제하고 false로 바꿈")
-                            checkLocal.checkKangwon = false;
+        case "강원도" :
+            if(!checkLocal.checkKangwon && saveLocal){
+                $(this).css('background-color','#e2e2e2');
+                checkLocal.checkKangwon=true;
+                saveLocal.push("강원도");
+            }else{
+                $(this).css('background-color','transparent');
+                if(saveLocal){
+                    for(var i = 0; i<saveLocal.length; i++){
+                        if(saveLocal[i]=="강원도"){
+                            saveLocal.splice(i,1);
+                            checkLocal.checkKangwon=false;
                         }
                     }
                 }
             }
             break;
-        case "checkChungcheong" :
-            if (!checkLocal.checkChungcheong && saveLocal) {
-                $(this).css('background-color', '#e2e2e2');
-                checkLocal.checkChungcheong = true;
-                saveLocal.push("checkChungcheong");
-            } else {
-                $(this).css('background-color', 'transparent');
-                if (saveLocal) {
-                    for (var i = 0; i < saveLocal.length; i++) {
-                        if (saveLocal[i] == "checkChungcheong") {
-                            saveLocal.splice(i, 1);
-                            console.log("splice로 삭제하고 false로 바꿈")
-                            checkLocal.checkChungcheong = false;
+        case "충청도" :
+            if(!checkLocal.checkChungcheong && saveLocal){
+                $(this).css('background-color','#e2e2e2');
+                checkLocal.checkChungcheong=true;
+                saveLocal.push("충청도");
+            }else{
+                $(this).css('background-color','transparent');
+                if(saveLocal){
+                    for(var i = 0; i<saveLocal.length; i++){
+                        if(saveLocal[i]=="충청도"){
+                            saveLocal.splice(i,1);
+                            checkLocal.checkChungcheong=false;
                         }
                     }
                 }
             }
             break;
-        case "checkJeolla" :
-            if (!checkLocal.checkJeolla && saveLocal) {
-                $(this).css('background-color', '#e2e2e2');
-                checkLocal.checkJeolla = true;
-                saveLocal.push("checkJeolla");
-            } else {
-                $(this).css('background-color', 'transparent');
-                if (saveLocal) {
-                    for (var i = 0; i < saveLocal.length; i++) {
-                        if (saveLocal[i] == "checkJeolla") {
-                            saveLocal.splice(i, 1);
-                            console.log("splice로 삭제하고 false로 바꿈")
-                            checkLocal.checkJeolla = false;
+        case "전라도" :
+            if(!checkLocal.checkJeolla && saveLocal){
+                $(this).css('background-color','#e2e2e2');
+                checkLocal.checkJeolla=true;
+                saveLocal.push("전라도");
+            }else{
+                $(this).css('background-color','transparent');
+                if(saveLocal){
+                    for(var i = 0; i<saveLocal.length; i++){
+                        if(saveLocal[i]=="전라도"){
+                            saveLocal.splice(i,1);
+                            checkLocal.checkJeolla=false;
                         }
                     }
                 }
             }
             break;
-        case "checkGyeong" :
-            if (!checkLocal.checkGyeong && saveLocal) {
-                $(this).css('background-color', '#e2e2e2');
-                checkLocal.checkGyeong = true;
-                saveLocal.push("checkGyeong");
-            } else {
-                $(this).css('background-color', 'transparent');
-                if (saveLocal) {
-                    for (var i = 0; i < saveLocal.length; i++) {
-                        if (saveLocal[i] == "checkGyeong") {
-                            saveLocal.splice(i, 1);
-                            console.log("splice로 삭제하고 false로 바꿈")
-                            checkLocal.checkGyeong = false;
+        case "경상도" :
+            if(!checkLocal.checkGyeongsang && saveLocal){
+                $(this).css('background-color','#e2e2e2');
+                checkLocal.checkGyeongsang=true;
+                saveLocal.push("경상도");
+            }else{
+                $(this).css('background-color','transparent');
+                if(saveLocal){
+                    for(var i = 0; i<saveLocal.length; i++){
+                        if(saveLocal[i]=="경상도"){
+                            saveLocal.splice(i,1);
+                            checkLocal.checkGyeongsang=false;
                         }
                     }
                 }
             }
             break;
-        case "checkJeju" :
-            if (!checkLocal.checkJeju && saveLocal) {
-                $(this).css('background-color', '#e2e2e2');
-                checkLocal.checkJeju = true;
-                saveLocal.push("checkJeju");
-            } else {
-                $(this).css('background-color', 'transparent');
-                if (saveLocal) {
-                    for (var i = 0; i < saveLocal.length; i++) {
-                        if (saveLocal[i] == "checkJeju") {
-                            saveLocal.splice(i, 1);
-                            console.log("splice로 삭제하고 false로 바꿈")
-                            checkLocal.checkJeju = false;
+        case "제주도" :
+            if(!checkLocal.checkJeju && saveLocal){
+                $(this).css('background-color','#e2e2e2');
+                checkLocal.checkJeju=true;
+                saveLocal.push("제주도");
+            }else{
+                $(this).css('background-color','transparent');
+                if(saveLocal){
+                    for(var i = 0; i<saveLocal.length; i++){
+                        if(saveLocal[i]=="제주도"){
+                            saveLocal.splice(i,1);
+                            checkLocal.checkJeju=false;
                         }
                     }
                 }
@@ -469,10 +447,7 @@ $(".dropLoc").on('click', function () {
             break;
     }
     console.log(saveLocal);
-
 });
-
-
 
 
 
