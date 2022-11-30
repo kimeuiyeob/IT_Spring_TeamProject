@@ -1,7 +1,10 @@
 package com.app.milestone.entity;
 
 import com.sun.istack.NotNull;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -22,9 +25,9 @@ public class Service extends Donation {
     public Service(LocalDateTime serviceVisitDate) {
         this.serviceVisitDate = serviceVisitDate;
     }
+
     public void update(LocalDateTime serviceVisitDate) {
         this.serviceVisitDate = serviceVisitDate;
     }
-
 
 }
