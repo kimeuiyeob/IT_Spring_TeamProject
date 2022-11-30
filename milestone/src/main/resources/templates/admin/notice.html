@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>이정표 | 관리자페이지</title>
+    <title>마일스톤 | 관리자페이지</title>
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/admin/all.css">
     <link rel="icon" href="/imgs/fix/favicon.png">
@@ -13,7 +13,7 @@
 
 <body onload="showClock()">
 <!-- 공지사항 수정 모달창 -->
-<div class="update-notice-modal">
+<div class="update-notice-modal" style="z-index: 5555;">
     <div class="update-notice-modal-body">
         <div class="notice-modal-header">
             <h2>공지사항 수정</h2>
@@ -25,7 +25,7 @@
                     제목
                 </div>
                 <div class="menu-sub-dropdown-item-title-margin">
-                    <input class="modal-info-padding" type="text">
+                    <input class="modal-info-padding" type="text" placeholder="제목을 입력하세요" style="font-size: 14px">
                 </div>
             </div>
             <div class="schedule-info-box">
@@ -41,7 +41,7 @@
 <div class="add-schedule-modal">
     <div class="add-schedule-modal-body">
         <div class="notice-modal-header">
-            <h2>공지사항 추가</h2>
+            <h2>공지사항 작성</h2>
             <div class="close-img"></div>
         </div>
         <div class="notice-modal-body">
@@ -50,7 +50,7 @@
                     제목
                 </div>
                 <div class="menu-sub-dropdown-item-title-margin">
-                    <input class="modal-info-padding" type="text">
+                    <input class="modal-info-padding" type="text"  placeholder="제목을 입력하세요" style="font-size: 14px">
                 </div>
             </div>
             <div class="schedule-info-box">
@@ -141,7 +141,7 @@
                                     <span class="menu-bullet">
                                         <span class="bullet"></span>
                                     </span>
-                                <span class="menu-title">전체 회원 목록</span>
+                                <span class="menu-title">전체 회원</span>
                             </a>
                         </div>
                         <div class="menu-item">
@@ -149,7 +149,7 @@
                                     <span class="menu-bullet">
                                         <span class="bullet"></span>
                                     </span>
-                                <span class="menu-title">보육원 사용자 목록</span>
+                                <span class="menu-title">보육원 회원</span>
                             </a>
                         </div>
                         <div class="menu-item">
@@ -180,7 +180,7 @@
                                     <span class="menu-bullet">
                                         <span class="bullet"></span>
                                     </span>
-                                <span class="menu-title">재능기부 목록</span>
+                                <span class="menu-title">재능기부</span>
                             </a>
                         </div>
                     </div>
@@ -203,7 +203,7 @@
                                     <span class="menu-bullet">
                                         <span class="bullet"></span>
                                     </span>
-                                <span class="menu-title">금액 기부</span>
+                                <span class="menu-title">현금기부</span>
                             </a>
                         </div>
                         <div class="menu-item">
@@ -222,7 +222,7 @@
                             <span class="menu-icon">
                                 <span id="supportGuest-icon-img"></span>
                             </span>
-                            <span class="menu-title">공지사항</span>
+                            <span class="menu-title">공지사항 관리</span>
                             <span class="menu-arrow">
                                 <span class="arrow-icon"></span>
                             </span>
@@ -233,7 +233,7 @@
                                     <span class="menu-bullet">
                                         <span class="bullet"></span>
                                     </span>
-                                <span class="menu-title">공지사항 관리</span>
+                                <span class="menu-title">공지사항</span>
                             </a>
                         </div>
                     </div>
@@ -260,7 +260,7 @@
         <div id="toolbar">
             <div id="toolbarTitle">
                 <span id="toolbarTitleText">공지사항 관리</span>
-                <span id="toolbarTitleSub">홈 - 공지사항 - 공지사항 관리</span>
+                <span id="toolbarTitleSub">홈 - 공지사항 관리 - 공지사항</span>
             </div>
         </div>
         <!-- 메인 컨텐츠 -->
@@ -374,7 +374,7 @@
 <!--                                </th>-->
                                 <th class="card-body-title-padding" style="width: 50%;">
                                     <div class="card-body-title-height">
-                                        공지사항 제목
+                                        제목
                                     </div>
                                 </th>
                                 <th class="card-body-title-padding" style="width: 32%;">

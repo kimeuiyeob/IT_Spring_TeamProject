@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>이정표 | 관리자페이지</title>
+    <title>마일스톤 | 관리자페이지</title>
     <link rel="stylesheet" href="/css/admin/all.css">
     <link rel="icon" href="/imgs/fix/favicon.png">
     <!-- <link rel="stylesheet" href="mileStoneManager_community.css"> -->
@@ -91,7 +91,7 @@
                                     <span class="menu-bullet">
                                         <span class="bullet"></span>
                                     </span>
-                                <span class="menu-title">전체 회원 목록</span>
+                                <span class="menu-title">전체 회원</span>
                             </a>
                         </div>
                         <div class="menu-item">
@@ -99,7 +99,7 @@
                                     <span class="menu-bullet">
                                         <span class="bullet"></span>
                                     </span>
-                                <span class="menu-title">보육원 사용자 목록</span>
+                                <span class="menu-title">보육원 회원</span>
                             </a>
                         </div>
                         <div class="menu-item">
@@ -130,7 +130,7 @@
                                     <span class="menu-bullet">
                                         <span class="bullet"></span>
                                     </span>
-                                <span class="menu-title">재능기부 목록</span>
+                                <span class="menu-title">재능기부</span>
                             </a>
                         </div>
                     </div>
@@ -153,7 +153,7 @@
                                     <span class="menu-bullet">
                                         <span class="bullet"></span>
                                     </span>
-                                <span class="menu-title">금액 기부</span>
+                                <span class="menu-title">현금기부</span>
                             </a>
                         </div>
                         <div class="menu-item">
@@ -172,7 +172,7 @@
                             <span class="menu-icon">
                                 <span id="supportGuest-icon-img"></span>
                             </span>
-                            <span class="menu-title">공지사항</span>
+                            <span class="menu-title">공지사항 관리</span>
                             <span class="menu-arrow">
                                 <span class="arrow-icon"></span>
                             </span>
@@ -183,7 +183,7 @@
                                     <span class="menu-bullet">
                                         <span class="bullet"></span>
                                     </span>
-                                <span class="menu-title">공지사항 관리</span>
+                                <span class="menu-title">공지사항</span>
                             </a>
                         </div>
                     </div>
@@ -210,7 +210,7 @@
         <div id="toolbar">
             <div id="toolbarTitle">
                 <span id="toolbarTitleText">재능기부 목록</span>
-                <span id="toolbarTitleSub">홈 - 재능기부 관리 - 재능기부 목록</span>
+                <span id="toolbarTitleSub">홈 - 재능기부 관리 - 재능기부</span>
             </div>
         </div>
         <!-- 메인 컨텐츠 -->
@@ -286,7 +286,7 @@
                     </div>
                     <!-- 카드 메인 -->
                     <div class="card-body">
-                        <!-- 기부 목록 -->
+                        <!-- 재능기부 목록 -->
                         <table>
                             <thead class="card-body-title-box">
                             <tr class="card-body-line">
@@ -301,24 +301,29 @@
                                         작성자
                                     </div>
                                 </th>
-                                <th class="card-body-title-padding" style="width: 13%;">
+                                <th class="card-body-title-padding" style="width: 15%;">
                                     <div class="card-body-title-height">
                                         닉네임
                                     </div>
                                 </th>
                                 <th class="card-body-title-padding" style="width: 13%;">
                                     <div class="card-body-title-height">
-                                        재능기부 분류
+                                        카테고리
                                     </div>
                                 </th>
-                                <th class="card-body-title-padding" style="width: 25%;">
+                                <th class="card-body-title-padding" style="width: 13%;">
                                     <div class="card-body-title-height">
-                                        재능기부 타이틀
+                                        지역
                                     </div>
                                 </th>
-                                <th class="card-body-title-padding" style="width: 23%;">
+                                <th class="card-body-title-padding" style="width: 17%;">
                                     <div class="card-body-title-height">
-                                        작성일
+                                        게시글 작성날짜
+                                    </div>
+                                </th>
+                                <th class="card-body-title-padding" style="width: 17%;">
+                                    <div class="card-body-title-height">
+                                        재능기부 날짜
                                     </div>
                                 </th>
                             </tr>
@@ -333,14 +338,14 @@
                                 </th>
                                 <th class="card-body-title-padding" style="width: 17%;">
                                     <div class="donater-info">
-                                        <div class="donater-info-img1"></div>
+                                        <!--<div class="donater-info-img1"></div>-->
                                         <div class="donater-info-text">
                                             <div class="donater-name">박해준</div>
                                             <div>phj@milestone.com</div>
                                         </div>
                                     </div>
                                 </th>
-                                <th class="card-body-title-padding" style="width: 13%;">
+                                <th class="card-body-title-padding" style="width: 15%;">
                                     <div class="donate-info-height">
                                         AxlRose
                                     </div>
@@ -352,12 +357,17 @@
                                         </div>
                                     </div>
                                 </th>
-                                <th class="card-body-title-padding" style="width: 25%;">
+                                <th class="card-body-title-padding" style="width: 13%;">
                                     <div class="donate-info-height">
-                                        눈치와 세치 혀로 세상을 살아가는법 강의 해드립니다
+                                        서울
                                     </div>
                                 </th>
-                                <th class="card-body-title-padding" style="width: 23%;">
+                                <th class="card-body-title-padding" style="width: 17%;">
+                                    <div class="donate-info-height">
+                                        2022년 11월 22일 19시 39분
+                                    </div>
+                                </th>
+                                <th class="card-body-title-padding" style="width: 17%;">
                                     <div class="donate-info-height">
                                         2022년 11월 22일 19시 39분
                                     </div>
@@ -370,14 +380,14 @@
                                 </th>
                                 <th class="card-body-title-padding" style="width: 17%;">
                                     <div class="donater-info">
-                                        <div class="donater-info-img1"></div>
+                                        <!--<div class="donater-info-img1"></div>-->
                                         <div class="donater-info-text">
                                             <div class="donater-name">박해준</div>
                                             <div>phj@milestone.com</div>
                                         </div>
                                     </div>
                                 </th>
-                                <th class="card-body-title-padding" style="width: 13%;">
+                                <th class="card-body-title-padding" style="width: 15%;">
                                     <div class="donate-info-height">
                                         AxlRose
                                     </div>
@@ -389,12 +399,17 @@
                                         </div>
                                     </div>
                                 </th>
-                                <th class="card-body-title-padding" style="width: 25%;">
+                                <th class="card-body-title-padding" style="width: 13%;">
                                     <div class="donate-info-height">
-                                        눈치와 세치 혀로 세상을 살아가는법 강의 해드립니다
+                                        서울
                                     </div>
                                 </th>
-                                <th class="card-body-title-padding" style="width: 23%;">
+                                <th class="card-body-title-padding" style="width: 17%;">
+                                    <div class="donate-info-height">
+                                        2022년 11월 22일 19시 39분
+                                    </div>
+                                </th>
+                                <th class="card-body-title-padding" style="width: 17%;">
                                     <div class="donate-info-height">
                                         2022년 11월 22일 19시 39분
                                     </div>
@@ -407,14 +422,14 @@
                                 </th>
                                 <th class="card-body-title-padding" style="width: 17%;">
                                     <div class="donater-info">
-                                        <div class="donater-info-img1"></div>
+                                        <!--<div class="donater-info-img1"></div>-->
                                         <div class="donater-info-text">
                                             <div class="donater-name">박해준</div>
                                             <div>phj@milestone.com</div>
                                         </div>
                                     </div>
                                 </th>
-                                <th class="card-body-title-padding" style="width: 13%;">
+                                <th class="card-body-title-padding" style="width: 15%;">
                                     <div class="donate-info-height">
                                         AxlRose
                                     </div>
@@ -426,12 +441,17 @@
                                         </div>
                                     </div>
                                 </th>
-                                <th class="card-body-title-padding" style="width: 25%;">
+                                <th class="card-body-title-padding" style="width: 13%;">
                                     <div class="donate-info-height">
-                                        눈치와 세치 혀로 세상을 살아가는법 강의 해드립니다
+                                        서울
                                     </div>
                                 </th>
-                                <th class="card-body-title-padding" style="width: 23%;">
+                                <th class="card-body-title-padding" style="width: 17%;">
+                                    <div class="donate-info-height">
+                                        2022년 11월 22일 19시 39분
+                                    </div>
+                                </th>
+                                <th class="card-body-title-padding" style="width: 17%;">
                                     <div class="donate-info-height">
                                         2022년 11월 22일 19시 39분
                                     </div>
@@ -444,14 +464,14 @@
                                 </th>
                                 <th class="card-body-title-padding" style="width: 17%;">
                                     <div class="donater-info">
-                                        <div class="donater-info-img1"></div>
+                                        <!--<div class="donater-info-img1"></div>-->
                                         <div class="donater-info-text">
                                             <div class="donater-name">박해준</div>
                                             <div>phj@milestone.com</div>
                                         </div>
                                     </div>
                                 </th>
-                                <th class="card-body-title-padding" style="width: 13%;">
+                                <th class="card-body-title-padding" style="width: 15%;">
                                     <div class="donate-info-height">
                                         AxlRose
                                     </div>
@@ -463,12 +483,17 @@
                                         </div>
                                     </div>
                                 </th>
-                                <th class="card-body-title-padding" style="width: 25%;">
+                                <th class="card-body-title-padding" style="width: 13%;">
                                     <div class="donate-info-height">
-                                        눈치와 세치 혀로 세상을 살아가는법 강의 해드립니다
+                                        서울
                                     </div>
                                 </th>
-                                <th class="card-body-title-padding" style="width: 23%;">
+                                <th class="card-body-title-padding" style="width: 17%;">
+                                    <div class="donate-info-height">
+                                        2022년 11월 22일 19시 39분
+                                    </div>
+                                </th>
+                                <th class="card-body-title-padding" style="width: 17%;">
                                     <div class="donate-info-height">
                                         2022년 11월 22일 19시 39분
                                     </div>
@@ -481,14 +506,14 @@
                                 </th>
                                 <th class="card-body-title-padding" style="width: 17%;">
                                     <div class="donater-info">
-                                        <div class="donater-info-img1"></div>
+                                        <!--<div class="donater-info-img1"></div>-->
                                         <div class="donater-info-text">
                                             <div class="donater-name">박해준</div>
                                             <div>phj@milestone.com</div>
                                         </div>
                                     </div>
                                 </th>
-                                <th class="card-body-title-padding" style="width: 13%;">
+                                <th class="card-body-title-padding" style="width: 15%;">
                                     <div class="donate-info-height">
                                         AxlRose
                                     </div>
@@ -500,12 +525,17 @@
                                         </div>
                                     </div>
                                 </th>
-                                <th class="card-body-title-padding" style="width: 25%;">
+                                <th class="card-body-title-padding" style="width: 13%;">
                                     <div class="donate-info-height">
-                                        눈치와 세치 혀로 세상을 살아가는법 강의 해드립니다
+                                        서울
                                     </div>
                                 </th>
-                                <th class="card-body-title-padding" style="width: 23%;">
+                                <th class="card-body-title-padding" style="width: 17%;">
+                                    <div class="donate-info-height">
+                                        2022년 11월 22일 19시 39분
+                                    </div>
+                                </th>
+                                <th class="card-body-title-padding" style="width: 17%;">
                                     <div class="donate-info-height">
                                         2022년 11월 22일 19시 39분
                                     </div>
@@ -518,14 +548,14 @@
                                 </th>
                                 <th class="card-body-title-padding" style="width: 17%;">
                                     <div class="donater-info">
-                                        <div class="donater-info-img1"></div>
+                                        <!--<div class="donater-info-img1"></div>-->
                                         <div class="donater-info-text">
                                             <div class="donater-name">박해준</div>
                                             <div>phj@milestone.com</div>
                                         </div>
                                     </div>
                                 </th>
-                                <th class="card-body-title-padding" style="width: 13%;">
+                                <th class="card-body-title-padding" style="width: 15%;">
                                     <div class="donate-info-height">
                                         AxlRose
                                     </div>
@@ -537,12 +567,17 @@
                                         </div>
                                     </div>
                                 </th>
-                                <th class="card-body-title-padding" style="width: 25%;">
+                                <th class="card-body-title-padding" style="width: 13%;">
                                     <div class="donate-info-height">
-                                        눈치와 세치 혀로 세상을 살아가는법 강의 해드립니다
+                                        서울
                                     </div>
                                 </th>
-                                <th class="card-body-title-padding" style="width: 23%;">
+                                <th class="card-body-title-padding" style="width: 17%;">
+                                    <div class="donate-info-height">
+                                        2022년 11월 22일 19시 39분
+                                    </div>
+                                </th>
+                                <th class="card-body-title-padding" style="width: 17%;">
                                     <div class="donate-info-height">
                                         2022년 11월 22일 19시 39분
                                     </div>
@@ -555,14 +590,14 @@
                                 </th>
                                 <th class="card-body-title-padding" style="width: 17%;">
                                     <div class="donater-info">
-                                        <div class="donater-info-img1"></div>
+                                        <!--<div class="donater-info-img1"></div>-->
                                         <div class="donater-info-text">
                                             <div class="donater-name">박해준</div>
                                             <div>phj@milestone.com</div>
                                         </div>
                                     </div>
                                 </th>
-                                <th class="card-body-title-padding" style="width: 13%;">
+                                <th class="card-body-title-padding" style="width: 15%;">
                                     <div class="donate-info-height">
                                         AxlRose
                                     </div>
@@ -574,12 +609,17 @@
                                         </div>
                                     </div>
                                 </th>
-                                <th class="card-body-title-padding" style="width: 25%;">
+                                <th class="card-body-title-padding" style="width: 13%;">
                                     <div class="donate-info-height">
-                                        눈치와 세치 혀로 세상을 살아가는법 강의 해드립니다
+                                        서울
                                     </div>
                                 </th>
-                                <th class="card-body-title-padding" style="width: 23%;">
+                                <th class="card-body-title-padding" style="width: 17%;">
+                                    <div class="donate-info-height">
+                                        2022년 11월 22일 19시 39분
+                                    </div>
+                                </th>
+                                <th class="card-body-title-padding" style="width: 17%;">
                                     <div class="donate-info-height">
                                         2022년 11월 22일 19시 39분
                                     </div>
