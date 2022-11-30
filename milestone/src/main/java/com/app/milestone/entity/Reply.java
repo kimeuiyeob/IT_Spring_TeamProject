@@ -1,9 +1,10 @@
 package com.app.milestone.entity;
 
-import com.app.milestone.embeddable.Address;
-import com.app.milestone.embeddable.Introduce;
 import com.sun.istack.NotNull;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -18,13 +19,17 @@ public class Reply extends Period {
     @NotNull
     private String replyContent;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn
+    @JoinColumn()
     @NotNull
     private School school;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
     @NotNull
     private People people;
+
+    public void changeSchool(School school) {
+        this.school = school;
+    }
 
     @Builder
     public Reply(String replyContent) {

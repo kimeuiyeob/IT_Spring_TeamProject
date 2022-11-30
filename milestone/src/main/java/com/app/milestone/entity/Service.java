@@ -17,6 +17,7 @@ public class Service extends Donation {
     @NotNull
     private LocalDateTime serviceVisitDate;
 
+
     @Builder
     public Service(LocalDateTime serviceVisitDate) {
         this.serviceVisitDate = serviceVisitDate;
@@ -24,4 +25,6 @@ public class Service extends Donation {
     public void update(LocalDateTime serviceVisitDate) {
         this.serviceVisitDate = serviceVisitDate;
     }
+
+
 }

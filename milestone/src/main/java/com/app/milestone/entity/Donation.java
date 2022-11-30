@@ -4,7 +4,6 @@ import com.sun.istack.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -27,6 +26,14 @@ public abstract class Donation extends Period {
     @JoinColumn
     @NotNull
     private People people;
+
+    public void changeSchool(School school) {
+        this.school = school;
+    }
+
+    public void changePeople(People people) {
+        this.people = people;
+    }
 
     public Donation(School school, People people) {
         this.school = school;
