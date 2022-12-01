@@ -16,7 +16,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class ServiceDTO {
     private Long userId;
-    private String donationType;
     private LocalDateTime serviceVisitDate;
 
     public Service toEntity() {
