@@ -52,7 +52,7 @@ public class NoticeTest {
         notice.update("[공지]공지로 수정합니다.", "수정내용");
     }
 
-//    공지사항 전체조회(오름차순)
+//    공지사항 전체조회
     @Test
     public void findAllTest() {
         jpaQueryFactory.select(notice).from(notice).fetch().forEach(notice -> log.info("공지사항 : "+notice.getNoticeTitle()));

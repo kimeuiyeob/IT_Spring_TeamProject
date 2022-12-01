@@ -13,15 +13,18 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 public class WithdrawalDTO {
     private String withdrawalReason;
+    private String withdrawalUserType;
 
     public Withdrawal toEntity() {
         return Withdrawal.builder()
                 .withdrawalReason(withdrawalReason)
+                .withdrawalUserType(withdrawalUserType)
                 .build();
     }
 
     @QueryProjection
-    public WithdrawalDTO(String withdrawalReason) {
+    public WithdrawalDTO(String withdrawalReason, String withdrawalUserType) {
         this.withdrawalReason = withdrawalReason;
+        this.withdrawalUserType = withdrawalUserType;
     }
 }
