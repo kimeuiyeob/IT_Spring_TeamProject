@@ -11,7 +11,6 @@ import org.springframework.util.StringUtils;
 
 import java.util.List;
 
-import static com.app.milestone.entity.QSchool.school;
 import static com.app.milestone.entity.QTalent.talent;
 
 @Repository
@@ -21,7 +20,6 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
     private final JPAQueryFactory jpaQueryFactory;
 
     //동적쿼리
-
     // 재능기부 목록 (가능일자 ASC)
     @Override
     public List<Talent> findAllByTalentAbleDate(Pageable pageable, Search search) {
@@ -42,6 +40,13 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
         return StringUtils.hasText(talentTitle) ? talent.talentTitle.contains(talentTitle) : null;
     }
 
-
+//          =========페이징 처리===========
+//          .offset(0) == 0부터 시작한다.
+//          .limit(10) == 10개 가져온다.
+//          Page<User> userPaging = new UserImpl<> (users, PageRequest.of(page0,amount10),total);
+//          userPaging.getTotalPages(); == 페이지 전부
+//          userPaging.isFirst(); == 첫번째 페이지
+//          userPaging.getContent(); == 1페이지에 있는 user List
+//          =============================
 
 }
