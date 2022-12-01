@@ -82,6 +82,7 @@ const $option9 = $("#option9");
 const $option10 = $("#option10");
 const $reset7 = $("#reset7");
 const $option11 = $("#option11");
+const $option12 = $("#option12");
 
 $reset1.click(function(){
     $option1.text("옵션 선택");
@@ -102,6 +103,7 @@ $reset4.click(function(){
 });
 $reset5.click(function(){
     $option8.text("옵션 선택");
+    $option12.text("옵션 선택");
 });
 $reset6.click(function(){
     $option9.text("옵션 선택");

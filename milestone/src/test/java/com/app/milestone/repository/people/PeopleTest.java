@@ -15,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static com.app.milestone.entity.QPeople.*;
+
 
 @Slf4j
 @SpringBootTest
@@ -46,9 +48,15 @@ public class PeopleTest {
     //    개인 한 명의 정보
     @Test
     public void findTest() {
-        People people = peopleRepository.findById(105L).get();
-        log.info(people.getUserName());
-        log.info(people.getPeopleNickname());
+//        People people = peopleRepository.findById(122L).get();
+//        log.info(people.getUserName());
+//        log.info(people.getPeopleNickname());
+        jpaQueryFactory
+                .select(people.userEmail, people.userName, people.userPhoneNumber, people.peopleNickname)
+                .from(people)
+                .where(people.userId.eq(123L))
+                .fetch()
+                .stream().map(Object::toString).forEach(log::info);
     }
 
     //    ======================================================보육원 좋아요===================================================

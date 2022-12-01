@@ -18,6 +18,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.app.milestone.entity.QDonation.donation;
+
 @SpringBootTest
 @Transactional
 @Rollback(false)
@@ -50,9 +52,9 @@ public class ServiceTest {
         service.changeSchool(school);
 
         List<Long> updateDonationCount = jpaQueryFactory
-                .select(QDonation.donation.donationId.count())
-                .from(QDonation.donation)
-                .where(QDonation.donation.school.userId.eq(11L))
+                .select(donation.donationId.count())
+                .from(donation)
+                .where(donation.school.userId.eq(11L))
                 .fetch();
 
         List<Integer> intUpdateDonationCount = updateDonationCount.stream().mapToInt(Long::intValue).boxed().collect(Collectors.toList());
@@ -75,10 +77,10 @@ public class ServiceTest {
     public void findVisitTest() {
         jpaQueryFactory
                 .select(QSchool.school.schoolName, QSchool.school.address.schoolAddress, QSchool.school.address.schoolAddressDetail, QService.service.serviceVisitDate)
-                .from(QSchool.school, QService.service, QPeople.people, QDonation.donation)
-                .where(QDonation.donation.donationId.eq(QService.service.donationId))
-                .where(QDonation.donation.school.userId.eq(QSchool.school.userId))
-                .where(QDonation.donation.people.userId.eq(2L))
+                .from(QSchool.school, QService.service, QPeople.people, donation)
+                .where(donation.donationId.eq(QService.service.donationId))
+                .where(donation.school.userId.eq(QSchool.school.userId))
+                .where(donation.people.userId.eq(2L))
                 .fetch()
                 .stream().map(Object::toString).forEach(log::info);
     }
@@ -104,13 +106,15 @@ public class ServiceTest {
 //    AND D.PEOPLE_USER_ID = P.USER_ID
 //    AND S.USER_ID = 11;
 
+
 //    @Test
 //    public void findTest() {
 //        assertThat(serviceRepository.findById(8L).get().getDonationId()).isEqualTo(8L);
 //    }
 
-//    @Test
-//    public void deleteTest() {
-//        serviceRepository.deleteById(8L);
-//    }
+//    삭제
+    @Test
+    public void deleteTest() {
+        serviceRepository.deleteById(117L);
+    }
 }
