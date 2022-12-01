@@ -18,9 +18,12 @@ public class Withdrawal extends Period {
     private Long withdrawalId;
     @NotNull
     private String withdrawalReason;
+    @NotNull
+    private String withdrawalUserType;
 
     @Builder
-    public Withdrawal(String withdrawalReason) {
+    public Withdrawal(String withdrawalReason, String withdrawalUserType) {
         this.withdrawalReason = withdrawalReason;
+        this.withdrawalUserType = withdrawalUserType;
     }
 }

@@ -14,6 +14,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import static com.app.milestone.entity.QNotice.notice;
+import static com.app.milestone.entity.QSchool.school;
 import static com.app.milestone.entity.QWithdrawal.withdrawal;
 
 @SpringBootTest
@@ -30,28 +31,41 @@ public class WithdrawalTest {
     @Test
     public void saveTest() {
         WithdrawalDTO withdrawalDTO = new WithdrawalDTO();
-        withdrawalDTO.setWithdrawalReason("서비스 퀄리티가 낮아요");
-//        withdrawalDTO.setWithdrawalUserType("보육원");                   //사용자 형태
+        withdrawalDTO.setWithdrawalReason("대체할 만한 서비스를 찾았어요");
+        withdrawalDTO.setWithdrawalUserType("보육원");                   //사용자 형태
         withdrawalRepository.save(withdrawalDTO.toEntity());
     }
 
 //    회원탈퇴 검색어(사용자 형태, 탈퇴이유)로 찾기
     @Test
     public void findBySearchTest() {
-    //        assertThat(noticeRepository.findById(1L).get().getNoticeTitle()).isEqualTo("[점검]긴급 점검입니다.");
         jpaQueryFactory.selectFrom(withdrawal)
-                .where(withdrawal.withdrawalReason.contains("퀄리티가"))
-//                .where(withdrawal.withdrawalUserType.contains("보육"))    //사용자 형태
+                .where(withdrawal.withdrawalUserType.contains("보육"))      //사용자 형태
+//                .where(withdrawal.withdrawalReason.contains("대체할"))    //탈퇴 사유
                 .fetch().forEach(withdrawal->log.info("검색어로 찾아온 탈퇴 사유 : "+withdrawal.getWithdrawalReason()));
     }
 
 //    회원탈퇴 필터(탈퇴날짜, 탈퇴이유)로 찾기
     @Test
     public void findTest() {
-//        jpaQueryFactory
-//                .selectFrom(withdrawal)
-//                .where(withdrawal.withdrawalId.eq(1L))
-//                .fetch().stream().map(Withdrawal::toString).forEach(log::info);
+        jpaQueryFactory
+                .selectFrom(withdrawal)
+                .where(withdrawal.withdrawalReason.eq("대체할 만한 서비스를 찾았어요"))
+                .orderBy(withdrawal.createdDate.desc())
+//                .orderBy(withdrawal.createdDate.asc())
+                .fetch().stream().map(Withdrawal::toString).forEach(log::info);
 
+//        동적쿼리 <<<안써도 될듯하다
+//        jpaQueryFactory.selectFrom(withdrawal)
+//                .where(
+//                        schoolNameContainingAndLocationContaining(search.getSchoolName(), search.getSchoolAddress())
+//                        schoolNameContaining(search.getSchoolName()),
+//                        schoolAddressContaining(search.getSchoolName())
+//                        school.address.schoolAddress.in(search.getSchoolAddress())
+//                )
+//                .orderBy(withdrawal.createdDate.desc())
+//                .fetch();
     }
+
+
 }
