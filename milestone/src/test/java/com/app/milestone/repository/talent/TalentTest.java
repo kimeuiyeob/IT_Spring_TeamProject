@@ -38,11 +38,10 @@ public class TalentTest {
 
     @Test
     public void save2Test() {
-        Place[] talentPlaces = {Place.경상도, Place.서울, Place.강원도, Place.제주도, Place.충청도};
+        String[] talentPlaces = {"경상도","서울","강원도","충청도","경기도"};
         String[] talentTitles = {"코끼리", "거북이", "하마", "기린", "돌고래", "비둘기", "뉴트리아", "뱀"};
         String[] talentContents = {"나는내용입니다", "나는내용일까요?", "나는김의엽입니다", "나는누구일까요?", "이제저도모르겠습니다."};
         String[] talentCategorys = {"운동", "음악", "미술", "IT"};
-
 
         for (int i = 0; i < 50; i++) {
             TalentDTO talentDTO = new TalentDTO();
@@ -50,7 +49,7 @@ public class TalentTest {
             talentDTO.setTalentContent(talentContents[i % 5]);
             talentDTO.setTalentAbleDate(LocalDateTime.now());
             talentDTO.setCategory(talentCategorys[i % 4]);
-//            talentDTO.setPlace(talentPlaces[i % 5]);
+            talentDTO.setPlace(talentPlaces[i % 5]);
             talentRepository.save(talentDTO.toEntity());
         }
     }
@@ -63,7 +62,7 @@ public class TalentTest {
         talentDTO.setTalentContent("하세용");
         talentDTO.setTalentAbleDate(LocalDateTime.now());
         talentDTO.setCategory("IT");
-//        talentDTO.setPlace(Place.제주도);
+        talentDTO.setPlace("제주도");
 
         Talent talent = talentDTO.toEntity();
         talentRepository.save(talent);
@@ -75,38 +74,23 @@ public class TalentTest {
 
     }
 
-//    @Test
-//    public void findJPQL() {
-//        talentRepository
-//    }
-
-
     @Test
     public void findTest() {
-//        List<Talent> asd = jpaQueryFactory
-//                .select(talent,QPeople.people,QDonation.donation).where(talent.donationId=QDonation.donation.donationId),
-//        (QPeople.people.userId = QDonation.donation.people.userId),()
-        List<Talent> yoby = jpaQueryFactory
+        List<Talent> UserId12 = jpaQueryFactory
                 .select(talent)
                 .from(talent, donation, people)
                 .where(talent.donationId.eq(donation.donationId))
                 .where(donation.people.userId.eq(people.userId))
                 .where(people.userId.eq(12L))
                 .fetch();
-        yoby.stream().map(Talent::toString).forEach(log::info);
+        UserId12.stream().map(Talent::toString).forEach(log::info);
 
     }
 
-  /*  @Test
-    public void findTest() {
-        Talent talent = talentRepository.findById(1L).get();
-    }*/
-
-     /*   @Test
+    @Test
     public void deleteTest() {
         talentRepository.deleteById(1L);
-    }*/
-
+    }
 
     @Test
     public void updateTest() {
@@ -114,7 +98,7 @@ public class TalentTest {
         TalentDTO talentDTO = new TalentDTO();
         talentDTO.setTalentTitle("제목");
         talentDTO.setTalentContent("내용");
-//        talentDTO.setPlace(Place.제주도);
+        talentDTO.setPlace("제주도");
         talentDTO.setTalentAbleDate(LocalDateTime.now());
         talentDTO.setCategory("교육");
         talent.update(talentDTO);
@@ -122,8 +106,8 @@ public class TalentTest {
 
     @Test
     public void findQueryDsl() {
-        List<Talent> tals = jpaQueryFactory.selectFrom(talent).fetch();
-        for (Talent tal : tals) {
+        List<Talent> talents = jpaQueryFactory.selectFrom(talent).fetch();
+        for (Talent tal : talents) {
             log.info("아이디넘버 : " + tal.getDonationId() +
                     "제목 : " + tal.getTalentTitle() +
                     "내용 : " + tal.getTalentContent() +
@@ -154,7 +138,7 @@ public class TalentTest {
         TalentDTO talentDTO = new TalentDTO();
         talentDTO.setTalentTitle("울라라랄");
         talentDTO.setTalentContent("울라라랄라라라");
-//        talentDTO.setPlace(Place.제주도);
+        talentDTO.setPlace("제주도");
         talentDTO.setTalentAbleDate(LocalDateTime.now());
         talentDTO.setCategory("교육");
         jpaQueryFactory.selectFrom(talent)
@@ -187,5 +171,18 @@ public class TalentTest {
                         "  AbleDate : " + o.getTalentAbleDate()));
     }
 
+    /*===============================   queryDsl 기본적인 사용 방법   ================================*/
 
+//    public vodid queryDslTest() {
+//        JPAQueryFactory queryFactory = new JPAQueryFactory(entityManager) //이건 QueryDslConfig에 @Bean으로 등록시켜논거를 @Autowirde를 통해서 사용한다.
+//        queryFactory.select(Quser.user) //select와 from절이 같을때 .selectFrom(Quser.user)이렇게 한번에 받을수 있다.
+//                .from(Quser.user)
+//                .where(Quser.user)
+//                .fetchOne(); //리턴하는게 값이 하나면 .fetchOne(), 많으면 .fetch()로 한다.
+//        asserThat(Quser.user.getUserNamer()).isEqualTo("김의엽")
+//    }
+
+    /*============================================================================================*/
 }
+
+

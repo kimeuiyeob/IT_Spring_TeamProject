@@ -42,7 +42,8 @@ public class TalentDTO {
                 .build();
     }
 
-    @QueryProjection //@QueryProjection은 생성자를 통해 DTO를 조회 -> Q파일 생성
+    @QueryProjection
+    //@QueryProjection은 생성자를 통해 DTO를 조회 -> Q파일 생성 , DTO의 생성자를 사용하는 것이 아니라 DTO 기반으로 생성된 QDTO 객체의 생성자를 사용하는 것이다.
     public TalentDTO(Long userId, String talentTitle, String talentContent, LocalDateTime talentAbleDate, String category, String place) {
         this.userId = userId;
         this.talentTitle = talentTitle;
