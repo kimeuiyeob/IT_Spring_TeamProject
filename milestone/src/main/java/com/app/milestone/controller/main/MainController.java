@@ -15,7 +15,7 @@ public class MainController {
 
     @GetMapping("main")
     public void main(Model model) {
-//        실험용 코드입니다.
+//        도움이 필요한 보육원
         model.addAttribute("schools", schoolService.needHelpList());
     }
 

@@ -5,6 +5,7 @@ import com.app.milestone.embeddable.Address;
 import com.app.milestone.embeddable.Introduce;
 import com.sun.istack.NotNull;
 import lombok.*;
+import org.hibernate.hql.internal.ast.tree.IntoClause;
 
 import javax.persistence.*;
 
@@ -62,19 +63,27 @@ public class School extends User {
 
     public void update(SchoolDTO schoolDTO) {
 //        School school = schoolDTO.toEntity();
-
+        Address address = new Address();
+        address.setSchoolZipcode(schoolDTO.getSchoolZipcode());
+        address.setSchoolAddress(schoolDTO.getSchoolAddress());
+        address.setSchoolAddressDetail(schoolDTO.getSchoolAddressDetail());
+        Introduce introduce = new Introduce();
+        introduce.setSchoolTitle(schoolDTO.getSchoolTitle());
+        introduce.setSchoolContent(schoolDTO.getSchoolContent());
 
         this.userEmail = schoolDTO.getUserEmail();
         this.userName = schoolDTO.getUserName();
         this.userPassword = schoolDTO.getUserPassword();
         this.userPhoneNumber = schoolDTO.getUserPhoneNumber();
         this.schoolName = schoolDTO.getSchoolName();
+        this.address = address;
         this.schoolTeachers = schoolDTO.getSchoolTeachers();
         this.schoolKids = schoolDTO.getSchoolKids();
         this.schoolBudget = schoolDTO.getSchoolBudget();
         this.schoolBank = schoolDTO.getSchoolBank();
         this.schoolAccount = schoolDTO.getSchoolAccount();
         this.schoolPhoneNumber = schoolDTO.getSchoolPhoneNumber();
+        this.introduce = introduce;
     }
 
 //    public void update(SchoolDTO schoolDTO) {
@@ -94,4 +103,9 @@ public class School extends User {
 //        this.schoolPhoneNumber = school.schoolPhoneNumber;
 //        this.introduce = school.introduce;
 //    }
+
+//    public SchoolDTO toDTO() {
+//        return new SchoolDTO(schoolName, address.getSchoolAddress(), address.getSchoolAddressDetail(), address.getSchoolZipcode(), schoolTeachers, schoolKids, schoolBudget, schoolBank, schoolAccount, schoolPhoneNumber, schoolQR, introduce.getSchoolTitle(), introduce.getSchoolContent(), userEmail, userName, userPassword, userPhoneNumber, donationCount);
+//    }
+
 }

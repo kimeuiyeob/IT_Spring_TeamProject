@@ -1,5 +1,9 @@
 package com.app.milestone.repository;
 
+import com.app.milestone.domain.MoneyDTO;
+import com.app.milestone.domain.QMoneyDTO;
+import com.app.milestone.entity.Money;
+import com.app.milestone.entity.People;
 import com.app.milestone.entity.QMoney;
 import com.app.milestone.entity.QSchool;
 import com.querydsl.core.Tuple;
@@ -18,6 +22,20 @@ import static com.app.milestone.entity.QSchool.*;
 @RequiredArgsConstructor
 public class MoneyCustomRepositoryImpl implements MoneyCustomRepository {
     private final JPAQueryFactory jpaQueryFactory;
+
+    //    기부받은 내역
+    @Override
+    public List<MoneyDTO> findByCreateDateByUserId(Long userId) {
+        return jpaQueryFactory.select(new QMoneyDTO(
+                money.people.userName,
+                money.school.userId,
+                money.moneyCash
+        )).from(money)
+                .where(money.school.userId.eq(userId))
+                .orderBy(money.createdDate.desc())
+                .fetch();
+    }
+
 
     //  기부금 랭킹 정렬
     @Override

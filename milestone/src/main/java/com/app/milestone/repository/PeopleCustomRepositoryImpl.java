@@ -1,5 +1,7 @@
 package com.app.milestone.repository;
 
+import com.app.milestone.domain.PeopleDTO;
+import com.app.milestone.domain.QPeopleDTO;
 import com.app.milestone.entity.QTalent;
 import com.querydsl.core.Tuple;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -20,6 +22,21 @@ import static com.app.milestone.entity.QTalent.*;
 @Slf4j
 public class PeopleCustomRepositoryImpl implements PeopleCustomRepository {
     private final JPAQueryFactory jpaQueryFactory;
+    
+    // 개인 한 명정보 조회
+    @Override
+    public PeopleDTO findInfoById(Long userId){
+        return jpaQueryFactory.select(new QPeopleDTO(
+                people.peopleNickname,
+                people.userEmail,
+                people.userName,
+                people.userPassword,
+                people.userPhoneNumber,
+                people.donationCount
+        )).from(people)
+                .fetchOne();
+
+    }
 
     //  기부금 랭킹 정렬
     @Override
