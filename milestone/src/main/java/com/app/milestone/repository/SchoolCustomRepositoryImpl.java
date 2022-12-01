@@ -21,7 +21,7 @@ import static com.app.milestone.entity.QSchool.school;
 public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
     private final JPAQueryFactory jpaQueryFactory;
 
-        //  메인 도움이 필요해요
+    //  메인 도움이 필요해요
 //    @Override
 //    public List<School> findAllByDonationCount(Pageable pageable) {
 //        return jpaQueryFactory.selectFrom(school)
@@ -54,13 +54,14 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
                 school.schoolAccount,
                 school.schoolPhoneNumber,
                 school.schoolQR,
-                school.schoolName,
-                school.schoolName,
+                school.introduce.schoolTitle,
+                school.introduce.schoolContent,
                 school.userEmail,
                 school.userName,
                 school.userPassword,
                 school.userPhoneNumber,
                 school.donationCount
+
         )).from(school)
                 .orderBy(school.donationCount.asc())
                 .offset(0)
@@ -68,7 +69,7 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
                 .fetch();
     }
 
-        //    보육원 목록(최신순)
+    //    보육원 목록(최신순)
 //    @Override
 //    public List<School> findAllByCreatedDate(Pageable pageable, Search search) {
 //        return jpaQueryFactory.selectFrom(school)
@@ -84,40 +85,40 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
 //                .fetch();
 //    }
     //    보육원 목록(최신순)(쿼리프로젝션 버전)
-        @Override
-        public List<SchoolDTO> findAllByCreatedDate(Pageable pageable, Search search) {
-            return jpaQueryFactory.select(new QSchoolDTO(
-                    school.schoolName,
-                    school.address.schoolZipcode,
-                    school.address.schoolAddress,
-                    school.address.schoolAddressDetail,
-                    school.schoolTeachers,
-                    school.schoolKids,
-                    school.schoolBudget,
-                    school.schoolBank,
-                    school.schoolAccount,
-                    school.schoolPhoneNumber,
-                    school.schoolQR,
-                    school.schoolName,
-                    school.schoolName,
-                    school.userEmail,
-                    school.userName,
-                    school.userPassword,
-                    school.userPhoneNumber,
-                    school.donationCount
-            ))
-                    .where(
-                            schoolNameContaining(search.getSchoolName()),
-                            schoolAddressContaining(search.getSchoolAddress())
+    @Override
+    public List<SchoolDTO> findAllByCreatedDate(Pageable pageable, Search search) {
+        return jpaQueryFactory.select(new QSchoolDTO(
+                school.schoolName,
+                school.address.schoolAddress,
+                school.address.schoolAddressDetail,
+                school.address.schoolZipcode,
+                school.schoolTeachers,
+                school.schoolKids,
+                school.schoolBudget,
+                school.schoolBank,
+                school.schoolAccount,
+                school.schoolPhoneNumber,
+                school.schoolQR,
+                school.introduce.schoolTitle,
+                school.introduce.schoolContent,
+                school.userEmail,
+                school.userName,
+                school.userPassword,
+                school.userPhoneNumber,
+                school.donationCount
+        ))
+                .where(
+                        schoolNameContaining(search.getSchoolName()),
+                        schoolAddressContaining(search.getSchoolAddress())
 //                        밑에 코드 값 안넘겨주면 where 1 = 2 나와서 값을 제대로 안가져오는 문제 발견해서 위에 코드로 바꿈
 //                        school.address.schoolAddress.in(search.getSchoolAddress())
 //                                .distinct() = join했을 시 중복값 제거
-                    ).from(school)
-                    .orderBy(school.createdDate.asc())
-                    .offset(pageable.getOffset())
-                    .limit(pageable.getPageSize())
-                    .fetch();
-        }
+                ).from(school)
+                .orderBy(school.createdDate.asc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
+    }
 
     //
     private BooleanExpression schoolNameContaining(String schoolName) {
@@ -126,7 +127,7 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
 
     private BooleanExpression schoolAddressContaining(List<String> schoolAddress) {
 //        return StringUtils.hasText(schoolAddress.get(0)) ? school.address.schoolAddress.in(schoolAddress) : null;
-        return schoolAddress.size()>0 ? school.address.schoolAddress.in(schoolAddress) : null;
+        return schoolAddress.size() > 0 ? school.address.schoolAddress.in(schoolAddress) : null;
     }
 
 
