@@ -104,7 +104,7 @@ public class SchoolTest {
         search.setSchoolName("뉴트");
 //        search.setSchoolName("고래");
 
-        schoolRepository.findAllByCreatedDate(pageable, search).forEach(o -> log.info("보육원 이름" + o.getSchoolName() + "보육원 주소" + o.getAddress().getSchoolAddress() + "보육원 등록일" + o.getCreatedDate() + "기부 받은 횟수" + o.getDonationCount()));
+//        schoolRepository.findAllByCreatedDate(pageable, search).forEach(o -> log.info("보육원 이름" + o.getSchoolName() + "보육원 주소" + o.getSchoolAddress() + "보육원 등록일" + o + "기부 받은 횟수" + o.getDonationCount()));
     }
 
     //    총 보육원 수 조회
