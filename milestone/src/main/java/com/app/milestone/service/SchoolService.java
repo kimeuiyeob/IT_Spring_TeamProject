@@ -25,12 +25,12 @@ public class SchoolService {
     }
 
     //    도움이 필요한 보육원(메인)
-    public List<School> needHelpList() {
+    public List<SchoolDTO> needHelpList() {
         return schoolRepository.findAllByDonationCount();
     }
 
     //    보육원 목록(보육원 목록)
-    public List<School> schoolList(Pageable pageable, Search search) {
+    public List<SchoolDTO> schoolList(Pageable pageable, Search search) {
         return schoolRepository.findAllByCreatedDate(pageable, search);
     }
 
