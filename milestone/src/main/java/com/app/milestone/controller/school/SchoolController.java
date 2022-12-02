@@ -3,6 +3,7 @@ package com.app.milestone.controller.school;
 import com.app.milestone.domain.Search;
 import com.app.milestone.service.SchoolService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/school/*")
+@Slf4j
 public class SchoolController {
     private final SchoolService schoolService;
 
@@ -23,10 +25,18 @@ public class SchoolController {
         pageable = PageRequest.of(0, 10);
         if (search.getSchoolAddress() == null) {
             search.setSchoolAddress(new ArrayList<>());
+            search.getSchoolAddress().add(null);
+            search.getSchoolAddress().add(null);
+            search.getSchoolAddress().add(null);
+            search.getSchoolAddress().add(null);
+            search.getSchoolAddress().add(null);
+            search.getSchoolAddress().add(null);
+            search.getSchoolAddress().add(null);
+            search.getSchoolAddress().add(null);
         }
+        log.info("=================================================================="+schoolService.schoolList(pageable, search));
         model.addAttribute("schools", schoolService.schoolList(pageable, search));
     }
-
 
 //    ==============================================
 
