@@ -82,7 +82,6 @@
             </div>
 
             <!-- ====================================================================================================== -->
-
             <section class="loc centerContent" style="padding-left:10px">
                 <div class="loactions" style="padding-top: 65px; display: none; height: 150px;">
                     <div class="location wholeLocation"
@@ -102,7 +101,11 @@
                     <button class="dropbtn">
                         <span class="dropbtn_content placeholder">전체</span>
                         <span class="dropbtn_click" style=" font-size : 16px; color : #3b3b3b; float:right;">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false" preserveAspectRatio="xMidYMid meet" class="css-7kp13n e181xm9y0"><polygon id="Triangle" transform="translate(12.000000, 12.000000) rotate(-180.000000) translate(-12.000000, -12.000000) " points="12 9 18 15 6 15"></polygon></svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
+                         focusable="false" preserveAspectRatio="xMidYMid meet" class="css-7kp13n e181xm9y0"><polygon
+                            id="Triangle"
+                            transform="translate(12.000000, 12.000000) rotate(-180.000000) translate(-12.000000, -12.000000) "
+                            points="12 9 18 15 6 15"></polygon></svg>
                 </span>
                     </button>
                     <div class="dropdown-content" style="position: absolute;top: 40px;">
@@ -124,32 +127,35 @@
     <!--==========================================재능 기부 목록===========================================-->
     <div class="talentBoxAll" id="all">
         <!-- ============================================================================================ -->
-        <article class="talentBox">
-            <div class="talentBox2">
-                <div class="talentBox3">
-                    <img src="../imgs/myPage/normalProfile.png" class="talentImg">
-                </div>
-                <div class="talentBox4">
-                    <p class="talentTitle">안녕</p>
-                    <p class="talentContent">나는의엽이</p>
-                    <div class="talentboxs">
-                        <div class="talentType">
-                            <img src="/imgs/talent/care2.png"
-                                 style="width: 25px; height: 25px; margin-bottom: -6px; margin-left: -10px;">나는
+        <th:block th:each="talent:${talents}">
+            <div style="padding-bottom:20px">
+                <article class="talentBox" th:object="${talent}">
+                    <div class="talentBox2">
+                        <div class="talentBox3">
+                            <img src="../imgs/myPage/normalProfile.png" class="talentImg">
                         </div>
-                        <div class="talentPlace">
-                            <img src="/imgs/talent/pin.png"
-                                 style="width: 25px; height: 25px; margin-bottom: -6px; margin-left: -10px;">김의엽
-                        </div>
-                        <div class="talentTime">
-                            <img src="/imgs/talent/mylove.png"
-                                 style="width: 25px; height: 25px; margin-bottom: -7px; margin-left: -15px;">입니다
+                        <div class="talentBox4">
+                            <p class="talentTitle" th:text="*{talentTitle}"><!--제목--></p>
+                            <p class="talentContent" th:text="*{talentContent}"><!--내용--></p>
+                            <div class="talentboxs">
+                                <div class="talentType">
+                                    <img src="/imgs/talent/care2.png" th:text="*{talentCategory}"
+                                         style="width: 25px; height: 25px; margin-bottom: -6px; margin-left: -10px;"><!--카테고리-->
+                                </div>
+                                <div class="talentPlace">
+                                    <img src="/imgs/talent/pin.png" th:text="*{talentPlace}"
+                                         style="width: 25px; height: 25px; margin-bottom: -6px; margin-left: -10px;"><!--지역-->
+                                </div>
+                                <div class="talentTime">
+                                    <img src="/imgs/talent/mylove.png" th:text="*{talentAbleDate}"
+                                         style="width: 25px; height: 25px; margin-bottom: -7px; margin-left: -15px;"><!--가능시간-->
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </article>
             </div>
-        </article>
-
+        </th:block>
         <!-- =============================================================================================== -->
     </div>
     <!-- =============================================================================================== -->

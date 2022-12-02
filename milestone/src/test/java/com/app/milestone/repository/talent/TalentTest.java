@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,9 +48,9 @@ public class TalentTest {
             TalentDTO talentDTO = new TalentDTO();
             talentDTO.setTalentTitle(talentTitles[i % 8]);
             talentDTO.setTalentContent(talentContents[i % 5]);
-            talentDTO.setTalentAbleDate(LocalDateTime.now());
-            talentDTO.setCategory(talentCategorys[i % 4]);
-            talentDTO.setPlace(talentPlaces[i % 5]);
+            talentDTO.setTalentAbleDate(LocalDate.now());
+            talentDTO.setTalentCategory(talentCategorys[i % 4]);
+            talentDTO.setTalentPlace(talentPlaces[i % 5]);
             talentRepository.save(talentDTO.toEntity());
         }
     }
@@ -60,9 +61,9 @@ public class TalentTest {
         TalentDTO talentDTO = new TalentDTO();
         talentDTO.setTalentTitle("안녕");
         talentDTO.setTalentContent("하세용");
-        talentDTO.setTalentAbleDate(LocalDateTime.now());
-        talentDTO.setCategory("IT");
-        talentDTO.setPlace("제주도");
+        talentDTO.setTalentAbleDate(LocalDate.now());
+        talentDTO.setTalentCategory("IT");
+        talentDTO.setTalentPlace("제주도");
 
         Talent talent = talentDTO.toEntity();
         talentRepository.save(talent);
@@ -84,6 +85,16 @@ public class TalentTest {
                 .where(people.userId.eq(12L))
                 .fetch();
         UserId12.stream().map(Talent::toString).forEach(log::info);
+    }
+
+    @Test
+    public void find2Test(){
+        List<Talent> UserId2 =  jpaQueryFactory
+                .selectFrom(talent)
+                .join(talent.people)
+                .fetchJoin()
+                .fetch();
+        UserId2.stream().map(Talent::toString).forEach(log::info);
 
     }
 
@@ -98,9 +109,9 @@ public class TalentTest {
         TalentDTO talentDTO = new TalentDTO();
         talentDTO.setTalentTitle("제목");
         talentDTO.setTalentContent("내용");
-        talentDTO.setPlace("제주도");
-        talentDTO.setTalentAbleDate(LocalDateTime.now());
-        talentDTO.setCategory("교육");
+        talentDTO.setTalentPlace("제주도");
+        talentDTO.setTalentAbleDate(LocalDate.now());
+        talentDTO.setTalentCategory("교육");
         talent.update(talentDTO);
     }
 
@@ -111,8 +122,8 @@ public class TalentTest {
             log.info("아이디넘버 : " + tal.getDonationId() +
                     "제목 : " + tal.getTalentTitle() +
                     "내용 : " + tal.getTalentContent() +
-                    "카테고리 : " + tal.getCategory() +
-                    "지역 : " + tal.getPlace());
+                    "카테고리 : " + tal.getTalentCategory() +
+                    "지역 : " + tal.getTalentPlace());
         }
     }
 
@@ -138,9 +149,9 @@ public class TalentTest {
         TalentDTO talentDTO = new TalentDTO();
         talentDTO.setTalentTitle("울라라랄");
         talentDTO.setTalentContent("울라라랄라라라");
-        talentDTO.setPlace("제주도");
-        talentDTO.setTalentAbleDate(LocalDateTime.now());
-        talentDTO.setCategory("교육");
+        talentDTO.setTalentPlace("제주도");
+        talentDTO.setTalentAbleDate(LocalDate.now());
+        talentDTO.setTalentCategory("교육");
         jpaQueryFactory.selectFrom(talent)
                 .where(talent.donationId.eq(3L))
                 .fetchOne()
@@ -162,12 +173,13 @@ public class TalentTest {
 
         search.setTalentTitle("돌고래"); //사용자가 입력한 재능기부 제목
         search.getTalentCategory().add("운동");
+
         talentRepository.findAllByTalentAbleDate(pageable, search)
                 .forEach(o -> log.info(
                         "  Title : " + o.getTalentTitle() +
                         "  Content : " + o.getTalentContent() +
-                        "  Category :" + o.getCategory() +
-                        "  Place : " + o.getPlace() +
+                        "  Category :" + o.getTalentCategory() +
+                        "  Place : " + o.getTalentPlace() +
                         "  AbleDate : " + o.getTalentAbleDate()));
     }
 

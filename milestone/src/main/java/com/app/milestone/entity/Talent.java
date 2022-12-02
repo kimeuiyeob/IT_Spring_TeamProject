@@ -1,11 +1,16 @@
 package com.app.milestone.entity;
 
 import com.app.milestone.domain.TalentDTO;
-import com.app.milestone.type.Place;
 import com.sun.istack.NotNull;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity //DB가 해당 객체를 인식 가능
@@ -20,21 +25,20 @@ public class Talent extends Donation {
     @NotNull
     private String talentContent;
     @NotNull
-    private LocalDateTime talentAbleDate;
+    private LocalDate talentAbleDate;
     @NotNull
-    private String category;
+    private String talentCategory;
     @NotNull
-//    @Enumerated(EnumType.STRING) //enum클래스로 만든걸 여기서 @Enumerated사용, 타입구분지을때 사용
-    private String place;
+    private String talentPlace;
 
     @Builder //Builder pattern을 사용하게 해주는 어노테이션!
-    public Talent(School school, People people, String talentTitle, String talentContent, LocalDateTime talentAbleDate, String category,String place) {
+    public Talent(School school, People people, String talentTitle, String talentContent, LocalDate talentAbleDate, String talentCategory,String talentPlace) {
         super(school, people);
         this.talentTitle = talentTitle;
         this.talentContent = talentContent;
         this.talentAbleDate = talentAbleDate;
-        this.category = category;
-        this.place = place;
+        this.talentCategory = talentCategory;
+        this.talentPlace = talentPlace;
 
     }
 
@@ -43,7 +47,7 @@ public class Talent extends Donation {
         this.talentTitle = talent.talentTitle;
         this.talentContent = talent.talentContent;
         this.talentAbleDate = talent.talentAbleDate;
-        this.category = talent.category;
-        this.place = talent.place;
+        this.talentCategory = talent.talentCategory;
+        this.talentPlace = talent.talentPlace;
     }
 }
