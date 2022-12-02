@@ -61,8 +61,19 @@ $(".location2").click(function () {
 
 /* 찜하기 하트 버튼 */
 $(".redHeart").css({"display": "none"})
-
-$(".heartWrap").click(function () {
+//
+// $(".heartWrap").on('click',function () {
+//     if (!check2) {
+//         $(this).children(".redHeart").css({"display": "inline"})
+//         $(this).children(".emptyHeart").css({"display": "none"})
+//         check2 = true;
+//     } else {
+//         $(this).children(".redHeart").css({"display": "none"})
+//         $(this).children(".emptyHeart").css({"display": "inline"})
+//         check2 = false;
+//     }
+// })
+$("section.schoolList").on('click',"span.heartWrap",function () {
     if (!check2) {
         $(this).children(".redHeart").css({"display": "inline"})
         $(this).children(".emptyHeart").css({"display": "none"})
@@ -121,7 +132,7 @@ var checkLocal = {
     checkChungcheong: false, checkJeolla: false, checkGyeongsang: false, checkJeju: false
 };
 /* 저장된 지역 */
-var saveLocal = [];
+var saveLocal = new Array(8);
 
 /* 드롭다운 버튼 */
 $("button.dropbtn").on('click', function () {
@@ -281,29 +292,53 @@ $(".dropLoc").on('click', function () {
 /*보육원 검색*/
 const $schoolName = $('input[name = schoolName]');
 
-let test;
+let searchName;
 
-saveLocal.forEach(o => test += o);
+
+saveLocal.forEach(o => searchName += o);
 
 $schoolName.on('keyup', function (e) {
     if (e.keyCode == 13) {
-        location.href = "/school/list?" + test
+        location.href = "/school/list?" + searchName
         searchForm.submit();
     }
 })
 
-const $location2 = $('.location2');
+/*지역으로 검색*/
+// let searchService = (function () {
+//     function getList(param, callback, error) {
+//         $.ajax({
+//             url: "/schoolrest/list/" + param.schoolAddress,
+//             type: "get",
+//             success: function (schoolDTO, status, xhr) {
+//                 if (callback) {
+//                     callback(replyDTO);
+//                 }
+//             },
+//             error: function (xhr, status, err) {
+//                 if (error) {
+//                     error(err);
+//                 }
+//             }
+//         });
+//     }
+//     return {getList: getList}
+// })
 
-let formData = new FormData();
-saveLocal.forEach(o => formData.append("schoolAddress",o) );
-
-$location2.on('click', function () {
+function getList1(param, callback, error) {
     $.ajax({
-        url: "/school/list",
+        url: "/schoolrest/list/" + param.schoolAddress,
         type: "get",
-        data: formData,
-        // contentType: false,
-        // processData: false,
-        // success: showUploadResult
-    })
-})
+        success: function (schoolDTO, status, xhr) {
+            console.log(schoolDTO)
+            if (callback) {
+                callback(schoolDTO);
+            }
+        },
+        error: function (xhr, status, err) {
+            if (error) {
+                error(err);
+            }
+        }
+    });
+}

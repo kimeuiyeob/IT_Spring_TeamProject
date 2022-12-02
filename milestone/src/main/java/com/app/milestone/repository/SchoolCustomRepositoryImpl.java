@@ -8,16 +8,19 @@ import com.app.milestone.entity.School;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.app.milestone.entity.QSchool.school;
 
 @Repository
 @RequiredArgsConstructor
+@Slf4j
 public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
     private final JPAQueryFactory jpaQueryFactory;
 
@@ -108,11 +111,22 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
                 school.donationCount
         ))
                 .where(
+//                        보육원 이름 검색
                         schoolNameContaining(search.getSchoolName()),
-                        schoolAddressContaining(search.getSchoolAddress())
+//                        schoolAddressContaining(search.getSchoolAddress())
 //                        밑에 코드 값 안넘겨주면 where 1 = 2 나와서 값을 제대로 안가져오는 문제 발견해서 위에 코드로 바꿈
 //                        school.address.schoolAddress.in(search.getSchoolAddress())
 //                                .distinct() = join했을 시 중복값 제거
+
+//                        지역선택
+                        schoolAddressContaining1(search.getSchoolAddress().get(0)),
+                        schoolAddressContaining2(search.getSchoolAddress().get(1)),
+                        schoolAddressContaining3(search.getSchoolAddress().get(2)),
+                        schoolAddressContaining4(search.getSchoolAddress().get(3)),
+                        schoolAddressContaining5(search.getSchoolAddress().get(4)),
+                        schoolAddressContaining6(search.getSchoolAddress().get(5)),
+                        schoolAddressContaining7(search.getSchoolAddress().get(6)),
+                        schoolAddressContaining8(search.getSchoolAddress().get(7))
                 ).from(school)
                 .orderBy(school.createdDate.asc())
                 .offset(pageable.getOffset())
@@ -125,10 +139,248 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
         return StringUtils.hasText(schoolName) ? school.schoolName.contains(schoolName) : null;
     }
 
-    private BooleanExpression schoolAddressContaining(List<String> schoolAddress) {
-//        return StringUtils.hasText(schoolAddress.get(0)) ? school.address.schoolAddress.in(schoolAddress) : null;
-        return schoolAddress.size() > 0 ? school.address.schoolAddress.in(schoolAddress) : null;
+//    private BooleanExpression schoolAddressContaining(List<String> schoolAddress) {
+//        return schoolAddress.size() > 0 ? school.address.schoolAddress.in(schoolAddress) : null;
+//    }
+
+    private BooleanExpression schoolAddressContaining1(String schoolAddress) {
+        if (!StringUtils.hasText(schoolAddress)) return null;
+        if (schoolAddress.equals("서울")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("서울") : null;
+        }
+        if (schoolAddress.equals("인천")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("인천") : null;
+        }
+        if (schoolAddress.equals("경기도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("경기") : null;
+        }
+        if (schoolAddress.equals("강원도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("강원") : null;
+        }
+        if (schoolAddress.equals("충청도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("충북").or(school.address.schoolAddress.like("충남")).or(school.address.schoolAddress.like("세종")).or(school.address.schoolAddress.like("대전"))
+                    : null;
+        }
+        if (schoolAddress.equals("전라도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("전북").or(school.address.schoolAddress.like("전남")).or(school.address.schoolAddress.like("광주")) : null;
+        }
+        if (schoolAddress.equals("경상도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("경북").or(school.address.schoolAddress.like("경남")).or(school.address.schoolAddress.like("부산")).or(school.address.schoolAddress.like("울산")).or(school.address.schoolAddress.like("대구")) : null;
+        }
+        if (schoolAddress.equals("제주도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("제주") : null;
+        }
+        return null;
     }
 
+    private BooleanExpression schoolAddressContaining2(String schoolAddress) {
+        if (!StringUtils.hasText(schoolAddress)) return null;
+        if (schoolAddress.equals("서울")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("서울") : null;
+        }
+        if (schoolAddress.equals("인천")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("인천") : null;
+        }
+        if (schoolAddress.equals("경기도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("경기") : null;
+        }
+        if (schoolAddress.equals("강원도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("강원") : null;
+        }
+        if (schoolAddress.equals("충청도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("충북").or(school.address.schoolAddress.like("충남")).or(school.address.schoolAddress.like("세종")).or(school.address.schoolAddress.like("대전"))
+                    : null;
+        }
+        if (schoolAddress.equals("전라도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("전북").or(school.address.schoolAddress.like("전남")).or(school.address.schoolAddress.like("광주")) : null;
+        }
+        if (schoolAddress.equals("경상도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("경북").or(school.address.schoolAddress.like("경남")).or(school.address.schoolAddress.like("부산")).or(school.address.schoolAddress.like("울산")).or(school.address.schoolAddress.like("대구")) : null;
+        }
+        if (schoolAddress.equals("제주도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("제주") : null;
+        }
+        return null;
+    }
+
+    private BooleanExpression schoolAddressContaining3(String schoolAddress) {
+        if (!StringUtils.hasText(schoolAddress)) return null;
+        if (schoolAddress.equals("서울")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("서울") : null;
+        }
+        if (schoolAddress.equals("인천")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("인천") : null;
+        }
+        if (schoolAddress.equals("경기도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("경기") : null;
+        }
+        if (schoolAddress.equals("강원도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("강원") : null;
+        }
+        if (schoolAddress.equals("충청도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("충북").or(school.address.schoolAddress.like("충남")).or(school.address.schoolAddress.like("세종")).or(school.address.schoolAddress.like("대전"))
+                    : null;
+        }
+        if (schoolAddress.equals("전라도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("전북").or(school.address.schoolAddress.like("전남")).or(school.address.schoolAddress.like("광주")) : null;
+        }
+        if (schoolAddress.equals("경상도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("경북").or(school.address.schoolAddress.like("경남")).or(school.address.schoolAddress.like("부산")).or(school.address.schoolAddress.like("울산")).or(school.address.schoolAddress.like("대구")) : null;
+        }
+        if (schoolAddress.equals("제주도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("제주") : null;
+        }
+        return null;
+    }
+
+    private BooleanExpression schoolAddressContaining4(String schoolAddress) {
+        if (!StringUtils.hasText(schoolAddress)) return null;
+        if (schoolAddress.equals("서울")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("서울") : null;
+        }
+        if (schoolAddress.equals("인천")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("인천") : null;
+        }
+        if (schoolAddress.equals("경기도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("경기") : null;
+        }
+        if (schoolAddress.equals("강원도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("강원") : null;
+        }
+        if (schoolAddress.equals("충청도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("충북").or(school.address.schoolAddress.like("충남")).or(school.address.schoolAddress.like("세종")).or(school.address.schoolAddress.like("대전"))
+                    : null;
+        }
+        if (schoolAddress.equals("전라도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("전북").or(school.address.schoolAddress.like("전남")).or(school.address.schoolAddress.like("광주")) : null;
+        }
+        if (schoolAddress.equals("경상도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("경북").or(school.address.schoolAddress.like("경남")).or(school.address.schoolAddress.like("부산")).or(school.address.schoolAddress.like("울산")).or(school.address.schoolAddress.like("대구")) : null;
+        }
+        if (schoolAddress.equals("제주도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("제주") : null;
+        }
+        return null;
+    }
+
+    private BooleanExpression schoolAddressContaining5(String schoolAddress) {
+        if (!StringUtils.hasText(schoolAddress)) return null;
+        if (schoolAddress.equals("서울")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("서울") : null;
+        }
+        if (schoolAddress.equals("인천")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("인천") : null;
+        }
+        if (schoolAddress.equals("경기도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("경기") : null;
+        }
+        if (schoolAddress.equals("강원도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("강원") : null;
+        }
+        if (schoolAddress.equals("충청도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("충북").or(school.address.schoolAddress.like("충남")).or(school.address.schoolAddress.like("세종")).or(school.address.schoolAddress.like("대전"))
+                    : null;
+        }
+        if (schoolAddress.equals("전라도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("전북").or(school.address.schoolAddress.like("전남")).or(school.address.schoolAddress.like("광주")) : null;
+        }
+        if (schoolAddress.equals("경상도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("경북").or(school.address.schoolAddress.like("경남")).or(school.address.schoolAddress.like("부산")).or(school.address.schoolAddress.like("울산")).or(school.address.schoolAddress.like("대구")) : null;
+        }
+        if (schoolAddress.equals("제주도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("제주") : null;
+        }
+        return null;
+    }
+
+    private BooleanExpression schoolAddressContaining6(String schoolAddress) {
+        if (!StringUtils.hasText(schoolAddress)) return null;
+        if (schoolAddress.equals("서울")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("서울") : null;
+        }
+        if (schoolAddress.equals("인천")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("인천") : null;
+        }
+        if (schoolAddress.equals("경기도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("경기") : null;
+        }
+        if (schoolAddress.equals("강원도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("강원") : null;
+        }
+        if (schoolAddress.equals("충청도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("충북").or(school.address.schoolAddress.like("충남")).or(school.address.schoolAddress.like("세종")).or(school.address.schoolAddress.like("대전"))
+                    : null;
+        }
+        if (schoolAddress.equals("전라도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("전북").or(school.address.schoolAddress.like("전남")).or(school.address.schoolAddress.like("광주")) : null;
+        }
+        if (schoolAddress.equals("경상도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("경북").or(school.address.schoolAddress.like("경남")).or(school.address.schoolAddress.like("부산")).or(school.address.schoolAddress.like("울산")).or(school.address.schoolAddress.like("대구")) : null;
+        }
+        if (schoolAddress.equals("제주도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("제주") : null;
+        }
+        return null;
+    }
+
+    private BooleanExpression schoolAddressContaining7(String schoolAddress) {
+        if (!StringUtils.hasText(schoolAddress)) return null;
+        if (schoolAddress.equals("서울")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("서울") : null;
+        }
+        if (schoolAddress.equals("인천")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("인천") : null;
+        }
+        if (schoolAddress.equals("경기도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("경기") : null;
+        }
+        if (schoolAddress.equals("강원도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("강원") : null;
+        }
+        if (schoolAddress.equals("충청도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("충북").or(school.address.schoolAddress.like("충남")).or(school.address.schoolAddress.like("세종")).or(school.address.schoolAddress.like("대전"))
+                    : null;
+        }
+        if (schoolAddress.equals("전라도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("전북").or(school.address.schoolAddress.like("전남")).or(school.address.schoolAddress.like("광주")) : null;
+        }
+        if (schoolAddress.equals("경상도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("경북").or(school.address.schoolAddress.like("경남")).or(school.address.schoolAddress.like("부산")).or(school.address.schoolAddress.like("울산")).or(school.address.schoolAddress.like("대구")) : null;
+        }
+        if (schoolAddress.equals("제주도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("제주") : null;
+        }
+        return null;
+    }
+
+    private BooleanExpression schoolAddressContaining8(String schoolAddress) {
+        if (!StringUtils.hasText(schoolAddress)) return null;
+        if (schoolAddress.equals("서울")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("서울") : null;
+        }
+        if (schoolAddress.equals("인천")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("인천") : null;
+        }
+        if (schoolAddress.equals("경기도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("경기") : null;
+        }
+        if (schoolAddress.equals("강원도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("강원") : null;
+        }
+        if (schoolAddress.equals("충청도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("충북").or(school.address.schoolAddress.like("충남")).or(school.address.schoolAddress.like("세종")).or(school.address.schoolAddress.like("대전"))
+                    : null;
+        }
+        if (schoolAddress.equals("전라도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("전북").or(school.address.schoolAddress.like("전남")).or(school.address.schoolAddress.like("광주")) : null;
+        }
+        if (schoolAddress.equals("경상도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("경북").or(school.address.schoolAddress.like("경남")).or(school.address.schoolAddress.like("부산")).or(school.address.schoolAddress.like("울산")).or(school.address.schoolAddress.like("대구")) : null;
+        }
+        if (schoolAddress.equals("제주도")) {
+            return StringUtils.hasText(schoolAddress) ? school.address.schoolAddress.like("제주") : null;
+        }
+        return null;
+    }
 
 }

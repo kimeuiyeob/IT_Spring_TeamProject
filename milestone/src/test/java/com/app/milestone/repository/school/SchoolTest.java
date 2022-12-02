@@ -38,7 +38,8 @@ public class SchoolTest {
     //  보육원 샘플데이터 (100개)추가
     @Test
     public void saveTest() {
-        String[] locations = {"바다", "산", "하늘", "들판", "사막", "동굴"};
+        String[] locations = {"서울 성동구 서울숲길 17 (성수파크빌)", "경기 가평군 가평읍 가랫골길 1", "인천 강화군 강화읍 갑룡길 3", "강원 강릉시 가작로 6", "충북 괴산군 감물면 감물로 7", "충남 계룡시 계룡대로 239", "전북 고창군 고수면 가협길 12", "세종특별자치시 가름로 143 (KT&G세종타워B)", "대전 대덕구 갑천도시고속도로 336", "전남 강진군 강진읍 강진공단길 8", "광주 광산구 가마길 2-21", "부산 강서구 가달1로 7"
+                , "울산 남구 갈밭로 3", "대구 남구 경상길 1", "경북 경산시 감못둑길 70 (가산건업, 백마화물)", "경남 거제시 거제면 거제남서로 3233", "제주특별자치도 서귀포시 가가로 14"};
         String[] schoolNames = {"코끼리", "거북이", "하마", "기린", "돌고래", "비둘기", "뉴트리아", "뱀"};
         for (int i = 0; i < 100; i++) {
             try {
@@ -47,18 +48,17 @@ public class SchoolTest {
                 e.printStackTrace();
             }
             SchoolDTO schoolDTO = new SchoolDTO();
-            Address address = new Address();
-            Introduce introduce = new Introduce();
-            schoolDTO = new SchoolDTO();
-            address.setSchoolZipcode("11111");
-            address.setSchoolAddress("바다");
-            address.setSchoolAddressDetail("용궁1동");
-            introduce.setSchoolTitle("안녕하세요");
-            introduce.setSchoolContent("반가워요");
+//            Address address = new Address();
+//            Introduce introduce = new Introduce();
+//            address.setSchoolZipcode("11111");
+//            address.setSchoolAddress(locations[i%17]);
+//            address.setSchoolAddressDetail("용궁1동");
+//            introduce.setSchoolTitle("안녕하세요");
+//            introduce.setSchoolContent("반가워요");
             schoolDTO.setSchoolName(schoolNames[i % 8] + " 보육원");
             schoolDTO.setSchoolZipcode("222222");
-            schoolDTO.setSchoolAddress(locations[i % 6]);
-            schoolDTO.setSchoolAddressDetail("봉우리1동");
+            schoolDTO.setSchoolAddress(locations[i%17]);
+            schoolDTO.setSchoolAddressDetail("주공받공아파트 124층 -12호");
             schoolDTO.setSchoolTeachers(3);
             schoolDTO.setSchoolKids(3);
             schoolDTO.setSchoolBudget(100000);
@@ -66,8 +66,8 @@ public class SchoolTest {
             schoolDTO.setSchoolAccount("000000000000");
             schoolDTO.setSchoolPhoneNumber("12312341234");
             schoolDTO.setSchoolQR(null);
-            schoolDTO.setSchoolTitle("치지직");
-            schoolDTO.setSchoolContent("두루미두루미");
+            schoolDTO.setSchoolTitle("치지직" + i);
+            schoolDTO.setSchoolContent("두루미두루미" + i);
             schoolDTO.setUserEmail("qwe@qwe.qwe");
             schoolDTO.setUserName("황지수");
             schoolDTO.setUserPassword("12341234");

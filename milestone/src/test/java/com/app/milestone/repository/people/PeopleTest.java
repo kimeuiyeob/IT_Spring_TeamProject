@@ -151,8 +151,8 @@ public class PeopleTest {
             donationCount = donationRepository.countBySchoolUserId(taker);
             school.update(donationCount);
 
-            Talent talent = new Talent(school, people, "재능제목", "재능내용", LocalDateTime.now(), "교육", "서울");
-            talentRepository.save(talent);
+//            Talent talent = new Talent(school, people, "재능제목", "재능내용", LocalDateTime.now(), "교육", "서울");
+//            talentRepository.save(talent);
         }
     }
 
