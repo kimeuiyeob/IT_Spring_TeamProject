@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /*================================================================================*/
@@ -26,9 +27,9 @@ public class TalentDTO {
     private Long userId;
     private String talentTitle;
     private String talentContent;
-    private LocalDateTime talentAbleDate;
-    private String category;
-    private String place;
+    private LocalDate talentAbleDate;
+    private String talentCategory;
+    private String talentPlace;
 
     public Talent toEntity() { //Service 단에서, 데이터를 저장시키기 위해서, 이 DTO를 Entity로 변환해주는 메소드
         return Talent.builder()
@@ -37,20 +38,20 @@ public class TalentDTO {
                 .talentTitle(talentTitle)
                 .talentContent(talentContent)
                 .talentAbleDate(talentAbleDate)
-                .category(category)
-                .place(place)
+                .talentCategory(talentCategory)
+                .talentPlace(talentPlace)
                 .build();
     }
 
     @QueryProjection
     //@QueryProjection은 생성자를 통해 DTO를 조회 -> Q파일 생성 , DTO의 생성자를 사용하는 것이 아니라 DTO 기반으로 생성된 QDTO 객체의 생성자를 사용하는 것이다.
-    public TalentDTO(Long userId, String talentTitle, String talentContent, LocalDateTime talentAbleDate, String category, String place) {
+    public TalentDTO(Long userId,String talentTitle, String talentContent, LocalDate talentAbleDate, String talentCategory, String talentPlace) {
         this.userId = userId;
         this.talentTitle = talentTitle;
         this.talentContent = talentContent;
         this.talentAbleDate = talentAbleDate;
-        this.category = category;
-        this.place = place;
+        this.talentCategory = talentCategory;
+        this.talentPlace = talentPlace;
 
     }
 }
