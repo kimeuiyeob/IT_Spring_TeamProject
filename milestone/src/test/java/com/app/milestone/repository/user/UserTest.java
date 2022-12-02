@@ -49,7 +49,9 @@ public class UserTest {
 //    회원 삭제
     @Test
     public void deleteTest() {
-        userRepository.deleteById(1L);
+        for (int i = 171; i<201; i++){
+            userRepository.deleteById(Long.valueOf(i));
+        }
     }
 
 }
