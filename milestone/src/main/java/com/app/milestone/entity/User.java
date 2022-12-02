@@ -15,7 +15,7 @@ import javax.persistence.*;
 @Table(name = "TBL_USER")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public abstract class User extends Period {
+public class User extends Period {
     @Id
     @GeneratedValue
     protected Long userId;
