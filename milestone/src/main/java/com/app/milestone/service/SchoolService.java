@@ -57,7 +57,7 @@ public class SchoolService {
         for (Tuple tuple : tuples) {
             MoneyDTO moneyDTO = new MoneyDTO();
             String name = peopleRepository.findById(tuple.get(1, Long.class)).get().getUserName();
-            moneyDTO.setMoneyCash(Integer.valueOf("" + tuple.get(0, Long.class)));
+            moneyDTO.setMoneyCash(tuple.get(0, Long.class));
             moneyDTO.setUserName(name);
             moneyDTOS.add(moneyDTO);
         }

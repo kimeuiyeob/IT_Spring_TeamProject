@@ -94,8 +94,8 @@ public class PeopleTest {
 
         for (int i = 0; i < 30; i++) {
             // 기부자 피기부자 샘플
-            Long giver = 1L + (i % 5);
-            Long taker = 106L;
+            Long giver = 101L + (i % 5);
+            Long taker = 5L;
             // 개인 총 기부 횟수 카운트
             People people = peopleRepository.findById(giver).get();
             donationCount = donationRepository.countByPeopleUserId(giver);
@@ -105,7 +105,7 @@ public class PeopleTest {
             donationCount = donationRepository.countBySchoolUserId(taker);
             school.update(donationCount);
 
-            Money money = new Money(school, people, 10000 * (i % 8 + 1));
+            Money money = new Money(school, people, 10000L * (i % 8 + 1));
             moneyRepository.save(money);
         }
     }
@@ -117,8 +117,8 @@ public class PeopleTest {
 
         for (int i = 0; i < 30; i++) {
             // 기부자 피기부자 샘플
-            Long giver = 1L + (i % 5);
-            Long taker = 105L;
+            Long giver = 101L + (i % 2);
+            Long taker = 5L;
             // 개인 총 기부 횟수 카운트
             People people = peopleRepository.findById(giver).get();
             donationCount = donationRepository.countByPeopleUserId(giver);
@@ -140,8 +140,8 @@ public class PeopleTest {
 
         for (int i = 0; i < 18; i++) {
             // 기부자 피기부자 샘플
-            Long giver = 1L + (i % 5);
-            Long taker = 110L;
+            Long giver = 101L + (i % 3);
+            Long taker = 5L;
             // 개인 총 기부 횟수 카운트
             People people = peopleRepository.findById(giver).get();
             donationCount = donationRepository.countByPeopleUserId(giver);
@@ -151,8 +151,8 @@ public class PeopleTest {
             donationCount = donationRepository.countBySchoolUserId(taker);
             school.update(donationCount);
 
-//            Talent talent = new Talent(school, people, "재능제목", "재능내용", LocalDateTime.now(), "교육", "서울");
-//            talentRepository.save(talent);
+            Talent talent = new Talent(school, people, "재능제목", "재능내용", LocalDateTime.now(), "교육", "서울");
+            talentRepository.save(talent);
         }
     }
 

@@ -73,7 +73,7 @@ $(".redHeart").css({"display": "none"})
 //         check2 = false;
 //     }
 // })
-$("section.schoolList").on('click',"span.heartWrap",function () {
+$("section.schoolList").on('click', "span.heartWrap", function () {
     if (!check2) {
         $(this).children(".redHeart").css({"display": "inline"})
         $(this).children(".emptyHeart").css({"display": "none"})
@@ -132,7 +132,8 @@ var checkLocal = {
     checkChungcheong: false, checkJeolla: false, checkGyeongsang: false, checkJeju: false
 };
 /* 저장된 지역 */
-var saveLocal = new Array(8);
+let saveLocal = [];
+// let saveLocal = new Array(8);
 
 /* 드롭다운 버튼 */
 $("button.dropbtn").on('click', function () {
@@ -294,8 +295,7 @@ const $schoolName = $('input[name = schoolName]');
 
 let searchName;
 
-
-saveLocal.forEach(o => searchName += o);
+// saveLocal.forEach(o => searchName += o);
 
 $schoolName.on('keyup', function (e) {
     if (e.keyCode == 13) {
@@ -326,11 +326,11 @@ $schoolName.on('keyup', function (e) {
 // })
 
 function getList1(param, callback, error) {
+    let test =param.schoolAddress.length!=0 ? "/"+param.schoolAddress : "/null";
     $.ajax({
-        url: "/schoolrest/list/" + param.schoolAddress,
+        url: "/schoolrest/list" + test,
         type: "get",
         success: function (schoolDTO, status, xhr) {
-            console.log(schoolDTO)
             if (callback) {
                 callback(schoolDTO);
             }

@@ -34,6 +34,7 @@ public class PeopleCustomRepositoryImpl implements PeopleCustomRepository {
                 people.userPhoneNumber,
                 people.donationCount
         )).from(people)
+                .where(people.userId.eq(userId))
                 .fetchOne();
 
     }
