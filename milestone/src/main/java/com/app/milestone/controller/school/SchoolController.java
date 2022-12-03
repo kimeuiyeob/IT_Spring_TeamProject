@@ -36,6 +36,7 @@ public class SchoolController {
         }
         log.info("=================================================================="+schoolService.schoolList(pageable, search));
         model.addAttribute("schools", schoolService.schoolList(pageable, search));
+        model.addAttribute("totalSchool", schoolService.schoolList(pageable, search).size());
     }
 
 //    ==============================================

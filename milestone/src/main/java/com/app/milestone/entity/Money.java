@@ -15,10 +15,10 @@ import javax.persistence.Table;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Money extends Donation {
     @NotNull
-    private int moneyCash;
+    private Long moneyCash;
 
     @Builder
-    public Money(School school, People people, int moneyCash) {
+    public Money(School school, People people, Long moneyCash) {
         super(school, people);
         this.moneyCash = moneyCash;
     }

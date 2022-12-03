@@ -21,7 +21,7 @@ import javax.persistence.ManyToOne;
 public class MoneyDTO {
     private String userName;
     private Long userId;
-    private int moneyCash;
+    private Long moneyCash;
 
     public Money toEntity() {
         return Money.builder()
@@ -30,7 +30,7 @@ public class MoneyDTO {
     }
 
     @QueryProjection
-    public MoneyDTO(String userName, Long userId, int moneyCash) {
+    public MoneyDTO(String userName, Long userId, Long moneyCash) {
         this.userName = userName;
         this.userId = userId;
         this.moneyCash = moneyCash;

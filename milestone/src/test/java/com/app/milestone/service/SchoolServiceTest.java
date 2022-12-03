@@ -1,8 +1,6 @@
 package com.app.milestone.service;
 
-import com.app.milestone.domain.MoneyDTO;
 import com.app.milestone.domain.Search;
-import com.app.milestone.entity.People;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +11,6 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @SpringBootTest
 @Slf4j

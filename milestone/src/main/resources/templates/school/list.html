@@ -58,6 +58,7 @@
                 <div class="selectedAddress"></div>
                 <div class="location wholeLocation">전체</div>
                 <div class="location location2">서울</div>
+                <div class="location location2">인천</div>
                 <div class="location location2">경기도</div>
                 <div class="location location2">강원도</div>
                 <div class="location location2">충청도</div>
@@ -69,7 +70,7 @@
             <div class="tAndS totalCount searchBox">
                 <!-- 총 검색 개수 -->
                 <div class="totalCount">총 &nbsp;
-                    <span id="totalCountNumber">10</span>건
+                    <span id="totalCountNumber" th:text="${totalSchool}"></span>건
                 </div>
                 <!-- 검색창 -->
                 <div class="searchBox realSearhBox">
@@ -213,13 +214,12 @@
 <script src="/js/fix/header.js"></script>
 <script th:inline="javascript">
     const $location2 = $(".location2");
-
-    let selectedAddress = [];
-    selectedAddress.push("바다")
-    selectedAddress.push("사막")
+    const $wholeLocation = $(".wholeLocation");
 
     $location2.on('click', function () {
-        console.log("실행은됨")
+        search()
+    })
+    $wholeLocation.on('click', function () {
         search()
     })
 
@@ -281,11 +281,9 @@
 
     }
 
-
     function search() {
-        console.log(saveLocal);
         getList1({
-            schoolAddress: saveLocal
+            schoolAddress: save
         }, getList);
     }
 </script>
