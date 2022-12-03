@@ -10,7 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static com.app.milestone.entity.QDonation.donation;
@@ -38,9 +37,9 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
                 talent.talentPlace
         ))
                 .where(
-                        talentTitleContaining(search.getTalentTitle()),
-                        talentCategoryContaining(search.getTalentCategory()),
-                        talentPlaceContaining(search.getSchoolAddress())
+                        talentTitleContaining(search.getTalentTitle())
+//                        talentCategoryContaining(search.getTalentCategory()),
+//                        talentPlaceContaining(search.getTalentPlace())
                 )
                 .from(talent)
                 .orderBy(talent.talentAbleDate.desc())
@@ -54,13 +53,14 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
         return StringUtils.hasText(talentTitle) ? talent.talentTitle.contains(talentTitle) : null;
     }
 
-    private BooleanExpression talentCategoryContaining(List<String> talentCategory) {
-        return talentCategory.size()>0 ? talent.talentCategory.in(talentCategory) : null;
-    }
+//    private BooleanExpression talentCategoryContaining(String talentCategory) {
+//        return talentCategory.size()>0 ? talent.talentCategory.in(talentCategory) : null;
+//    }
 
-    private BooleanExpression talentPlaceContaining(List<String> talentPlace) {
-        return talentPlace.size()>0 ? talent.talentPlace.in(talentPlace) : null;
-    }
+//    private BooleanExpression talentPlaceContaining(List<String> talentPlace) {
+//        return talentPlace.size()>0 ? talent.talentPlace.in(talentPlace) : null;
+//    }
+
 
 //          =========페이징 처리===========
 //          .offset(0) == 0부터 시작한다.
@@ -86,5 +86,15 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
                 .where(people.userId.eq(userId))
                 .fetch();
     }
+
+    /*@Override
+    public List<TalentDTO> talentLikeExercise(TalentDTO talentDTO) {
+       List<Talent> exercise =  jpaQueryFactory
+                .selectFrom(talent)
+                .where(talent.talentCategory.like("운동")).fetch();
+       return exercise;
+    };*/
+
+
 
 }

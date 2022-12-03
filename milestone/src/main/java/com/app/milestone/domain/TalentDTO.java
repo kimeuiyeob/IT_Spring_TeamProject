@@ -27,7 +27,7 @@ public class TalentDTO {
     private Long userId;
     private String talentTitle;
     private String talentContent;
-    private LocalDate talentAbleDate;
+    private LocalDateTime talentAbleDate;
     private String talentCategory;
     private String talentPlace;
 
@@ -45,7 +45,7 @@ public class TalentDTO {
 
     @QueryProjection
     //@QueryProjection은 생성자를 통해 DTO를 조회 -> Q파일 생성 , DTO의 생성자를 사용하는 것이 아니라 DTO 기반으로 생성된 QDTO 객체의 생성자를 사용하는 것이다.
-    public TalentDTO(Long userId,String talentTitle, String talentContent, LocalDate talentAbleDate, String talentCategory, String talentPlace) {
+    public TalentDTO(Long userId,String talentTitle, String talentContent, LocalDateTime talentAbleDate, String talentCategory, String talentPlace) {
         this.userId = userId;
         this.talentTitle = talentTitle;
         this.talentContent = talentContent;
