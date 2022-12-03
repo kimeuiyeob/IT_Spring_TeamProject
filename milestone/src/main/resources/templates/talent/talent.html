@@ -43,7 +43,7 @@
                 <div>전체</div>
             </div>
 
-            <div class="education">
+            <div class="education" onclick="dataSend()">
                 <div>교육</div>
             </div>
 
@@ -129,6 +129,7 @@
         <!-- ============================================================================================ -->
         <th:block th:each="talent:${talents}">
             <div style="padding-bottom:20px">
+
                 <article class="talentBox" th:object="${talent}">
                     <div class="talentBox2">
                         <div class="talentBox3">
@@ -140,15 +141,18 @@
                             <div class="talentboxs">
                                 <div class="talentType">
                                     <img src="/imgs/talent/care2.png" th:text="*{talentCategory}"
-                                         style="width: 25px; height: 25px; margin-bottom: -6px; margin-left: -10px;"><!--카테고리-->
+                                         style="width: 25px; height: 25px; margin-bottom: -6px; margin-left: -10px;">
+                                    <!--카테고리-->
                                 </div>
                                 <div class="talentPlace">
                                     <img src="/imgs/talent/pin.png" th:text="*{talentPlace}"
-                                         style="width: 25px; height: 25px; margin-bottom: -6px; margin-left: -10px;"><!--지역-->
+                                         style="width: 25px; height: 25px; margin-bottom: -6px; margin-left: -10px;">
+                                    <!--지역-->
                                 </div>
                                 <div class="talentTime">
                                     <img src="/imgs/talent/mylove.png" th:text="*{talentAbleDate}"
-                                         style="width: 25px; height: 25px; margin-bottom: -7px; margin-left: -15px;"><!--가능시간-->
+                                         style="width: 25px; height: 25px; margin-bottom: -7px; margin-left: -15px;">
+                                    <!--가능시간-->
                                 </div>
                             </div>
                         </div>
@@ -484,4 +488,65 @@
     AOS.init();
 </script>
 <!--================================================================================================================-->
+<script th:inline="javascript">
+    const $location2 = $(".location2");
+
+    $location2.on('click', function () {
+        search()
+    })
+
+    function getList(talentDTO) {
+
+        let text = "";
+        for (tal in talentDTO) {
+            let talent = talentDTO[tal];
+
+            text += `<article class="talentBox">`
+            text += `<div class="talentBox2">`
+
+            text += `<div class="talentBox3">`
+            text += `<img src="../imgs/myPage/normalProfile.png" class="talentImg">`
+            text += `</div>`
+
+            text += `<div class="talentBox4">`
+
+            text += `<p class="talentTitle">` + talent.talentTitle + `</p>`
+
+            text += `<p class="talentContent">` + talent.talentContent + `</p>`
+
+            text += `<div class="talentboxs">`
+
+            text += `<div class="talentType">`
+            text += `<img src="/imgs/talent/care2.png" style="width: 25px; height: 25px; margin-bottom: -6px; margin-left: -10px;">` + talent.talentCategory
+            text += `</div>`
+
+            text += `<div class="talentPlace">`
+            text += `<img src="/imgs/talent/pin.png" style="width: 25px; height: 25px; margin-bottom: -6px; margin-left: -10px;">` + talent.talentPlace
+            text += `</div>`
+
+            text += `<div class="talentTime">`
+            text += `<img src="/imgs/talent/mylove.png" style="width: 25px; height: 25px; margin-bottom: -7px; margin-left: -15px;">` + talent.talentAbleDate
+            text += `</div>`
+
+            text += `</div>`
+
+            text += `</div>`
+            text += `</div>`
+            text += `</article>`
+
+        }
+
+        $(".talentBoxAll").html(text)
+
+    }
+
+    function search() {
+        console.log(saveLocal);
+        getTalentList1({
+            schoolAddress: saveLocal
+        }, getList);
+    }
+
+</script>
+
 </html>

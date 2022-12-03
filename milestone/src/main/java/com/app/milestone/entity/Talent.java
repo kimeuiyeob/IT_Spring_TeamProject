@@ -25,14 +25,14 @@ public class Talent extends Donation {
     @NotNull
     private String talentContent;
     @NotNull
-    private LocalDate talentAbleDate;
+    private LocalDateTime talentAbleDate;
     @NotNull
     private String talentCategory;
     @NotNull
     private String talentPlace;
 
     @Builder //Builder pattern을 사용하게 해주는 어노테이션!
-    public Talent(School school, People people, String talentTitle, String talentContent, LocalDate talentAbleDate, String talentCategory,String talentPlace) {
+    public Talent(School school, People people, String talentTitle, String talentContent, LocalDateTime talentAbleDate, String talentCategory,String talentPlace) {
         super(school, people);
         this.talentTitle = talentTitle;
         this.talentContent = talentContent;
