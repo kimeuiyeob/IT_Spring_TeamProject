@@ -533,17 +533,18 @@ function getTalentList1(param, callback, error) {
         }
     });
 }
-/*=================호석이가 ajax 도와준곳=====================*/
+/*======================================================================================*/
+/*=================================카테고리 AJAX=========================================*/
+/*======================================================================================*/
 
-$("#education").on("click",function () {
+/*===================================전체 클릭시=========================================*/
+$("#showAll").on("click",function () {
 
     $.ajax({
         url: "/talentrest/showall",
         type: "post",
         success:function (lists) {
-
             let text= "";
-
             lists.forEach(function (list) {
                 text += `<div style="padding-bottom:20px">`
                 text += `<article class="talentBox">`
@@ -564,8 +565,8 @@ $("#education").on("click",function () {
 
                 let date = new Date(list.talentAbleDate);
                 let year = date.getFullYear().toString().substr(2);
-                let month = date.getMonth();
-                let day = date.getDay();
+                let month = date.getMonth() + 1;
+                let day = date.getDate();
 
                 text += `<div class="talentTime">`
                 text += `<img src="/imgs/talent/mylove.png" style="width: 25px; height: 25px; margin-bottom: -7px; margin-left: -15px;">` + year + '년 ' + ("00" +month.toString()).slice(-2) + "월 " + ("00" +day.toString()).slice(-2)+ "일"
@@ -581,7 +582,238 @@ $("#education").on("click",function () {
         }
     })
 })
+/*=====================================================================================*/
+/*===================================교육 클릭시=========================================*/
+$("#education").on("click",function () {
 
+    $.ajax({
+        url: "/talentrest/showeducation",
+        type: "post",
+        success:function (lists) {
+            let text= "";
+            lists.forEach(function (list) {
+                text += `<div style="padding-bottom:20px">`
+                text += `<article class="talentBox">`
+                text += `<div class="talentBox2">`
+                text += `<div class="talentBox3">`
+                text += `<img src="../imgs/myPage/normalProfile.png" class="talentImg">`
+                text += `</div>`
+                text += `<div class="talentBox4">`
+                text += `<p class="talentTitle">` + list.talentTitle + `</p>`
+                text += `<p class="talentContent">` + list.talentContent + `</p>`
+                text += `<div class="talentboxs">`
+                text += `<div class="talentType">`
+                text += `<img src="/imgs/talent/care2.png" style="width: 25px; height: 25px; margin-bottom: -6px; margin-left: -10px;">` + list.talentCategory
+                text += `</div>`
+                text += `<div class="talentPlace">`
+                text += `<img src="/imgs/talent/pin.png" style="width: 25px; height: 25px; margin-bottom: -6px; margin-left: -10px;">` + list.talentPlace
+                text += `</div>`
+
+                let date = new Date(list.talentAbleDate);
+                let year = date.getFullYear().toString().substr(2);
+                let month = date.getMonth() + 1;
+                let day = date.getDate();
+
+                text += `<div class="talentTime">`
+                text += `<img src="/imgs/talent/mylove.png" style="width: 25px; height: 25px; margin-bottom: -7px; margin-left: -15px;">` + year + '년 ' + ("00" +month.toString()).slice(-2) + "월 " + ("00" +day.toString()).slice(-2)+ "일"
+                text += `</div>`
+                text += `</div>`
+                text += `</div>`
+                text += `</div>`
+                text += `</article>`
+                text += `</div>`
+                $(".talentBoxAll").html(text);
+
+            })
+        }
+    })
+})
+/*=====================================================================================*/
+/*===================================운동 클릭시=========================================*/
+$("#exercise").on("click",function () {
+
+    $.ajax({
+        url: "/talentrest/showexercise",
+        type: "post",
+        success:function (lists) {
+            let text= "";
+            lists.forEach(function (list) {
+                text += `<div style="padding-bottom:20px">`
+                text += `<article class="talentBox">`
+                text += `<div class="talentBox2">`
+                text += `<div class="talentBox3">`
+                text += `<img src="../imgs/myPage/normalProfile.png" class="talentImg">`
+                text += `</div>`
+                text += `<div class="talentBox4">`
+                text += `<p class="talentTitle">` + list.talentTitle + `</p>`
+                text += `<p class="talentContent">` + list.talentContent + `</p>`
+                text += `<div class="talentboxs">`
+                text += `<div class="talentType">`
+                text += `<img src="/imgs/talent/care2.png" style="width: 25px; height: 25px; margin-bottom: -6px; margin-left: -10px;">` + list.talentCategory
+                text += `</div>`
+                text += `<div class="talentPlace">`
+                text += `<img src="/imgs/talent/pin.png" style="width: 25px; height: 25px; margin-bottom: -6px; margin-left: -10px;">` + list.talentPlace
+                text += `</div>`
+
+                let date = new Date(list.talentAbleDate);
+                let year = date.getFullYear().toString().substr(2);
+                let month = date.getMonth() + 1;
+                let day = date.getDate();
+
+                text += `<div class="talentTime">`
+                text += `<img src="/imgs/talent/mylove.png" style="width: 25px; height: 25px; margin-bottom: -7px; margin-left: -15px;">` + year + '년 ' + ("00" +month.toString()).slice(-2) + "월 " + ("00" +day.toString()).slice(-2)+ "일"
+                text += `</div>`
+                text += `</div>`
+                text += `</div>`
+                text += `</div>`
+                text += `</article>`
+                text += `</div>`
+                $(".talentBoxAll").html(text);
+
+            })
+        }
+    })
+})
+/*=====================================================================================*/
+/*===================================음악 클릭시=========================================*/
+$("#music").on("click",function () {
+
+    $.ajax({
+        url: "/talentrest/showmusic",
+        type: "post",
+        success:function (lists) {
+            let text= "";
+            lists.forEach(function (list) {
+                text += `<div style="padding-bottom:20px">`
+                text += `<article class="talentBox">`
+                text += `<div class="talentBox2">`
+                text += `<div class="talentBox3">`
+                text += `<img src="../imgs/myPage/normalProfile.png" class="talentImg">`
+                text += `</div>`
+                text += `<div class="talentBox4">`
+                text += `<p class="talentTitle">` + list.talentTitle + `</p>`
+                text += `<p class="talentContent">` + list.talentContent + `</p>`
+                text += `<div class="talentboxs">`
+                text += `<div class="talentType">`
+                text += `<img src="/imgs/talent/care2.png" style="width: 25px; height: 25px; margin-bottom: -6px; margin-left: -10px;">` + list.talentCategory
+                text += `</div>`
+                text += `<div class="talentPlace">`
+                text += `<img src="/imgs/talent/pin.png" style="width: 25px; height: 25px; margin-bottom: -6px; margin-left: -10px;">` + list.talentPlace
+                text += `</div>`
+
+                let date = new Date(list.talentAbleDate);
+                let year = date.getFullYear().toString().substr(2);
+                let month = date.getMonth() +1;
+                let day = date.getDate();
+
+                text += `<div class="talentTime">`
+                text += `<img src="/imgs/talent/mylove.png" style="width: 25px; height: 25px; margin-bottom: -7px; margin-left: -15px;">` + year + '년 ' + ("00" +month.toString()).slice(-2) + "월 " + ("00" +day.toString()).slice(-2)+ "일"
+                text += `</div>`
+                text += `</div>`
+                text += `</div>`
+                text += `</div>`
+                text += `</article>`
+                text += `</div>`
+                $(".talentBoxAll").html(text);
+
+            })
+        }
+    })
+})
+/*=====================================================================================*/
+/*===================================미술 클릭시=========================================*/
+$("#art").on("click",function () {
+
+    $.ajax({
+        url: "/talentrest/showart",
+        type: "post",
+        success:function (lists) {
+            let text= "";
+            lists.forEach(function (list) {
+                text += `<div style="padding-bottom:20px">`
+                text += `<article class="talentBox">`
+                text += `<div class="talentBox2">`
+                text += `<div class="talentBox3">`
+                text += `<img src="../imgs/myPage/normalProfile.png" class="talentImg">`
+                text += `</div>`
+                text += `<div class="talentBox4">`
+                text += `<p class="talentTitle">` + list.talentTitle + `</p>`
+                text += `<p class="talentContent">` + list.talentContent + `</p>`
+                text += `<div class="talentboxs">`
+                text += `<div class="talentType">`
+                text += `<img src="/imgs/talent/care2.png" style="width: 25px; height: 25px; margin-bottom: -6px; margin-left: -10px;">` + list.talentCategory
+                text += `</div>`
+                text += `<div class="talentPlace">`
+                text += `<img src="/imgs/talent/pin.png" style="width: 25px; height: 25px; margin-bottom: -6px; margin-left: -10px;">` + list.talentPlace
+                text += `</div>`
+
+                let date = new Date(list.talentAbleDate);
+                let year = date.getFullYear().toString().substr(2);
+                let month = date.getMonth() +1;
+                let day = date.getDate();
+
+                text += `<div class="talentTime">`
+                text += `<img src="/imgs/talent/mylove.png" style="width: 25px; height: 25px; margin-bottom: -7px; margin-left: -15px;">` + year + '년 ' + ("00" +month.toString()).slice(-2) + "월 " + ("00" +day.toString()).slice(-2)+ "일"
+                text += `</div>`
+                text += `</div>`
+                text += `</div>`
+                text += `</div>`
+                text += `</article>`
+                text += `</div>`
+                $(".talentBoxAll").html(text);
+
+            })
+        }
+    })
+})
+/*=====================================================================================*/
+/*===================================미술 클릭시=========================================*/
+$("#program").on("click",function () {
+
+    $.ajax({
+        url: "/talentrest/showit",
+        type: "post",
+        success:function (lists) {
+            let text= "";
+            lists.forEach(function (list) {
+                text += `<div style="padding-bottom:20px">`
+                text += `<article class="talentBox">`
+                text += `<div class="talentBox2">`
+                text += `<div class="talentBox3">`
+                text += `<img src="../imgs/myPage/normalProfile.png" class="talentImg">`
+                text += `</div>`
+                text += `<div class="talentBox4">`
+                text += `<p class="talentTitle">` + list.talentTitle + `</p>`
+                text += `<p class="talentContent">` + list.talentContent + `</p>`
+                text += `<div class="talentboxs">`
+                text += `<div class="talentType">`
+                text += `<img src="/imgs/talent/care2.png" style="width: 25px; height: 25px; margin-bottom: -6px; margin-left: -10px;">` + list.talentCategory
+                text += `</div>`
+                text += `<div class="talentPlace">`
+                text += `<img src="/imgs/talent/pin.png" style="width: 25px; height: 25px; margin-bottom: -6px; margin-left: -10px;">` + list.talentPlace
+                text += `</div>`
+
+                let date = new Date(list.talentAbleDate);
+                let year = date.getFullYear().toString().substr(2);
+                let month = date.getMonth() +1;
+                let day = date.getDate();
+
+                text += `<div class="talentTime">`
+                text += `<img src="/imgs/talent/mylove.png" style="width: 25px; height: 25px; margin-bottom: -7px; margin-left: -15px;">` + year + '년 ' + ("00" +month.toString()).slice(-2) + "월 " + ("00" +day.toString()).slice(-2)+ "일"
+                text += `</div>`
+                text += `</div>`
+                text += `</div>`
+                text += `</div>`
+                text += `</article>`
+                text += `</div>`
+                $(".talentBoxAll").html(text);
+
+            })
+        }
+    })
+})
+/*=====================================================================================*/
+/*=====================================================================================*/
 
 
 

@@ -32,9 +32,36 @@ public class TalentService {
 //    public List<TalentDTO> talentDetail(Long UserId) {
 //        return talentRepository.talentDetail(UserId);
 //    }
-    //교육클릭시 정렬
+
+    //전체클릭시 전체 조회하기 (가능일자순으로)
+    public List<TalentDTO> allList() {
+        return talentRepository.allList();
+    }
+
+    //교육클릭시 교육 조회하기
     public List<TalentDTO> educationList() {
         return talentRepository.educationList();
     }
+
+    //운동클릭시 운동 조회하기
+    public List<TalentDTO> exerciseList() {
+        return talentRepository.exerciseList();
+    }
+
+    //음악클릭시 음악 조회하기
+    public List<TalentDTO> musicList() {
+        return talentRepository.musicList();
+    }
+
+    //미술클릭시 미술 조회하기
+    public List<TalentDTO> artList() {
+        return talentRepository.artList();
+    }
+
+    //IT클릭시 IT 조회하기
+    public List<TalentDTO> itList() {
+        return talentRepository.itList();
+    }
+
 
 }

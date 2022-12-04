@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,18 +39,18 @@ public class TalentTest {
 
     @Test
     public void save2Test() {
-        String[] talentPlaces = {"경상도","서울","강원도","충청도","경기도"};
+        String[] talentPlaces = {"서울","경기도","강원도","충청도","전라도","경상도","제주도"};
         String[] talentTitles = {"코끼리", "거북이", "하마", "기린", "돌고래", "비둘기", "뉴트리아", "뱀"};
         String[] talentContents = {"나는내용입니다", "나는내용일까요?", "나는김의엽입니다", "나는누구일까요?", "이제저도모르겠습니다."};
-        String[] talentCategorys = {"운동", "음악", "미술", "IT"};
+        String[] talentCategorys = {"교육", "운동", "음악", "미술","IT"};
 
         for (int i = 0; i < 50; i++) {
             TalentDTO talentDTO = new TalentDTO();
             talentDTO.setTalentTitle(talentTitles[i % 8]);
             talentDTO.setTalentContent(talentContents[i % 5]);
             talentDTO.setTalentAbleDate(LocalDateTime.now());
-            talentDTO.setTalentCategory(talentCategorys[i % 4]);
-            talentDTO.setTalentPlace(talentPlaces[i % 5]);
+            talentDTO.setTalentCategory(talentCategorys[i % 5]);
+            talentDTO.setTalentPlace(talentPlaces[i % 7]);
             talentRepository.save(talentDTO.toEntity());
         }
     }
