@@ -17,24 +17,6 @@
 
 <body>
 <header th:replace="/fix/header.html :: header"></header>
-<!--<form th:action="@{/school/list}">-->
-<!--    <input type="text" name="schoolAddress">-->
-<!--    <button>버튼</button>-->
-<!--    <input type="text" name="schoolAddress" value="사막">-->
-<!--</form>-->
-
-<!--<table border="1">-->
-<!--    <th:block th:each="school:${schools}">-->
-<!--        <tr th:object="${school}">-->
-<!--            <td th:text="*{schoolName}"></td>-->
-<!--            <td th:text="*{schoolBank}"></td>-->
-<!--            <td th:text="*{schoolZipcode}"></td>-->
-<!--            <td th:text="*{schoolAddress}"></td>-->
-<!--            <td th:text="*{schoolAddressDetail}"></td>-->
-<!--        </tr>-->
-<!--    </th:block>-->
-<!--</table>-->
-
 
 </th:block>
 <div class="wholePage">
@@ -52,7 +34,7 @@
     </section>
 
     <!-- 지역섹션 -->
-    <form th:action="@{/school/list}" name="searchForm">
+    <form th:action="@{/school/list}" name="searchForm" onsubmit="return false">
         <section class="loc centerContent">
             <div class="loactions" style="padding-top: 65px; display: flex;height: 150px;">
                 <div class="selectedAddress"></div>
@@ -68,6 +50,13 @@
             </div>
 
             <div class="tAndS totalCount searchBox">
+                <!-- 이전 선택한 지역-->
+                <div class="beforeSelectLocations" style="display: none">
+                    <th:block th:each="address : ${schoolAddresses}">
+                        <div class="beforeLocation" th:text="*{address}"></div>
+                    </th:block>
+                    <div class="beforeName" th:text="${schoolName}"></div>
+                </div>
                 <!-- 총 검색 개수 -->
                 <div class="totalCount">총 &nbsp;
                     <span id="totalCountNumber" th:text="${totalSchool}"></span>건
@@ -214,6 +203,21 @@
     const $location2 = $(".location2");
     const $wholeLocation = $(".wholeLocation");
 
+    console.log($('.beforeLocation').eq(0).text());
+
+    //페이지 로딩 완료후 이전에 검색한 지역 눌림 상태
+    $location2.each(function (i, o) {
+        let location = $(o).text();
+
+        if ($('.beforeLocation').text().indexOf(location) != -1) {
+            $(".wholeLocation").css({"background-color": "#f2f3f7"})
+            $(".wholeLocation").css({"border": "none"})
+            $(o).css({"background-color": "transparent"});
+            $(o).css({"border": "solid 1px black"});
+            save.push($(o).text());
+        }
+    })
+
     $location2.on('click', function () {
         search()
     })
@@ -282,7 +286,8 @@
 
     function search() {
         getList1({
-            schoolAddress: save
+            schoolAddress: save,
+            schoolName: $('.beforeName').text()
         }, getList);
     }
 </script>
