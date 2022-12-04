@@ -3,9 +3,11 @@ package com.app.milestone.repository;
 import com.app.milestone.domain.QTalentDTO;
 import com.app.milestone.domain.Search;
 import com.app.milestone.domain.TalentDTO;
+import com.app.milestone.entity.QTalent;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
@@ -18,6 +20,7 @@ import static com.app.milestone.entity.QTalent.talent;
 
 @Repository
 @RequiredArgsConstructor
+@Slf4j
 public class TalentCustomRepositoryImpl implements TalentCustomRepository {
 
     private final JPAQueryFactory jpaQueryFactory;
@@ -37,9 +40,9 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
                 talent.talentPlace
         ))
                 .where(
-                        talentTitleContaining(search.getTalentTitle())
-//                        talentCategoryContaining(search.getTalentCategory()),
-//                        talentPlaceContaining(search.getTalentPlace())
+                        talentTitleContaining(search.getTalentTitle()),
+                        talentCategoryContaining(search.getTalentCategory()),
+                        talentPlaceContaining(search.getTalentPlace())
                 )
                 .from(talent)
                 .orderBy(talent.talentAbleDate.desc())
@@ -49,17 +52,18 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
     }
 
     //BooleanExpression은 null 일때 무시될 수 있고, and또는 or절을 통해서 조합을 할 수 있다.
-    private BooleanExpression talentTitleContaining(String talentTitle) { //BooleanExpression null을 받으면 이메소드 사라진다.
+    private BooleanExpression talentTitleContaining(String talentTitle) {
         return StringUtils.hasText(talentTitle) ? talent.talentTitle.contains(talentTitle) : null;
+    } //BooleanExpression 조건문을 반환한다, null일때 메소드 사라진다.
+      //talentTitle에값이 있다면  talent.talentTitle.contains(talentTitle) 이걸 where절에 반환하고 false면 null을 반환해서 where절의 talentTitleContaining 메소드를 삭제한다.
+
+    private BooleanExpression talentCategoryContaining(String talentCategory) {
+        return StringUtils.hasText(talentCategory) ? talent.talentCategory.contains(talentCategory) : null;
     }
 
-//    private BooleanExpression talentCategoryContaining(String talentCategory) {
-//        return talentCategory.size()>0 ? talent.talentCategory.in(talentCategory) : null;
-//    }
-
-//    private BooleanExpression talentPlaceContaining(List<String> talentPlace) {
-//        return talentPlace.size()>0 ? talent.talentPlace.in(talentPlace) : null;
-//    }
+    private BooleanExpression talentPlaceContaining(List<String> talentPlace) {
+        return talentPlace.size() > 0 ?  talent.talentPlace.in(talentPlace) : null;
+    }
 
 
 //          =========페이징 처리===========
@@ -70,6 +74,7 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
 //          userPaging.isFirst(); == 첫번째 페이지
 //          userPaging.getContent(); == 1페이지에 있는 user List
 //          =============================
+
 
     @Override
     public List<TalentDTO> talentDetail(Long userId) {
@@ -87,14 +92,17 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
                 .fetch();
     }
 
-    /*@Override
-    public List<TalentDTO> talentLikeExercise(TalentDTO talentDTO) {
-       List<Talent> exercise =  jpaQueryFactory
-                .selectFrom(talent)
-                .where(talent.talentCategory.like("운동")).fetch();
-       return exercise;
-    };*/
-
-
+    @Override
+    public List<TalentDTO> educationList() {
+        return jpaQueryFactory.select(new QTalentDTO (
+                talent.people.userId,
+                talent.talentTitle,
+                talent.talentContent,
+                talent.talentAbleDate,
+                talent.talentCategory,
+                talent.talentPlace
+        )).from(talent)
+                .where(talent.talentCategory.eq("교육")).fetch();
+    }
 
 }

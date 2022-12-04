@@ -11,7 +11,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -32,16 +31,15 @@ public class TalentServiceTest {
         Search search = new Search();
 
         search.setSchoolAddress(new ArrayList<>());
-        search.setTalentCategory(new ArrayList<>());
 
         for (String location : locations) {
             search.getSchoolAddress().add(location);
         }
 
         search.setTalentTitle("돌고래");
-        search.getTalentCategory().add("운동");
+        search.setTalentCategory("운동");
 
-        talentService.TalentList(pageable, search)
+        talentService.talentList(pageable, search)
                 .forEach(o -> log.info(
                         "  Title : " + o.getTalentTitle() +
                                 "  Content : " + o.getTalentContent() +
@@ -57,7 +55,7 @@ public class TalentServiceTest {
 
         talentDTO.setTalentTitle("서비스테스트제목");
         talentDTO.setTalentContent("서비스테스트내용");
-        talentDTO.setTalentAbleDate(LocalDate.now());
+        talentDTO.setTalentAbleDate(LocalDateTime.now());
         talentDTO.setTalentCategory("교육");
         talentDTO.setTalentPlace("서울");
 
@@ -66,10 +64,9 @@ public class TalentServiceTest {
     }
 
     @Test
-    public void talentDetailTest() {
-
-        Long userId = 3L;
-        talentService.talentDetail(userId);
+    public void educationTest() {
+        talentService.educationList().stream().map(o -> o.toString()).forEach(o -> log.info("값은: " + o));
     }
+
 
 }

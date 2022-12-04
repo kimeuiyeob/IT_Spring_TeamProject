@@ -15,7 +15,7 @@ public class Search {
     /*===============================*/
 
     private String talentTitle;
-    private List<String> talentCategory;
+    private String talentCategory;
     private List<String> talentPlace;
 
 }
