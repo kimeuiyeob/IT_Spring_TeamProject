@@ -4,6 +4,7 @@ import com.app.milestone.domain.Search;
 import com.app.milestone.repository.SchoolRepository;
 import com.app.milestone.service.SchoolService;
 import com.app.milestone.service.UserService;
+import com.app.milestone.service.WithdrawalService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +20,8 @@ import java.util.ArrayList;
 @RequestMapping("/admin/*")
 public class AdminController {
     private final UserService userService;
+    private final WithdrawalService withdrawalService;
+    private final SchoolService schoolService;
 
     @GetMapping("talent")
     public void community(){};
@@ -39,9 +42,15 @@ public class AdminController {
     };
 
     @GetMapping("school")
-    public void evolution(){};
+    public void school(Pageable pageable, Model model){
+        pageable = PageRequest.of(0,7);
+        model.addAttribute("schools", schoolService.schoolListManager(pageable));
+    };
 
     @GetMapping("reason")
-    public void reason(){};
+    public void reason(Pageable pageable,Model model){
+        pageable = PageRequest.of(0, 7);
+        model.addAttribute("withdrawals", withdrawalService.withdrawalList(pageable));
+    };
 
 }

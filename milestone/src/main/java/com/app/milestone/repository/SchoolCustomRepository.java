@@ -14,4 +14,5 @@ public interface SchoolCustomRepository {
     public List<SchoolDTO> findAllByCreatedDate (Pageable pageable, Search search);
     public Long countByCreatedDate (Pageable pageable, Search search);
 //    public List<School> findAllByCreatedDate (Pageable pageable, Search search);
+    public List<School> findByCreatedDate (Pageable pageable);
 }

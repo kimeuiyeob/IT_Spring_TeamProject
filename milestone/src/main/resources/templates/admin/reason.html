@@ -298,154 +298,28 @@
                             </tr>
                             </thead>
                             <tbody class="card-body-main-box">
-                            <tr>
-                                <th class="card-body-title-padding" style="width: 25%;">
-                                    <div class="donater-info">
-                                        <!--<div class="donater-info-img1"></div>-->
-                                        <div class="donater-info-text">
-                                            <div class="donater-name">보육원</div>
-                                            <!--<div>phj@milestone.com</div>-->
+                            <!--회원 하나-->
+                            <th:block th:each="withdrawal:${withdrawals}">
+                                <tr th:object="${withdrawal}">
+                                    <th class="card-body-title-padding" style="width: 25%;">
+                                        <div class="donater-info" style="height: 50px">
+                                            <div class="donater-info-text">
+                                                <div class="donater-name" th:text="*{withdrawalUserType}"><!--일반 또는 보육원--></div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </th>
-                                <th class="card-body-title-padding" style="width: 43%;">
-                                    <div class="donate-info-height">
-                                        이용하고 싶은 서비스가 없어요
-                                    </div>
-                                </th>
-                                <th class="card-body-title-padding" style="width: 30%;">
-                                    <div class="donate-info-height">
-                                        2022년 11월 21일 23시 50분
-                                    </div>
-                                </th>
-                            </tr>
-                            <tr>
-                                <th class="card-body-title-padding" style="width: 25%;">
-                                    <div class="donater-info">
-                                        <!--<div class="donater-info-img1"></div>-->
-                                        <div class="donater-info-text">
-                                            <div class="donater-name">보육원</div>
-                                            <!--<div>phj@milestone.com</div>-->
+                                    </th>
+                                    <th class="card-body-title-padding" style="width: 43%;">
+                                        <div class="donate-info-height" th:text="*{withdrawalReason}">
+                                            <!--이용하고 싶은 서비스가 없어요-->
                                         </div>
-                                    </div>
-                                </th>
-                                <th class="card-body-title-padding" style="width: 43%;">
-                                    <div class="donate-info-height">
-                                        이용하고 싶은 서비스가 없어요
-                                    </div>
-                                </th>
-                                <th class="card-body-title-padding" style="width: 30%;">
-                                    <div class="donate-info-height">
-                                        2022년 11월 21일 23시 50분
-                                    </div>
-                                </th>
-                            </tr>
-                            <tr>
-                                <th class="card-body-title-padding" style="width: 25%;">
-                                    <div class="donater-info">
-                                        <!--<div class="donater-info-img1"></div>-->
-                                        <div class="donater-info-text">
-                                            <div class="donater-name">보육원</div>
-                                            <!--<div>phj@milestone.com</div>-->
+                                    </th>
+                                    <th class="card-body-title-padding" style="width: 30%;">
+                                        <div class="donate-info-height" th:text="*{#temporals.format(createdDate,'YYYY년 MM월 dd일')}">
+                                            <!--2022년 11월 21일 23시 50분-->
                                         </div>
-                                    </div>
-                                </th>
-                                <th class="card-body-title-padding" style="width: 43%;">
-                                    <div class="donate-info-height">
-                                        이용하고 싶은 서비스가 없어요
-                                    </div>
-                                </th>
-                                <th class="card-body-title-padding" style="width: 30%;">
-                                    <div class="donate-info-height">
-                                        2022년 11월 21일 23시 50분
-                                    </div>
-                                </th>
-                            </tr>
-                            <tr>
-                                <th class="card-body-title-padding" style="width: 25%;">
-                                    <div class="donater-info">
-                                        <!--<div class="donater-info-img1"></div>-->
-                                        <div class="donater-info-text">
-                                            <div class="donater-name">보육원</div>
-                                            <!--<div>phj@milestone.com</div>-->
-                                        </div>
-                                    </div>
-                                </th>
-                                <th class="card-body-title-padding" style="width: 43%;">
-                                    <div class="donate-info-height">
-                                        이용하고 싶은 서비스가 없어요
-                                    </div>
-                                </th>
-                                <th class="card-body-title-padding" style="width: 30%;">
-                                    <div class="donate-info-height">
-                                        2022년 11월 21일 23시 50분
-                                    </div>
-                                </th>
-                            </tr>
-                            <tr>
-                                <th class="card-body-title-padding" style="width: 25%;">
-                                    <div class="donater-info">
-                                        <!--<div class="donater-info-img1"></div>-->
-                                        <div class="donater-info-text">
-                                            <div class="donater-name">보육원</div>
-                                            <!--<div>phj@milestone.com</div>-->
-                                        </div>
-                                    </div>
-                                </th>
-                                <th class="card-body-title-padding" style="width: 43%;">
-                                    <div class="donate-info-height">
-                                        이용하고 싶은 서비스가 없어요
-                                    </div>
-                                </th>
-                                <th class="card-body-title-padding" style="width: 30%;">
-                                    <div class="donate-info-height">
-                                        2022년 11월 21일 23시 50분
-                                    </div>
-                                </th>
-                            </tr>
-                            <tr>
-                                <th class="card-body-title-padding" style="width: 25%;">
-                                    <div class="donater-info">
-                                        <!--<div class="donater-info-img1"></div>-->
-                                        <div class="donater-info-text">
-                                            <div class="donater-name">보육원</div>
-                                            <!--<div>phj@milestone.com</div>-->
-                                        </div>
-                                    </div>
-                                </th>
-                                <th class="card-body-title-padding" style="width: 43%;">
-                                    <div class="donate-info-height">
-                                        이용하고 싶은 서비스가 없어요
-                                    </div>
-                                </th>
-                                <th class="card-body-title-padding" style="width: 30%;">
-                                    <div class="donate-info-height">
-                                        2022년 11월 21일 23시 50분
-                                    </div>
-                                </th>
-                            </tr>
-                            <tr>
-                                <th class="card-body-title-padding" style="width: 25%;">
-                                    <div class="donater-info">
-                                        <!--<div class="donater-info-img1"></div>-->
-                                        <div class="donater-info-text">
-                                            <div class="donater-name">보육원</div>
-                                            <!--<div>phj@milestone.com</div>-->
-                                        </div>
-                                    </div>
-                                </th>
-                                <th class="card-body-title-padding" style="width: 43%;">
-                                    <div class="donate-info-height">
-                                        이용하고 싶은 서비스가 없어요
-                                    </div>
-                                </th>
-                                <th class="card-body-title-padding" style="width: 30%;">
-                                    <div class="donate-info-height">
-                                        2022년 11월 21일 23시 50분
-                                    </div>
-                                </th>
-                            </tr>
-
+                                    </th>
+                                </tr>
+                            </th:block>
                             </tbody>
                         </table>
                         <!-- 카드 푸터 -->

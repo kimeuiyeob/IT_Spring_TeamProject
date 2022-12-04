@@ -146,4 +146,20 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
         return booleanBuilder;
     }
 
+
+
+
+
+
+    //========================관리자페이지===========================
+    //        보육원 목록(최신순)
+    @Override
+    public List<School> findByCreatedDate(Pageable pageable) {
+        return jpaQueryFactory.selectFrom(school)
+                .orderBy(school.createdDate.desc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
+    }
+    //=============================================================
 }

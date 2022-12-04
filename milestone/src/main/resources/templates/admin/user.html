@@ -349,46 +349,46 @@
 
                             <tbody class="card-body-main-box">
 
-                                <!--회원 하나-->
-                                <th:block th:each="user:${users}">
-                                    <tr th:object="${user}">
-                                        <th class="card-body-title-checkbox-padding" style="width: 3%;">
-                                            <label class="card-body-title-user-checkbox">
-                                                <div class="check-img"></div>
-                                                <input class="notice-checked" type="checkbox" name="check">
-                                            </label>
-                                        </th>
-                                        <th class="card-body-title-padding" style="width: 22%;">
-                                            <div class="donater-info">
-                                                <div class="donater-info-img1"></div>
-                                                <div class="donater-info-text">
-                                                    <div class="donater-name" th:text="*{userName}"><!--박해준--></div>
-                                                    <div th:text="*{userEmail}"><!--abc@gmail.com--></div>
-                                                </div>
+                            <!--회원 하나-->
+                            <th:block th:each="user:${users}">
+                                <tr th:object="${user}">
+                                    <th class="card-body-title-checkbox-padding" style="width: 3%; margin-top: 29px;padding-top: 0; padding-bottom: 31px;">
+                                        <label class="card-body-title-user-checkbox">
+                                            <div class="check-img"></div>
+                                            <input class="notice-checked" type="checkbox" name="check">
+                                        </label>
+                                    </th>
+                                    <th class="card-body-title-padding" style="width: 22%;">
+                                        <div class="donater-info" style="height: 50px">
+                                            <div class="donater-info-img1"></div>
+                                            <div class="donater-info-text">
+                                                <div class="donater-name" th:text="*{userName}"><!--박해준--></div>
+                                                <div th:text="*{userEmail}"><!--abc@gmail.com--></div>
                                             </div>
-                                        </th>
-                                        <th class="card-body-title-padding" style="width: 18%;">
-                                            <div class="donate-info-height" th:text="*{userPhoneNumber}">
-                                                <!--01021208515-->
-                                            </div>
-                                        </th>
-                                        <th class="card-body-title-padding" style="width: 17%;">
-                                            <div class="donate-info-height">
-                                                일반 또는 보육원
-                                            </div>
-                                        </th>
-                                        <th class="card-body-title-padding" style="width: 18%;">
-                                            <div class="donate-info-height">
-                                                5분전
-                                            </div>
-                                        </th>
-                                        <th class="card-body-title-padding" style="width: 22%;">
-                                            <div class="donate-info-height" th:text="*{#temporals.format(createdDate,'YYYY년 MM월 dd일')}">
-                                                <!--2022년 10월 2일 20시 00분-->
-                                            </div>
-                                        </th>
-                                    </tr>
-                                </th:block>
+                                        </div>
+                                    </th>
+                                    <th class="card-body-title-padding" style="width: 18%;">
+                                        <div class="donate-info-height" th:text="*{userPhoneNumber}">
+                                            <!--01021208515-->
+                                        </div>
+                                    </th>
+                                    <th class="card-body-title-padding" style="width: 17%;">
+                                        <div class="donate-info-height">
+                                            일반 또는 보육원
+                                        </div>
+                                    </th>
+                                    <th class="card-body-title-padding" style="width: 18%;">
+                                        <div class="donate-info-height">
+                                            5분전
+                                        </div>
+                                    </th>
+                                    <th class="card-body-title-padding" style="width: 22%;">
+                                        <div class="donate-info-height" th:text="*{#temporals.format(createdDate,'YYYY년 MM월 dd일')}">
+                                            <!--2022년 10월 2일 20시 00분-->
+                                        </div>
+                                    </th>
+                                </tr>
+                            </th:block>
                             </tbody>
                         </table>
 
@@ -402,7 +402,7 @@
                                     <div class="paging-number-flex">
                                         <div class="prev-page page-number-padding">
                                             <!--이전버튼-->
-                                            <a class="page-number-link" th:href="">
+                                            <a class="page-number-link">
                                                 <div class="prev-page-prevArrow"></div>
                                             </a>
                                         </div>
@@ -465,4 +465,53 @@
 <script src="/js/admin/public.js"></script>
 <script src="/js/admin/user.js"></script>
 
+
+<script th:inline="javascript">
+    $schools =  $(".toolbar-choose-usertype-flex");
+    $schools.on('click', function () {
+        rightOption()
+    })
+
+    function getSchools(school,user){
+        let text = "";
+        for(s in school){
+            text += `<tr>`
+            text +=  `<th class="card-body-title-checkbox-padding" style="width: 3%; margin-top: 29px;padding-top: 0; padding-bottom: 31px;">`
+            text += `<label class="card-body-title-user-checkbox">`
+            text += `<div class="check-img"></div>`
+            text += `<input class="notice-checked" type="checkbox" name="check">`
+            text += `</label>`
+            text += `</th>`
+            text += `<th class="card-body-title-padding" style="width: 22%;">`
+            text += `<div class="donater-info" style="height: 50px">`
+            text += `<div class="donater-info-img1"></div>`
+            text += `<div class="donater-info-text">`
+            text += `<div class="donater-name">`+school.schoolName+`</div>`
+            text += `<div>`+ school.phone +`</div>`
+            text += `</div>`
+            text += `</div>`
+            text += `</th>`
+            text += `<th class="card-body-title-padding" style="width: 18%;">`
+            text += `<div class="donate-info-height"></div>`
+            text += `</th>`
+            text += `<th class="card-body-title-padding" style="width: 17%;">`
+            text += `<div class="donate-info-height">`+'일반 또는 보육원'+`</div>`
+            text += `</th>`
+            text += `<th class="card-body-title-padding" style="width: 18%;">`
+            text += `<div class="donate-info-height">5분전</div>`
+            text += `</th>`
+            text += `<th class="card-body-title-padding" style="width: 22%;">`
+            text += `<div class="donate-info-height">`+ user. +`</div>`
+            text += `</th>
+        text += `</tr>`
+        }
+        $(".card-body-main-box").html(text)
+    }
+
+    function rightOption(){
+        getSchools1({
+
+        },getSchools);
+    }
+</script>
 </html>
