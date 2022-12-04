@@ -74,8 +74,19 @@ public class SchoolService {
         return moneyDTOS;
     }
 
-    //    관리자 페이지 : 보육원 목록
+
+
+
+
+    // 관리자 페이지============================================
+
+    //    보육원 목록
     public List<School> schoolListManager(Pageable pageable){
         return schoolRepository.findByCreatedDate(pageable);
+    }
+
+    //    전체회원 중 보육원 목록
+    public List<SchoolDTO> schoolOnly(){
+        return schoolRepository.findBySchoolOnly();
     }
 }

@@ -239,21 +239,54 @@ $userType.on('mouseout', function () {
 
 /*===========Ajax===============================*/
 /*==================보육원 선택==================*/
-function getSchools(param, callback, error) {
-    let test =param.schools.length!=0 ? "/"+param.school : "/null";
+$schools =  $(".toolbar-choose-usertype-flex");
+
+$schools.on("click",function(){
+
     $.ajax({
-        url: "/adminRest/user" + test,
-        type: "get",
-        success: function (schools, users, status, xhr) {
-            if (callback) {
-                callback(schools);
-                callback(users);
-            }
-        },
-        error: function (xhr, status, err) {
-            if (error) {
-                error(err);
-            }
+        url: "/adminRest/schools",
+        type: "post",
+        success: function (schools){
+            let text = "";
+            schools.forEach(function(school){
+                text += `<tr>`
+                text +=  `<th class="card-body-title-checkbox-padding" style="width: 3%; margin-top: 29px;padding-top: 0; padding-bottom: 31px;">`
+                text += `<label class="card-body-title-user-checkbox">`
+                text += `<div class="check-img"></div>`
+                text += `<input class="notice-checked" type="checkbox" name="check">`
+                text += `</label>`
+                text += `</th>`
+                text += `<th class="card-body-title-padding" style="width: 22%;">`
+                text += `<div class="donater-info" style="height: 50px">`
+                text += `<div class="donater-info-img1"></div>`
+                text += `<div class="donater-info-text">`
+                text += `<div class="donater-name">`+school.userName+`</div>`
+                text += `<div>`+ school.userEmail +`</div>`
+                text += `</div>`
+                text += `</div>`
+                text += `</th>`
+                text += `<th class="card-body-title-padding" style="width: 18%;">`
+                text += `<div class="donate-info-height">`+ school.userPhoneNumber+`</div>`
+                text += `</th>`
+                text += `<th class="card-body-title-padding" style="width: 17%;">`
+                text += `<div class="donate-info-height">`+'일반 또는 보육원'+`</div>`
+                text += `</th>`
+                text += `<th class="card-body-title-padding" style="width: 18%;">`
+                text += `<div class="donate-info-height">5분전</div>`
+                text += `</th>`
+                text += `<th class="card-body-title-padding" style="width: 22%;">`
+
+                let date = new Date(school.createdDate);
+                let year = date.getFullYear().toString().substr(2)+'년 ';
+                let month = date.getMonth() + 1 +'월 ';
+                let day = date.getDate()+'일';
+                let createdDateView = year+month+day;
+
+                text += `<div class="donate-info-height">`+ createdDateView +`</div>`
+                text += `</th>`
+                text += `</tr>`
+            })
+            $(".card-body-main-box").html(text)
         }
-    });
-}
+    })
+})
