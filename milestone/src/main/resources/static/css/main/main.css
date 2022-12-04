@@ -351,14 +351,6 @@ li {
     grid-template-columns: 1fr 1fr;
 }
 
-.slide-text1 {
-    grid-gap: 20px;
-    display: flex;
-    flex-direction: column;
-    margin: 71px 374px auto;
-    position: absolute;
-}
-
 .slide-text2 {
     margin: 0;
     color: #ffffff;

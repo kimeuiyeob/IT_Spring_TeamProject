@@ -113,28 +113,30 @@
             <button role="button" color="default" class="button2 button3" style="display: none;">
                 <span class="button4 button3">보육원 등록</span>
             </button>
-            <button role="button" color="default" class="button2 button3" id="message-button">
-                <span class="button4 button3">알림</span>
-            </button>
-            <div class="message1" id="message-id1">
-                <div class="message2">
-                    <ul class="message3 list1">
-                        <li>봉사 알림</li>
+            <div class="relative">
+                <button role="button" color="default" class="button2 button3" id="message-button">
+                    <span class="button4 button3">알림</span>
+                </button>
+                <div class="message1" id="message-id1">
+                    <div class="message2">
+                        <ul class="message3 list1">
+                            <li>봉사 알림</li>
+                        </ul>
+                    </div>
+                    <div class="message4 list1">
+                        <li class="message7">모든 메시지를 확인했습니다.</li>
+                    </div>
+                    <ul class="message5 list1">
+                        <a href="#" class="message8">
+                            <li class="message6">받은 전체 메시지 확인</li>
+                        </a>
                     </ul>
                 </div>
-                <div class="message4 list1">
-                    <li class="message7">모든 메시지를 확인했습니다.</li>
-                </div>
-                <ul class="message5 list1">
-                    <a href="#" class="message8">
-                        <li class="message6">받은 전체 메시지 확인</li>
-                    </a>
-                </ul>
             </div>
-            <button role="button" color="default" id = "loginBtn" class="button5 button3" style="display: none;">
+            <button role="button" color="default" id="loginBtn" class="button5 button3" style="display: none;">
                 <span class="button6 button3">로그인</span>
             </button>
-            <button role="button" color="default" id = "loginBtn" class="button5 button3">
+            <button role="button" color="default" id="loginBtn" class="button5 button3">
                 <span class="button6 button3">내 정보</span>
             </button>
             <a role="link" color="yellow" href="#" class="button7 button3" style="display: none;">
@@ -144,7 +146,8 @@
                 <a role="link" color="default" href="#" class="profile3 profile4" aria-expanded="false">
                     <span class="profile5 profile6">
                         <div size="32" shape="0" role="article" class="profile7 profile8">
-                            <img src="/imgs/fix/login.png" alt="avatar" shape="0" loading="lazy" class="profile9 profile10" id="login-profile9">
+                            <img src="/imgs/fix/login.png" alt="avatar" shape="0" loading="lazy"
+                                 class="profile9 profile10" id="login-profile9">
                         </div>
                     </span>
                 </a>
@@ -277,7 +280,8 @@
                 <nav>
                     <ul class="nav1">
                         <li class="nav2 nav3" style="padding-right: 10px">
-                            <a color="secondary" th:href="@{/introduce/introduce}" class="nav4 nav5 nav6" id="nav-text1">소개</a>
+                            <a color="secondary" th:href="@{/introduce/introduce}" class="nav4 nav5 nav6"
+                               id="nav-text1">소개</a>
                             <div class="nav7 nav8">
                                 <div class="nav9 nav10" id="yellow1"></div>
                             </div>
@@ -295,7 +299,7 @@
                             </div>
                         </li>
                         <li class="nav2 nav3" style="padding-right: 10px">
-                            <a color="secondary" href="#" class="nav4 nav5 nav6" id="nav-text4">기부랭킹</a>
+                            <a color="secondary" th:href="@{/ranking/ranking}" class="nav4 nav5 nav6" id="nav-text4">기부랭킹</a>
                             <div class="nav7 nav8">
                                 <div class="nav9 nav10" id="yellow4"></div>
                             </div>
