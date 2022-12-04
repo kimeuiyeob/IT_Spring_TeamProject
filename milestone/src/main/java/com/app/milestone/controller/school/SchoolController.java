@@ -25,12 +25,12 @@ public class SchoolController {
     @GetMapping("/list")
     public void list(Pageable pageable, Search search, Model model) {
         pageable = PageRequest.of(0, 10);
-        log.info("==================asdasdada====================" + search);
-//        log.info("==================asdasdada====================" + schoolAddress1);
         if (search.getSchoolAddress() == null) {
             search.setSchoolAddress(new ArrayList<>());
             search.getSchoolAddress().add(null);
         }
+        model.addAttribute("schoolAddresses", search.getSchoolAddress());
+        model.addAttribute("schoolName", search.getSchoolName());
         model.addAttribute("schools", schoolService.schoolList(pageable, search));
         model.addAttribute("totalSchool", schoolService.schoolListCount(pageable, search));
     }

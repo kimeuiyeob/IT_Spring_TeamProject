@@ -21,14 +21,21 @@ import java.util.List;
 public class SchoolRestController {
     private final SchoolService schoolService;
 
-//    총 페이지도 같이 전달
-    @GetMapping("/list/{schoolAddress}")
+    //    총 페이지도 같이 전달
+    @GetMapping(value = {"/list/{schoolAddress}","/list/{schoolAddress}/{schoolName}"})
     public SchoolResp search(Pageable pageable, Search search, Model model) {
         SchoolResp schoolResp = new SchoolResp();
         pageable = PageRequest.of(0, 10);
         List<SchoolDTO> arSchoolDTO = schoolService.schoolList(pageable, search);
         if (search.getSchoolAddress() == null) {
             search.setSchoolAddress(new ArrayList<>());
+        }
+        log.info(search.getSchoolName()+"========================");
+        if (search.getSchoolName()==null) {
+            log.info("들어옴========================");
+            search.setSchoolName(null);
+        }else{
+            log.info("안들어옴========================");
         }
 
         schoolResp.setArSchoolDTO(arSchoolDTO);

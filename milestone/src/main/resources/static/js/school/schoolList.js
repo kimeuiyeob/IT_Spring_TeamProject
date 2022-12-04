@@ -294,24 +294,31 @@ $(".dropLoc").on('click', function () {
 const $schoolName = $('input[name = schoolName]');
 const $realSearhBox = $('.realSearhBox');
 
-let searchName;
-
 $schoolName.on('keyup', function (e) {
-    let text;
+    let text = "";
     if (e.keyCode == 13) {
         save.forEach(value => {
-            text += `<input type = "hidden" name = "schoolAddress1" value = "` + value + `" >`;
+            text += `<input type = "hidden" name = "schoolAddress" value = "` + value + `" >`;
         })
         $realSearhBox.append(text)
+        // save.forEach(value => {
+        //     text += `<input type = "hidden" name = "schoolAddress1" value = "` + value + `" >`;
+        // })
+        // $realSearhBox.append(text)
         searchForm.submit();
     }
 })
 
 /*지역으로 검색*/
 function getList1(param, callback, error) {
-    let test = param.schoolAddress.length != 0 ? "/" + param.schoolAddress : "/null";
+    console.log(param)
+    let queryString1 = param.schoolAddress.length != 0 ? "/" + param.schoolAddress : "/null";
+    queryString1 += param.schoolName.length != 0 ? "/" + param.schoolName : "";
+    console.log(queryString1);
+    console.log(param.schoolName);
+    console.log(param.schoolName.length);
     $.ajax({
-        url: "/schoolrest/list" + test,
+        url: "/schoolrest/list" + queryString1,
         type: "get",
         success: function (schoolResp, status, xhr) {
             if (callback) {

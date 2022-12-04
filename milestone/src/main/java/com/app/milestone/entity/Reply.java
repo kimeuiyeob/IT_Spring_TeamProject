@@ -31,9 +31,15 @@ public class Reply extends Period {
         this.school = school;
     }
 
+    public void changePeople(People people) {
+        this.people = people;
+    }
+
     @Builder
-    public Reply(String replyContent) {
+    public Reply(String replyContent, School school, People people) {
         this.replyContent = replyContent;
+        this.school = school;
+        this.people = people;
     }
 
     public void update(String replyContent) {

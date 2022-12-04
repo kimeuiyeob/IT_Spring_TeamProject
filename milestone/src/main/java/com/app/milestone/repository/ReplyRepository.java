@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
 @Component
-public interface ReplyRepository extends JpaRepository<Reply, Long> {
+public interface ReplyRepository extends JpaRepository<Reply, Long>, ReplyCustomRepository {
 }
