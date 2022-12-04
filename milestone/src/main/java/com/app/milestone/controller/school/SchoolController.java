@@ -10,8 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -23,20 +25,14 @@ public class SchoolController {
     @GetMapping("/list")
     public void list(Pageable pageable, Search search, Model model) {
         pageable = PageRequest.of(0, 10);
+        log.info("==================asdasdada====================" + search);
+//        log.info("==================asdasdada====================" + schoolAddress1);
         if (search.getSchoolAddress() == null) {
             search.setSchoolAddress(new ArrayList<>());
             search.getSchoolAddress().add(null);
-            search.getSchoolAddress().add(null);
-            search.getSchoolAddress().add(null);
-            search.getSchoolAddress().add(null);
-            search.getSchoolAddress().add(null);
-            search.getSchoolAddress().add(null);
-            search.getSchoolAddress().add(null);
-            search.getSchoolAddress().add(null);
         }
-        log.info("=================================================================="+schoolService.schoolList(pageable, search));
         model.addAttribute("schools", schoolService.schoolList(pageable, search));
-        model.addAttribute("totalSchool", schoolService.schoolList(pageable, search).size());
+        model.addAttribute("totalSchool", schoolService.schoolListCount(pageable, search));
     }
 
 //    ==============================================
@@ -47,7 +43,7 @@ public class SchoolController {
 
     ;
 
-    @GetMapping("/school-help")
+    @GetMapping("/help")
     public void schoolHelp() {
     }
 

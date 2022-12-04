@@ -119,14 +119,6 @@
                 </div>
             </div>
         </section>
-        <th:block th:each="school:${schools}">
-            <table border="1">
-                <tr th:object="${school}">
-                    <td th:text="*{schoolName}"></td>
-                    <td th:text="*{schoolBank}"></td>
-                </tr>
-            </table>
-        </th:block>
         <section class="ranking1" id="mobile-ranking1">
             <h1 class="ranking-title1" id="mobile-ranking-title1">
                 기부 랭킹을 만나보세요!
@@ -137,141 +129,32 @@
                 </div>
                 <nav>
                     <ul class="ranking3">
-                        <li class="ranking4">
-                            <a href="#" class="ranking5">
-                                <div class="ranking6">
-                                        <span
-                                                style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 48px; height: 48px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
+                        <th:block th:object="${moneys.get(i)}" th:each="i:${#numbers.sequence(0,8)}">
+                            <li class="ranking4" th:if="${i <= 3}">
+                                <a href="#" class="ranking5">
+                                    <div class="ranking6">
+                                        <span style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 48px; height: 48px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
                                             <img alt="프로필 아이콘" srcset="/imgs/main/rangking_icon01.png 1x"
                                                  src="/imgs/main/rangking_icon01.png" decoding="async" data-nimg="fixed"
                                                  style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
                                         </span>
-                                </div>
-                                <span class="ranking-text2">
-                                        한지민
-                                    </span>
-                            </a>
-                        </li>
-                        <li class="ranking4">
-                            <a href="#" class="ranking5">
-                                <div class="ranking6">
-                                        <span
-                                                style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 48px; height: 48px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
-                                            <img alt="프로필 아이콘" srcset="/imgs/main/rangking_icon02.png 1x"
-                                                 src="/imgs/main/rangking_icon02.png" decoding="async" data-nimg="fixed"
+                                    </div>
+                                    <span class="ranking-text2" th:text="*{userName}"></span>
+                                </a>
+                            </li>
+                            <li class="ranking4 mobile-ranking4" th:if="${i > 3}">
+                                <a href="#" class="ranking5">
+                                    <div class="ranking6">
+                                        <span style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 48px; height: 48px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
+                                            <img alt="프로필 아이콘" srcset="/imgs/main/rangking_icon01.png 1x"
+                                                 src="/imgs/main/rangking_icon01.png" decoding="async" data-nimg="fixed"
                                                  style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
                                         </span>
-                                </div>
-                                <span class="ranking-text2">
-                                        한예슬
-                                    </span>
-                            </a>
-                        </li>
-                        <li class="ranking4">
-                            <a href="#" class="ranking5">
-                                <div class="ranking6">
-                                        <span
-                                                style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 48px; height: 48px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
-                                            <img alt="프로필 아이콘" srcset="/imgs/main/rangking_icon03.png 1x"
-                                                 src="/imgs/main/rangking_icon03.png" decoding="async" data-nimg="fixed"
-                                                 style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
-                                        </span>
-                                </div>
-                                <span class="ranking-text2">
-                                        이연희
-                                    </span>
-                            </a>
-                        </li>
-                        <li class="ranking4">
-                            <a href="#" class="ranking5">
-                                <div class="ranking6">
-                                        <span
-                                                style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 48px; height: 48px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
-                                            <img alt="프로필 아이콘" srcset="/imgs/main/rangking_icon04.png 1x"
-                                                 src="/imgs/main/rangking_icon04.png" decoding="async" data-nimg="fixed"
-                                                 style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
-                                        </span>
-                                </div>
-                                <span class="ranking-text2">
-                                        한가인
-                                    </span>
-                            </a>
-                        </li>
-                        <li class="ranking4 mobile-ranking4">
-                            <a href="#" class="ranking5">
-                                <div class="ranking6">
-                                        <span
-                                                style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 48px; height: 48px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
-                                            <img alt="프로필 아이콘" srcset="/imgs/main/rangking_icon09.png 1x"
-                                                 src="/imgs/main/rangking_icon09.png" decoding="async" data-nimg="fixed"
-                                                 style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
-                                        </span>
-                                </div>
-                                <span class="ranking-text2">
-                                        이나영
-                                    </span>
-                            </a>
-                        </li>
-                        <li class="ranking4 mobile-ranking4">
-                            <a href="#" class="ranking5">
-                                <div class="ranking6">
-                                        <span
-                                                style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 48px; height: 48px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
-                                            <img alt="프로필 아이콘" srcset="/imgs/main/rangking_icon05.png 1x"
-                                                 src="/imgs/main/rangking_icon05.png" decoding="async" data-nimg="fixed"
-                                                 style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
-                                        </span>
-                                </div>
-                                <span class="ranking-text2">
-                                        김태희
-                                    </span>
-                            </a>
-                        </li>
-                        <li class="ranking4 mobile-ranking4">
-                            <a href="#" class="ranking5">
-                                <div class="ranking6">
-                                        <span
-                                                style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 48px; height: 48px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
-                                            <img alt="프로필 아이콘" srcset="/imgs/main/rangking_icon06.png 1x"
-                                                 src="/imgs/main/rangking_icon06.png" decoding="async" data-nimg="fixed"
-                                                 style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
-                                        </span>
-                                </div>
-                                <span class="ranking-text2">
-                                        한채영
-                                    </span>
-                            </a>
-                        </li>
-                        <li class="ranking4 mobile-ranking4">
-                            <a href="#" class="ranking5">
-                                <div class="ranking6">
-                                        <span
-                                                style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 48px; height: 48px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
-                                            <img alt="프로필 아이콘" srcset="/imgs/main/rangking_icon07.png 1x"
-                                                 src="/imgs/main/rangking_icon07.png" decoding="async" data-nimg="fixed"
-                                                 style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
-                                        </span>
-                                </div>
-                                <span class="ranking-text2">
-                                        오연서
-                                    </span>
-                            </a>
-                        </li>
-                        <li class="ranking4 mobile-ranking4">
-                            <a href="#" class="ranking5">
-                                <div class="ranking6">
-                                        <span
-                                                style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 48px; height: 48px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
-                                            <img alt="프로필 아이콘" srcset="/imgs/main/rangking_icon08.png 1x"
-                                                 src="/imgs/main/rangking_icon08.png" decoding="async" data-nimg="fixed"
-                                                 style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
-                                        </span>
-                                </div>
-                                <span class="ranking-text2">
-                                        한예슬
-                                    </span>
-                            </a>
-                        </li>
+                                    </div>
+                                    <span class="ranking-text2" th:text="*{userName}"></span>
+                                </a>
+                            </li>
+                        </th:block>
                     </ul>
                 </nav>
             </div>
@@ -281,141 +164,107 @@
                 </div>
                 <nav>
                     <ul class="ranking3">
-                        <li class="ranking4">
-                            <a href="#" class="ranking5">
-                                <div class="ranking6">
-                                        <span
-                                                style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 48px; height: 48px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
+                        <th:block th:object="${services.get(i)}" th:each="i:${#numbers.sequence(0,8)}">
+                            <li class="ranking4" th:if="${i <= 3}">
+                                <a href="#" class="ranking5">
+                                    <div class="ranking6">
+                                        <span style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 48px; height: 48px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
                                             <img alt="프로필 아이콘" srcset="/imgs/main/rangking_icon09.png 1x"
                                                  src="/imgs/main/rangking_icon09.png" decoding="async" data-nimg="fixed"
                                                  style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
                                         </span>
-                                </div>
-                                <span class="ranking-text2">
-                                        한예슬
-                                    </span>
-                            </a>
-                        </li>
-                        <li class="ranking4">
-                            <a href="#" class="ranking5">
-                                <div class="ranking6">
-                                        <span
-                                                style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 48px; height: 48px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
-                                            <img alt="프로필 아이콘" srcset="/imgs/main/rangking_icon08.png 1x"
-                                                 src="/imgs/main/rangking_icon08.png" decoding="async" data-nimg="fixed"
+                                    </div>
+                                    <span class="ranking-text2" th:text="*{userName}">한예슬</span>
+                                </a>
+                            </li>
+                            <li class="ranking4 mobile-ranking4" th:if="${i > 3}">
+                                <a href="#" class="ranking5">
+                                    <div class="ranking6">
+                                        <span style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 48px; height: 48px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
+                                            <img alt="프로필 아이콘" srcset="/imgs/main/rangking_icon09.png 1x"
+                                                 src="/imgs/main/rangking_icon09.png" decoding="async" data-nimg="fixed"
                                                  style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
                                         </span>
-                                </div>
-                                <span class="ranking-text2">
-                                        한가인
-                                    </span>
-                            </a>
-                        </li>
-                        <li class="ranking4">
-                            <a href="#" class="ranking5">
-                                <div class="ranking6">
-                                        <span
-                                                style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 48px; height: 48px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
-                                            <img alt="프로필 아이콘" srcset="/imgs/main/rangking_icon07.png 1x"
-                                                 src="/imgs/main/rangking_icon07.png" decoding="async" data-nimg="fixed"
-                                                 style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
-                                        </span>
-                                </div>
-                                <span class="ranking-text2">
-                                        한채영
-                                    </span>
-                            </a>
-                        </li>
-                        <li class="ranking4">
-                            <a href="#" class="ranking5">
-                                <div class="ranking6">
-                                        <span
-                                                style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 48px; height: 48px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
-                                            <img alt="프로필 아이콘" srcset="/imgs/main/rangking_icon06.png 1x"
-                                                 src="/imgs/main/rangking_icon06.png" decoding="async" data-nimg="fixed"
-                                                 style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
-                                        </span>
-                                </div>
-                                <span class="ranking-text2">
-                                        한효주
-                                    </span>
-                            </a>
-                        </li>
-                        <li class="ranking4 mobile-ranking4">
-                            <a href="#" class="ranking5">
-                                <div class="ranking6">
-                                        <span
-                                                style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 48px; height: 48px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
-                                            <img alt="프로필 아이콘" srcset="/imgs/main/rangking_icon05.png 1x"
-                                                 src="/imgs/main/rangking_icon05.png" decoding="async" data-nimg="fixed"
-                                                 style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
-                                        </span>
-                                </div>
-                                <span class="ranking-text2">
-                                        김태희
-                                    </span>
-                            </a>
-                        </li>
-                        <li class="ranking4 mobile-ranking4">
-                            <a href="#" class="ranking5">
-                                <div class="ranking6">
-                                        <span
-                                                style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 48px; height: 48px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
-                                            <img alt="프로필 아이콘" srcset="/imgs/main/rangking_icon04.png 1x"
-                                                 src="/imgs/main/rangking_icon04.png" decoding="async" data-nimg="fixed"
-                                                 style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
-                                        </span>
-                                </div>
-                                <span class="ranking-text2">
-                                        이나영
-                                    </span>
-                            </a>
-                        </li>
-                        <li class="ranking4 mobile-ranking4">
-                            <a href="#" class="ranking5">
-                                <div class="ranking6">
-                                        <span
-                                                style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 48px; height: 48px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
-                                            <img alt="프로필 아이콘" srcset="/imgs/main/rangking_icon03.png 1x"
-                                                 src="/imgs/main/rangking_icon03.png" decoding="async" data-nimg="fixed"
-                                                 style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
-                                        </span>
-                                </div>
-                                <span class="ranking-text2">
-                                        카리나
-                                    </span>
-                            </a>
-                        </li>
-                        <li class="ranking4 mobile-ranking4">
-                            <a href="#" class="ranking5">
-                                <div class="ranking6">
-                                        <span
-                                                style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 48px; height: 48px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
-                                            <img alt="프로필 아이콘" srcset="/imgs/main/rangking_icon02.png 1x"
-                                                 src="/imgs/main/rangking_icon02.png" decoding="async" data-nimg="fixed"
-                                                 style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
-                                        </span>
-                                </div>
-                                <span class="ranking-text2">
-                                        한지민
-                                    </span>
-                            </a>
-                        </li>
-                        <li class="ranking4 mobile-ranking4">
-                            <a href="#" class="ranking5">
-                                <div class="ranking6">
-                                        <span
-                                                style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 48px; height: 48px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
-                                            <img alt="프로필 아이콘" srcset="/imgs/main/rangking_icon01.png 1x"
-                                                 src="/imgs/main/rangking_icon01.png" decoding="async" data-nimg="fixed"
-                                                 style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
-                                        </span>
-                                </div>
-                                <span class="ranking-text2">
-                                        이연희
-                                    </span>
-                            </a>
-                        </li>
+                                    </div>
+                                    <span class="ranking-text2" th:text="*{userName}">한예슬</span>
+                                </a>
+                            </li>
+                        </th:block>
+<!--                        <li class="ranking4 mobile-ranking4">-->
+<!--                            <a href="#" class="ranking5">-->
+<!--                                <div class="ranking6">-->
+<!--                                        <span-->
+<!--                                                style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 48px; height: 48px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">-->
+<!--                                            <img alt="프로필 아이콘" srcset="/imgs/main/rangking_icon05.png 1x"-->
+<!--                                                 src="/imgs/main/rangking_icon05.png" decoding="async" data-nimg="fixed"-->
+<!--                                                 style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">-->
+<!--                                        </span>-->
+<!--                                </div>-->
+<!--                                <span class="ranking-text2">-->
+<!--                                        김태희-->
+<!--                                    </span>-->
+<!--                            </a>-->
+<!--                        </li>-->
+<!--                        <li class="ranking4 mobile-ranking4">-->
+<!--                            <a href="#" class="ranking5">-->
+<!--                                <div class="ranking6">-->
+<!--                                        <span-->
+<!--                                                style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 48px; height: 48px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">-->
+<!--                                            <img alt="프로필 아이콘" srcset="/imgs/main/rangking_icon04.png 1x"-->
+<!--                                                 src="/imgs/main/rangking_icon04.png" decoding="async" data-nimg="fixed"-->
+<!--                                                 style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">-->
+<!--                                        </span>-->
+<!--                                </div>-->
+<!--                                <span class="ranking-text2">-->
+<!--                                        이나영-->
+<!--                                    </span>-->
+<!--                            </a>-->
+<!--                        </li>-->
+<!--                        <li class="ranking4 mobile-ranking4">-->
+<!--                            <a href="#" class="ranking5">-->
+<!--                                <div class="ranking6">-->
+<!--                                        <span-->
+<!--                                                style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 48px; height: 48px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">-->
+<!--                                            <img alt="프로필 아이콘" srcset="/imgs/main/rangking_icon03.png 1x"-->
+<!--                                                 src="/imgs/main/rangking_icon03.png" decoding="async" data-nimg="fixed"-->
+<!--                                                 style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">-->
+<!--                                        </span>-->
+<!--                                </div>-->
+<!--                                <span class="ranking-text2">-->
+<!--                                        카리나-->
+<!--                                    </span>-->
+<!--                            </a>-->
+<!--                        </li>-->
+<!--                        <li class="ranking4 mobile-ranking4">-->
+<!--                            <a href="#" class="ranking5">-->
+<!--                                <div class="ranking6">-->
+<!--                                        <span-->
+<!--                                                style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 48px; height: 48px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">-->
+<!--                                            <img alt="프로필 아이콘" srcset="/imgs/main/rangking_icon02.png 1x"-->
+<!--                                                 src="/imgs/main/rangking_icon02.png" decoding="async" data-nimg="fixed"-->
+<!--                                                 style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">-->
+<!--                                        </span>-->
+<!--                                </div>-->
+<!--                                <span class="ranking-text2">-->
+<!--                                        한지민-->
+<!--                                    </span>-->
+<!--                            </a>-->
+<!--                        </li>-->
+<!--                        <li class="ranking4 mobile-ranking4">-->
+<!--                            <a href="#" class="ranking5">-->
+<!--                                <div class="ranking6">-->
+<!--                                        <span-->
+<!--                                                style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 48px; height: 48px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">-->
+<!--                                            <img alt="프로필 아이콘" srcset="/imgs/main/rangking_icon01.png 1x"-->
+<!--                                                 src="/imgs/main/rangking_icon01.png" decoding="async" data-nimg="fixed"-->
+<!--                                                 style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">-->
+<!--                                        </span>-->
+<!--                                </div>-->
+<!--                                <span class="ranking-text2">-->
+<!--                                        이연희-->
+<!--                                    </span>-->
+<!--                            </a>-->
+<!--                        </li>-->
                     </ul>
                 </nav>
             </div>
@@ -424,14 +273,16 @@
             <h2 class="help-title1" id="mobile-help-title1">
                 도움이 필요한 보육원 이에요!
             </h2>
-            <div class="help2">
+            <div class="help2" th:object="${schools}">
                 <article class="help3">
                     <a href="#" class="help4">
                         <div class="help5" id="mobile-help5-1">
                             <div class="help6" style="background-color: rgb(212, 220, 252);">
-                                <h5 class="help-text1" id="mobile-help-text1-1">경기도 성남시</h5>
-                                <h2 class="help-text2" id="mobile-help-text2-1">해준 보육원</h3>
-                                    <img class="help-img1" id="mobile-help-img1-1" src="/imgs/main/baby01.png">
+                                <h5 class="help-text1" id="mobile-help-text1-1"
+                                    th:text="${schools.get(0).schoolAddress}">경기도 성남시</h5>
+                                <h2 class="help-text2" id="mobile-help-text2-1" th:text="${schools.get(0).schoolName}">
+                                    해준 보육원</h2>
+                                <img class="help-img1" id="mobile-help-img1-1" src="/imgs/main/baby01.png">
                             </div>
                         </div>
                     </a>
@@ -440,9 +291,11 @@
                     <a href="#" class="help4">
                         <div class="help5" id="mobile-help5-2">
                             <div class="help6" style="background-color: rgb(244, 246, 159);">
-                                <h5 class="help-text1" id="mobile-help-text1-2">경기도 성남시</h5>
-                                <h2 class="help-text2" id="mobile-help-text2-2">의엽 보육원</h3>
-                                    <img class="help-img1" id="mobile-help-img1-2" src="/imgs/main/baby02.png">
+                                <h5 class="help-text1" id="mobile-help-text1-2"
+                                    th:text="${schools.get(1).schoolAddress}">경기도 성남시</h5>
+                                <h2 class="help-text2" id="mobile-help-text2-2" th:text="${schools.get(1).schoolName}">
+                                    의엽 보육원</h2>
+                                <img class="help-img1" id="mobile-help-img1-2" src="/imgs/main/baby02.png">
                             </div>
                         </div>
                     </a>
@@ -451,9 +304,12 @@
                     <a href="#" class="help4">
                         <div class="help5" id="mobile-help5-3">
                             <div class="help6" style="background-color: rgb(246, 201, 172);">
-                                <h5 class="help-text1" id="mobile-help-text1-3">경기도 성남시</h5>
-                                <h2 class="help-text2" id="mobile-help-text2-3">지수 보육원</h3>
-                                    <img class="help-img1" id="mobile-help-img1-3" src="/imgs/main/baby03.png">
+                                <h5 class="help-text1" id="mobile-help-text1-3"
+                                    th:text="${schools.get(2).schoolAddress}">
+                                    경기도 성남시</h5>
+                                <h2 class="help-text2" id="mobile-help-text2-3" th:text="${schools.get(2).schoolName}">
+                                    지수 보육원</h2>
+                                <img class="help-img1" id="mobile-help-img1-3" src="/imgs/main/baby03.png">
                             </div>
                         </div>
                     </a>
@@ -462,9 +318,12 @@
                     <a href="#" class="help4">
                         <div class="help5" id="mobile-help5-4">
                             <div class="help6" style="background-color: rgb(215, 209, 251);">
-                                <h5 class="help-text1" id="mobile-help-text1-4">경기도 성남시</h5>
-                                <h2 class="help-text2" id="mobile-help-text2-4">서림 보육원</h3>
-                                    <img class="help-img1" id="mobile-help-img1-4" src="/imgs/main/baby04.png">
+                                <h5 class="help-text1" id="mobile-help-text1-4"
+                                    th:text="${schools.get(3).schoolAddress}">
+                                    경기도 성남시</h5>
+                                <h2 class="help-text2" id="mobile-help-text2-4" th:text="${schools.get(3).schoolName}">
+                                    서림 보육원</h2>
+                                <img class="help-img1" id="mobile-help-img1-4" src="/imgs/main/baby04.png">
                             </div>
                         </div>
                     </a>
@@ -473,9 +332,9 @@
                     <a href="#" class="help4">
                         <div class="help5">
                             <div class="help6" style="background-color: rgb(203, 224, 252);">
-                                <h5 class="help-text1">경기도 성남시</h5>
-                                <h2 class="help-text2">브래드피트 보육원</h3>
-                                    <img class="help-img1" src="/imgs/main/baby05.png">
+                                <h5 class="help-text1" th:text="${schools.get(4).schoolAddress}">경기도 성남시</h5>
+                                <h2 class="help-text2" th:text="${schools.get(4).schoolName}">브래드피트 보육원</h2>
+                                <img class="help-img1" src="/imgs/main/baby05.png">
                             </div>
                         </div>
                     </a>

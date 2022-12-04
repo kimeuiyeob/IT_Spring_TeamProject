@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -101,7 +101,7 @@
             <img id="menu-icon" src="/imgs/fix/menu_icon.png" alt="네비게이션 메뉴 아이콘" style="cursor:pointer">
             <img id="close-icon" src="/imgs/fix/close_icon.png" alt="닫기 아이콘" style="cursor:pointer">
         </div>
-        <a href="#" class="logo1" id="mobile-logo1">
+        <a th:href="@{/main/main}" class="logo1" id="mobile-logo1">
             <img src="/imgs/fix/logo.png" style="width: 120px; height: 120%;" class="logo2">
         </a>
         <div class="mobile-menu-icon2" id="mobile-search-icon1">
@@ -135,7 +135,7 @@
                 <span class="button6 button3">로그인</span>
             </button>
             <button role="button" color="default" id = "loginBtn" class="button5 button3">
-                <span class="button6 button3">마이 크몽</span>
+                <span class="button6 button3">내 정보</span>
             </button>
             <a role="link" color="yellow" href="#" class="button7 button3" style="display: none;">
                 <span class="button8 button3">무료 회원가입</span>
@@ -197,12 +197,12 @@
                         </a>
                     </ul>
                     <ul class="small_menu">
-                        <a href="#">
+                        <a th:href="@{/introduce/introduce}">
                             <li style="padding-bottom: 5px; padding-top: 5px;">소개</li>
                         </a>
                     </ul>
                     <ul class="small_menu">
-                        <a href="#">
+                        <a th:href="@{/school/list}">
                             <li style="padding-bottom: 5px; padding-top: 5px;">보육원</li>
                         </a>
                     </ul>
@@ -277,13 +277,13 @@
                 <nav>
                     <ul class="nav1">
                         <li class="nav2 nav3" style="padding-right: 10px">
-                            <a color="secondary" href="#" class="nav4 nav5 nav6" id="nav-text1">소개</a>
+                            <a color="secondary" th:href="@{/introduce/introduce}" class="nav4 nav5 nav6" id="nav-text1">소개</a>
                             <div class="nav7 nav8">
                                 <div class="nav9 nav10" id="yellow1"></div>
                             </div>
                         </li>
                         <li class="nav2 nav3" style="padding-right: 10px">
-                            <a color="secondary" href="#" class="nav4 nav5 nav6" id="nav-text2">보육원</a>
+                            <a color="secondary" th:href="@{/school/list}" class="nav4 nav5 nav6" id="nav-text2">보육원</a>
                             <div class="nav7 nav8">
                                 <div class="nav9 nav10" id="yellow2"></div>
                             </div>

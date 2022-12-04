@@ -292,47 +292,30 @@ $(".dropLoc").on('click', function () {
 /*--------------------황지수----------------------------*/
 /*보육원 검색*/
 const $schoolName = $('input[name = schoolName]');
+const $realSearhBox = $('.realSearhBox');
 
 let searchName;
 
-// saveLocal.forEach(o => searchName += o);
-
 $schoolName.on('keyup', function (e) {
+    let text;
     if (e.keyCode == 13) {
-        location.href = "/school/list?" + searchName
+        save.forEach(value => {
+            text += `<input type = "hidden" name = "schoolAddress1" value = "` + value + `" >`;
+        })
+        $realSearhBox.append(text)
         searchForm.submit();
     }
 })
 
 /*지역으로 검색*/
-// let searchService = (function () {
-//     function getList(param, callback, error) {
-//         $.ajax({
-//             url: "/schoolrest/list/" + param.schoolAddress,
-//             type: "get",
-//             success: function (schoolDTO, status, xhr) {
-//                 if (callback) {
-//                     callback(replyDTO);
-//                 }
-//             },
-//             error: function (xhr, status, err) {
-//                 if (error) {
-//                     error(err);
-//                 }
-//             }
-//         });
-//     }
-//     return {getList: getList}
-// })
-
 function getList1(param, callback, error) {
-    let test =param.schoolAddress.length!=0 ? "/"+param.schoolAddress : "/null";
+    let test = param.schoolAddress.length != 0 ? "/" + param.schoolAddress : "/null";
     $.ajax({
         url: "/schoolrest/list" + test,
         type: "get",
-        success: function (schoolDTO, status, xhr) {
+        success: function (schoolResp, status, xhr) {
             if (callback) {
-                callback(schoolDTO);
+                callback(schoolResp);
             }
         },
         error: function (xhr, status, err) {
