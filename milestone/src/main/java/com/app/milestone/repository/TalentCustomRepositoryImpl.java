@@ -45,7 +45,7 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
                         talentPlaceContaining(search.getTalentPlace())
                 )
                 .from(talent)
-                .orderBy(talent.talentAbleDate.desc())
+                .orderBy(talent.talentAbleDate.asc())
                 .offset(pageable.getOffset()) //offset은 어디서부터 == page
                 .limit(pageable.getPageSize()) //limit몇개를 들고오겠다 == amount
                 .fetch();
@@ -92,7 +92,24 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
                 .fetch();
     }
 
-    @Override
+    /*=========================카테고리 AJAX==============================*/
+
+    @Override //전체 리스트 조회
+    public List<TalentDTO> allList() {
+        return jpaQueryFactory.select(new QTalentDTO (
+                talent.people.userId,
+                talent.talentTitle,
+                talent.talentContent,
+                talent.talentAbleDate,
+                talent.talentCategory,
+                talent.talentPlace
+        ))
+                .from(talent)
+                .orderBy(talent.talentAbleDate.asc())
+                .fetch();
+    }
+
+    @Override //교육 리스트 조회
     public List<TalentDTO> educationList() {
         return jpaQueryFactory.select(new QTalentDTO (
                 talent.people.userId,
@@ -101,8 +118,73 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
                 talent.talentAbleDate,
                 talent.talentCategory,
                 talent.talentPlace
-        )).from(talent)
-                .where(talent.talentCategory.eq("교육")).fetch();
+        ))
+                .from(talent)
+                .where(talent.talentCategory.eq("교육"))
+                .orderBy(talent.talentAbleDate.asc())
+                .fetch();
     }
+
+    @Override //운동 리스트 조회
+    public List<TalentDTO> exerciseList() {
+        return jpaQueryFactory.select(new QTalentDTO (
+                talent.people.userId,
+                talent.talentTitle,
+                talent.talentContent,
+                talent.talentAbleDate,
+                talent.talentCategory,
+                talent.talentPlace
+        )).from(talent)
+                .where(talent.talentCategory.eq("운동"))
+                .orderBy(talent.talentAbleDate.asc())
+                .fetch();
+    }
+
+    @Override //음악 리스트 조회
+    public List<TalentDTO> musicList() {
+        return jpaQueryFactory.select(new QTalentDTO (
+                talent.people.userId,
+                talent.talentTitle,
+                talent.talentContent,
+                talent.talentAbleDate,
+                talent.talentCategory,
+                talent.talentPlace
+        )).from(talent)
+                .where(talent.talentCategory.eq("음악"))
+                .orderBy(talent.talentAbleDate.asc())
+                .fetch();
+    }
+
+    @Override //미술 리스트 조회
+    public List<TalentDTO> artList() {
+        return jpaQueryFactory.select(new QTalentDTO (
+                talent.people.userId,
+                talent.talentTitle,
+                talent.talentContent,
+                talent.talentAbleDate,
+                talent.talentCategory,
+                talent.talentPlace
+        )).from(talent)
+                .where(talent.talentCategory.eq("미술"))
+                .orderBy(talent.talentAbleDate.asc())
+                .fetch();
+    }
+
+    @Override //IT 리스트 조회
+    public List<TalentDTO> itList() {
+        return jpaQueryFactory.select(new QTalentDTO (
+                talent.people.userId,
+                talent.talentTitle,
+                talent.talentContent,
+                talent.talentAbleDate,
+                talent.talentCategory,
+                talent.talentPlace
+        )).from(talent)
+                .where(talent.talentCategory.eq("IT"))
+                .orderBy(talent.talentAbleDate.asc())
+                .fetch();
+    }
+
+    /*===================================================================*/
 
 }

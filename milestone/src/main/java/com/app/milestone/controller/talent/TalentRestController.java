@@ -37,10 +37,34 @@ public class TalentRestController {
         return talentService.talentList(pageable, search);
     }
 
-    @PostMapping("/showall")
+    @PostMapping("/showall") //교육 리스트 조회하기
     public List<TalentDTO> showAll() {
-        log.info("교육클릭컨트롤러><");
-        talentService.educationList().stream().map(o -> o.toString()).forEach(log::info);
+        return talentService.allList();
+    }
+
+    @PostMapping("/showeducation") //교육 리스트 조회하기
+    public List<TalentDTO> showEducation() {
        return talentService.educationList();
     }
+
+    @PostMapping("/showexercise") //운동 리스트 조회하기
+    public List<TalentDTO> showExercise() {
+        return talentService.exerciseList();
+    }
+
+    @PostMapping("/showmusic") //음악 리스트 조회하기
+    public List<TalentDTO> showMusic() {
+        return talentService.musicList();
+    }
+
+    @PostMapping("/showart") //미술 리스트 조회하기
+    public List<TalentDTO> showArt() {
+        return talentService.artList();
+    }
+
+    @PostMapping("/showit") //It 리스트 조회하기
+    public List<TalentDTO> showIt() {
+        return talentService.itList();
+    }
+
 }
