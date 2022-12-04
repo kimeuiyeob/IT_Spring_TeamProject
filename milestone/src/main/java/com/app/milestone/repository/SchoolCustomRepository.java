@@ -12,5 +12,6 @@ public interface SchoolCustomRepository {
 //    public List<School> findAllByDonationCount ();
     public List<SchoolDTO> findAllByDonationCount ();
     public List<SchoolDTO> findAllByCreatedDate (Pageable pageable, Search search);
+    public Long countByCreatedDate (Pageable pageable, Search search);
 //    public List<School> findAllByCreatedDate (Pageable pageable, Search search);
 }

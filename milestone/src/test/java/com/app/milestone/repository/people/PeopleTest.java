@@ -94,7 +94,7 @@ public class PeopleTest {
 
         for (int i = 0; i < 30; i++) {
             // 기부자 피기부자 샘플
-            Long giver = 101L + (i % 5);
+            Long giver = 111L + (i % 5);
             Long taker = 5L;
             // 개인 총 기부 횟수 카운트
             People people = peopleRepository.findById(giver).get();
@@ -117,7 +117,7 @@ public class PeopleTest {
 
         for (int i = 0; i < 30; i++) {
             // 기부자 피기부자 샘플
-            Long giver = 101L + (i % 2);
+            Long giver = 125L + (i % 5);
             Long taker = 5L;
             // 개인 총 기부 횟수 카운트
             People people = peopleRepository.findById(giver).get();
@@ -140,7 +140,7 @@ public class PeopleTest {
 
         for (int i = 0; i < 18; i++) {
             // 기부자 피기부자 샘플
-            Long giver = 101L + (i % 3);
+            Long giver = 101L + (i % 5);
             Long taker = 5L;
             // 개인 총 기부 횟수 카운트
             People people = peopleRepository.findById(giver).get();

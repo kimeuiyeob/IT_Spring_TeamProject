@@ -32,12 +32,21 @@ public class SchoolService {
 
     //    도움이 필요한 보육원(메인)
     public List<SchoolDTO> needHelpList() {
-        return schoolRepository.findAllByDonationCount();
+        List<SchoolDTO> arSchoolDTO = schoolRepository.findAllByDonationCount();
+        for (SchoolDTO schoolDTO : arSchoolDTO) {
+            schoolDTO.setSchoolAddress(schoolDTO.getSchoolAddress().split(schoolDTO.getSchoolAddress().charAt(2) + "")[0]);
+        }
+        return arSchoolDTO;
     }
 
     //    보육원 목록(보육원 목록)
     public List<SchoolDTO> schoolList(Pageable pageable, Search search) {
         return schoolRepository.findAllByCreatedDate(pageable, search);
+    }
+
+    //    보육원 목록(보육원 목록) 수
+    public Long schoolListCount(Pageable pageable, Search search) {
+        return schoolRepository.countByCreatedDate(pageable, search);
     }
 
     //    총 보육원 수

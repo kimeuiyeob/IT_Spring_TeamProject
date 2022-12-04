@@ -121,8 +121,7 @@
             <article th:object="${school}">
                 <!-- 보육원 이미지 및 하트-->
                 <span class="schoolImg">
-                    <img
-                            src="https://kmong.com/_next/image?url=https%3A%2F%2Fd2v80xjmx68n4w.cloudfront.net%2Fassets%2Fenterprise%2Fquote-guide%2F1-3.jpg&w=320&q=75">
+                    <img src="https://kmong.com/_next/image?url=https%3A%2F%2Fd2v80xjmx68n4w.cloudfront.net%2Fassets%2Fenterprise%2Fquote-guide%2F1-3.jpg&w=320&q=75">
                     <span class="heartWrap">
                         <!-- 빈 하트 -->
                         <span role="img" color="#ffffff" rotate="0" class="heart emptyHeart">
@@ -169,8 +168,7 @@
                 <!-- QR코드 이미지 및 "기부하러가기" 버튼 -->
                 <div class="rightBox">
                     <div class="QR">
-                        <img
-                                src="https://ko.qr-code-generator.com/wp-content/themes/qr/new_structure/markets/basic_market/generator/dist/generator/assets/images/websiteQRCode_noFrame.png">
+                        <img src="https://ko.qr-code-generator.com/wp-content/themes/qr/new_structure/markets/basic_market/generator/dist/generator/assets/images/websiteQRCode_noFrame.png">
                     </div>
                     <a class="donationButton"><span>보육원 보러가기</span></a>
                 </div>
@@ -223,11 +221,11 @@
         search()
     })
 
-    function getList(schoolDTO) {
+    function getList(schoolResp) {
         let text = "";
         // JSON.stringify(schoolDTO).forEach(school => {
-        for (k in schoolDTO) {
-            let school = schoolDTO[k];
+        for (k in schoolResp.arSchoolDTO) {
+            let school = schoolResp.arSchoolDTO[k];
             text += `<article>`
             text += `<span class="schoolImg">`
             text += `<img src="https://kmong.com/_next/image?url=https%3A%2F%2Fd2v80xjmx68n4w.cloudfront.net%2Fassets%2Fenterprise%2Fquote-guide%2F1-3.jpg&w=320&q=75">`
@@ -259,7 +257,7 @@
             text += `</span>`
             text += `</span>`
             text += `<span class="schoolIntroduce">`
-            text += `<h2 class="schoolName">` + school.schoolTitle + `</h2>`
+            text += `<h2 class="schoolName">` + school.schoolName + `</h2>`
             text += `<div class="intro">` + school.schoolContent + `</div>`
             text += `<div class="miniLocationTag">`
             text += `<div class="schoolLocation1">`
@@ -278,6 +276,7 @@
         }
         $(".schoolList").html(text)
         $(".redHeart").css({"display": "none"})
+        $("#totalCountNumber").html(schoolResp.total)
 
     }
 

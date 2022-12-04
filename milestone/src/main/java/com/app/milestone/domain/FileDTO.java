@@ -2,6 +2,7 @@ package com.app.milestone.domain;
 
 import com.app.milestone.entity.File;
 import com.app.milestone.entity.School;
+import com.app.milestone.type.FileType;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;
 import lombok.Getter;
@@ -15,9 +16,9 @@ public class FileDTO {
     private String fileName;
     private String filePath;
     private String fileUuid;
-    private int fileSize;
-    private boolean fileImageCheck;
-    private Long schoolId;
+    private Long fileSize;
+    private FileType fileType;
+    private Long userId;
 
     public File toEntity() {
         return File.builder()
@@ -25,17 +26,17 @@ public class FileDTO {
                 .filePath(filePath)
                 .fileUuid(fileUuid)
                 .fileSize(fileSize)
-                .fileImageCheck(fileImageCheck)
+                .fileType(fileType)
                 .build();
     }
 
     @QueryProjection
-    public FileDTO(String fileName, String filePath, String fileUuid, int fileSize, boolean fileImageCheck, Long schoolId) {
+    public FileDTO(String fileName, String filePath, String fileUuid, Long fileSize, FileType fileType, Long userId) {
         this.fileName = fileName;
         this.filePath = filePath;
         this.fileUuid = fileUuid;
         this.fileSize = fileSize;
-        this.fileImageCheck = fileImageCheck;
-        this.schoolId = schoolId;
+        this.fileType = fileType;
+        this.userId = userId;
     }
 }
