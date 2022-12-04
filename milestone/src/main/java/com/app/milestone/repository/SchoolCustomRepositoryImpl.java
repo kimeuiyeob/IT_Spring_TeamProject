@@ -4,8 +4,10 @@ import com.app.milestone.domain.QSchoolDTO;
 import com.app.milestone.domain.SchoolDTO;
 import com.app.milestone.domain.Search;
 import com.app.milestone.entity.QSchool;
+import com.app.milestone.entity.QUser;
 import com.app.milestone.entity.School;
 import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.Tuple;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -152,7 +154,7 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
 
 
     //========================관리자페이지===========================
-    //        보육원 목록(최신순)
+    //보육원 목록
     @Override
     public List<School> findByCreatedDate(Pageable pageable) {
         return jpaQueryFactory.selectFrom(school)
@@ -161,5 +163,63 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
                 .limit(pageable.getPageSize())
                 .fetch();
     }
+
+    //전체 회원중 보육원 회원만
+    @Override
+//    public List<Tuple> findBySchoolOnly (){
+//        List<Tuple> tuples = new ArrayList<>();
+//        tuples = jpaQueryFactory.select(new QSchoolDTO(
+//                school.address.schoolAddress,
+//                school.address.schoolAddressDetail,
+//                school.address.schoolZipcode,
+//                school.schoolBank,
+//                school.schoolTeachers,
+//                school.schoolKids,
+//                school.schoolBudget,
+//                school.userName,
+//                school.schoolAccount,
+//                school.schoolPhoneNumber,
+//                school.schoolQR,
+//                school.introduce.schoolTitle,
+//                school.introduce.schoolContent,
+//                school.userEmail,
+//                school.schoolName,
+//                school.userPassword,
+//                school.userPhoneNumber,
+//                school.donationCount
+//                ),school.createdDate)
+//                .from(school, QUser.user)
+//                .where(school.userId.eq(QUser.user.userId))
+//                .fetch();
+//
+//        return tuples;
+//    };
+    public List<SchoolDTO> findBySchoolOnly (){
+        return jpaQueryFactory.select(new QSchoolDTO(
+                school.schoolName,
+                school.address.schoolAddress,
+                school.address.schoolAddressDetail,
+                school.address.schoolZipcode,
+                school.schoolTeachers,
+                school.schoolKids,
+                school.schoolBudget,
+                school.schoolBank,
+                school.schoolAccount,
+                school.schoolQR,
+                school.introduce.schoolTitle,
+                school.introduce.schoolContent,
+                school.userEmail,
+                school.userEmail,
+                school.userName,
+                school.userPassword,
+                school.userPhoneNumber,
+                school.donationCount
+                ))
+                .from(school, QUser.user)
+                .where(school.userId.eq(QUser.user.userId))
+                .fetch();
+    };
+
+
     //=============================================================
 }
