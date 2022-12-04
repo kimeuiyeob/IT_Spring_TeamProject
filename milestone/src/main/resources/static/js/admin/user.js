@@ -234,3 +234,26 @@ $userType.on('mouseover', function () {
 $userType.on('mouseout', function () {
     $(this).css('color', '#5e6278');
 })
+
+
+
+/*===========Ajax===============================*/
+/*==================보육원 선택==================*/
+function getSchools(param, callback, error) {
+    let test =param.schools.length!=0 ? "/"+param.school : "/null";
+    $.ajax({
+        url: "/adminRest/user" + test,
+        type: "get",
+        success: function (schools, users, status, xhr) {
+            if (callback) {
+                callback(schools);
+                callback(users);
+            }
+        },
+        error: function (xhr, status, err) {
+            if (error) {
+                error(err);
+            }
+        }
+    });
+}

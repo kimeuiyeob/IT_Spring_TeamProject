@@ -74,4 +74,8 @@ public class SchoolService {
         return moneyDTOS;
     }
 
+    //    관리자 페이지 : 보육원 목록
+    public List<School> schoolListManager(Pageable pageable){
+        return schoolRepository.findByCreatedDate(pageable);
+    }
 }
