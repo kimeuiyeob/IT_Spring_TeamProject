@@ -11,5 +11,6 @@ public interface TalentCustomRepository {
 
     public List<TalentDTO> findAllByTalentAbleDate (Pageable pageable, Search search);
     public List<TalentDTO> talentDetail(Long userId);
+    public List<TalentDTO> educationList();
 
 }

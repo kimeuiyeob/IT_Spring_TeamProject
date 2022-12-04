@@ -2,10 +2,10 @@ package com.app.milestone.repository.talent;
 
 import com.app.milestone.domain.Search;
 import com.app.milestone.domain.TalentDTO;
-import com.app.milestone.entity.*;
+import com.app.milestone.entity.People;
+import com.app.milestone.entity.Talent;
 import com.app.milestone.repository.PeopleRepository;
 import com.app.milestone.repository.TalentRepository;
-import com.app.milestone.type.Place;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -16,7 +16,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +47,7 @@ public class TalentTest {
             TalentDTO talentDTO = new TalentDTO();
             talentDTO.setTalentTitle(talentTitles[i % 8]);
             talentDTO.setTalentContent(talentContents[i % 5]);
-            talentDTO.setTalentAbleDate(LocalDate.now());
+            talentDTO.setTalentAbleDate(LocalDateTime.now());
             talentDTO.setTalentCategory(talentCategorys[i % 4]);
             talentDTO.setTalentPlace(talentPlaces[i % 5]);
             talentRepository.save(talentDTO.toEntity());
@@ -61,7 +60,7 @@ public class TalentTest {
         TalentDTO talentDTO = new TalentDTO();
         talentDTO.setTalentTitle("안녕");
         talentDTO.setTalentContent("하세용");
-        talentDTO.setTalentAbleDate(LocalDate.now());
+        talentDTO.setTalentAbleDate(LocalDateTime.now());
         talentDTO.setTalentCategory("IT");
         talentDTO.setTalentPlace("제주도");
 
@@ -110,7 +109,7 @@ public class TalentTest {
         talentDTO.setTalentTitle("제목");
         talentDTO.setTalentContent("내용");
         talentDTO.setTalentPlace("제주도");
-        talentDTO.setTalentAbleDate(LocalDate.now());
+        talentDTO.setTalentAbleDate(LocalDateTime.now());
         talentDTO.setTalentCategory("교육");
         talent.update(talentDTO);
     }
@@ -150,7 +149,7 @@ public class TalentTest {
         talentDTO.setTalentTitle("울라라랄");
         talentDTO.setTalentContent("울라라랄라라라");
         talentDTO.setTalentPlace("제주도");
-        talentDTO.setTalentAbleDate(LocalDate.now());
+        talentDTO.setTalentAbleDate(LocalDateTime.now());
         talentDTO.setTalentCategory("교육");
         jpaQueryFactory.selectFrom(talent)
                 .where(talent.donationId.eq(3L))
@@ -165,14 +164,13 @@ public class TalentTest {
         Pageable pageable = PageRequest.of(0, 10); //0페이지에 10개를 가져오겠다.
         Search search = new Search(); //사용자가 선택한 지역을 search에 넣어준다.
         search.setSchoolAddress(new ArrayList<>());
-        search.setTalentCategory(new ArrayList<>());
 
         for (String location : locations) {
             search.getSchoolAddress().add(location);
         }
 
         search.setTalentTitle("돌고래"); //사용자가 입력한 재능기부 제목
-        search.getTalentCategory().add("운동");
+        search.setTalentCategory("운동");
 
         talentRepository.findAllByTalentAbleDate(pageable, search)
                 .forEach(o -> log.info(

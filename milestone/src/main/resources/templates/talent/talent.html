@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>talent</title>
@@ -39,130 +39,132 @@
 
         <div class="talentChoicebar">
 
-            <div class="all">
+            <div class="all" id="showAll">
                 <div>전체</div>
             </div>
 
-            <div class="education" onclick="dataSend()">
+            <div class="education" id="education">
                 <div>교육</div>
             </div>
 
-            <div class="exercise">
+            <div class="exercise" id="exercise">
                 <div>운동</div>
             </div>
 
-            <div class="music">
+            <div class="music" id="music">
                 <div>음악</div>
             </div>
 
-            <div class="art">
+            <div class="art" id="art">
                 <div>미술</div>
             </div>
 
-            <div class="program">
+            <div class="program" id="program">
                 <div>IT</div>
             </div>
 
-            <div id="pseudo"></div>
+            <div id="pseudo" ></div>
         </div>
 
         <!-- ====================================================================================================== -->
         <!-- 검색창 -->
+            <div style="display: flex">
+                <div class="searchBox realSearhBox">
+                    <input type="text" name="talentName" placeholder=" &nbsp;제목을 검색하세요" value=""
+                           style="border: solid white;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
+                         style="cursor:pointer"
+                         focusable="false" preserveAspectRatio="xMidYMid meet" class="css-7kp13n e181xm9y0">
+                        <path xmlns="http://www.w3.org/2000/svg"
+                              d="M11.2307008,3.5 C15.5002489,3.5 18.9614015,6.96828437 18.9614015,11.24663 C18.9614015,13.0978372 18.3133954,14.7973826 17.2322825,16.1299241 L20.2742127,19.178378 C20.5762688,19.4810023 20.5764739,19.9714482 20.2746708,20.2738195 C19.9728678,20.5761908 19.4833433,20.5759857 19.1812873,20.2733614 L19.1812873,20.2733614 L16.1426973,17.2288066 C14.8071694,18.3312107 13.0960911,18.9932599 11.2307008,18.9932599 C6.96115262,18.9932599 3.5,15.5249756 3.5,11.24663 C3.5,6.96828437 6.96115262,3.5 11.2307008,3.5 Z M11.2307008,5.04932599 C7.81506225,5.04932599 5.04614015,7.82395349 5.04614015,11.24663 C5.04614015,14.6693064 7.81506225,17.4439339 11.2307008,17.4439339 C14.6463393,17.4439339 17.4152614,14.6693064 17.4152614,11.24663 C17.4152614,7.82395349 14.6463393,5.04932599 11.2307008,5.04932599 Z">
+                        </path>
+                    </svg>
+                </div>
+        <!-- ====================================================================================================== -->
 
-        <div style="display: flex">
-            <div class="searchBox realSearhBox">
-                <input type="text" placeholder=" &nbsp;제목을 검색하세요" value="" style="border: solid white;">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
-                     style="cursor:pointer"
-                     focusable="false" preserveAspectRatio="xMidYMid meet" class="css-7kp13n e181xm9y0">
-                    <path xmlns="http://www.w3.org/2000/svg"
-                          d="M11.2307008,3.5 C15.5002489,3.5 18.9614015,6.96828437 18.9614015,11.24663 C18.9614015,13.0978372 18.3133954,14.7973826 17.2322825,16.1299241 L20.2742127,19.178378 C20.5762688,19.4810023 20.5764739,19.9714482 20.2746708,20.2738195 C19.9728678,20.5761908 19.4833433,20.5759857 19.1812873,20.2733614 L19.1812873,20.2733614 L16.1426973,17.2288066 C14.8071694,18.3312107 13.0960911,18.9932599 11.2307008,18.9932599 C6.96115262,18.9932599 3.5,15.5249756 3.5,11.24663 C3.5,6.96828437 6.96115262,3.5 11.2307008,3.5 Z M11.2307008,5.04932599 C7.81506225,5.04932599 5.04614015,7.82395349 5.04614015,11.24663 C5.04614015,14.6693064 7.81506225,17.4439339 11.2307008,17.4439339 C14.6463393,17.4439339 17.4152614,14.6693064 17.4152614,11.24663 C17.4152614,7.82395349 14.6463393,5.04932599 11.2307008,5.04932599 Z">
-                    </path>
-                </svg>
+
+        <section class="loc centerContent" style="padding-left:10px">
+            <div class="loactions" style="padding-top: 65px; display: none; height: 150px;">
+                <div class="location wholeLocation"
+                     style="background-color: transparent; border: 1px solid black;">지역
+                </div>
+                <div class="location location2">서울</div>
+                <div class="location location2">경기도</div>
+                <div class="location location2">강원도</div>
+                <div class="location location2">충청도</div>
+                <div class="location location2">전라도</div>
+                <div class="location location2">경상도</div>
+                <div class="location location2">제주도</div>
             </div>
 
-            <!-- ====================================================================================================== -->
-            <section class="loc centerContent" style="padding-left:10px">
-                <div class="loactions" style="padding-top: 65px; display: none; height: 150px;">
-                    <div class="location wholeLocation"
-                         style="background-color: transparent; border: 1px solid black;">지역
-                    </div>
-                    <div class="location location2">서울</div>
-                    <div class="location location2">경기도</div>
-                    <div class="location location2">강원도</div>
-                    <div class="location location2">충청도</div>
-                    <div class="location location2">전라도</div>
-                    <div class="location location2">경상도</div>
-                    <div class="location location2">제주도</div>
-                </div>
-
-                <!-- 드롭다운 -->
-                <div class="dropdown" style="justify-content: flex-end; position: relative;">
-                    <button class="dropbtn">
-                        <span class="dropbtn_content placeholder">전체</span>
-                        <span class="dropbtn_click" style=" font-size : 16px; color : #3b3b3b; float:right;">
+            <!-- 드롭다운 -->
+            <div class="dropdown" style="justify-content: flex-end; position: relative;">
+                <button class="dropbtn">
+                    <span class="dropbtn_content placeholder">전체</span>
+                    <span class="dropbtn_click" style=" font-size : 16px; color : #3b3b3b; float:right;">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
                          focusable="false" preserveAspectRatio="xMidYMid meet" class="css-7kp13n e181xm9y0"><polygon
                             id="Triangle"
                             transform="translate(12.000000, 12.000000) rotate(-180.000000) translate(-12.000000, -12.000000) "
                             points="12 9 18 15 6 15"></polygon></svg>
                 </span>
-                    </button>
-                    <div class="dropdown-content" style="position: absolute;top: 40px;">
-                        <div class="dropLoc checkSeoul">서울</div>
-                        <div class="dropLoc checkKyungki">경기도</div>
-                        <div class="dropLoc checkKangwon">강원도</div>
-                        <div class="dropLoc checkChungcheong">충청도</div>
-                        <div class="dropLoc checkJeolla">전라도</div>
-                        <div class="dropLoc checkGyeong">경상도</div>
-                        <div class="dropLoc checkJeju">제주도</div>
-                    </div>
+                </button>
+                <div class="dropdown-content" style="position: absolute;top: 40px;">
+                    <div class="dropLoc checkSeoul">서울</div>
+                    <div class="dropLoc checkKyungki">경기도</div>
+                    <div class="dropLoc checkKangwon">강원도</div>
+                    <div class="dropLoc checkChungcheong">충청도</div>
+                    <div class="dropLoc checkJeolla">전라도</div>
+                    <div class="dropLoc checkGyeong">경상도</div>
+                    <div class="dropLoc checkJeju">제주도</div>
                 </div>
-                <!-- ===================================================================================== -->
-            </section>
-        </div>
+            </div>
+            <!-- ===================================================================================== -->
+        </section>
 
     </div>
 
-    <!--==========================================재능 기부 목록===========================================-->
-    <div class="talentBoxAll" id="all">
-        <!-- ============================================================================================ -->
-        <th:block th:each="talent:${talents}">
-            <div style="padding-bottom:20px">
+</div>
 
-                <article class="talentBox" th:object="${talent}">
-                    <div class="talentBox2">
-                        <div class="talentBox3">
-                            <img src="../imgs/myPage/normalProfile.png" class="talentImg">
-                        </div>
-                        <div class="talentBox4">
-                            <p class="talentTitle" th:text="*{talentTitle}"><!--제목--></p>
-                            <p class="talentContent" th:text="*{talentContent}"><!--내용--></p>
-                            <div class="talentboxs">
-                                <div class="talentType">
-                                    <img src="/imgs/talent/care2.png" th:text="*{talentCategory}"
-                                         style="width: 25px; height: 25px; margin-bottom: -6px; margin-left: -10px;">
-                                    <!--카테고리-->
-                                </div>
-                                <div class="talentPlace">
-                                    <img src="/imgs/talent/pin.png" th:text="*{talentPlace}"
-                                         style="width: 25px; height: 25px; margin-bottom: -6px; margin-left: -10px;">
-                                    <!--지역-->
-                                </div>
-                                <div class="talentTime">
-                                    <img src="/imgs/talent/mylove.png" th:text="*{talentAbleDate}"
-                                         style="width: 25px; height: 25px; margin-bottom: -7px; margin-left: -15px;">
-                                    <!--가능시간-->
-                                </div>
+<!--==========================================재능 기부 목록===========================================-->
+<div class="talentBoxAll" id="all">
+    <!-- ============================================================================================ -->
+    <th:block th:each="talent:${talents}">
+        <div style="padding-bottom:20px">
+
+            <article class="talentBox" th:object="${talent}">
+                <div class="talentBox2">
+                    <div class="talentBox3">
+                        <img src="../imgs/myPage/normalProfile.png" class="talentImg">
+                    </div>
+                    <div class="talentBox4">
+                        <p class="talentTitle" th:text="*{talentTitle}"><!--제목--></p>
+                        <p class="talentContent" th:text="*{talentContent}"><!--내용--></p>
+                        <div class="talentboxs">
+                            <div class="talentType">
+                                <img src="/imgs/talent/care2.png" th:text="*{talentCategory}"
+                                     style="width: 25px; height: 25px; margin-bottom: -6px; margin-left: -10px;">
+                                <!--카테고리-->
+                            </div>
+                            <div class="talentPlace">
+                                <img src="/imgs/talent/pin.png" th:text="*{talentPlace}"
+                                     style="width: 25px; height: 25px; margin-bottom: -6px; margin-left: -10px;">
+                                <!--지역-->
+                            </div>
+                            <div class="talentTime">
+                                <img src="/imgs/talent/mylove.png" th:text="${#temporals.format(talent.talentAbleDate,'YY년 MM월 dd일')}"
+                                     style="width: 25px; height: 25px; margin-bottom: -7px; margin-left: -15px;">
+                                <!--가능시간-->
                             </div>
                         </div>
                     </div>
-                </article>
-            </div>
-        </th:block>
-        <!-- =============================================================================================== -->
-    </div>
+                </div>
+            </article>
+        </div>
+    </th:block>
     <!-- =============================================================================================== -->
+</div>
+<!-- =============================================================================================== -->
 </div>
 
 <!-- ============================================================================================= -->
@@ -489,9 +491,14 @@
 </script>
 <!--================================================================================================================-->
 <script th:inline="javascript">
-    const $location2 = $(".location2");
 
-    $location2.on('click', function () {
+    const $location2 = $(".location2"); //작은지역들
+    const $wholeLocation = $(".wholeLocation"); //전체
+
+    $location2.on('click', function () { // 작은지역들 클릭시 search()실행
+        search()
+    })
+    $wholeLocation.on('click', function () { // 전체 클릭시 search()실행
         search()
     })
 
@@ -500,6 +507,8 @@
         let text = "";
         for (tal in talentDTO) {
             let talent = talentDTO[tal];
+
+            text += `<div style="padding-bottom:20px">`
 
             text += `<article class="talentBox">`
             text += `<div class="talentBox2">`
@@ -534,16 +543,18 @@
             text += `</div>`
             text += `</article>`
 
+            text += `</div>`
+
         }
 
         $(".talentBoxAll").html(text)
 
     }
 
+    //작은지역들, 전체 클릭시 아래 함수 실행
     function search() {
-        console.log(saveLocal);
-        getTalentList1({
-            schoolAddress: saveLocal
+        getList1({
+            talentPlace: save
         }, getList);
     }
 

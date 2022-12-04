@@ -1,3 +1,5 @@
+let save = [];
+
 window.onload = function () {
 
     $("#talentModal").css({"display": "none"})
@@ -118,6 +120,7 @@ $(".program").click(function () {
 
 /*=====================지역 드랍 다운===========================*/
 
+
 $(".location").mouseover(function () {
     $(this).css({"padding-bottom": "10px"})
 })
@@ -128,6 +131,50 @@ $(".location").mouseout(function () {
 
 $(".wholeLocation").css({"background-color": "transparent"});
 $(".wholeLocation").css({"border": "solid 1px black"});
+
+
+/* 전체보기를 눌렀을 땐 작은 지역들 선택을 해제한다 */
+$(".wholeLocation").click(function () {
+    $(".wholeLocation").css({"background-color": "transparent"});
+    $(".wholeLocation").css({"border": "solid 1px black"});
+    $(".location2").css({"background-color": "#f2f3f7"})
+    $(".location2").css({"border": "none"})
+    save = [];
+})
+
+/* 지역선택시 지역저장 */
+$(".location2").click(function () {
+    $(".wholeLocation").css({"background-color": "#f2f3f7"})
+    $(".wholeLocation").css({"border": "none"})
+
+    if ($(this).css('background-color') == 'rgb(242, 243, 247)') {
+        $(this).css({"background-color": "transparent"})
+        $(this).css({"border": "solid 1px black"})
+        /* 담긴게 없다면 무조건 push */
+        if (save.length == 0) {
+            save.push($(this).text());
+        } else if (save.length > 0) {
+            for (var i = 0; i < save.length; i++) {
+                /* 담을 지역이 담은 지역과 겹치는게 없다면 push */
+                if (save[i] != $(this).text()) {
+                    save.push($(this).text());
+                    break;
+                }
+            }
+        }
+    } else {
+        $(this).css({"background-color": "#f2f3f7"})
+        $(this).css({"border": "none"})
+        save.forEach(element => {
+            /* 담을 지역이 담은 지역과 겹치는게 있다면 splice */
+            if (element == $(this).text()) {
+                save.splice(save.indexOf(element), 1);
+            }
+        });
+    }
+    console.log(save);
+})
+
 
 /*===================글작성 선택 모달==========================*/
 
@@ -452,16 +499,29 @@ $(".dropLoc").on('click', function () {
     console.log(saveLocal);
 });
 
+/*============================================================*/
+/*제목으로 검색*/
+const $talentName = $('input[name = talentName]');
+
+$talentName.on('keyup', function (e) {
+    if (e.keyCode == 13) {
+        searchForm.submit();
+    }
+})
+
+
 /*=========================Ajax 사용=========================*/
+
 /*지역 선택*/
 
 function getTalentList1(param, callback, error) {
 
+    let test = param.talentPlace.length != 0 ? "/" + param.talentPlace : "/null";
+
     $.ajax({
-        url: "/talentrest/list/" + param.schoolAddress,
+        url: "/talentrest/list/" + test,
         type: "get",
         success: function (talentDTO, status, xhr) {
-            console.log(talentDTO)
             if (callback) {
                 callback(talentDTO);
             }
@@ -473,8 +533,54 @@ function getTalentList1(param, callback, error) {
         }
     });
 }
+/*=================호석이가 ajax 도와준곳=====================*/
 
+$("#education").on("click",function () {
 
+    $.ajax({
+        url: "/talentrest/showall",
+        type: "post",
+        success:function (lists) {
+
+            let text= "";
+
+            lists.forEach(function (list) {
+                text += `<div style="padding-bottom:20px">`
+                text += `<article class="talentBox">`
+                text += `<div class="talentBox2">`
+                text += `<div class="talentBox3">`
+                text += `<img src="../imgs/myPage/normalProfile.png" class="talentImg">`
+                text += `</div>`
+                text += `<div class="talentBox4">`
+                text += `<p class="talentTitle">` + list.talentTitle + `</p>`
+                text += `<p class="talentContent">` + list.talentContent + `</p>`
+                text += `<div class="talentboxs">`
+                text += `<div class="talentType">`
+                text += `<img src="/imgs/talent/care2.png" style="width: 25px; height: 25px; margin-bottom: -6px; margin-left: -10px;">` + list.talentCategory
+                text += `</div>`
+                text += `<div class="talentPlace">`
+                text += `<img src="/imgs/talent/pin.png" style="width: 25px; height: 25px; margin-bottom: -6px; margin-left: -10px;">` + list.talentPlace
+                text += `</div>`
+
+                let date = new Date(list.talentAbleDate);
+                let year = date.getFullYear().toString().substr(2);
+                let month = date.getMonth();
+                let day = date.getDay();
+
+                text += `<div class="talentTime">`
+                text += `<img src="/imgs/talent/mylove.png" style="width: 25px; height: 25px; margin-bottom: -7px; margin-left: -15px;">` + year + '년 ' + ("00" +month.toString()).slice(-2) + "월 " + ("00" +day.toString()).slice(-2)+ "일"
+                text += `</div>`
+                text += `</div>`
+                text += `</div>`
+                text += `</div>`
+                text += `</article>`
+                text += `</div>`
+                $(".talentBoxAll").html(text);
+
+            })
+        }
+    })
+})
 
 
 

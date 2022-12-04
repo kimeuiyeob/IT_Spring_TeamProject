@@ -18,7 +18,7 @@ public class TalentService {
     private final JPAQueryFactory jpaQueryFactory;
 
     //재능기부 목록 조회
-    public List<TalentDTO> TalentList(Pageable pageable, Search search) {
+    public List<TalentDTO> talentList(Pageable pageable, Search search) {
         return talentRepository.findAllByTalentAbleDate(pageable, search);
     }
 
@@ -27,10 +27,14 @@ public class TalentService {
         talentRepository.save(talentDTO.toEntity());
     }
 
-    //재능 기부 목록 상세보기
-    public List<TalentDTO> talentDetail(Long UserId) {
-        return talentRepository.talentDetail(UserId);
-    }
 
+    //재능 기부 목록 상세보기
+//    public List<TalentDTO> talentDetail(Long UserId) {
+//        return talentRepository.talentDetail(UserId);
+//    }
+    //교육클릭시 정렬
+    public List<TalentDTO> educationList() {
+        return talentRepository.educationList();
+    }
 
 }

@@ -30,13 +30,11 @@ public class TalentController {
     @GetMapping("/talent")
     public void list(Pageable pageable, Search search, Model model){
 
-        pageable = PageRequest.of(0, 10);
-
-        if (search.getSchoolAddress() == null) {
-            search.setSchoolAddress(new ArrayList<>());
-            search.setTalentCategory(new ArrayList<>());
+        pageable = PageRequest.of(0, 10); //TalentCustomRepositoryImpl에 pageable값을 넘겨주기위해서 생성
+        if (search.getTalentPlace() == null) {
+            search.setTalentPlace(new ArrayList<>()); //TalentCustomRepositoryImpl에 search값을 넘겨주기위해서 생성
         }
-        model.addAttribute("talents", talentService.TalentList(pageable,search));
+        model.addAttribute("talents", talentService.talentList(pageable,search));
     }
 
 }
