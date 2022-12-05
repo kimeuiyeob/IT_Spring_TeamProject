@@ -6,6 +6,7 @@ import com.app.milestone.domain.Search;
 import com.app.milestone.service.SchoolService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.ui.Model;
@@ -21,25 +22,22 @@ import java.util.List;
 public class SchoolRestController {
     private final SchoolService schoolService;
 
-    //    총 페이지도 같이 전달
-    @GetMapping(value = {"/list/{schoolAddress}","/list/{schoolAddress}/{schoolName}"})
-    public SchoolResp search(Pageable pageable, Search search, Model model) {
+    //    보육원 목록
+    @GetMapping(value = {"/list/{page}", "/list/{page}/{schoolAddress}", "/list/{page}/{schoolAddress}/{schoolName}"})
+    public SchoolResp search(@PathVariable("page") Integer page, Search search, Model model) {
         SchoolResp schoolResp = new SchoolResp();
-        pageable = PageRequest.of(0, 10);
-        List<SchoolDTO> arSchoolDTO = schoolService.schoolList(pageable, search);
-        if (search.getSchoolAddress() == null) {
-            search.setSchoolAddress(new ArrayList<>());
-        }
-        log.info(search.getSchoolName()+"========================");
-        if (search.getSchoolName()==null) {
-            log.info("들어옴========================");
-            search.setSchoolName(null);
-        }else{
-            log.info("안들어옴========================");
-        }
-
+        Pageable pageable = PageRequest.of(page, 10);
+        log.info("레스트" + pageable);
+        Page<SchoolDTO> arSchoolDTO = schoolService.schoolList(pageable, search);
         schoolResp.setArSchoolDTO(arSchoolDTO);
         schoolResp.setTotal(schoolService.schoolListCount(pageable, search));
         return schoolResp;
+    }
+
+    //    보육원 상세페이지
+    @GetMapping(value = {"/read/{userId}"})
+    public SchoolDTO search(@PathVariable("userId") Long userId) {
+        log.info("===============아작아작"+schoolService.schoolInfo(userId));
+        return schoolService.schoolInfo(userId);
     }
 }

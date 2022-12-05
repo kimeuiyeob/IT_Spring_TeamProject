@@ -1,113 +1,114 @@
 let check2 = false;
 
 /* 찜하기 버튼 마우스 올렸을 때*/
-$("button.zzimButton").mouseover(function(){
-    $(this).css({"background-color":"rgb(102 102 102 / 29%)"})
-    $(this).css({"border-radius":"3px"})
-    $(this).css({"transition":"all .2s ease"})
+$("button.zzimButton").mouseover(function () {
+    $(this).css({"background-color": "rgb(102 102 102 / 29%)"})
+    $(this).css({"border-radius": "3px"})
+    $(this).css({"transition": "all .2s ease"})
 })
-$("button.zzimButton").mouseout(function(){
-    $(this).css({"background-color":"transparent"})
-    $(this).css({"border-radius":"3px"})
-    $(this).css({"transition":"all .2s ease"})
+$("button.zzimButton").mouseout(function () {
+    $(this).css({"background-color": "transparent"})
+    $(this).css({"border-radius": "3px"})
+    $(this).css({"transition": "all .2s ease"})
 })
 
-$(".redHeart").css({"display":"none"})
+$(".redHeart").css({"display": "none"})
 
 /* 찜하기 버튼 클릭 */
-$(".zzimButton").click(function(){
-    if(!check2){
-        $(this).children(".redHeart").css({"display":"inline"})
-        $(this).children(".emptyHeart").css({"display":"none"})
-        check2=true;
-    }else{
-        $(this).children(".redHeart").css({"display":"none"})
-        $(this).children(".emptyHeart").css({"display":"inline"})
-        check2=false;
+$(".zzimButton").click(function () {
+    if (!check2) {
+        $(this).children(".redHeart").css({"display": "inline"})
+        $(this).children(".emptyHeart").css({"display": "none"})
+        check2 = true;
+    } else {
+        $(this).children(".redHeart").css({"display": "none"})
+        $(this).children(".emptyHeart").css({"display": "inline"})
+        check2 = false;
     }
 })
 
 /* 기부하기 버튼 마우스 올렸을 때 */
-$("button#donate").mouseover(function(){
-    $(this).css({"background-color":"#eac405"})
-    $(this).css({"transition":"all .2s ease"})
+$("button#donate").mouseover(function () {
+    $(this).css({"background-color": "#eac405"})
+    $(this).css({"transition": "all .2s ease"})
 })
-$("button#donate").mouseout(function(){
-    $(this).css({"background-color":"#ffd400"})
-    $(this).css({"transition":"all .2s ease"})
+$("button#donate").mouseout(function () {
+    $(this).css({"background-color": "#ffd400"})
+    $(this).css({"transition": "all .2s ease"})
 })
 
 /* 더보기 버튼 마우스 올렸을 때 */
-$("button.moreButton").mouseover(function(){
-    $(this).css({"background-color":"rgb(237 237 237)"})
-    $(this).css({"transition":"all .2s ease"})
+$("button.moreButton").mouseover(function () {
+    $(this).css({"background-color": "rgb(237 237 237)"})
+    $(this).css({"transition": "all .2s ease"})
 })
-$("button.moreButton").mouseout(function(){
-    $(this).css({"background-color":"transparent"})
-    $(this).css({"transition":"all .2s ease"})
-})
-
-/* 우측 어사이드 바 클릭 */
-$(".intro").click(function(){
-    $("#introRightBox").css({"display":"block"})
-
-    $("#pseudo").css({"transform":"translateX(0%)"})
-    $(this).css({"color":"rgb(48, 52, 65)"})
-    $(this).css({"font-weight":"700"})
-    $(".total").css({"font-weight":"normal"})
-    $(".total").css({"color":"rgb(154, 155, 167)"})
-    $(".ranking").css({"font-weight":"normal"})
-    $(".ranking").css({"color":"rgb(154, 155, 167)"})
-
-    $("#totalRightBox").css({"display":"none"})
-    $("#rankingRightBox").css({"display":"none"})
+$("button.moreButton").mouseout(function () {
+    $(this).css({"background-color": "transparent"})
+    $(this).css({"transition": "all .2s ease"})
 })
 
 /* 우측 어사이드 바 클릭 */
-$(".total").click(function(){
-    $("#totalRightBox").css({"display":"block"})
+$(".intro").click(function () {
+    $("#introRightBox").css({"display": "block"})
 
-    $("#pseudo").css({"transform":"translateX(100%)"})
-    $(this).css({"color":"rgb(48, 52, 65)"})
-    $(this).css({"font-weight":"700"})
-    $(".intro").css({"font-weight":"normal"})
-    $(".intro").css({"color":"rgb(154, 155, 167)"})
-    $(".ranking").css({"font-weight":"normal"})
-    $(".ranking").css({"color":"rgb(154, 155, 167)"})
+    $("#pseudo").css({"transform": "translateX(0%)"})
+    $(this).css({"color": "rgb(48, 52, 65)"})
+    $(this).css({"font-weight": "700"})
+    $(".total").css({"font-weight": "normal"})
+    $(".total").css({"color": "rgb(154, 155, 167)"})
+    $(".ranking").css({"font-weight": "normal"})
+    $(".ranking").css({"color": "rgb(154, 155, 167)"})
 
-    $("#introRightBox").css({"display":"none"})
-    $("#rankingRightBox").css({"display":"none"})
+    $("#totalRightBox").css({"display": "none"})
+    $("#rankingRightBox").css({"display": "none"})
 })
 
 /* 우측 어사이드 바 클릭 */
-$(".ranking").click(function(){
-    $("#rankingRightBox").css({"display":"block"})
+$(".total").click(function () {
+    $("#totalRightBox").css({"display": "block"})
 
-    $("#pseudo").css({"transform":"translateX(200%)"})
-    $(this).css({"color":"rgb(48, 52, 65)"})
-    $(this).css({"font-weight":"700"})
-    $(".intro").css({"font-weight":"normal"})
-    $(".intro").css({"color":"rgb(154, 155, 167)"})
-    $(".total").css({"font-weight":"normal"})
-    $(".total").css({"color":"rgb(154, 155, 167)"})
+    $("#pseudo").css({"transform": "translateX(100%)"})
+    $(this).css({"color": "rgb(48, 52, 65)"})
+    $(this).css({"font-weight": "700"})
+    $(".intro").css({"font-weight": "normal"})
+    $(".intro").css({"color": "rgb(154, 155, 167)"})
+    $(".ranking").css({"font-weight": "normal"})
+    $(".ranking").css({"color": "rgb(154, 155, 167)"})
 
-    $("#introRightBox").css({"display":"none"})
-    $("#totalRightBox").css({"display":"none"})
+    $("#introRightBox").css({"display": "none"})
+    $("#rankingRightBox").css({"display": "none"})
+})
+
+/* 우측 어사이드 바 클릭 */
+$(".ranking").click(function () {
+    $("#rankingRightBox").css({"display": "block"})
+
+    $("#pseudo").css({"transform": "translateX(200%)"})
+    $(this).css({"color": "rgb(48, 52, 65)"})
+    $(this).css({"font-weight": "700"})
+    $(".intro").css({"font-weight": "normal"})
+    $(".intro").css({"color": "rgb(154, 155, 167)"})
+    $(".total").css({"font-weight": "normal"})
+    $(".total").css({"color": "rgb(154, 155, 167)"})
+
+    $("#introRightBox").css({"display": "none"})
+    $("#totalRightBox").css({"display": "none"})
 })
 
 /* QR 보러가기 모달창 */
-function openModal(){
-    $("#modal").css({"display":"block"})
+function openModal() {
+    $("#modal").css({"display": "block"})
     document.body.style.overflow = "hidden";
 }
 
-function closeModal(){
-    $("#modal").css({"display":"none"})
+function closeModal() {
+    $("#modal").css({"display": "none"})
     document.body.style.overflow = "unset";
 }
+
 /* 외부영역 클릭시 모달 닫기 */
-$(document).mouseup(function (e){
-    if($("#modal").has(e.target).length === 0){
+$(document).mouseup(function (e) {
+    if ($("#modal").has(e.target).length === 0) {
         $("#modal").hide();
         document.body.style.overflow = "unset";
     }
@@ -115,26 +116,26 @@ $(document).mouseup(function (e){
 
 
 /* 댓글 */
-$(".modifyReady").click(function(){
+$(".modifyReady").click(function () {
     $(this).closest(".modifyAndDelete").closest(".commentsInfo").siblings(".modifyShow").hide();
     $(this).closest(".modifyAndDelete").closest(".commentsInfo").siblings(".modifyHide").show();
 
-    $(this).css('display','none');
-    $(this).siblings(".deleteReady").css('display','none');
-    $(this).siblings(".between").css('display','none');
+    $(this).css('display', 'none');
+    $(this).siblings(".deleteReady").css('display', 'none');
+    $(this).siblings(".between").css('display', 'none');
     /* 취소버튼 */
-    $(this).siblings(".cancel").css('display','inline');
+    $(this).siblings(".cancel").css('display', 'inline');
 })
 
 
-$(".cancel").click(function(){
+$(".cancel").click(function () {
     $(this).closest(".modifyAndDelete").closest(".commentsInfo").siblings(".modifyShow").show();
     $(this).closest(".modifyAndDelete").closest(".commentsInfo").siblings(".modifyHide").hide();
 
-    $(this).css('display','none');
-    $(this).siblings(".modifyReady").css('display','inline');
-    $(this).siblings(".between").css('display','inline');
-    $(this).siblings(".deleteReady").css('display','inline');
+    $(this).css('display', 'none');
+    $(this).siblings(".modifyReady").css('display', 'inline');
+    $(this).siblings(".between").css('display', 'inline');
+    $(this).siblings(".deleteReady").css('display', 'inline');
 })
 
 
@@ -176,6 +177,28 @@ var mainImage = document.querySelector('#mainImage');
 /* 사진 클릭시 큰 사진으로 바뀜 */
 var mainImage = document.querySelector('#mainImage');
 
-$(".one").click(function(){
-    $("#mainImage").attr('src' , $(this).attr('src'));
+$(".one").click(function () {
+    $("#mainImage").attr('src', $(this).attr('src'));
 })
+
+/*--------------------황지수----------------------------*/
+
+// 보육원 정보 뿌림
+
+function getInfo1(param, callback, error) {
+    console.log("아작아작")
+    $.ajax({
+        url: "/schoolrest/read/" + param.userId,
+        type: "get",
+        success: function (schoolDTO, status, xhr) {
+            if (callback) {
+                callback(schoolDTO);
+            }
+        },
+        error: function (xhr, status, err) {
+            if (error) {
+                error(err);
+            }
+        }
+    });
+}

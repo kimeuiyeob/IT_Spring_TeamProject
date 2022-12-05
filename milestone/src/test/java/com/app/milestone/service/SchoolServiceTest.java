@@ -48,6 +48,12 @@ public class SchoolServiceTest {
         schoolService.needHelpList().forEach(o -> log.info("" + o.getDonationCount()));
     }
 
+    //    보육원 정보
+    @Test
+    public void schoolInfoTest() {
+        log.info("" + schoolService.schoolInfo(5L));
+    }
+
     //    보육원 목록
     @Test
     public void schoolListTest() {

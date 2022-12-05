@@ -280,6 +280,7 @@
                 </span>
             </section>
             <!-- 보육원 이름 -->
+            <input type="hidden" class = "userId" th:value="${userId}">
             <section class="schoolName">
                 <h1>새싹보육원</h1>
             </section>
@@ -295,10 +296,10 @@
                 <div class="rightBox1">
                     <!-- INTRO 박스 -->
                     <div class="rightBox2" id="introRightBox">
-                        <span class="introTitle">안녕하세요, 새싹보육원입니다.</span>
+                        <span class="introTitle schoolTitle">안녕하세요, 새싹보육원입니다.</span>
                         <!-- 보육원 정보 -->
                         <div class="schoolInfo">
-                            <div class="address">주소 : <span class="addressIn">서울시 강남구 역삼동 테헤란로 146 현익빌딩 3,4층</div>
+                            <div class="address">주소 : <span class="addressIn">서울시 강남구 역삼동 테헤란로 146 현익빌딩 3,4층</span></div>
                             <div class="phone">전화 : <span class="phoneIn">02 1234 1234</span></div>
                             <div class="childCount">아이들 인원 : <span class="childCountIn">20명</span></div>
                         </div>
@@ -531,4 +532,31 @@
 <script src="/js/school/schoolDetail.js"></script>
 <script src="/js/school/calendar.js"></script>
 <script src="/js/fix/header.js"></script>
+<script th:inline="javascript">
+
+    show();
+
+    /*아마 schoolResp로 바뀔 예정*/
+    function getInfo(schoolDTO){
+        console.log(schoolDTO);
+        $('.schoolName').find('h1').html(schoolDTO.schoolName);
+        // $('.smallCategory').html(schoolDTO.schoolAddress.substring(0,2));
+        $('.schoolTitle').html(schoolDTO.schoolTitle);
+        $('.addressIn').html(schoolDTO.schoolAddress);
+        if(schoolDTO.schoolPhoneNumber){
+            $('.phoneIn').html(schoolDTO.schoolPhoneNumber)
+        }else{
+            $('.phoneIn').html(schoolDTO.userPhoneNumber)
+        }
+        $('.childCountIn').html(schoolDTO.schoolKids);
+        $('.introContent').html(schoolDTO.schoolContent);
+    }
+
+    function show() {
+        getInfo1({
+            userId : $('.userId').val()
+        },getInfo);
+    }
+
+</script>
 </html>

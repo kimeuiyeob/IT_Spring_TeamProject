@@ -10,6 +10,9 @@ import com.app.milestone.repository.SchoolRepository;
 import com.querydsl.core.Tuple;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -68,9 +71,34 @@ public class SchoolService {
         return arSchoolDTO;
     }
 
-    //    보육원 목록(보육원 목록)
-    public List<SchoolDTO> schoolList(Pageable pageable, Search search) {
-        return schoolRepository.findAllByCreatedDate(pageable, search);
+    //    보육원 정보(하나)
+    public SchoolDTO schoolInfo(Long userId) {
+        return schoolRepository.findByUserId(userId);
+    }
+
+    //    보육원 목록(보육원 목록)(Page버전)
+    public Page<SchoolDTO> schoolList(Pageable pageable, Search search) {
+        Pageable pageable1 = pageable;
+        if (search.getSchoolAddress() == null) {
+            search.setSchoolAddress(new ArrayList<>());
+            search.getSchoolAddress().add(null);
+        }
+        if (search.getSchoolName() == null) {
+            search.setSchoolName(null);
+        }
+        List<SchoolDTO> list = schoolRepository.findAllByCreatedDate(pageable, search);
+        int start = list.size() > (int) pageable1.getOffset() ? (int) pageable1.getOffset() : (int) pageable1.getOffset() - 10;
+        int end = Math.min((start + pageable.getPageSize()), list.size());
+        log.info("===============asdf" + pageable1);
+        log.info("===============asdf" + search);
+        log.info("===============asdf" + start);
+        log.info("asd===============" + end);
+        log.info("asd===============" + schoolRepository.countByCreatedDate(pageable, search));
+
+        Page<SchoolDTO> page = new PageImpl<>(list.subList(start, end), pageable, Integer.valueOf("" + schoolRepository.countByCreatedDate(pageable, search)));
+//        Page<SchoolDTO> page = new PageImpl<>(list);
+
+        return page;
     }
 
     //    보육원 목록(보육원 목록) 수

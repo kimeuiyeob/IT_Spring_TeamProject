@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 @Data
 @NoArgsConstructor
 public class SchoolDTO {
+    private Long userId;
     private String schoolName;
     private String schoolZipcode;
     private String schoolAddress;
@@ -62,7 +63,8 @@ public class SchoolDTO {
     }
 
     @QueryProjection
-    public SchoolDTO(String schoolName, String schoolAddress, String schoolAddressDetail, String schoolZipcode, int schoolTeachers, int schoolKids, int schoolBudget, String schoolBank, String schoolAccount, String schoolPhoneNumber, String schoolQR, String schoolTitle, String schoolContent, String userEmail, String userName, String userPassword, String userPhoneNumber, int donationCount) {
+    public SchoolDTO(Long userId, String schoolName, String schoolAddress, String schoolAddressDetail, String schoolZipcode, int schoolTeachers, int schoolKids, int schoolBudget, String schoolBank, String schoolAccount, String schoolPhoneNumber, String schoolQR, String schoolTitle, String schoolContent, String userEmail, String userName, String userPassword, String userPhoneNumber, int donationCount) {
+        this.userId = userId;
         this.schoolName = schoolName;
         this.schoolAddress = schoolAddress;
         this.schoolAddressDetail = schoolAddressDetail;

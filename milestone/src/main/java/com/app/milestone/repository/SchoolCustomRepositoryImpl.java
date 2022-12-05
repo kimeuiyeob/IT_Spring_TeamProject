@@ -27,10 +27,11 @@ import static com.app.milestone.entity.QSchool.school;
 public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
     private final JPAQueryFactory jpaQueryFactory;
 
-    //  메인 도움이 필요해요(쿼리프로젝션 버전)
+    //  메인 도움이 필요해요
     @Override
     public List<SchoolDTO> findAllByDonationCount() {
         return jpaQueryFactory.select(new QSchoolDTO(
+                school.userId,
                 school.schoolName,
                 school.address.schoolAddress,
                 school.address.schoolAddressDetail,
@@ -57,10 +58,11 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
                 .fetch();
     }
 
-    //    보육원 목록(최신순)(쿼리프로젝션 버전)
+    //    보육원 목록(최신순)
     @Override
     public List<SchoolDTO> findAllByCreatedDate(Pageable pageable, Search search) {
         return jpaQueryFactory.select(new QSchoolDTO(
+                school.userId,
                 school.schoolName,
                 school.address.schoolAddress,
                 school.address.schoolAddressDetail,
@@ -81,18 +83,42 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
                 school.donationCount
         ))
                 .where(
-//                        보육원 이름 검색
                         schoolNameContaining(search.getSchoolName()),
                         schoolAddressContaining0(search.getSchoolAddress())
-
                 ).from(school)
-                .orderBy(school.createdDate.asc())
-                .offset(pageable.getOffset())
-                .limit(pageable.getPageSize())
+                .orderBy(school.createdDate.desc())
                 .fetch();
     }
 
-    //    보육원 목록(최신순)(쿼리프로젝션 버전)
+    //    보육원 정보(하나)
+    @Override
+    public SchoolDTO findByUserId(Long userId) {
+        return jpaQueryFactory.select(new QSchoolDTO(
+                school.userId,
+                school.schoolName,
+                school.address.schoolAddress,
+                school.address.schoolAddressDetail,
+                school.address.schoolZipcode,
+                school.schoolTeachers,
+                school.schoolKids,
+                school.schoolBudget,
+                school.schoolBank,
+                school.schoolAccount,
+                school.schoolPhoneNumber,
+                school.schoolQR,
+                school.introduce.schoolTitle,
+                school.introduce.schoolContent,
+                school.userEmail,
+                school.userName,
+                school.userPassword,
+                school.userPhoneNumber,
+                school.donationCount
+        )).from(school)
+                .where(school.userId.eq(userId))
+                .fetchOne();
+    }
+
+    //    조건에 따른 보육원 수
     @Override
     public Long countByCreatedDate(Pageable pageable, Search search) {
         return jpaQueryFactory.select(school.count())
@@ -103,8 +129,8 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
                         schoolAddressContaining0(search.getSchoolAddress())
                 )
                 .orderBy(school.createdDate.asc())
-                .offset(pageable.getOffset())
-                .limit(pageable.getPageSize())
+//                .offset(pageable.getOffset())
+//                .limit(pageable.getPageSize())
                 .fetchOne();
     }
 
@@ -149,10 +175,6 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
     }
 
 
-
-
-
-
     //========================관리자페이지===========================
     //보육원 목록
     @Override
@@ -194,8 +216,9 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
 //
 //        return tuples;
 //    };
-    public List<SchoolDTO> findBySchoolOnly (){
+    public List<SchoolDTO> findBySchoolOnly() {
         return jpaQueryFactory.select(new QSchoolDTO(
+                school.userId,
                 school.schoolName,
                 school.address.schoolAddress,
                 school.address.schoolAddressDetail,
@@ -214,11 +237,13 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
                 school.userPassword,
                 school.userPhoneNumber,
                 school.donationCount
-                ))
+        ))
                 .from(school, QUser.user)
                 .where(school.userId.eq(QUser.user.userId))
                 .fetch();
-    };
+    }
+
+    ;
 
 
     //=============================================================
