@@ -1,7 +1,10 @@
 package com.app.milestone.entity;
 
 import com.sun.istack.NotNull;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
@@ -15,7 +18,7 @@ public class People extends User {
     @NotNull
     private String peopleNickname;
 
-//    @OneToMany(mappedBy = "people", fetch = FetchType.LAZY)
+    //    @OneToMany(mappedBy = "people", fetch = FetchType.LAZY)
 //    private List<Reply> replies;
 //    @OneToMany(mappedBy = "people", fetch = FetchType.LAZY)
 //    private List<Like> likes;

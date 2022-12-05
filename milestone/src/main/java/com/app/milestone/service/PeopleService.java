@@ -1,10 +1,8 @@
 package com.app.milestone.service;
 
-import com.app.milestone.domain.MoneyDTO;
 import com.app.milestone.domain.PeopleDTO;
 import com.app.milestone.domain.Ranking;
 import com.app.milestone.entity.Like;
-import com.app.milestone.entity.Money;
 import com.app.milestone.entity.People;
 import com.app.milestone.entity.School;
 import com.app.milestone.repository.LikeRepository;
@@ -12,10 +10,13 @@ import com.app.milestone.repository.PeopleRepository;
 import com.app.milestone.repository.SchoolRepository;
 import com.querydsl.core.Tuple;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -24,6 +25,26 @@ public class PeopleService {
     private final SchoolRepository schoolRepository;
     private final LikeRepository likeRepository;
 
+    public ResponseEntity peopleSignUp(PeopleDTO peopleDTO) {
+
+        Optional<People> people = peopleRepository.findByUserEmail(peopleDTO.getUserEmail());
+
+        if (people.isEmpty()) {
+            People newPeople = People.builder()
+                    .userEmail(peopleDTO.getUserEmail())
+                    .userPassword(peopleDTO.getUserPassword())
+                    .userName(peopleDTO.getUserName())
+                    .peopleNickname(peopleDTO.getPeopleNickname())
+                    .userPhoneNumber(peopleDTO.getUserPhoneNumber())
+                    .build();
+
+            peopleRepository.save(newPeople);
+
+            return new ResponseEntity("success", HttpStatus.OK);
+        } else {
+            return new ResponseEntity("fail", HttpStatus.OK);
+        }
+    }
 
     //    개인회원 한 명의 정보
     public PeopleDTO onesInfo(Long userId) {

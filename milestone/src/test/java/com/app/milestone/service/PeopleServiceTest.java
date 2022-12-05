@@ -1,5 +1,6 @@
 package com.app.milestone.service;
 
+import com.app.milestone.domain.PeopleDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,20 @@ import java.util.List;
 public class PeopleServiceTest {
     @Autowired
     private PeopleService peopleService;
+
+
+    //    회원가입
+    @Test
+    public void peopleSignUpTest() {
+        PeopleDTO peopleDTO = new PeopleDTO();
+        peopleDTO.setUserEmail("cyon8254@gmail.com");
+        peopleDTO.setUserPassword("phj@971204");
+        peopleDTO.setUserName("박해준");
+        peopleDTO.setPeopleNickname("AxlRose");
+        peopleDTO.setUserPhoneNumber("01021208515");
+
+        peopleService.peopleSignUp(peopleDTO);
+    }
 
     //    개인회원 한 명의 정보
     @Test
