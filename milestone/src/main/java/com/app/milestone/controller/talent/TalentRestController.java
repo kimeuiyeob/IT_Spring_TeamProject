@@ -6,15 +6,10 @@ import com.app.milestone.domain.TalentDTO;
 import com.app.milestone.service.TalentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.annotation.AccessType;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,24 +22,31 @@ public class TalentRestController {
 
     private final TalentService talentService;
 
-    @GetMapping("/list/{talentPlace}")
+    /*===============================================*/
+
+    @GetMapping(value = {"/list/{talentPlace}", "/list/{talentPlace}/{talentTitle}"})
     public List<TalentDTO> search(Pageable pageable, Search search, Model model) {
+
         pageable = PageRequest.of(0, 10);
+
+        List<TalentDTO> talentDTO = talentService.talentList(pageable, search);
         if (search.getTalentPlace() == null) {
             search.setTalentPlace(new ArrayList<>());
         }
-        model.addAttribute("talents", talentService.talentList(pageable, search));
-        return talentService.talentList(pageable, search);
+        log.info("여기에 값있니?" + talentDTO);
+        return talentDTO;
     }
 
-    @PostMapping("/showall") //교육 리스트 조회하기
+    /*===============================================*/
+
+    @PostMapping("/showall") //전체 리스트 조회하기
     public List<TalentDTO> showAll() {
         return talentService.allList();
     }
 
     @PostMapping("/showeducation") //교육 리스트 조회하기
     public List<TalentDTO> showEducation() {
-       return talentService.educationList();
+        return talentService.educationList();
     }
 
     @PostMapping("/showexercise") //운동 리스트 조회하기
@@ -66,5 +68,17 @@ public class TalentRestController {
     public List<TalentDTO> showIt() {
         return talentService.itList();
     }
+
+    @GetMapping(value = {"/showmodal/{peopleUserId}"})
+    public List<TalentDTO> showDetail(@PathVariable("peopleUserId") Long userId) { //@PathVariable 이걸로 같은 이름을 찾아온다.
+        log.info("여기에 아이디값이 있어야죠?" + userId);
+        log.info("레스트컨트롤러로 넘어옴");
+        return talentService.talentDetail(userId);
+    }
+
+//    @GetMapping("/showmodal")
+//    public void showDetail() { //@PathVariable 이걸로 같은 이름을 찾아온다.
+//        log.info("레스트컨트롤러로 넘어옴");
+//    }
 
 }

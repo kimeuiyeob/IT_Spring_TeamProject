@@ -1,13 +1,9 @@
 package com.app.milestone.controller.talent;
 
 import com.app.milestone.domain.Search;
-import com.app.milestone.domain.TalentDTO;
-import com.app.milestone.entity.QTalent;
-import com.app.milestone.entity.Talent;
 import com.app.milestone.service.TalentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.Criteria;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -16,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 @Controller
@@ -35,6 +30,10 @@ public class TalentController {
             search.setTalentPlace(new ArrayList<>()); //TalentCustomRepositoryImpl에 search값을 넘겨주기위해서 생성
         }
         model.addAttribute("talents", talentService.talentList(pageable,search));
+        log.info("화면으로 가지고갈 값" + talentService.talentList(pageable,search));
+
+        model.addAttribute("talentPlaces", search.getTalentPlace());
+        model.addAttribute("talentTitle", search.getTalentTitle());
     }
 
 }

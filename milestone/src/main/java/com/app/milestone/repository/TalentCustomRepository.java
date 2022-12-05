@@ -10,6 +10,8 @@ import java.util.List;
 public interface TalentCustomRepository {
 
     public List<TalentDTO> findAllByTalentAbleDate (Pageable pageable, Search search);
+
+    //재능기부 클릭시 DONATION ID로 상세페이지 보기
     public List<TalentDTO> talentDetail(Long userId);
 
     //전체클릭시 전체리스트 뽑아오기

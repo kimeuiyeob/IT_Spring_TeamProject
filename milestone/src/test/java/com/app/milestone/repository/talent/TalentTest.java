@@ -1,10 +1,14 @@
 package com.app.milestone.repository.talent;
 
+import com.app.milestone.domain.QTalentDTO;
 import com.app.milestone.domain.Search;
 import com.app.milestone.domain.TalentDTO;
 import com.app.milestone.entity.People;
+import com.app.milestone.entity.QSchool;
+import com.app.milestone.entity.School;
 import com.app.milestone.entity.Talent;
 import com.app.milestone.repository.PeopleRepository;
+import com.app.milestone.repository.SchoolRepository;
 import com.app.milestone.repository.TalentRepository;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.extern.slf4j.Slf4j;
@@ -36,24 +40,39 @@ public class TalentTest {
     private TalentRepository talentRepository;
     @Autowired
     private PeopleRepository peopleRepository;
+    @Autowired
+    private SchoolRepository schoolRepository;
 
     @Test
     public void save2Test() {
-        String[] talentPlaces = {"서울","경기도","강원도","충청도","전라도","경상도","제주도"};
-        String[] talentTitles = {"코끼리", "거북이", "하마", "기린", "돌고래", "비둘기", "뉴트리아", "뱀"};
-        String[] talentContents = {"나는내용입니다", "나는내용일까요?", "나는김의엽입니다", "나는누구일까요?", "이제저도모르겠습니다."};
-        String[] talentCategorys = {"교육", "운동", "음악", "미술","IT"};
 
-        for (int i = 0; i < 50; i++) {
-            TalentDTO talentDTO = new TalentDTO();
-            talentDTO.setTalentTitle(talentTitles[i % 8]);
-            talentDTO.setTalentContent(talentContents[i % 5]);
-            talentDTO.setTalentAbleDate(LocalDateTime.now());
-            talentDTO.setTalentCategory(talentCategorys[i % 5]);
-            talentDTO.setTalentPlace(talentPlaces[i % 7]);
-            talentRepository.save(talentDTO.toEntity());
-        }
-    }
+//        String[] talentPlaces = {"서울","경기도","강원도","충청도","전라도","경상도","제주도"};
+//        String[] talentTitles = {"코끼리", "거북이", "하마", "기린", "돌고래", "비둘기", "뉴트리아", "뱀", "준성이"};
+//        String[] talentContents = {"나는내용입니다", "나는내용일까요?", "나는김의엽입니다", "나는누구일까요?", "이제저도모르겠습니다."};
+//        String[] talentCategorys = {"교육", "운동", "음악", "미술","IT"};
+//        for (int i = 0; i < 50; i++) {
+
+        TalentDTO talentDTO = new TalentDTO();
+
+        People people = peopleRepository.findById(110L).get();
+
+//            talentDTO.setTalentTitle(talentTitles[i % 8]);
+//            talentDTO.setTalentContent(talentContents[i % 5]);
+//            talentDTO.setTalentAbleDate(LocalDateTime.now());
+//            talentDTO.setTalentCategory(talentCategorys[i % 5]);
+//            talentDTO.setTalentPlace(talentPlaces[i % 7]);
+
+        talentDTO.setTalentTitle("안녕10");
+        talentDTO.setTalentContent("이건내용10");
+        talentDTO.setTalentAbleDate(LocalDateTime.now());
+        talentDTO.setTalentCategory("음악");
+        talentDTO.setTalentPlace("전라도");
+
+        Talent talent = talentRepository.save(talentDTO.toEntity()); //talentRepository.save(talentDTO.toEntity()) 리턴타입 Entity
+
+        talent.changePeople(people);
+//    }
+}
 
     @Test
     public void saveTest() {
@@ -71,25 +90,52 @@ public class TalentTest {
     }
 
     @Test
-    public void findQueryDsl2() {
-
-    }
-
-    @Test
     public void findTest() {
         List<Talent> UserId12 = jpaQueryFactory
                 .select(talent)
                 .from(talent, donation, people)
                 .where(talent.donationId.eq(donation.donationId))
                 .where(donation.people.userId.eq(people.userId))
-                .where(people.userId.eq(12L))
+                .where(people.userId.eq(1L))
                 .fetch();
         UserId12.stream().map(Talent::toString).forEach(log::info);
     }
 
     @Test
-    public void find2Test(){
-        List<Talent> UserId2 =  jpaQueryFactory
+    public void findTest2() {
+        List<Talent> doantionId202 = jpaQueryFactory
+                .select(talent)
+                .from(talent, donation)
+                .where(talent.donationId.eq(202L))
+                .fetch();
+        doantionId202.stream().map(Talent::toString).forEach(log::info);
+    }
+
+    @Test/*=========================실험중=======================================*/
+    public void findTest1() {
+        List<TalentDTO> doantionId202 = jpaQueryFactory
+                .select(new QTalentDTO(
+                        talent.donationId,
+                        talent.talentTitle,
+                        talent.talentContent,
+                        talent.talentAbleDate,
+                        talent.talentCategory,
+                        talent.talentPlace,
+                        talent.people.peopleNickname,
+                        talent.school.userId,
+                        talent.people.userId
+                )).from(talent, donation, people)
+                .where(talent.donationId.eq(donation.donationId))
+                .where(donation.people.userId.eq(people.userId))
+                .where(people.userId.eq(101L))
+                .fetch();
+        doantionId202.stream().map(TalentDTO::toString).forEach(log::info);
+    }
+
+
+    @Test
+    public void find2Test() {
+        List<Talent> UserId2 = jpaQueryFactory
                 .selectFrom(talent)
                 .join(talent.people)
                 .fetchJoin()
@@ -176,10 +222,10 @@ public class TalentTest {
         talentRepository.findAllByTalentAbleDate(pageable, search)
                 .forEach(o -> log.info(
                         "  Title : " + o.getTalentTitle() +
-                        "  Content : " + o.getTalentContent() +
-                        "  Category :" + o.getTalentCategory() +
-                        "  Place : " + o.getTalentPlace() +
-                        "  AbleDate : " + o.getTalentAbleDate()));
+                                "  Content : " + o.getTalentContent() +
+                                "  Category :" + o.getTalentCategory() +
+                                "  Place : " + o.getTalentPlace() +
+                                "  AbleDate : " + o.getTalentAbleDate()));
     }
 
     /*===============================   queryDsl 기본적인 사용 방법   ================================*/
