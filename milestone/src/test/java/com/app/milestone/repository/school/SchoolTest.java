@@ -41,23 +41,16 @@ public class SchoolTest {
         String[] locations = {"서울 성동구 서울숲길 17 (성수파크빌)", "경기 가평군 가평읍 가랫골길 1", "인천 강화군 강화읍 갑룡길 3", "강원 강릉시 가작로 6", "충북 괴산군 감물면 감물로 7", "충남 계룡시 계룡대로 239", "전북 고창군 고수면 가협길 12", "세종특별자치시 가름로 143 (KT&G세종타워B)", "대전 대덕구 갑천도시고속도로 336", "전남 강진군 강진읍 강진공단길 8", "광주 광산구 가마길 2-21", "부산 강서구 가달1로 7"
                 , "울산 남구 갈밭로 3", "대구 남구 경상길 1", "경북 경산시 감못둑길 70 (가산건업, 백마화물)", "경남 거제시 거제면 거제남서로 3233", "제주특별자치도 서귀포시 가가로 14"};
         String[] schoolNames = {"코끼리", "거북이", "하마", "기린", "돌고래", "비둘기", "뉴트리아", "뱀"};
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 3; i++) {
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             SchoolDTO schoolDTO = new SchoolDTO();
-//            Address address = new Address();
-//            Introduce introduce = new Introduce();
-//            address.setSchoolZipcode("11111");
-//            address.setSchoolAddress(locations[i%17]);
-//            address.setSchoolAddressDetail("용궁1동");
-//            introduce.setSchoolTitle("안녕하세요");
-//            introduce.setSchoolContent("반가워요");
             schoolDTO.setSchoolName(schoolNames[i % 8] + " 보육원");
             schoolDTO.setSchoolZipcode("222222");
-            schoolDTO.setSchoolAddress(locations[i%17]);
+            schoolDTO.setSchoolAddress(locations[i % 17]);
             schoolDTO.setSchoolAddressDetail("주공받공아파트 124층 -12호");
             schoolDTO.setSchoolTeachers(3);
             schoolDTO.setSchoolKids(3);
@@ -84,6 +77,12 @@ public class SchoolTest {
     public void findAllByDonationCountTest() {
         Pageable pageable = PageRequest.of(0, 5);
 //        schoolRepository.findAllByDonationCount(pageable).forEach(o -> log.info("보육원 이름" + o.getSchoolName() + "기부 받은 횟수" + o.getDonationCount()));
+    }
+
+    //    보육원 정보(하나)
+    @Test
+    public void findByUserId() {
+        log.info(""+schoolRepository.findByUserId(5L));
     }
 
     //  보육원 목록(10개, 지역과 보육원 이름 검색 조건추가 후 최신순)

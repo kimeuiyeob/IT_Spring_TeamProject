@@ -61,18 +61,7 @@ $(".location2").click(function () {
 
 /* 찜하기 하트 버튼 */
 $(".redHeart").css({"display": "none"})
-//
-// $(".heartWrap").on('click',function () {
-//     if (!check2) {
-//         $(this).children(".redHeart").css({"display": "inline"})
-//         $(this).children(".emptyHeart").css({"display": "none"})
-//         check2 = true;
-//     } else {
-//         $(this).children(".redHeart").css({"display": "none"})
-//         $(this).children(".emptyHeart").css({"display": "inline"})
-//         check2 = false;
-//     }
-// })
+
 $("section.schoolList").on('click', "span.heartWrap", function () {
     if (!check2) {
         $(this).children(".redHeart").css({"display": "inline"})
@@ -97,22 +86,6 @@ $("span.heart").mouseout(function () {
 })
 
 
-/*  페이지 이동  */
-const $pageNumberLink = $('.page-number-link');
-
-$pageNumberLink.on('mouseover', function () {
-    $(this).css('background-color', '#f4f6fa');
-    $(this).css('color', '#009ef7');
-})
-
-$pageNumberLink.on('mouseout', function () {
-    $(this).css('background-color', '#fff');
-    $(this).css('color', '#5e6278');
-})
-
-window.onresize = function () {
-    document.location.reload();
-};
 
 
 $(".dropdown").hide();
@@ -133,7 +106,6 @@ var checkLocal = {
 };
 /* 저장된 지역 */
 let saveLocal = [];
-// let saveLocal = new Array(8);
 
 /* 드롭다운 버튼 */
 $("button.dropbtn").on('click', function () {
@@ -294,31 +266,19 @@ $(".dropLoc").on('click', function () {
 const $schoolName = $('input[name = schoolName]');
 const $realSearhBox = $('.realSearhBox');
 
-$schoolName.on('keyup', function (e) {
-    let text = "";
-    if (e.keyCode == 13) {
-        save.forEach(value => {
-            text += `<input type = "hidden" name = "schoolAddress" value = "` + value + `" >`;
-        })
-        $realSearhBox.append(text)
-        // save.forEach(value => {
-        //     text += `<input type = "hidden" name = "schoolAddress1" value = "` + value + `" >`;
-        // })
-        // $realSearhBox.append(text)
-        searchForm.submit();
-    }
-})
 
 /*지역으로 검색*/
 function getList1(param, callback, error) {
-    console.log(param)
-    let queryString1 = param.schoolAddress.length != 0 ? "/" + param.schoolAddress : "/null";
-    queryString1 += param.schoolName.length != 0 ? "/" + param.schoolName : "";
-    console.log(queryString1);
-    console.log(param.schoolName);
-    console.log(param.schoolName.length);
+    let existAddress = param.schoolAddress.length != 0;
+    let existSchoolName = param.schoolName.length != 0;
+    let queryString = "/" + param.page || 1;
+    queryString += existAddress ? "/" + param.schoolAddress : "";
+    if (!existAddress && existSchoolName) {
+        queryString += "/null";
+    }
+    queryString += existSchoolName ? "/" + param.schoolName : "";
     $.ajax({
-        url: "/schoolrest/list" + queryString1,
+        url: "/schoolrest/list" + queryString,
         type: "get",
         success: function (schoolResp, status, xhr) {
             if (callback) {
