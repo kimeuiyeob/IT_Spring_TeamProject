@@ -1,13 +1,11 @@
 package com.app.milestone.domain;
 
 import com.app.milestone.entity.Talent;
-import com.app.milestone.type.Place;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /*================================================================================*/
@@ -24,14 +22,18 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class TalentDTO {
 
-    private Long userId;
+    private Long donationId;
     private String talentTitle;
     private String talentContent;
     private LocalDateTime talentAbleDate;
     private String talentCategory;
     private String talentPlace;
+    private String peopleNickname;
+    private Long schoolUserId;
+    private Long peopleUserId;
 
-    public Talent toEntity() { //Service 단에서, 데이터를 저장시키기 위해서, 이 DTO를 Entity로 변환해주는 메소드
+
+    public Talent toEntity() { //Service 단에서, 데이터를 저장시키기 위해서, DTO를 Entity로 변환해주는 메소드
         return Talent.builder()
                 //빌더 패턴으로 구현하면 각 값들은 빌더의 각 값들의 이름 함수로 셋팅이 되지 각각 무슨 값을 의미하는지 파악하기 쉽다.
                 //따라서 생성자로 설정해야하는 값이 많을 경우 빌더를 쓰는 것이 생성자보다 가독성이 좋다
@@ -45,13 +47,16 @@ public class TalentDTO {
 
     @QueryProjection
     //@QueryProjection은 생성자를 통해 DTO를 조회 -> Q파일 생성 , DTO의 생성자를 사용하는 것이 아니라 DTO 기반으로 생성된 QDTO 객체의 생성자를 사용하는 것이다.
-    public TalentDTO(Long userId,String talentTitle, String talentContent, LocalDateTime talentAbleDate, String talentCategory, String talentPlace) {
-        this.userId = userId;
+    public TalentDTO(Long donationId,String talentTitle, String talentContent, LocalDateTime talentAbleDate, String talentCategory, String talentPlace,  String peopleNickname, Long schoolUserId, Long peopleUserId) {
+        this.donationId = donationId;
         this.talentTitle = talentTitle;
         this.talentContent = talentContent;
         this.talentAbleDate = talentAbleDate;
         this.talentCategory = talentCategory;
         this.talentPlace = talentPlace;
+        this.peopleNickname = peopleNickname;
+        this.schoolUserId = schoolUserId;
+        this.peopleUserId = peopleUserId;
 
     }
 }

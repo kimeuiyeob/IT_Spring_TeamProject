@@ -3,7 +3,6 @@ package com.app.milestone.repository;
 import com.app.milestone.domain.QTalentDTO;
 import com.app.milestone.domain.Search;
 import com.app.milestone.domain.TalentDTO;
-import com.app.milestone.entity.QTalent;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -32,12 +31,15 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
 
         //pageable쓰면 pageable.of(파라미터 2개를 받을수있다) 첫번째가 현재페이지(page), 두번째가 페이지 사이즈(amount)
         return jpaQueryFactory.select(new QTalentDTO (
-                talent.people.userId,
+                talent.donationId,
                 talent.talentTitle,
                 talent.talentContent,
                 talent.talentAbleDate,
                 talent.talentCategory,
-                talent.talentPlace
+                talent.talentPlace,
+                talent.people.peopleNickname,
+                talent.school.userId,
+                talent.people.userId
         ))
                 .where(
                         talentTitleContaining(search.getTalentTitle()),
@@ -79,12 +81,15 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
     @Override
     public List<TalentDTO> talentDetail(Long userId) {
         return jpaQueryFactory.select(new QTalentDTO (
-                talent.people.userId,
+                talent.donationId,
                 talent.talentTitle,
                 talent.talentContent,
                 talent.talentAbleDate,
-                talent.talentCategory,
-                talent.talentPlace
+                talent.people.peopleNickname,
+                talent.talentPlace,
+                talent.people.peopleNickname,
+                talent.school.userId,
+                talent.people.userId
         )).from(talent, donation, people)
                 .where(talent.donationId.eq(donation.donationId))
                 .where(donation.people.userId.eq(people.userId))
@@ -97,12 +102,15 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
     @Override //전체 리스트 조회
     public List<TalentDTO> allList() {
         return jpaQueryFactory.select(new QTalentDTO (
-                talent.people.userId,
+                talent.donationId,
                 talent.talentTitle,
                 talent.talentContent,
                 talent.talentAbleDate,
                 talent.talentCategory,
-                talent.talentPlace
+                talent.talentPlace,
+                talent.people.peopleNickname,
+                talent.school.userId,
+                talent.people.userId
         ))
                 .from(talent)
                 .orderBy(talent.talentAbleDate.asc())
@@ -112,12 +120,15 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
     @Override //교육 리스트 조회
     public List<TalentDTO> educationList() {
         return jpaQueryFactory.select(new QTalentDTO (
-                talent.people.userId,
+                talent.donationId,
                 talent.talentTitle,
                 talent.talentContent,
                 talent.talentAbleDate,
                 talent.talentCategory,
-                talent.talentPlace
+                talent.talentPlace,
+                talent.people.peopleNickname,
+                talent.school.userId,
+                talent.people.userId
         ))
                 .from(talent)
                 .where(talent.talentCategory.eq("교육"))
@@ -128,12 +139,15 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
     @Override //운동 리스트 조회
     public List<TalentDTO> exerciseList() {
         return jpaQueryFactory.select(new QTalentDTO (
-                talent.people.userId,
+                talent.donationId,
                 talent.talentTitle,
                 talent.talentContent,
                 talent.talentAbleDate,
                 talent.talentCategory,
-                talent.talentPlace
+                talent.talentPlace,
+                talent.people.peopleNickname,
+                talent.school.userId,
+                talent.people.userId
         )).from(talent)
                 .where(talent.talentCategory.eq("운동"))
                 .orderBy(talent.talentAbleDate.asc())
@@ -143,12 +157,15 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
     @Override //음악 리스트 조회
     public List<TalentDTO> musicList() {
         return jpaQueryFactory.select(new QTalentDTO (
-                talent.people.userId,
+                talent.donationId,
                 talent.talentTitle,
                 talent.talentContent,
                 talent.talentAbleDate,
                 talent.talentCategory,
-                talent.talentPlace
+                talent.talentPlace,
+                talent.people.peopleNickname,
+                talent.school.userId,
+                talent.people.userId
         )).from(talent)
                 .where(talent.talentCategory.eq("음악"))
                 .orderBy(talent.talentAbleDate.asc())
@@ -158,12 +175,15 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
     @Override //미술 리스트 조회
     public List<TalentDTO> artList() {
         return jpaQueryFactory.select(new QTalentDTO (
-                talent.people.userId,
+                talent.donationId,
                 talent.talentTitle,
                 talent.talentContent,
                 talent.talentAbleDate,
                 talent.talentCategory,
-                talent.talentPlace
+                talent.talentPlace,
+                talent.people.peopleNickname,
+                talent.school.userId,
+                talent.people.userId
         )).from(talent)
                 .where(talent.talentCategory.eq("미술"))
                 .orderBy(talent.talentAbleDate.asc())
@@ -173,12 +193,15 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
     @Override //IT 리스트 조회
     public List<TalentDTO> itList() {
         return jpaQueryFactory.select(new QTalentDTO (
-                talent.people.userId,
+                talent.donationId,
                 talent.talentTitle,
                 talent.talentContent,
                 talent.talentAbleDate,
                 talent.talentCategory,
-                talent.talentPlace
+                talent.talentPlace,
+                talent.people.peopleNickname,
+                talent.school.userId,
+                talent.people.userId
         )).from(talent)
                 .where(talent.talentCategory.eq("IT"))
                 .orderBy(talent.talentAbleDate.asc())

@@ -63,12 +63,24 @@
                 <div>IT</div>
             </div>
 
-            <div id="pseudo" ></div>
+            <div id="pseudo"></div>
         </div>
 
         <!-- ====================================================================================================== -->
+
+        <!-- =================================선택한 지역=======================================-->
+        <div class="beforeSelectLocations" style="display: none">
+            <th:block th:each="talentPlace : ${talentPlaces}">
+                <div class="beforeLocation" th:text="*{talentPlace}"></div>
+            </th:block>
+            <div class="beforeName" th:text="${talentTitle}"></div>
+        </div>
+
         <!-- 검색창 -->
-            <div style="display: flex">
+        <form th:action="@{/talent/talent}" name="talentForm">
+
+            <div style="display: flex;">
+
                 <div class="searchBox realSearhBox">
                     <input type="text" name="talentName" placeholder=" &nbsp;제목을 검색하세요" value=""
                            style="border: solid white;">
@@ -80,91 +92,84 @@
                         </path>
                     </svg>
                 </div>
-        <!-- ====================================================================================================== -->
+                <!-- ====================================================================================================== -->
 
+                <section class="loc centerContent" style="padding-left:10px">
+                    <div class="dropdown" style="justify-content: flex-end; position: relative;">
+                        <button class="dropbtn" type="button">
+                            <span class="dropbtn_content placeholder">전체</span>
+                            <span class="awdasws" style=" font-size : 16px; color : #3b3b3b; float:right;">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
+                                     focusable="false" preserveAspectRatio="xMidYMid meet" class="qwdqwd e181xm9y0">
+                                    <polygon id="Triangle"
+                                             transform="translate(12.000000, 12.000000) rotate(-180.000000) translate(-12.000000, -12.000000) "
+                                             points="12 9 18 15 6 15"></polygon></svg>
+                            </span>
+                        </button>
+                        <div class="dropdown-content" style="position: absolute;top: 40px;">
+                            <div class="dropLoc checkSeoul">서울</div>
+                            <div class="dropLoc checkKyungki">경기도</div>
+                            <div class="dropLoc checkKangwon">강원도</div>
+                            <div class="dropLoc checkChungcheong">충청도</div>
+                            <div class="dropLoc checkJeolla">전라도</div>
+                            <div class="dropLoc checkGyeong">경상도</div>
+                            <div class="dropLoc checkJeju">제주도</div>
+                        </div>
+                    </div>
+                </section>
 
-        <section class="loc centerContent" style="padding-left:10px">
-            <div class="loactions" style="padding-top: 65px; display: none; height: 150px;">
-                <div class="location wholeLocation"
-                     style="background-color: transparent; border: 1px solid black;">지역
-                </div>
-                <div class="location location2">서울</div>
-                <div class="location location2">경기도</div>
-                <div class="location location2">강원도</div>
-                <div class="location location2">충청도</div>
-                <div class="location location2">전라도</div>
-                <div class="location location2">경상도</div>
-                <div class="location location2">제주도</div>
+                <!-- ===================================================================================== -->
             </div>
-
-            <!-- 드롭다운 -->
-            <div class="dropdown" style="justify-content: flex-end; position: relative;">
-                <button class="dropbtn">
-                    <span class="dropbtn_content placeholder">전체</span>
-                    <span class="dropbtn_click" style=" font-size : 16px; color : #3b3b3b; float:right;">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
-                         focusable="false" preserveAspectRatio="xMidYMid meet" class="css-7kp13n e181xm9y0"><polygon
-                            id="Triangle"
-                            transform="translate(12.000000, 12.000000) rotate(-180.000000) translate(-12.000000, -12.000000) "
-                            points="12 9 18 15 6 15"></polygon></svg>
-                </span>
-                </button>
-                <div class="dropdown-content" style="position: absolute;top: 40px;">
-                    <div class="dropLoc checkSeoul">서울</div>
-                    <div class="dropLoc checkKyungki">경기도</div>
-                    <div class="dropLoc checkKangwon">강원도</div>
-                    <div class="dropLoc checkChungcheong">충청도</div>
-                    <div class="dropLoc checkJeolla">전라도</div>
-                    <div class="dropLoc checkGyeong">경상도</div>
-                    <div class="dropLoc checkJeju">제주도</div>
-                </div>
-            </div>
-            <!-- ===================================================================================== -->
-        </section>
+        </form>
 
     </div>
 
 </div>
 
 <!--==========================================재능 기부 목록===========================================-->
-<div class="talentBoxAll" id="all">
-    <!-- ============================================================================================ -->
-    <th:block th:each="talent:${talents}">
-        <div style="padding-bottom:20px">
+<div class="AllTalentBox" style=" display: flex; justify-content: center">
+    <div class="talentBoxAll" id="all">
+        <!-- ============================================================================================ -->
+        <th:block th:each="talent:${talents}">
+            <div style="padding-bottom:20px">
 
-            <article class="talentBox" th:object="${talent}">
-                <div class="talentBox2">
-                    <div class="talentBox3">
-                        <img src="../imgs/myPage/normalProfile.png" class="talentImg">
-                    </div>
-                    <div class="talentBox4">
-                        <p class="talentTitle" th:text="*{talentTitle}"><!--제목--></p>
-                        <p class="talentContent" th:text="*{talentContent}"><!--내용--></p>
-                        <div class="talentboxs">
-                            <div class="talentType">
-                                <img src="/imgs/talent/care2.png" th:text="*{talentCategory}"
-                                     style="width: 25px; height: 25px; margin-bottom: -6px; margin-left: -10px;">
-                                <!--카테고리-->
+                <article class="talentBox" th:object="${talent}" id="talentBox">
+
+                    <div class="peopleUserId" style="display:none" th:text="*{peopleUserId}">
+
+                        <div class="talentBox2">
+                            <div class="talentBox3">
+                                <img src="../imgs/myPage/normalProfile.png" class="talentImg">
                             </div>
-                            <div class="talentPlace">
-                                <img src="/imgs/talent/pin.png" th:text="*{talentPlace}"
-                                     style="width: 25px; height: 25px; margin-bottom: -6px; margin-left: -10px;">
-                                <!--지역-->
-                            </div>
-                            <div class="talentTime">
-                                <img src="/imgs/talent/mylove.png" th:text="${#temporals.format(talent.talentAbleDate,'YY년 MM월 dd일')}"
-                                     style="width: 25px; height: 25px; margin-bottom: -7px; margin-left: -15px;">
-                                <!--가능시간-->
+                            <div class="talentBox4">
+                                <p class="talentTitle" th:text="*{talentTitle}"><!--제목--></p>
+                                <p class="talentContent" th:text="*{talentContent}"><!--내용--></p>
+                                <div class="talentboxs">
+                                    <div class="talentType">
+                                        <img src="/imgs/talent/care2.png" th:text="*{talentCategory}"
+                                             style="width: 25px; height: 25px; margin-bottom: -6px; margin-left: -10px; margin-right: 7px">
+                                        <!--카테고리-->
+                                    </div>
+                                    <div class="talentPlace">
+                                        <img src="/imgs/talent/pin.png" th:text="*{talentPlace}"
+                                             style="width: 25px; height: 25px; margin-bottom: -6px; margin-left: -10px;margin-right: 2px; ">
+                                        <!--지역-->
+                                    </div>
+                                    <div class="talentTime">
+                                        <img src="/imgs/talent/mylove.png"
+                                             th:text="${#temporals.format(talent.talentAbleDate,'YY년 MM월 dd일')}"
+                                             style="width: 25px; height: 25px; margin-bottom: -7px; margin-left: -15px; margin-right: 2px;">
+                                        <!--가능시간-->
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </article>
-        </div>
-    </th:block>
+                </article>
+            </div>
+        </th:block>
+        <!-- =============================================================================================== -->
+    </div>
     <!-- =============================================================================================== -->
-</div>
-<!-- =============================================================================================== -->
 </div>
 
 <!-- ============================================================================================= -->
@@ -215,7 +220,7 @@
                                                          class="css-nh621w e181xm9y1"><svg
                         width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
                         focusable="false" style="cursor: pointer"
-                        preserveAspectRatio="xMidYMid meet" class="css-7kp13n e181xm9y0"><path
+                        preserveAspectRatio="xMidYMid meet"><path
                         xmlns="http://www.w3.org/2000/svg"
                         d="M6.34314575,4.92893219 L12.000039,10.585039 L17.6568542,4.92893219 C18.0473785,4.5384079 18.6805435,4.5384079 19.0710678,4.92893219 C19.4615921,5.31945648 19.4615921,5.95262146 19.0710678,6.34314575 L13.415039,12.000039 L19.0710678,17.6568542 C19.4615921,18.0473785 19.4615921,18.6805435 19.0710678,19.0710678 C18.6805435,19.4615921 18.0473785,19.4615921 17.6568542,19.0710678 L12.000039,13.415039 L6.34314575,19.0710678 C5.95262146,19.4615921 5.31945648,19.4615921 4.92893219,19.0710678 C4.5384079,18.6805435 4.5384079,18.0473785 4.92893219,17.6568542 L10.585039,12.000039 L4.92893219,6.34314575 C4.5384079,5.95262146 4.5384079,5.31945648 4.92893219,4.92893219 C5.31945648,4.5384079 5.95262146,4.5384079 6.34314575,4.92893219 Z"></path></svg></span></span>
             </div>
@@ -356,8 +361,7 @@
 </div>
 
 <!--================================================================================================================-->
-<!-- 재능 목록 클릭시 상세 모달 -->
-
+<!-- 재능 목록 클릭시 상세 모달-->
 <div class="talentModal">
     <div class="talentScope">
         <div class="talentHead">
@@ -365,16 +369,16 @@
             <div style="display:flex; justify-content: space-between;width: 100%;">
                 <div style="padding-top: 15px;">
                     <div class="css-1gtanqs e1y81j3a3">
-                        <div class="css-14prtx6 e1dh882h2">김의엽킹왕짱</div>
+                        <div class="css-14prtx6 e1dh882h2">김의엽헤이킹왕짱</div>
                     </div>
                 </div>
-                <span class="css-1oteowz eklkj751"><span role="img" color="#e4e5ed" rotate="0"
-                                                         class="css-nh621w e181xm9y1"><svg
-                        width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
-                        focusable="false" style="cursor: pointer"
-                        preserveAspectRatio="xMidYMid meet" class="css-7kp13n e181xm9y0"><path
-                        xmlns="http://www.w3.org/2000/svg"
-                        d="M6.34314575,4.92893219 L12.000039,10.585039 L17.6568542,4.92893219 C18.0473785,4.5384079 18.6805435,4.5384079 19.0710678,4.92893219 C19.4615921,5.31945648 19.4615921,5.95262146 19.0710678,6.34314575 L13.415039,12.000039 L19.0710678,17.6568542 C19.4615921,18.0473785 19.4615921,18.6805435 19.0710678,19.0710678 C18.6805435,19.4615921 18.0473785,19.4615921 17.6568542,19.0710678 L12.000039,13.415039 L6.34314575,19.0710678 C5.95262146,19.4615921 5.31945648,19.4615921 4.92893219,19.0710678 C4.5384079,18.6805435 4.5384079,18.0473785 4.92893219,17.6568542 L10.585039,12.000039 L4.92893219,6.34314575 C4.5384079,5.95262146 4.5384079,5.31945648 4.92893219,4.92893219 C5.31945648,4.5384079 5.95262146,4.5384079 6.34314575,4.92893219 Z"></path></svg></span></span>
+                <span class="css-1oteowz eklkj751">
+                    <span role="img" color="#e4e5ed" rotate="0" class="css-nh621w e181xm9y1">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
+                         focusable="false" style="cursor: pointer"
+                         preserveAspectRatio="xMidYMid meet">
+                    <path xmlns="http://www.w3.org/2000/svg"
+                          d="M6.34314575,4.92893219 L12.000039,10.585039 L17.6568542,4.92893219 C18.0473785,4.5384079 18.6805435,4.5384079 19.0710678,4.92893219 C19.4615921,5.31945648 19.4615921,5.95262146 19.0710678,6.34314575 L13.415039,12.000039 L19.0710678,17.6568542 C19.4615921,18.0473785 19.4615921,18.6805435 19.0710678,19.0710678 C18.6805435,19.4615921 18.0473785,19.4615921 17.6568542,19.0710678 L12.000039,13.415039 L6.34314575,19.0710678 C5.95262146,19.4615921 5.31945648,19.4615921 4.92893219,19.0710678 C4.5384079,18.6805435 4.5384079,18.0473785 4.92893219,17.6568542 L10.585039,12.000039 L4.92893219,6.34314575 C4.5384079,5.95262146 4.5384079,5.31945648 4.92893219,4.92893219 C5.31945648,4.5384079 5.95262146,4.5384079 6.34314575,4.92893219 Z"></path></svg></span></span>
             </div>
 
             <div style="display:flex; justify-content: space-between; border-bottom: 1px solid rgb(228, 229, 237); padding-bottom: 15px;margin-top: -15px; width: 100%;">
@@ -414,9 +418,7 @@
                             11. 18
                         </div>
 
-
                     </div>
-
 
                     <div>
                         <div class="css-1438eek e1y81j3a6">
@@ -445,21 +447,6 @@
                                         너무나 쉽게 잊혀졌다고 이제 남이라고~서툰 내사랑에 지쳐 떠난그대
                                         너무 많이 울려서 잡을 용기 조차 낼수 없었죠
                                         미안해요 내 사랑아~~~ 다시 나같은 사랑 만나지 마요
-                                        <br>
-                                        혹시 찾아가도 두번다시 나를 허락해주지마요
-                                        그댄여리고 너무 착해서 싫단 말도 잘못하는데
-                                        많이 부족한 나를 사랑한 그대
-                                        이거면됬어요 더이상은 그대 불행하지 않도록 나이쯤에서
-                                        <br>
-                                        없어지는게 그댈위한 나의 사랑인걸요~~
-                                        너무 투명해서 때론 불안했죠
-                                        제멋대로 살아온 나를 감당할수 없을것같죠
-                                        다시 나같은 사람 만나지마요 혹시 찾아가도 두번다시
-                                        <br>
-                                        나를 허락헤주지마요 그댄 여리고 너무 착해서 싫단 말도
-                                        잘못하는데 고마워서요 나를 사랑해줘서 나같은 사람이
-                                        두번다시 감히 받을수 없는 사랑 그대때문에 행복했어요
-                                        울지마요 그댈 잘생각해봐요 나쁜일들만
                                     </div>
                                 </div>
 
@@ -492,57 +479,85 @@
 <!--================================================================================================================-->
 <script th:inline="javascript">
 
-    const $location2 = $(".location2"); //작은지역들
-    const $wholeLocation = $(".wholeLocation"); //전체
+    const $checkSeoul = $(".checkSeoul"); //서울
+    const $checkKyungki = $(".checkKyungki"); //경기도
+    const $checkKangwon = $(".checkKangwon"); //강원도
+    const $checkChungcheong = $(".checkChungcheong"); //충청도
+    const $checkJeolla = $(".checkJeolla"); //전라도
+    const $checkGyeong = $(".checkGyeong"); //경상도
+    const $checkJeju = $(".checkJeju"); //제주도
 
-    $location2.on('click', function () { // 작은지역들 클릭시 search()실행
+    const $wholePlace = $(".dropbtn"); //전체
+
+    $checkSeoul.on('click', function () { // 작은지역들 클릭시 search()실행
+        console.log("지역1")
         search()
     })
-    $wholeLocation.on('click', function () { // 전체 클릭시 search()실행
+    $checkKyungki.on('click', function () { // 작은지역들 클릭시 search()실행
+        console.log("지역2")
+        search()
+    })
+    $checkKangwon.on('click', function () { // 작은지역들 클릭시 search()실행
+        console.log("지역3")
+        search()
+    })
+    $checkChungcheong.on('click', function () { //  작은지역들 클릭시 search()실행
+        console.log("지역4")
+        search()
+    })
+    $checkJeolla.on('click', function () { //  작은지역들 클릭시 search()실행
+        console.log("지역5")
+        search()
+    })
+    $checkGyeong.on('click', function () { //  작은지역들 클릭시 search()실행
+        console.log("지역6")
+        search()
+    })
+    $checkJeju.on('click', function () { //  작은지역들 클릭시 search()실행
+        console.log("지역7")
+        search()
+    })
+    $wholePlace.on('click', function () { // 전체 클릭시 search()실행
+        console.log("지역8")
         search()
     })
 
     function getList(talentDTO) {
+        console.log("여기값들어와라!!!" + talentDTO);
 
         let text = "";
         for (tal in talentDTO) {
             let talent = talentDTO[tal];
 
             text += `<div style="padding-bottom:20px">`
-
             text += `<article class="talentBox">`
             text += `<div class="talentBox2">`
-
             text += `<div class="talentBox3">`
             text += `<img src="../imgs/myPage/normalProfile.png" class="talentImg">`
             text += `</div>`
-
             text += `<div class="talentBox4">`
-
             text += `<p class="talentTitle">` + talent.talentTitle + `</p>`
-
             text += `<p class="talentContent">` + talent.talentContent + `</p>`
-
             text += `<div class="talentboxs">`
-
             text += `<div class="talentType">`
             text += `<img src="/imgs/talent/care2.png" style="width: 25px; height: 25px; margin-bottom: -6px; margin-left: -10px;">` + talent.talentCategory
             text += `</div>`
-
             text += `<div class="talentPlace">`
             text += `<img src="/imgs/talent/pin.png" style="width: 25px; height: 25px; margin-bottom: -6px; margin-left: -10px;">` + talent.talentPlace
             text += `</div>`
 
+            let date = new Date(talent.talentAbleDate);
+            let year = date.getFullYear().toString().substr(2);
+            let month = date.getMonth() + 1;
+            let day = date.getDate();
+
             text += `<div class="talentTime">`
-            text += `<img src="/imgs/talent/mylove.png" style="width: 25px; height: 25px; margin-bottom: -7px; margin-left: -15px;">` + talent.talentAbleDate
+            text += `<img src="/imgs/talent/mylove.png" style="width: 25px; height: 25px; margin-bottom: -7px; margin-left: -15px;">` + year + '년 ' + ("00" + month.toString()).slice(-2) + "월 " + ("00" + day.toString()).slice(-2) + "일"
             text += `</div>`
-
             text += `</div>`
-
             text += `</div>`
             text += `</div>`
             text += `</article>`
-
             text += `</div>`
 
         }
@@ -553,8 +568,10 @@
 
     //작은지역들, 전체 클릭시 아래 함수 실행
     function search() {
-        getList1({
-            talentPlace: save
+        console.log("썰치실행")
+        getTalentList({
+            talentPlace: save,
+            talentTitle: $('.beforeName').text()
         }, getList);
     }
 

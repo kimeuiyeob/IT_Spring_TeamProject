@@ -123,6 +123,7 @@ body {
 /*========================재능기부 박스==============================*/
 
 .talentBoxAll {
+    width: 1160px;
     padding-bottom: 20px;
     display: flex;
     justify-content: space-between;

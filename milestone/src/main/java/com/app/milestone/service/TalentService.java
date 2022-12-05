@@ -29,9 +29,9 @@ public class TalentService {
 
 
     //재능 기부 목록 상세보기
-//    public List<TalentDTO> talentDetail(Long UserId) {
-//        return talentRepository.talentDetail(UserId);
-//    }
+    public List<TalentDTO> talentDetail(Long userId) {
+        return talentRepository.talentDetail(userId);
+    }
 
     //전체클릭시 전체 조회하기 (가능일자순으로)
     public List<TalentDTO> allList() {

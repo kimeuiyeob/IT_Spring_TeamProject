@@ -7,9 +7,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -30,6 +28,7 @@ public class Talent extends Donation {
     private String talentCategory;
     @NotNull
     private String talentPlace;
+
 
     @Builder //Builder pattern을 사용하게 해주는 어노테이션!
     public Talent(School school, People people, String talentTitle, String talentContent, LocalDateTime talentAbleDate, String talentCategory,String talentPlace) {
