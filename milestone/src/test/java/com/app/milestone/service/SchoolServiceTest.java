@@ -1,5 +1,6 @@
 package com.app.milestone.service;
 
+import com.app.milestone.domain.SchoolDTO;
 import com.app.milestone.domain.Search;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -21,6 +22,25 @@ public class SchoolServiceTest {
     private SchoolService schoolService;
     @Autowired
     private PeopleService peopleService;
+
+    //    보육원 회원가입
+    @Test
+    public void schoolSignUpTest() {
+        SchoolDTO schoolDTO = new SchoolDTO();
+        schoolDTO.setUserEmail("cyon8254@gmail.com");
+        schoolDTO.setUserPassword("phj@971204");
+        schoolDTO.setUserName("박해준");
+        schoolDTO.setSchoolName("박해준보육원");
+        schoolDTO.setSchoolTeachers(1);
+        schoolDTO.setSchoolKids(1);
+        schoolDTO.setSchoolBudget(10000);
+        schoolDTO.setSchoolBank("하나은행");
+        schoolDTO.setSchoolAccount("94290200120288");
+        schoolDTO.setUserPhoneNumber("01021208515");
+        schoolDTO.setSchoolPhoneNumber("0317578254");
+
+        schoolService.schoolSignUp(schoolDTO);
+    }
 
     //    도움이 필요한 보육원
     @Test
@@ -55,7 +75,7 @@ public class SchoolServiceTest {
     //    보육원 하나에 대한 기부금 랭킹
     @Test
     public void moneyDonationRankingForOneSchool() {
-        schoolService.moneyDonationRankingForOneSchool(105L).forEach(o -> log.info("기부금 : "+o.getMoneyCash() + " 기부자 : " + o.getUserName()));
+        schoolService.moneyDonationRankingForOneSchool(105L).forEach(o -> log.info("기부금 : " + o.getMoneyCash() + " 기부자 : " + o.getUserName()));
     }
 
 }

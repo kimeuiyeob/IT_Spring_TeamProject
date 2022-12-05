@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -53,7 +53,7 @@
         <div class="divisionLine">
             <div class="emailWrap">
                 <a href="" class="snsBtn flexPublic"
-                   style="background-color : /*rgb(255, 253, 236)*/#e4e5ed; color:#333333;">
+                   style="background-color : /*rgb(255, 253, 236)*/#e4e5ed; color:#333333;" th:href="@{/join/user}">
                     <div class="flexPublic">
                         <div>이메일로 가입하기</div>
                     </div>

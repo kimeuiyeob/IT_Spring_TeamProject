@@ -3,7 +3,6 @@ package com.app.milestone.service;
 import com.app.milestone.domain.MoneyDTO;
 import com.app.milestone.domain.SchoolDTO;
 import com.app.milestone.domain.Search;
-import com.app.milestone.entity.Money;
 import com.app.milestone.entity.School;
 import com.app.milestone.repository.MoneyRepository;
 import com.app.milestone.repository.PeopleRepository;
@@ -12,10 +11,13 @@ import com.querydsl.core.Tuple;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -24,6 +26,33 @@ public class SchoolService {
     private final SchoolRepository schoolRepository;
     private final PeopleRepository peopleRepository;
     private final MoneyRepository moneyRepository;
+
+    //    보육원 회원가입
+    public ResponseEntity schoolSignUp(SchoolDTO schoolDTO) {
+
+        Optional<School> school = schoolRepository.findByUserEmail(schoolDTO.getUserEmail());
+
+        if (school.isEmpty()) {
+            School newSchool = School.builder()
+                    .userEmail(schoolDTO.getUserEmail())
+                    .userPassword(schoolDTO.getUserPassword())
+                    .userName(schoolDTO.getUserName())
+                    .schoolName(schoolDTO.getSchoolName())
+                    .schoolTeachers(schoolDTO.getSchoolTeachers())
+                    .schoolKids(schoolDTO.getSchoolKids())
+                    .schoolBudget(schoolDTO.getSchoolBudget())
+                    .schoolAccount(schoolDTO.getSchoolAccount())
+                    .userPhoneNumber(schoolDTO.getUserPhoneNumber())
+                    .schoolPhoneNumber(schoolDTO.getSchoolPhoneNumber())
+                    .build();
+
+            schoolRepository.save(newSchool);
+
+            return new ResponseEntity("success", HttpStatus.OK);
+        } else {
+            return new ResponseEntity("fail", HttpStatus.OK);
+        }
+    }
 
     //    보육원 등록
     public void registerSchool(SchoolDTO schoolDTO) {
@@ -75,18 +104,15 @@ public class SchoolService {
     }
 
 
-
-
-
     // 관리자 페이지============================================
 
     //    보육원 목록
-    public List<School> schoolListManager(Pageable pageable){
+    public List<School> schoolListManager(Pageable pageable) {
         return schoolRepository.findByCreatedDate(pageable);
     }
 
     //    전체회원 중 보육원 목록
-    public List<SchoolDTO> schoolOnly(){
+    public List<SchoolDTO> schoolOnly() {
         return schoolRepository.findBySchoolOnly();
     }
 }
