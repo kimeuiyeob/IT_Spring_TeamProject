@@ -4,9 +4,19 @@ const $filterDropdown = $('.menu-sub-dropdown');
 const $filters = $('.card-toolbar-item');
 let check1 = false;
 
-$body.on('click', function (e) {
+$(document).on('click', function (e) {
     if (check1) {
         if (e.target.closest('.menu-sub-dropdown') == e.currentTarget.querySelector('.menu-sub-dropdown').closest('.menu-sub-dropdown')) {
+            if($(".apply-button").text().match('적용')){
+                $filterDropdown.css('display', 'none');
+                $filter.css('background-color', '#f6f8fa');
+                $filter.css('color', '#009ef7');
+                $filter.find('#filter-img').css({
+                    'background': `url('/imgs/admin/filterBlue.png')`,
+                    'background-size': '13px'
+                });
+                check1 = !check1;
+            }
         } else {
             $filterDropdown.css('display', 'none');
             $filter.css('background-color', '#f6f8fa');
@@ -132,3 +142,90 @@ $pageNumberLink.on('mouseout',function(){
     $(this).css('background-color','#fff');
     $(this).css('color','#5e6278');
 })
+
+
+showWithdrawalAll();
+
+/*===========Ajax===============================*/
+/*============전체목록 조회=====================*/
+function showWithdrawalAll(){
+    $.ajax({
+        url : "/adminRest/withdrawal",
+        type : "post",
+        success : function (items) {
+            let text="";
+            items.forEach(function(item){
+                text += `<tr>`
+                text += `<th class="card-body-title-padding" style="width: 25%;">`
+                text += `<div class="donater-info" style="height: 50px">`
+                text += `<div class="donater-info-text">`
+                text += `<div class="donater-name">`+ item.withdrawalUserType +`</div>`
+                text += `</div>`
+                text += `</div>`
+                text += `</th>`
+                text += `<th class="card-body-title-padding" style="width: 43%;">`
+                text += `<div class="donate-info-height">`+item.withdrawalReason+`</div>`
+                text += `<th class="card-body-title-padding" style="width: 30%;">`
+
+                let date = new Date(item.createdDate);
+                let year = date.getFullYear().toString().substr(2) + '년 ';
+                let month = date.getMonth() + 1 + '월 ';
+                let day = date.getDate() + '일';
+                let createdDateView = year + month + day;
+
+                text += `<div class="donate-info-height">`+createdDateView+`</div>`
+                text += `</th>`
+                text += `</tr>`
+            })
+            $(".card-body-main-box").html(text)
+        }
+    })
+}
+
+
+/*필터*/
+// $filterAccept = $(".apply-button");
+//
+// $filterAccept.on("click",function(){
+//     if($("#option6").text().match('최신순')){
+//         showWithdrawalAll();
+//     }else{
+//         showAsc();
+//     }
+// })
+
+
+/*오름차순 조회*/
+function showAsc(){
+    $.ajax({
+        url : "/adminRest/withdrawalAsc",
+        type : "post",
+        success : function (withdrawalsAsc) {
+            let text="";
+            withdrawalsAsc.forEach(function(withdrawal){
+                text += `<tr>`
+                text += `<th class="card-body-title-padding" style="width: 25%;">`
+                text += `<div class="donater-info" style="height: 50px">`
+                text += `<div class="donater-info-text">`
+                text += `<div class="donater-name">`+withdrawal.withdrawalUserType+`</div>`
+                text += `</div>`
+                text += `</div>`
+                text += `</th>`
+                text += `<th class="card-body-title-padding" style="width: 43%;">`
+                text += `<div class="donate-info-height">`+withdrawal.withdrawalReason+`</div>`
+                text += `<th class="card-body-title-padding" style="width: 30%;">`
+
+/*                let date = new Date(withdrawal.createdDate);
+                let year = date.getFullYear().toString().substr(2) + '년 ';
+                let month = date.getMonth() + 1 + '월 ';
+                let day = date.getDate() + '일';
+                let createdDateView = year + month + day;*/
+
+                text += `<div class="donate-info-height">`+withdrawal.createdDate+`</div>`
+                text += `</th>`
+                text += `</tr>`
+            })
+            $(".card-body-main-box").html(text)
+        }
+    })
+}

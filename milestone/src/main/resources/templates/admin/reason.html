@@ -196,7 +196,7 @@
                     <!-- 카드 헤더 -->
                     <div class="card-header">
                         <div class="card-title">
-                            <div class="card-title-item-box">
+                            <div class="card-title-item-boxth">
                                 <div class="card-item-search"></div>
                                 <input id="search-bar" type="text" placeholder="검색">
                             </div>
@@ -270,7 +270,7 @@
                                             </div>
                                             <div class="menu-sub-dropdown-footer">
                                                 <div class="menu-sub-dropdown-Botton" id="reset3">초기화</div>
-                                                <div class="menu-sub-dropdown-Botton">적용</div>
+                                                <div class="menu-sub-dropdown-Botton .apply-button">적용</div>
                                             </div>
 
                                         </div>
@@ -299,27 +299,25 @@
                             </thead>
                             <tbody class="card-body-main-box">
                             <!--회원 하나-->
-                            <th:block th:each="withdrawal:${withdrawals}">
-                                <tr th:object="${withdrawal}">
+                                <!--tr th:object="${withdrawal}">
                                     <th class="card-body-title-padding" style="width: 25%;">
                                         <div class="donater-info" style="height: 50px">
                                             <div class="donater-info-text">
-                                                <div class="donater-name" th:text="*{withdrawalUserType}"><!--일반 또는 보육원--></div>
+                                                <div class="donater-name" th:text="*{withdrawalUserType}"></div>
                                             </div>
                                         </div>
                                     </th>
                                     <th class="card-body-title-padding" style="width: 43%;">
                                         <div class="donate-info-height" th:text="*{withdrawalReason}">
-                                            <!--이용하고 싶은 서비스가 없어요-->
+                                            &lt;!&ndash;이용하고 싶은 서비스가 없어요&ndash;&gt;
                                         </div>
                                     </th>
                                     <th class="card-body-title-padding" style="width: 30%;">
                                         <div class="donate-info-height" th:text="*{#temporals.format(createdDate,'YYYY년 MM월 dd일')}">
-                                            <!--2022년 11월 21일 23시 50분-->
+                                            &lt;!&ndash;2022년 11월 21일 23시 50분&ndash;&gt;
                                         </div>
                                     </th>
-                                </tr>
-                            </th:block>
+                                </tr>-->
                             </tbody>
                         </table>
                         <!-- 카드 푸터 -->
