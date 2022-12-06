@@ -58,11 +58,18 @@ public class AdminRestController {
         return peopleService.peopleOnlyAsc();
     }
 
+//    보육원회원에서 최신순
+    @PostMapping("/school")
+    public List<SchoolDTO> showSchoolList(){
+        return schoolService.schoolOnly();
+    }
+
 //    보육원회원에서 오름차순
-//    @PostMapping("/schoolasc")
-//    public List<SchoolDTO> showSchoolListAsc(){
-//        return schoolService.schoolOnlyAsc();
-//    }
+    @PostMapping("/schoolasc")
+    public List<SchoolDTO> showSchoolListAsc(){
+        return schoolService.schoolOnlyAsc();
+    }
+
 
 //    탈퇴회원 조회
     @PostMapping("/withdrawal")

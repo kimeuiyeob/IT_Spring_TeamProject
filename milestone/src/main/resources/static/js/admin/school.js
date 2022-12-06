@@ -234,3 +234,44 @@ $userType.on('mouseover', function () {
 $userType.on('mouseout', function () {
     $(this).css('color', '#5e6278');
 })
+
+
+showSchoolList()
+
+function showSchoolList(){
+    $.ajax({
+        url : "/adminRest/school",
+        type : "post",
+        success : function (schools) {
+            let text="";
+            schools.forEach(function(school){
+                text += `<tr>`
+                text += ` <th class="card-body-title-checkbox-padding" style="width: 5%;margin-top: 29px;padding-top: 0; padding-bottom: 31px;">`
+                text += `<label class="card-body-title-user-checkbox">`
+                text += `<div class="check-img"></div>`
+                text += `<input class="notice-checked" type="checkbox" name="check">`
+                text += `</label>`
+                text += `</th>`
+                text += `<th class="card-body-title-padding" style="width: 17%;">`
+                text += `<div class="donater-info" style="height: 50px;">`
+                text += `<div class="donater-info-img1"></div>`
+                text += `<div class="donater-info-text">`
+                text += `<div class="donater-name">`+ school.schoolName +`</div>`
+                text += `</div>`
+                text += `</div>`
+                text += `</th>`
+                text += `<th class="card-body-title-padding" style="width: 38%">`
+                text += `<div class="donate-info-height">`+ school.schoolAddress+''+ school.schoolAddressDetail+`</div>`
+                text += `</th>`
+                text += `<th class="card-body-title-padding" style="width: 17%;">`
+                text += `<div class="donate-info-height">`+school.schoolPhoneNumber+`</div>`
+                text += `</th>`
+                text += `<th class="card-body-title-padding" style="width: 18%; padding-bottom: 31px;padding-top: 0; margin-top: 32px;">`
+                text += `<div class="donate-info-height">`+school.schoolBudget+`</div>`
+                text += `</th>`
+                text += `</tr>`
+            })
+            $(".card-body-main-box").html(text)
+        }
+    })
+}

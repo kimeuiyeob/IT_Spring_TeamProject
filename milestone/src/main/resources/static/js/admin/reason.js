@@ -83,7 +83,6 @@ $filters.on('mouseout', function () {
 const $selectOption = $('.menu-sub-dropdown-option-box');
 
 $selectOption.on('click', function () {
-    console.log('방가')
     if ($(this).find('input').is(':checked')) {
         $(this).find('.menu-sub-dropdown-option-sub').css('display', 'flex');
         $(this).find('input').prop('checked', true);
@@ -167,15 +166,15 @@ function showWithdrawalAll(){
                 text += `<div class="donate-info-height">`+item.withdrawalReason+`</div>`
                 text += `<th class="card-body-title-padding" style="width: 30%;">`
 
-                let date = new Date(item.createdDate);
-                let year = date.getFullYear().toString().substr(2) + '년 ';
-                let month = date.getMonth() + 1 + '월 ';
-                let day = date.getDate() + '일';
-                let createdDateView = year + month + day;
+                var createdDateView = item.createdDate.split('T')[0].split('-');
 
-                text += `<div class="donate-info-height">`+createdDateView+`</div>`
-                text += `</th>`
-                text += `</tr>`
+                var year = createdDateView[0]+'년 ';
+                var month = createdDateView[1]+'월 ';
+                var date = createdDateView[2]+'일';
+
+                var result = year + month + date;
+
+                text += `<div class="donate-info-height date-time">`+ result +`</div>`
             })
             $(".card-body-main-box").html(text)
         }
@@ -184,15 +183,15 @@ function showWithdrawalAll(){
 
 
 /*필터*/
-// $filterAccept = $(".apply-button");
-//
-// $filterAccept.on("click",function(){
-//     if($("#option6").text().match('최신순')){
-//         showWithdrawalAll();
-//     }else{
-//         showAsc();
-//     }
-// })
+$filterAccept = $(".apply-button");
+
+$filterAccept.on("click",function(){
+    if($("#option6").text().match('최신순')){
+        showWithdrawalAll();
+    }else if($("#option6").text().match('오래된순')){
+        showAsc();
+    }
+})
 
 
 /*오름차순 조회*/
@@ -215,13 +214,15 @@ function showAsc(){
                 text += `<div class="donate-info-height">`+withdrawal.withdrawalReason+`</div>`
                 text += `<th class="card-body-title-padding" style="width: 30%;">`
 
-/*                let date = new Date(withdrawal.createdDate);
-                let year = date.getFullYear().toString().substr(2) + '년 ';
-                let month = date.getMonth() + 1 + '월 ';
-                let day = date.getDate() + '일';
-                let createdDateView = year + month + day;*/
+                var createdDateView = withdrawal.createdDate.split('T')[0].split('-');
 
-                text += `<div class="donate-info-height">`+withdrawal.createdDate+`</div>`
+                var year = createdDateView[0]+'년 ';
+                var month = createdDateView[1]+'월 ';
+                var date = createdDateView[2]+'일';
+
+                var result = year + month + date;
+
+                text += `<div class="donate-info-height date-time">`+ result +`</div>`
                 text += `</th>`
                 text += `</tr>`
             })

@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.app.milestone.entity.QSchool.school;
+import static com.app.milestone.entity.QWithdrawal.withdrawal;
 
 @Repository
 @RequiredArgsConstructor
@@ -49,7 +50,8 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
                 school.userName,
                 school.userPassword,
                 school.userPhoneNumber,
-                school.donationCount
+                school.donationCount,
+                school.createdDate
 
         )).from(school)
                 .orderBy(school.donationCount.asc())
@@ -80,7 +82,8 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
                 school.userName,
                 school.userPassword,
                 school.userPhoneNumber,
-                school.donationCount
+                school.donationCount,
+                school.createdDate
         ))
                 .where(
                         schoolNameContaining(search.getSchoolName()),
@@ -112,7 +115,8 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
                 school.userName,
                 school.userPassword,
                 school.userPhoneNumber,
-                school.donationCount
+                school.donationCount,
+                school.createdDate
         )).from(school)
                 .where(school.userId.eq(userId))
                 .fetchOne();
@@ -188,34 +192,6 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
 
     //전체 회원중 보육원 회원만
     @Override
-//    public List<Tuple> findBySchoolOnly (){
-//        List<Tuple> tuples = new ArrayList<>();
-//        tuples = jpaQueryFactory.select(new QSchoolDTO(
-//                school.address.schoolAddress,
-//                school.address.schoolAddressDetail,
-//                school.address.schoolZipcode,
-//                school.schoolBank,
-//                school.schoolTeachers,
-//                school.schoolKids,
-//                school.schoolBudget,
-//                school.userName,
-//                school.schoolAccount,
-//                school.schoolPhoneNumber,
-//                school.schoolQR,
-//                school.introduce.schoolTitle,
-//                school.introduce.schoolContent,
-//                school.userEmail,
-//                school.schoolName,
-//                school.userPassword,
-//                school.userPhoneNumber,
-//                school.donationCount
-//                ),school.createdDate)
-//                .from(school, QUser.user)
-//                .where(school.userId.eq(QUser.user.userId))
-//                .fetch();
-//
-//        return tuples;
-//    };
     public List<SchoolDTO> findBySchoolOnly() {
         return jpaQueryFactory.select(new QSchoolDTO(
                 school.userId,
@@ -232,18 +208,49 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
                 school.introduce.schoolTitle,
                 school.introduce.schoolContent,
                 school.userEmail,
-                school.userEmail,
+                school.schoolPhoneNumber,
                 school.userName,
                 school.userPassword,
                 school.userPhoneNumber,
-                school.donationCount
+                school.donationCount,
+                school.createdDate
         ))
                 .from(school, QUser.user)
                 .where(school.userId.eq(QUser.user.userId))
+                .orderBy(school.createdDate.desc())
                 .fetch();
     }
+        //전체 회원중 보육원 회원만
+        @Override
+        public List<SchoolDTO> findBySchoolOnlyAsc() {
+            return jpaQueryFactory.select(new QSchoolDTO(
+                    school.userId,
+                    school.schoolName,
+                    school.address.schoolAddress,
+                    school.address.schoolAddressDetail,
+                    school.address.schoolZipcode,
+                    school.schoolTeachers,
+                    school.schoolKids,
+                    school.schoolBudget,
+                    school.schoolBank,
+                    school.schoolAccount,
+                    school.schoolQR,
+                    school.introduce.schoolTitle,
+                    school.introduce.schoolContent,
+                    school.userEmail,
+                    school.userEmail,
+                    school.userName,
+                    school.userPassword,
+                    school.userPhoneNumber,
+                    school.donationCount,
+                    school.createdDate
+            ))
+                    .from(school, QUser.user)
+                    .where(school.userId.eq(QUser.user.userId))
+                    .orderBy(school.createdDate.asc())
+                    .fetch();
+        }
 
-    ;
 
 
     //=============================================================

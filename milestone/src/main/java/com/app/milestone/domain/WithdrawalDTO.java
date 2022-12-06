@@ -8,12 +8,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 @Component
 @Data
 @NoArgsConstructor
 public class WithdrawalDTO {
     private String withdrawalReason;
     private String withdrawalUserType;
+    private LocalDateTime createdDate;
 
     public Withdrawal toEntity() {
         return Withdrawal.builder()
@@ -23,8 +26,9 @@ public class WithdrawalDTO {
     }
 
     @QueryProjection
-    public WithdrawalDTO(String withdrawalReason, String withdrawalUserType) {
+    public WithdrawalDTO(String withdrawalReason, String withdrawalUserType, LocalDateTime createdDate) {
         this.withdrawalReason = withdrawalReason;
         this.withdrawalUserType = withdrawalUserType;
+        this.createdDate = createdDate;
     }
 }

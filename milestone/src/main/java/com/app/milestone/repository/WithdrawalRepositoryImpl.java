@@ -23,7 +23,8 @@ public class WithdrawalRepositoryImpl implements WithdrawalCustomRepository{
     public List<WithdrawalDTO> findByCreatedDate (Pageable pageable) {
         return jpaQueryFactory.select(new QWithdrawalDTO(
                 withdrawal.withdrawalReason,
-                withdrawal.withdrawalUserType
+                withdrawal.withdrawalUserType,
+                withdrawal.createdDate
         )).from(withdrawal)
                 .orderBy(withdrawal.createdDate.desc())
                 .fetch();
@@ -33,7 +34,8 @@ public class WithdrawalRepositoryImpl implements WithdrawalCustomRepository{
     public List<WithdrawalDTO> findByCreatedDateAsc () {
         return jpaQueryFactory.select(new QWithdrawalDTO(
             withdrawal.withdrawalReason,
-            withdrawal.withdrawalUserType
+            withdrawal.withdrawalUserType,
+            withdrawal.createdDate
             )).from(withdrawal)
                 .orderBy(withdrawal.createdDate.asc())
                 .fetch();

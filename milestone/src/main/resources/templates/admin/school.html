@@ -308,7 +308,7 @@
                             </tr>
                             </thead>
                             <tbody class="card-body-main-box">
-                            <th:block th:each="school:${schools}">
+                            <!--<th:block th:each="school:${schools}">
                                 <tr th:object="${school}">
                                     <th class="card-body-title-checkbox-padding" style="width: 5%;margin-top: 29px;padding-top: 0; padding-bottom: 31px;">
                                         <label class="card-body-title-user-checkbox">
@@ -320,27 +320,27 @@
                                         <div class="donater-info" style="height: 50px;">
                                             <div class="donater-info-img1"></div>
                                             <div class="donater-info-text">
-                                                <div class="donater-name" th:text="*{schoolName}"><!--코끼리보육원--></div>
+                                                <div class="donater-name" th:text="*{schoolName}">&lt;!&ndash;코끼리보육원&ndash;&gt;</div>
                                             </div>
                                         </div>
                                     </th>
                                     <th class="card-body-title-padding" style="width: 38%">
                                         <div class="donate-info-height" th:text="|*{address.schoolAddress} *{address.schoolAddressDetail}|">
-                                            <!--경기도 성남시 중원구 하대원동 아튼빌아파트-->
+                                            &lt;!&ndash;경기도 성남시 중원구 하대원동 아튼빌아파트&ndash;&gt;
                                         </div>
                                     </th>
                                     <th class="card-body-title-padding" style="width: 17%;">
                                         <div class="donate-info-height" th:text="*{schoolPhoneNumber}">
-                                            <!--0317578254-->
+                                            &lt;!&ndash;0317578254&ndash;&gt;
                                         </div>
                                     </th>
                                     <th class="card-body-title-padding" style="width: 18%; padding-bottom: 31px;padding-top: 0; margin-top: 32px;" th:text="*{schoolBudget}">
                                         <div class="donate-info-height">
-                                            <!--700,000,000-->
+                                            &lt;!&ndash;700,000,000&ndash;&gt;
                                         </div>
                                     </th>
                                 </tr>
-                            </th:block>
+                            </th:block>-->
                             </tbody>
                         </table>
                         <!-- 카드 푸터 -->

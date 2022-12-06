@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 @Component
 @Data
 @NoArgsConstructor
@@ -18,6 +20,7 @@ public class PeopleDTO {
     private String userPassword;
     private String userPhoneNumber;
     private int donationCount;
+    private LocalDateTime createdDate;
 
     public People toEntity() {
         return People.builder()
@@ -31,12 +34,13 @@ public class PeopleDTO {
     }
 
     @QueryProjection
-    public PeopleDTO(String peopleNickname , String userEmail,String userName, String userPassword,String userPhoneNumber, int donationCount) {
+    public PeopleDTO(String peopleNickname , String userEmail,String userName, String userPassword,String userPhoneNumber, int donationCount, LocalDateTime createdDate) {
         this.peopleNickname = peopleNickname;
         this.userEmail = userEmail;
         this.userName = userName;
         this.userPassword = userPassword;
         this.userPhoneNumber = userPhoneNumber;
         this.donationCount = donationCount;
+        this.createdDate = createdDate;
     }
 }

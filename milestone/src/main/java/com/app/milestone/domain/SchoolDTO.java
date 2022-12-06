@@ -9,6 +9,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Component
 @Data
 @NoArgsConstructor
@@ -33,6 +36,7 @@ public class SchoolDTO {
     private String userPhoneNumber;
     private String userProfile;
     private int donationCount;
+    private LocalDateTime createdDate;
 
 
     public School toEntity() {
@@ -63,7 +67,7 @@ public class SchoolDTO {
     }
 
     @QueryProjection
-    public SchoolDTO(Long userId, String schoolName, String schoolAddress, String schoolAddressDetail, String schoolZipcode, int schoolTeachers, int schoolKids, int schoolBudget, String schoolBank, String schoolAccount, String schoolPhoneNumber, String schoolQR, String schoolTitle, String schoolContent, String userEmail, String userName, String userPassword, String userPhoneNumber, int donationCount) {
+    public SchoolDTO(Long userId, String schoolName, String schoolAddress, String schoolAddressDetail, String schoolZipcode, int schoolTeachers, int schoolKids, int schoolBudget, String schoolBank, String schoolAccount, String schoolPhoneNumber, String schoolQR, String schoolTitle, String schoolContent, String userEmail, String userName, String userPassword, String userPhoneNumber, int donationCount, LocalDateTime createdDate) {
         this.userId = userId;
         this.schoolName = schoolName;
         this.schoolAddress = schoolAddress;
@@ -83,5 +87,6 @@ public class SchoolDTO {
         this.userPassword = userPassword;
         this.userPhoneNumber = userPhoneNumber;
         this.donationCount = donationCount;
+        this.createdDate = createdDate;
     }
 }

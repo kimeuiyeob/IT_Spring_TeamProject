@@ -34,7 +34,8 @@ public class PeopleCustomRepositoryImpl implements PeopleCustomRepository {
                 people.userName,
                 people.userPassword,
                 people.userPhoneNumber,
-                people.donationCount
+                people.donationCount,
+                people.createdDate
         )).from(people)
                 .where(people.userId.eq(userId))
                 .fetchOne();
@@ -137,7 +138,8 @@ public class PeopleCustomRepositoryImpl implements PeopleCustomRepository {
                 people.userName,
                 people.userPassword,
                 people.userPhoneNumber,
-                people.donationCount
+                people.donationCount,
+                people.createdDate
         )).from(people, QUser.user)
                 .where(people.userId.eq(QUser.user.userId))
                 .orderBy(people.createdDate.desc())
@@ -152,7 +154,8 @@ public class PeopleCustomRepositoryImpl implements PeopleCustomRepository {
                 people.userName,
                 people.userPassword,
                 people.userPhoneNumber,
-                people.donationCount
+                people.donationCount,
+                people.createdDate
         )).from(people, QUser.user)
                 .where(people.userId.eq(QUser.user.userId))
                 .orderBy(people.createdDate.asc())
