@@ -85,7 +85,7 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
                 talent.talentTitle,
                 talent.talentContent,
                 talent.talentAbleDate,
-                talent.people.peopleNickname,
+                talent.talentCategory,
                 talent.talentPlace,
                 talent.people.peopleNickname,
                 talent.school.userId,
