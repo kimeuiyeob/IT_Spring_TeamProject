@@ -23,8 +23,7 @@ public class SchoolController {
     private final SchoolService schoolService;
 
     @GetMapping("/list")
-    public void list(Search search ) {
-    }
+    public void list(Search search ) {;}
 
     @GetMapping("/read")
     public void read(Long userId, Model model) {

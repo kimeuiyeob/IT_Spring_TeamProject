@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>보육원 | 검색</title>
-<!--    <link rel="stylesheet" type="text/css"-->
-<!--          href="//p25.zdassets.com/hc/theming_assets/9204604/360002309011/style.css?digest=12256508972825">-->
+    <!--    <link rel="stylesheet" type="text/css"-->
+    <!--          href="//p25.zdassets.com/hc/theming_assets/9204604/360002309011/style.css?digest=12256508972825">-->
 </head>
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
 
@@ -51,10 +51,6 @@
             <div class="tAndS totalCount searchBox">
                 <!-- 이전 선택한 지역-->
                 <div class="beforeSelectLocations" style="display: none">
-                    <th:block th:each="address : ${schoolAddresses}">
-                        <div class="beforeLocation" th:text="*{address}"></div>
-                    </th:block>
-                    <div class="beforeName" th:text="${schoolName}"></div>
                 </div>
                 <!-- 총 검색 개수 -->
                 <div class="totalCount">총 &nbsp;
@@ -129,24 +125,26 @@
     show();
 
     // 새로고침test
-    window.addEventListener('beforeunload',function (e) {
+    window.addEventListener('beforeunload', function (e) {
         searchForm.submit();
         console.log("잘가")
         e.preventDefault();
     })
 
-    //페이지 로딩 완료후 이전에 검색한 지역 눌림 상태
-    $location2.each(function (i, o) {
-        let location = $(o).text();
+    // //페이지 로딩 완료후 이전에 검색한 지역 눌림 상태
+    // $location2.each(function (i, o) {
+    //     let location = $(o).text();
+    //     if ($('.beforeLocation').text().indexOf(location) != -1) {
+    //         $(".wholeLocation").css({"background-color": "#f2f3f7"})
+    //         $(".wholeLocation").css({"border": "none"})
+    //         $(o).css({"background-color": "transparent"});
+    //         $(o).css({"border": "solid 1px black"});
+    //         save.push($(o).text());
+    //     }
+    // })
 
-        if ($('.beforeLocation').text().indexOf(location) != -1) {
-            $(".wholeLocation").css({"background-color": "#f2f3f7"})
-            $(".wholeLocation").css({"border": "none"})
-            $(o).css({"background-color": "transparent"});
-            $(o).css({"border": "solid 1px black"});
-            save.push($(o).text());
-        }
-    })
+    //이전 검색 저장
+    let $beforeSelectLocations = $('.beforeSelectLocations');
 
     $location2.on('click', function () {
         search()
@@ -162,6 +160,10 @@
     })
 
     //==========================페이징============================
+    // 새로고침시
+    let schools = [[${schools}]];
+    console.log(schools.content);
+
     let pageInfo;
 
     function getList(schoolResp) {
@@ -212,7 +214,7 @@
             text += `<div class="QR">`
             text += `<img src="https://ko.qr-code-generator.com/wp-content/themes/qr/new_structure/markets/basic_market/generator/dist/generator/assets/images/websiteQRCode_noFrame.png">`
             text += `</div>`
-            text += `<a class="donationButton" href = "`+ school.userId +`"><span>보육원 보러가기</span></a>`
+            text += `<a class="donationButton" href = "` + school.userId + `"><span>보육원 보러가기</span></a>`
             text += `</div>`
             text += `</article>`
         })
@@ -223,6 +225,13 @@
     }
 
     function search() {
+        // let text = "";
+        // console.log(save);
+        // console.log($schoolName.val())
+        // save.forEach(o => {
+        //     // text += `<input type="text" name=schoolName`
+        // })
+
         getList1({
             schoolAddress: save,
             schoolName: $schoolName.val(),
@@ -249,7 +258,7 @@
         let startPage = endPage - 5 + 1;
         // <!--페이징 처리-->
         // 이전
-        if (startPage>1) {
+        if (startPage > 1) {
             text += `<div class="prev-page page-number-padding">`
             text += `<a class="page-number-link" href="` + (startPage - 2) + `">`
             text += `<div class="prev-page-prevArrow"></div>`
@@ -263,9 +272,9 @@
 
         for (let i = startPage; i < startPage + 5 && i <= pageInfo.totalPages; i++) {
             text += `<div class="page-number-padding">`
-            if(i==nowPage){
+            if (i == nowPage) {
                 text += `<div class="page-number-link" style="color:#303441">` + i + `</div>`
-            }else{
+            } else {
                 text += `<a class="page-number-link" href="` + (i - 1) + `">` + i + `</a>`
             }
             text += `</div>`
@@ -307,10 +316,10 @@
         document.location.reload();
     };
 
-//    보육원 상세 이동
-    $(".schoolList").on('click', '.donationButton', function(e){
+    //    보육원 상세 이동
+    $(".schoolList").on('click', '.donationButton', function (e) {
         e.preventDefault();
-        location.href = "/school/read?userId=" +$(this).attr("href");
+        location.href = "/school/read?userId=" + $(this).attr("href");
     })
 
 </script>
