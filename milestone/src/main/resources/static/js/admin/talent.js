@@ -1,4 +1,4 @@
-/* ------------------필터 클릭, 호버--------------------- */
+    /* ------------------필터 클릭, 호버--------------------- */
 const $filter = $('.card-toolbar-item').eq(0);
 const $filterDropdown = $('.menu-sub-dropdown');
 const $filters = $('.card-toolbar-item');
@@ -224,3 +224,5 @@ $pageNumberLink.on('mouseout', function () {
     $(this).css('background-color', '#fff');
     $(this).css('color', '#5e6278');
 })
+
+

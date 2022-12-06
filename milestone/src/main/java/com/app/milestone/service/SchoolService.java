@@ -143,4 +143,9 @@ public class SchoolService {
     public List<SchoolDTO> schoolOnly() {
         return schoolRepository.findBySchoolOnly();
     }
+
+    //    전체회원 중 보육원 목록
+    public List<SchoolDTO> schoolOnlyAsc() {
+        return schoolRepository.findBySchoolOnlyAsc();
+    }
 }
