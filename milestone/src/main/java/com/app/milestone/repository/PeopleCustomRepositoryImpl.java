@@ -3,10 +3,12 @@ package com.app.milestone.repository;
 import com.app.milestone.domain.PeopleDTO;
 import com.app.milestone.domain.QPeopleDTO;
 import com.app.milestone.entity.QTalent;
+import com.app.milestone.entity.QUser;
 import com.querydsl.core.Tuple;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -121,5 +123,39 @@ public class PeopleCustomRepositoryImpl implements PeopleCustomRepository {
             }
         }
         return tuples;
+    }
+
+
+
+    /*=================관리자 페이지=================*/
+    @Override
+    /*일반회원만 조회*/
+    public List<PeopleDTO> findByPeopleOnly(){
+        return jpaQueryFactory.select(new QPeopleDTO(
+                people.peopleNickname,
+                people.userEmail,
+                people.userName,
+                people.userPassword,
+                people.userPhoneNumber,
+                people.donationCount
+        )).from(people, QUser.user)
+                .where(people.userId.eq(QUser.user.userId))
+                .orderBy(people.createdDate.desc())
+                .fetch();
+    }
+    @Override
+    /*일반회원만 오름차순 조회*/
+    public List<PeopleDTO> findByPeopleOnlyAsc(){
+        return jpaQueryFactory.select(new QPeopleDTO(
+                people.peopleNickname,
+                people.userEmail,
+                people.userName,
+                people.userPassword,
+                people.userPhoneNumber,
+                people.donationCount
+        )).from(people, QUser.user)
+                .where(people.userId.eq(QUser.user.userId))
+                .orderBy(people.createdDate.asc())
+                .fetch();
     }
 }

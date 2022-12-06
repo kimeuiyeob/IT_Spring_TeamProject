@@ -5,9 +5,19 @@ const $filters = $('.card-toolbar-item');
 const $filtersLast = $('.card-toolbar-itemBox').children().last()
 let check1 = false;
 
-$body.on('click', function (e) {
+$(document).on('click', function (e) {
     if (check1) {
         if (e.target.closest('.menu-sub-dropdown') == e.currentTarget.querySelector('.menu-sub-dropdown').closest('.menu-sub-dropdown')) {
+            if($(".apply-button").text().match('적용')){
+                $filterDropdown.css('display', 'none');
+                $filter.css('background-color', '#f6f8fa');
+                $filter.css('color', '#009ef7');
+                $filter.find('#filter-img').css({
+                    'background': `url('/imgs/admin/filterBlue.png')`,
+                    'background-size': '13px'
+                });
+                check1 = !check1;
+            }
         } else {
             $filterDropdown.css('display', 'none');
             $filter.css('background-color', '#f6f8fa');
@@ -143,13 +153,16 @@ $subOptionApllyChoose.on('mouseout', function () {
 const $checkBox = $('.notice-checked');
 const $checkBoxAll = $('.notice-checked-all');
 
-$checkBoxAll.on('click', function () {
+$('.card-body-title-box').on('click','.notice-checked-all' , function(e) {
+
+    e.preventDefault();
+
     if ($checkBoxAll.is(':checked')) {
         $checkBoxAll.closest('.card-body-title-user-checkbox').css('background-color', '#009ef7');
         $checkBoxAll.prev().css('display', 'flex');
         $checkBox.closest('.card-body-title-user-checkbox').css('background-color', '#009ef7');
         $checkBox.prev().css('display', 'flex');
-        $checkBox.prop('checked', true);
+        // $checkBox.prop('checked', true);
     } else {
         $checkBoxAll.closest('.card-body-title-user-checkbox').css('background-color', '#eff2f5');
         $checkBoxAll.prev().css('display', 'none');
@@ -159,13 +172,15 @@ $checkBoxAll.on('click', function () {
     }
 })
 
-$checkBox.on('click', function (e) {
+$('.card-body-main-box').on('click','.notice-checked', function (e) {
+
+    e.preventDefault();
 
     if ($(this).is(':checked')) {
         $(this).closest('.card-body-title-user-checkbox').css('background-color', '#009ef7');
         $(this).prev().css('display', 'flex')
     } else {
-        $(this).closest('.card-body-title-user-checkbox').css('background-color', '#eff2f5')
+        $(this).closest('.card-body-title-user-checkbox').css('background-color', '#eff2f5');
         $(this).prev().css('display', 'none')
         $checkBoxAll.prop('checked', false);
         $checkBoxAll.closest('.card-body-title-user-checkbox').css('background-color', '#eff2f5');
@@ -176,6 +191,7 @@ $checkBox.on('click', function (e) {
         $checkBoxAll.closest('.card-body-title-user-checkbox').css('background-color', '#009ef7');
         $checkBoxAll.prev().css('display', 'flex');
     }
+
 })
 
 /* -----------삭제 모달창-------------- */
@@ -236,13 +252,38 @@ $userType.on('mouseout', function () {
 })
 
 
-
 /*===========Ajax===============================*/
+show();
+
+/*==================필터==================*/
+$filterAccept = $(".apply-button");
+
+$filterAccept.on("click",function(){
+    if($(".user-type").eq(0).text() === '일반'){
+        if($("#option9").text().match('오름차순')){
+            peopleAscendList();
+        }else{
+            peopleList();
+        }
+    }else if($(".user-type").eq(0).text() === '보육원'){
+        if($("#option9").text().match('오름차순')){
+            schoolAscendList();
+        }else{
+            schoolList();
+        }
+    }
+})
+
+$schools =  $(".right-school");
+$people =  $(".right-people");
+
 /*==================보육원 선택==================*/
-$schools =  $(".toolbar-choose-usertype-flex");
+/*보육원*/
+$schools.on("click",function () {
+    schoolList()
+})
 
-$schools.on("click",function(){
-
+function schoolList(){
     $.ajax({
         url: "/adminRest/schools",
         type: "post",
@@ -269,7 +310,7 @@ $schools.on("click",function(){
                 text += `<div class="donate-info-height">`+ school.userPhoneNumber+`</div>`
                 text += `</th>`
                 text += `<th class="card-body-title-padding" style="width: 17%;">`
-                text += `<div class="donate-info-height">`+'일반 또는 보육원'+`</div>`
+                text += `<div class="donate-info-height user-type">`+'보육원'+`</div>`
                 text += `</th>`
                 text += `<th class="card-body-title-padding" style="width: 18%;">`
                 text += `<div class="donate-info-height">5분전</div>`
@@ -289,4 +330,209 @@ $schools.on("click",function(){
             $(".card-body-main-box").html(text)
         }
     })
+}
+
+/*==================일반 선택==================*/
+/*일반*/
+$people.on("click",function(){
+    peopleList()
 })
+
+function peopleList(){
+    $.ajax({
+        url: "/adminRest/people",
+        type: "post",
+        success: function (people){
+            let text = "";
+            people.forEach(function(person){
+                text += `<tr>`
+                text +=  `<th class="card-body-title-checkbox-padding" style="width: 3%; margin-top: 29px;padding-top: 0; padding-bottom: 31px;">`
+                text += `<label class="card-body-title-user-checkbox">`
+                text += `<div class="check-img"></div>`
+                text += `<input class="notice-checked" type="checkbox" name="check">`
+                text += `</label>`
+                text += `</th>`
+                text += `<th class="card-body-title-padding" style="width: 22%;">`
+                text += `<div class="donater-info" style="height: 50px">`
+                text += `<div class="donater-info-img1"></div>`
+                text += `<div class="donater-info-text">`
+                text += `<div class="donater-name">`+person.userName+`</div>`
+                text += `<div>`+ person.userEmail +`</div>`
+                text += `</div>`
+                text += `</div>`
+                text += `</th>`
+                text += `<th class="card-body-title-padding" style="width: 18%;">`
+                text += `<div class="donate-info-height">`+ person.userPhoneNumber+`</div>`
+                text += `</th>`
+                text += `<th class="card-body-title-padding" style="width: 17%;">`
+                text += `<div class="donate-info-height user-type">`+'일반'+`</div>`
+                text += `</th>`
+                text += `<th class="card-body-title-padding" style="width: 18%;">`
+                text += `<div class="donate-info-height">5분전</div>`
+                text += `</th>`
+                text += `<th class="card-body-title-padding" style="width: 22%;">`
+
+                let date = new Date(person.createdDate);
+                let year = date.getFullYear().toString().substr(2)+'년 ';
+                let month = date.getMonth() + 1 +'월 ';
+                let day = date.getDate()+'일';
+                let createdDateView = year+month+day;
+
+                text += `<div class="donate-info-height">`+ createdDateView +`</div>`
+                text += `</th>`
+                text += `</tr>`
+            })
+            $(".card-body-main-box").html(text)
+        }
+    })
+}
+
+/*==================전체회원==================*/
+function show(){
+    $.ajax({
+        url: "/adminRest/all",
+        type: "post",
+        success: function (all) {
+            let text = "";
+            all.forEach(function (one) {
+                text += `<tr>`
+                text += `<th class="card-body-title-checkbox-padding" style="width: 3%; margin-top: 29px;padding-top: 0; padding-bottom: 31px;">`
+                text += `<label class="card-body-title-user-checkbox">`
+                text += `<div class="check-img"></div>`
+                text += `<input class="notice-checked" type="checkbox" name="check">`
+                text += `</label>`
+                text += `</th>`
+                text += `<th class="card-body-title-padding" style="width: 22%;">`
+                text += `<div class="donater-info" style="height: 50px">`
+                text += `<div class="donater-info-img1"></div>`
+                text += `<div class="donater-info-text">`
+                text += `<div class="donater-name">` + one.userName + `</div>`
+                text += `<div>` + one.userEmail + `</div>`
+                text += `</div>`
+                text += `</div>`
+                text += `</th>`
+                text += `<th class="card-body-title-padding" style="width: 18%;">`
+                text += `<div class="donate-info-height">` + one.userPhoneNumber + `</div>`
+                text += `</th>`
+                text += `<th class="card-body-title-padding" style="width: 17%;">`
+                text += `<div class="donate-info-height user-type">` + '일반 또는 보육원' + `</div>`
+                text += `</th>`
+                text += `<th class="card-body-title-padding" style="width: 18%;">`
+                text += `<div class="donate-info-height">5분전</div>`
+                text += `</th>`
+                text += `<th class="card-body-title-padding" style="width: 22%;">`
+
+                let date = new Date(one.createdDate);
+                let year = date.getFullYear().toString().substr(2) + '년 ';
+                let month = date.getMonth() + 1 + '월 ';
+                let day = date.getDate() + '일';
+                let createdDateView = year + month + day;
+
+                text += `<div class="donate-info-height">` + createdDateView + `</div>`
+                text += `</th>`
+                text += `</tr>`
+            })
+            $(".card-body-main-box").html(text)
+        }
+    })
+}
+
+
+/*===================오름차순================*/
+function peopleAscendList(){
+    $.ajax({
+        url: "/adminRest/peopleasc",
+        type: "post",
+        success: function (all) {
+            let text = "";
+            all.forEach(function (one) {
+                text += `<tr>`
+                text += `<th class="card-body-title-checkbox-padding" style="width: 3%; margin-top: 29px;padding-top: 0; padding-bottom: 31px;">`
+                text += `<label class="card-body-title-user-checkbox">`
+                text += `<div class="check-img"></div>`
+                text += `<input class="notice-checked" type="checkbox" name="check">`
+                text += `</label>`
+                text += `</th>`
+                text += `<th class="card-body-title-padding" style="width: 22%;">`
+                text += `<div class="donater-info" style="height: 50px">`
+                text += `<div class="donater-info-img1"></div>`
+                text += `<div class="donater-info-text">`
+                text += `<div class="donater-name">` + one.userName + `</div>`
+                text += `<div>` + one.userEmail + `</div>`
+                text += `</div>`
+                text += `</div>`
+                text += `</th>`
+                text += `<th class="card-body-title-padding" style="width: 18%;">`
+                text += `<div class="donate-info-height">` + one.userPhoneNumber + `</div>`
+                text += `</th>`
+                text += `<th class="card-body-title-padding" style="width: 17%;">`
+                text += `<div class="donate-info-height user-type">` + '일반' + `</div>`
+                text += `</th>`
+                text += `<th class="card-body-title-padding" style="width: 18%;">`
+                text += `<div class="donate-info-height">5분전</div>`
+                text += `</th>`
+                text += `<th class="card-body-title-padding" style="width: 22%;">`
+
+                let date = new Date(one.createdDate);
+                let year = date.getFullYear().toString().substr(2) + '년 ';
+                let month = date.getMonth() + 1 + '월 ';
+                let day = date.getDate() + '일';
+                let createdDateView = year + month + day;
+
+                text += `<div class="donate-info-height">` + createdDateView + `</div>`
+                text += `</th>`
+                text += `</tr>`
+            })
+            $(".card-body-main-box").html(text)
+        }
+    })
+}
+function schoolAscendList(){
+    $.ajax({
+        url: "/adminRest/schoolasc",
+        type: "post",
+        success: function (all) {
+            let text = "";
+            all.forEach(function (one) {
+                text += `<tr>`
+                text += `<th class="card-body-title-checkbox-padding" style="width: 3%; margin-top: 29px;padding-top: 0; padding-bottom: 31px;">`
+                text += `<label class="card-body-title-user-checkbox">`
+                text += `<div class="check-img"></div>`
+                text += `<input class="notice-checked" type="checkbox" name="check">`
+                text += `</label>`
+                text += `</th>`
+                text += `<th class="card-body-title-padding" style="width: 22%;">`
+                text += `<div class="donater-info" style="height: 50px">`
+                text += `<div class="donater-info-img1"></div>`
+                text += `<div class="donater-info-text">`
+                text += `<div class="donater-name">` + one.userName + `</div>`
+                text += `<div>` + one.userEmail + `</div>`
+                text += `</div>`
+                text += `</div>`
+                text += `</th>`
+                text += `<th class="card-body-title-padding" style="width: 18%;">`
+                text += `<div class="donate-info-height">` + one.userPhoneNumber + `</div>`
+                text += `</th>`
+                text += `<th class="card-body-title-padding" style="width: 17%;">`
+                text += `<div class="donate-info-height user-type">` + '일반' + `</div>`
+                text += `</th>`
+                text += `<th class="card-body-title-padding" style="width: 18%;">`
+                text += `<div class="donate-info-height">5분전</div>`
+                text += `</th>`
+                text += `<th class="card-body-title-padding" style="width: 22%;">`
+
+                let date = new Date(one.createdDate);
+                let year = date.getFullYear().toString().substr(2) + '년 ';
+                let month = date.getMonth() + 1 + '월 ';
+                let day = date.getDate() + '일';
+                let createdDateView = year + month + day;
+
+                text += `<div class="donate-info-height">` + createdDateView + `</div>`
+                text += `</th>`
+                text += `</tr>`
+            })
+            $(".card-body-main-box").html(text)
+        }
+    })
+}
+

@@ -18,24 +18,25 @@ import static com.app.milestone.entity.QWithdrawal.withdrawal;
 public class WithdrawalRepositoryImpl implements WithdrawalCustomRepository{
     private final JPAQueryFactory jpaQueryFactory;
 
-    //    탈퇴회원 목록
+    //    탈퇴회원 목록 내림차순(최신순)
     @Override
-    public List<Withdrawal> findByCreatedDate (Pageable pageable) {
-        return jpaQueryFactory.selectFrom(withdrawal)
+    public List<WithdrawalDTO> findByCreatedDate (Pageable pageable) {
+        return jpaQueryFactory.select(new QWithdrawalDTO(
+                withdrawal.withdrawalReason,
+                withdrawal.withdrawalUserType
+        )).from(withdrawal)
                 .orderBy(withdrawal.createdDate.desc())
-                .offset(pageable.getOffset())
-                .limit(pageable.getPageSize())
                 .fetch();
     };
-//    public List<WithdrawalDTO> findByCreatedDate (Pageable pageable) {
-//        return jpaQueryFactory.select(new QWithdrawalDTO(
-//            withdrawal.withdrawalUserType,
-//            withdrawal.withdrawalReason
-//        )).from(withdrawal)
-//                .orderBy(withdrawal.createdDate.desc())
-//                .offset(pageable.getOffset())
-//                .limit(pageable.getPageSize())
-//                .fetch();
-//    };
+
+    //    탈퇴회원 목록 오름차순(오래된 순)
+    public List<WithdrawalDTO> findByCreatedDateAsc () {
+        return jpaQueryFactory.select(new QWithdrawalDTO(
+            withdrawal.withdrawalReason,
+            withdrawal.withdrawalUserType
+            )).from(withdrawal)
+                .orderBy(withdrawal.createdDate.asc())
+                .fetch();
+    };
 
 }

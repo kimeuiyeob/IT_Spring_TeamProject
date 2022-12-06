@@ -212,11 +212,11 @@
                 <span id="toolbarTitleSub">홈 - 사용자 관리 - 전체 회원</span>
             </div>
             <div id="toolbar-choose-usertype">
-                <div class="toolbar-choose-usertype-flex">
+                <div class="toolbar-choose-usertype-flex right-people">
                     <div class="toolbar-choose-usertype-general-img"></div>
                     일반
                 </div>
-                <div class="toolbar-choose-usertype-flex">
+                <div class="toolbar-choose-usertype-flex right-school">
                     <div class="toolbar-choose-usertype-nurserySchool-img"></div>
                     보육원
                 </div>
@@ -240,7 +240,7 @@
                                     <div id="filter-img"></div>
                                     필터
 
-                                    <div class="menu-sub-dropdown">
+                                    <div class="menu-sub-dropdown asdf">
                                         <div class="menu-sub-dropdown-wrap">
                                             <div class="menu-sub-dropdown-header-title">
                                                 필터 옵션
@@ -259,10 +259,10 @@
                                                         </div>
                                                         <div class="menu-sub-dropdown-option-arrow"></div>
                                                         <div class="menu-sub-dropdown-option-sub">
-                                                            <div class="menu-sub-dropdown-option-sub-item">
+                                                            <div class="menu-sub-dropdown-option-sub-item listAsc">
                                                                 오름차순
                                                             </div>
-                                                            <div class="menu-sub-dropdown-option-sub-item">
+                                                            <div class="menu-sub-dropdown-option-sub-item listDesc">
                                                                 내림차순
                                                             </div>
                                                         </div>
@@ -293,7 +293,7 @@
                                             </div>
                                             <div class="menu-sub-dropdown-footer">
                                                 <div class="menu-sub-dropdown-Botton" id="reset6">초기화</div>
-                                                <div class="menu-sub-dropdown-Botton">적용</div>
+                                                <div class="menu-sub-dropdown-Botton apply-button">적용</div>
                                             </div>
 
                                         </div>
@@ -313,7 +313,7 @@
                             <thead class="card-body-title-box">
                             <tr class="card-body-line">
                                 <th class="card-body-title-checkbox-padding" style="width: 3%;">
-                                    <label class="card-body-title-user-checkbox">
+                                    <label class="card-body-title-user-checkbox card-body-title-user-checkbox-all">
                                         <div class="check-img"></div>
                                         <input class="notice-checked-all" type="checkbox" name="check">
                                     </label>
@@ -350,45 +350,45 @@
                             <tbody class="card-body-main-box">
 
                             <!--회원 하나-->
-                            <th:block th:each="user:${users}">
-                                <tr th:object="${user}">
-                                    <th class="card-body-title-checkbox-padding" style="width: 3%; margin-top: 29px;padding-top: 0; padding-bottom: 31px;">
-                                        <label class="card-body-title-user-checkbox">
-                                            <div class="check-img"></div>
-                                            <input class="notice-checked" type="checkbox" name="check">
-                                        </label>
-                                    </th>
-                                    <th class="card-body-title-padding" style="width: 22%;">
-                                        <div class="donater-info" style="height: 50px">
-                                            <div class="donater-info-img1"></div>
-                                            <div class="donater-info-text">
-                                                <div class="donater-name" th:text="*{userName}"><!--박해준--></div>
-                                                <div th:text="*{userEmail}"><!--abc@gmail.com--></div>
-                                            </div>
-                                        </div>
-                                    </th>
-                                    <th class="card-body-title-padding" style="width: 18%;">
-                                        <div class="donate-info-height" th:text="*{userPhoneNumber}">
-                                            <!--01021208515-->
-                                        </div>
-                                    </th>
-                                    <th class="card-body-title-padding" style="width: 17%;">
-                                        <div class="donate-info-height">
-                                            일반 또는 보육원
-                                        </div>
-                                    </th>
-                                    <th class="card-body-title-padding" style="width: 18%;">
-                                        <div class="donate-info-height">
-                                            5분전
-                                        </div>
-                                    </th>
-                                    <th class="card-body-title-padding" style="width: 22%;">
-                                        <div class="donate-info-height" th:text="*{#temporals.format(createdDate,'YYYY년 MM월 dd일')}">
-                                            <!--2022년 10월 2일 20시 00분-->
-                                        </div>
-                                    </th>
-                                </tr>
-                            </th:block>
+<!--                            <th:block th:each="user:${users}">-->
+<!--                                <tr th:object="${user}">-->
+<!--                                    <th class="card-body-title-checkbox-padding" style="width: 3%; margin-top: 29px;padding-top: 0; padding-bottom: 31px;">-->
+<!--                                        <label class="card-body-title-user-checkbox">-->
+<!--                                            <div class="check-img"></div>-->
+<!--                                            <input class="notice-checked" type="checkbox" name="check">-->
+<!--                                        </label>-->
+<!--                                    </th>-->
+<!--                                    <th class="card-body-title-padding" style="width: 22%;">-->
+<!--                                        <div class="donater-info" style="height: 50px">-->
+<!--                                            <div class="donater-info-img1"></div>-->
+<!--                                            <div class="donater-info-text">-->
+<!--                                                <div class="donater-name" th:text="*{userName}">&lt;!&ndash;박해준&ndash;&gt;</div>-->
+<!--                                                <div th:text="*{userEmail}">&lt;!&ndash;abc@gmail.com&ndash;&gt;</div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </th>-->
+<!--                                    <th class="card-body-title-padding" style="width: 18%;">-->
+<!--                                        <div class="donate-info-height" th:text="*{userPhoneNumber}">-->
+<!--                                            &lt;!&ndash;01021208515&ndash;&gt;-->
+<!--                                        </div>-->
+<!--                                    </th>-->
+<!--                                    <th class="card-body-title-padding" style="width: 17%;">-->
+<!--                                        <div class="donate-info-height user-type">-->
+<!--                                            일반 또는 보육원-->
+<!--                                        </div>-->
+<!--                                    </th>-->
+<!--                                    <th class="card-body-title-padding" style="width: 18%;">-->
+<!--                                        <div class="donate-info-height">-->
+<!--                                            5분전-->
+<!--                                        </div>-->
+<!--                                    </th>-->
+<!--                                    <th class="card-body-title-padding" style="width: 22%;">-->
+<!--                                        <div class="donate-info-height" th:text="*{#temporals.format(createdDate,'YYYY년 MM월 dd일')}">-->
+<!--                                            &lt;!&ndash;2022년 10월 2일 20시 00분&ndash;&gt;-->
+<!--                                        </div>-->
+<!--                                    </th>-->
+<!--                                </tr>-->
+<!--                            </th:block>-->
                             </tbody>
                         </table>
 

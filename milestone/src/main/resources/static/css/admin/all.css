@@ -1733,7 +1733,6 @@ main {
 
 .menu-sub-dropdown {
     display: none;
-    /* display: flex; */
     position: absolute;
     background-color: #fff;
     border-radius: 0.475rem;

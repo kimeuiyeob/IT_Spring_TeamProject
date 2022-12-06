@@ -14,13 +14,13 @@ import java.util.List;
 public class WithdrawalService {
     private final WithdrawalRepository withdrawalRepository;
 
-    //    전체 탈퇴회원 목록
-    public List<Withdrawal> withdrawalList(Pageable pageable){
-        return withdrawalRepository.findByCreatedDate(pageable);
-    }
-/*
+    //    전체 탈퇴회원 목록(최신순)
     public List<WithdrawalDTO> withdrawalList(Pageable pageable){
         return withdrawalRepository.findByCreatedDate(pageable);
     }
-*/
+
+    //  전체 탈퇴회원 목록(오래된 순)
+    public List<WithdrawalDTO> withdrawalListAsc(){
+        return withdrawalRepository.findByCreatedDateAsc();
+    }
 }

@@ -10,6 +10,7 @@ import com.app.milestone.repository.PeopleRepository;
 import com.app.milestone.repository.SchoolRepository;
 import com.querydsl.core.Tuple;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -103,5 +104,19 @@ public class PeopleService {
             arRanking.add(ranking);
         }
         return arRanking;
+    }
+
+
+
+
+    /* 관리자페이지 */
+    //전체회원중 일반회원 불러오기
+    public List<PeopleDTO> peopleOnly(){
+        return peopleRepository.findByPeopleOnly();
+    }
+
+    //일반회원 중 가입날짜 오름차순 정렬
+    public List<PeopleDTO> peopleOnlyAsc(){
+        return peopleRepository.findByPeopleOnlyAsc();
     }
 }
