@@ -27,8 +27,7 @@ public class SchoolRestController {
     public SchoolResp search(@PathVariable("page") Integer page, Search search, Model model) {
         SchoolResp schoolResp = new SchoolResp();
         Pageable pageable = PageRequest.of(page, 10);
-        log.info("레스트" + pageable);
-        Page<SchoolDTO> arSchoolDTO = schoolService.schoolList(pageable, search);
+        Page<SchoolDTO> arSchoolDTO = schoolService.schoolList(page, search);
         schoolResp.setArSchoolDTO(arSchoolDTO);
         schoolResp.setTotal(schoolService.schoolListCount(pageable, search));
         return schoolResp;

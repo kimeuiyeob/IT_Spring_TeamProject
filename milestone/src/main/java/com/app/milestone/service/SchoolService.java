@@ -77,8 +77,9 @@ public class SchoolService {
     }
 
     //    보육원 목록(보육원 목록)(Page버전)
-    public Page<SchoolDTO> schoolList(Pageable pageable, Search search) {
-        Pageable pageable1 = pageable;
+    public Page<SchoolDTO> schoolList(Integer page, Search search) {
+        if(page==null) page=0;
+        Pageable pageable = PageRequest.of(page,10);
         if (search.getSchoolAddress() == null) {
             search.setSchoolAddress(new ArrayList<>());
             search.getSchoolAddress().add(null);
@@ -87,18 +88,17 @@ public class SchoolService {
             search.setSchoolName(null);
         }
         List<SchoolDTO> list = schoolRepository.findAllByCreatedDate(pageable, search);
-        int start = list.size() > (int) pageable1.getOffset() ? (int) pageable1.getOffset() : (int) pageable1.getOffset() - 10;
+        int start = list.size() > (int) pageable.getOffset() ? (int) pageable.getOffset() : (int) pageable.getOffset() - 10;
         int end = Math.min((start + pageable.getPageSize()), list.size());
-        log.info("===============asdf" + pageable1);
-        log.info("===============asdf" + search);
-        log.info("===============asdf" + start);
-        log.info("asd===============" + end);
-        log.info("asd===============" + schoolRepository.countByCreatedDate(pageable, search));
+//        log.info("===============asdf" + pageable);
+//        log.info("===============asdf" + search);
+//        log.info("===============asdf" + start);
+//        log.info("asd===============" + end);
+//        log.info("asd===============" + schoolRepository.countByCreatedDate(pageable, search));
 
-        Page<SchoolDTO> page = new PageImpl<>(list.subList(start, end), pageable, Integer.valueOf("" + schoolRepository.countByCreatedDate(pageable, search)));
-//        Page<SchoolDTO> page = new PageImpl<>(list);
+        Page<SchoolDTO> schools = new PageImpl<>(list.subList(start, end), pageable, Integer.valueOf("" + schoolRepository.countByCreatedDate(pageable, search)));
 
-        return page;
+        return schools;
     }
 
     //    보육원 목록(보육원 목록) 수

@@ -280,7 +280,7 @@
                 </span>
             </section>
             <!-- 보육원 이름 -->
-            <input type="hidden" class = "userId" th:value="${userId}">
+            <input type="hidden" class="userId" th:value="${userId}">
             <section class="schoolName">
                 <h1>새싹보육원</h1>
             </section>
@@ -299,7 +299,8 @@
                         <span class="introTitle schoolTitle">안녕하세요, 새싹보육원입니다.</span>
                         <!-- 보육원 정보 -->
                         <div class="schoolInfo">
-                            <div class="address">주소 : <span class="addressIn">서울시 강남구 역삼동 테헤란로 146 현익빌딩 3,4층</span></div>
+                            <div class="address">주소 : <span class="addressIn">서울시 강남구 역삼동 테헤란로 146 현익빌딩 3,4층</span>
+                            </div>
                             <div class="phone">전화 : <span class="phoneIn">02 1234 1234</span></div>
                             <div class="childCount">아이들 인원 : <span class="childCountIn">20명</span></div>
                         </div>
@@ -536,26 +537,37 @@
 
     show();
 
+    //보육원 정보
     /*아마 schoolResp로 바뀔 예정*/
-    function getInfo(schoolDTO){
+    function getInfo(schoolDTO) {
         console.log(schoolDTO);
         $('.schoolName').find('h1').html(schoolDTO.schoolName);
-        // $('.smallCategory').html(schoolDTO.schoolAddress.substring(0,2));
+        $('.smallCategory').html(schoolDTO.schoolAddress.substring(0, 2));
         $('.schoolTitle').html(schoolDTO.schoolTitle);
         $('.addressIn').html(schoolDTO.schoolAddress);
-        if(schoolDTO.schoolPhoneNumber){
+        if (schoolDTO.schoolPhoneNumber) {
             $('.phoneIn').html(schoolDTO.schoolPhoneNumber)
-        }else{
+        } else {
             $('.phoneIn').html(schoolDTO.userPhoneNumber)
         }
         $('.childCountIn').html(schoolDTO.schoolKids);
         $('.introContent').html(schoolDTO.schoolContent);
     }
 
+    //보육원 하나에 대한 최근 기부
+    function getRecent(schoolDTO) {
+        console.log(schoolDTO);
+        schoolDTO.forEach(school => {
+        })
+
+    }
+
+    //보육원 하나에 대한 기부 랭킹
+
     function show() {
         getInfo1({
-            userId : $('.userId').val()
-        },getInfo);
+            userId: $('.userId').val()
+        }, getInfo);
     }
 
 </script>
