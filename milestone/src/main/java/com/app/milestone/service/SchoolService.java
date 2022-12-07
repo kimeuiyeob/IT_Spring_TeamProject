@@ -14,13 +14,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -31,30 +28,10 @@ public class SchoolService {
     private final MoneyRepository moneyRepository;
 
     //    보육원 회원가입
-    public ResponseEntity schoolSignUp(SchoolDTO schoolDTO) {
-
-        Optional<School> school = schoolRepository.findByUserEmail(schoolDTO.getUserEmail());
-
-        if (school.isEmpty()) {
-            School newSchool = School.builder()
-                    .userEmail(schoolDTO.getUserEmail())
-                    .userPassword(schoolDTO.getUserPassword())
-                    .userName(schoolDTO.getUserName())
-                    .schoolName(schoolDTO.getSchoolName())
-                    .schoolTeachers(schoolDTO.getSchoolTeachers())
-                    .schoolKids(schoolDTO.getSchoolKids())
-                    .schoolBudget(schoolDTO.getSchoolBudget())
-                    .schoolAccount(schoolDTO.getSchoolAccount())
-                    .userPhoneNumber(schoolDTO.getUserPhoneNumber())
-                    .schoolPhoneNumber(schoolDTO.getSchoolPhoneNumber())
-                    .build();
-
-            schoolRepository.save(newSchool);
-
-            return new ResponseEntity("success", HttpStatus.OK);
-        } else {
-            return new ResponseEntity("fail", HttpStatus.OK);
-        }
+    public Long createSchool(SchoolDTO schoolDTO) {
+        School school = schoolDTO.toEntity();
+        schoolRepository.save(school);
+        return school.getUserId();
     }
 
     //    보육원 등록
@@ -78,8 +55,8 @@ public class SchoolService {
 
     //    보육원 목록(보육원 목록)(Page버전)
     public Page<SchoolDTO> schoolList(Integer page, Search search) {
-        if(page==null) page=0;
-        Pageable pageable = PageRequest.of(page,10);
+        if (page == null) page = 0;
+        Pageable pageable = PageRequest.of(page, 10);
         if (search.getSchoolAddress() == null) {
             search.setSchoolAddress(new ArrayList<>());
             search.getSchoolAddress().add(null);
@@ -132,21 +109,6 @@ public class SchoolService {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     // 관리자 페이지============================================
 
     //    보육원 목록
@@ -155,10 +117,10 @@ public class SchoolService {
     }
 
     //    전체회원 중 보육원 목록
-    public Page<SchoolDTO> schoolOnly(Integer page,Search search) {
-        if(page==null) page=0;
-        Pageable pageable = PageRequest.of(page,7);
-        List<SchoolDTO> list = schoolRepository.findBySchoolOnly(pageable,search);
+    public Page<SchoolDTO> schoolOnly(Integer page, Search search) {
+        if (page == null) page = 0;
+        Pageable pageable = PageRequest.of(page, 7);
+        List<SchoolDTO> list = schoolRepository.findBySchoolOnly(pageable, search);
         int start = list.size() > (int) pageable.getOffset() ? (int) pageable.getOffset() : (int) pageable.getOffset() - 10;
         int end = Math.min((start + pageable.getPageSize()), list.size());
 
@@ -175,8 +137,8 @@ public class SchoolService {
     /*=============================================================================*/
     //    보육원 검색 + 예산 내림차순
     public Page<SchoolDTO> schoolListBudgetSearch(Integer page, Search search) {
-        if(page==null) page=0;
-        Pageable pageable = PageRequest.of(page,7);
+        if (page == null) page = 0;
+        Pageable pageable = PageRequest.of(page, 7);
         if (search.getSchoolAddress() == null) {
             search.setSchoolAddress(new ArrayList<>());
             search.getSchoolAddress().add(null);
@@ -185,7 +147,7 @@ public class SchoolService {
             search.setSchoolName(null);
         }
         List<SchoolDTO> list = schoolRepository.findByBudgetAndSearch(pageable, search);
-        log.info("결과============"+pageable.getOffset());
+        log.info("결과============" + pageable.getOffset());
         int start = list.size() > (int) pageable.getOffset() ? (int) pageable.getOffset() : (int) pageable.getOffset() - 10;
         int end = Math.min((start + pageable.getPageSize()), list.size());
 
@@ -196,8 +158,8 @@ public class SchoolService {
 
     //    보육원 검색 + 예산 오름차순
     public Page<SchoolDTO> schoolListBudgetSearchAsc(Integer page, Search search) {
-        if(page==null) page=0;
-        Pageable pageable = PageRequest.of(page,7);
+        if (page == null) page = 0;
+        Pageable pageable = PageRequest.of(page, 7);
         if (search.getSchoolAddress() == null) {
             search.setSchoolAddress(new ArrayList<>());
             search.getSchoolAddress().add(null);
