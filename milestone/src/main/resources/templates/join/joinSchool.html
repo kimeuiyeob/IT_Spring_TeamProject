@@ -20,13 +20,14 @@
         <div class="joinTitleWrap" style="margin-top: 0; word-spacing: -5px;">
             딱 이것만 체크하면 가입완료!
         </div>
-        <form action="" id="joinForm" name="joinForm">
+        <form role="form" th:action="@{/main/school}" th:object="${schoolDTO}" method="post" id="joinForm"
+              name="joinForm">
             <div class="inputWrap flexCol">
                 <div class="flexRow margin-bottom-8">
                     <div class="inputTitle">이메일</div>
                     <div class="essential">*</div>
                 </div>
-                <input class="inputCos" name="email" id="email" type="email" placeholder="이메일을 입력해 주세요.">
+                <input th:field="*{userEmail}" class="inputCos" name="email" id="email" type="email" placeholder="이메일을 입력해 주세요.">
                 <div class="flexRow margin-top-4" style="display: none;">
                     <div class="warningMsg">이메일을 입력해 주세요.</div>
                 </div>
@@ -36,7 +37,7 @@
                     <div class="inputTitle">비밀번호</div>
                     <div class="essential">*</div>
                 </div>
-                <input class="inputCos" name="password" id="password" type="password"
+                <input th:field="*{userPassword}" class="inputCos" name="password" id="password" type="password"
                        placeholder="비밀번호를 입력해 주세요.(8자리 이상)">
                 <div class="flexRow margin-top-4" style="display: none;">
                     <div class="warningMsg">비밀번호를 입력해 주세요.</div>
@@ -54,7 +55,7 @@
                     <div class="inputTitle">이름</div>
                     <div class="essential">*</div>
                 </div>
-                <input class="inputCos" name="name" id="name" type="text" placeholder="이름을 입력해 주세요.">
+                <input th:field="*{userName}" class="inputCos" name="name" id="name" type="text" placeholder="이름을 입력해 주세요.">
                 <div class="flexRow margin-top-4" style="display: none;">
                     <div class="warningMsg">이름을 입력해 주세요.</div>
                 </div>
@@ -64,7 +65,7 @@
                     <div class="inputTitle">보육원 이름</div>
                     <div class="essential">*</div>
                 </div>
-                <input class="inputCos" name="schoolName" id="schoolName" type="text" placeholder="보육원이름을 입력해 주세요.">
+                <input th:field="*{schoolName}" class="inputCos" name="schoolName" id="schoolName" type="text" placeholder="보육원이름을 입력해 주세요.">
                 <div class="flexRow margin-top-4" style="display: none;">
                     <div class="warningMsg">보육원 이름을 입력해 주세요.</div>
                 </div>
@@ -103,7 +104,7 @@
                 <div class="margin-bottom-8 flexRow">
                     <div class="inputTitle">보육원 교사 수</div>
                 </div>
-                <input class="inputCos" name="teacherPersonnel" id="teacherPersonnel" type="text"
+                <input th:field="*{schoolTeachers}" class="inputCos" name="teacherPersonnel" id="teacherPersonnel" type="text"
                        placeholder="0">
             </div>
             <div class="inputWrap flexCol">
@@ -111,7 +112,7 @@
                     <div class="inputTitle">보육원 아이들 수</div>
                     <div class="essential">*</div>
                 </div>
-                <input class="inputCos" name="childPersonnel" id="childPersonnel" type="text"
+                <input th:field="*{schoolKids}" class="inputCos" name="childPersonnel" id="childPersonnel" type="text"
                        placeholder="0">
                 <div class="margin-top-6" style="display: none;">
                     <div class="warningMsg">보육원 아이들 수를 입력해 주세요.</div>
@@ -121,7 +122,7 @@
                 <div class="margin-bottom-8 flexRow">
                     <div class="inputTitle">1년 예산</div>
                 </div>
-                <input class="inputCos" name="budget" id="budget" type="text" placeholder="0">
+                <input th:field="*{schoolBudget}" class="inputCos" name="budget" id="budget" type="text" placeholder="0">
             </div>
             <div class="inputWrap flexCol">
                 <div class="margin-bottom-8 flexRow">
@@ -139,8 +140,8 @@
                     </div>
                     <div class="inputCos flex" style="padding: 0;">
                         <div class="inputSpace flexRow">
-                            <input type=text name="bank" id="bank" placeholder="은행을 선택해주세요" disabled>
-                            <input type=text id="bankFocus">
+                            <input  th:field="*{schoolBank}" type=text name="bank" id="bank" placeholder="은행을 선택해주세요" disabled>
+                            <input  type=text id="bankFocus">
                         </div>
                         <div class="arrowWrap flexPublic">
                             <svg height="20" width="20" class="arrowColor">
@@ -158,7 +159,7 @@
                     <div class="inputTitle">보육원 계좌 번호</div>
                     <div class="essential">*</div>
                 </div>
-                <input class="inputCos" name="accountNumber" id="accountNumber" type="text"
+                <input th:field="*{schoolAccount}" class="inputCos" name="accountNumber" id="accountNumber" type="text"
                        placeholder=" - 를 제외한 숫자만 입력해 주세요">
                 <div class="margin-top-6" style="display: none;">
                     <div class="warningMsg">계좌 번호를 입력해 주세요.</div>
@@ -170,7 +171,7 @@
                     <div class="essential">*</div>
                 </div>
                 <div class="flexBetween">
-                    <input class="inputCos" name="phone" id="phone" type="text" placeholder="전화번호를 입력해 주세요.">
+                    <input th:field="*{userPhoneNumber}" class="inputCos" name="phone" id="phone" type="text" placeholder="전화번호를 입력해 주세요.">
                     <button type="button" class="certificationBtn"><span>인증번호 받기</span></button>
                 </div>
                 <div class="flexRow margin-top-4" style="display: none;">
@@ -189,67 +190,67 @@
                     <div class="inputTitle">추가 연락처</div>
                 </div>
                 <div class="flexBetween">
-                    <input class="inputCos" name="plusPhone" id="plusPhone" type="text" placeholder="전화번호를 입력해 주세요.">
+                    <input th:field="*{schoolPhoneNumber}" class="inputCos" name="plusPhone" id="plusPhone" type="text" placeholder="전화번호를 입력해 주세요.">
                 </div>
                 <div class="flexRow margin-top-4" style="display: none;">
                     <div class="warningMsg">전화번호를 정확히 입력해 주세요.</div>
                 </div>
             </div>
-        </form>
-        <div class="agreements">
-            <label>
-                <div class="agreeAllWrap flexRow">
-                    <input type="checkbox" class="allCheckbox">
-                    <div class="agreeBackground">
-                        <div class="checkImg"></div>
+            <div class="agreements">
+                <label>
+                    <div class="agreeAllWrap flexRow">
+                        <input type="checkbox" class="allCheckbox">
+                        <div class="agreeBackground">
+                            <div class="checkImg"></div>
+                        </div>
+                        모두 동의합니다.
                     </div>
-                    모두 동의합니다.
+                </label>
+                <div class="margin-top-16">
+                    <label>
+                        <div class="flexRow margin-bottom-4 smallAgree">
+                            <input type="checkbox" class="smallCheckbox">
+                            <div class="smallAgreeBackground">
+                                <div class="smallCheckImg"></div>
+                            </div>
+                            만 14세 이상입니다.
+                            <div class="essentialAgree">(필수)</div>
+                        </div>
+                    </label>
+                    <label>
+                        <div class="flexRow margin-bottom-4 smallAgree">
+                            <input type="checkbox" class="smallCheckbox">
+                            <div class="smallAgreeBackground">
+                                <div class="smallCheckImg"></div>
+                            </div>
+                            <a href="">서비스 이용약관</a>에 동의합니다.
+                            <div class="essentialAgree">(필수)</div>
+                        </div>
+                    </label>
+                    <label>
+                        <div class="flexRow margin-bottom-4 smallAgree">
+                            <input type="checkbox" class="smallCheckbox">
+                            <div class="smallAgreeBackground">
+                                <div class="smallCheckImg"></div>
+                            </div>
+                            <a href="">개인정보 수집/이용</a>에 동의합니다.
+                            <div class="essentialAgree">(필수)</div>
+                        </div>
+                    </label>
+                    <label>
+                        <div class="flexRow margin-bottom-4 smallAgree">
+                            <input type="checkbox" class="smallCheckbox">
+                            <div class="smallAgreeBackground">
+                                <div class="smallCheckImg"></div>
+                            </div>
+                            <a href="">개인정보 제3자 제공</a>에 동의합니다.
+                            <div class="essentialAgree">(필수)</div>
+                        </div>
+                    </label>
                 </div>
-            </label>
-            <div class="margin-top-16">
-                <label>
-                    <div class="flexRow margin-bottom-4 smallAgree">
-                        <input type="checkbox" class="smallCheckbox">
-                        <div class="smallAgreeBackground">
-                            <div class="smallCheckImg"></div>
-                        </div>
-                        만 14세 이상입니다.
-                        <div class="essentialAgree">(필수)</div>
-                    </div>
-                </label>
-                <label>
-                    <div class="flexRow margin-bottom-4 smallAgree">
-                        <input type="checkbox" class="smallCheckbox">
-                        <div class="smallAgreeBackground">
-                            <div class="smallCheckImg"></div>
-                        </div>
-                        <a href="">서비스 이용약관</a>에 동의합니다.
-                        <div class="essentialAgree">(필수)</div>
-                    </div>
-                </label>
-                <label>
-                    <div class="flexRow margin-bottom-4 smallAgree">
-                        <input type="checkbox" class="smallCheckbox">
-                        <div class="smallAgreeBackground">
-                            <div class="smallCheckImg"></div>
-                        </div>
-                        <a href="">개인정보 수집/이용</a>에 동의합니다.
-                        <div class="essentialAgree">(필수)</div>
-                    </div>
-                </label>
-                <label>
-                    <div class="flexRow margin-bottom-4 smallAgree">
-                        <input type="checkbox" class="smallCheckbox">
-                        <div class="smallAgreeBackground">
-                            <div class="smallCheckImg"></div>
-                        </div>
-                        <a href="">개인정보 제3자 제공</a>에 동의합니다.
-                        <div class="essentialAgree">(필수)</div>
-                    </div>
-                </label>
             </div>
-        </div>
-        <button type = "button" class="joinBtn" form="joinForm">버튼만 누르면 가입완료!</button>
+            <button type="button" class="joinBtn" form="joinForm">버튼만 누르면 가입완료!</button>
+        </form>
     </div>
     <div class="joinFooter">
         마일스톤은 회원님의 원할한 서비스 이용에 필요한 정보를
