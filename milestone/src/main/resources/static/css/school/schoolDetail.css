@@ -225,6 +225,7 @@ aside{
     display: flex;
     align-items: flex-start;
     flex-direction: column;
+    justify-content: center;
 }
 
 .commentsInfo{
@@ -699,6 +700,7 @@ table#userTable{
 }
 
 .userNickname{
+    justify-content: center;
     padding: 5px;
     width: 40%;
     text-align: left;
@@ -749,12 +751,6 @@ table#userTable2{
 
 
 /* ==========댓글============ */
-.replyRegisterButton:hover {
-    filter: brightness(90%);
-    cursor: pointer;
-    transition: all 0.2s ease 0s;
-}
-
 .modifyAndDelete {
     display: flex;
     margin-left: auto;
@@ -783,6 +779,29 @@ table#userTable2{
     font: inherit;
     border-radius: 3px;
     font-weight: 400;
+}
+
+.replyRegisterButton:hover {
+    filter: brightness(90%);
+    cursor: pointer;
+    transition: all 0.2s ease 0s;
+}
+
+.replyUpdateButton {
+    margin-left: 5px;
+    width: 15%;
+    color: black;
+    border: 1px solid rgb(228 229 237);
+    background-color: rgb(242 243 247);
+    font: inherit;
+    border-radius: 3px;
+    font-weight: 400;
+}
+
+.replyUpdateButton:hover {
+    filter: brightness(90%);
+    cursor: pointer;
+    transition: all 0.2s ease 0s;
 }
 
 .cancel{

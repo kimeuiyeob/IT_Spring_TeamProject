@@ -63,7 +63,7 @@ public class SchoolServiceTest {
         search.setSchoolAddress(new ArrayList<>());
         search.getSchoolAddress().add("바다");
         search.getSchoolAddress().add("사막");
-        schoolService.schoolList(pageable, search).forEach(o -> log.info("adsdafas" + o));
+        schoolService.schoolList(0, search).forEach(o -> log.info("adsdafas" + o));
     }
 
     //    총 보육원 수
@@ -75,13 +75,13 @@ public class SchoolServiceTest {
     //   보육원 하나에 대한 최근 기부받은 내역
     @Test
     public void recentDonationList() {
-        schoolService.recentDonationList(105L).forEach(o -> log.info("기부자 : " + o.getUserName() + " 기부금 : " + o.getMoneyCash()));
+        schoolService.recentDonationList(105L).forEach(o -> log.info("기부자 : " + o.getPeopleNickName() + " 기부금 : " + o.getMoneyCash()));
     }
 
     //    보육원 하나에 대한 기부금 랭킹
     @Test
     public void moneyDonationRankingForOneSchool() {
-        schoolService.moneyDonationRankingForOneSchool(105L).forEach(o -> log.info("기부금 : " + o.getMoneyCash() + " 기부자 : " + o.getUserName()));
+        schoolService.moneyDonationRankingForOneSchool(105L).forEach(o -> log.info("기부금 : " + o.getMoneyCash() + " 기부자 : " + o.getPeopleNickName()));
     }
 
 }

@@ -57,12 +57,28 @@ public class PeopleService {
         return peopleRepository.findInfoById(userId);
     }
 
+    //    ============================좋아요=========================
+    //    내가 누른 좋아요
+    public List<Long> likeSchoolList(Long sessionId) {
+        List<Long> arUserId = new ArrayList<>();
+        List<Like> likes = likeRepository.findByPeopleUserId(sessionId);
+        for (Like like : likes) {
+            arUserId.add(like.getSchool().getUserId());
+        }
+        return arUserId;
+    }
+
     //    좋아요 누름
-    public void likeSchool(List<Long> userId) {
-        School school = schoolRepository.findById(userId.get(0)).get();
-        People people = peopleRepository.findById(userId.get(1)).get();
+    public Long likeSchool(Long userId, Long sessionId) {
+        School school = schoolRepository.findById(userId).get();
+        People people = peopleRepository.findById(sessionId).get();
         Like like = new Like(school, people);
-        likeRepository.save(like);
+        return likeRepository.save(like).getLikeId();
+    }
+
+    //    좋아요 개수
+    public Long likeCount(Long userId) {
+        return likeRepository.countBySchoolUserId(userId);
     }
 
     //    ===================================기부 랭킹====================================
@@ -112,8 +128,6 @@ public class PeopleService {
     }
 
 
-
-
     /* ==============관리자페이지================================================= */
     //    회원 수
     public Long peopleListCount(Pageable pageable, Search search) {
@@ -121,8 +135,8 @@ public class PeopleService {
     }
 
     public Page<PeopleDTO> peopleListSearch(Integer page, Search search) {
-        if(page==null) page=0;
-        Pageable pageable = PageRequest.of(page,7);
+        if (page == null) page = 0;
+        Pageable pageable = PageRequest.of(page, 7);
 
         if (search.getUserName() == null) {
             search.setUserName(null);
@@ -138,9 +152,10 @@ public class PeopleService {
 
         return people;
     }
+
     public Page<PeopleDTO> peopleListSearchAsc(Integer page, Search search) {
-        if(page==null) page=0;
-        Pageable pageable = PageRequest.of(page,7);
+        if (page == null) page = 0;
+        Pageable pageable = PageRequest.of(page, 7);
 
         if (search.getUserName() == null) {
             search.setUserName(null);

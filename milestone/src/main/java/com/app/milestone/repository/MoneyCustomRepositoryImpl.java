@@ -27,7 +27,7 @@ public class MoneyCustomRepositoryImpl implements MoneyCustomRepository {
     @Override
     public List<MoneyDTO> findByCreateDateByUserId(Long userId) {
         return jpaQueryFactory.select(new QMoneyDTO(
-                money.people.userName,
+                money.people.peopleNickname,
                 money.school.userId,
                 money.moneyCash
         )).from(money)

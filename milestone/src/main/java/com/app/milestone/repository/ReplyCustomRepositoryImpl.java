@@ -19,11 +19,15 @@ public class ReplyCustomRepositoryImpl implements ReplyCustomRepository {
     @Override
     public List<ReplyDTO> findBySchoolId(Long userId) {
         return jpaQueryFactory.select(new QReplyDTO(
+                reply.replyId,
                 reply.replyContent,
+                reply.people.peopleNickname,
+                reply.createdDate,
                 reply.school.userId,
                 reply.people.userId
         )).from(reply)
                 .where(reply.school.userId.eq(userId))
+                .orderBy(reply.createdDate.desc())
                 .fetch();
     }
 }

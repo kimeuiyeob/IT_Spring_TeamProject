@@ -64,7 +64,8 @@
                               d="M11.2307008,3.5 C15.5002489,3.5 18.9614015,6.96828437 18.9614015,11.24663 C18.9614015,13.0978372 18.3133954,14.7973826 17.2322825,16.1299241 L20.2742127,19.178378 C20.5762688,19.4810023 20.5764739,19.9714482 20.2746708,20.2738195 C19.9728678,20.5761908 19.4833433,20.5759857 19.1812873,20.2733614 L19.1812873,20.2733614 L16.1426973,17.2288066 C14.8071694,18.3312107 13.0960911,18.9932599 11.2307008,18.9932599 C6.96115262,18.9932599 3.5,15.5249756 3.5,11.24663 C3.5,6.96828437 6.96115262,3.5 11.2307008,3.5 Z M11.2307008,5.04932599 C7.81506225,5.04932599 5.04614015,7.82395349 5.04614015,11.24663 C5.04614015,14.6693064 7.81506225,17.4439339 11.2307008,17.4439339 C14.6463393,17.4439339 17.4152614,14.6693064 17.4152614,11.24663 C17.4152614,7.82395349 14.6463393,5.04932599 11.2307008,5.04932599 Z">
                         </path>
                     </svg>
-                    <input type="text" name="schoolName" id="schoolName" placeholder=" &nbsp;보육원을 검색하세요" value=""
+                    <input type="hidden" name = "schoolName">
+                    <input type="text" id="schoolName" placeholder=" &nbsp;보육원을 검색하세요" value=""
                            style="border: solid white;">
                 </div>
             </div>
@@ -124,44 +125,25 @@
     // 처음 목록 가져오기
     show();
 
-    // 새로고침test
-    window.addEventListener('beforeunload', function (e) {
-        searchForm.submit();
-        console.log("잘가")
-        e.preventDefault();
-    })
-
-    // //페이지 로딩 완료후 이전에 검색한 지역 눌림 상태
-    // $location2.each(function (i, o) {
-    //     let location = $(o).text();
-    //     if ($('.beforeLocation').text().indexOf(location) != -1) {
-    //         $(".wholeLocation").css({"background-color": "#f2f3f7"})
-    //         $(".wholeLocation").css({"border": "none"})
-    //         $(o).css({"background-color": "transparent"});
-    //         $(o).css({"border": "solid 1px black"});
-    //         save.push($(o).text());
-    //     }
-    // })
-
-    //이전 검색 저장
-    let $beforeSelectLocations = $('.beforeSelectLocations');
-
     $location2.on('click', function () {
+        globalThis.page = 0;
         search()
     })
     $wholeLocation.on('click', function () {
+        globalThis.page = 0;
         search()
     })
 
+    //검색
     $schoolName.on('keyup', function (e) {
         if (e.keyCode == 13) {
+            $('input[name = "schoolName"]').val($schoolName.val());
+            globalThis.page = 0;
             search()
         }
     })
 
     //==========================페이징============================
-    // 새로고침시
-    let schools = [[${schools}]];
 
     let pageInfo;
 
@@ -224,16 +206,9 @@
     }
 
     function search() {
-        // let text = "";
-        // console.log(save);
-        // console.log($schoolName.val())
-        // save.forEach(o => {
-        //     // text += `<input type="text" name=schoolName`
-        // })
-
         getList1({
             schoolAddress: save,
-            schoolName: $schoolName.val(),
+            schoolName: $('input[name = "schoolName"]').val(),
             page: globalThis.page
         }, getList);
     }
