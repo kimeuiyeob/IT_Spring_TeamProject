@@ -34,12 +34,23 @@ public class ReplyTest {
     //    추가
     @Test
     public void saveTest() {
-        School school = schoolRepository.findById(1L).get();
-        People people = peopleRepository.findById(101L).get();
-        ReplyDTO replyDTO = new ReplyDTO("안녕하세요 저는 댓글이예요", 1L, 101L);
-        Reply reply = replyRepository.save(replyDTO.toEntity());
-        reply.changeSchool(school);
-        reply.changePeople(people);
+//        화면에서 받음
+        Long schoolId = 5L;
+        Long peopleId = 132L;
+        String content = "안녕하세요 저는 댓글이예요";
+
+        for (int i = 0; i < 33; i++) {
+            School school = schoolRepository.findById(schoolId).get();
+            People people = peopleRepository.findById(peopleId).get();
+            ReplyDTO replyDTO = new ReplyDTO();
+            replyDTO.setReplyContent(content+i);
+            replyDTO.setSchoolUserId(schoolId);
+            replyDTO.setPeopleUserId(peopleId+i);
+            Reply reply = replyRepository.save(replyDTO.toEntity());
+            reply.changeSchool(school);
+            reply.changePeople(people);
+        }
+
     }
 
     //    조회

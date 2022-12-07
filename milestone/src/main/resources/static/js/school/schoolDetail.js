@@ -20,6 +20,7 @@ $(".zzimButton").click(function () {
         $(this).children(".redHeart").css({"display": "inline"})
         $(this).children(".emptyHeart").css({"display": "none"})
         check2 = true;
+        likeSchool($('.userId').val(),showLikeCount)
     } else {
         $(this).children(".redHeart").css({"display": "none"})
         $(this).children(".emptyHeart").css({"display": "inline"})
@@ -115,30 +116,6 @@ $(document).mouseup(function (e) {
 });
 
 
-/* 댓글 */
-$(".modifyReady").click(function () {
-    $(this).closest(".modifyAndDelete").closest(".commentsInfo").siblings(".modifyShow").hide();
-    $(this).closest(".modifyAndDelete").closest(".commentsInfo").siblings(".modifyHide").show();
-
-    $(this).css('display', 'none');
-    $(this).siblings(".deleteReady").css('display', 'none');
-    $(this).siblings(".between").css('display', 'none');
-    /* 취소버튼 */
-    $(this).siblings(".cancel").css('display', 'inline');
-})
-
-
-$(".cancel").click(function () {
-    $(this).closest(".modifyAndDelete").closest(".commentsInfo").siblings(".modifyShow").show();
-    $(this).closest(".modifyAndDelete").closest(".commentsInfo").siblings(".modifyHide").hide();
-
-    $(this).css('display', 'none');
-    $(this).siblings(".modifyReady").css('display', 'inline');
-    $(this).siblings(".between").css('display', 'inline');
-    $(this).siblings(".deleteReady").css('display', 'inline');
-})
-
-
 /* 슬라이드 */
 /* 클릭인덱스 */
 /*var i = 0;*/
@@ -183,12 +160,10 @@ $(".one").click(function () {
 
 /*--------------------황지수----------------------------*/
 
-// 보육원 정보 뿌림
-
+// 보육원 정보
 function getInfo1(param, callback, error) {
-    console.log("아작아작")
     $.ajax({
-        url: "/schoolrest/read/" + param.userId,
+        url: "/schoolrest/info/" + param.userId,
         type: "get",
         success: function (schoolDTO, status, xhr) {
             if (callback) {
@@ -201,4 +176,196 @@ function getInfo1(param, callback, error) {
             }
         }
     });
+}
+
+// 보육원 최근 기부
+function getRecent1(param, callback, error) {
+    $.ajax({
+        url: "/schoolrest/recent/" + param.userId,
+        type: "get",
+        success: function (schoolDTO, status, xhr) {
+            if (callback) {
+                callback(schoolDTO);
+            }
+        },
+        error: function (xhr, status, err) {
+            if (error) {
+                error(err);
+            }
+        }
+    });
+}
+
+// 보육원 기부랭킹
+function getRanking1(param, callback, error) {
+    $.ajax({
+        url: "/schoolrest/ranking/" + param.userId,
+        type: "get",
+        success: function (schoolDTO, status, xhr) {
+            if (callback) {
+                callback(schoolDTO);
+            }
+        },
+        error: function (xhr, status, err) {
+            if (error) {
+                error(err);
+            }
+        }
+    });
+}
+
+//보육원 댓글
+function getReply1(param, callback, error) {
+    console.log(param)
+    $.ajax({
+        url: "/schoolrest/reply/" + param.page + "/" + param.userId,
+        type: "get",
+        success: function (replys, status, xhr) {
+            if (callback) {
+                callback(replys);
+            }
+        },
+        error: function (xhr, status, err) {
+            if (error) {
+                error(err);
+            }
+        }
+    });
+}
+
+//댓글 작성된 시간
+function timeForToday(value) {
+    const today = new Date();
+    const timeValue = new Date(value);
+
+    const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
+    if (betweenTime < 1) return '방금전';
+    if (betweenTime < 60) {
+        return `${betweenTime}분전`;
+    }
+
+    const betweenTimeHour = Math.floor(betweenTime / 60);
+    if (betweenTimeHour < 24) {
+        return `${betweenTimeHour}시간전`;
+    }
+
+    const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
+    if (betweenTimeDay < 365) {
+        return `${betweenTimeDay}일전`;
+    }
+
+    return `${Math.floor(betweenTimeDay / 365)}년전`;
+}
+
+// 댓글 더보기
+let moreFlag;
+const $moreButton = $('.moreButton');
+
+$moreButton.on('click', function () {
+    if (lastReplyFlag) return;
+    moreFlag = true;
+    nowPage++;
+    showReply();
+})
+
+// 댓글 삭제
+function remove(replyId, callback, error) {
+    $.ajax({
+        url: "/schoolrest/" + replyId,
+        type: "get",
+        success: function(){
+            callback();
+        },
+        error: function (xhr, status, err) {
+            if (error) {
+                error(err);
+            }
+        }
+    })
+}
+
+// 댓글 수정
+function modify(reply, callback, error) {
+    $.ajax({
+        url: "/schoolrest/modify/",
+        type: "post",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(reply),
+        success: function(){
+            callback();
+        },
+        error: function (xhr, status, err) {
+            if (error) {
+                error(err);
+            }
+        }
+    })
+}
+
+// 댓글 등록
+function register(reply, callback, error) {
+    console.log(reply)
+    $.ajax({
+        url: "/schoolrest/register/",
+        type: "post",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(reply),
+        success: function(){
+            callback();
+        },
+        error: function (xhr, status, err) {
+            if (error) {
+                error(err);
+            }
+        }
+    })
+}
+
+//========================댓글=========================
+//내가 좋아한 보육원
+function getLikeSchoolList(param, callback, error){
+    $.ajax({
+        url:"/schoolrest/likeSchool",
+        type: "get",
+        success:function(likeSchoolList){
+            callback(likeSchoolList);
+        },
+        error: function (xhr, status, err) {
+            if (error) {
+                error(err);
+            }
+        }
+    })
+}
+
+//좋아요 개수
+function getLikeCount(userId, callback, error){
+    $.ajax({
+        url:"/schoolrest/likeCount/" + userId,
+        type: "get",
+        success:function(likeCount){
+            callback(likeCount);
+        },
+        error: function (xhr, status, err) {
+            if (error) {
+                error(err);
+            }
+        }
+    })
+}
+
+//좋아요 누름
+function likeSchool(userId, callback, error){
+    $.ajax({
+        url:"/schoolrest/like/" + userId,
+        type: "get",
+        success:function(likeCount){
+            callback(likeCount);
+        },
+        error: function (xhr, status, err) {
+            if (error) {
+                error(err);
+            }
+        }
+    })
 }

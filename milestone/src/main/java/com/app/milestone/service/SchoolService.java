@@ -122,9 +122,9 @@ public class SchoolService {
         List<Tuple> tuples = moneyRepository.moneyRankingByOne(userId);
         for (Tuple tuple : tuples) {
             MoneyDTO moneyDTO = new MoneyDTO();
-            String name = peopleRepository.findById(tuple.get(1, Long.class)).get().getUserName();
+            String name = peopleRepository.findById(tuple.get(1, Long.class)).get().getPeopleNickname();
             moneyDTO.setMoneyCash(tuple.get(0, Long.class));
-            moneyDTO.setUserName(name);
+            moneyDTO.setPeopleNickName(name);
             moneyDTOS.add(moneyDTO);
         }
 

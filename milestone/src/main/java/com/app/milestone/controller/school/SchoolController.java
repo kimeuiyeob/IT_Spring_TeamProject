@@ -52,7 +52,7 @@ public class SchoolController {
 
     ;
 
-    @GetMapping("/school-donation")
+    @GetMapping("/donation")
     public void schoolDonation() {
     }
 

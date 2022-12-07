@@ -1,6 +1,7 @@
 package com.app.milestone.service;
 
 import com.app.milestone.domain.PeopleDTO;
+import com.app.milestone.entity.Like;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,13 +40,21 @@ public class PeopleServiceTest {
         log.info(peopleService.onesInfo(105L) + "");
     }
 
+    //    ====================좋아요====================
+    //    내가 누른 좋아요
+    @Test
+    public void likeSchoolListTest() {
+        Long sessionId = 105L;
+        peopleService.likeSchoolList(sessionId).forEach(o -> log.info("" + o));
+    }
+
     //    좋아요 누름
     @Test
     public void likeSchoolTest() {
-        List<Long> userIds = new ArrayList<>();
-        userIds.add(5L);
-        userIds.add(105L);
-        peopleService.likeSchool(userIds);
+//        List<Long> userIds = new ArrayList<>();
+//        userIds.add(5L);
+//        userIds.add(105L);
+        peopleService.likeSchool(5L, 105L);
     }
 
     //    기부금 랭킹

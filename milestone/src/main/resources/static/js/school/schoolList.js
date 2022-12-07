@@ -263,7 +263,7 @@ $(".dropLoc").on('click', function () {
 
 /*--------------------황지수----------------------------*/
 /*보육원 검색*/
-const $schoolName = $('input[name = schoolName]');
+const $schoolName = $('#schoolName');
 const $realSearhBox = $('.realSearhBox');
 
 

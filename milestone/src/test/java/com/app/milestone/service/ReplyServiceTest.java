@@ -24,7 +24,7 @@ public class ReplyServiceTest {
     public void registerTest() {
         ReplyDTO replyDTO = new ReplyDTO();
         replyDTO.setPeopleUserId(101L);
-        replyDTO.setSchoolUserId(1L);
+        replyDTO.setSchoolUserId(5L);
         replyDTO.setReplyContent("이것도 댓글이예요");
         replyService.register(replyDTO);
     }
@@ -32,14 +32,14 @@ public class ReplyServiceTest {
     //    조회
     @Test
     public void showAll() {
-        replyService.showAll(1L).forEach(o -> log.info("작성자" + o.getUserName() + "댓글" + o.getReplyContent()));
+        replyService.showAll(1,5L).forEach(o -> log.info("모든"+o+"작성자" + o.getPeopleNickName() + "댓글" + o.getReplyContent()));
     }
 
     //    수정
     @Test
     public void modify() {
         ReplyDTO replyDTO = new ReplyDTO();
-        replyDTO.setReplyId(465L);
+        replyDTO.setReplyId(561L);
         replyDTO.setReplyContent("저는 이제 바뀔 거예요");
         replyService.modify(replyDTO);
     }
@@ -47,6 +47,6 @@ public class ReplyServiceTest {
     //    삭제
     @Test
     public void remove() {
-        replyService.remove(465L);
+        replyService.remove(568L);
     }
 }

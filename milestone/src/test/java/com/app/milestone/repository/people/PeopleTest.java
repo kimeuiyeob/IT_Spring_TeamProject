@@ -39,8 +39,8 @@ public class PeopleTest {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            PeopleDTO peopleDTO = new PeopleDTO("독수리" + i + "호", "asd@ads.com", names[i % 6], "12341234", "01045614561", 0);
-            peopleRepository.save(peopleDTO.toEntity());
+//            PeopleDTO peopleDTO = new PeopleDTO("독수리" + i + "호", "asd@ads.com", names[i % 6], "12341234", "01045614561", 0);
+//            peopleRepository.save(peopleDTO.toEntity());
         }
 
     }
@@ -66,12 +66,29 @@ public class PeopleTest {
     //    좋아요 누름
     @Test
     public void likeTest() {
-//        세션에서 받음
-        People people = peopleRepository.findById(67L).get();
+        for (int i = 0; i < 2; i++) {
+            //        세션에서 받음
+            People people = peopleRepository.findById(105L).get();
 //        화면에서 받음
-        School school = schoolRepository.findById(123L).get();
-        Like like = new Like(school, people);
-        likeRepository.save(like);
+            School school = schoolRepository.findById(8L).get();
+            Like like = new Like(school, people);
+            likeRepository.save(like);
+        }
+    }
+
+    @Test
+    public void likeCountTest() {
+        Long schoolId = 5L;
+        log.info("" + likeRepository.countBySchoolUserId(schoolId));
+    }
+
+    @Test
+    public void likeFindByPeopleTest(){
+        String text = "";
+        for (Like o :likeRepository.findByPeopleUserId(105L)){
+            text += "\n"+o.getSchool().getUserId();
+        }
+        log.info(text);
     }
 
     //   =======================================================기부 랭킹================================================
