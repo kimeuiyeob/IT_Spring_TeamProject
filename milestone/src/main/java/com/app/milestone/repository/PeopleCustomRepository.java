@@ -1,6 +1,7 @@
 package com.app.milestone.repository;
 
 import com.app.milestone.domain.PeopleDTO;
+import com.app.milestone.domain.Search;
 import com.querydsl.core.Tuple;
 import org.springframework.data.domain.Pageable;
 
@@ -14,4 +15,9 @@ public interface PeopleCustomRepository {
 
     public List<PeopleDTO> findByPeopleOnly();
     public List<PeopleDTO> findByPeopleOnlyAsc();
+
+    public Long countByCreatedDate (Pageable pageable, Search search);
+    public List<PeopleDTO> findPeopleSearch(Pageable pageable,Search search);
+    public List<PeopleDTO> findPeopleSearchAsc(Pageable pageable,Search search);
+
 }

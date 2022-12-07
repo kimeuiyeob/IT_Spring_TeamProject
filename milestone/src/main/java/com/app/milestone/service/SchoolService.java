@@ -132,6 +132,21 @@ public class SchoolService {
     }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // 관리자 페이지============================================
 
     //    보육원 목록
@@ -140,12 +155,62 @@ public class SchoolService {
     }
 
     //    전체회원 중 보육원 목록
-    public List<SchoolDTO> schoolOnly() {
-        return schoolRepository.findBySchoolOnly();
+    public Page<SchoolDTO> schoolOnly(Integer page,Search search) {
+        if(page==null) page=0;
+        Pageable pageable = PageRequest.of(page,7);
+        List<SchoolDTO> list = schoolRepository.findBySchoolOnly(pageable,search);
+        int start = list.size() > (int) pageable.getOffset() ? (int) pageable.getOffset() : (int) pageable.getOffset() - 10;
+        int end = Math.min((start + pageable.getPageSize()), list.size());
+
+        Page<SchoolDTO> schools = new PageImpl<>(list.subList(start, end), pageable, Integer.valueOf("" + schoolRepository.countByCreatedDate(pageable, search)));
+
+        return schools;
     }
 
-    //    전체회원 중 보육원 목록
-    public List<SchoolDTO> schoolOnlyAsc() {
-        return schoolRepository.findBySchoolOnlyAsc();
+
+    /*=============================================================================*/
+    /*=============================================================================*/
+    /*=============================================================================*/
+    /*=============================================================================*/
+    /*=============================================================================*/
+    //    보육원 검색 + 예산 내림차순
+    public Page<SchoolDTO> schoolListBudgetSearch(Integer page, Search search) {
+        if(page==null) page=0;
+        Pageable pageable = PageRequest.of(page,7);
+        if (search.getSchoolAddress() == null) {
+            search.setSchoolAddress(new ArrayList<>());
+            search.getSchoolAddress().add(null);
+        }
+        if (search.getSchoolName() == null) {
+            search.setSchoolName(null);
+        }
+        List<SchoolDTO> list = schoolRepository.findByBudgetAndSearch(pageable, search);
+        log.info("결과============"+pageable.getOffset());
+        int start = list.size() > (int) pageable.getOffset() ? (int) pageable.getOffset() : (int) pageable.getOffset() - 10;
+        int end = Math.min((start + pageable.getPageSize()), list.size());
+
+        Page<SchoolDTO> schools = new PageImpl<>(list.subList(start, end), pageable, Integer.valueOf("" + schoolRepository.countByCreatedDate(pageable, search)));
+
+        return schools;
+    }
+
+    //    보육원 검색 + 예산 오름차순
+    public Page<SchoolDTO> schoolListBudgetSearchAsc(Integer page, Search search) {
+        if(page==null) page=0;
+        Pageable pageable = PageRequest.of(page,7);
+        if (search.getSchoolAddress() == null) {
+            search.setSchoolAddress(new ArrayList<>());
+            search.getSchoolAddress().add(null);
+        }
+        if (search.getSchoolName() == null) {
+            search.setSchoolName(null);
+        }
+        List<SchoolDTO> list = schoolRepository.findByBudgetAndSearchAsc(pageable, search);
+        int start = list.size() > (int) pageable.getOffset() ? (int) pageable.getOffset() : (int) pageable.getOffset() - 10;
+        int end = Math.min((start + pageable.getPageSize()), list.size());
+
+        Page<SchoolDTO> schools = new PageImpl<>(list.subList(start, end), pageable, Integer.valueOf("" + schoolRepository.countByCreatedDate(pageable, search)));
+
+        return schools;
     }
 }

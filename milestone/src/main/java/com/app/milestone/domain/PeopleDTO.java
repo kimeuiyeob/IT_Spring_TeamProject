@@ -14,6 +14,8 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 public class PeopleDTO {
+
+    private Long userId;
     private String peopleNickname;
     private String userEmail;
     private String userName;
@@ -34,7 +36,8 @@ public class PeopleDTO {
     }
 
     @QueryProjection
-    public PeopleDTO(String peopleNickname , String userEmail,String userName, String userPassword,String userPhoneNumber, int donationCount, LocalDateTime createdDate) {
+    public PeopleDTO(Long userId, String peopleNickname , String userEmail,String userName, String userPassword,String userPhoneNumber, int donationCount, LocalDateTime createdDate) {
+        this.userId = userId;
         this.peopleNickname = peopleNickname;
         this.userEmail = userEmail;
         this.userName = userName;
