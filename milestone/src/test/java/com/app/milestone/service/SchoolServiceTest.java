@@ -23,25 +23,6 @@ public class SchoolServiceTest {
     @Autowired
     private PeopleService peopleService;
 
-    //    보육원 회원가입
-    @Test
-    public void schoolSignUpTest() {
-        SchoolDTO schoolDTO = new SchoolDTO();
-        schoolDTO.setUserEmail("cyon8254@gmail.com");
-        schoolDTO.setUserPassword("phj@971204");
-        schoolDTO.setUserName("박해준");
-        schoolDTO.setSchoolName("박해준보육원");
-        schoolDTO.setSchoolTeachers(1);
-        schoolDTO.setSchoolKids(1);
-        schoolDTO.setSchoolBudget(10000);
-        schoolDTO.setSchoolBank("하나은행");
-        schoolDTO.setSchoolAccount("94290200120288");
-        schoolDTO.setUserPhoneNumber("01021208515");
-        schoolDTO.setSchoolPhoneNumber("0317578254");
-
-        schoolService.schoolSignUp(schoolDTO);
-    }
-
     //    도움이 필요한 보육원
     @Test
     public void needHelpListTest() {
