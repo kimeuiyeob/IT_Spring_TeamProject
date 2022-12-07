@@ -18,4 +18,8 @@ public class Search {
     private String talentCategory;
     private List<String> talentPlace;
 
+    /*===============================*/
+
+    private String userName;
+    private String peopleNickName;
 }

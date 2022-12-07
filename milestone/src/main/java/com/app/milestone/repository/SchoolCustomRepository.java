@@ -16,6 +16,10 @@ public interface SchoolCustomRepository {
 
 //    관리자
     public List<School> findByCreatedDate (Pageable pageable);
-    public List<SchoolDTO> findBySchoolOnly ();
+    public List<SchoolDTO> findBySchoolOnly (Pageable pageable, Search search);
     public List<SchoolDTO> findBySchoolOnlyAsc ();
+
+
+    public List<SchoolDTO> findByBudgetAndSearchAsc (Pageable pageable, Search search);
+    public List<SchoolDTO> findByBudgetAndSearch (Pageable pageable, Search search);
 }

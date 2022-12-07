@@ -2,6 +2,8 @@ package com.app.milestone.service;
 
 import com.app.milestone.domain.PeopleDTO;
 import com.app.milestone.domain.Ranking;
+import com.app.milestone.domain.SchoolDTO;
+import com.app.milestone.domain.Search;
 import com.app.milestone.entity.Like;
 import com.app.milestone.entity.People;
 import com.app.milestone.entity.School;
@@ -10,6 +12,9 @@ import com.app.milestone.repository.PeopleRepository;
 import com.app.milestone.repository.SchoolRepository;
 import com.querydsl.core.Tuple;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -109,14 +114,48 @@ public class PeopleService {
 
 
 
-    /* 관리자페이지 */
-    //전체회원중 일반회원 불러오기
-    public List<PeopleDTO> peopleOnly(){
-        return peopleRepository.findByPeopleOnly();
+    /* ==============관리자페이지================================================= */
+    //    회원 수
+    public Long peopleListCount(Pageable pageable, Search search) {
+        return peopleRepository.countByCreatedDate(pageable, search);
     }
 
-    //일반회원 중 가입날짜 오름차순 정렬
-    public List<PeopleDTO> peopleOnlyAsc(){
-        return peopleRepository.findByPeopleOnlyAsc();
+    public Page<PeopleDTO> peopleListSearch(Integer page, Search search) {
+        if(page==null) page=0;
+        Pageable pageable = PageRequest.of(page,7);
+
+        if (search.getUserName() == null) {
+            search.setUserName(null);
+        }
+        if (search.getPeopleNickName() == null) {
+            search.setPeopleNickName(null);
+        }
+        List<PeopleDTO> list = peopleRepository.findPeopleSearch(pageable, search);
+        int start = list.size() > (int) pageable.getOffset() ? (int) pageable.getOffset() : (int) pageable.getOffset() - 10;
+        int end = Math.min((start + pageable.getPageSize()), list.size());
+
+        Page<PeopleDTO> people = new PageImpl<>(list.subList(start, end), pageable, Integer.valueOf("" + peopleRepository.countByCreatedDate(pageable, search)));
+
+        return people;
     }
+    public Page<PeopleDTO> peopleListSearchAsc(Integer page, Search search) {
+        if(page==null) page=0;
+        Pageable pageable = PageRequest.of(page,7);
+
+        if (search.getUserName() == null) {
+            search.setUserName(null);
+        }
+        if (search.getPeopleNickName() == null) {
+            search.setPeopleNickName(null);
+        }
+        List<PeopleDTO> list = peopleRepository.findPeopleSearchAsc(pageable, search);
+        int start = list.size() > (int) pageable.getOffset() ? (int) pageable.getOffset() : (int) pageable.getOffset() - 10;
+        int end = Math.min((start + pageable.getPageSize()), list.size());
+
+        Page<PeopleDTO> people = new PageImpl<>(list.subList(start, end), pageable, Integer.valueOf("" + peopleRepository.countByCreatedDate(pageable, search)));
+
+        return people;
+    }
+
+
 }

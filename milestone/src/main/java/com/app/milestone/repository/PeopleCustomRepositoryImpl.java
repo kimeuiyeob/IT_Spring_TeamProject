@@ -2,20 +2,24 @@ package com.app.milestone.repository;
 
 import com.app.milestone.domain.PeopleDTO;
 import com.app.milestone.domain.QPeopleDTO;
+import com.app.milestone.domain.Search;
 import com.app.milestone.entity.QTalent;
 import com.app.milestone.entity.QUser;
 import com.querydsl.core.Tuple;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.app.milestone.entity.QMoney.*;
 import static com.app.milestone.entity.QPeople.*;
+import static com.app.milestone.entity.QSchool.school;
 import static com.app.milestone.entity.QService.*;
 import static com.app.milestone.entity.QTalent.*;
 
@@ -29,6 +33,7 @@ public class PeopleCustomRepositoryImpl implements PeopleCustomRepository {
     @Override
     public PeopleDTO findInfoById(Long userId){
         return jpaQueryFactory.select(new QPeopleDTO(
+                people.userId,
                 people.peopleNickname,
                 people.userEmail,
                 people.userName,
@@ -128,11 +133,12 @@ public class PeopleCustomRepositoryImpl implements PeopleCustomRepository {
 
 
 
+
     /*=================관리자 페이지=================*/
     @Override
-    /*일반회원만 조회*/
     public List<PeopleDTO> findByPeopleOnly(){
         return jpaQueryFactory.select(new QPeopleDTO(
+                people.userId,
                 people.peopleNickname,
                 people.userEmail,
                 people.userName,
@@ -140,15 +146,14 @@ public class PeopleCustomRepositoryImpl implements PeopleCustomRepository {
                 people.userPhoneNumber,
                 people.donationCount,
                 people.createdDate
-        )).from(people, QUser.user)
-                .where(people.userId.eq(QUser.user.userId))
+        )).from(people)
                 .orderBy(people.createdDate.desc())
                 .fetch();
     }
     @Override
-    /*일반회원만 오름차순 조회*/
     public List<PeopleDTO> findByPeopleOnlyAsc(){
         return jpaQueryFactory.select(new QPeopleDTO(
+                people.userId,
                 people.peopleNickname,
                 people.userEmail,
                 people.userName,
@@ -156,8 +161,70 @@ public class PeopleCustomRepositoryImpl implements PeopleCustomRepository {
                 people.userPhoneNumber,
                 people.donationCount,
                 people.createdDate
-        )).from(people, QUser.user)
-                .where(people.userId.eq(QUser.user.userId))
+        )).from(people)
+                .orderBy(people.createdDate.asc())
+                .fetch();
+    }
+
+
+    //    이름검색
+    private BooleanExpression peopleNameContaining(String peopleName) {
+        return StringUtils.hasText(peopleName) ? people.userName.contains(peopleName) : null;
+    }
+    //    닉네임 검색
+    private BooleanExpression peopleNickNameContaining(String peopleNickame) {
+        return StringUtils.hasText(peopleNickame) ? people.peopleNickname.contains(peopleNickame) : null;
+    }
+
+    //    검색 결과 count
+    @Override
+    public Long countByCreatedDate(Pageable pageable, Search search) {
+        return jpaQueryFactory.select(people.count())
+                .from(people)
+                .where(
+                        peopleNameContaining(search.getUserName()),
+                        peopleNickNameContaining(search.getPeopleNickName())
+                )
+                .orderBy(people.createdDate.asc())
+                .fetchOne();
+    }
+
+    @Override
+    public List<PeopleDTO> findPeopleSearch(Pageable pageable, Search search){
+        return jpaQueryFactory.select(new QPeopleDTO(
+                people.userId,
+                people.peopleNickname,
+                people.userEmail,
+                people.userName,
+                people.userPassword,
+                people.userPhoneNumber,
+                people.donationCount,
+                people.createdDate
+        )).from(people)
+                .where(
+                        peopleNameContaining(search.getUserName()),
+                        peopleNickNameContaining(search.getPeopleNickName())
+                )
+                .orderBy(people.createdDate.desc())
+                .fetch();
+    }
+
+    @Override
+    public List<PeopleDTO> findPeopleSearchAsc(Pageable pageable, Search search){
+        return jpaQueryFactory.select(new QPeopleDTO(
+                people.userId,
+                people.peopleNickname,
+                people.userEmail,
+                people.userName,
+                people.userPassword,
+                people.userPhoneNumber,
+                people.donationCount,
+                people.createdDate
+        )).from(people)
+                .where(
+                        peopleNameContaining(search.getUserName()),
+                        peopleNickNameContaining(search.getPeopleNickName())
+                )
                 .orderBy(people.createdDate.asc())
                 .fetch();
     }
