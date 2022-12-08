@@ -41,8 +41,8 @@ public class NoticeTest {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            NoticeDTO noticeDTO = new NoticeDTO("공지사항 제목"+(i+1),"공지사항 내용"+(i+1));
-            noticeRepository.save(noticeDTO.toEntity());
+//            NoticeDTO noticeDTO = new NoticeDTO("공지사항 제목"+(i+1),"공지사항 내용"+(i+1));
+//            noticeRepository.save(noticeDTO.toEntity());
         }
     }
 

@@ -33,12 +33,7 @@ function printAmount() {
 }
 
 //---------------------------황지수-----------------------------
-const $orderButton = $('.orderButton');
 
-$orderButton.on('click', function () {
-    // console.log("emfdha")
-    location.href = "/school/payment?userId="+$('#userId') + "&moneyCash" + $('#amountInputMoney');
-})
 
 
 function getSchoolInfo(userId, callback, error) {
@@ -56,10 +51,22 @@ function getSchoolInfo(userId, callback, error) {
     })
 }
 
-function payment(moneyDTO, callback, error) {
-    $.ajax(
-        // url: "/schoolrest/payment"
-    )
-
+function giveMoneyCash(moneyCash, callback, error) {
+    console.log(moneyCash)
+    $.ajax({
+        url: "/schoolrest/payment",
+        type: "post",
+        data: JSON.stringify(moneyCash),
+        contentType: "application/json; charset=utf-8",
+        success: function (schoolDTO) {
+            location.href = "/school/read?userId="+$('#userId').val();
+        },
+        error: function (xhr, status, err) {
+            if (error) {
+                error(err);
+            }
+        }
+    })
 }
+
 

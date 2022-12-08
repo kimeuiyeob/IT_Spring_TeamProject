@@ -3,6 +3,7 @@ package com.app.milestone.domain;
 import com.app.milestone.entity.School;
 import com.app.milestone.entity.Service;
 import com.app.milestone.entity.Talent;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;
 import lombok.Getter;
@@ -16,6 +17,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class ServiceDTO {
     private Long userId;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+//    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime serviceVisitDate;
 
     public Service toEntity() {

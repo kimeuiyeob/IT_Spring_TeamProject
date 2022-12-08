@@ -1,7 +1,6 @@
 .tempDiv {
     padding: 20px;
     width: 468px;
-    height: 420px;
 }
 
 .callenderWrap {
@@ -75,4 +74,8 @@
 
 th{
     border-radius: 3px;
+}
+
+.thisMonthDays:hover{
+    filter: brightness(90%);
 }

@@ -41,13 +41,13 @@ public class TalentServiceTest {
         search.setTalentTitle("돌고래");
         search.setTalentCategory("운동");
 
-        talentService.talentList(pageable, search)
-                .forEach(o -> log.info(
-                        "  Title : " + o.getTalentTitle() +
-                                "  Content : " + o.getTalentContent() +
-                                "  Category :" + o.getTalentCategory() +
-                                "  Place : " + o.getTalentPlace() +
-                                "  AbleDate : " + o.getTalentAbleDate()));
+//        talentService.talentList(pageable, search)
+//                .forEach(o -> log.info(
+//                        "  Title : " + o.getTalentTitle() +
+//                                "  Content : " + o.getTalentContent() +
+//                                "  Category :" + o.getTalentCategory() +
+//                                "  Place : " + o.getTalentPlace() +
+//                                "  AbleDate : " + o.getTalentAbleDate()));
     }
 
 //    @Test

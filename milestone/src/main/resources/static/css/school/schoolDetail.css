@@ -408,7 +408,7 @@ aside{
     overflow-y: scroll;
 }
 
-#donate{
+.donate{
     outline: none;
     border-width: 1px;
     border-style: solid;
