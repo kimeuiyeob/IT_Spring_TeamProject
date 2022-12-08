@@ -361,6 +361,7 @@ li {
 }
 
 .search1 {
+    cursor: text;
     display: flex;
     position: relative;
 }
@@ -375,6 +376,11 @@ li {
     -webkit-box-align: center;
     align-items: center;
     position: relative;
+}
+
+label[for = "hero-search2"]{
+    display: none;
+    width: 88%;
 }
 
 .search-text1 {
@@ -409,11 +415,15 @@ li {
     border: none;
     padding-left: 12px;
     padding-right: 12px;
-    border-radius: 20px;
     flex: 1;
     color: #ffffff;
     font-size: 20px;
-    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+.search4:focus{
+    outline: none;
 }
 
 

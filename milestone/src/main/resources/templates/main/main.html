@@ -27,13 +27,13 @@
                 <div class="bannerWrap">
                     <section class="slide-text1" id="mobile-slide-text1">
                         <h1 class="slide-text2">보육원 찾기 NO.1 마일스톤에서<br>기부하고싶은 보육원을 찾아보세요!</h1>
-                        <form class="search1">
+                        <form class="search1" th:action="@{/school/list}">
                             <div class="search2">
                                 <div class="search-text1">
                                     <!-- =============================================================================== -->
                                     <div style="margin: 0; padding: 0;
                                 list-style: none; box-sizing: border-box; ">
-                                        <div style="  height: 100vh; display: flex;justify-content: center;
+                                        <div style=" display: flex;justify-content: center;
                                     align-items: center;color: black;">
                                             <div style="height: 55px; display: flex; justify-content: center;
                                         align-items: flex-end; font-size: 1.6rem;">
@@ -48,10 +48,6 @@
                                     <span style="white-space:pre;min-height:29px"></span>
                                     <span class="search-text2 search-text3">|</span>
                                 </div>
-                                <label for="hero-search1">
-                                    <input id="hero-search1" role="search" maxlength="15" autocomplete="off"
-                                           autocorrect="off" autocapitalize="off" class="search3" value="">
-                                </label>
                                 <label for="hero-search2">
                                     <input id="hero-search2" role="search" maxlength="15" autocomplete="off"
                                            autocorrect="off" autocapitalize="off" class="search4" value="">
@@ -69,20 +65,23 @@
                                 </div>
                             </div>
                         </form>
-                        <div class="slide-text3">
+                        <div class="slide-text3" th:object="${schools}">
                             <div class="slide-text4">
-                                <a href="#" class="slide-text5">#
-                                    <!-- -->도움이 필요한 보육원
+                                <a th:href="*{get(0).userId}" class="slide-text5" style="display: flex">
+                                    #
+                                    <div th:text="*{get(0).schoolName}">도움이 필요한 보육원</div>
                                 </a>
                             </div>
                             <div class="slide-text4">
-                                <a href="#" class="slide-text5">#
-                                    <!-- -->도움이 필요한 보육원
+                                <a th:href="*{get(1).userId}" class="slide-text5" style="display: flex">
+                                    #
+                                    <div th:text="*{get(1).schoolName}">도움이 필요한 보육원</div>
                                 </a>
                             </div>
                             <div class="slide-text4">
-                                <a href="#" class="slide-text5">#
-                                    <!-- -->도움이 필요한 보육원
+                                <a th:href="*{get(2).userId}" class="slide-text5" style="display: flex">
+                                    #
+                                    <div th:text="*{get(2).schoolName}">도움이 필요한 보육원</div>
                                 </a>
                             </div>
                         </div>
@@ -197,63 +196,63 @@
             </h2>
             <div class="help2" th:object="${schools}">
                 <article class="help3">
-                    <a href="#" class="help4">
+                    <a th:href="*{get(0).userId}" class="help4">
                         <div class="help5" id="mobile-help5-1">
                             <div class="help6" style="background-color: rgb(212, 220, 252);">
                                 <h5 class="help-text1" id="mobile-help-text1-1"
-                                    th:text="${schools.get(0).schoolAddress}"></h5>
+                                    th:text="*{get(0).schoolAddress}"></h5>
                                 <h2 class="help-text2" id="mobile-help-text2-1"
-                                    th:text="${schools.get(0).schoolName}"></h2>
+                                    th:text="*{get(0).schoolName}"></h2>
                                 <img class="help-img1" id="mobile-help-img1-1" src="/imgs/main/baby01.png">
                             </div>
                         </div>
                     </a>
                 </article>
                 <article class="help3">
-                    <a href="#" class="help4">
+                    <a th:href="*{get(1).userId}" class="help4">
                         <div class="help5" id="mobile-help5-2">
                             <div class="help6" style="background-color: rgb(244, 246, 159);">
                                 <h5 class="help-text1" id="mobile-help-text1-2"
-                                    th:text="${schools.get(1).schoolAddress}"></h5>
+                                    th:text="*{get(1).schoolAddress}"></h5>
                                 <h2 class="help-text2" id="mobile-help-text2-2"
-                                    th:text="${schools.get(1).schoolName}"></h2>
+                                    th:text="*{get(1).schoolName}"></h2>
                                 <img class="help-img1" id="mobile-help-img1-2" src="/imgs/main/baby02.png">
                             </div>
                         </div>
                     </a>
                 </article>
                 <article class="help3">
-                    <a href="#" class="help4">
+                    <a th:href="*{get(2).userId}" class="help4">
                         <div class="help5" id="mobile-help5-3">
                             <div class="help6" style="background-color: rgb(246, 201, 172);">
                                 <h5 class="help-text1" id="mobile-help-text1-3"
-                                    th:text="${schools.get(2).schoolAddress}"></h5>
+                                    th:text="*{get(2).schoolAddress}"></h5>
                                 <h2 class="help-text2" id="mobile-help-text2-3"
-                                    th:text="${schools.get(2).schoolName}"></h2>
+                                    th:text="*{get(2).schoolName}"></h2>
                                 <img class="help-img1" id="mobile-help-img1-3" src="/imgs/main/baby03.png">
                             </div>
                         </div>
                     </a>
                 </article>
                 <article class="help3">
-                    <a href="#" class="help4">
+                    <a th:href="*{get(3).userId}" class="help4">
                         <div class="help5" id="mobile-help5-4">
                             <div class="help6" style="background-color: rgb(215, 209, 251);">
                                 <h5 class="help-text1" id="mobile-help-text1-4"
-                                    th:text="${schools.get(3).schoolAddress}"></h5>
+                                    th:text="*{get(3).schoolAddress}"></h5>
                                 <h2 class="help-text2" id="mobile-help-text2-4"
-                                    th:text="${schools.get(3).schoolName}"></h2>
+                                    th:text="*{get(3).schoolName}"></h2>
                                 <img class="help-img1" id="mobile-help-img1-4" src="/imgs/main/baby04.png">
                             </div>
                         </div>
                     </a>
                 </article>
                 <article class="help3" id="mobile-delete">
-                    <a href="#" class="help4">
+                    <a th:href="*{get(4).userId}" class="help4">
                         <div class="help5">
                             <div class="help6" style="background-color: rgb(203, 224, 252);">
-                                <h5 class="help-text1" th:text="${schools.get(4).schoolAddress}"></h5>
-                                <h2 class="help-text2" th:text="${schools.get(4).schoolName}"></h2>
+                                <h5 class="help-text1" th:text="*{get(4).schoolAddress}"></h5>
+                                <h2 class="help-text2" th:text="*{get(4).schoolName}"></h2>
                                 <img class="help-img1" src="/imgs/main/baby05.png">
                             </div>
                         </div>

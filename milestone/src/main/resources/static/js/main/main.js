@@ -66,20 +66,34 @@ function wait(ms) {
 // 초기 실행
 setTimeout(typing, 1500);
 /*----------검색창 커서 들어가고 나갔을때-------------*/
-const $search1 = $(".search3");
-const $search2 = $(".search4");
+// const $search1 = $(".search3");
+const $search2 = $("label[for = 'hero-search2']");
 const $searchText = $(".search-text1");
+const $search1 = $(".search1");
 
-$search1.on("focus", function () {
-    $search1.hide();
-    $search2.show().focus();
-    $search2.css('outline', 'none');
+$search1.on('click', function () {
     $searchText.hide();
-});
-$search2.on("blur", function () {
-    $search2.hide();
-    $search2.val('');
-    $search1.show();
-    $search1.css('outline', 'none');
+    $search2.show();
+    $('#hero-search2').focus()
+})
+
+$('#hero-search2').on('blur', function () {
+    $(this).val('');
     $searchText.show();
-});
+    $search2.hide();
+})
+
+//도움이 필요한 보육원
+const $help4 = $('.help4');
+const $bannerHashtag = $('.slide-text5');
+
+$help4.on('click', function (e) {
+    e.preventDefault();
+    location.href = "/school/read?userId=" + $(this).attr("href");
+})
+
+$bannerHashtag.on('click', function (e) {
+    e.preventDefault();
+    location.href = "/school/read?userId=" + $(this).attr("href");
+})
+
