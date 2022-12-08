@@ -7,6 +7,7 @@ import com.app.milestone.service.PeopleService;
 import com.app.milestone.service.SchoolService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +24,7 @@ import javax.servlet.http.HttpSession;
 public class JoinController {
     private final PeopleService peopleService;
     private final SchoolService schoolService;
-    private final KakaoService kakaoService;
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("/user")
     public String createPeople(Model model) {
@@ -37,11 +38,21 @@ public class JoinController {
         return "join/joinSchool";
     }
 
-    ;
+    @GetMapping("/OAuth")
+    public String createOAuth(Model model) {
+        model.addAttribute("peopleDTO", new PeopleDTO());
+        return "join/joinOAuth";
+    }
 
     @GetMapping("/way")
     public String way() {
         return "/join/joinWay";
+    }
+
+    ;
+    @GetMapping("/logout")
+    public String logout() {
+        return "/join/logout";
     }
 
     ;
@@ -53,13 +64,5 @@ public class JoinController {
 
     ;
 
-    @ResponseBody
-    @GetMapping("/login/kakao")
-    public void kakaoCallback(@RequestParam String code, HttpSession session) throws Exception {
-        log.info(code);
-        String token = kakaoService.getKaKaoAccessToken(code);
-        session.setAttribute("token", token);
-        kakaoService.getKakaoInfo(token);
-    }
 
 }
