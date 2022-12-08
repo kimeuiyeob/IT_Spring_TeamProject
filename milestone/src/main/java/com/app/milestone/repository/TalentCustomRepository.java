@@ -9,7 +9,11 @@ import java.util.List;
 // customRepository쓰는이유는 만약 서비스중에서 하나를  Mybatis로 사용하고 싶으면 customRepository를 만들어서 사용한다.
 public interface TalentCustomRepository {
 
+    //페이징 및 검색
+    //     List타입으로     findAllByTalentAbleDate의 메소드에 pageable, search받는다.
     public List<TalentDTO> findAllByTalentAbleDate (Pageable pageable, Search search);
+
+    public Long countByAbleDate (Pageable pageable, Search search);
 
     //재능기부 클릭시 DONATION ID로 상세페이지 보기
     public List<TalentDTO> talentDetail(Long userId);

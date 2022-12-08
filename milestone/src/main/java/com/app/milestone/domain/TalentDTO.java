@@ -1,9 +1,11 @@
 package com.app.milestone.domain;
 
 import com.app.milestone.entity.Talent;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -25,6 +27,7 @@ public class TalentDTO {
     private Long donationId;
     private String talentTitle;
     private String talentContent;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime talentAbleDate;
     private String talentCategory;
     private String talentPlace;
