@@ -63,14 +63,14 @@ $(".location2").click(function () {
 $(".redHeart").css({"display": "none"})
 
 $("section.schoolList").on('click', "span.heartWrap", function () {
-    if (!check2) {
+    if ($(this).children(".redHeart").css("display")=="none") {
         $(this).children(".redHeart").css({"display": "inline"})
         $(this).children(".emptyHeart").css({"display": "none"})
-        check2 = true;
+        likeSchool($(this).closest('article').find('.donationButton').attr("href"))
     } else {
         $(this).children(".redHeart").css({"display": "none"})
         $(this).children(".emptyHeart").css({"display": "inline"})
-        check2 = false;
+        cancelLikeSchool($(this).closest('article').find('.donationButton').attr("href"))
     }
 })
 
@@ -291,4 +291,56 @@ function getList1(param, callback, error) {
             }
         }
     });
+}
+
+//========================좋아요=========================
+//내가 좋아한 보육원
+function getLikeSchoolList1(callback, error){
+    console.log("그럼여기?")
+    $.ajax({
+        url:"/schoolrest/likeSchool",
+        type: "get",
+        success:function(likeSchoolList){
+            console.log("그럼여기는?")
+            console.log(likeSchoolList)
+            callback(likeSchoolList);
+        },
+        error: function (xhr, status, err) {
+            if (error) {
+                error(err);
+            }
+        }
+    })
+}
+
+//좋아요 누름
+function likeSchool(userId, callback, error){
+    $.ajax({
+        url:"/schoolrest/like/" + userId,
+        type: "get",
+        success:function(likeCount){
+            // callback(likeCount);
+        },
+        error: function (xhr, status, err) {
+            if (error) {
+                error(err);
+            }
+        }
+    })
+}
+
+//좋아요 취소
+function cancelLikeSchool(userId, callback, error){
+    $.ajax({
+        url:"/schoolrest/cancel/" + userId,
+        type: "get",
+        success:function(likeCount){
+            // callback(likeCount);
+        },
+        error: function (xhr, status, err) {
+            if (error) {
+                error(err);
+            }
+        }
+    })
 }
