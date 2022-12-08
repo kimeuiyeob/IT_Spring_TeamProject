@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,8 @@ public class SchoolRestController {
     private final PeopleService peopleService;
     private final ReplyService replyService;
     private final LikeService likeService;
+    private final MoneyService moneyService;
+    private final ServiceService serviceService;
 
     //    보육원 목록
     @GetMapping(value = {"/list/{page}", "/list/{page}/{schoolAddress}", "/list/{page}/{schoolAddress}/{schoolName}"})
@@ -109,7 +112,20 @@ public class SchoolRestController {
         likeService.cancelLikeSchool(userId, sessionId);
     }
 
+    //    ======================결제==========================
+    //    결제진행
+    @PostMapping("/payment")
+    public void payment(@RequestBody MoneyDTO moneyDTO) {
+        Long sessionId = 132L;
+        moneyService.payment(sessionId, moneyDTO);
+    }
 
-
+    //    방문기부
+    @PostMapping("/visit")
+    public void visit(@RequestBody ServiceDTO serviceDTO) {
+        log.info("==============asd===================" + serviceDTO);
+        Long sessionId = 132L;
+        serviceService.donationReservation(sessionId,serviceDTO);
+    }
 
 }

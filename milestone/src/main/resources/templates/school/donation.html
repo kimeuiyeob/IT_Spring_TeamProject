@@ -64,11 +64,19 @@
                     <span>총 기부 금액</span>
                     <span class="pay"></span>
                 </h5>
-                <h5 class="innrRightIn">
-                    <span><input type="text" class="amountInput" id="amountInputMoney"
-                                 placeholder="기부하실 금액을 입력하세요"></span>
-                    <span class="cash">원</span>
+                <h5 class="innrRightIn" style = "margin: 0">
+                    <form th:action="@{/school/payment}" method="post" name="paymentForm" onsubmit="return false">
+                        <span>
+                            <input type="text" name="moneyCash" class="amountInput" id="amountInputMoney"
+                                   placeholder="기부하실 금액을 입력하세요">
+                        </span>
+                        <span class="cash">원</span>
+                    </form>
+
                 </h5>
+                <div class="guideMsg" style="display: none">
+                    기부금액을 입력해 주세요.
+                </div>
                 <div id="justBorder"></div>
                 <h5 class="innrRightIn">
                     <span>총 결제금액</span>
@@ -77,11 +85,16 @@
                     </div>
                 </h5>
                 <div class="checkOk">
-                    <div>
-                        <input type="checkbox">
-                    </div>
-                    <div id="checkOk2">
-                        주문 내용을 확인하였으며, 결제에 동의합니다. (필수)
+                    <div style="display: flex; flex-direction: column">
+                        <div style="display: flex;">
+                            <input type="checkbox" class="agreePayment">
+                            <div id="checkOk2">
+                                주문 내용을 확인하였으며, 결제에 동의합니다. (필수)
+                            </div>
+                        </div>
+                        <div class="guideMsg" style="display: none">
+                            결제에 동의해 주세요.
+                        </div>
                     </div>
                 </div>
                 <div>
@@ -91,9 +104,7 @@
             </div>
         </div>
 
-
     </div>
-
 
 </div>
 
@@ -104,19 +115,40 @@
 <script src="/js/school/schoolDonation.js"></script>
 <script src="/js/fix/header.js"></script>
 <script>
+
+    const $orderButton = $('.orderButton');
+
+    $orderButton.on('click', function () {
+        let $amountInputMoney = $('#amountInputMoney');
+        if($('#amountInputMoney').val() <= 0 && !$('#amountInputMoney').val()){
+            $('#amountInputMoney').closest('h5').next().show();
+        }else{
+            $('#amountInputMoney').closest('h5').next().hide();
+        }
+        if(!$('.agreePayment').is(":checked")){
+            $('.agreePayment').parent().next().show();
+        }else{
+            $('.agreePayment').parent().next().hide();
+        }
+
+        if ($amountInputMoney) {
+            payment();
+        } else {
+            console.log("값없음")
+        }
+    })
+
     // 부트페이 결제 api
-    // import { Bootpay } from '@bootpay/client-js'
-    // (Bootpay.requestPayment)
-
-    test();
-
-
-    function test() {
-
-        const response = Bootpay.requestPayment({
+    async function payment() {
+        // try {
+        console.log($('#amountInputMoney').val().replace(",",""))
+        console.log($('#schoolName').html())
+        console.log($('#schoolName').text())
+        let moneyCash = $('#amountInputMoney').val().replace(",","")
+        const response = await Bootpay.requestPayment({
             "application_id": "6390c5f2d01c7e001ffeb8a2",
-            "price": 1000,
-            "order_name": "테스트결제",
+            "price": moneyCash,
+            "order_name": $('#schoolName').text() + " 기부금",
             "order_id": "TEST_ORDER_ID",
             "pg": "케이씨피",
             "method": "카드",
@@ -125,109 +157,52 @@
                 "id": "회원아이디",
                 "username": "회원이름",
                 "phone": "01000000000",
-                "email": "test@test.com"
             },
             "items": [
                 {
                     "id": "item_id",
                     "name": "테스트아이템",
                     "qty": 1,
-                    "price": 1000
+                    "price": moneyCash
                 }
             ],
             "extra": {
-                "open_type": "redirect",
-                "redirect_url": "/school/list",
+                "open_type": "iframe",
                 "card_quota": "0,2,3",
-                "escrow": false,
-                "display_success_result":true,
-                "display_error_result":true
-
+                "escrow": false
+                // "display_success_result": true,
+                // "display_error_result": true
             }
-            // extra: {
-            //     open_type: 'iframe',
-            //     browser_open_type: [
-            //         {
-            //             browser: 'instagram',
-            //             open_type: 'redirect'
-            //         },
-            //         {
-            //             browser: 'facebook',
-            //             open_type: 'redirect'
-            //         },
-            //         {
-            //             browser: 'kakaotalk',
-            //             open_type: 'popup'
-            //         },
-            //         {
-            //             browser: 'naver',
-            //             open_type: 'popup'
-            //         },
-            //         {
-            //             browser: 'mobile_safari',
-            //             open_type: 'popup'
-            //         },
-            //         {
-            //             browser: 'mobile_chrome',
-            //             open_type: 'iframe'
-            //         }
-            //     ],
-            //     redirect_url: '/school/list'
-            // }
+
         })
+        switch (response.event) {
+            case 'done':
+                // 결제 완료 처리
+                console.log(response)
+                console.log(response.data)
+                console.log(response.data.price)
+                giveMoneyCash({
+                    moneyCash: response.data.price,
+                    userId: $('#userId').val()
+                });
+                // paymentForm.submit();
+                break
+        }
+
+        // } catch (e) {
+        //     console.log(e.message)
+        //     switch (e.event) {
+        //         case 'cancel':
+        //             // 사용자가 결제창을 닫을때 호출
+        //             console.log(e.message);
+        //             break
+        //         case 'error':
+        //             // 결제 승인 중 오류 발생시 호출
+        //             console.log(e.error_code);
+        //             break
+        //     }
+        // }
     }
-
-    // BootPay.request({
-    //     price: '1000', //실제 결제되는 가격
-    //     application_id: '593f8febe13f332431a8ddae',
-    //     name: '블링블링 마스카라', //결제창에서 보여질 이름
-    //     pg: 'danal',
-    //     show_agree_window: 0, // 부트페이 정보 동의 창 보이기 여부
-    //     items: [
-    //         {
-    //             item_name: '나는 아이템', //상품명
-    //             qty: 1, //수량
-    //             unique: '123', //해당 상품을 구분짓는 primary key
-    //             price: 1000, //상품 단가
-    //             cat1: 'TOP', // 대표 상품의 카테고리 상, 50글자 이내
-    //             cat2: '티셔츠', // 대표 상품의 카테고리 중, 50글자 이내
-    //             cat3: '라운드 티', // 대표상품의 카테고리 하, 50글자 이내
-    //         }
-    //     ],
-    //     user_info: {
-    //         username: '사용자 이름',
-    //         email: '사용자 이메일',
-    //         addr: '사용자 주소',
-    //         phone: '010-1234-4567'
-    //     },
-    //     method: 'card', //결제수단, 입력하지 않으면 결제수단 선택부터 화면이 시작합니다.
-    //     order_id: '고유order_id_1234', //관리하시는 고유 주문번호를 입력해주세요
-    //     params: {
-    //         callback1: '그대로 콜백받을 변수 1',
-    //         callback2: '그대로 콜백받을 변수 2',
-    //         customvar1234: '변수명도 마음대로'
-    //     },
-    // }).error(function (data) {
-    //     //결제 진행시 에러가 발생하면 수행됩니다.
-    //     console.log(data);
-    // }).cancel(function (data) {
-    //     //결제가 취소되면 수행됩니다.
-    //     console.log(data);
-    // }).confirm(function (data) {
-    //     //결제가 실행되기 전에 수행되며, 주로 재고를 확인하는 로직이 들어갑니다.
-    //     //주의 - 카드 수기결제일 경우 이 부분이 실행되지 않습니다.
-    //     console.log(data);
-    //     if(somthing) { // 재고 수량 관리 로직 혹은 다른 처리
-    //         this.transactionConfirm(data); // 조건이 맞으면 승인 처리를 한다.
-    //     } else {
-    //         this.removeWindow(); // 조건이 맞지 않으면 결제 창을 닫고 결제를 승인하지 않는다.
-    //     }
-    // }).done(function (data) {
-    //     //결제가 정상적으로 완료되면 수행됩니다
-    //     //비즈니스 로직을 수행하기 전에 결제 유효성 검증을 하시길 추천합니다.
-    //     console.log(data);
-    // });
-
 </script>
 <script th:inline="javascript">
 

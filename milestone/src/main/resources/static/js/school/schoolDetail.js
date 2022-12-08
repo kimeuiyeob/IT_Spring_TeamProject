@@ -217,7 +217,6 @@ function getRanking1(param, callback, error) {
 //==============================댓글============================
 //보육원 댓글
 function getReply1(param, callback, error) {
-    console.log(param)
     $.ajax({
         url: "/schoolrest/reply/" + param.page + "/" + param.userId,
         type: "get",
@@ -386,7 +385,26 @@ function cancelLikeSchool(userId, callback, error){
     })
 }
 
+//========================기부=======================
+function serviceVisitDate (serviceDTO, callback, error){
+    $.ajax({
+        url: "/schoolrest/visit",
+        type: "post",
+        data: JSON.stringify(serviceDTO),
+        contentType: "application/json; charset=utf-8",
+        success: function(){
+            alert("신청 완료!!")
+            console.log("들어왔니?")
+        },
+        error: function (xhr, status, err) {
+            if (error) {
+                error(err);
+            }
+        }
+    })
+}
+
 //기부하기로 이동
-$('#donate').on('click',function(){
+$('#donateMoney').on('click',function(){
     location.href = "/school/donation?userId=" + $('.userId').val();
 })

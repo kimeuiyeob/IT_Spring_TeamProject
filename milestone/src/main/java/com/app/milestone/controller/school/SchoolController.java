@@ -38,15 +38,13 @@ public class SchoolController {
     //    결제페이지 이동
     @GetMapping("/donation")
     public void donation(Long userId, Model model) {
-        log.info("" + userId);
         model.addAttribute("schoolDTO", schoolService.schoolInfo(userId));
     }
-
 
     //    결제진행
     @PostMapping("/payment")
     public RedirectView payment(@RequestBody MoneyDTO moneyDTO) {
-        log.info(""+moneyDTO);
+        log.info("==============asd==================="+moneyDTO);
 //        replyService.register(replyDTO);
         return new RedirectView("/school/read");
     }

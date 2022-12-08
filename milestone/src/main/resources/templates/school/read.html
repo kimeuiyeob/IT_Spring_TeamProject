@@ -279,7 +279,7 @@
                     </div>
 
                     <div class="donateDIV">
-                        <button id="donate">
+                        <button class="donate" id="donateMoney">
                             <span>기부하기</span>
                         </button>
                     </div>
@@ -309,7 +309,6 @@
                     <!-- 달력 -->
                     <div class="calendarContent2">
                         <div>
-
                             <div class="tempDiv">
                                 <div class="callenderWrap">
                                     <div class="callenderHead">
@@ -317,7 +316,7 @@
                                         <div class="nowMonth"></div>
                                         <div class="nextMonth"></div>
                                     </div>
-                                    <table class="callenderBody">
+                                    <table class="callenderBody" style="margin-bottom: 24px">
                                         <tr>
                                             <th>일</th>
                                             <th>월</th>
@@ -329,6 +328,9 @@
                                         </tr>
                                     </table>
                                 </div>
+                                <button class="donate" id="donateVisit">
+                                    <span>신청하기</span>
+                                </button>
                             </div>
 
                         </div>
@@ -593,6 +595,20 @@
             userId: $('.userId').val()
         }, getReply)
     }
+
+    //    ======================방문기부====================
+    //방문기부 신청
+    $('#donateVisit').on('click', function () {
+        if (!saveDate) {
+            alert("방문하실 날짜를 선택해 주세요.")
+            return;
+        }
+        serviceVisitDate({
+            userId: $('.userId').val(),
+            serviceVisitDate: saveDate
+        })
+        // location.href = "/school/donation?userId=" + $('.userId').val();
+    })
 
 </script>
 </html>

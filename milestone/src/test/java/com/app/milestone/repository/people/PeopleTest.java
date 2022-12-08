@@ -45,6 +45,11 @@ public class PeopleTest {
 
     }
 
+    @Test
+    public void findOneTest(){
+        log.info(""+peopleRepository.findById(132L).get());
+    }
+
     //    개인 한 명의 정보
     @Test
     public void findTest() {
