@@ -25,6 +25,7 @@ $(".zzimButton").click(function () {
         $(this).children(".redHeart").css({"display": "none"})
         $(this).children(".emptyHeart").css({"display": "inline"})
         check2 = false;
+        cancelLikeSchool($('.userId').val(),showLikeCount)
     }
 })
 
@@ -213,7 +214,7 @@ function getRanking1(param, callback, error) {
         }
     });
 }
-
+//==============================댓글============================
 //보육원 댓글
 function getReply1(param, callback, error) {
     console.log(param)
@@ -304,7 +305,6 @@ function modify(reply, callback, error) {
 
 // 댓글 등록
 function register(reply, callback, error) {
-    console.log(reply)
     $.ajax({
         url: "/schoolrest/register/",
         type: "post",
@@ -321,9 +321,9 @@ function register(reply, callback, error) {
     })
 }
 
-//========================댓글=========================
+//========================좋아요=========================
 //내가 좋아한 보육원
-function getLikeSchoolList(param, callback, error){
+function getLikeSchoolList(callback, error){
     $.ajax({
         url:"/schoolrest/likeSchool",
         type: "get",
@@ -369,3 +369,24 @@ function likeSchool(userId, callback, error){
         }
     })
 }
+
+//좋아요 취소
+function cancelLikeSchool(userId, callback, error){
+    $.ajax({
+        url:"/schoolrest/cancel/" + userId,
+        type: "get",
+        success:function(likeCount){
+            callback(likeCount);
+        },
+        error: function (xhr, status, err) {
+            if (error) {
+                error(err);
+            }
+        }
+    })
+}
+
+//기부하기로 이동
+$('#donate').on('click',function(){
+    location.href = "/school/donation?userId=" + $('.userId').val();
+})

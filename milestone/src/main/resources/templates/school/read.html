@@ -389,6 +389,8 @@
     show();
     showReply();
     showLikeCount();
+    getLikeSchoolList(clickLikeBtn);
+    // likeSchool();
 
     //보육원 정보
     /*아마 schoolResp로 바뀔 예정*/
@@ -451,26 +453,24 @@
 
     //=======================좋아요======================
     //내가 좋아한 보육원
-    function likeSchool() {
-
-    }
-
-    function clickLikeBtn(){
-
+    function clickLikeBtn(likeSchoolList) {
+        likeSchoolList.forEach(id => {
+            if (id == $('.userId').val()) {
+                $(".redHeart").css({"display": "inline"})
+                $(".emptyHeart").css({"display": "none"})
+                check2 = true;
+            }
+        });
     }
 
     //좋아요 개수
-    function likeCount(likeCount){
+    function likeCount(likeCount) {
         $('#zzimCount').html(likeCount);
     }
 
-    function showLikeCount(){
-        getLikeCount($('.userId').val(),likeCount)
+    function showLikeCount() {
+        getLikeCount($('.userId').val(), likeCount)
     }
-
-    //좋아요 누름
-
-    //좋아요 취소
 
     //show!!
     function show() {
@@ -494,9 +494,7 @@
     let sessionId = 132;
 
 
-
     function getReply(replys) {
-        console.log(nowPage)
         replyText = "";
         lastReplyFlag = replys.last;
         replys.content.forEach(reply => {

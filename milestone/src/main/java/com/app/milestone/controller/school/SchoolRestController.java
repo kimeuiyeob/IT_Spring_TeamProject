@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +23,7 @@ public class SchoolRestController {
     private final SchoolService schoolService;
     private final PeopleService peopleService;
     private final ReplyService replyService;
+    private final LikeService likeService;
 
     //    보육원 목록
     @GetMapping(value = {"/list/{page}", "/list/{page}/{schoolAddress}", "/list/{page}/{schoolAddress}/{schoolName}"})
@@ -79,31 +81,35 @@ public class SchoolRestController {
 
     //  ==============좋아요=============
     //    내가 누른 좋아요
+    @Transactional
     @GetMapping(value = {"/likeSchool"})
     public List<Long> likeSchool() {
+        log.info("================================들어옴");
         Long sessionId = 132L;
-        return peopleService.likeSchoolList(sessionId);
+        return likeService.likeSchoolList(sessionId);
     }
 
     //    좋아요 개수
     @GetMapping(value = {"/likeCount/{userId}"})
     public Long likeCount(@PathVariable("userId") Long userId) {
-        return peopleService.likeCount(userId);
+        return likeService.likeCount(userId);
     }
 
     //    좋아요 누름
     @GetMapping(value = {"/like/{userId}"})
     public void like(@PathVariable("userId") Long userId) {
         Long sessionId = 132L;
-        peopleService.likeSchool(userId, sessionId);
+        likeService.likeSchool(userId, sessionId);
     }
 
     //    좋아요 취소
     @GetMapping(value = {"/cancel/{userId}"})
     public void cancel(@PathVariable("userId") Long userId) {
         Long sessionId = 132L;
-        peopleService.likeSchool(userId, sessionId);
+        likeService.cancelLikeSchool(userId, sessionId);
     }
+
+
 
 
 }
