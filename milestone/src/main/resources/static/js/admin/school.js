@@ -5,11 +5,13 @@ const $filters = $('.card-toolbar-item');
 const $filtersLast = $('.card-toolbar-itemBox').children().last()
 let check1 = false;
 
-$body.on('click', function (e) {
+$(document).on('click', function (e) {
+    console.log('1 : '+$("#option9").text())
     if (check1) {
         if (e.target.closest('.menu-sub-dropdown') == e.currentTarget.querySelector('.menu-sub-dropdown').closest('.menu-sub-dropdown')) {
             if($(".apply-button").text().match('적용')){
-                search();
+                console.log('2222 : '+$("#option9").text())
+
                 $filterDropdown.css('display', 'none');
                 $filter.css('background-color', '#f6f8fa');
                 $filter.css('color', '#009ef7');
@@ -18,6 +20,15 @@ $body.on('click', function (e) {
                     'background-size': '13px'
                 });
                 check1 = !check1;
+                if($("#option9").text().match('내림차순')) {
+                    console.log('333333 : '+$("#option9").text())
+                    console.log('내림차순 실행')
+                    search();
+                }else if($("#option9").text().match('오름차순')){
+                    console.log('4444444 : '+$("#option9").text())
+
+                    search2();
+                }
             }
         } else {
             $filterDropdown.css('display', 'none');
@@ -103,7 +114,6 @@ $(".delete-modal-cancel1").on('click', function () {
 const $selectOption = $('.menu-sub-dropdown-option-box');
 
 $selectOption.on('click', function () {
-    console.log('방가')
     if ($(this).find('input').is(':checked')) {
         $(this).find('.menu-sub-dropdown-option-sub').css('display', 'flex');
         $(this).find('input').prop('checked', true);
@@ -151,10 +161,13 @@ $subOptionApllyChoose.on('mouseout', function () {
 })
 
 /* ----------------체크박스-------------------- */
-const $checkBox = $('.notice-checked');
-const $checkBoxAll = $('.notice-checked-all');
 
-$checkBoxAll.on('click', function () {
+/*전체선택*/
+$('.card-body-title-box').on('click','.notice-checked-all' , function(e) {
+
+    const $checkBox = $('.notice-checked');
+    const $checkBoxAll = $('.notice-checked-all');
+
     if ($checkBoxAll.is(':checked')) {
         $checkBoxAll.closest('.card-body-title-user-checkbox').css('background-color', '#009ef7');
         $checkBoxAll.prev().css('display', 'flex');
@@ -168,9 +181,14 @@ $checkBoxAll.on('click', function () {
         $checkBox.prev().css('display', 'none');
         $checkBox.prop('checked', false);
     }
+
 })
 
-$checkBox.on('click', function (e) {
+/* 하나 선택 */
+$('.card-body-main-box').on('click', '.notice-checked', function (e) {
+
+    const $checkBox = $('.notice-checked');
+    const $checkBoxAll = $('.notice-checked-all');
 
     if ($(this).is(':checked')) {
         $(this).closest('.card-body-title-user-checkbox').css('background-color', '#009ef7');
@@ -187,7 +205,35 @@ $checkBox.on('click', function (e) {
         $checkBoxAll.closest('.card-body-title-user-checkbox').css('background-color', '#009ef7');
         $checkBoxAll.prev().css('display', 'flex');
     }
+
 })
+
+function fnGetdata(){
+    var chkArray = new Array(); // 배열 선언
+
+    $('input:checkbox[name=check]:checked').each(function() { // 체크된 체크박스의 value 값을 가지고 온다.
+        chkArray.push($(this).siblings('.userId').val());
+    });
+
+    // 삭제할 회원번호들
+    $('#hiddenValue').val(chkArray);
+    console.log('chkArray : ' + chkArray)
+    // console.log('hidden : '+$('#hiddenValue').val());
+    // console.log('chkArray : '+chkArray[0]);
+
+    $.ajax({
+        type : 'POST'
+        ,url : '/adminRest/schoolDelete'
+        ,data : {chkArray: chkArray}
+        ,traditional: true
+        ,success : function(result) {
+            alert("해당 회원이 정상적으로 삭제되었습니다.");
+            location.replace("school")
+        },
+        error: function(request, status, error) {
+        }
+    })
+}
 
 /* -----------삭제 모달창-------------- */
 const $delete = $('.donate-outBox');
@@ -195,10 +241,14 @@ const $finalDelete = $('.delete-modal-delete');
 const $finalDeleteCancel = $('.delete-modal-cancel');
 const deleteModal = $('.delete-modal')[0];
 
+/* 삭제 OK 모달*/
 $finalDelete.on('click', function () {
     deleteModal.classList.toggle('show');
     body.style.overflow = 'auto';
+    fnGetdata();    //회원삭제
 })
+
+
 
 $finalDeleteCancel.on('click', function () {
     deleteModal.classList.toggle('show');
@@ -253,10 +303,10 @@ const $search = $('input[name = search]');
 globalThis.page = 0;
 let $pagingBtnFlex = $('.paging-number-flex');
 /*처음 목록 가져오기*/
-show();
+showList();
 
 
-function show(){
+function showList(){
     console.log('몇페이지 : '+page);
 
     getList1({
@@ -279,6 +329,8 @@ function getList(schoolResp) {
         text += `<label class="card-body-title-user-checkbox">`
         text += `<div class="check-img"></div>`
         text += `<input class="notice-checked" type="checkbox" name="check">`
+        text += `<input type="hidden" value="` + school.userId + `"name ="check2" class="userId">`
+        text += `<input type="hidden" name="hiddenValue" id="hiddenValue" value=""/>`
         text += `</label>`
         text += `</th>`
         text += `<th class="card-body-title-padding" style="width: 17%;">`
@@ -311,7 +363,9 @@ function getList1(param, callback, error){
     let existAddress = param.schoolAddress.length != 0;
     let existSchoolName = param.schoolName.length != 0;
     let queryString = "/" + param.page || 1;
+
     queryString += existAddress ? "/" + param.schoolAddress : "";
+
     if (!existAddress && existSchoolName) {
         queryString += "/null";
     }
@@ -330,6 +384,53 @@ function getList1(param, callback, error){
             }
         }
     });
+}
+function getList1Asc(param, callback, error){
+
+    let existAddress = param.schoolAddress.length != 0;
+    let existSchoolName = param.schoolName.length != 0;
+    let queryString = "/" + param.page || 1;
+
+    queryString += existAddress ? "/" + param.schoolAddress : "";
+
+    if (!existAddress && existSchoolName) {
+        queryString += "/null";
+    }
+    queryString += existSchoolName ? "/" + param.schoolName : "";
+    $.ajax({
+        url : "/adminRest/schoolbudgetAsc"+queryString,
+        type : "get",
+        success : function (schoolResp, status, xhr) {
+            if(callback){
+                callback(schoolResp)
+            }
+        },
+        error: function (xhr, status, err) {
+            if (error) {
+                error(err);
+            }
+        }
+    });
+}
+
+
+/* 검색 */
+function search() {
+    console.log("$search.text() : "+$search.val())
+    getList1({
+        schoolAddress: $search.val(),
+        schoolName: $search.val(),
+        page: globalThis.page
+    }, getList);
+}
+
+function search2() {
+    console.log("$search.text() : "+$search.val())
+    getList1Asc({
+        schoolAddress: $search.val(),
+        schoolName: $search.val(),
+        page: globalThis.page
+    }, getList);
 }
 
 
@@ -390,17 +491,6 @@ $pagingBtnFlex.on('click', ".page-number-link", function (e) {
 })
 
 
-
-
-/* 검색 */
-function search() {
-    console.log("$search.text() : "+$search.val())
-    getList1({
-        schoolAddress: $search.val(),
-        schoolName: $search.val(),
-        page: globalThis.page
-    }, getList);
-}
 
 
 /*  페이지 이동  */

@@ -123,11 +123,11 @@ public class PeopleService {
         if (search.getUserName() == null) {
             search.setUserName(null);
         }
-        if (search.getPeopleNickName() == null) {
-            search.setPeopleNickName(null);
+        if (search.getPeopleNickname() == null) {
+            search.setPeopleNickname(null);
         }
         List<PeopleDTO> list = peopleRepository.findPeopleSearch(pageable, search);
-        int start = list.size() > (int) pageable.getOffset() ? (int) pageable.getOffset() : (int) pageable.getOffset() - 10;
+        int start = list.size() >= (int) pageable.getOffset() ? (int) pageable.getOffset() : (int) pageable.getOffset() - 10;
         int end = Math.min((start + pageable.getPageSize()), list.size());
 
         Page<PeopleDTO> people = new PageImpl<>(list.subList(start, end), pageable, Integer.valueOf("" + peopleRepository.countByCreatedDate(pageable, search)));
@@ -142,16 +142,21 @@ public class PeopleService {
         if (search.getUserName() == null) {
             search.setUserName(null);
         }
-        if (search.getPeopleNickName() == null) {
-            search.setPeopleNickName(null);
+        if (search.getPeopleNickname() == null) {
+            search.setPeopleNickname(null);
         }
         List<PeopleDTO> list = peopleRepository.findPeopleSearchAsc(pageable, search);
-        int start = list.size() > (int) pageable.getOffset() ? (int) pageable.getOffset() : (int) pageable.getOffset() - 10;
+        int start = list.size() >= (int) pageable.getOffset() ? (int) pageable.getOffset() : (int) pageable.getOffset() - 10;
         int end = Math.min((start + pageable.getPageSize()), list.size());
 
         Page<PeopleDTO> people = new PageImpl<>(list.subList(start, end), pageable, Integer.valueOf("" + peopleRepository.countByCreatedDate(pageable, search)));
 
         return people;
+    }
+
+//    회원 삭제
+    public void deleteByUserId(Long userId){
+        peopleRepository.deleteById(userId);
     }
 
 

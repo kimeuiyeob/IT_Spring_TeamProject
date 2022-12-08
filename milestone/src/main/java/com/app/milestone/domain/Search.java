@@ -20,6 +20,10 @@ public class Search {
 
     /*===============================*/
 
+    private String peopleNickname;
     private String userName;
-    private String peopleNickName;
+
+    /*===============================*/
+
+    private String NoticeTitle;
 }

@@ -2,6 +2,7 @@ package com.app.milestone.controller.admin;
 
 import com.app.milestone.domain.Search;
 import com.app.milestone.repository.SchoolRepository;
+import com.app.milestone.service.PeopleService;
 import com.app.milestone.service.SchoolService;
 import com.app.milestone.service.UserService;
 import com.app.milestone.service.WithdrawalService;
@@ -10,10 +11,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -22,6 +24,7 @@ public class AdminController {
     private final UserService userService;
     private final WithdrawalService withdrawalService;
     private final SchoolService schoolService;
+    private final PeopleService peopleService;
 
     @GetMapping("talent")
     public void community(){};
