@@ -9,11 +9,12 @@
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/admin/all.css">
     <link rel="icon" href="/imgs/fix/favicon.png">
+    <script src="./summernote-ko-KR.js"></script>
 </head>
 
 <body onload="showClock()">
 <!-- 공지사항 수정 모달창 -->
-<div class="update-notice-modal" style="z-index: 5555;">
+<!--<div class="update-notice-modal" style="z-index: 5555;">
     <div class="update-notice-modal-body">
         <div class="notice-modal-header">
             <h2>공지사항 수정</h2>
@@ -25,7 +26,8 @@
                     제목
                 </div>
                 <div class="menu-sub-dropdown-item-title-margin">
-                    <input class="modal-info-padding" type="text" placeholder="제목을 입력하세요" style="font-size: 14px">
+                    &lt;!&ndash;<input class="modal-info-padding" type="text" placeholder="제목을 입력하세요" style="font-size: 14px" th:utext="${}">&ndash;&gt;
+                    <input class="modal-info-padding" type="text" placeholder="제목을 입력하세요" style="font-size: 14px"/>
                 </div>
             </div>
             <div class="schedule-info-box">
@@ -36,7 +38,7 @@
             <button class="modal-submit">수정</button>
         </div>
     </div>
-</div>
+</div>-->
 <!-- 공지사항 추가 모달창 -->
 <div class="add-schedule-modal" style="z-index: 5555;">
     <div class="add-schedule-modal-body">
@@ -44,22 +46,26 @@
             <h2>공지사항 작성</h2>
             <div class="close-img"></div>
         </div>
-        <div class="notice-modal-body">
-            <div class="schedule-info-box">
-                <div class="menu-sub-dropdown-item-title-margin">
-                    제목
+        <form method="post" th:action="@{/notice/write}">
+            <div class="notice-modal-body">
+                <div class="schedule-info-box">
+                    <div class="menu-sub-dropdown-item-title-margin">
+                        제목
+                    </div>
+                    <div class="menu-sub-dropdown-item-title-margin">
+                        <input  class="modal-info-padding" type="text" placeholder="제목을 입력하세요" name="noticeTitle" style="font-size: 14px">
+                    </div>
                 </div>
-                <div class="menu-sub-dropdown-item-title-margin">
-                    <input class="modal-info-padding" type="text"  placeholder="제목을 입력하세요" style="font-size: 14px">
+                <div class="schedule-info-box">
+                    <div>
+                        <textarea class="summernote" name="noticeContent"></textarea>
+                    </div>
                 </div>
             </div>
-            <div class="schedule-info-box">
-                <div class="summernote"></div>
+            <div class="modal-footer">
+                <button class="modal-submit add-submit">추가</button>
             </div>
-        </div>
-        <div class="modal-footer">
-            <button class="modal-submit">추가</button>
-        </div>
+        </form>
     </div>
 </div>
 <!-- 삭제 모달창 -->
@@ -272,7 +278,7 @@
                         <div class="card-title">
                             <div class="card-title-item-box">
                                 <div class="card-item-search"></div>
-                                <input id="search-bar" type="text" placeholder="검색">
+                                <input id="search-bar" type="text" placeholder="검색" name="search">
                             </div>
                         </div>
                         <div class="card-toolbar">
@@ -334,7 +340,7 @@
                                             </div>
                                             <div class="menu-sub-dropdown-footer">
                                                 <div class="menu-sub-dropdown-Botton" id="reset2">초기화</div>
-                                                <div class="menu-sub-dropdown-Botton">적용</div>
+                                                <div class="menu-sub-dropdown-Botton apply-button">적용</div>
                                             </div>
 
                                         </div>
@@ -364,7 +370,7 @@
                                 <th class="card-body-title-checkbox-padding" style="width: 14%;">
                                     <label class="card-body-title-user-checkbox">
                                         <div class="check-img"></div>
-                                        <input class="notice-checked-all checked" type="checkbox" name="check">
+                                        <input class="notice-checked-all checked" type="checkbox" name="check-all">
                                     </label>
                                 </th>
 <!--                                <th class="card-body-title-padding" style="width: 6%;">-->
@@ -385,20 +391,13 @@
                             </tr>
                             </thead>
                             <tbody class="card-body-main-box">
-                            <tr>
+<!--                            <tr>
                                 <th class="card-body-title-checkbox-padding" style="width: 14%;">
                                     <label class="card-body-title-user-checkbox">
                                         <div class="check-img"></div>
                                         <input class="notice-checked checked" type="checkbox" name="check">
                                     </label>
                                 </th>
-<!--                                <th class="card-body-title-padding" style="width: 6%;">-->
-<!--                                    <div class="donate-info-height">-->
-<!--                                        <div class="donate-info-text">-->
-<!--                                            점검-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </th>-->
                                 <th class="card-body-title-padding" style="width: 50%;">
                                     <div class="donate-info-height">
                                         <div class="donate-info-text">
@@ -411,108 +410,7 @@
                                         2022년 11월 22일 19시 53분
                                     </div>
                                 </th>
-                                <th class="card-body-title-checkbox-padding" style="width: 14%;">
-                                    <label class="card-body-title-user-checkbox">
-                                        <div class="check-img"></div>
-                                        <input class="notice-checked checked" type="checkbox" name="check">
-                                    </label>
-                                </th>
-<!--                                <th class="card-body-title-padding" style="width: 6%;">-->
-<!--                                    <div class="donate-info-height">-->
-<!--                                        <div class="donate-info-text">-->
-<!--                                            공지-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </th>-->
-                                <th class="card-body-title-padding" style="width: 50%;">
-                                    <div class="donate-info-height">
-                                        <div class="donate-info-text">
-                                            10/3(월) 홈페이지 정기점검 안내
-                                        </div>
-                                    </div>
-                                </th>
-                                <th class="card-body-title-padding" style="width: 32%;">
-                                    <div class="donate-info-height">
-                                        2022년 11월 22일 19시 53분
-                                    </div>
-                                </th>
-                            <tr>
-                                <th class="card-body-title-checkbox-padding" style="width: 14%;">
-                                    <label class="card-body-title-user-checkbox">
-                                        <div class="check-img"></div>
-                                        <input class="notice-checked checked" type="checkbox" name="check">
-                                    </label>
-                                </th>
-<!--                                <th class="card-body-title-padding" style="width: 6%;">-->
-<!--                                    <div class="donate-info-height">-->
-<!--                                        <div class="donate-info-text">-->
-<!--                                            점검-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </th>-->
-                                <th class="card-body-title-padding" style="width: 50%;">
-                                    <div class="donate-info-height">
-                                        <div class="donate-info-text">
-                                            [점검완료] 9/26(월) 홈페이지 정기점검(6:00 ~ 9:00)
-                                        </div>
-                                    </div>
-                                </th>
-                                <th class="card-body-title-padding" style="width: 32%;">
-                                    <div class="donate-info-height">
-                                        2022년 11월 22일 19시 53분
-                                    </div>
-                                </th>
-                                <th class="card-body-title-checkbox-padding" style="width: 14%;">
-                                    <label class="card-body-title-user-checkbox">
-                                        <div class="check-img"></div>
-                                        <input class="notice-checked checked" type="checkbox" name="check">
-                                    </label>
-                                </th>
-<!--                                <th class="card-body-title-padding" style="width: 6%;">-->
-<!--                                    <div class="donate-info-height">-->
-<!--                                        <div class="donate-info-text">-->
-<!--                                            공지-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </th>-->
-                                <th class="card-body-title-padding" style="width: 50%;">
-                                    <div class="donate-info-height">
-                                        <div class="donate-info-text">
-                                            9/26(월) 홈페이지 정기점검 안내
-                                        </div>
-                                    </div>
-                                </th>
-                                <th class="card-body-title-padding" style="width: 32%;">
-                                    <div class="donate-info-height">
-                                        2022년 11월 22일 19시 53분
-                                    </div>
-                                </th>
-                                <th class="card-body-title-checkbox-padding" style="width: 14%;">
-                                    <label class="card-body-title-user-checkbox">
-                                        <div class="check-img"></div>
-                                        <input class="notice-checked checked" type="checkbox" name="check">
-                                    </label>
-                                </th>
-<!--                                <th class="card-body-title-padding" style="width: 6%;">-->
-<!--                                    <div class="donate-info-height">-->
-<!--                                        <div class="donate-info-text">-->
-<!--                                            공지-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </th>-->
-                                <th class="card-body-title-padding" style="width: 50%;">
-                                    <div class="donate-info-height">
-                                        <div class="donate-info-text">
-                                            커뮤니티 이용 시 주의사항 안내
-                                        </div>
-                                    </div>
-                                </th>
-                                <th class="card-body-title-padding" style="width: 32%;">
-                                    <div class="donate-info-height">
-                                        2022년 11월 22일 19시 53분
-                                    </div>
-                                </th>
-                            </tr>
+                            </tr>-->
 
                             </tbody>
                         </table>

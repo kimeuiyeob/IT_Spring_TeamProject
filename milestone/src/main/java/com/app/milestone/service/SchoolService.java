@@ -129,7 +129,6 @@ public class SchoolService {
         return schools;
     }
 
-
     /*=============================================================================*/
     /*=============================================================================*/
     /*=============================================================================*/
@@ -147,8 +146,7 @@ public class SchoolService {
             search.setSchoolName(null);
         }
         List<SchoolDTO> list = schoolRepository.findByBudgetAndSearch(pageable, search);
-        log.info("결과============" + pageable.getOffset());
-        int start = list.size() > (int) pageable.getOffset() ? (int) pageable.getOffset() : (int) pageable.getOffset() - 10;
+        int start = list.size() >= (int) pageable.getOffset() ? (int) pageable.getOffset() : (int) pageable.getOffset() - 10;
         int end = Math.min((start + pageable.getPageSize()), list.size());
 
         Page<SchoolDTO> schools = new PageImpl<>(list.subList(start, end), pageable, Integer.valueOf("" + schoolRepository.countByCreatedDate(pageable, search)));
@@ -168,11 +166,17 @@ public class SchoolService {
             search.setSchoolName(null);
         }
         List<SchoolDTO> list = schoolRepository.findByBudgetAndSearchAsc(pageable, search);
-        int start = list.size() > (int) pageable.getOffset() ? (int) pageable.getOffset() : (int) pageable.getOffset() - 10;
+        int start = list.size() >= (int) pageable.getOffset() ? (int) pageable.getOffset() : (int) pageable.getOffset() - 10;
         int end = Math.min((start + pageable.getPageSize()), list.size());
 
         Page<SchoolDTO> schools = new PageImpl<>(list.subList(start, end), pageable, Integer.valueOf("" + schoolRepository.countByCreatedDate(pageable, search)));
 
         return schools;
+    }
+
+
+    //    회원 삭제
+    public void deleteByUserId(Long userId){
+        schoolRepository.deleteById(userId);
     }
 }

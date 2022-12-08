@@ -28,7 +28,7 @@ import static com.app.milestone.entity.QTalent.*;
 @Slf4j
 public class PeopleCustomRepositoryImpl implements PeopleCustomRepository {
     private final JPAQueryFactory jpaQueryFactory;
-    
+
     // 개인 한 명정보 조회
     @Override
     public PeopleDTO findInfoById(Long userId){
@@ -168,12 +168,12 @@ public class PeopleCustomRepositoryImpl implements PeopleCustomRepository {
 
 
     //    이름검색
-    private BooleanExpression peopleNameContaining(String peopleName) {
-        return StringUtils.hasText(peopleName) ? people.userName.contains(peopleName) : null;
+    private BooleanExpression peopleNameContaining(String userName) {
+        return StringUtils.hasText(userName) ? people.userName.contains(userName) : null;
     }
     //    닉네임 검색
-    private BooleanExpression peopleNickNameContaining(String peopleNickame) {
-        return StringUtils.hasText(peopleNickame) ? people.peopleNickname.contains(peopleNickame) : null;
+    private BooleanExpression peopleNicknameContaining(String peopleNickname) {
+        return StringUtils.hasText(peopleNickname) ? people.peopleNickname.contains(peopleNickname) : null;
     }
 
     //    검색 결과 count
@@ -182,8 +182,8 @@ public class PeopleCustomRepositoryImpl implements PeopleCustomRepository {
         return jpaQueryFactory.select(people.count())
                 .from(people)
                 .where(
-                        peopleNameContaining(search.getUserName()),
-                        peopleNickNameContaining(search.getPeopleNickName())
+                        peopleNicknameContaining(search.getPeopleNickname()),
+                        peopleNameContaining(search.getUserName())
                 )
                 .orderBy(people.createdDate.asc())
                 .fetchOne();
@@ -202,8 +202,8 @@ public class PeopleCustomRepositoryImpl implements PeopleCustomRepository {
                 people.createdDate
         )).from(people)
                 .where(
-                        peopleNameContaining(search.getUserName()),
-                        peopleNickNameContaining(search.getPeopleNickName())
+                        peopleNicknameContaining(search.getPeopleNickname()),
+                        peopleNameContaining(search.getUserName())
                 )
                 .orderBy(people.createdDate.desc())
                 .fetch();
@@ -222,10 +222,11 @@ public class PeopleCustomRepositoryImpl implements PeopleCustomRepository {
                 people.createdDate
         )).from(people)
                 .where(
-                        peopleNameContaining(search.getUserName()),
-                        peopleNickNameContaining(search.getPeopleNickName())
+                        peopleNicknameContaining(search.getPeopleNickname()),
+                        peopleNameContaining(search.getUserName())
                 )
                 .orderBy(people.createdDate.asc())
                 .fetch();
     }
+
 }

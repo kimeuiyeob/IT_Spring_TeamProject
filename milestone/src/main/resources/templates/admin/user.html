@@ -18,10 +18,12 @@
             !
         </div>
         <div class="delete-modal-middle">내보내시겠습니까?</div>
-        <div class="delete-modal-bottom">
-            <div class="delete-modal-delete" style="cursor: pointer">네,삭제합니다!</div>
-            <div class="delete-modal-cancel" style="cursor: pointer">아니요,취소</div>
-        </div>
+            <form method="post" th:action="@{/admin/delete}" th:object="${board}">
+                <div class="delete-modal-bottom">
+                    <div class="delete-modal-delete" style="cursor: pointer">네,삭제합니다!</div>
+                    <div class="delete-modal-cancel" style="cursor: pointer">아니요,취소</div>
+                </div>
+            </form>
     </div>
 </div>
 <!-- 확인 모달창 -->
@@ -295,7 +297,7 @@
                                                 <div class="menu-sub-dropdown-Botton" id="reset6">초기화</div>
                                                 <div class="menu-sub-dropdown-Botton apply-button">적용</div>
                                             </div>
-
+                                        </div>
                                         </div>
                                     </div>
                                 </button>
@@ -303,6 +305,8 @@
                                     <div id="out-img"></div>
                                     내보내기
                                 </button>
+
+
                             </div>
                         </div>
                     </div>
@@ -315,7 +319,7 @@
                                 <th class="card-body-title-checkbox-padding" style="width: 3%;">
                                     <label class="card-body-title-user-checkbox card-body-title-user-checkbox-all">
                                         <div class="check-img"></div>
-                                        <input class="notice-checked-all" type="checkbox" name="check">
+                                        <input class="notice-checked-all" type="checkbox" name="check-all">
                                     </label>
                                 </th>
                                 <th class="card-body-title-padding" style="width: 22%;">

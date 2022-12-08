@@ -6,9 +6,26 @@ const $filtersLast = $('.card-toolbar-itemBox').children().last()
 
 let check1 = false;
 
-$body.on('click', function (e) {
+$(document).on('click', function (e) {
     if (check1) {
         if (e.target.closest('.menu-sub-dropdown') == e.currentTarget.querySelector('.menu-sub-dropdown').closest('.menu-sub-dropdown')) {
+            console.log('들어옴1');
+            if($(".apply-button").text().match('적용')){
+                console.log('들어옴2');
+                $filterDropdown.css('display', 'none');
+                $filter.css('background-color', '#f6f8fa');
+                $filter.css('color', '#009ef7');
+                $filter.find('#filter-img').css({
+                    'background': `url('/imgs/admin/filterBlue.png')`,
+                    'background-size': '13px'
+                });
+                check1 = !check1;
+                if($("#option4").text().match('내림차순')) {
+                    search();
+                }else if($("#option4").text().match('오름차순')){
+                    search2();
+                }
+            }
         } else {
             $filterDropdown.css('display', 'none');
             $filter.css('background-color', '#f6f8fa');
@@ -102,7 +119,6 @@ $(".delete-modal-cancel1").on('click', function () {
 const $selectOption = $('.menu-sub-dropdown-option-box');
 
 $selectOption.on('click', function () {
-    console.log('방가')
     if ($(this).find('input').is(':checked')) {
         $(this).find('.menu-sub-dropdown-option-sub').css('display', 'flex');
         $(this).find('input').prop('checked', true);
@@ -150,10 +166,13 @@ $subOptionApllyChoose.on('mouseout', function () {
 })
 
 /* ----------------체크박스-------------------- */
-const $checkBox = $('.notice-checked');
-const $checkBoxAll = $('.notice-checked-all');
 
-$checkBoxAll.on('click', function () {
+/*전체선택*/
+$('.card-body-title-box').on('click','.notice-checked-all' , function(e) {
+
+    const $checkBox = $('.notice-checked');
+    const $checkBoxAll = $('.notice-checked-all');
+
     if ($checkBoxAll.is(':checked')) {
         $checkBoxAll.closest('.card-body-title-user-checkbox').css('background-color', '#009ef7');
         $checkBoxAll.prev().css('display', 'flex');
@@ -167,9 +186,14 @@ $checkBoxAll.on('click', function () {
         $checkBox.prev().css('display', 'none');
         $checkBox.prop('checked', false);
     }
+
 })
 
-$checkBox.on('click', function (e) {
+/* 하나 선택 */
+$('.card-body-main-box').on('click', '.notice-checked', function (e) {
+
+    const $checkBox = $('.notice-checked');
+    const $checkBoxAll = $('.notice-checked-all');
 
     if ($(this).is(':checked')) {
         $(this).closest('.card-body-title-user-checkbox').css('background-color', '#009ef7');
@@ -186,7 +210,34 @@ $checkBox.on('click', function (e) {
         $checkBoxAll.closest('.card-body-title-user-checkbox').css('background-color', '#009ef7');
         $checkBoxAll.prev().css('display', 'flex');
     }
+
 })
+
+function fnGetdata(){
+    var chkArray = new Array(); // 배열 선언
+
+    $('input:checkbox[name=check]:checked').each(function() { // 체크된 체크박스의 value 값을 가지고 온다.
+        chkArray.push($(this).siblings('.noticeId').val());
+    });
+
+    // 삭제할 회원번호들
+    $('#hiddenValue').val(chkArray);
+    console.log('hidden : '+$('#hiddenValue').val());
+    // console.log('chkArray : '+chkArray[0]);
+
+    $.ajax({
+        type : 'POST'
+        ,url : '/noticeRest/noticeDelete'
+        ,data : {chkArray: chkArray}
+        ,traditional: true
+        ,success : function(result) {
+            alert("해당 회원이 정상적으로 삭제되었습니다.");
+            location.replace("notice")
+        },
+        error: function(request, status, error) {
+        }
+    })
+}
 
 
 /* -----------공지사항 추가,수정 모달창-------------- */
@@ -248,11 +299,12 @@ const $finalDelete = $('.delete-modal-delete');
 const $finalDeleteCancel = $('.delete-modal-cancel');
 const deleteModal = $('.delete-modal')[0];
 
+/* 삭제 OK 모달*/
 $finalDelete.on('click', function () {
     deleteModal.classList.toggle('show');
     body.style.overflow = 'auto';
+    fnGetdata();    //회원삭제
 })
-
 $finalDeleteCancel.on('click', function () {
     deleteModal.classList.toggle('show');
     body.style.overflow = 'auto';
@@ -276,22 +328,23 @@ $delete.on('mouseout', function () {
 })
 
 /* -----------------썸머노트-------------- */
-
-jb('.summernote').summernote({
-    placeholder: '공지사항을 작성하세요',
-    tabsize: 2,
-    height: 280,
-    toolbar: [
-        ['style', ['style']],
-        ['font', ['bold', 'underline', 'clear']],
-        ['color', ['color']],
-        ['para', ['ul', 'ol', 'paragraph']],
-        ['table', ['table']],
-        ['insert', ['link', 'picture']],
-        ['view', ['help']]
-    ]
+$(document).ready(function() {
+    jb('.summernote').summernote({
+        placeholder: '공지사항을 작성하세요',
+        tabsize: 2,
+        height: 280,
+        lang: "ko-KR",
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link']],
+            ['view', ['help']]
+        ]
+    });
 });
-
 /* -------------- 페이지 이동 ---------------- */
 const $pageNumberLink = $('.page-number-link');
 
@@ -305,6 +358,203 @@ $pageNumberLink.on('mouseout', function () {
     $(this).css('color', '#5e6278');
 })
 
+/*=========================================================*/
+const $search = $('input[name = search]');
+globalThis.page = 0;
+let $pagingBtnFlex = $('.paging-number-flex');
+let pageInfo;
+
+/* 처음 뿌리기 */
+noticeShow();
+
+function noticeShow(){
+    console.log('몇페이지 : '+page);
+    getNoticeList1({
+        noticeTitle: $search.text(),
+        page: globalThis.page
+    }, getNoticeList)
+}
+
+function getNoticeList(noticeResp) {
+    let text = "";
+    pageInfo = noticeResp.arNoticeDTO;
+    noticeResp.arNoticeDTO.content.forEach(notice => {
+        text += `<tr>`
+        text += `<th class="card-body-title-checkbox-padding" style="width: 14%;">`
+        text += `<label class="card-body-title-user-checkbox">`
+        text += `<div class="check-img"></div>`
+        text += `<input class="notice-checked checked" type="checkbox" name="check">`
+        text += `<input type="hidden" value="` + notice.noticeId + `"name ="check2" class="noticeId">`
+        text += `<input type="hidden" name="hiddenValue" id="hiddenValue" value=""/>`
+        text += `</label>`
+        text += `</th>`
+        text += `<th class="card-body-title-padding" style="width: 50%;">`
+        text += `<div class="donate-info-height">`
+        text += `<div class="donate-info-text">` + notice.noticeTitle + `</div>`
+        text += `</div>`
+        text += `</div>`
+        text += `</th>`
+        text += `<th class="card-body-title-padding" style="width: 32%;">`
+
+        let date = new Date(notice.createdDate);
+        let year = date.getFullYear().toString().substr(2)+'년 ';
+        let month = date.getMonth() + 1 +'월 ';
+        let day = date.getDate()+'일';
+        let createdDateView = year+month+day;
 
 
+        text += `<div class="donate-info-height">` + createdDateView + `</div>`
+        text += `</div>`
+        text += `</th>`
+        text += `</tr>`
+
+    })
+    $(".card-body-main-box").html(text)
+    pageingBtn();
+}
+
+
+
+function getNoticeList1(param, callback, error) {
+
+    let existNoticeTitle = param.noticeTitle.length != 0;
+    let queryString = "/" + param.page || 1;
+
+    queryString += existNoticeTitle ? "/" + param.noticeTitle : "";
+    $.ajax({
+        url: "/noticeRest/list" + queryString,
+        type: "get",
+        success: function (noticeResp, status, xhr) {
+            if (callback) {
+                callback(noticeResp)
+            }
+        },
+        error: function (xhr, status, err) {
+            if (error) {
+                error(err);
+            }
+        }
+    });
+}
+
+function getNoticeList1Asc(param, callback, error) {
+
+    let existNoticeTitle = param.noticeTitle.length != 0;
+    let queryString = "/" + param.page || 1;
+
+    queryString += existNoticeTitle ? "/" + param.noticeTitle : "";
+    $.ajax({
+        url: "/noticeRest/listAsc" + queryString,
+        type: "get",
+        success: function (noticeResp, status, xhr) {
+            if (callback) {
+                callback(noticeResp)
+            }
+        },
+        error: function (xhr, status, err) {
+            if (error) {
+                error(err);
+            }
+        }
+    });
+}
+
+/* 검색 */
+function search() {
+    console.log("$search.text() : "+$search.val())
+    getNoticeList1({
+        noticeTitle: $search.val(),
+        page: globalThis.page
+    }, getNoticeList);
+}
+
+/* 검색 오름차순 */
+function search2() {
+    console.log("$search.text() : "+$search.val())
+    getNoticeList1Asc({
+        noticeTitle: $search.val(),
+        page: globalThis.page
+    }, getNoticeList);
+}
+
+
+
+
+
+
+
+/* 이름, 주소 검색 */
+$search.on("keyup", function (event) {
+    if (event.keyCode === 13) {
+        search()
+    }
+});
+
+/* 페이징 처리 */
+function pageingBtn() {
+    let text = "";
+    let nowPage = pageInfo.pageable.pageNumber + 1;
+    let endPage = Math.ceil(nowPage / 5) * 5;
+    let startPage = endPage - 5 + 1;
+    // <!--페이징 처리-->
+    // 이전
+    if (startPage > 1) {
+        text += `<div class="prev-page page-number-padding">`
+        text += `<a class="page-number-link" href="` + (startPage - 2) + `">`
+        text += `<div class="prev-page-prevArrow"></div>`
+        text += `</a>`
+        text += `</div>`
+    } else {
+        text += `<div class="prev-page page-number-padding">`
+        text += `</div>`
+    }
+    // 페이지 버튼
+
+    for (let i = startPage; i < startPage + 5 && i <= pageInfo.totalPages; i++) {
+        text += `<div class="page-number-padding">`
+        if (i == nowPage) {
+            text += `<div class="page-number-link" style="color:#303441">` + i + `</div>`
+        } else {
+            text += `<a class="page-number-link" href="` + (i - 1) + `">` + i + `</a>`
+        }
+        text += `</div>`
+    }
+    //이후
+    if (4 < endPage && endPage < pageInfo.totalPages) {
+        text += `<div class="next-page page-number-padding">`
+        text += `<a class="page-number-link" href="` + (endPage) + `">`
+        text += `<div class="prev-page-nextArrow"></div>`
+        text += `</a>`
+        text += `</div>`
+        text += `</div>`
+        text += `</div>`
+    }
+    $pagingBtnFlex.html(text);
+}
+
+$pagingBtnFlex.on('click', ".page-number-link", function (e) {
+    e.preventDefault();
+    window.scrollTo({top: 0})
+    globalThis.page = $(this).attr("href");
+    search();
+})
+
+/*  페이지 이동  */
+$pagingBtnFlex.on('mouseover', "a.page-number-link", function () {
+    $(this).css('background-color', '#f4f6fa');
+    // $(this).css('color', '#009ef7');
+})
+
+$pagingBtnFlex.on('mouseout', "a.page-number-link", function () {
+    $(this).css('background-color', '#fff');
+    $(this).css('color', '#9a9ba7');
+})
+
+window.onresize = function () {
+    document.location.reload();
+};
+
+$(".add-submit").on('click', function () {
+    alert('공지사항이 등록되었습니다')
+})
 

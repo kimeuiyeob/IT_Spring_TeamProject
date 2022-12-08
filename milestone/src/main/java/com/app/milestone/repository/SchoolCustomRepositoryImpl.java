@@ -257,53 +257,6 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
 
 
 
-
-    //    예산 순 오름차순, 검색
-    @Override
-    public List<SchoolDTO> findByBudgetAndSearchAsc(Pageable pageable, Search search) {
-        return jpaQueryFactory.select(new QSchoolDTO(
-                school.userId,
-                school.schoolName,
-                school.address.schoolAddress,
-                school.address.schoolAddressDetail,
-                school.address.schoolZipcode,
-                school.schoolTeachers,
-                school.schoolKids,
-                school.schoolBudget,
-                school.schoolBank,
-                school.schoolAccount,
-                school.schoolQR,
-                school.introduce.schoolTitle,
-                school.introduce.schoolContent,
-                school.userEmail,
-                school.schoolPhoneNumber,
-                school.userName,
-                school.userPassword,
-                school.userPhoneNumber,
-                school.donationCount,
-                school.createdDate
-        ))
-                .from(school)
-                .where(
-    //                  보육원 이름 검색
-                        schoolNameContaining(search.getSchoolName()),
-                        schoolAddressContaining0(search.getSchoolAddress())
-                )
-                .orderBy(school.schoolBudget.asc())
-//                .offset(pageable.getOffset())
-//                .limit(pageable.getPageSize())
-                .fetch();
-    }
-
-
-
-
-
-
-
-
-
-
 /*====================================================================*/
 /*====================================================================*/
 /*====================================================================*/
@@ -334,14 +287,53 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
                 school.donationCount,
                 school.createdDate
         ))
+                .from(school)
                 .where(
                         schoolNameContaining(search.getSchoolName()),
                         schoolAddressContaining0(search.getSchoolAddress())
-                ).from(school)
+                )
                 .orderBy(school.schoolBudget.desc())
                 .fetch();
     }
 
+    //    예산 순 오름차순, 검색
+    @Override
+    public List<SchoolDTO> findByBudgetAndSearchAsc(Pageable pageable, Search search) {
+        return jpaQueryFactory.select(new QSchoolDTO(
+                school.userId,
+                school.schoolName,
+                school.address.schoolAddress,
+                school.address.schoolAddressDetail,
+                school.address.schoolZipcode,
+                school.schoolTeachers,
+                school.schoolKids,
+                school.schoolBudget,
+                school.schoolBank,
+                school.schoolAccount,
+                school.schoolQR,
+                school.introduce.schoolTitle,
+                school.introduce.schoolContent,
+                school.userEmail,
+                school.schoolPhoneNumber,
+                school.userName,
+                school.userPassword,
+                school.userPhoneNumber,
+                school.donationCount,
+                school.createdDate
+        ))
+                .from(school)
+                .where(
+                        //                  보육원 이름 검색
+                        schoolNameContaining(search.getSchoolName()),
+                        schoolAddressContaining0(search.getSchoolAddress())
+                )
+                .orderBy(school.schoolBudget.asc())
+//                .offset(pageable.getOffset())
+//                .limit(pageable.getPageSize())
+                .fetch();
+    }
 
-    //=============================================================
+
+
+
 }

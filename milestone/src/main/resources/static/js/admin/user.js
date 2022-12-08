@@ -17,6 +17,11 @@ $(document).on('click', function (e) {
                     'background-size': '13px'
                 });
                 check1 = !check1;
+                if($("#option9").text().match('내림차순')) {
+                    search();
+                }else if($("#option9").text().match('오름차순')){
+                    search2();
+                }
             }
         } else {
             $filterDropdown.css('display', 'none');
@@ -150,11 +155,12 @@ $subOptionApllyChoose.on('mouseout', function () {
 })
 
 /* ----------------체크박스-------------------- */
-const $checkBox = $('.notice-checked');
-const $checkBoxAll = $('.notice-checked-all');
-var checkBoxArr = [];   //체크한 userId값 저장
 
+/*전체선택*/
 $('.card-body-title-box').on('click','.notice-checked-all' , function(e) {
+
+    const $checkBox = $('.notice-checked');
+    const $checkBoxAll = $('.notice-checked-all');
 
     if ($checkBoxAll.is(':checked')) {
         $checkBoxAll.closest('.card-body-title-user-checkbox').css('background-color', '#009ef7');
@@ -170,24 +176,19 @@ $('.card-body-title-box').on('click','.notice-checked-all' , function(e) {
         $checkBox.prop('checked', false);
     }
 
-    // $("input:checkbox[name='check']:checked").each(function() {
-    //     checkBoxArr.push($(this).val());     // 체크된 것만 값을 뽑아서 배열에 push
-    //     console.log(checkBoxArr);
-    // })
-    // $("input:checkbox[name='check2']:checked").each(function() {
-    //     checkBoxArr.push($(this).val());     // 체크된 것만 값을 뽑아서 배열에 push
-    //     console.log(checkBoxArr);
-    // })
-
 })
 
-$('.card-body-main-box').on('click','.notice-checked', function (e) {
+/* 하나 선택 */
+$('.card-body-main-box').on('click', '.notice-checked', function (e) {
+
+    const $checkBox = $('.notice-checked');
+    const $checkBoxAll = $('.notice-checked-all');
 
     if ($(this).is(':checked')) {
         $(this).closest('.card-body-title-user-checkbox').css('background-color', '#009ef7');
         $(this).prev().css('display', 'flex')
     } else {
-        $(this).closest('.card-body-title-user-checkbox').css('background-color', '#eff2f5');
+        $(this).closest('.card-body-title-user-checkbox').css('background-color', '#eff2f5')
         $(this).prev().css('display', 'none')
         $checkBoxAll.prop('checked', false);
         $checkBoxAll.closest('.card-body-title-user-checkbox').css('background-color', '#eff2f5');
@@ -199,13 +200,33 @@ $('.card-body-main-box').on('click','.notice-checked', function (e) {
         $checkBoxAll.prev().css('display', 'flex');
     }
 
-    console.log($("input:checkbox[name='check2']:checked"));
-    $("input:checkbox[name='check2']:checked").each(function() {
-        checkBoxArr.push($(this).val());     // 체크된 것만 값을 뽑아서 배열에 push
-        console.log(checkBoxArr);
-    })
 })
 
+function fnGetdata(){
+    var chkArray = new Array(); // 배열 선언
+
+    $('input:checkbox[name=check]:checked').each(function() { // 체크된 체크박스의 value 값을 가지고 온다.
+        chkArray.push($(this).siblings('.userId').val());
+    });
+
+    // 삭제할 회원번호들
+    $('#hiddenValue').val(chkArray);
+    // console.log('hidden : '+$('#hiddenValue').val());
+    // console.log('chkArray : '+chkArray[0]);
+
+    $.ajax({
+        type : 'POST'
+        ,url : '/adminRest/peopleDelete'
+        ,data : {chkArray: chkArray}
+        ,traditional: true
+        ,success : function(result) {
+            alert("해당 회원이 정상적으로 삭제되었습니다.");
+            location.replace("user")
+        },
+        error: function(request, status, error) {
+        }
+    })
+}
 
 
 /* -----------삭제 모달창-------------- */
@@ -214,9 +235,11 @@ const $finalDelete = $('.delete-modal-delete');
 const $finalDeleteCancel = $('.delete-modal-cancel');
 const deleteModal = $('.delete-modal')[0];
 
+/* 삭제 OK 모달*/
 $finalDelete.on('click', function () {
     deleteModal.classList.toggle('show');
     body.style.overflow = 'auto';
+    fnGetdata();    //회원삭제
 })
 
 $finalDeleteCancel.on('click', function () {
@@ -284,17 +307,17 @@ function peopleListShow(){
         page: globalThis.page
     }, getPeopleList)
 }
-
 function getPeopleList(peopleResp) {
     let text = "";
     pageInfo = peopleResp.arPeopleDTO;
     peopleResp.arPeopleDTO.content.forEach(person => {
-        text += `<input type="hidden" value="` + person.userId + `"name ="check2">`
         text += `<tr>`
-        text +=  `<th class="card-body-title-checkbox-padding" style="width: 3%; margin-top: 29px;padding-top: 0; padding-bottom: 31px;">`
+        text += `<th class="card-body-title-checkbox-padding" style="width: 3%; margin-top: 29px;padding-top: 0; padding-bottom: 31px;">`
         text += `<label class="card-body-title-user-checkbox">`
         text += `<div class="check-img"></div>`
         text += `<input class="notice-checked" type="checkbox" name="check">`
+        text += `<input type="hidden" value="` + person.userId + `"name ="check2" class="userId">`
+        text += `<input type="hidden" name="hiddenValue" id="hiddenValue" value=""/>`
         text += `</label>`
         text += `</th>`
         text += `<th class="card-body-title-padding" style="width: 22%;">`
@@ -331,7 +354,7 @@ function getPeopleList(peopleResp) {
     pageingBtn();
 }
 
-function getPeopleList1(param, callback, error){
+function getPeopleList1(param, callback, error) {
 
     let existPeopleNickName = param.peopleNickName.length != 0;
     let existUserName = param.userName.length != 0;
@@ -344,7 +367,35 @@ function getPeopleList1(param, callback, error){
     }
     queryString += existUserName ? "/" + param.userName : "";
     $.ajax({
-        url : "/adminRest/userpeople"+queryString,
+        url: "/adminRest/userpeople" + queryString,
+        type: "get",
+        success: function (peopleResp, status, xhr) {
+            if (callback) {
+                callback(peopleResp)
+            }
+        },
+        error: function (xhr, status, err) {
+            if (error) {
+                error(err);
+            }
+        }
+    });
+}
+
+function getPeopleList1Asc(param, callback, error){
+
+    let existPeopleNickName = param.peopleNickName.length != 0;
+    let existUserName = param.userName.length != 0;
+    let queryString = "/" + param.page || 1;
+
+    queryString += existPeopleNickName ? "/" + param.peopleNickName : "";
+
+    if (!existPeopleNickName && existUserName) {
+        queryString += "/null";
+    }
+    queryString += existUserName ? "/" + param.userName : "";
+    $.ajax({
+        url : "/adminRest/userpeopleAsc"+queryString,
         type : "get",
         success : function (peopleResp, status, xhr) {
             if(callback){
@@ -363,6 +414,15 @@ function getPeopleList1(param, callback, error){
 function search() {
     console.log("$search.text() : "+$search.val())
     getPeopleList1({
+        peopleNickName: $search.val(),
+        userName: $search.val(),
+        page: globalThis.page
+    }, getPeopleList);
+}
+    /*일반회원 검색 오름차순*/
+function search2() {
+    console.log("$search.text() : "+$search.val())
+    getPeopleList1Asc({
         peopleNickName: $search.val(),
         userName: $search.val(),
         page: globalThis.page
@@ -441,3 +501,7 @@ $pagingBtnFlex.on('mouseout', "a.page-number-link", function () {
 window.onresize = function () {
     document.location.reload();
 };
+
+$(".add-submit").on('click', function () {
+    console.log()
+})

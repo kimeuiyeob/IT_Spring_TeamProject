@@ -13,6 +13,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequiredArgsConstructor
@@ -102,7 +105,26 @@ public class AdminRestController {
         return schoolResp;
     }
 
+    //   전체회원 중 일반회원 삭제
+    @RequestMapping("/peopleDelete")
+    public void deletePeople(HttpServletRequest request){
+        String [] userIds = request.getParameterValues("chkArray");
+        for (int i = 0; i<userIds.length; i++){
+            peopleService.deleteByUserId(Long.valueOf(userIds[i]));
+        }
+//        for(Long userId : userIds) peopleService.deleteByUserId(Long.valueOf(userId));
+    }
 
+
+    //   보육원회원 삭제
+    @RequestMapping("/schoolDelete")
+    public void deleteSchool(HttpServletRequest request){
+        String [] userIds = request.getParameterValues("chkArray");
+        for (int i = 0; i<userIds.length; i++){
+            schoolService.deleteByUserId(Long.valueOf(userIds[i]));
+        }
+//        for(Long userId : userIds) peopleService.deleteByUserId(Long.valueOf(userId));
+    }
 
 
 
