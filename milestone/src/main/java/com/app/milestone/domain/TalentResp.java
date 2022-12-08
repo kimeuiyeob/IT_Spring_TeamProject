@@ -2,6 +2,7 @@ package com.app.milestone.domain;
 
 
 import lombok.Data;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -10,5 +11,5 @@ import java.util.List;
 @Data
 public class TalentResp {
     private Long total;
-    private List<TalentDTO> arTalentDTO;
+    private Page<TalentDTO> arTalentDTO;
 }

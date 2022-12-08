@@ -2,6 +2,8 @@ package com.app.milestone.service;
 
 import com.app.milestone.domain.Search;
 import com.app.milestone.domain.TalentDTO;
+import com.app.milestone.entity.People;
+import com.app.milestone.entity.Talent;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,20 +50,11 @@ public class TalentServiceTest {
                                 "  AbleDate : " + o.getTalentAbleDate()));
     }
 
-    @Test
-    public void registerTalentTest() {
+//    @Test
+//    public void writeSaveTest() {
+//        talentService.writeSave();
+//    }
 
-        TalentDTO talentDTO = new TalentDTO();
-
-        talentDTO.setTalentTitle("서비스테스트제목");
-        talentDTO.setTalentContent("서비스테스트내용");
-        talentDTO.setTalentAbleDate(LocalDateTime.now());
-        talentDTO.setTalentCategory("교육");
-        talentDTO.setTalentPlace("서울");
-
-        talentService.registerTalent(talentDTO);
-
-    }
 
     @Test
     public void educationTest() {

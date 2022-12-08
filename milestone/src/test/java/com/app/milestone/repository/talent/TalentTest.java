@@ -40,8 +40,6 @@ public class TalentTest {
     private TalentRepository talentRepository;
     @Autowired
     private PeopleRepository peopleRepository;
-    @Autowired
-    private SchoolRepository schoolRepository;
 
     @Test
     public void save2Test() {
@@ -88,6 +86,7 @@ public class TalentTest {
         talentRepository.save(talent);
         talent.changePeople(peopleId);
     }
+
 
     @Test
     public void findTest() {
