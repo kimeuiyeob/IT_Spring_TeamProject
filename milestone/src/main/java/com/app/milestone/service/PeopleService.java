@@ -15,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -28,10 +29,15 @@ public class PeopleService {
     private final LikeRepository likeRepository;
 
     //    회원가입
-    public Long createPeople(PeopleDTO peopleDTO) {
+    public void createPeople(PeopleDTO peopleDTO) {
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         People people = peopleDTO.toEntity();
-        peopleRepository.save(people);
-        return people.getUserId();
+        peopleDTO.setUserEmail(people.getUserEmail());
+        peopleDTO.setUserPassword(bCryptPasswordEncoder.encode(people.getUserPassword()));
+        peopleDTO.setUserName(people.getUserName());
+        peopleDTO.setPeopleNickname(people.getPeopleNickname());
+        peopleDTO.setUserPhoneNumber(people.getUserPhoneNumber());
+        peopleRepository.save(peopleDTO.toEntity());
     }
 
     //    개인회원 한 명의 정보

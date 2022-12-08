@@ -46,6 +46,16 @@ public class MainController {
         return "redirect:/main/main";
     }
 
+    @PostMapping("/main/OAuth")
+    public String createOAuth(@Valid PeopleDTO peopleDTO, BindingResult result) {
+        if (result.hasErrors()) {
+            return "join/joinOAuth";
+        }
+        peopleService.createPeople(peopleDTO);
+
+        return "redirect:/main/main";
+    }
+
     @GetMapping("main")
     public void main(Model model) {
 //        도움이 필요한 보육원

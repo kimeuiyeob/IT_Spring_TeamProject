@@ -1,7 +1,10 @@
 package com.app.milestone.service;
 
+import com.app.milestone.entity.People;
+import com.app.milestone.repository.PeopleRepository;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +14,11 @@ import java.net.URL;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class KakaoService {
+
+    private final PeopleRepository peopleRepository;
+    private People people;
 
     public String getKaKaoAccessToken(String code) {
         String access_Token = "";
@@ -31,9 +38,9 @@ public class KakaoService {
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
             sb.append("&client_id=ec88be2bdb89985381291c974eac293a"); // TODO REST_API_KEY 입력   	ec88be2bdb89985381291c974eac293a
-            sb.append("&redirect_uri=http://localhost:9999/join/login/kakao"); // TODO 인가코드 받은 redirect_uri 입력    http://localhost:9999/join/login/kakao
+            sb.append("&redirect_uri=http://localhost:9999/kakao/login"); // TODO 인가코드 받은 redirect_uri 입력    http://localhost:9999/join/login/kakao
             sb.append("&code=" + code);
-            sb.append("&scope=profile_nickName,account_email");
+            sb.append("&scope=account_email");
             bw.write(sb.toString());
             bw.flush();
 
@@ -69,10 +76,9 @@ public class KakaoService {
         return access_Token;
     }
 
-    public void getKakaoInfo(String token) throws Exception {
-
+    public String getKakaoInfo(String token) throws Exception {
         String reqURL = "https://kapi.kakao.com/v2/user/me";
-
+        String userEmail = "";
         //access_token을 이용하여 사용자 정보 조회
         try {
             URL url = new URL(reqURL);
@@ -100,21 +106,21 @@ public class KakaoService {
             JsonParser parser = new JsonParser();
             JsonElement element = parser.parse(result);
 
-            int id = element.getAsJsonObject().get("id").getAsInt();
+            int Id = element.getAsJsonObject().get("id").getAsInt();
             boolean hasEmail = element.getAsJsonObject().get("kakao_account").getAsJsonObject().get("has_email").getAsBoolean();
-            String email = "";
-            if (hasEmail) {
-                email = element.getAsJsonObject().get("kakao_account").getAsJsonObject().get("email").getAsString();
-            }
 
-            log.info("id : " + id);
-            log.info("email : " + email);
+            if (hasEmail) {
+                userEmail = element.getAsJsonObject().get("kakao_account").getAsJsonObject().get("email").getAsString();
+            }
+            log.info("Id : " + Id);
+            log.info("email : " + userEmail);
 
             br.close();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return userEmail;
     }
 
     public void logoutKakao(String token) {
