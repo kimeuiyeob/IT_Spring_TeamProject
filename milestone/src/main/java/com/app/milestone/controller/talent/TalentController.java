@@ -26,6 +26,7 @@ public class TalentController {
     private final TalentService talentService;
 
     @GetMapping("/talent")
-    public void list(Search search ) {;}
+    public void list(Search search) {
+    }
 
 }
