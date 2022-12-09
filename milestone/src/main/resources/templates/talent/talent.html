@@ -21,7 +21,7 @@
 <!-- ================================================================================================================ -->
 <header th:replace="/fix/header.html :: header"></header>
 <!-- ================================================================================================================ -->
-<div class="wholePage">
+<div class="wholePage" style="padding-bottom: 100px";>
     <div class="main" style="position: relative;">
 
         <div style="display: flex; justify-content: space-between; ">
@@ -41,27 +41,27 @@
             <div class="talentChoicebar">
 
                 <div class="all" id="showAll">
-                    <div>전체</div>
+                    <div class="cateAll">전체</div>
                 </div>
 
                 <div class="education" id="education">
-                    <div>교육</div>
+                    <div class="cateEdu">교육</div>
                 </div>
 
                 <div class="exercise" id="exercise">
-                    <div>운동</div>
+                    <div class="cateExe">운동</div>
                 </div>
 
                 <div class="music" id="music">
-                    <div>음악</div>
+                    <div class="cateMus">음악</div>
                 </div>
 
                 <div class="art" id="art">
-                    <div>미술</div>
+                    <div class="cateArt">미술</div>
                 </div>
 
                 <div class="program" id="program">
-                    <div>IT</div>
+                    <div class="cateIt">IT</div>
                 </div>
 
                 <div id="pseudo"></div>
@@ -78,14 +78,14 @@
             </div>
 
             <!-- 검색창 -->
-            <form th:action="@{/talent/talent}" name="talentForm">
+            <form th:action="@{/talent/talent}" name="talentForm" onsubmit="return false">
 
                 <div style="display: flex;">
                     <div class="searchBox realSearhBox">
 
-                        <input type="hidden" name="talentTitle">
+                        <input type="hidden" name="talentName">
 
-                        <input type="text" name="talentName" placeholder=" &nbsp;제목을 검색하세요" value=""
+                        <input type="text" name="talentName" id="talentName" placeholder=" &nbsp;제목을 검색하세요" value=""
                                style="border: solid white;">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
                              style="cursor:pointer"
@@ -130,59 +130,24 @@
     </div>
 
     <!--==========================================재능 기부 목록===========================================-->
+
     <div class="AllTalentBox" style=" display: flex; justify-content: center">
         <div class="talentBoxAll" id="all">
-            <!-- ============================================================================================ -->
-            <th:block th:each="talent:${talents}">
-                <div style="padding-bottom:20px">
-
-                    <article class="talentBox" th:object="${talent}" id="talentBox">
-
-                        <div class="peopleUserId" style="display:none" th:text="*{peopleUserId}">
-
-                            <div class="talentBox2">
-                                <div class="talentBox3">
-                                    <img src="../imgs/myPage/normalProfile.png" class="talentImg">
-                                </div>
-                                <div class="talentBox4">
-                                    <p class="talentTitle" th:text="*{talentTitle}"><!--제목--></p>
-                                    <p class="talentContent" th:text="*{talentContent}"><!--내용--></p>
-                                    <div class="talentboxs">
-                                        <div class="talentType">
-                                            <img src="/imgs/talent/care2.png" th:text="*{talentCategory}"
-                                                 style="width: 25px; height: 25px; margin-bottom: -6px; margin-left: -10px; margin-right: 7px">
-                                            <!--카테고리-->
-                                        </div>
-                                        <div class="talentPlace">
-                                            <img src="/imgs/talent/pin.png" th:text="*{talentPlace}"
-                                                 style="width: 25px; height: 25px; margin-bottom: -6px; margin-left: -10px;margin-right: 2px; ">
-                                            <!--지역-->
-                                        </div>
-                                        <div class="talentTime">
-                                            <img src="/imgs/talent/mylove.png"
-                                                 th:text="${#temporals.format(talent.talentAbleDate,'YY년 MM월 dd일')}"
-                                                 style="width: 25px; height: 25px; margin-bottom: -7px; margin-left: -15px; margin-right: 2px;">
-                                            <!--가능시간-->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                    </article>
-                </div>
-            </th:block>
-            <!-- =============================================================================================== -->
         </div>
-        <!-- =============================================================================================== -->
     </div>
 
     <!-- ============================================================================================= -->
-    <!-- 페이지 버튼 -->
+
+
+    <!-- 페이지 버튼 전체 -->
     <div class="paging-number-box">
         <div class="paging-number">
             <div class="paging-number-flex">
             </div>
         </div>
     </div>
+
+
 </div>
 <!--=========================================================================================================-->
 <!-- 글작성 클릭시 모달 -->
@@ -367,9 +332,11 @@
 
     globalThis.page = 0;
 
-    // 처음 목록 가져오기
+    let savecategory = "";
+
     show();
 
+    // 처음 목록 가져오기
     const $checkSeoul = $(".checkSeoul"); //서울
     const $checkKyungki = $(".checkKyungki"); //경기도
     const $checkKangwon = $(".checkKangwon"); //강원도
@@ -379,6 +346,7 @@
     const $checkJeju = $(".checkJeju"); //제주도
 
     const $wholePlace = $(".dropbtn"); //전체
+
 
     $checkSeoul.on('click', function () { // 작은지역들 클릭시 search()실행
         globalThis.page = 0;
@@ -415,9 +383,11 @@
 
 
     /*검색창 엔터*/
-    $talentSearch.on('keyup', function (e) {
+    $talentName.on('keyup', function (e) {
         if (e.keyCode == 13) {
-            $('input[name = talentName]').val($talentSearch.val());
+            console.log("검색창 엔터!!!!!!!!")
+            $('input[name = talentName]').val($talentName.val());
+            console.log($('input[name = talentName]').val($talentName.val()));
             globalThis.page = 0;
             search()
         }
@@ -425,18 +395,18 @@
 
     /*검색창 클릭*/
     $talentClick.on('click', function (e) {
-        $('input[name = talentName]').val($talentSearch.val());
+        console.log("검색창 클릭!!!!!!!")
+        $('input[name = talentName]').val($talentName.val());
+        console.log($('input[name = talentName]').val($talentName.val()));
         globalThis.page = 0;
         search()
     })
 
-
-    //==========================페이징============================
-
+    //==========================페이징===========================================
     let pageInfo;
 
+    //=========================처음 들어갈때 전체 페이지============================
     function getList(talentResp) {
-        console.log(talentResp)
         let text = "";
         pageInfo = talentResp.arTalentDTO;
         talentResp.arTalentDTO.content.forEach(talent => {
@@ -448,8 +418,11 @@
             text += `<img src="../imgs/myPage/normalProfile.png" class="talentImg">`
             text += `</div>`
             text += `<div class="talentBox4">`
+
+            text += `<div class="donationId" style="display: none">` + talent.donationId + `</div>`
+
             text += `<p class="talentTitle">` + talent.talentTitle + `</p>`
-            text += `<p class="talentContent">` + talent.talentContent + `</p>`
+            text += `<p class="talentContent" style="overflow: hidden; height: 43px">` + talent.talentContent + `</p>`
             text += `<div class="talentboxs">`
             text += `<div class="talentType">`
             text += `<img src="/imgs/talent/care2.png" style="width: 25px; height: 25px; margin-bottom: -6px; margin-left: -10px;">` + talent.talentCategory
@@ -473,33 +446,67 @@
             text += `</div>`
 
         })
-
         $(".talentBoxAll").html(text)
-        $("#totalCountNumber").html(talentResp.total)
         pageingBtn();
     }
 
-    //=======================작은지역들, 전체 클릭시 아래 함수 실행=================
+    /*=======================================================================================================*/
+
+
+    $(".cateAll").on("click", function () {
+        savecategory = $(this).text();
+        globalThis.page = 0;
+        show();
+    })
+    $(".cateEdu").on("click", function () {
+        savecategory = $(this).text();
+        globalThis.page = 0;
+        show();
+    })
+    $(".cateExe").on("click", function () {
+        savecategory = $(this).text();
+        globalThis.page = 0;
+        show();
+    })
+    $(".cateMus").on("click", function () {
+        savecategory = $(this).text();
+        globalThis.page = 0;
+        show();
+    })
+    $(".cateArt").on("click", function () {
+        savecategory = $(this).text();
+        globalThis.page = 0;
+        show();
+    })
+    $(".cateIt").on("click", function () {
+        savecategory = $(this).text();
+        globalThis.page = 0;
+        show();
+    })
+
+    /*==========================================================================*/
+
+    /*==========지역 및 제목 검색시========*/
     function search() {
         getTalentList({
-            talentPlace: save,
-            talentTitle: $('input[name = "talentTitle"]').val(),
+            talentCategory: savecategory,
+            talentPlace: saveLocal,
+            talentTitle: $('input[name = "talentName"]').val(),
             page: globalThis.page
         }, getList);
-        console.log("여기콘솔1번 : " + $('input[name = "talentTitle"]').val())
     }
 
+    /*============전체 클릭시============*/
     function show() {
         getTalentList({
-            talentPlace: save,
-            talentTitle: $('.beforeName').text(),
+            talentCategory: savecategory,
+            talentPlace: saveLocal,
+            talentTitle: $('input[name = "talentName"]').val(),
             page: globalThis.page
         }, getList)
-        console.log("여기콘솔2번 : " + $('.beforeName').text())
     }
 
-    //============================페이징 버튼 처리================================
-
+    //============================페이징 버튼 처리 전체================================
     let $pagingBtnFlex = $('.paging-number-flex');
 
     function pageingBtn() {
@@ -520,7 +527,6 @@
             text += `</div>`
         }
         // 페이지 버튼
-
         for (let i = startPage; i < startPage + 5 && i <= pageInfo.totalPages; i++) {
             text += `<div class="page-number-padding">`
             if (i == nowPage) {

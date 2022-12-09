@@ -8,9 +8,6 @@ import com.app.milestone.service.TalentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,58 +19,31 @@ import java.util.List;
 public class TalentRestController {
 
     private final TalentService talentService;
+    /*===============================================*/
 
     //재능 기부 목록
-    @GetMapping(value = {"/list/{page}","/list/{page}/{talentPlace}", "/list/{page}/{talentPlace}/{talentTitle}"})
-    public TalentResp search(@PathVariable("page") Integer page, Search search, Model model) {
+    @GetMapping(value = {"/list/{page}","/list/{page}/{talentCategory}","/list/{page}/{talentCategory}/{talentPlace}","/list/{page}/{talentCategory}/{talentPlace}/{talentTitle}"})
+    public TalentResp search(@PathVariable("page") Integer page, Search search) {
+
+        log.info("list 레스트 컨트롤러 페이지 : " + page);
+        log.info("list 레스트 컨트롤러 설치 : " + search);
+
         TalentResp talentResp = new TalentResp();
-        Pageable pageable = PageRequest.of(page, 10);
         Page<TalentDTO> arTalentDTO = talentService.talentList(page, search);
         talentResp.setArTalentDTO(arTalentDTO);
+
+        log.info("list 레스트 컨트롤러 화면들고갈 값 : " + arTalentDTO.toString());
+        log.info("list 레스트 컨트롤러 화면들고갈 값 : " + talentResp.toString());
+
         return talentResp;
     }
 
     /*===============================================*/
 
-    //전체 리스트 조회하기
-    @PostMapping("/showall")
-    public List<TalentDTO> showAll() {
-        return talentService.allList();
-    }//page를 받아와야한다.
-    //교육 리스트 조회하기
-    @PostMapping("/showeducation")
-    public List<TalentDTO> showEducation() {
-        return talentService.educationList();
-    }
-    //운동 리스트 조회하기
-    @PostMapping("/showexercise")
-    public List<TalentDTO> showExercise() {
-        return talentService.exerciseList();
-    }
-    //음악 리스트 조회하기
-    @PostMapping("/showmusic")
-    public List<TalentDTO> showMusic() {
-        return talentService.musicList();
-    }
-    //미술 리스트 조회하기
-    @PostMapping("/showart")
-    public List<TalentDTO> showArt() {
-        return talentService.artList();
-    }
-    //It 리스트 조회하기
-    @PostMapping("/showit")
-    public List<TalentDTO> showIt() {
-        return talentService.itList();
-    }
-
-    /*===============================================*/
-
     //재능기부 목록 상세페이지
-    @GetMapping(value = {"/showmodal/{peopleUserId}"})
-    public List<TalentDTO> showDetail(@PathVariable("peopleUserId") Long userId) { //@PathVariable 이걸로 같은 이름을 찾아온다.
-        log.info("여기에 아이디값이 있어야죠?" + userId);
-        log.info("레스트컨트롤러로 넘어옴");
-        return talentService.talentDetail(userId);
+    @GetMapping(value = {"/showmodal/{donationId}"})
+    public List<TalentDTO> showDetail(@PathVariable("donationId") Long donationId) { //@PathVariable 이걸로 같은 이름을 찾아온다.
+        return talentService.talentDetail(donationId);
     }
 
     /*===============================================*/
@@ -81,10 +51,7 @@ public class TalentRestController {
     //글 작성시 저장
     @PostMapping("/write")
     public void saveBoard(@RequestBody TalentDTO talentDTO){
-
-        log.info("래스트 컨트롤러 write로 잘왔습니다!!");
-        log.info("값이 있나요? 있어야됩니다!!!" + talentDTO);
-        talentDTO.setPeopleUserId(101L);
+        talentDTO.setPeopleUserId(101L); // <=======================================세션값으로 변경
         talentService.registerTalent(talentDTO);
     }
 

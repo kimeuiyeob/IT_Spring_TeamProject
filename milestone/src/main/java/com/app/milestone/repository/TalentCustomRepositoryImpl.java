@@ -25,11 +25,10 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
 
     private final JPAQueryFactory jpaQueryFactory;
 
-    //동적쿼리
+    /*=============================================================================================================*/
     // 재능기부 목록 (가능일자 ASC)
     @Override
     public List<TalentDTO> findAllByTalentAbleDate(Pageable pageable, Search search) {
-
         //pageale쓰면 pageale.of(파라미터 2개를 받을수있다) 첫번째가 현재페이지(page), 두번째가 페이지 사이즈(amount)
         return jpaQueryFactory.select(new QTalentDTO(
                 talent.donationId,
@@ -44,17 +43,18 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
         ))
                 .where(
                         talentTitleContaining(search.getTalentTitle()),
-                        talentCategoryContaining(search.getTalentCategory()),
-                        talentPlaceContaining(search.getTalentPlace())
+                        talentPlaceContaining(search.getTalentPlace()),
+                        talentCategoryContainingAll(search.getTalentCategory()) //카테고리 클릭시
                 )
                 .from(talent)
                 .orderBy(talent.talentAbleDate.asc())
-//                .offset(pageable.getOffset()) //여기서부터 10개를 가져온다 <-10개는 아래 limit ex)2페이지면 10부터 10개
-//                .limit(pageable.getPageSize()) //목록에 뿌릴갯수 -> 10을보냈으니까 10으로 limit걸어논거다.
+                .offset(pageable.getOffset()) //여기서부터 10개를 가져온다 <-10개는 아래 limit ex)2페이지면 10부터 10개
+                .limit(pageable.getPageSize()) //목록에 뿌릴갯수 -> 10을보냈으니까 10으로 limit걸어논거다.
                 .fetch();
     }
 
-    //    조건에 따른 보육원 수
+    /*=============================================================================================================*/
+    //조건에 따른 보육원 수
     @Override
     public Long countByAbleDate(Pageable pageable, Search search) {
         return jpaQueryFactory.select(talent.count())
@@ -62,8 +62,8 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
                 .where(
 //                        보육원 이름 검색
                         talentTitleContaining(search.getTalentTitle()),
-                        talentCategoryContaining(search.getTalentCategory()),
-                        talentPlaceContaining(search.getTalentPlace())
+                        talentPlaceContaining(search.getTalentPlace()),
+                        talentCategoryContainingAll(search.getTalentCategory())
                 )
                 .orderBy(talent.talentAbleDate.asc())
 //                .offset(pageable.getOffset())
@@ -71,53 +71,96 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
                 .fetchOne();
     }
 
+    /*=============================================================================================================*/
+    @Override  //게시글 상세보기
+    public List<TalentDTO> talentDetail(Long donationId) {
+        return jpaQueryFactory.select(new QTalentDTO(
+                talent.donationId,
+                talent.talentTitle,
+                talent.talentContent,
+                talent.talentAbleDate,
+                talent.talentCategory,
+                talent.talentPlace,
+                talent.people.peopleNickname,
+                talent.school.userId,
+                talent.people.userId
+        )).from(talent, donation)
+                .where(talent.donationId.eq(donationId))
+                .fetch();
+    }
 
     //============제목 검색==============//
-    private BooleanExpression talentTitleContaining(String talentTitle) { //ooleanExpression은 null 일때 무시될 수 있고, and또는 or절을 통해서 조합을 할 수 있다.
+    private BooleanExpression talentTitleContaining(String talentTitle) { //booleanExpression은 null 일때 무시될 수 있고, and또는 or절을 통해서 조합을 할 수 있다.
         return StringUtils.hasText(talentTitle) ? talent.talentTitle.contains(talentTitle) : null;
-    } //ooleanExpression 조건문을 반환한다, null일때 메소드 사라진다.
+    } //booleanExpression 조건문을 반환한다, null일때 메소드 사라진다.
     //talentTitle에값이 있다면  talent.talentTitle.contains(talentTitle) 이걸 where절에 반환하고 false면 null을 반환해서 where절의 talentTitleContaining 메소드를 삭제한다.
 
-    //============카테고리 검색===========//
-    private BooleanExpression talentCategoryContaining(String talentCategory) {
-        return StringUtils.hasText(talentCategory) ? talent.talentCategory.contains(talentCategory) : null;
+    //============카테고리 전체===========//
+
+    private BooleanBuilder talentCategoryContainingAll(String talentCategory) {
+        if (talentCategory == null) {
+            return null;
+        }
+        BooleanBuilder booleanBuilder = new BooleanBuilder();
+        if (talentCategory.equals("전체")) {
+            booleanBuilder.or(talent.talentCategory.like("교육%"));
+            booleanBuilder.or(talent.talentCategory.like("운동%"));
+            booleanBuilder.or(talent.talentCategory.like("음악%"));
+            booleanBuilder.or(talent.talentCategory.like("미술%"));
+            booleanBuilder.or(talent.talentCategory.like("IT%"));
+        }
+        if (talentCategory.equals("교육")) {
+            booleanBuilder.or(talent.talentCategory.like("교육%"));
+        }
+        if (talentCategory.equals("운동")) {
+            booleanBuilder.or(talent.talentCategory.like("운동%"));
+        }
+        if (talentCategory.equals("음악")) {
+            booleanBuilder.or(talent.talentCategory.like("음악%"));
+        }
+        if (talentCategory.equals("미술")) {
+            booleanBuilder.or(talent.talentCategory.like("미술%"));
+        }
+        if (talentCategory.equals("IT")) {
+            booleanBuilder.or(talent.talentCategory.like("IT%"));
+        }
+        return booleanBuilder;
     }
 
     //============지역 검색==============//
     private BooleanBuilder talentPlaceContaining(List<String> talentPlace) {
-        if (talentPlace.get(0) == null) {
+        if (talentPlace == null) {
             return null;
         }
         BooleanBuilder booleanBuilder = new BooleanBuilder();
         for (String schoolAddress : talentPlace) {
-            if (schoolAddress.equals("서울")) {
+            if (schoolAddress.contains("서울")) {
                 booleanBuilder.or(talent.talentPlace.like("서울%"));
             }
-            if (schoolAddress.equals("인천")) {
+            if (schoolAddress.contains("인천")) {
                 booleanBuilder.or(talent.talentPlace.like("인천%"));
             }
-            if (schoolAddress.equals("경기도")) {
+            if (schoolAddress.contains("경기도")) {
                 booleanBuilder.or(talent.talentPlace.like("경기%"));
             }
-            if (schoolAddress.equals("강원도")) {
+            if (schoolAddress.contains("강원도")) {
                 booleanBuilder.or(talent.talentPlace.like("강원%"));
             }
-            if (schoolAddress.equals("충청도")) {
-                booleanBuilder.or(talent.talentPlace.like("충북%").or(talent.talentPlace.like("충남%")).or(talent.talentPlace.like("세종%")).or(talent.talentPlace.like("대전%")));
+            if (schoolAddress.contains("충청도")) {
+                booleanBuilder.or(talent.talentPlace.like("충청%"));
             }
-            if (schoolAddress.equals("전라도")) {
-                booleanBuilder.or(talent.talentPlace.like("전북%").or(talent.talentPlace.like("전남%")).or(talent.talentPlace.like("광주%")));
+            if (schoolAddress.contains("전라도")) {
+                booleanBuilder.or(talent.talentPlace.like("전라%"));
             }
-            if (schoolAddress.equals("경상도")) {
-                booleanBuilder.or(talent.talentPlace.like("경북%").or(talent.talentPlace.like("경남%")).or(talent.talentPlace.like("부산%")).or(talent.talentPlace.like("울산%")).or(talent.talentPlace.like("대구%")));
+            if (schoolAddress.contains("경상도")) {
+                booleanBuilder.or(talent.talentPlace.like("경상%"));
             }
-            if (schoolAddress.equals("제주도")) {
+            if (schoolAddress.contains("제주도")) {
                 booleanBuilder.or(talent.talentPlace.like("제주%"));
             }
         }
         return booleanBuilder;
     }
-
 
 
 //          =========페이징 처리===========
@@ -132,137 +175,5 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
     /*=================================================================================================*/
     /*=================================================================================================*/
 
-
-    @Override
-    public List<TalentDTO> talentDetail(Long userId) {
-        return jpaQueryFactory.select(new QTalentDTO(
-                talent.donationId,
-                talent.talentTitle,
-                talent.talentContent,
-                talent.talentAbleDate,
-                talent.talentCategory,
-                talent.talentPlace,
-                talent.people.peopleNickname,
-                talent.school.userId,
-                talent.people.userId
-        )).from(talent, donation, people)
-                .where(talent.donationId.eq(donation.donationId))
-                .where(donation.people.userId.eq(people.userId))
-                .where(people.userId.eq(userId))
-                .fetch();
-    }
-
-    /*=========================카테고리 AJAX==============================*/
-
-    @Override //전체 리스트 조회
-    public List<TalentDTO> allList() {
-        return jpaQueryFactory.select(new QTalentDTO(
-                talent.donationId,
-                talent.talentTitle,
-                talent.talentContent,
-                talent.talentAbleDate,
-                talent.talentCategory,
-                talent.talentPlace,
-                talent.people.peopleNickname,
-                talent.school.userId,
-                talent.people.userId
-        ))
-                .from(talent)
-                .orderBy(talent.talentAbleDate.asc())
-                .fetch();
-    }
-
-    @Override //교육 리스트 조회
-    public List<TalentDTO> educationList() {
-        return jpaQueryFactory.select(new QTalentDTO(
-                talent.donationId,
-                talent.talentTitle,
-                talent.talentContent,
-                talent.talentAbleDate,
-                talent.talentCategory,
-                talent.talentPlace,
-                talent.people.peopleNickname,
-                talent.school.userId,
-                talent.people.userId
-        ))
-                .from(talent)
-                .where(talent.talentCategory.eq("교육"))
-                .orderBy(talent.talentAbleDate.asc())
-                .fetch();
-    }
-
-    @Override //운동 리스트 조회
-    public List<TalentDTO> exerciseList() {
-        return jpaQueryFactory.select(new QTalentDTO(
-                talent.donationId,
-                talent.talentTitle,
-                talent.talentContent,
-                talent.talentAbleDate,
-                talent.talentCategory,
-                talent.talentPlace,
-                talent.people.peopleNickname,
-                talent.school.userId,
-                talent.people.userId
-        )).from(talent)
-                .where(talent.talentCategory.eq("운동"))
-                .orderBy(talent.talentAbleDate.asc())
-                .fetch();
-    }
-
-    @Override //음악 리스트 조회
-    public List<TalentDTO> musicList() {
-        return jpaQueryFactory.select(new QTalentDTO(
-                talent.donationId,
-                talent.talentTitle,
-                talent.talentContent,
-                talent.talentAbleDate,
-                talent.talentCategory,
-                talent.talentPlace,
-                talent.people.peopleNickname,
-                talent.school.userId,
-                talent.people.userId
-        )).from(talent)
-                .where(talent.talentCategory.eq("음악"))
-                .orderBy(talent.talentAbleDate.asc())
-                .fetch();
-    }
-
-    @Override //미술 리스트 조회
-    public List<TalentDTO> artList() {
-        return jpaQueryFactory.select(new QTalentDTO(
-                talent.donationId,
-                talent.talentTitle,
-                talent.talentContent,
-                talent.talentAbleDate,
-                talent.talentCategory,
-                talent.talentPlace,
-                talent.people.peopleNickname,
-                talent.school.userId,
-                talent.people.userId
-        )).from(talent)
-                .where(talent.talentCategory.eq("미술"))
-                .orderBy(talent.talentAbleDate.asc())
-                .fetch();
-    }
-
-    @Override //IT 리스트 조회
-    public List<TalentDTO> itList() {
-        return jpaQueryFactory.select(new QTalentDTO(
-                talent.donationId,
-                talent.talentTitle,
-                talent.talentContent,
-                talent.talentAbleDate,
-                talent.talentCategory,
-                talent.talentPlace,
-                talent.people.peopleNickname,
-                talent.school.userId,
-                talent.people.userId
-        )).from(talent)
-                .where(talent.talentCategory.eq("IT"))
-                .orderBy(talent.talentAbleDate.asc())
-                .fetch();
-    }
-
-    /*===================================================================*/
 
 }
