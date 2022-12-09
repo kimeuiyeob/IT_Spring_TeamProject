@@ -5,9 +5,12 @@ const $filters = $('.card-toolbar-item');
 let check1 = false;
 
 $(document).on('click', function (e) {
+    console.log('들어옴1')
     if (check1) {
         if (e.target.closest('.menu-sub-dropdown') == e.currentTarget.querySelector('.menu-sub-dropdown').closest('.menu-sub-dropdown')) {
+            console.log('들어옴2')
             if($(".apply-button").text().match('적용')){
+                console.log('들어옴3')
                 $filterDropdown.css('display', 'none');
                 $filter.css('background-color', '#f6f8fa');
                 $filter.css('color', '#009ef7');
@@ -16,6 +19,7 @@ $(document).on('click', function (e) {
                     'background-size': '13px'
                 });
                 check1 = !check1;
+                search();
             }
         } else {
             $filterDropdown.css('display', 'none');
@@ -142,91 +146,198 @@ $pageNumberLink.on('mouseout',function(){
     $(this).css('color','#5e6278');
 })
 
+globalThis.page = 0;
+let $pagingBtnFlex = $('.paging-number-flex');
+let pageInfo;
 
-showWithdrawalAll();
 
-/*===========Ajax===============================*/
-/*============전체목록 조회=====================*/
-function showWithdrawalAll(){
-    $.ajax({
-        url : "/adminRest/withdrawal",
-        type : "post",
-        success : function (items) {
-            let text="";
-            items.forEach(function(item){
-                text += `<tr>`
-                text += `<th class="card-body-title-padding" style="width: 25%;">`
-                text += `<div class="donater-info" style="height: 50px">`
-                text += `<div class="donater-info-text">`
-                text += `<div class="donater-name">`+ item.withdrawalUserType +`</div>`
-                text += `</div>`
-                text += `</div>`
-                text += `</th>`
-                text += `<th class="card-body-title-padding" style="width: 43%;">`
-                text += `<div class="donate-info-height">`+item.withdrawalReason+`</div>`
-                text += `<th class="card-body-title-padding" style="width: 30%;">`
+/* 페이징 처리 */
+function pageingBtn() {
+    let text = "";
+    let nowPage = pageInfo.pageable.pageNumber + 1;
+    let endPage = Math.ceil(nowPage / 5) * 5;
+    let startPage = endPage - 5 + 1;
+    // <!--페이징 처리-->
+    // 이전
+    if (startPage > 1) {
+        text += `<div class="prev-page page-number-padding">`
+        text += `<a class="page-number-link" href="` + (startPage - 2) + `">`
+        text += `<div class="prev-page-prevArrow"></div>`
+        text += `</a>`
+        text += `</div>`
+    } else {
+        text += `<div class="prev-page page-number-padding">`
+        text += `</div>`
+    }
+    // 페이지 버튼
 
-                var createdDateView = item.createdDate.split('T')[0].split('-');
-
-                var year = createdDateView[0]+'년 ';
-                var month = createdDateView[1]+'월 ';
-                var date = createdDateView[2]+'일';
-
-                var result = year + month + date;
-
-                text += `<div class="donate-info-height date-time">`+ result +`</div>`
-            })
-            $(".card-body-main-box").html(text)
+    for (let i = startPage; i < startPage + 5 && i <= pageInfo.totalPages; i++) {
+        text += `<div class="page-number-padding">`
+        if (i == nowPage) {
+            text += `<div class="page-number-link" style="color:#303441">` + i + `</div>`
+        } else {
+            text += `<a class="page-number-link" href="` + (i - 1) + `">` + i + `</a>`
         }
-    })
+        text += `</div>`
+    }
+    //이후
+    if (4 < endPage && endPage < pageInfo.totalPages) {
+        text += `<div class="next-page page-number-padding">`
+        text += `<a class="page-number-link" href="` + (endPage) + `">`
+        text += `<div class="prev-page-nextArrow"></div>`
+        text += `</a>`
+        text += `</div>`
+        text += `</div>`
+        text += `</div>`
+    }
+    $pagingBtnFlex.html(text);
 }
 
-
-/*필터*/
-$filterAccept = $(".apply-button");
-
-$filterAccept.on("click",function(){
-    if($("#option6").text().match('최신순')){
-        showWithdrawalAll();
-    }else if($("#option6").text().match('오래된순')){
-        showAsc();
-    }
+$pagingBtnFlex.on('click', ".page-number-link", function (e) {
+    e.preventDefault();
+    window.scrollTo({top: 0})
+    globalThis.page = $(this).attr("href");
+    search();
 })
 
+/*  페이지 이동  */
+$pagingBtnFlex.on('mouseover', "a.page-number-link", function () {
+    $(this).css('background-color', '#f4f6fa');
+    // $(this).css('color', '#009ef7');
+})
 
-/*오름차순 조회*/
-function showAsc(){
-    $.ajax({
-        url : "/adminRest/withdrawalAsc",
-        type : "post",
-        success : function (withdrawalsAsc) {
-            let text="";
-            withdrawalsAsc.forEach(function(withdrawal){
-                text += `<tr>`
-                text += `<th class="card-body-title-padding" style="width: 25%;">`
-                text += `<div class="donater-info" style="height: 50px">`
-                text += `<div class="donater-info-text">`
-                text += `<div class="donater-name">`+withdrawal.withdrawalUserType+`</div>`
-                text += `</div>`
-                text += `</div>`
-                text += `</th>`
-                text += `<th class="card-body-title-padding" style="width: 43%;">`
-                text += `<div class="donate-info-height">`+withdrawal.withdrawalReason+`</div>`
-                text += `<th class="card-body-title-padding" style="width: 30%;">`
+$pagingBtnFlex.on('mouseout', "a.page-number-link", function () {
+    $(this).css('background-color', '#fff');
+    $(this).css('color', '#9a9ba7');
+})
 
-                var createdDateView = withdrawal.createdDate.split('T')[0].split('-');
+window.onresize = function () {
+    document.location.reload();
+};
 
-                var year = createdDateView[0]+'년 ';
-                var month = createdDateView[1]+'월 ';
-                var date = createdDateView[2]+'일';
+/* Asc이 최신순으로 바뀌었음*/
+/* 처음 뿌리기 */
+showList();
 
-                var result = year + month + date;
-
-                text += `<div class="donate-info-height date-time">`+ result +`</div>`
-                text += `</th>`
-                text += `</tr>`
-            })
-            $(".card-body-main-box").html(text)
-        }
-    })
+function showList(){
+    getList1Asc({
+        withdrawalReason: "",
+        page: globalThis.page
+    }, getList)
 }
+
+function getList(withdrawalResp) {
+    let text = "";
+    pageInfo = withdrawalResp.arWithdrawalDTO;
+    withdrawalResp.arWithdrawalDTO.content.forEach(withdrawal => {
+        text += `<tr>`
+        text += `<th class="card-body-title-padding" style="width: 25%;">`
+        text += `<div class="donater-info" style="height: 50px">`
+        text += `<div class="donater-info-text">`
+        text += `<div class="donater-name">`+withdrawal.withdrawalUserType+`</div>`
+        text += `</div>`
+        text += `</div>`
+        text += `</th>`
+        text += `<th class="card-body-title-padding" style="width: 43%;">`
+        text += `<div class="donate-info-height">`+withdrawal.withdrawalReason+`</div>`
+        text += `<th class="card-body-title-padding" style="width: 30%;">`
+
+        var createdDateView = withdrawal.createdDate.split('T')[0].split('-');
+
+        var year = createdDateView[0]+'년 ';
+        var month = createdDateView[1]+'월 ';
+        var date = createdDateView[2]+'일';
+
+        var result = year + month + date;
+
+        text += `<div class="donate-info-height date-time">`+ result +`</div>`
+        text += `</th>`
+        text += `</tr>`
+    })
+    $(".card-body-main-box").html(text)
+    pageingBtn();
+}
+
+function getList1(param, callback, error) {
+
+    let existWithdrawal = param.withdrawalReason.length != 0;
+    let queryString = "/" + param.page || 1;
+
+    queryString += existWithdrawal ? "/" + param.withdrawalReason : "";
+
+    $.ajax({
+        url: "/adminRest/withdrawalAsc" + queryString,
+        type: "get",
+        success: function (withdrawalResp, status, xhr) {
+            if (callback) {
+                callback(withdrawalResp)
+            }
+        },
+        error: function (xhr, status, err) {
+            if (error) {
+                error(err);
+            }
+        }
+    });
+}
+function getList1Asc(param, callback, error) {
+
+    let existWithdrawal = param.withdrawalReason.length != 0;
+    let queryString = "/" + param.page || 1;
+
+    queryString += existWithdrawal ? "/" + param.withdrawalReason : "";
+
+    $.ajax({
+        url: "/adminRest/withdrawalAsc" + queryString,
+        type: "get",
+        success: function (withdrawalResp, status, xhr) {
+            if (callback) {
+                callback(withdrawalResp)
+            }
+        },
+        error: function (xhr, status, err) {
+            if (error) {
+                error(err);
+            }
+        }
+    });
+}
+/* 회원 검색 */
+function search() {
+    var word = $("#option5").text();
+    console.log(word);
+
+    if($("#option6").text().match("최신순")){
+        getList1Asc({
+            withdrawalReason: word,
+            page: globalThis.page
+        }, getList)
+        console.log('어디')
+    }else if($("#option6").text().match("오래된순")){
+        getList1({
+            withdrawalReason: word,
+            page: globalThis.page
+        }, getList)
+        console.log('들어')
+    }else if($("#option6").text().match("옵션")){
+        if(word==="옵션 선택"){
+            getList1Asc({
+                withdrawalReason: "",
+                page: globalThis.page
+            }, getList)
+            console.log('갔니')
+        }
+        getList1Asc({
+            withdrawalReason: word,
+            page: globalThis.page
+        }, getList)
+        console.log('응?')
+    }
+}
+
+$("#reset3").on('click',function () {
+    getList1Asc({
+        withdrawalReason: "",
+        page: globalThis.page
+    }, getList)
+})

@@ -3,6 +3,7 @@ package com.app.milestone.service;
 import com.app.milestone.domain.NoticeDTO;
 import com.app.milestone.domain.SchoolDTO;
 import com.app.milestone.domain.Search;
+import com.app.milestone.entity.Notice;
 import com.app.milestone.repository.NoticeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -10,6 +11,8 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +57,16 @@ public class NoticeService {
         noticeRepository.save(noticeDTO.toEntity());
     }
 
+    //    공지사항 수정
+    @Transactional
+    public NoticeDTO modifyNotice(NoticeDTO noticeDTO){
+        Long noticeId = noticeDTO.getNoticeId();
+        Notice notice = noticeRepository.findById(noticeId).get();
+        notice.update(noticeDTO.getNoticeTitle(), noticeDTO.getNoticeContent());
+
+        return noticeRepository.findByNoticeId(noticeId);
+    }
+
     //    공지사항 삭제
     public void deleteByNoticeId(Long noticeId){
         noticeRepository.deleteById(noticeId);
@@ -64,5 +77,9 @@ public class NoticeService {
         return noticeRepository.countByCreatedDate(pageable, search);
     }
 
+    //    공지사항 정보하나
+    public NoticeDTO noticeInfo(Long noticeId){
+        return noticeRepository.findByNoticeId(noticeId);
+    }
 }
 

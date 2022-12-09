@@ -1,6 +1,7 @@
 package com.app.milestone.service;
 
 import com.app.milestone.domain.MoneyDTO;
+import com.app.milestone.domain.PeopleDTO;
 import com.app.milestone.domain.SchoolDTO;
 import com.app.milestone.domain.Search;
 import com.app.milestone.entity.School;
@@ -82,6 +83,9 @@ public class SchoolService {
     public Long schoolListCount(Pageable pageable, Search search) {
         return schoolRepository.countByCreatedDate(pageable, search);
     }
+    public Long schoolListCount2(Pageable pageable, Search search) {
+        return schoolRepository.countByCreatedDate2(pageable, search);
+    }
 
     //    총 보육원 수
     public Long schoolTotal() {
@@ -111,12 +115,10 @@ public class SchoolService {
 
     // 관리자 페이지============================================
 
-    //    보육원 목록
     public List<School> schoolListManager(Pageable pageable) {
         return schoolRepository.findByCreatedDate(pageable);
     }
 
-    //    전체회원 중 보육원 목록
     public Page<SchoolDTO> schoolOnly(Integer page, Search search) {
         if (page == null) page = 0;
         Pageable pageable = PageRequest.of(page, 7);
@@ -128,12 +130,49 @@ public class SchoolService {
 
         return schools;
     }
+/*========================================================================================*/
 
-    /*=============================================================================*/
-    /*=============================================================================*/
-    /*=============================================================================*/
-    /*=============================================================================*/
-    /*=============================================================================*/
+    public Page<SchoolDTO> schoolListSearch(Integer page, Search search) {
+        if (page == null) page = 0;
+        Pageable pageable = PageRequest.of(page, 7);
+
+        if (search.getUserName() == null) {
+            search.setUserName(null);
+        }
+        if (search.getSchoolName() == null) {
+            search.setSchoolName(null);
+        }
+        List<SchoolDTO> list = schoolRepository.findSchoolSearch(pageable, search);
+        int start = list.size() >= (int) pageable.getOffset() ? (int) pageable.getOffset() : (int) pageable.getOffset() - 10;
+        int end = Math.min((start + pageable.getPageSize()), list.size());
+
+        Page<SchoolDTO> school = new PageImpl<>(list.subList(start, end), pageable, Integer.valueOf("" + schoolRepository.countByCreatedDate2(pageable, search)));
+
+        return school;
+    }
+
+    public Page<SchoolDTO> schoolListSearchAsc(Integer page, Search search) {
+        if (page == null) page = 0;
+        Pageable pageable = PageRequest.of(page, 7);
+
+        if (search.getUserName() == null) {
+            search.setUserName(null);
+        }
+        if (search.getSchoolName() == null) {
+            search.setSchoolName(null);
+        }
+        List<SchoolDTO> list = schoolRepository.findSchoolSearchAsc(pageable, search);
+        int start = list.size() >= (int) pageable.getOffset() ? (int) pageable.getOffset() : (int) pageable.getOffset() - 10;
+        int end = Math.min((start + pageable.getPageSize()), list.size());
+
+        Page<SchoolDTO> school = new PageImpl<>(list.subList(start, end), pageable, Integer.valueOf("" + schoolRepository.countByCreatedDate2(pageable, search)));
+
+        return school;
+    }
+
+
+
+
     //    보육원 검색 + 예산 내림차순
     public Page<SchoolDTO> schoolListBudgetSearch(Integer page, Search search) {
         if (page == null) page = 0;
@@ -173,7 +212,6 @@ public class SchoolService {
 
         return schools;
     }
-
 
     //    회원 삭제
     public void deleteByUserId(Long userId){
