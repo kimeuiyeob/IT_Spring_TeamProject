@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <link rel="stylesheet" href="/css/login/login.css"/>
+    <link rel="icon" href="/imgs/fix/favicon.png">
+</head>
+<body>
+<nav id="kmongNavBar" data-is-navbar-white="1" data-is-navbar-fixed="" data-is-navbar-visible=""
+     data-is-category-list="category" data-user-inbox-unread-count="0" data-user-order-unread-count="0"
+     data-user-kmong-unread-count="0" class="
+        top-0
+        is-nav-white
+
+        " :class="{
+        'is-nav-white': navBarIsWhite,
+        'is-fixed': navBarIsFixed,
+        'hidden': navBarIsVisible === false,
+        'border-bottom-none': navBarIsCategoryList === '/my_gigs/',
+        'PrimeNav': isPrimeService,
+    }">
+
+    <div class="container-1170">
+        <div class="flex" style="justify-content: space-between; align-items: center; height: 74px;">
+            <div class="flex" style="align-items: center; margin: 1px 0 0 1px;">
+                <div class="nav-logo-wrapper">
+                    <a class="sendGATriggerClz cursor" data-ga-category="header" data-ga-action="click on logo_intro"
+                       href="#">
+                        <img style="margin-top: 1px; width: 85px; height: 26px;" class="ic-nav-bar-kmong"
+                             src="/imgs/fix/logo.png">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="container login-page-container">
+    <div>
+        <div class="login-container margin-top-80">
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2 class="login-title"><b>로그인</b></h2>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <form th:action="@{/login/login}" th:object="${loginDTO}" method="post" accept-charset="UTF-8" id="loginForm" autocomplete="off" data-gtm-form-interact-id="0">
+                        <div class="multi-form-group margin-top-0">
+                            <div class="position-relative">
+                                <div id="emailFormGroup" class="form-group">
+                                    <input th:field="*{userEmail}" id="email" type="email" class="form-control" name="email" placeholder="이메일" autocomplete="false">
+                                </div>
+                                <ul id="emailDropdown" class="dropdown-menu width-100 list-unstyled font-size-h6" role="menu" aria-labelledby="dLabel" style="top: 51px; display: none;" data-index="0">
+
+                                </ul>
+                            </div>
+
+                            <div id="passwordFormGroup" class="form-group">
+                                <input th:field="*{userPassword}" id="password" type="password" class="form-control" name="password" placeholder="비밀번호" autocomplete="new-password">
+                            </div>
+
+                            <div class="col-xs-12 margin-top-25">
+                                <div class="row">
+                                    <button id="loginBtn" type="submit" class="btn btn-primary btn-black btn-block sendGATriggerClz login-hover" data-ga-category="로그인" data-ga-action="로그인" data-ga-label="" form="loginForm">
+                                        로그인
+                                    </button>
+                                </div>
+                                <div class="row margin-top-10 margin-bottom-35">
+                                    <div class="col-xs-6 text-left">
+                                        <div class="row">
+                                            <a class="font-color-base sendGATriggerClz underline"  data-ga-category="로그인" data-ga-action="아이디/비밀번호 찾기" data-ga-label="">
+                                                아이디/비밀번호 찾기
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 text-right" style="left: 87px;">
+                                        <div class="row">
+                                            <a class="font-color-base sendGATriggerClz underline"  data-ga-category="로그인" data-ga-action="무료 회원가입" data-ga-label="" >
+                                                무료회원가입
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <section class="sns-login-btn-wrapper">
+
+                                    <div class="row">
+                                        <a id="naverLoginBtn" class="btn btn-block btn-default font-size-small sns-login-btn sendGATriggerClz" data-ga-category="로그인" data-ga-label="SNS 회원가입" data-ga-action="네이버">
+                                            <img class="width-25px margin-right-10" style="margin-top: -2px" src="https://d2v80xjmx68n4w.cloudfront.net/assets/icon/icon_fill_naver.png">
+                                            네이버로 시작하기
+                                        </a>
+                                    </div>
+                                    <div class="row">
+                                        <a id="kakaoLoginBtn" class="btn btn-block btn-default font-size-small sns-login-btn sendGATriggerClz" data-ga-category="로그인" data-ga-label="SNS 회원가입" data-ga-action="카카오톡">
+                                            <img class="width-25px margin-right-10" style="margin-top: -2px" src="https://d2v80xjmx68n4w.cloudfront.net/assets/icon/icon_fill_kakao.png">
+                                            카카오톡으로 시작하기
+                                        </a>
+                                    </div>
+                                    <div class="row">
+                                        <a id="googleLoginBtn" class="btn btn-block btn-default font-size-small sns-login-btn sendGATriggerClz" data-ga-category="로그인" data-ga-label="SNS 회원가입" data-ga-action="구글">
+                                            <img class="width-25px margin-right-10" style="margin-top: -2px" src="https://d2v80xjmx68n4w.cloudfront.net/assets/icon/icon_fill_google.png">
+                                            구글로 시작하기
+                                        </a>
+                                    </div>
+
+                                </section>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div id="login-footer">
+        <h6 class="footer-copyright" id="kmongCopyRight">Copyright © 2022 milestone Inc. All rights reserved.</h6>
+    </div>
+</div>
+</body>
+</html>

@@ -2,20 +2,14 @@ package com.app.milestone.controller.join;
 
 import com.app.milestone.domain.PeopleDTO;
 import com.app.milestone.domain.SchoolDTO;
-import com.app.milestone.service.KakaoService;
 import com.app.milestone.service.PeopleService;
 import com.app.milestone.service.SchoolService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/join/*")
@@ -24,7 +18,6 @@ import javax.servlet.http.HttpSession;
 public class JoinController {
     private final PeopleService peopleService;
     private final SchoolService schoolService;
-    private PasswordEncoder passwordEncoder;
 
     @GetMapping("/user")
     public String createPeople(Model model) {
@@ -50,6 +43,7 @@ public class JoinController {
     }
 
     ;
+
     @GetMapping("/logout")
     public String logout() {
         return "/join/logout";
