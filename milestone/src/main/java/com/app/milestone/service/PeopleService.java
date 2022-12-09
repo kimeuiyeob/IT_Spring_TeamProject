@@ -15,7 +15,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -30,10 +29,9 @@ public class PeopleService {
 
     //    회원가입
     public void createPeople(PeopleDTO peopleDTO) {
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         People people = peopleDTO.toEntity();
         peopleDTO.setUserEmail(people.getUserEmail());
-        peopleDTO.setUserPassword(bCryptPasswordEncoder.encode(people.getUserPassword()));
+        peopleDTO.setUserPassword(people.getUserPassword());
         peopleDTO.setUserName(people.getUserName());
         peopleDTO.setPeopleNickname(people.getPeopleNickname());
         peopleDTO.setUserPhoneNumber(people.getUserPhoneNumber());
@@ -160,8 +158,8 @@ public class PeopleService {
         return people;
     }
 
-//    회원 삭제
-    public void deleteByUserId(Long userId){
+    //    회원 삭제
+    public void deleteByUserId(Long userId) {
         peopleRepository.deleteById(userId);
     }
 
