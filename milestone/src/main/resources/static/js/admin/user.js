@@ -36,6 +36,10 @@ $(document).on('click', function (e) {
     }
 })
 
+$("#reset6").on('click',function () {
+    search()
+})
+
 $filter.on("click", function () {
     if ($filterDropdown.css('display') == 'none') {
         $filter.css('background-color', '#009ef7');
@@ -307,6 +311,7 @@ function peopleListShow(){
         page: globalThis.page
     }, getPeopleList)
 }
+
 function getPeopleList(peopleResp) {
     let text = "";
     pageInfo = peopleResp.arPeopleDTO;
@@ -341,6 +346,53 @@ function getPeopleList(peopleResp) {
         text += `<th class="card-body-title-padding" style="width: 22%;">`
 
         let date = new Date(person.createdDate);
+        let year = date.getFullYear().toString().substr(2)+'년 ';
+        let month = date.getMonth() + 1 +'월 ';
+        let day = date.getDate()+'일';
+        let createdDateView = year+month+day;
+
+        text += `<div class="donate-info-height">`+ createdDateView +`</div>`
+        text += `</th>`
+        text += `</tr>`
+    })
+    $(".card-body-main-box").html(text)
+    pageingBtn();
+}
+
+function getSchoolList(schoolResp) {
+    let text = "";
+    pageInfo = schoolResp.arSchoolDTO;
+    schoolResp.arSchoolDTO.content.forEach(school => {
+        text += `<tr>`
+        text += `<th class="card-body-title-checkbox-padding" style="width: 3%; margin-top: 29px;padding-top: 0; padding-bottom: 31px;">`
+        text += `<label class="card-body-title-user-checkbox">`
+        text += `<div class="check-img"></div>`
+        text += `<input class="notice-checked" type="checkbox" name="check">`
+        text += `<input type="hidden" value="` + school.userId + `"name ="check2" class="userId">`
+        text += `<input type="hidden" name="hiddenValue" id="hiddenValue" value=""/>`
+        text += `</label>`
+        text += `</th>`
+        text += `<th class="card-body-title-padding" style="width: 22%;">`
+        text += `<div class="donater-info" style="height: 50px">`
+        text += `<div class="donater-info-img1"></div>`
+        text += `<div class="donater-info-text">`
+        text += `<div class="donater-name">`+school.userName+`</div>`
+        text += `<div>`+ school.userEmail +`</div>`
+        text += `</div>`
+        text += `</div>`
+        text += `</th>`
+        text += `<th class="card-body-title-padding" style="width: 18%;">`
+        text += `<div class="donate-info-height">`+ school.userPhoneNumber+`</div>`
+        text += `</th>`
+        text += `<th class="card-body-title-padding" style="width: 17%;">`
+        text += `<div class="donate-info-height user-type">`+'보육원'+`</div>`
+        text += `</th>`
+        text += `<th class="card-body-title-padding" style="width: 18%;">`
+        text += `<div class="donate-info-height">`+school.schoolName+`</div>`
+        text += `</th>`
+        text += `<th class="card-body-title-padding" style="width: 22%;">`
+
+        let date = new Date(school.createdDate);
         let year = date.getFullYear().toString().substr(2)+'년 ';
         let month = date.getMonth() + 1 +'월 ';
         let day = date.getDate()+'일';
@@ -410,23 +462,112 @@ function getPeopleList1Asc(param, callback, error){
     });
 }
 
-/* 일반회원 검색 */
+function getSchoolList1(param, callback, error){
+
+    let existSchoolName = param.schoolName.length != 0;
+    let existUserName = param.userName.length != 0;
+    let queryString = "/" + param.page || 1;
+
+    queryString += existSchoolName ? "/" + param.schoolName : "";
+
+    if (!existSchoolName && existUserName) {
+        queryString += "/null";
+    }
+    queryString += existUserName ? "/" + param.userName : "";
+    $.ajax({
+        url : "/adminRest/userschool"+queryString,
+        type : "get",
+        success : function (schoolResp, status, xhr) {
+            if(callback){
+                callback(schoolResp)
+            }
+        },
+        error: function (xhr, status, err) {
+            if (error) {
+                error(err);
+            }
+        }
+    });
+}
+
+function getSchoolList1Asc(param, callback, error){
+
+    let existSchoolName = param.schoolName.length != 0;
+    let existUserName = param.userName.length != 0;
+    let queryString = "/" + param.page || 1;
+
+    queryString += existSchoolName ? "/" + param.schoolName : "";
+
+    if (!existSchoolName && existUserName) {
+        queryString += "/null";
+    }
+    queryString += existUserName ? "/" + param.userName : "";
+    $.ajax({
+        url : "/adminRest/userschoolAsc"+queryString,
+        type : "get",
+        success : function (schoolResp, status, xhr) {
+            if(callback){
+                callback(schoolResp)
+            }
+        },
+        error: function (xhr, status, err) {
+            if (error) {
+                error(err);
+            }
+        }
+    });
+}
+
+/* 회원 검색 */
 function search() {
     console.log("$search.text() : "+$search.val())
-    getPeopleList1({
-        peopleNickName: $search.val(),
-        userName: $search.val(),
-        page: globalThis.page
-    }, getPeopleList);
+    if($(".user-type").text().match("일반")){
+        getPeopleList1({
+            peopleNickName: $search.val(),
+            userName: $search.val(),
+            page: globalThis.page
+        }, getPeopleList);
+    }else if($(".user-type").text().match("보육원")){
+        getSchoolList1({
+            schoolName : $search.val(),
+            userName: $search.val(),
+            page: globalThis.page
+        }, getSchoolList);
+    }
 }
-    /*일반회원 검색 오름차순*/
+
+$(".right-people").on('click',function () {
+    getPeopleList1({
+        peopleNickName: $search.text(),
+        userName: $search.text(),
+        page: globalThis.page
+    }, getPeopleList)
+})
+
+$(".right-school").on('click',function () {
+    getSchoolList1({
+        schoolName: $search.text(),
+        userName: $search.text(),
+        page: globalThis.page
+    }, getSchoolList)
+})
+
+/*검색 오름차순*/
 function search2() {
     console.log("$search.text() : "+$search.val())
-    getPeopleList1Asc({
-        peopleNickName: $search.val(),
-        userName: $search.val(),
-        page: globalThis.page
-    }, getPeopleList);
+    if($(".user-type").text().match("일반")){
+        getPeopleList1Asc({
+            peopleNickName: $search.val(),
+            userName: $search.val(),
+            page: globalThis.page
+        }, getPeopleList);
+    }else if($(".user-type").text().match("보육원")){
+        getSchoolList1Asc({
+            schoolName : $search.val(),
+            userName: $search.val(),
+            page: globalThis.page
+        }, getSchoolList);
+    }
 }
 
 

@@ -26,4 +26,8 @@ public class Search {
     /*===============================*/
 
     private String NoticeTitle;
+
+    /*===============================*/
+
+    private String withdrawalReason;
 }

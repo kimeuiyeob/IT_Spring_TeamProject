@@ -22,6 +22,19 @@ public class NoticeCustomRepositoryImpl implements NoticeCustomRepository{
     private final JPAQueryFactory jpaQueryFactory;
 
     @Override
+    public NoticeDTO findByNoticeId(Long noticeId){
+        return jpaQueryFactory.select(new QNoticeDTO(
+                notice.noticeId,
+                notice.noticeTitle,
+                notice.noticeContent,
+                notice.createdDate
+        ))
+                .from(notice)
+                .where(notice.noticeId.eq(noticeId))
+                .fetchOne();
+    };
+
+    @Override
     public List<NoticeDTO> findCreatedDate(Pageable pageable) {
         return jpaQueryFactory.select(new QNoticeDTO(
                 notice.noticeId,

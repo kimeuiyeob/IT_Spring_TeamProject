@@ -231,7 +231,7 @@ function fnGetdata(){
         ,data : {chkArray: chkArray}
         ,traditional: true
         ,success : function(result) {
-            alert("해당 회원이 정상적으로 삭제되었습니다.");
+            alert("해당 게시글이 정상적으로 삭제되었습니다.");
             location.replace("notice")
         },
         error: function(request, status, error) {
@@ -249,7 +249,6 @@ const $modalSubmit = $('.modal-submit');
 const $closeImg = $('.close-img');
 
 $closeImg.on('click', function () {
-    console.log($(this).closest('.update-notice-modal'))
     if ($(this).closest('.update-notice-modal').length > 0) {
         updateNoticeModal.classList.toggle('show');
     }
@@ -259,7 +258,10 @@ $closeImg.on('click', function () {
     body.style.overflow = 'auto';
 })
 
-$modalSubmit.on('click', function () {
+$modalSubmit.on('click', function (e) {
+    e.preventDefault();
+    console.log("$modalSubmit : "+$(this))
+
     if ($(this).closest('.update-notice-modal').length > 0) {
         updateNoticeModal.classList.toggle('show');
     }
@@ -270,6 +272,8 @@ $modalSubmit.on('click', function () {
 
 
 $updateNotice.on('click', function () {
+    console.log("$updateNotice : "+$(this))
+
     updateNoticeModal.classList.toggle('show');
 
     if (updateNoticeModal.classList.contains('show')) {
@@ -340,11 +344,29 @@ $(document).ready(function() {
             ['color', ['color']],
             ['para', ['ul', 'ol', 'paragraph']],
             ['table', ['table']],
-            ['insert', ['link']],
-            ['view', ['help']]
         ]
     });
 });
+
+$(document).ready(function() {
+    jb('.summernote2').summernote({
+        placeholder: '공지사항을 작성하세요',
+        tabsize: 2,
+        height: 280,
+        lang: "ko-KR",
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+        ],
+    });
+    $(document).on('click', '.modal-submit', function () {
+        update()
+    });
+});
+
 /* -------------- 페이지 이동 ---------------- */
 const $pageNumberLink = $('.page-number-link');
 
@@ -390,7 +412,7 @@ function getNoticeList(noticeResp) {
         text += `</th>`
         text += `<th class="card-body-title-padding" style="width: 50%;">`
         text += `<div class="donate-info-height">`
-        text += `<div class="donate-info-text">` + notice.noticeTitle + `</div>`
+        text += `<div class="donate-info-text-title" style="cursor: pointer">` + notice.noticeTitle + `</div>`
         text += `</div>`
         text += `</div>`
         text += `</th>`
@@ -558,3 +580,60 @@ $(".add-submit").on('click', function () {
     alert('공지사항이 등록되었습니다')
 })
 
+
+
+$(".card-body").on('click','.donate-info-text-title', function (event) {
+    event.preventDefault();
+    // console.log($(this).closest('.donate-info-height').closest('.card-body-title-padding').siblings('.card-body-title-checkbox-padding').children('.card-body-title-user-checkbox').children('.noticeId').val())
+
+    let noticeId = $(this).closest('.donate-info-height').closest('.card-body-title-padding').siblings('.card-body-title-checkbox-padding').children('.card-body-title-user-checkbox').children('.noticeId').val()
+
+    updateNoticeModal.classList.toggle('show');
+
+    if (updateNoticeModal.classList.contains('show')) {
+        body.style.overflow = 'hidden';
+    }
+
+    //상세보기 데이터 전달
+    showDetail(noticeId);
+})
+
+var existContent = "";
+function showDetail(noticeId) {
+    $.ajax({
+        url: "/noticeRest/info/" + noticeId,
+        type: "get",
+        success: function (result) {
+            $(".hidden-noticeId").val(noticeId);
+            $(".modal-info-padding").val(result.noticeTitle);
+            $(".note-editable").eq(0).text(result.noticeContent);
+        },
+    });
+
+
+}
+
+function update() {
+
+    let noticeId = $(".hidden-noticeId").val()
+    let noticeTitle = $(".modal-info-padding").eq(0).val();
+    let noticeContent = $(".note-editable").eq(0).text();
+    console.log("noticeId" + noticeId);
+    console.log(noticeTitle);
+    console.log(noticeContent);
+
+    $.ajax({
+        url: "/noticeRest/modify",
+        data: {noticeId: noticeId, noticeTitle: noticeTitle, noticeContent: noticeContent},
+        type: "get",
+        success: function (result) {
+            console.log(result)
+            alert('게시글 수정이 완료되었습니다');
+        },
+    });
+
+}
+
+// $('#summernote').on('summernote.change', function(we, contents, $editable) {
+//     $('input[name=groupContent]').attr('value', $(".note-editable").html());
+// });

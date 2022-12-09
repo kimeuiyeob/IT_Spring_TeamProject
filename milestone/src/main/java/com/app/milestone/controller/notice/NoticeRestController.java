@@ -3,6 +3,7 @@ package com.app.milestone.controller.notice;
 import com.app.milestone.domain.*;
 import com.app.milestone.service.NoticeService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/noticeRest/*")
+@Slf4j
 public class NoticeRestController {
     private final NoticeService noticeService;
 
@@ -48,4 +50,13 @@ public class NoticeRestController {
         }
     }
 
+    @GetMapping(value = {"/info/{noticeId}"})
+    public NoticeDTO info(@PathVariable("noticeId") Long noticeId) {
+        return noticeService.noticeInfo(noticeId);
+    }
+
+    @GetMapping(value = {"/modify"})
+    public NoticeDTO noticeModify(NoticeDTO noticeDTO){
+        return noticeService.modifyNotice(noticeDTO);
+    };
 }

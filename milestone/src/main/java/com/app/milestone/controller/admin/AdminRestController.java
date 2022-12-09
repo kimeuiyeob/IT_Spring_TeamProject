@@ -1,6 +1,7 @@
 package com.app.milestone.controller.admin;
 
 import com.app.milestone.domain.*;
+import com.app.milestone.entity.Withdrawal;
 import com.app.milestone.service.PeopleService;
 import com.app.milestone.service.SchoolService;
 import com.app.milestone.service.UserService;
@@ -50,24 +51,24 @@ public class AdminRestController {
     }
 
 //    전체회원에서 보육원 선택후 검색 및 조회 (기본 : 최신순)
-    @GetMapping(value= {"/userschool/{page}", "/userschool/{page}/{schoolAddress}","/userschool/{page}/{schoolAddress}/{schoolName}"})
+    @GetMapping(value= {"/userschool/{page}", "/userschool/{page}/{schoolName}","/userschool/{page}/{schoolName}/{userName}"})
     public SchoolResp userListSchool(@PathVariable("page") Integer page, Search search, Model model) {
         SchoolResp schoolResp = new SchoolResp();
         Pageable pageable = PageRequest.of(page, 7);
-        Page<SchoolDTO> arSchoolDTO = schoolService.schoolListBudgetSearch(page, search);
+        Page<SchoolDTO> arSchoolDTO = schoolService.schoolListSearch(page, search);
         schoolResp.setArSchoolDTO(arSchoolDTO);
-        schoolResp.setTotal(schoolService.schoolListCount(pageable, search));
+        schoolResp.setTotal(schoolService.schoolListCount2(pageable, search));
         return schoolResp;
     }
 
 //    전체회원에서 보육원 선택후 검색 및 조회 (asc)
-    @GetMapping(value= {"/userschoolAsc/{page}", "/userschoolAsc/{page}/{schoolAddress}","/userschoolAsc/{page}/{schoolAddress}/{schoolName}"})
+    @GetMapping(value= {"/userschoolAsc/{page}", "/userschoolAsc/{page}/{schoolName}","/userschoolAsc/{page}/{schoolName}/{userName}"})
     public SchoolResp userListSchoolAsc(@PathVariable("page") Integer page, Search search, Model model) {
         SchoolResp schoolResp = new SchoolResp();
         Pageable pageable = PageRequest.of(page, 7);
-        Page<SchoolDTO> arSchoolDTO = schoolService.schoolListBudgetSearch(page, search);
+        Page<SchoolDTO> arSchoolDTO = schoolService.schoolListSearchAsc(page, search);
         schoolResp.setArSchoolDTO(arSchoolDTO);
-        schoolResp.setTotal(schoolService.schoolListCount(pageable, search));
+        schoolResp.setTotal(schoolService.schoolListCount2(pageable, search));
         return schoolResp;
     }
 
@@ -123,30 +124,29 @@ public class AdminRestController {
         for (int i = 0; i<userIds.length; i++){
             schoolService.deleteByUserId(Long.valueOf(userIds[i]));
         }
-//        for(Long userId : userIds) peopleService.deleteByUserId(Long.valueOf(userId));
     }
 
 
+    //    탈퇴회원 조회
+    @GetMapping(value= {"/withdrawal/{page}", "/withdrawal/{page}/{withdrawalReason}"})
+    public WithdrawalResp witthdrawal(@PathVariable("page") Integer page, Search search, Model model) {
+        WithdrawalResp withdrawalResp = new WithdrawalResp();
+        Pageable pageable = PageRequest.of(page, 7);
+        Page<WithdrawalDTO> arWithdrawalDTO = withdrawalService.withdrawalListSearch(page, search);
+        withdrawalResp.setArWithdrawalDTO(arWithdrawalDTO);
+        withdrawalResp.setTotal(withdrawalService.withdrawalListCount(pageable, search));
+        return withdrawalResp;
+    }
 
-
-
-
-
-
-
-
-
-//    탈퇴회원 조회
-//    @PostMapping("/withdrawal")
-//    public List<WithdrawalDTO> showWithdrawalList(Pageable pageable){
-//        return withdrawalService.withdrawalList(pageable);
-//    }
-
-//    탈퇴회원 조회 (오름차순)
-//    @PostMapping("/withdrawalAsc")
-//    public List<WithdrawalDTO> showWithdrawalListAsc(){
-//        return withdrawalService.withdrawalListAsc();
-//    }
-
+    //    탈퇴회원 조회
+    @GetMapping(value= {"/withdrawalAsc/{page}", "/withdrawalAsc/{page}/{withdrawalReason}"})
+    public WithdrawalResp witthdrawalAsc(@PathVariable("page") Integer page, Search search, Model model) {
+        WithdrawalResp withdrawalResp = new WithdrawalResp();
+        Pageable pageable = PageRequest.of(page, 7);
+        Page<WithdrawalDTO> arWithdrawalDTO = withdrawalService.withdrawalListSearchAsc(page, search);
+        withdrawalResp.setArWithdrawalDTO(arWithdrawalDTO);
+        withdrawalResp.setTotal(withdrawalService.withdrawalListCount(pageable, search));
+        return withdrawalResp;
+    }
 
 }
