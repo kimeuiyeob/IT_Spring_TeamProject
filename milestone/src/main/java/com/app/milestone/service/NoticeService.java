@@ -37,6 +37,7 @@ public class NoticeService {
         return notices;
     }
 
+    //Notice공지사항 글 가져오기
     public Page<NoticeDTO> noticeListBySearchAsc(Integer page, Search search) {
         if (page == null) page = 0;
         Pageable pageable = PageRequest.of(page, 7);

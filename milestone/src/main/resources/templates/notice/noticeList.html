@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <title>notice1</title>
+</head>
+<!-- ===================================================================================================== -->
+
+<link href="/css/notice/notices.css" rel="stylesheet"/>
+<link rel="icon" href="/imgs/fix/favicon.png">
+
+<link rel="stylesheet" href="/css/fix/header.css">
+<link rel="stylesheet" href="/css/fix/footer.css">
+
+<!-- ================================================================================================================ -->
+<body>
+
+<header th:replace="/fix/header.html :: header"></header>
+
+<!-- ================================================================================================================ -->
+
+
+<main role="main" style="padding-top:100px">
+    <div class="container-divider" style="border-top : none;"></div>
+    <div class="container">
+        <div class="article-container" id="article-container">
+
+            <!--            <section class="article-sidebar">-->
+
+            <!--                <section class="section-articles collapsible-sidebar">-->
+            <!--                    <h3 class="collapsible-sidebar-title sidenav-title" style="padding-left:10px;">이 섹션의 문서</h3>-->
+            <!--                    <ul>-->
+
+            <!--                        <li>-->
+            <!--                            <a href="" class="sidenav-item current-article">-->
+            <!--                                <p class="sidenav-item-text">Milestone 고객 센터 운영 시간 안내</p> &lt;!&ndash; 해당 링크 걸기 &ndash;&gt;-->
+            <!--                            </a>-->
+            <!--                        </li>-->
+
+            <!--                        <li>-->
+            <!--                            <a href="" class="sidenav-item ">-->
+            <!--                                <p class="sidenav-item-text">Milestone 개인 정보 처리 방침 개정 안내</p>&lt;!&ndash; 해당 링크 걸기 &ndash;&gt;-->
+            <!--                            </a>-->
+            <!--                        </li>-->
+
+            <!--                        <li>-->
+            <!--                            <a href="" class="sidenav-item ">-->
+            <!--                                <p class="sidenav-item-text">Milestone 페널티 정책 안내</p>&lt;!&ndash; 해당 링크 걸기 &ndash;&gt;-->
+            <!--                            </a>-->
+            <!--                        </li>-->
+
+            <!--                        <li>-->
+            <!--                            <a href="" class="sidenav-item ">-->
+            <!--                                <p class="sidenav-item-text">Milestone 서비스 이용약관 개정 안내</p>&lt;!&ndash; 해당 링크 걸기 &ndash;&gt;-->
+            <!--                            </a>-->
+            <!--                        </li>-->
+
+            <!--                        <li>-->
+            <!--                            <a href="" class="sidenav-item ">-->
+            <!--                                <p class="sidenav-item-text">Milestone을 사칭하는 메시지, 조심하세요!</p>&lt;!&ndash; 해당 링크 걸기 &ndash;&gt;-->
+            <!--                            </a>-->
+            <!--                        </li>-->
+
+            <!--                        <li>-->
+            <!--                            <a href="" class="sidenav-item ">-->
+            <!--                                <p class="sidenav-item-text">Milestone 메시지 알림 보관 기간 변경됩니다.</p>&lt;!&ndash; 해당 링크 걸기 &ndash;&gt;-->
+            <!--                            </a>-->
+            <!--                        </li>-->
+
+
+            <!--                    </ul>-->
+
+            <!--                    &lt;!&ndash;  <a style="color:black" href="" class="article-sidebar-item">더보기</a>  &ndash;&gt;&lt;!&ndash; 해당 링크 걸기 &ndash;&gt;-->
+
+            <!--                </section>-->
+            <!--            </section>-->
+
+            <article class="article">
+
+                <header class="article-header">
+                    <h1 title="11월, 고객센터 운영 시간 안내" class="article-title" th:utext="${notice.noticeTitle}"></h1>
+                </header>
+
+                <section class="article-info">
+                    <div class="article-content">
+                        <div class="article-body">
+                            <p th:utext="${notice.noticeContent}"></p>
+                        </div>
+                    </div>
+                </section>
+
+            </article>
+        </div>
+    </div>
+</main>
+
+<!-- =========================================================================================================== -->
+<footer th:replace="/fix/footer.html :: footer"></footer>
+
+<!-- ================================================================================================================ -->
+</body>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script src="/js/fix/header.js"></script>
+</html>

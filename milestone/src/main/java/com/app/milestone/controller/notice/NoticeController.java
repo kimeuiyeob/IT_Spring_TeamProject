@@ -6,7 +6,10 @@ import com.app.milestone.service.NoticeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequiredArgsConstructor
@@ -15,16 +18,23 @@ import org.springframework.web.bind.annotation.*;
 public class NoticeController {
     private final NoticeService noticeService;
 
-    @GetMapping(value = {"notice", "notice1", "notice2", "notice3", "notice4", "notice5", "notice6"})
-    public void notice(){
+    /*==================================================================================================*/
+    @GetMapping("notice")
+    public void notice() {
+    ;
+    }
+    /*==================================================================================================*/
+
+    @GetMapping("/noticeList")
+    public void noticeList(Long noticeId, Model model){
+        model.addAttribute("notice",  noticeService.noticeInfo(noticeId));
     }
 
+    /*==================================================================================================*/
     @PostMapping(value = "write")
-    public String noticeWrite(NoticeDTO noticeDTO){
+    public String noticeWrite(NoticeDTO noticeDTO) {
         noticeService.registerNotice(noticeDTO);
         return "/admin/notice";
-    };
-
-
-
+    }
+    ;
 }
