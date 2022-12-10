@@ -196,37 +196,46 @@ let phoneCheckFlag = false;
 let tempPhone;
 
 var phoneCheck = /^[0-9]{11,11}$/;
+var code = "";
 
 $certificationBtn.on('click', function () {
     $certification.attr("disabled", true);
-    var phone = $(this).prev().val();
-    phone = phone.replace(/-/g, "");
-    $(this).prev().val(phone);
+    var userPhoneNumber = $(this).prev().val();
+    console.log(userPhoneNumber);
+    userPhoneNumber = userPhoneNumber.replace(/-/g, "");
+    $(this).prev().val(userPhoneNumber);
     $warningMsg = $(this).parent().next();
-    if (phone == '' || phone == 'undefined') {
-        $warningMsg.show();
-        $warningMsg.find(".warningMsg").css("color", "rgb(255, 64, 43)");
-        $warningMsg.find(".warningMsg").text('전화번호를 입력해 주세요');
-        $phone.focus();
-        phoneFlag = false;
-        return;
-    }
-    if (!phoneCheck.test(phone) || !phone.startsWith("010")) {
-        $warningMsg.show();
-        $warningMsg.find(".warningMsg").css("color", "rgb(255, 64, 43)");
-        $warningMsg.find(".warningMsg").text('전화번호를 정확히 입력해 주세요');
-        $phone.focus();
-        phoneFlag = false;
-        return false;
-    } else {
-        $warningMsg.show();
-        $warningMsg.find(".warningMsg").css("color", "rgb(79 189 18)");
-        $warningMsg.find(".warningMsg").text('입력하신 전화번호로 인증번호가 전송되었습니다.');
-        tempPhone = phone;
-        $certification.attr("disabled", false)
-        $certification.focus();
-        phoneFlag = true;
-    }
+    $.ajax({
+        type: "get",
+        url: "phoneCheck?phone=" + userPhoneNumber,
+        cache: false,
+        success: function (data) {
+            $warningMsg.show();
+            $warningMsg.find(".warningMsg").css("color", "rgb(79 189 18)");
+            $warningMsg.find(".warningMsg").text('입력하신 전화번호로 인증번호가 전송되었습니다.');
+            tempPhone = userPhoneNumber;
+            $certification.attr("disabled", false)
+            $certification.focus();
+            phoneFlag = true;
+            if (data == "error" || userPhoneNumber == '' || userPhoneNumber == 'undefined') {
+                $warningMsg.show();
+                $warningMsg.find(".warningMsg").css("color", "rgb(255, 64, 43)");
+                $warningMsg.find(".warningMsg").text('전화번호를 입력해 주세요');
+                $phone.focus();
+                phoneFlag = false;
+                return;
+            }
+            if (data == "error" || !phoneCheck.test(userPhoneNumber) || !userPhoneNumber.startsWith("010")) {
+                $warningMsg.show();
+                $warningMsg.find(".warningMsg").css("color", "rgb(255, 64, 43)");
+                $warningMsg.find(".warningMsg").text('전화번호를 정확히 입력해 주세요');
+                $phone.focus();
+                phoneFlag = false;
+                return false;
+            }
+            code = data;
+        }
+    });
 });
 
 $phone.on('blur', function () {
@@ -253,7 +262,7 @@ $certification.on('blur', function () {
             $warningMsg.closest(".flexRow").show();
             $warningMsg.css("color", "rgb(255, 64, 43)");
             $warningMsg.text("인증번호를 입력해 주세요")
-        } else if ("1234" == $certification.val()) {
+        } else if (code == $certification.val()) {
             $warningMsg.closest(".flexRow").show();
             phoneCheckFlag = true;
             $warningMsg.css("color", "rgb(79 189 18)");
