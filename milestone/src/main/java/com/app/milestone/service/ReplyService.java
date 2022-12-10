@@ -47,10 +47,10 @@ public class ReplyService {
         if (page == null) page = 0;
 //        Pageable pageable = PageRequest.of(page,10);
         Pageable pageable = PageRequest.of(0,(page+1)*10);
-        List<ReplyDTO> list = replyRepository.findBySchoolId(userId);
-        int start = list.size() > (int) pageable.getOffset() ? (int) pageable.getOffset() : (int) pageable.getOffset() - 10;
-        int end = Math.min((start + pageable.getPageSize()),list.size());
-        Page<ReplyDTO> replys = new PageImpl<>(list.subList(start, end), pageable,list.size());
+        List<ReplyDTO> list = replyRepository.findBySchoolId(pageable,userId);
+//        int start = list.size() > (int) pageable.getOffset() ? (int) pageable.getOffset() : (int) pageable.getOffset() - 10;
+//        int end = Math.min((start + pageable.getPageSize()),list.size());
+        Page<ReplyDTO> replys = new PageImpl<>(list, pageable,list.size());
         return replys;
     }
 

@@ -24,8 +24,8 @@ public class SchoolController {
 
     //    보육원 목록
     @GetMapping("/list")
-    public void list(Search search) {
-        ;
+    public void list(Search search, Model model) {
+        model.addAttribute("search",search);
     }
 
     //    보육원 상세

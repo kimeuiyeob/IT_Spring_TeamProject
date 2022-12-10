@@ -5,6 +5,7 @@ import com.app.milestone.domain.ReplyDTO;
 import com.app.milestone.entity.QReply;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class ReplyCustomRepositoryImpl implements ReplyCustomRepository {
     private final JPAQueryFactory jpaQueryFactory;
 
     @Override
-    public List<ReplyDTO> findBySchoolId(Long userId) {
+    public List<ReplyDTO> findBySchoolId(Pageable pageable, Long userId) {
         return jpaQueryFactory.select(new QReplyDTO(
                 reply.replyId,
                 reply.replyContent,
@@ -27,6 +28,8 @@ public class ReplyCustomRepositoryImpl implements ReplyCustomRepository {
                 reply.people.userId
         )).from(reply)
                 .where(reply.school.userId.eq(userId))
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
                 .orderBy(reply.createdDate.desc())
                 .fetch();
     }

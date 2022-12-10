@@ -126,7 +126,6 @@ $("button.dropbtn").on('click', function () {
             }
             $(".placeholder").text(placeholderText);
         } else {
-            // console.log(saveLocal.length);
             $(".placeholder").text("전체");
         }
     }
@@ -270,7 +269,7 @@ const $realSearhBox = $('.realSearhBox');
 /*지역으로 검색*/
 function getList1(param, callback, error) {
     let existAddress = param.schoolAddress.length != 0;
-    let existSchoolName = param.schoolName.length != 0;
+    let existSchoolName =  param.schoolName != null && param.schoolName.length != 0;
     let queryString = "/" + param.page || 1;
     queryString += existAddress ? "/" + param.schoolAddress : "";
     if (!existAddress && existSchoolName) {
@@ -296,13 +295,10 @@ function getList1(param, callback, error) {
 //========================좋아요=========================
 //내가 좋아한 보육원
 function getLikeSchoolList1(callback, error){
-    console.log("그럼여기?")
     $.ajax({
         url:"/schoolrest/likeSchool",
         type: "get",
         success:function(likeSchoolList){
-            console.log("그럼여기는?")
-            console.log(likeSchoolList)
             callback(likeSchoolList);
         },
         error: function (xhr, status, err) {

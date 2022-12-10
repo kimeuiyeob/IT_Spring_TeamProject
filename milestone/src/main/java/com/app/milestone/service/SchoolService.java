@@ -66,15 +66,15 @@ public class SchoolService {
             search.setSchoolName(null);
         }
         List<SchoolDTO> list = schoolRepository.findAllByCreatedDate(pageable, search);
-        int start = list.size() > (int) pageable.getOffset() ? (int) pageable.getOffset() : (int) pageable.getOffset() - 10;
-        int end = Math.min((start + pageable.getPageSize()), list.size());
+//        int start = list.size() > (int) pageable.getOffset() ? (int) pageable.getOffset() : (int) pageable.getOffset() - 10;
+//        int end = Math.min((start + pageable.getPageSize()), list.size());
 //        log.info("===============asdf" + pageable);
 //        log.info("===============asdf" + search);
 //        log.info("===============asdf" + start);
 //        log.info("asd===============" + end);
 //        log.info("asd===============" + schoolRepository.countByCreatedDate(pageable, search));
 
-        Page<SchoolDTO> schools = new PageImpl<>(list.subList(start, end), pageable, Integer.valueOf("" + schoolRepository.countByCreatedDate(pageable, search)));
+        Page<SchoolDTO> schools = new PageImpl<>(list, pageable, Integer.valueOf("" + schoolRepository.countByCreatedDate(pageable, search)));
 
         return schools;
     }

@@ -120,6 +120,13 @@
     const $location2 = $(".location2");
     const $wholeLocation = $(".wholeLocation");
     globalThis.page = 0;
+    let searchFromMain = [[${search.schoolName}]];
+    if(searchFromMain){
+        console.log("들옴")
+        $('input[name = "schoolName"]').val(searchFromMain);
+        $('input[id = "schoolName"]').val(searchFromMain);
+    }
+    console.log(searchFromMain);
 
     // 처음 목록 가져오기
     show();
@@ -226,7 +233,7 @@
     function show() {
         getList1({
             schoolAddress: save,
-            schoolName: $('.beforeName').text(),
+            schoolName: [[${search.schoolName}]],
             page: globalThis.page
         }, getList)
     }
@@ -322,7 +329,6 @@
                 }
             });
             if (!likeFlag) {
-                console.log(schoolId)
                 $donationButton.closest('article').find(".redHeart").css({"display": "none"})
                 $donationButton.closest('article').find(".emptyHeart").css({"display": "inline"})
             }

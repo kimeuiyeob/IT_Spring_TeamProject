@@ -379,9 +379,12 @@ aside{
 }
 
 .rightBox1{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 447px;
     color: rgb(48, 52, 65);
     border: 1px solid rgb(228, 229, 237);
-    display: block;
 }
 
 .rightBox2{
@@ -692,6 +695,8 @@ aside{
 }
 
 table#userTable{
+    border-collapse: separate;
+    border-spacing: 0 6px;
     width: 100%;
 }
 
@@ -727,6 +732,9 @@ table#userTable{
 }
 
 table#userTable2{
+    border-collapse: separate;
+    /*border-spacing: 0 8px;*/
+    border-bottom: 8px solid transparent;
     height: 30px;
     font-size: 15px;
     border-top: 1px solid rgb(154, 154, 154);
@@ -816,3 +824,5 @@ table#userTable2{
 #noBorderBottom{
     border-bottom: 0px solid transparent;
 }
+
+/*---------------황지수--------------------------*/
