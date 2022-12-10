@@ -36,22 +36,21 @@ public class ReplyService {
         reply.changePeople(people);
     }
 
-//    //    조회
-//    public List<ReplyDTO> showAll(Long userId) {
-//        List<ReplyDTO> arReplyDTO = replyRepository.findBySchoolId(userId);
-//        return arReplyDTO;
-//    }
-
     //    조회
     public Page<ReplyDTO> showAll(Integer page, Long userId) {
         if (page == null) page = 0;
 //        Pageable pageable = PageRequest.of(page,10);
-        Pageable pageable = PageRequest.of(0,(page+1)*10);
-        List<ReplyDTO> list = replyRepository.findBySchoolId(pageable,userId);
+        Pageable pageable = PageRequest.of(0, (page + 1) * 10);
+        List<ReplyDTO> list = replyRepository.findBySchoolId(pageable, userId);
 //        int start = list.size() > (int) pageable.getOffset() ? (int) pageable.getOffset() : (int) pageable.getOffset() - 10;
 //        int end = Math.min((start + pageable.getPageSize()),list.size());
-        Page<ReplyDTO> replys = new PageImpl<>(list, pageable,list.size());
+        Page<ReplyDTO> replys = new PageImpl<>(list, pageable, replyRepository.countBySchoolId(userId));
         return replys;
+    }
+
+    //    댓글 개수
+    public Long replyCount(Long userId) {
+        return replyRepository.countBySchoolId(userId);
     }
 
     //    수정

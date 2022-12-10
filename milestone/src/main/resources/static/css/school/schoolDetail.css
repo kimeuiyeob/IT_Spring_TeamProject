@@ -7,17 +7,17 @@
     url(https://d2v80xjmx68n4w.cloudfront.net/assets/fonts/MetroSans/MetroSans-Bold.eot?#iefix) format('embedded-opentype');
 }
 
-body{
+body {
     margin: 0;
 }
 
-.wholePage{
+.wholePage {
     width: 1200px;
     padding: 0 16px;
     margin: 0 auto;
 }
 
-.wholeSection{
+.wholeSection {
     width: 100%;
     margin: 24px auto 70px;
     display: flex;
@@ -25,31 +25,31 @@ body{
     justify-content: space-between;
 }
 
-main{
+main {
     flex: 0 0 auto;
     width: 652px;
     flex-direction: column;
 }
 
-aside{
+aside {
     margin-left: 58px;
     width: 100%;
 }
 
-#category{
+#category {
     display: flex;
     margin-bottom: 16px;
     font-size: 14px;
 }
 
-#imgsSection{
+#imgsSection {
     position: relative;
     margin-bottom: 36px;
     border: 1px solid rgb(228, 229, 237);
     max-width: 652px;
 }
 
-#mainImage{
+#mainImage {
     width: 100%;
     max-height: 488px;
     height: 488px;
@@ -58,12 +58,12 @@ aside{
     background-color: gray;
 }
 
-.images{
+.images {
     line-height: normal;
     -webkit-text-size-adjust: 100%;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
-    font-family: 'Metro Sans',sans-serif;
+    font-family: 'Metro Sans', sans-serif;
     box-sizing: border-box;
     position: relative;
     top: 0;
@@ -77,7 +77,7 @@ aside{
     transform: translate3d(0px, 0px, 0px);
 }
 
-.longImages{
+.longImages {
     position: relative;
     display: block;
     overflow: hidden;
@@ -86,31 +86,31 @@ aside{
     transition: .3s ease-out;
 }
 
-.miniImages{
+.miniImages {
     outline: none;
     width: 3260px;
     display: flex;
 }
 
-.miniImage{
+.miniImage {
     overflow: hidden;
     height: 109px;
     margin-bottom: 4px;
 }
 
-.miniImage>img{
+.miniImage > img {
     cursor: pointer;
     margin: 3px 5px 5px;
     width: 152px;
 }
 
-#list{
+#list {
     line-height: normal;
     -webkit-text-size-adjust: 100%;
     cursor: pointer;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
-    font-family: 'Metro Sans',sans-serif;
+    font-family: 'Metro Sans', sans-serif;
     box-sizing: border-box;
     position: relative;
     display: block;
@@ -121,7 +121,7 @@ aside{
 }
 
 /* 좌 우 버튼 */
-.emgxp40{
+.emgxp40 {
     -webkit-text-size-adjust: 100%;
     overflow: visible;
     cursor: pointer;
@@ -141,7 +141,7 @@ aside{
     background-color: rgba(255, 255, 255, 0.76);
 }
 
-#commentNavi{
+#commentNavi {
     width: 100%;
     background-color: rgb(255, 255, 255);
     z-index: 1;
@@ -150,15 +150,15 @@ aside{
     margin-bottom: 40px;
 }
 
-#naviBar{
+#naviBar {
     display: flex;
 }
 
-.navText{
+.navText {
     margin-top: 121px;
     line-height: normal;
     -webkit-text-size-adjust: 100%;
-    font-family: 'Metro Sans',sans-serif;
+    font-family: 'Metro Sans', sans-serif;
     box-sizing: border-box;
     position: relative;
     flex: 1 1 0%;
@@ -178,30 +178,30 @@ aside{
     border-left: 1px solid rgb(228, 229, 237);
 }
 
-#commentsCount{
+#commentsCount {
     line-height: normal;
     -webkit-text-size-adjust: 100%;
     font-size: 14px;
     color: rgb(48, 52, 65);
     font-weight: 700;
-    font-family: 'Metro Sans',sans-serif;
+    font-family: 'Metro Sans', sans-serif;
     box-sizing: border-box;
 }
 
-#comments{
+#comments {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
 }
 
-.commentsList{
+.commentsList {
     line-height: normal;
     -webkit-text-size-adjust: 100%;
-    font-family: 'Metro Sans',sans-serif;
+    font-family: 'Metro Sans', sans-serif;
     box-sizing: border-box;
 }
 
-.comment{
+.comment {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -209,18 +209,18 @@ aside{
     padding: 40px 0px;
 }
 
-.profilePicture{
+.profilePicture {
     width: 32px;
     height: 32px;
 }
 
-.profilePicture>img{
+.profilePicture > img {
     border-radius: 50px;
     width: 100%;
     height: 100%;
 }
 
-.nameAndDate{
+.nameAndDate {
     margin-left: 8px;
     display: flex;
     align-items: flex-start;
@@ -228,22 +228,20 @@ aside{
     justify-content: center;
 }
 
-.commentsInfo{
+.commentsInfo {
     display: flex;
     font-size: 12px;
 }
 
-.commentContent{
+.commentContent {
     margin-top: 20px;
+    position: relative;
 }
 
-.commentContent2{
-    display: flex;
-    -webkit-box-pack: justify;
-    justify-content: space-between;
+.commentContent2 {
 }
 
-.commentContent2>p{
+.commentContent2 > p {
     margin: 0px;
     white-space: pre-wrap;
     font-size: 14px;
@@ -252,7 +250,7 @@ aside{
     width: 100%;
 }
 
-#latest{
+#latest {
     display: inline-block;
     font-style: normal;
     line-height: 0;
@@ -265,15 +263,15 @@ aside{
     font-weight: 500;
 }
 
-.more{
+.more {
     position: relative;
     height: 40px;
 }
 
-.moreButton{
+.moreButton {
     font: inherit;
     background-color: transparent;
-    border-color:rgb(228 229 237);
+    border-color: rgb(228 229 237);
     margin: 0;
     overflow: visible;
     outline: none;
@@ -298,13 +296,13 @@ aside{
     border-top: 0px;
 }
 
-#zzim{
+#zzim {
     display: flex;
     justify-content: flex-end;
     margin: 56px 0px 8px;
 }
 
-.zzimButton{
+.zzimButton {
     border: 0;
     background-color: transparent;
     display: flex;
@@ -314,12 +312,12 @@ aside{
     cursor: pointer;
 }
 
-.zzimButton>svg{
+.zzimButton > svg {
     width: 18px;
     height: 18px;
 }
 
-.schoolName{
+.schoolName {
     font-weight: 500;
     color: rgb(48, 52, 65);
     font-size: 20px;
@@ -327,17 +325,17 @@ aside{
     line-height: 1.5;
 }
 
-.schoolName>h1{
+.schoolName > h1 {
     font: inherit;
     margin: 0px 0px 8px;
 }
 
 
-.introTotalRanking{
+.introTotalRanking {
     margin-bottom: 20px;
 }
 
-.introTotalRanking2{
+.introTotalRanking2 {
     position: relative;
     display: flex;
     width: 100%;
@@ -348,12 +346,12 @@ aside{
     border-left-color: rgb(228, 229, 237);
 }
 
-#intro{
-    color:rgb(48, 52, 65);
-    font-weight:700;
+#intro {
+    color: rgb(48, 52, 65);
+    font-weight: 700;
 }
 
-.introTotalRanking3{
+.introTotalRanking3 {
     flex: 0 0 auto;
     width: 156px;
     height: 48px;
@@ -365,7 +363,7 @@ aside{
     color: rgb(154, 155, 167);
 }
 
-#pseudo{
+#pseudo {
     content: "";
     position: absolute;
     z-index: 1;
@@ -378,7 +376,7 @@ aside{
     transition: transform 300ms ease 0s;
 }
 
-.rightBox1{
+.rightBox1 {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -387,18 +385,18 @@ aside{
     border: 1px solid rgb(228, 229, 237);
 }
 
-.rightBox2{
+.rightBox2 {
     padding: 24px 24px 0px;
     margin-bottom: 24px;
 }
 
-.introTitle{
+.introTitle {
     color: rgb(48, 52, 65);
     font-size: 18px;
     font-weight: 700;
 }
 
-.introContent{
+.introContent {
     position: relative;
     margin: 16px 0px;
     padding: 16px;
@@ -411,7 +409,7 @@ aside{
     overflow-y: scroll;
 }
 
-.donate{
+.donate {
     outline: none;
     border-width: 1px;
     border-style: solid;
@@ -438,24 +436,24 @@ aside{
     color: rgb(48, 52, 65);
 }
 
-#donate>span{
+#donate > span {
     font: inherit;
     line-height: 1;
     font-weight: 600;
     font-size: 16px;
 }
 
-.donateDIV{
+.donateDIV {
     padding: 0px 24px;
 }
 
-.QRgo{
+.QRgo {
     display: flex;
     justify-content: flex-end;
     margin: 8px 24px 16px;
 }
 
-.QRButton{
+.QRButton {
     outline: none;
     border-width: 1px;
     border-style: solid;
@@ -480,14 +478,14 @@ aside{
     color: rgb(48, 52, 65);
 }
 
-.QRButton>span{
+.QRButton > span {
     font: inherit;
     line-height: 1;
     font-weight: 600;
     font-size: 12px;
 }
 
-.calendar{
+.calendar {
     display: flex;
     flex: 1 1 0%;
     gap: 24px;
@@ -498,20 +496,20 @@ aside{
     background: rgb(255, 255, 255);
 }
 
-.calendarTitle{
+.calendarTitle {
     padding: 12px 24px;
     background-color: rgb(242, 243, 247);
     position: relative;
 }
 
-.calendarTitle2{
+.calendarTitle2 {
     display: flex;
     flex-direction: column;
     justify-content: center;
     height: 47px;
 }
 
-.calendarTitle2>h1{
+.calendarTitle2 > h1 {
     font-size: 18px;
     color: rgb(48, 52, 65);
     font-weight: bold;
@@ -519,13 +517,13 @@ aside{
     font: inherit;
 }
 
-.calendarContent{
+.calendarContent {
     display: flex;
     flex-direction: column;
     width: 100%;
 }
 
-.calendarContent2{
+.calendarContent2 {
     margin-top: 4px;
     font-size: 14px;
     color: #555969;
@@ -538,34 +536,34 @@ aside{
     margin: 8px 0 0;
 }
 
-.calendarContent3{
+.calendarContent3 {
     margin: 0 30px;
     display: flex;
     justify-content: center;
     height: 30px;
 }
 
-.calendarContent3>h5{
+.calendarContent3 > h5 {
     color: rgb(85, 89, 105);
     line-height: 1.3;
     font-size: 15px;
     font-weight: 400;
-    font:inherit;
+    font: inherit;
 }
 
-.calendarContent3>img{
+.calendarContent3 > img {
     width: 20px;
     height: 24px;
     margin-right: 10px;
 }
 
 /* 캘린더 api넣고 지우면 됩니다 */
-.calendarContent2>div{
+.calendarContent2 > div {
     width: 100%;
     height: 100%;
 }
 
-.rightFixButton{
+.rightFixButton {
     z-index: 9999;
     font-family: inherit;
     margin: 0;
@@ -600,7 +598,7 @@ aside{
     bottom: 0;
 }
 
-#modal{
+#modal {
     display: none;
     background-color: #ffff;
     width: 500px;
@@ -649,74 +647,75 @@ aside{
 .sect01 .line-02 {
     transform: rotate(45deg) translateX(0%);
 }
+
 /* ================================= */
 
 
-#modalQR{
+#modalQR {
     width: 370px;
     height: 370px;
     margin-left: 6%;
 }
 
-#modalQR>img{
+#modalQR > img {
     width: 100%;
     height: 100%;
 }
 
-#scanPlz{
+#scanPlz {
     display: flex;
     justify-content: center;
 }
 
-.totalBox{
+.totalBox {
     margin-top: 10px;
 }
 
-.rankingBox{
+.rankingBox {
     margin-top: 10px;
 }
 
-#totalRightBox{
+#totalRightBox {
     display: none;
 }
 
-#rankingRightBox{
+#rankingRightBox {
     display: none;
 }
 
-.schoolInfo{
+.schoolInfo {
     font-size: 14px;
-    padding-left:5px;
-    padding-top:5px;
+    padding-left: 5px;
+    padding-top: 5px;
 }
 
-.userTr{
+.userTr {
     font-weight: normal;
 }
 
-table#userTable{
+table#userTable {
     border-collapse: separate;
     border-spacing: 0 6px;
     width: 100%;
 }
 
-.userProfile{
+.userProfile {
     width: 5%;
 }
 
-.userNickname{
+.userNickname {
     justify-content: center;
     padding: 5px;
     width: 40%;
     text-align: left;
 }
 
-.donation{
+.donation {
     width: 55%;
     text-align: right;
 }
 
-.rightBox{
+.rightBox {
     line-height: normal;
     -webkit-text-size-adjust: 100%;
     font-size: 14px;
@@ -726,12 +725,12 @@ table#userTable{
     border-top: 1px solid rgb(48, 52, 65);
 }
 
-.thth{
+.thth {
     font-weight: normal;
     font-size: 15px;
 }
 
-table#userTable2{
+table#userTable2 {
     border-collapse: separate;
     /*border-spacing: 0 8px;*/
     border-bottom: 8px solid transparent;
@@ -742,20 +741,19 @@ table#userTable2{
     width: 100%;
 }
 
-#rankingTHead>tr{
+#rankingTHead > tr {
     height: 40px;
     border-color: rgb(250 250 252);
 }
 
-.oneUser{
+.oneUser {
     border-top: 1px solid rgb(250 250 252);
     border-bottom: 1px solid rgb(250 250 252);
 }
 
-#rankingTHead{
+#rankingTHead {
     background-color: rgb(250 250 252);
 }
-
 
 
 /* ==========댓글============ */
@@ -766,63 +764,84 @@ table#userTable2{
     align-items: center;
 }
 
-.mAd{
+.mAd {
     cursor: pointer;
 }
 
 .reply {
     resize: none;
     color: black;
-    width: 85%;
     font: inherit;
     /* display: none; */
 }
 
+.reply::placeholder{
+    color: #b7b7b7;
+}
+
 .replyRegisterButton {
-    margin-left: 5px;
-    width: 15%;
-    color: black;
-    border: 1px solid rgb(228 229 237);
-    background-color: rgb(242 243 247);
+    position: absolute;
+    bottom: 13px;
+    right: 7px;
+    height: 30px;
+    width: 47px;
+    background-color: #fff;
+    color: #b7b7b7;
+    border: 1px solid #fff;
     font: inherit;
+    font-size: 13px;
     border-radius: 3px;
     font-weight: 400;
 }
 
-.replyRegisterButton:hover {
-    filter: brightness(90%);
-    cursor: pointer;
-    transition: all 0.2s ease 0s;
-}
+/*.replyRegisterButton:hover {*/
+/*    filter: brightness(90%);*/
+/*    cursor: pointer;*/
+/*    transition: all 0.2s ease 0s;*/
+/*}*/
 
 .replyUpdateButton {
-    margin-left: 5px;
-    width: 15%;
-    color: black;
-    border: 1px solid rgb(228 229 237);
-    background-color: rgb(242 243 247);
+    position: absolute;
+    bottom: 13px;
+    right: 7px;
+    height: 30px;
+    width: 47px;
+    background-color: rgb(255, 212, 0);
+    color: #303441;
+    border: 1px solid #fff;
     font: inherit;
+    font-size: 13px;
     border-radius: 3px;
     font-weight: 400;
 }
 
-.replyUpdateButton:hover {
-    filter: brightness(90%);
-    cursor: pointer;
-    transition: all 0.2s ease 0s;
-}
+/*.replyUpdateButton:hover {*/
+/*    filter: brightness(90%);*/
+/*    cursor: pointer;*/
+/*    transition: all 0.2s ease 0s;*/
+/*}*/
 
-.cancel{
+.cancel {
     display: none;
     cursor: pointer;
 }
 
-.modifyHide{
+.modifyHide {
     display: none;
 }
 
-#noBorderBottom{
+#noBorderBottom {
     border-bottom: 0px solid transparent;
 }
 
 /*---------------황지수--------------------------*/
+/*기부 받은 적이 없을 때*/
+.noneDonation {
+    display: none;
+    height: 250px;
+    font-size: 20px;
+    color: #8f92a6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

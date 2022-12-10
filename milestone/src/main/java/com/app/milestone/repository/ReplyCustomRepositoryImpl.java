@@ -33,4 +33,12 @@ public class ReplyCustomRepositoryImpl implements ReplyCustomRepository {
                 .orderBy(reply.createdDate.desc())
                 .fetch();
     }
+
+    @Override
+    public Long countBySchoolId(Long userId) {
+        return jpaQueryFactory.select(reply.count(
+        )).from(reply)
+                .where(reply.school.userId.eq(userId))
+                .fetchOne();
+    }
 }

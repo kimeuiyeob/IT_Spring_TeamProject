@@ -13,6 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -56,7 +58,8 @@ public class ReplyTest {
     //    조회
     @Test
     public void findAllTest() {
-        replyRepository.findBySchoolId(1L).forEach(o -> log.info("보육원 : " + o.getSchoolUserId() + " 유저 : " + o.getPeopleUserId() + " 댓글 : " + o.getReplyContent()));
+        Pageable pageable = PageRequest.of(0,10);
+        replyRepository.findBySchoolId(pageable,1L).forEach(o -> log.info("보육원 : " + o.getSchoolUserId() + " 유저 : " + o.getPeopleUserId() + " 댓글 : " + o.getReplyContent()));
     }
 
     //    수정

@@ -178,11 +178,9 @@
                     </div>
                     <div class="commentContent">
                         <div class="commentContent2">
-                            <textarea name="" class="reply" cols="30" placeholder="댓글을 입력하세요" rows="3"
-                                      style="resize:none; color:black; width: 85%; font:inherit"></textarea>
-                            <input type="button" class="replyRegisterButton" value="등록"
-                                   style="margin-left: 5px; width: 15%; color:black; border: 1px solid rgb(228 229 237); background-color:rgb(242 243 247); font: inherit; border-radius: 3px; font-weight: 400;">
+                            <textarea name="" class="reply" cols="30" placeholder="댓글을 남겨보세요" rows="3"></textarea>
                         </div>
+                        <input type="button" class="replyRegisterButton" value="등록">
                     </div>
                 </div>
 
@@ -246,6 +244,11 @@
                     <div class="rightBox2" id="totalRightBox">
                         <span class="introTitle totalTitle">최근기부</span>
                         <div class="totalBox">
+                            <div class="noneDonation">
+                                <div>
+                                    기부 받은 내역이 없습니다.
+                                </div>
+                            </div>
                             <!-- 기부 내역 -->
                             <table id="userTable">
                             </table>
@@ -255,6 +258,12 @@
                     <div class="rightBox2" id="rankingRightBox">
                         <span class="introTitle rankingTitle">기부랭킹</span>
                         <div class="rankingBox">
+                            <div class="noneDonation">
+                                <div>
+                                    기부 받은 내역이 없습니다.
+                                    첫 후원자가 되어보세요.
+                                </div>
+                            </div>
 
                             <table id="userTable2">
                                 <thead id="rankingTHead" style="border-top:1px solid gray">
@@ -416,6 +425,16 @@
     function getRecent(schoolDTO) {
         let text = "";
         let count = 0;
+        console.log(schoolDTO.length == 0)
+        if (schoolDTO.length == 0) {
+            $('#userTable').hide();
+            $('#userTable2').hide();
+            $('.noneDonation').show();
+        } else {
+            $('#userTable').show();
+            $('#userTable2').show();
+            $('.noneDonation').hide();
+        }
         schoolDTO.forEach(school => {
             if (count == 6) return;
             count++;
@@ -495,11 +514,20 @@
 
     //세션에 있다고 생각
     let sessionId = 132;
-
+    // console.log($('.reply').val())
+    // console.log($('.reply').text())
+    // $('.reply').val();
+    // $('.reply').text();
 
     function getReply(replys) {
         replyText = "";
         lastReplyFlag = replys.last;
+        $('.reply').val("");
+        if (replys.content.length < replys.totalElements) {
+            $('.more').show();
+        } else {
+            $('.more').hide();
+        }
         replys.content.forEach(reply => {
             replyText += `<div class="comment">`
             replyText += `<div class="commentsInfo">`
@@ -576,9 +604,24 @@
         }, showReply)
     })
 
+    $('.reply').on('keyup', function () {
+        if ($(this).val().length != 0) {
+            $('.replyRegisterButton').css("background-color", "rgb(255, 212, 0)")
+            $('.replyRegisterButton').css("color", "#303441")
+        } else {
+            $('.replyRegisterButton').css("background-color", "#fff")
+            $('.replyRegisterButton').css("color", "#b7b7b7")
+        }
+    })
+
     // 댓글 등록
     $('.replyRegisterButton').on('click', function () {
-        let replyContent = $(this).prev().val();
+        let replyContent = $(this).prev().children('textarea').val();
+        console.log(replyContent)
+        if (!replyContent) {
+            alert("댓글 내용을 입력하지 않았습니다.")
+            return;
+        }
         nowPage = 0;
         register({
             replyContent: replyContent,
