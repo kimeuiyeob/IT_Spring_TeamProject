@@ -147,8 +147,8 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
                         userNameContaining(search.getUserName())
                 )
                 .orderBy(school.createdDate.asc())
-//                .offset(pageable.getOffset())
-//                .limit(pageable.getPageSize())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
                 .fetchOne();
     }
 

@@ -277,19 +277,20 @@
 
                         </div>
                     </div>
-
-                    <div class="donateDIV">
-                        <button class="donate" id="donateMoney">
-                            <span>기부하기</span>
-                        </button>
-                    </div>
-                    <a href="#none" onclick="openModal()">
-                        <div class="QRgo">
-                            <button class="QRButton">
-                                <span>QR 보러가기</span>
+                    <div>
+                        <div class="donateDIV">
+                            <button class="donate" id="donateMoney">
+                                <span>기부하기</span>
                             </button>
                         </div>
-                    </a>
+                        <a href="#none" onclick="openModal()">
+                            <div class="QRgo">
+                                <button class="QRButton">
+                                    <span>QR 보러가기</span>
+                                </button>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </section>
 
@@ -418,7 +419,7 @@
         schoolDTO.forEach(school => {
             if (count == 6) return;
             count++;
-            text += `<tr>`
+            text += `<tr">`
             // <!-- 프로필 사진 -->
             text += `<th class="userTr userProfile">`
             text += `<div class="profilePicture">`
