@@ -14,5 +14,7 @@ public interface NoticeCustomRepository {
     public NoticeDTO findByNoticeId(Long noticeId);
     public Long countByCreatedDate (Pageable pageable, Search search);
     public List<NoticeDTO> findBySearch(Pageable pageable, Search search);
+
+    //Notice공지사항 글 순서대로 조회
     public List<NoticeDTO> findBySearchAsc(Pageable pageable, Search search);
 }

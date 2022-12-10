@@ -385,7 +385,6 @@
     /*검색창 엔터*/
     $talentName.on('keyup', function (e) {
         if (e.keyCode == 13) {
-            console.log("검색창 엔터!!!!!!!!")
             $('input[name = talentName]').val($talentName.val());
             console.log($('input[name = talentName]').val($talentName.val()));
             globalThis.page = 0;
@@ -395,7 +394,6 @@
 
     /*검색창 클릭*/
     $talentClick.on('click', function (e) {
-        console.log("검색창 클릭!!!!!!!")
         $('input[name = talentName]').val($talentName.val());
         console.log($('input[name = talentName]').val($talentName.val()));
         globalThis.page = 0;
@@ -575,5 +573,4 @@
     /*===========================================================================*/
 
 </script>
-
 </html>

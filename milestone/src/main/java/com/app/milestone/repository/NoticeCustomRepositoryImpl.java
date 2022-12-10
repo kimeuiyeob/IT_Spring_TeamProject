@@ -71,6 +71,7 @@ public class NoticeCustomRepositoryImpl implements NoticeCustomRepository{
                 .fetchOne();
     }
 
+    /*Notice 공지사항 찾아오기*/
     @Override
     public List<NoticeDTO> findBySearchAsc(Pageable pageable, Search search) {
         return jpaQueryFactory.select(new QNoticeDTO(

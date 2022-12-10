@@ -41,9 +41,9 @@ public class TalentService {
         if (search.getTalentPlace() == null) {
             search.setTalentPlace(new ArrayList<>());
         }
-        if (search.getTalentTitle() == null) {
-            search.setTalentTitle(null);
-        }
+//        if (search.getTalentTitle() == null) {
+//            search.setTalentTitle(null);
+//        }
 
         log.info("페이지 : " + page);
         log.info("써치 : " + search);

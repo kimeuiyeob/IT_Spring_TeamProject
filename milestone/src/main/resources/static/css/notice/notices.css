@@ -152,7 +152,7 @@ ul {
 
 .article-container {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
 
 }
 
@@ -496,5 +496,18 @@ ul {
 .wysiwyg-color-orange80 {
     color : #ffc266;
 }
+
+/*===================================*/
+
+.article-list-link {
+    word-break: break-all;
+    overflow: hidden;
+    -webkit-line-clamp: 1;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+
+
 
 

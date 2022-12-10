@@ -10,7 +10,7 @@
 
 <!-- ======================================헤더/푸터======================================== -->
 
-<link href="/css/notice/notice.css" rel="stylesheet" />
+<link href="/css/notice/notice.css" rel="stylesheet"/>
 <link rel="icon" href="/imgs/fix/favicon.png">
 
 <link rel="stylesheet" href="/css/fix/header.css">
@@ -22,101 +22,54 @@
 <header th:replace="/fix/header.html :: header"></header>
 
 <!-- ================================================================================================================ -->
-
 <main role="main">
     <div class="container-divider"></div>
     <div class="container">
 
-        <div class="category-container">
-            <div class="category-content">
-                <header class="page-header">
-                    <h1>
-                        <div class="page-title">공지사항</div>
-                    </h1>
+        <div>
+            <div class="category-container">
+                <div class="category-content">
+                    <header class="page-header">
+                        <h1>
+                            <div class="page-title" style="cursor: default;">공지사항</div>
+                        </h1>
 
-                </header>
+                    </header>
 
-                <div class="section-tree">
+                    <div class="section-tree">
 
-                    <section class="section" style="padding-top: 30px;">
-                        <h3 class="section-tree-title">
-                            <a href="">전체공지</a>
-                        </h3>
-
-                        <ul class="article-list">
-
-                            <li class="article-list-item article-promoted">
-
-                                <span data-title="승격된 문서" class="icon-star"></span>
-                                <div>
-                                    <img src="/imgs/notice/notice.png" alt="이미지" width="20px" height="20px"
-                                         style=" margin-bottom :-3px; margin-right: -3px" />
-                                    <a href="" class="article-list-link">&nbspMilestone 고객 센터 운영 시간 안내</a>
-                                </div>
-
-                            </li>
-
-                            <li class="article-list-item article-promoted">
-
-                                <span data-title="승격된 문서" class="icon-star"></span>
-                                <div>
-                                    <img src="/imgs/notice/notice.png" alt="이미지" width="20px" height="20px"
-                                         style=" margin-bottom :-3px; margin-right: -3px" />
-                                    <a href="" class="article-list-link">&nbspMilestone 개인 정보 처리 방침 개정 안내</a>
-                                </div>
-                            </li>
-
-                            <li class="article-list-item article-promoted">
-
-                                <span data-title="승격된 문서" class="icon-star"></span>
-                                <div>
-                                    <img src="/imgs/notice/notice.png" alt="이미지" width="20px" height="20px"
-                                         style=" margin-bottom :-3px; margin-right: -3px" />
-                                    <a href="" class="article-list-link">&nbspMilestone 페널티 정책 안내</a>
-                                </div>
-                            </li>
-
-                            <li class="article-list-item article-promoted">
-
-                                <span data-title="승격된 문서" class="icon-star"></span>
-                                <div>
-                                    <img src="/imgs/notice/notice.png" alt="이미지" width="20px" height="20px"
-                                         style=" margin-bottom :-3px; margin-right: -3px" />
-                                    <a href="" class="article-list-link">&nbspMilestone 서비스 이용약관 개정 안내</a>
-                                </div>
-                            </li>
-
-                            <li class="article-list-item article-promoted">
-
-                                <span data-title="승격된 문서" class="icon-star"></span>
-                                <div>
-                                    <img src="/imgs/notice/notice.png" alt="이미지" width="20px" height="20px"
-                                         style=" margin-bottom :-3px; margin-right: -3px" />
-                                    <a href="" class="article-list-link">&nbspMilestone을 사칭하는 메시지, 조심하세요!</a>
-                                </div>
-                            </li>
-
-                            <li class="article-list-item">
-                                <div>
-                                    <img src="/imgs/notice/notice.png" alt="이미지" width="20px" height="20px"
-                                         style=" margin-bottom :-3px; margin-right: -3px" />
-                                    <a href="" class="article-list-link">&nbspMilestone 메시지 알림 보관 기간 변경됩니다.</a>
-                                </div>
-                            </li>
-
-                        </ul>
+                        <section class="section" style="padding-top: 30px;">
+                            <h3 class="section-tree-title">
+                                <a href="">전체공지</a>
+                            </h3>
 
 
-                    </section>
 
-                    <a tabindex="0" class="see-all-sections-trigger" aria-hidden="true"
-                       id="see-all-sections-trigger" title="모든 섹션 보기…">모든 섹션 보기… </a>
+                            <!--==========공지사항 목록===========-->
+                           <ul class="article-list">
 
+                            </ul>
+
+
+                        </section>
+
+                    </div>
                 </div>
             </div>
+
+            <!-- 페이지 버튼 전체 -->
+            <div class="paging-number-box">
+                <div class="paging-number">
+                    <div class="paging-number-flex">
+                    </div>
+                </div>
+            </div>
+
+
         </div>
     </div>
 </main>
+
 
 <!-- ================================================================================================================ -->
 <footer th:replace="/fix/footer.html :: footer"></footer>
@@ -125,5 +78,140 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script src="/js/fix/header.js"></script>
+
+<script th:inline="javascript">
+    globalThis.page = 0;
+
+    let $pagingBtnFlex = $('.paging-number-flex');
+    let pageInfo;
+
+    /* =================================처음 뿌리기================================*/
+    noticeShow();
+    function noticeShow() {
+        getNoticeList1({
+            page: globalThis.page
+        }, getNoticeList)
+    }
+    /*====================공지사항 제목 클릭시 상세페이지 이동=====================*/
+
+    $(".article-list").on("click", ".article-list-link", function (){
+        let noticeId = $(this).find("#noticeId").html();
+        location.href = "/notice/noticeList?noticeId=" + noticeId;
+    })
+
+    //=========================처음 들어갈때 전체 페이지============================
+    function getNoticeList(noticeResp) {
+        let text = "";
+        pageInfo = noticeResp.arNoticeDTO;
+        noticeResp.arNoticeDTO.content.forEach(notice => {
+
+            text += `<li class="article-list-item article-promoted">`
+            text += `<span data-title="승격된 문서" class="icon-star">`
+            text += `</span>`
+
+            text += `<div class="noticeBox">`
+
+            text += `<img src="/imgs/notice/notice.png" class="noticeImgs" alt="이미지" width="20px" height="20px"/>`
+
+            text += `<div style="padding-right:5px">`
+            text += `</div>`
+
+            text += `<div class="article-list-link" style="cursor: pointer">` + notice.noticeTitle
+            text += `<div style="display : none" id="noticeId">` + notice.noticeId + `</div>`
+            text += `</div>`
+
+            text += `</div>`
+
+            text += `</li>`
+
+        })
+        $(".article-list").html(text)
+        pageingBtn();
+    }
+
+    function getNoticeList1(param, callback, error) {
+        let queryString = "/" + param.page || 1;
+        $.ajax({
+            url: "/noticeRest/listAsc" + queryString,
+            type: "get",
+            success: function (noticeResp, status, xhr) {
+                if (callback) {
+                    callback(noticeResp)
+                }
+            },
+            error: function (xhr, status, err) {
+                if (error) {
+                    error(err);
+                }
+            }
+        });
+    }
+
+    /* ====================================페이징 처리====================================== */
+
+    function pageingBtn() {
+        let text = "";
+        let nowPage = pageInfo.pageable.pageNumber + 1;
+        let endPage = Math.ceil(nowPage / 5) * 5;
+        let startPage = endPage - 5 + 1;
+        // <!--페이징 처리-->
+        // 이전
+        if (startPage > 1) {
+            text += `<div class="prev-page page-number-padding">`
+            text += `<a class="page-number-link" href="` + (startPage - 2) + `">`
+            text += `<div class="prev-page-prevArrow"></div>`
+            text += `</a>`
+            text += `</div>`
+        } else {
+            text += `<div class="prev-page page-number-padding">`
+            text += `</div>`
+        }
+        // 페이지 버튼
+
+        for (let i = startPage; i < startPage + 5 && i <= pageInfo.totalPages; i++) {
+            text += `<div class="page-number-padding">`
+            if (i == nowPage) {
+                text += `<div class="page-number-link" style="color:#303441">` + i + `</div>`
+            } else {
+                text += `<a class="page-number-link" href="` + (i - 1) + `">` + i + `</a>`
+            }
+            text += `</div>`
+        }
+        //이후
+        if (4 < endPage && endPage < pageInfo.totalPages) {
+            text += `<div class="next-page page-number-padding">`
+            text += `<a class="page-number-link" href="` + (endPage) + `">`
+            text += `<div class="prev-page-nextArrow"></div>`
+            text += `</a>`
+            text += `</div>`
+            text += `</div>`
+            text += `</div>`
+        }
+        $pagingBtnFlex.html(text);
+    }
+
+    $pagingBtnFlex.on('click', ".page-number-link", function (e) {
+        e.preventDefault();
+        window.scrollTo({top: 0})
+        globalThis.page = $(this).attr("href");
+        noticeShow();
+    })
+
+    /*  페이지 이동  */
+    $pagingBtnFlex.on('mouseover', "a.page-number-link", function () {
+        $(this).css('background-color', '#f4f6fa');
+        // $(this).css('color', '#009ef7');
+    })
+
+    $pagingBtnFlex.on('mouseout', "a.page-number-link", function () {
+        $(this).css('background-color', '#fff');
+        $(this).css('color', '#9a9ba7');
+    })
+
+    window.onresize = function () {
+        document.location.reload();
+    };
+
+</script>
 
 </html>

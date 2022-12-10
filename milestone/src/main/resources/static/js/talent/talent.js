@@ -164,7 +164,6 @@ $(".location2").click(function () {
             }
         });
     }
-    console.log("이거 save인데 머냐? :" + save);
 })
 
 
@@ -176,7 +175,6 @@ let body = $('body');
 let $modalBtn = $('.modalBtn');
 let modalWrap = document.querySelector('.modalWrap');
 
-let hungry = [];
 
 $cancels.on('click', function () {
     $modalWrap.show();
@@ -196,7 +194,6 @@ document.addEventListener('click', function (e) {
         $modalWrap.hide();
         body.css('overflow', 'auto');
     }
-      // console.log(e.target);
 })
 
 /*========================================================*/
@@ -662,8 +659,13 @@ $(".dropLoc").on('click', function () {
             }
             break;
     }
-    console.log("여기가 지역 저장한 곳2 : " +saveLocal); /*======================================================================================*/
+    console.log("여기가 지역 저장한 곳2 : " +saveLocal);
 });
+/*========================인풋 데이트 타입 오늘전날짜 클릭 못하게============================*/
+var now_utc = Date.now()
+var timeOff = new Date().getTimezoneOffset() * 60000;
+var today = new Date(now_utc - timeOff).toISOString().split("T")[0];
+document.getElementById("dateTime").setAttribute("min", today);
 
 /*====================================검색창 제목 입력시==================================*/
 
@@ -677,7 +679,6 @@ const $talentClick = $('.css-7kp13n');
 function getTalentList(param, callback, error) {
 
         console.log("파람 값 : " + JSON.stringify(param))
-
     const list = [];
 
     list.push(param.talentCategory);
@@ -688,7 +689,6 @@ function getTalentList(param, callback, error) {
     for (let i = 0; i < talentPlaceList.length; i++){
         talentPlaceVal += talentPlaceList[i];
     }
-
     list.push(talentPlaceVal);
     list.push(param.talentTitle);
 
