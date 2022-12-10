@@ -36,6 +36,6 @@ public class KakaoController {
         log.info("logout");
         kakaoService.logoutKakao((String) session.getAttribute("token"));
         session.invalidate();
-        return new RedirectView("/join/logout");
+        return new RedirectView("/login/login");
     }
 }

@@ -46,7 +46,6 @@ public class LoginController {
         log.info("이메일: " + loginDTO.getUserEmail());
         log.info("pw: " + loginDTO.getUserPassword());
         User loginMember = userService.login(loginDTO.getUserEmail(), loginDTO.getUserPassword());
-        log.info("유저 : " + loginMember);
 
         if (loginMember == null) {
             bindingResult.reject("loginFail", "아이디 또는 비밀번호가 맞지 않습니다.");
@@ -61,6 +60,7 @@ public class LoginController {
         // 세션에 로그인 회원 정보 보관
         session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
 
+        log.info("유저 : " + loginMember.getUserEmail());
         log.info("성공");
         log.info("sessionId={}", session.getId());
         log.info("getMaxInactiveInterval={}", session.getMaxInactiveInterval());
@@ -82,8 +82,10 @@ public class LoginController {
 
         session = request.getSession(false);
         if (session != null) {
+            log.info("세션 날림");
             session.invalidate();   // 세션 날림
         }
+        log.info("sessionId={}", session.getId());
         log.info("로그아웃 성공");
         return "redirect:/login/login";
     }
