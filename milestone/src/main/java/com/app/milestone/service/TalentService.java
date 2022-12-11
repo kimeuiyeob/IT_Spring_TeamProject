@@ -1,10 +1,12 @@
 package com.app.milestone.service;
 
+import com.app.milestone.domain.Ranking;
 import com.app.milestone.domain.Search;
 import com.app.milestone.domain.TalentDTO;
 import com.app.milestone.entity.Talent;
 import com.app.milestone.repository.PeopleRepository;
 import com.app.milestone.repository.TalentRepository;
+import com.querydsl.core.Tuple;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -74,5 +76,21 @@ public class TalentService {
     }
 
     /*=================================================================*/
+
+    //    ===================================기부 랭킹====================================
+    //    재능기부 횟수 랭킹
+    public List<Ranking> donationTalentRanking() {
+        List<Ranking> arRanking = new ArrayList<>();
+        List<Tuple> rankingInfo = talentRepository.sortBytalentRank();
+        for (Tuple tuple : rankingInfo) {
+            Ranking ranking = new Ranking();
+            String userName = peopleRepository.findById(tuple.get(1, Long.TYPE)).get().getUserName();
+            ranking.setUserName(userName);
+            ranking.setUserId(tuple.get(1, Long.TYPE));
+            ranking.setRankingItem(tuple.get(0, Long.TYPE));
+            arRanking.add(ranking);
+        }
+        return arRanking;
+    }
 
 }

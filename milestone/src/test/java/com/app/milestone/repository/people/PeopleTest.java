@@ -209,17 +209,17 @@ public class PeopleTest {
 //    }
 
     //  재능 기부 횟수 랭킹 정보
-    @Test
-    public void talentRankingTest() {
-        List<Tuple> tests = peopleRepository.sortBytalentRank();
-        String text = "";
-        for (Tuple tuple : tests) {
-            People people = peopleRepository.findById(tuple.get(1, Long.TYPE)).get();
-//            log.info("재능기부횟수 : " + tuple.get(0, Long.class) + " 기부자 : " + people.getUserName());
-            text += "\n재능기부횟수 : " + tuple.get(0, Long.class) + " 기부자 : " + people.getUserName();
-        }
-        log.info(text);
-    }
+//    @Test
+//    public void talentRankingTest() {
+//        List<Tuple> tests = peopleRepository.sortBytalentRank();
+//        String text = "";
+//        for (Tuple tuple : tests) {
+//            People people = peopleRepository.findById(tuple.get(1, Long.TYPE)).get();
+////            log.info("재능기부횟수 : " + tuple.get(0, Long.class) + " 기부자 : " + people.getUserName());
+//            text += "\n재능기부횟수 : " + tuple.get(0, Long.class) + " 기부자 : " + people.getUserName();
+//        }
+//        log.info(text);
+//    }
 
     //    =====================================================================================================================
     @Test
