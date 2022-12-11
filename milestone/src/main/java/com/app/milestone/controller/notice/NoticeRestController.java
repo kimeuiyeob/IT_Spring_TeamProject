@@ -32,7 +32,6 @@ public class NoticeRestController {
         return noticeResp;
     }
 
-    /*========================의엽이가보고았는거=============================================*/
     @GetMapping(value= {"/listAsc/{page}", "/listAsc/{page}/{noticeTitle}"})
     public NoticeResp userListPeopleAsc(@PathVariable("page") Integer page, Search search, Model model) {
 
@@ -46,8 +45,6 @@ public class NoticeRestController {
         noticeResp.setTotal(noticeService.noticeListCount(pageable, search));
         return noticeResp;
     }
-    /*===================================================================================*/
-
 
     @RequestMapping("/noticeDelete")
     public void deleteNotice(HttpServletRequest request){

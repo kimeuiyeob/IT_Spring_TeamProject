@@ -26,28 +26,33 @@
     <div class="container">
         <div class="article-container" id="article-container">
 
-                        <section class="article-sidebar">
+            <section class="article-sidebar">
 
-                            <section class="section-articles collapsible-sidebar">
-                                <h3 class="collapsible-sidebar-title sidenav-title" style="padding-left:10px; cursor: default">이 섹션의 문서</h3>
-                                <ul>
+                <section class="section-articles collapsible-sidebar">
+                    <h3 class="collapsible-sidebar-title sidenav-title" style="padding-left:10px; color: #4c4848 ; cursor: default">최근 섹션의
+                        문서</h3>
+                    <ul>
 
-                                    <th:block th:each="notices : ${noticeAll}">
-                                    <li>
-                                        <a href="" class="sidenav-item current-article" style="height: 65px">
-                                            <p class="sidenav-item-text"  th:text="*{notices.noticeTitle}"></p> <!-- 해당 링크 걸기 -->
-                                        </a>
-                                    </li>
-                                    </th:block>
+                        <th:block th:each="notices : ${noticeAll}">
+                            <li>
+                                <div class="sidenav-item current-article" th:classappend="${notices.noticeId}" style="height: 65px">
+                                    <div class="findNotice" style="cursor: pointer">
+                                        <p class="sidenav-item-text" th:text="*{notices.noticeTitle}"></p>
+                                        <!-- 해당 링크 걸기 -->
+                                        <p class="noticeId" style="display:none " th:text="*{notices.noticeId}"></p>
+                                    </div>
+                                </div>
+                            </li>
+                        </th:block>
 
 
-                                </ul>
+                    </ul>
 
-                                <div style="padding-top: 10px"></div>
-                                  <a style="color: #666666 ; font-size: 15px;" href="../notice/notice" class="article-sidebar-item">더보기</a>
+                    <div style="padding-top: 10px"></div>
+                    <a style="color: #666666 ; font-size: 15px;" href="../notice/notice" class="article-sidebar-item">더보기</a>
 
-                            </section>
-                        </section>
+                </section>
+            </section>
 
             <article class="article">
 
@@ -75,4 +80,23 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script src="/js/fix/header.js"></script>
+
+<script th:inline="javascript">
+
+    let url = decodeURI(window.location.href).split("=");
+    let noticeId = url[url.length - 1];
+
+
+    $(".sidenav-item").removeClass("selected");
+    $(".sidenav-item." + noticeId).addClass("selected");
+
+
+    $(".findNotice").on("click", function () {
+        let noticeId = $(this).find(".noticeId").html();
+        location.href = "/notice/noticeList?noticeId=" + noticeId;
+    })
+
+
+</script>
+
 </html>
