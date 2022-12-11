@@ -19,6 +19,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 @Service
@@ -32,7 +33,7 @@ public class PeopleService {
     public void createPeople(PeopleDTO peopleDTO) {
         People people = peopleDTO.toEntity();
         peopleDTO.setUserEmail(people.getUserEmail());
-        peopleDTO.setUserPassword(people.getUserPassword());
+        peopleDTO.setUserPassword(Base64.getEncoder().encodeToString(people.getUserPassword().getBytes()));
         peopleDTO.setUserName(people.getUserName());
         peopleDTO.setPeopleNickname(people.getPeopleNickname());
         peopleDTO.setUserPhoneNumber(people.getUserPhoneNumber());

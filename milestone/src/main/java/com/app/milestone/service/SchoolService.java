@@ -18,6 +18,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 @Service
@@ -31,6 +32,20 @@ public class SchoolService {
     //    보육원 회원가입
     public Long createSchool(SchoolDTO schoolDTO) {
         School school = schoolDTO.toEntity();
+        schoolDTO.setUserEmail(school.getUserEmail());
+        schoolDTO.setUserPassword(Base64.getEncoder().encodeToString(school.getUserPassword().getBytes()));
+        schoolDTO.setUserName(school.getUserName());
+        schoolDTO.setSchoolName(school.getSchoolName());
+        schoolDTO.setSchoolZipcode("13405");
+        schoolDTO.setSchoolAddress("아튼빌 아파트");
+        schoolDTO.setSchoolAddressDetail("1009동 1404호");
+        schoolDTO.setSchoolTeachers(school.getSchoolTeachers());
+        schoolDTO.setSchoolKids(school.getSchoolKids());
+        schoolDTO.setSchoolBudget(school.getSchoolBudget());
+        schoolDTO.setSchoolBank(school.getSchoolBank());
+        schoolDTO.setSchoolAccount(school.getSchoolAccount());
+        schoolDTO.setUserPhoneNumber(school.getUserPhoneNumber());
+        schoolDTO.setSchoolPhoneNumber(school.getSchoolPhoneNumber());
         schoolRepository.save(school);
         return school.getUserId();
     }
