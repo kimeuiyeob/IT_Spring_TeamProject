@@ -37,7 +37,8 @@
                                   margin-top: -15px;">아이들에게 사랑을 나누세요.</h2>
 
 
-                    <input class="introduceButton" type="button" value="Milestone 이용하기">
+                    <input class="introduceButton" type="button" value="Milestone 이용하기"
+                           onClick="location.href='../main/main'">
 
 
                 </div>
@@ -84,8 +85,7 @@
                 <div class="col" style="display: inline-block;">
                     <p style="text-align:center; padding-top: 35px; font-weight: 550; color: #303441;">개인 회원수</p>
                     <div style="margin-top: -45px;">
-                        <p class="count-num" data-count="4523" style="display: inline-block;">
-                            <!-- data-count에 값넣으면됩니다 -->
+                        <p class="count-num"  id="people" data-count = "" style="display: inline-block;">
                         </p>
                         <p style="display: inline-block; font-size: 40px;
                     font-weight: 500;">명+</p>
@@ -94,8 +94,8 @@
                 <div class="col">
                     <p style="text-align:center; padding-top: 35px; font-weight: 550; color: #303441;">보육원 회원수</p>
                     <div style="margin-top: -45px;">
-                        <p class="count-num" data-count="2324" style="display: inline-block;">
-                            <!-- data-count에 값넣으면됩니다 -->
+                        <p class="count-num" id="school" data-count = "" style="display: inline-block;">
+                        </p>
                         <p style="display: inline-block; font-size: 40px;
                         font-weight: 500;">명+</p>
                     </div>
@@ -103,9 +103,9 @@
                 <div class="col">
                     <p style="text-align:center; padding-top: 35px; font-weight: 550; color: #303441;">누적 기부 횟수</p>
                     <div style="margin-top: -45px;">
-                        <p class="count-num" data-count="64235" style="display: inline-block;">
-                            <!-- data-count에 값넣으면됩니다 -->
+                        <p class="count-num" data-count = "" style="display: inline-block;">
                         <p style="display: inline-block; font-size: 40px;
+
                         font-weight: 500;">건+</p>
                     </div>
                 </div>
@@ -130,7 +130,8 @@
                     </h4>
 
 
-                    <input class="introduceButton" type="button" value="보육원 목록 이동하기">
+                    <input class="introduceButton" type="button" value="보육원 목록 이동하기"
+                           onClick="location.href='../school/list'">
 
 
                 </div>
@@ -160,8 +161,8 @@
                     <div data-aos="fade-down">
                         <div class="video">
                             <iframe style="border-radius: 8px;" width="560" height="400"
-                                    src="https://www.youtube.com/embed/Ko8-Uxdq9hA" title="YouTube video player"
-                                    frameborder="0"
+                                    src="https://www.youtube.com/embed/D9TuERn7Uu4"
+                                    title="YouTube video player" frameborder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                     allowfullscreen></iframe>
                         </div>
@@ -171,13 +172,13 @@
 
             <div class="helpSchools">
                 <div data-aos="fade-left">
-                    <h1 style="color: #303441; font-size: 35px; margin-top: -10px;">도움이 필요한 아이들<br>따뜻한 나눔이 필요해요.
+                    <h1 style="color: #303441; font-size: 35px; margin-top: -10px;">여러분의 멋진 재능을<br>아이들에게 나눠주세요.
                     </h1>
-                    <h4 style="color: #303441;  margin-top: -13px; padding-bottom: 50px;">사랑스런 아이들이 도움이
-                        필요해요.<br>아이들이
-                        건강하게 자랄 수 있도록 계속해서<br>많은 관심 부탁드립니다!</h4>
+                    <h4 style="color: #303441;  margin-top: -13px; padding-bottom: 50px;">사랑스런 아이들이 배움이
+                        필요해요.<br>아이들이 멋있게 자랄 수 있도록 계속해서<br>많은 관심 부탁드립니다!</h4>
 
-                    <input class="introduceButton" type="button" value="도움이 필요한 보육원">
+                    <input class="introduceButton" type="button" value="재능 목록 이동하기"
+                           onClick="location.href='../talent/talent'">
 
                 </div>
             </div>
@@ -282,10 +283,17 @@
 
     /* ================================카운트 업===================================== */
 
-    $('.count-num').each(function () {
-        var $this = $(this),
-            countTo = $this.attr('data-count');
+    let test = [[${people}]]
+    let test2 = [[${school}]]
+    let test3 = [[${donation}]]
 
+    let $countNum = $('.count-num');
+    $countNum.eq(0).attr("data-count",test)
+    $countNum.eq(1).attr("data-count",test2)
+    $countNum.eq(2).attr("data-count",test3)
+
+    $('.count-num').each(function () {
+        var $this = $(this), countTo = $this.attr("data-count")
         $({countNum: $this.text()}).animate({
                 countNum: countTo
             },

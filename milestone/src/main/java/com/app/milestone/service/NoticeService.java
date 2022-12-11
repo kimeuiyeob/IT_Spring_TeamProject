@@ -6,6 +6,7 @@ import com.app.milestone.domain.Search;
 import com.app.milestone.entity.Notice;
 import com.app.milestone.repository.NoticeRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -19,6 +20,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class NoticeService {
     private final NoticeRepository noticeRepository;
 
@@ -36,7 +38,14 @@ public class NoticeService {
 
         return notices;
     }
+    /*============================================================*/
+    //Notice리스트 가져오기
+    public List<NoticeDTO> selectNoticeAll() {
+        List<NoticeDTO> list = noticeRepository.selectNoticeAll();
+        return list;
+    }
 
+    /*============================================================*/
     //Notice공지사항 글 가져오기
     public Page<NoticeDTO> noticeListBySearchAsc(Integer page, Search search) {
         if (page == null) page = 0;

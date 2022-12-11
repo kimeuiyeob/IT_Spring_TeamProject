@@ -466,7 +466,7 @@ ul {
 }
 
 .sidenav-title {
-    font-size: 15px;
+    font-size: 16px;
     position: relative;
 
 }
@@ -496,9 +496,7 @@ ul {
 .wysiwyg-color-orange80 {
     color : #ffc266;
 }
-
 /*===================================*/
-
 .article-list-link {
     word-break: break-all;
     overflow: hidden;
@@ -508,6 +506,13 @@ ul {
     -webkit-box-orient: vertical;
 }
 
-
+.sidenav-item-text {
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    height: 55px;
+}
 
 

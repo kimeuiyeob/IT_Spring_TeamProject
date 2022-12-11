@@ -575,8 +575,7 @@
             <div class="col" style="display: inline-block;">
                 <p style="text-align:center; padding-top: 35px;color: #9a9ba7">개인 회원수</p>
                 <div style="margin-top: -45px;">
-                    <p class="count-num" data-count="4523" style="display: inline-block; color:white">
-                        <!-- data-count에 값넣으면됩니다 -->
+                    <p class="count-num" id="people" style="display: inline-block; color:white">
                     </p>
                     <p style="display: inline-block; font-size: 40px; color: white;
                     font-weight: 500;">명+</p>
@@ -585,8 +584,7 @@
             <div class="col">
                 <p style="text-align:center; padding-top: 35px;color: #9a9ba7">보육원 회원수</p>
                 <div style="margin-top: -45px;">
-                    <p class="count-num" data-count="324" style="display: inline-block; color:white">
-                        <!-- data-count에 값넣으면됩니다 -->
+                    <p class="count-num" id="school" style="display: inline-block; color:white">
                     <p style="display: inline-block; font-size: 40px; color: white;
                         font-weight: 500;">명+</p>
                 </div>
@@ -594,8 +592,7 @@
             <div class="col">
                 <p style="text-align:center; padding-top: 35px;color: #9a9ba7">누적 기부 횟수</p>
                 <div style="margin-top: -45px;">
-                    <p class="count-num" data-count="64235" style="display: inline-block; color:white">
-                        <!-- data-count에 값넣으면됩니다 -->
+                    <p class="count-num"  id="donation" style="display: inline-block; color:white">
                     <p style="display: inline-block; font-size: 40px; color: white;
                         font-weight: 500;">건+</p>
                 </div>
@@ -731,10 +728,17 @@
 
     /* ================================카운트 업===================================== */
 
-    $('.count-num').each(function () {
-        var $this = $(this),
-            countTo = $this.attr('data-count');
+    let test = [[${people}]]
+    let test2 = [[${school}]]
+    let test3 = [[${donation}]]
 
+    let $countNum = $('.count-num');
+    $countNum.eq(0).attr("data-count",test)
+    $countNum.eq(1).attr("data-count",test2)
+    $countNum.eq(2).attr("data-count",test3)
+
+    $('.count-num').each(function () {
+        var $this = $(this), countTo = $this.attr("data-count")
         $({countNum: $this.text()}).animate({
                 countNum: countTo
             },
@@ -749,7 +753,6 @@
                 }
             });
     });
-
     /* =========================화면============================================= */
 
     let observer = new IntersectionObserver((e) => {
