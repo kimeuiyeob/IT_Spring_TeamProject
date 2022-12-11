@@ -402,18 +402,21 @@
     //세션에 있다고 생각
     let sessionId;
 
-    if (modelSchoolDTO || modelPeopleDTO) {
-        $('.display-none').show();
-        if(modelPeopleDTO){
-            $(".nickName").text(modelPeopleDTO.peopleNickname);
-            sessionId = modelPeopleDTO.userId;
-        }
-        if (modelSchoolDTO) {
-            $(".nickName").text(modelSchoolDTO.schoolName);
-            $('.donate').hide();
-            sessionId = modelPeopleDTO.userId;
-        }
-    }
+    console.log(modelSchoolDTO)
+    console.log(modelPeopleDTO)
+
+    // if (modelSchoolDTO || modelPeopleDTO) {
+    //     $('.display-none').show();
+    //     if(modelPeopleDTO){
+    //         $(".nickName").text(modelPeopleDTO.peopleNickname);
+    //         sessionId = modelPeopleDTO.userId;
+    //     }
+    //     if (modelSchoolDTO) {
+    //         $(".nickName").text(modelSchoolDTO.schoolName);
+    //         $('.donate').hide();
+    //         sessionId = modelPeopleDTO.userId;
+    //     }
+    // }
 
     show();
 

@@ -38,6 +38,7 @@ public class LoginController {
     // 서블릿 HTTP 세션 사용
     @PostMapping("/login")
     public String login(@Valid @ModelAttribute("loginDTO") LoginDTO loginDTO, BindingResult bindingResult, HttpServletRequest request) {
+        userService.login(loginDTO.getUserEmail(), loginDTO.getUserPassword());
         log.info("로그인 컨트롤러");
         if (bindingResult.hasErrors()) {
             log.info("실패");
@@ -45,9 +46,10 @@ public class LoginController {
         }
         log.info("이메일: " + loginDTO.getUserEmail());
         log.info("pw: " + loginDTO.getUserPassword());
-        User loginMember = userService.login(loginDTO.getUserEmail(), loginDTO.getUserPassword());
 
-        if (loginMember == null) {
+        Long userId = userService.login(loginDTO.getUserEmail(), loginDTO.getUserPassword());
+
+        if (userId == null) {
             bindingResult.reject("loginFail", "아이디 또는 비밀번호가 맞지 않습니다.");
             log.info("아이디 비번 오류");
             return "login/login";
@@ -58,16 +60,16 @@ public class LoginController {
         // getSession() : 디폴트가 true, false는 세션이 없을 때 새로 만들지 않고 null을 반환
         HttpSession session = request.getSession();
         // 세션에 로그인 회원 정보 보관
-        session.setAttribute("userId", loginMember);
+        session.setAttribute("userId", userId);
 
-        log.info("유저 : " + loginMember.getUserEmail());
-        log.info("유저 : " + loginMember.getUserEmail());
-        log.info("성공");
-        log.info("sessionId={}", session.getId());
-        log.info("getMaxInactiveInterval={}", session.getMaxInactiveInterval());
-        log.info("creationTime={}", new Date(session.getCreationTime()));
-        log.info("lastAccessedTime={}", new Date(session.getLastAccessedTime()));
-        log.info("isNew={}", session.isNew());
+//        log.info("유저 : " + loginMember.getUserEmail());
+//        log.info("유저 : " + loginMember.getUserEmail());
+//        log.info("성공");
+//        log.info("sessionId={}", session.getId());
+//        log.info("getMaxInactiveInterval={}", session.getMaxInactiveInterval());
+//        log.info("creationTime={}", new Date(session.getCreationTime()));
+//        log.info("lastAccessedTime={}", new Date(session.getLastAccessedTime()));
+//        log.info("isNew={}", session.isNew());
         return "redirect:/main/main";
     }
 

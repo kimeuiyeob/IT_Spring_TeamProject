@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserCustomRepository {
-    public List<User> findByCreatedDate (Pageable pageable);
+    public List<User> findByCreatedDate(Pageable pageable);
 
     public User findByUserId(Long userId);
 
@@ -16,4 +16,6 @@ public interface UserCustomRepository {
     public List<User> findAll();
 
     public void clearStore();
+
+    public Long findByUserEmailAndUserPassword(String userEmail, String userPassword);
 }

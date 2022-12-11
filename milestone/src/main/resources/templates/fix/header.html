@@ -135,7 +135,7 @@
                     </ul>
                 </div>
             </div>
-            <form th:action="@{/login/login}" method="post">
+            <form th:action="@{/login/login}" method="get">
                 <button role="button" type="submit" color="default" id="loginBtn" class="button5 button3"
                         th:style="${session.loginMember == null ? 'display:block' : 'display:none'}">
                     <span class="button6 button3">로그인</span>

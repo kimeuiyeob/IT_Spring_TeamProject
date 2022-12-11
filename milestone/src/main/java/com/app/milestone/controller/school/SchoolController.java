@@ -34,9 +34,9 @@ public class SchoolController {
     @GetMapping("/list")
     public void list(HttpServletRequest request, Search search, Model model) {
         HttpSession session = request.getSession();
-        User user = (User)session.getAttribute("loginMember");
+        User user = (User) session.getAttribute("loginMember");
         Long userId = null;
-        if(user != null){
+        if (user != null) {
             userId = user.getUserId();
         }
         model.addAttribute("userId", userId);
@@ -47,13 +47,14 @@ public class SchoolController {
     @GetMapping("/read")
     public void read(HttpServletRequest request, Long userId, Model model) {
         HttpSession session = request.getSession();
-        User user = (User)session.getAttribute("loginMember");
+        Long sessionId = (Long)session.getAttribute("userId");
+        log.info("===================="+sessionId);
         PeopleDTO peopleDTO = null;
         SchoolDTO schoolDTO = null;
-        if(user != null){
-            peopleDTO = peopleService.onesInfo(user.getUserId());
-            if(peopleDTO == null){
-                schoolDTO = schoolService.schoolInfo(user.getUserId());
+        if (sessionId != null) {
+            peopleDTO = peopleService.onesInfo(sessionId);
+            if (peopleDTO == null) {
+                schoolDTO = schoolService.schoolInfo(sessionId);
             }
         }
         model.addAttribute("peopleDTO", peopleDTO);
