@@ -181,30 +181,32 @@ public class PeopleTest {
     //    =================================실제 기부===================================
 
     //    개인 기부금 랭킹 정보
-    @Test
-    public void moneyRankingTest() {
-        List<Tuple> tests = peopleRepository.sortByMoneyCash();
-        String text = "";
-
-        for (Tuple tuple : tests) {
-            People people = peopleRepository.findById(tuple.get(1, Long.TYPE)).get();
-            text += "\n기부금 : " + tuple.get(0, Long.class) + " 기부자 : " + people.getUserName();
-        }
-        log.info(text);
-    }
+//    MoneyTest로 옮길 예정
+//    @Test
+//    public void moneyRankingTest() {
+//        List<Tuple> tests = peopleRepository.sortByMoneyCash();
+//        String text = "";
+//
+//        for (Tuple tuple : tests) {
+//            People people = peopleRepository.findById(tuple.get(1, Long.TYPE)).get();
+//            text += "\n기부금 : " + tuple.get(0, Long.class) + " 기부자 : " + people.getUserName();
+//        }
+//        log.info(text);
+//    }
 
     //    개인 보육원 방문기부 횟수 랭킹 정보
-    @Test
-    public void visitRankingTest() {
-        List<Tuple> tests = peopleRepository.sortByVisitRank();
-        String text = "";
-
-        for (Tuple tuple : tests) {
-            People people = peopleRepository.findById(tuple.get(1, Long.TYPE)).get();
-            text += "\n방문횟수 : " + tuple.get(0, Long.class) + " 기부자 : " + people.getUserName();
-        }
-        log.info(text);
-    }
+//    ServiceTest로 옮길 예정
+//    @Test
+//    public void visitRankingTest() {
+//        List<Tuple> tests = peopleRepository.sortByVisitRank();
+//        String text = "";
+//
+//        for (Tuple tuple : tests) {
+//            People people = peopleRepository.findById(tuple.get(1, Long.TYPE)).get();
+//            text += "\n방문횟수 : " + tuple.get(0, Long.class) + " 기부자 : " + people.getUserName();
+//        }
+//        log.info(text);
+//    }
 
     //  재능 기부 횟수 랭킹 정보
     @Test

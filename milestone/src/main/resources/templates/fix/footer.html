@@ -77,12 +77,12 @@
                 <ul class="footer4">
                     <li class="footer4">
                         <p class="nav-text6" id="mobile-nav-text6-9">
-                            <a color="inherit" target="_self" href="#" class="footer-text1">공지사항</a>
+                            <a color="inherit" target="_self" th:href="@{/notice/notice}" class="footer-text1">공지사항</a>
                         </p>
                     </li>
                     <li class="footer4">
                         <p class="nav-text6" id="mobile-nav-text6-10">
-                            <a color="inherit" target="_self" href="#" class="footer-text1">자주 묻는 질문</a>
+                            <a color="inherit" target="_self" th:href = "@{/faq/faq}" class="footer-text1">자주 묻는 질문</a>
                         </p>
                     </li>
                     <li class="footer4">
@@ -95,11 +95,6 @@
                             <a color="inherit" href="#" target="_blank" class="footer-text1">
                                 <b>개인정보처리방침</b>
                             </a>
-                        </p>
-                    </li>
-                    <li class="footer4">
-                        <p class="nav-text6" id="mobile-nav-text6-13">
-                            <a color="inherit" target="_self" href="#" class="footer-text1">전문가 센터</a>
                         </p>
                     </li>
                 </ul>
@@ -119,7 +114,7 @@
             개인정보관리책임자 : 황지수
             <span class="footer-text2"></span>
             사업자등록번호 : 012-34-56789
-            <a role="link" color="default" href="#" target="_blank" class="footer9">
+            <a role="link" color="default" th:href="@{/admin/user}" target="_blank" class="footer9">
                 <span class="footer-text3">관리자 모드</span>
             </a>
             <br>통신판매업신고 : 2018-서울서초-2134

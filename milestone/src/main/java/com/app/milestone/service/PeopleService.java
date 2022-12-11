@@ -69,36 +69,7 @@ public class PeopleService {
     }
 
     //    ===================================기부 랭킹====================================
-    //    기부금 랭킹
-    public List<Ranking> donationMoneyRanking() {
-        List<Ranking> arRanking = new ArrayList<>();
-        List<Tuple> rankingInfo = peopleRepository.sortByMoneyCash();
-        for (Tuple tuple : rankingInfo) {
-            Ranking ranking = new Ranking();
-            String userName = peopleRepository.findById(tuple.get(1, Long.TYPE)).get().getUserName();
-            ranking.setUserName(userName);
-            ranking.setUserId(tuple.get(1, Long.TYPE));
-            ranking.setRankingItem(tuple.get(0, Long.TYPE));
-            arRanking.add(ranking);
-        }
-        return arRanking;
-    }
-
-    //    방문횟수 랭킹
-    public List<Ranking> donationVisitRanking() {
-        List<Ranking> arRanking = new ArrayList<>();
-        List<Tuple> rankingInfo = peopleRepository.sortByVisitRank();
-        for (Tuple tuple : rankingInfo) {
-            Ranking ranking = new Ranking();
-            String userName = peopleRepository.findById(tuple.get(1, Long.TYPE)).get().getUserName();
-            ranking.setUserName(userName);
-            ranking.setUserId(tuple.get(1, Long.TYPE));
-            ranking.setRankingItem(tuple.get(0, Long.TYPE));
-            arRanking.add(ranking);
-        }
-        return arRanking;
-    }
-
+//    TalentService로 옮길 예정
     //    재능기부 횟수 랭킹
     public List<Ranking> donationTalentRanking() {
         List<Ranking> arRanking = new ArrayList<>();

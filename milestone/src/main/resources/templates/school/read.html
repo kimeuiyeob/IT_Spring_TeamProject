@@ -416,15 +416,9 @@
     }
 
     show();
-    showReply();
-    showLikeCount();
-    getLikeSchoolList(clickLikeBtn);
-    // likeSchool();
 
     //보육원 정보
-    /*아마 schoolResp로 바뀔 예정*/
     function getInfo(schoolDTO) {
-        // console.log(schoolDTO);
         $('.schoolName').find('h1').html(schoolDTO.schoolName);
         $('.smallCategory').html(schoolDTO.schoolAddress.substring(0, 2));
         $('.schoolTitle').html(schoolDTO.schoolTitle);
@@ -442,6 +436,7 @@
     function getRecent(recentDonations) {
         let text = "";
         let count = 0;
+        //최근 기부 유무
         if (recentDonations.length == 0) {
             $('#userTable').hide();
             $('#userTable2').hide();
@@ -451,6 +446,7 @@
             $('#userTable2').show();
             $('.noneDonation').hide();
         }
+        //
         recentDonations.forEach(school => {
             if (count == 6) return;
             count++;
@@ -461,10 +457,8 @@
             text += `<img src="/imgs/myPage/normalProfile.png">`
             text += `</div>`
             text += `</th>`
-            // <!-- 닉네임 -->
             text += `<th class="userTr userNickname">` + school.peopleNickname + `</th>`
-            // <!-- 기부금액 -->
-            text += `<th class="userTr donation"><span>` + school.moneyCash + `</span>원</th>`
+            text += `<th class="userTr donation"><span>` + school.moneyCash.toLocaleString('ko-KR') + `</span>원</th>`
             text += `</tr>`
         })
         $('#userTable').html(text);
@@ -478,12 +472,9 @@
             if (count == 5) return;
             count++;
             text += `<tr class="oneUser">`
-            // 순위
             text += `<th>` + count + `</th>`
-            // 닉네임
             text += `<th class="userTr userNickname">` + school.peopleNickname + `</th>`
-            // 금액
-            text += `<th class="userTr donation"><span class="amount">` + school.moneyCash + `</span>원</th>`
+            text += `<th class="userTr donation"><span class="amount">` + school.moneyCash.toLocaleString('ko-KR') + `</span>원</th>`
             text += `</tr>`
         })
         $('#userTable2>tbody').html(text);
@@ -504,24 +495,6 @@
     //좋아요 개수
     function likeCount(likeCount) {
         $('#zzimCount').html(likeCount);
-    }
-
-    function showLikeCount() {
-        getLikeCount($('.userId').val(), likeCount)
-    }
-
-    //show!!
-    function show() {
-        getRanking1({
-            userId: $('.userId').val()
-        }, getRanking)
-        getRecent1({
-            userId: $('.userId').val()
-        }, getRecent);
-        getInfo1({
-            userId: $('.userId').val()
-        }, getInfo);
-
     }
 
     //==========================댓글=============================
@@ -662,5 +635,21 @@
         })
     })
 
+    //  ======================페이지 이동 후 정보 뿌림=================
+    //show!!
+    function show() {
+        getRanking1({
+            userId: $('.userId').val()
+        }, getRanking)
+        getRecent1({
+            userId: $('.userId').val()
+        }, getRecent);
+        getInfo1({
+            userId: $('.userId').val()
+        }, getInfo);
+        showReply;
+        getLikeCount($('.userId').val(), likeCount);
+        getLikeSchoolList(clickLikeBtn);
+    }
 </script>
 </html>

@@ -86,8 +86,10 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
         ))
                 .where(
                         schoolNameContaining(search.getSchoolName()),
-                        schoolAddressContaining0(search.getSchoolAddress())
+                        schoolAddressContaining(search.getSchoolAddress())
                 ).from(school)
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
                 .orderBy(school.createdDate.desc())
                 .fetch();
     }
@@ -129,11 +131,9 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
                 .where(
 //                        보육원 이름 검색
                         schoolNameContaining(search.getSchoolName()),
-                        schoolAddressContaining0(search.getSchoolAddress())
+                        schoolAddressContaining(search.getSchoolAddress())
                 )
                 .orderBy(school.createdDate.asc())
-//                .offset(pageable.getOffset())
-//                .limit(pageable.getPageSize())
                 .fetchOne();
     }
 
@@ -148,7 +148,7 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
     }
 
     //    지역검색
-    private BooleanBuilder schoolAddressContaining0(List<String> schoolAddresses) {
+    private BooleanBuilder schoolAddressContaining(List<String> schoolAddresses) {
         if (schoolAddresses.get(0) == null) {
             return null;
         }

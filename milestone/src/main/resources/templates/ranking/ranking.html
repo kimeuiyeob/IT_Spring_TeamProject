@@ -46,10 +46,11 @@
                             </span>
                                 <div class="css-1okqk0z eegfgsa1">
                                     <!--총기부금액-->
-                                    <span class="css-r4d2us eegfgsa2" th:text="*{rankingItem}">291,331,150원</span>
+                                    <span class="css-r4d2us eegfgsa2"
+                                          th:text="*{#numbers.formatInteger(rankingItem, 1, 'COMMA') + '원'}"></span>
                                     <div class="css-65gs3l eegfgsa3">
                                         <!--닉네임-->
-                                        <span class="css-1raaqrb eegfgsa4" th:text="*{peopleNickname}">민성이는 바보</span>
+                                        <span class="css-1raaqrb eegfgsa4" th:text="*{peopleNickname}"></span>
                                     </div>
                                 </div>
                                 <div href="" class="css-65gs3l eegfgsa3">
@@ -75,9 +76,11 @@
                                          th:if="${i == 4}">
                                 </span>
                                 <div class="css-1okqk0z eegfgsa1">
-                                    <span class="css-1w82quq eegfgsa2" th:text="*{rankingItem}">500원</span><!--총기부금액-->
+                                    <span class="css-1w82quq eegfgsa2"
+                                          th:text="*{#numbers.formatInteger(rankingItem, 1, 'COMMA') + '원'}"></span>
+                                    <!--총기부금액-->
                                     <div href="" class="css-65gs3l eegfgsa3">
-                                        <span class="css-1raaqrb eegfgsa4" th:text="*{peopleNickname}">나는야 킹왕짱 김의엽</span>
+                                        <span class="css-1raaqrb eegfgsa4" th:text="*{peopleNickname}"></span>
                                         <!--닉네임-->
                                     </div>
                                 </div>
@@ -106,7 +109,8 @@
                             </span>
                                 <div class="css-1okqk0z eegfgsa1">
                                     <!--방문횟수-->
-                                    <span class="css-r4d2us eegfgsa2" th:text="*{rankingItem}"></span>
+                                    <span class="css-r4d2us eegfgsa2"
+                                          th:text="*{#numbers.formatInteger(rankingItem, 1, 'COMMA') + '회'}"></span>
                                     <div class="css-65gs3l eegfgsa3">
                                         <!--닉네임-->
                                         <span class="css-1raaqrb eegfgsa4" th:text="*{peopleNickname}"></span>
@@ -135,7 +139,9 @@
                                          th:if="${i == 4}">
                                 </span>
                                 <div class="css-1okqk0z eegfgsa1">
-                                    <span class="css-1w82quq eegfgsa2" th:text="*{rankingItem}"></span><!--방문횟수-->
+                                    <span class="css-1w82quq eegfgsa2"
+                                          th:text="*{#numbers.formatInteger(rankingItem, 1, 'COMMA') + '회'}"></span>
+                                    <!--방문횟수-->
                                     <div href="" class="css-65gs3l eegfgsa3">
                                         <span class="css-1raaqrb eegfgsa4" th:text="*{peopleNickname}"></span>
                                         <!--닉네임-->
@@ -166,7 +172,8 @@
                             </span>
                                 <div class="css-1okqk0z eegfgsa1">
                                     <!--재능기부 횟수-->
-                                    <span class="css-r4d2us eegfgsa2" th:text="*{rankingItem}"></span>
+                                    <span class="css-r4d2us eegfgsa2"
+                                          th:text="*{#numbers.formatInteger(rankingItem, 1, 'COMMA') + '회'}"></span>
                                     <div class="css-65gs3l eegfgsa3">
                                         <!--닉네임-->
                                         <span class="css-1raaqrb eegfgsa4" th:text="*{userName}"></span>
@@ -195,7 +202,9 @@
                                          th:if="${i == 4}">
                                 </span>
                                 <div class="css-1okqk0z eegfgsa1">
-                                    <span class="css-1w82quq eegfgsa2" th:text="*{rankingItem}"></span><!--재능기부 횟수-->
+                                    <span class="css-1w82quq eegfgsa2"
+                                          th:text="*{#numbers.formatInteger(rankingItem, 1, 'COMMA') + '회'}"></span>
+                                    <!--재능기부 횟수-->
                                     <div href="" class="css-65gs3l eegfgsa3">
                                         <span class="css-1raaqrb eegfgsa4" th:text="*{userName}"></span>
                                         <!--닉네임-->

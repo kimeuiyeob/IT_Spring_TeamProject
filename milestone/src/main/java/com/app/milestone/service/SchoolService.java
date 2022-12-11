@@ -66,29 +66,13 @@ public class SchoolService {
             search.setSchoolName(null);
         }
         List<SchoolDTO> list = schoolRepository.findAllByCreatedDate(pageable, search);
-//        int start = list.size() > (int) pageable.getOffset() ? (int) pageable.getOffset() : (int) pageable.getOffset() - 10;
-//        int end = Math.min((start + pageable.getPageSize()), list.size());
-//        log.info("===============asdf" + pageable);
-//        log.info("===============asdf" + search);
-//        log.info("===============asdf" + start);
-//        log.info("asd===============" + end);
-//        log.info("asd===============" + schoolRepository.countByCreatedDate(pageable, search));
-
         Page<SchoolDTO> schools = new PageImpl<>(list, pageable, Integer.valueOf("" + schoolRepository.countByCreatedDate(pageable, search)));
 
         return schools;
     }
 
-    //    보육원 목록(보육원 목록) 수
-    public Long schoolListCount(Pageable pageable, Search search) {
-        return schoolRepository.countByCreatedDate(pageable, search);
-    }
-
-    //    총 보육원 수
-    public Long schoolTotal() {
-        return schoolRepository.countBy();
-    }
-
+    
+//    밑에 두 메소드 MoneyService로 옮길 예정
     //    보육원 하나에 대한 최근 기부받은 내역
     public List<MoneyDTO> recentDonationList(Long userId) {
         return moneyRepository.findByCreateDateByUserId(userId);
