@@ -1,5 +1,6 @@
 package com.app.milestone.service;
 
+import com.app.milestone.domain.MoneyDTO;
 import com.app.milestone.domain.Ranking;
 import com.app.milestone.domain.ServiceDTO;
 import com.app.milestone.entity.People;
@@ -7,6 +8,10 @@ import com.app.milestone.entity.School;
 import com.app.milestone.repository.*;
 import com.querydsl.core.Tuple;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -49,4 +54,29 @@ public class ServiceService {
         donationCount = donationRepository.countBySchoolUserId(serviceDTO.getUserId());
         school.update(donationCount);
     }
+
+    //    관리자 페이지=======================================================
+
+    public Page<ServiceDTO> serviceListSearch(Integer page, String keyword) {
+        if (page == null) page = 0;
+        Pageable pageable = PageRequest.of(page, 7);
+        if (keyword == null) {
+            keyword = null;
+        }
+        List<ServiceDTO> list = serviceRepository.findServiceSearch(pageable, keyword);
+        Page<ServiceDTO> service = new PageImpl<>(list, pageable, Integer.valueOf("" + serviceRepository.countByCreatedDate(pageable, keyword)));
+        return service;
+    }
+
+    public Page<ServiceDTO> serviceListSearchAsc(Integer page, String keyword) {
+        if (page == null) page = 0;
+        Pageable pageable = PageRequest.of(page, 7);
+        if (keyword == null) {
+            keyword = null;
+        }
+        List<ServiceDTO> list = serviceRepository.findServiceSearchAsc(pageable, keyword);
+        Page<ServiceDTO> service = new PageImpl<>(list, pageable, Integer.valueOf("" + serviceRepository.countByCreatedDate(pageable, keyword)));
+        return service;
+    }
+
 }

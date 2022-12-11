@@ -23,6 +23,7 @@ public class AdminRestController {
     private final PeopleService peopleService;
     private final WithdrawalService withdrawalService;
     private final MoneyService moneyService;
+    private final ServiceService serviceService;
 
 
 //    전체회원에서 일반회원 선택 후 검색 및 조회
@@ -167,6 +168,26 @@ public class AdminRestController {
         Page<MoneyDTO> arMoneyDTO = moneyService.moneyListSearchAmountAsc(page, keyword);
         moneyResp.setArMoneyDTO(arMoneyDTO);
         return moneyResp;
+    }
+
+    //    봉사 조회
+    @GetMapping(value= {"/service/{page}", "/service/{page}/{keyword}"})
+    public ServiceResp serviceList(@PathVariable("page") Integer page, @PathVariable(required = false)String keyword) {
+        if(keyword == null){keyword= "";}
+        ServiceResp serviceResp = new ServiceResp();
+        Page<ServiceDTO> arServiceDTO = serviceService.serviceListSearch(page, keyword);
+        serviceResp.setArServiceDTO(arServiceDTO);
+        return serviceResp;
+    }
+
+    //    봉사 조회 asc
+    @GetMapping(value= {"/serviceAsc/{page}", "/serviceAsc/{page}/{keyword}"})
+    public ServiceResp serviceListAsc(@PathVariable("page") Integer page, @PathVariable(required = false)String keyword) {
+        if(keyword == null){keyword= "";}
+        ServiceResp serviceResp = new ServiceResp();
+        Page<ServiceDTO> arServiceDTO = serviceService.serviceListSearchAsc(page, keyword);
+        serviceResp.setArServiceDTO(arServiceDTO);
+        return serviceResp;
     }
 
 }

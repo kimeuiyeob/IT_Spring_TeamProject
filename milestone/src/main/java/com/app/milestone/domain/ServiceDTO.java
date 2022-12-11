@@ -16,6 +16,8 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 public class ServiceDTO {
+    private String schoolName;
+    private String peopleNickname;
     private Long userId;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 //    @JsonFormat(pattern = "yyyy-MM-dd")
@@ -28,7 +30,9 @@ public class ServiceDTO {
     }
 
     @QueryProjection
-    public ServiceDTO(Long userId, LocalDateTime serviceVisitDate) {
+    public ServiceDTO(String schoolName, String peopleNickname, Long userId, LocalDateTime serviceVisitDate) {
+        this.schoolName = schoolName;
+        this.peopleNickname = peopleNickname;
         this.userId = userId;
         this.serviceVisitDate = serviceVisitDate;
     }
