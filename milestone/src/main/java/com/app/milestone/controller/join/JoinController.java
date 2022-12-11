@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/join/*")
 @RequiredArgsConstructor
@@ -36,8 +39,11 @@ public class JoinController {
     }
 
     @GetMapping("/OAuth")
-    public String createOAuth(Model model) {
+    public String createOAuth(Model model, HttpServletRequest request, HttpSession session) {
         model.addAttribute("peopleDTO", new PeopleDTO());
+        if (session.getId()!=null){
+            return "join/joinOAuth";
+        }
         return "redirect:/kakao/logout";
     }
 

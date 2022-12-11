@@ -58,8 +58,9 @@ public class LoginController {
         // getSession() : 디폴트가 true, false는 세션이 없을 때 새로 만들지 않고 null을 반환
         HttpSession session = request.getSession();
         // 세션에 로그인 회원 정보 보관
-        session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
+        session.setAttribute("userId", loginMember);
 
+        log.info("유저 : " + loginMember.getUserEmail());
         log.info("유저 : " + loginMember.getUserEmail());
         log.info("성공");
         log.info("sessionId={}", session.getId());
@@ -87,7 +88,7 @@ public class LoginController {
         }
         log.info("sessionId={}", session.getId());
         log.info("로그아웃 성공");
-        return "redirect:/login/login";
+        return "redirect:/main/main";
     }
 
 }
