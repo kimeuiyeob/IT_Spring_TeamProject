@@ -68,24 +68,6 @@ public class PeopleService {
         return likeRepository.countBySchoolUserId(userId);
     }
 
-    //    ===================================기부 랭킹====================================
-//    TalentService로 옮길 예정
-    //    재능기부 횟수 랭킹
-    public List<Ranking> donationTalentRanking() {
-        List<Ranking> arRanking = new ArrayList<>();
-        List<Tuple> rankingInfo = peopleRepository.sortBytalentRank();
-        for (Tuple tuple : rankingInfo) {
-            Ranking ranking = new Ranking();
-            String userName = peopleRepository.findById(tuple.get(1, Long.TYPE)).get().getUserName();
-            ranking.setUserName(userName);
-            ranking.setUserId(tuple.get(1, Long.TYPE));
-            ranking.setRankingItem(tuple.get(0, Long.TYPE));
-            arRanking.add(ranking);
-        }
-        return arRanking;
-    }
-
-
     /* ==============관리자페이지================================================= */
     public Page<PeopleDTO> peopleListSearch(Integer page, String keyword) {
         if (page == null) page = 0;

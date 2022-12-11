@@ -71,29 +71,6 @@ public class SchoolService {
         return schools;
     }
 
-    
-//    밑에 두 메소드 MoneyService로 옮길 예정
-    //    보육원 하나에 대한 최근 기부받은 내역
-    public List<MoneyDTO> recentDonationList(Long userId) {
-        return moneyRepository.findByCreateDateByUserId(userId);
-    }
-
-    //    보육원 하나에 대한 기부금 랭킹
-    public List<MoneyDTO> moneyDonationRankingForOneSchool(Long userId) {
-        List<MoneyDTO> moneyDTOS = new ArrayList<>();
-        List<Tuple> tuples = moneyRepository.moneyRankingByOne(userId);
-        for (Tuple tuple : tuples) {
-            MoneyDTO moneyDTO = new MoneyDTO();
-            String name = peopleRepository.findById(tuple.get(1, Long.class)).get().getPeopleNickname();
-            moneyDTO.setMoneyCash(tuple.get(0, Long.class));
-            moneyDTO.setPeopleNickname(name);
-            moneyDTOS.add(moneyDTO);
-        }
-
-        return moneyDTOS;
-    }
-
-
     // 관리자 페이지============================================
 
     public List<School> schoolListManager(Pageable pageable) {
@@ -121,9 +98,6 @@ public class SchoolService {
         Page<SchoolDTO> school = new PageImpl<>(list, pageable, Integer.valueOf("" + schoolRepository.countByCreatedDate2(pageable, keyword)));
         return school;
     }
-
-
-
 
     //    보육원 검색 + 예산 내림차순
     public Page<SchoolDTO> schoolListBudgetSearch(Integer page, String keyword) {

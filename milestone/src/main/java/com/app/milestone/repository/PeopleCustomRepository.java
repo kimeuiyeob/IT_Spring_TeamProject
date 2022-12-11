@@ -11,7 +11,6 @@ public interface PeopleCustomRepository {
     public PeopleDTO findInfoById(Long userId);
 //    public List<Tuple> sortByMoneyCash();
 //    public List<Tuple> sortByVisitRank();
-    public List<Tuple> sortBytalentRank();
 
     public Long countByCreatedDate (Pageable pageable, String keyword);
     public List<PeopleDTO> findPeopleSearch(Pageable pageable,String keyword);

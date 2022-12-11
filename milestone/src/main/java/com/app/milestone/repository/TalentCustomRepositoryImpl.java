@@ -4,6 +4,7 @@ import com.app.milestone.domain.QTalentDTO;
 import com.app.milestone.domain.Search;
 import com.app.milestone.domain.TalentDTO;
 import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.Tuple;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -12,9 +13,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.app.milestone.entity.QDonation.donation;
+import static com.app.milestone.entity.QPeople.people;
 import static com.app.milestone.entity.QTalent.talent;
 
 @Repository
@@ -69,6 +72,35 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
 //                .limit(pageable.getPageSize())
                 .fetchOne();
     }
+
+//    =====================================재능기부 랭킹======================================
+//  재능기부 랭킹 정렬
+@Override
+public List<Tuple> sortBytalentRank() {
+    List<Tuple> tuples = new ArrayList<>();
+    Tuple temp = null;
+
+    tuples = jpaQueryFactory.select(talent.talentAbleDate.count(), talent.people.userId)
+            .from(talent)
+            .groupBy(people.userId)
+            .fetch();
+
+//        sortTuples
+    for (int i = 0; i < tuples.size(); i++) {
+        for (int j = 0; j < tuples.size(); j++) {
+            String icash = tuples.get(i).get(0, Long.class) + "";
+            String jcash = tuples.get(j).get(0, Long.class) + "";
+            Long longIcash = Long.valueOf(icash);
+            Long longJcash = Long.valueOf(jcash);
+            if (longIcash >= longJcash) {
+                temp = tuples.get(i);
+                tuples.set(i, tuples.get(j));
+                tuples.set(j, temp);
+            }
+        }
+    }
+    return tuples;
+}
 
     /*=============================================================================================================*/
     @Override  //게시글 상세보기

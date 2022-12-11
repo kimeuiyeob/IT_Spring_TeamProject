@@ -46,13 +46,13 @@ public class SchoolRestController {
     //    보육원 최근 기부
     @GetMapping(value = {"/recent/{userId}"})
     public List<MoneyDTO> recent(@PathVariable("userId") Long userId) {
-        return schoolService.recentDonationList(userId);
+        return moneyService.recentDonationList(userId);
     }
 
     //    보육원 기부 랭킹
     @GetMapping(value = {"/ranking/{userId}"})
     public List<MoneyDTO> ranking(@PathVariable("userId") Long userId) {
-        return schoolService.moneyDonationRankingForOneSchool(userId);
+        return moneyService.moneyDonationRankingForOneSchool(userId);
     }
 
     //    ================댓글=================
@@ -110,7 +110,7 @@ public class SchoolRestController {
         likeService.cancelLikeSchool(userId, sessionId);
     }
 
-    //    ======================결제==========================
+    //    ======================기부==========================
     //    결제진행
     @PostMapping("/payment")
     public void payment(@RequestBody MoneyDTO moneyDTO) {

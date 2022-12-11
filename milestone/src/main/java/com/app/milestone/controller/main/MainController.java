@@ -66,7 +66,7 @@ public class MainController {
 //        도움이 필요한 보육원
         model.addAttribute("moneys", moneyService.donationMoneyRanking());
         model.addAttribute("services", serviceService.donationVisitRanking());
-        model.addAttribute("talents", peopleService.donationTalentRanking());
+        model.addAttribute("talents", talentService.donationTalentRanking());
         model.addAttribute("schools", schoolService.needHelpList());
     }
 

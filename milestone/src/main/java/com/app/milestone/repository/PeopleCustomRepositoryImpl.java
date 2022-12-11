@@ -48,35 +48,6 @@ public class PeopleCustomRepositoryImpl implements PeopleCustomRepository {
 
     }
 
-//    재능기부 레퍼지토리로 옮길 예정
-    //  재능기부 랭킹 정렬
-    @Override
-    public List<Tuple> sortBytalentRank() {
-        List<Tuple> tuples = new ArrayList<>();
-        Tuple temp = null;
-
-        tuples = jpaQueryFactory.select(talent.talentAbleDate.count(), talent.people.userId)
-                .from(talent)
-                .groupBy(people.userId)
-                .fetch();
-
-//        sortTuples
-        for (int i = 0; i < tuples.size(); i++) {
-            for (int j = 0; j < tuples.size(); j++) {
-                String icash = tuples.get(i).get(0, Long.class) + "";
-                String jcash = tuples.get(j).get(0, Long.class) + "";
-                Long longIcash = Long.valueOf(icash);
-                Long longJcash = Long.valueOf(jcash);
-                if (longIcash >= longJcash) {
-                    temp = tuples.get(i);
-                    tuples.set(i, tuples.get(j));
-                    tuples.set(j, temp);
-                }
-            }
-        }
-        return tuples;
-    }
-
     /*=================관리자 페이지=================*/
     //    검색 결과 count
     @Override
