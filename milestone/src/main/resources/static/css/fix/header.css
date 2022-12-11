@@ -816,6 +816,7 @@ input[type = 'checkbox']:checked + .checkboxCos {
 }
 
 .list1{
+    padding: 0;
     list-style: none;
 }
 

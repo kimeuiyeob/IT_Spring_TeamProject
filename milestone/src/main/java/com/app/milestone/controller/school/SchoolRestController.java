@@ -31,13 +31,9 @@ public class SchoolRestController {
 
     //    보육원 목록
     @GetMapping(value = {"/list/{page}", "/list/{page}/{schoolAddress}", "/list/{page}/{schoolAddress}/{schoolName}"})
-    public SchoolResp search(@PathVariable("page") Integer page, Search search, Model model) {
-        SchoolResp schoolResp = new SchoolResp();
-        Pageable pageable = PageRequest.of(page, 10);
+    public Page<SchoolDTO> search(@PathVariable("page") Integer page, Search search) {
         Page<SchoolDTO> arSchoolDTO = schoolService.schoolList(page, search);
-        schoolResp.setArSchoolDTO(arSchoolDTO);
-        schoolResp.setTotal(schoolService.schoolListCount(pageable, search));
-        return schoolResp;
+        return arSchoolDTO;
     }
 
     //    ==========================보육원 상세=======================
@@ -58,6 +54,8 @@ public class SchoolRestController {
     public List<MoneyDTO> ranking(@PathVariable("userId") Long userId) {
         return schoolService.moneyDonationRankingForOneSchool(userId);
     }
+
+    //    ================댓글=================
 
     //    보육원 댓글
     @GetMapping(value = {"/reply/{page}/{userId}"})
@@ -88,7 +86,6 @@ public class SchoolRestController {
     @Transactional
     @GetMapping(value = {"/likeSchool"})
     public List<Long> likeSchool() {
-        log.info("================================들어옴");
         Long sessionId = 132L;
         return likeService.likeSchoolList(sessionId);
     }
@@ -124,9 +121,8 @@ public class SchoolRestController {
     //    방문기부
     @PostMapping("/visit")
     public void visit(@RequestBody ServiceDTO serviceDTO) {
-        log.info("==============asd===================" + serviceDTO);
         Long sessionId = 132L;
-        serviceService.donationReservation(sessionId,serviceDTO);
+        serviceService.donationReservation(sessionId, serviceDTO);
     }
 
 }

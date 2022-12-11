@@ -116,6 +116,23 @@
 <script src="/js/fix/header.js"></script>
 <script>
 
+</script>
+<script th:inline="javascript">
+
+    function schoolInfo(schoolDTO) {
+        $('#schoolName').html(schoolDTO.schoolName)
+        $('.schoolAddress').html(schoolDTO.schoolAddress)
+        $('.schoolAddressDetail').html(schoolDTO.schoolAddressDetail)
+        $('#budget').html(schoolDTO.schoolBudget.toLocaleString('ko-KR'))
+        $('#accountNum').html(schoolDTO.schoolAccount)
+        $('#bank').html(schoolDTO.schoolBank)
+        $('#teacher').html(schoolDTO.schoolTeachers.toLocaleString('ko-KR'))
+        $('#children').html(schoolDTO.schoolKids.toLocaleString('ko-KR'))
+    }
+
+    getSchoolInfo($('#userId').val(), schoolInfo)
+
+    //===================결제+===================
     const $orderButton = $('.orderButton');
 
     $orderButton.on('click', function () {
@@ -138,17 +155,11 @@
 
         if (paymentFlag) {
             payment();
-        } else {
-            console.log("어딜")
         }
     })
 
     // 부트페이 결제 api
     async function payment() {
-        // try {
-        console.log($('#amountInputMoney').val().replace(",",""))
-        console.log($('#schoolName').html())
-        console.log($('#schoolName').text())
         let moneyCash = $('#amountInputMoney').val().replace(/,/gi,"")
         const response = await Bootpay.requestPayment({
             "application_id": "6390c5f2d01c7e001ffeb8a2",
@@ -183,46 +194,14 @@
         switch (response.event) {
             case 'done':
                 // 결제 완료 처리
-                console.log(response)
-                console.log(response.data)
-                console.log(response.data.price)
                 giveMoneyCash({
                     moneyCash: response.data.price,
                     userId: $('#userId').val()
                 });
-                // paymentForm.submit();
                 break
         }
 
-        // } catch (e) {
-        //     console.log(e.message)
-        //     switch (e.event) {
-        //         case 'cancel':
-        //             // 사용자가 결제창을 닫을때 호출
-        //             console.log(e.message);
-        //             break
-        //         case 'error':
-        //             // 결제 승인 중 오류 발생시 호출
-        //             console.log(e.error_code);
-        //             break
-        //     }
-        // }
     }
-</script>
-<script th:inline="javascript">
-
-    function schoolInfo(schoolDTO) {
-        $('#schoolName').html(schoolDTO.schoolName)
-        $('.schoolAddress').html(schoolDTO.schoolAddress)
-        $('.schoolAddressDetail').html(schoolDTO.schoolAddressDetail)
-        $('#budget').html(schoolDTO.schoolBudget)
-        $('#accountNum').html(schoolDTO.schoolAccount)
-        $('#bank').html(schoolDTO.schoolBank)
-        $('#teacher').html(schoolDTO.schoolTeachers)
-        $('#children').html(schoolDTO.schoolKids)
-    }
-
-    getSchoolInfo($('#userId').val(), schoolInfo)
 
 
 </script>

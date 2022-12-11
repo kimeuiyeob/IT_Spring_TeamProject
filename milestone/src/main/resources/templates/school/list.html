@@ -117,11 +117,11 @@
 <script type="text/javascript" src="/js/school/schoolList.js"></script>
 <script src="/js/fix/header.js"></script>
 <script th:inline="javascript">
+    globalThis.page = 0;
     const $location2 = $(".location2");
     const $wholeLocation = $(".wholeLocation");
-    globalThis.page = 0;
+    const $location = $(".location");
     let sessionId = [[${userId}]];
-    console.log(sessionId);
     let searchFromMain = [[${search.schoolName}]];
 
     if (searchFromMain) {
@@ -135,23 +135,17 @@
     //이전 페이지 감지
     window.onpageshow = function (e) {
         if (e.persisted) {
-            setTimeout(() =>
-                    getLikeSchoolList1(clickLikeBtn)
-                , 100)
+            setTimeout(() => getLikeSchoolList1(clickLikeBtn), 100)
         }
     }
 
     //지역으로 검색
-    $location2.on('click', function () {
-        globalThis.page = 0;
-        search()
-    })
-    $wholeLocation.on('click', function () {
+    $location.on('click', function () {
         globalThis.page = 0;
         search()
     })
 
-    //검색
+    //보육원 이름으로 검색
     $schoolName.on('keyup', function (e) {
         if (e.keyCode == 13) {
             $('input[name = "schoolName"]').val($schoolName.val());
@@ -164,10 +158,11 @@
 
     let pageInfo;
 
-    function getList(schoolResp) {
+    function getList(schoolDTO) {
         let text = "";
-        pageInfo = schoolResp.arSchoolDTO;
-        schoolResp.arSchoolDTO.content.forEach(school => {
+        console.log(schoolDTO)
+        pageInfo = schoolDTO;
+        schoolDTO.content.forEach(school => {
             text += `<article>`
             text += `<span class="schoolImg">`
             text += `<img src="https://kmong.com/_next/image?url=https%3A%2F%2Fd2v80xjmx68n4w.cloudfront.net%2Fassets%2Fenterprise%2Fquote-guide%2F1-3.jpg&w=320&q=75">`
@@ -220,7 +215,7 @@
         })
         $(".schoolList").html(text)
         $(".redHeart").css({"display": "none"})
-        $("#totalCountNumber").html(schoolResp.total)
+        $("#totalCountNumber").html(schoolDTO.totalElements)
         pageingBtn();
         getLikeSchoolList1(clickLikeBtn);
     }

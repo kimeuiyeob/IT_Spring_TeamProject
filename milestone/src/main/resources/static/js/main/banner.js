@@ -22,15 +22,13 @@ var color1 = $(".banner2");
 classHtml1.on("click", function () {
     console.log($(".swiper-pagination-current").text());
     if ($(".swiper-pagination-current").text() == 1) {
-        $(".banner2").css('background-color', '#00D3C7');
-    } else if ($(".swiper-pagination-current").text() == 2) {
         $(".banner2").css('background-color', 'rgb(48, 52, 65)');
-    } else if ($(".swiper-pagination-current").text() == 3) {
-        $(".banner2").css('background-color', 'rgb(10, 195, 221)');
-    } else if ($(".swiper-pagination-current").text() == 4) {
-        $(".banner2").css('background-color', 'rgb(55, 184, 107)');
-    } else if ($(".swiper-pagination-current").text() == 5) {
+    } else if ($(".swiper-pagination-current").text() == 2) {
         $(".banner2").css('background-color', 'rgb(55, 17, 108)');
+    } else if ($(".swiper-pagination-current").text() == 3) {
+        $(".banner2").css('background-color', 'rgb(55, 184, 107)');
+    } else if ($(".swiper-pagination-current").text() == 4) {
+        $(".banner2").css('background-color', 'rgb(10, 195, 221)');
     }
 });
 /* 이전 버튼 */
@@ -39,14 +37,12 @@ var classHtml2 = $(".swiper-button-prev");
 classHtml2.on("click", function () {
     console.log($(".swiper-pagination-current").text());
     if ($(".swiper-pagination-current").text() == 1) {
-        $(".banner2").css('background-color', '#00D3C7');
-    } else if ($(".swiper-pagination-current").text() == 2) {
         $(".banner2").css('background-color', 'rgb(48, 52, 65)');
-    } else if ($(".swiper-pagination-current").text() == 3) {
-        $(".banner2").css('background-color', 'rgb(10, 195, 221)');
-    } else if ($(".swiper-pagination-current").text() == 4) {
-        $(".banner2").css('background-color', 'rgb(55, 184, 107)');
-    } else if ($(".swiper-pagination-current").text() == 5) {
+    } else if ($(".swiper-pagination-current").text() == 2) {
         $(".banner2").css('background-color', 'rgb(55, 17, 108)');
+    } else if ($(".swiper-pagination-current").text() == 3) {
+        $(".banner2").css('background-color', 'rgb(55, 184, 107)');
+    } else if ($(".swiper-pagination-current").text() == 4) {
+        $(".banner2").css('background-color', 'rgb(10, 195, 221)');
     }
 });
