@@ -25,17 +25,11 @@ public class NoticeController {
     ;
     }
     /*==================================================================================================*/
-
     @GetMapping("/noticeList")
     public void noticeList(Long noticeId, Model model){
         model.addAttribute("notice",  noticeService.noticeInfo(noticeId));
-        log.info("컨트롤러 -> 화면으로 가져갈값1 : " +  noticeService.noticeInfo(noticeId));
-
         model.addAttribute("noticeAll" ,noticeService.selectNoticeAll());
-
-        log.info("컨트롤러 -> 화면으로 가져갈값2 : " + noticeService.selectNoticeAll());
     }
-
     /*==================================================================================================*/
     @PostMapping(value = "write")
     public String noticeWrite(NoticeDTO noticeDTO) {
