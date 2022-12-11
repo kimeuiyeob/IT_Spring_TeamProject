@@ -119,22 +119,27 @@
     const $orderButton = $('.orderButton');
 
     $orderButton.on('click', function () {
+        let paymentFlag;
         let $amountInputMoney = $('#amountInputMoney');
-        if($('#amountInputMoney').val() <= 0 && !$('#amountInputMoney').val()){
-            $('#amountInputMoney').closest('h5').next().show();
+        if($amountInputMoney.val() <= 0 && !$amountInputMoney.val()){
+            $amountInputMoney.closest('h5').next().show();
+            paymentFlag = false;
         }else{
-            $('#amountInputMoney').closest('h5').next().hide();
+            $amountInputMoney.closest('h5').next().hide();
+            paymentFlag = true;
         }
         if(!$('.agreePayment').is(":checked")){
             $('.agreePayment').parent().next().show();
+            paymentFlag = false;
         }else{
             $('.agreePayment').parent().next().hide();
+            paymentFlag = true;
         }
 
-        if ($amountInputMoney) {
+        if (paymentFlag) {
             payment();
         } else {
-            console.log("값없음")
+            console.log("어딜")
         }
     })
 
@@ -144,7 +149,7 @@
         console.log($('#amountInputMoney').val().replace(",",""))
         console.log($('#schoolName').html())
         console.log($('#schoolName').text())
-        let moneyCash = $('#amountInputMoney').val().replace(",","")
+        let moneyCash = $('#amountInputMoney').val().replace(/,/gi,"")
         const response = await Bootpay.requestPayment({
             "application_id": "6390c5f2d01c7e001ffeb8a2",
             "price": moneyCash,

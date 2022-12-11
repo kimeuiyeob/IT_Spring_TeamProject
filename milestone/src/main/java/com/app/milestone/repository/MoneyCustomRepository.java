@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface MoneyCustomRepository {
     public List<Tuple> moneyRankingByOne(Long userId);
-
     public List<MoneyDTO> findByCreateDateByUserId(Long userId);
+    public List<Tuple> sortByMoneyCash();
 }

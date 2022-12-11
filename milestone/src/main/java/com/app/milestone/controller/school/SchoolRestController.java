@@ -18,6 +18,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@Transactional
 @RequestMapping("/schoolrest/*")
 @Slf4j
 public class SchoolRestController {
@@ -46,7 +47,7 @@ public class SchoolRestController {
         return schoolService.schoolInfo(userId);
     }
 
-    //    보육원 기부 랭킹
+    //    보육원 최근 기부
     @GetMapping(value = {"/recent/{userId}"})
     public List<MoneyDTO> recent(@PathVariable("userId") Long userId) {
         return schoolService.recentDonationList(userId);
