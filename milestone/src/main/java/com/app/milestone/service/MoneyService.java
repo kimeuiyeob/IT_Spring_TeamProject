@@ -2,6 +2,7 @@ package com.app.milestone.service;
 
 import com.app.milestone.domain.MoneyDTO;
 import com.app.milestone.domain.Ranking;
+import com.app.milestone.domain.SchoolDTO;
 import com.app.milestone.entity.Donation;
 import com.app.milestone.entity.Money;
 import com.app.milestone.entity.People;
@@ -13,6 +14,10 @@ import com.app.milestone.repository.SchoolRepository;
 import com.querydsl.core.Tuple;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -57,6 +62,57 @@ public List<Ranking> donationMoneyRanking() {
         people.update(donationCount);
         donationCount = donationRepository.countBySchoolUserId(moneyDTO.getUserId());
         school.update(donationCount);
+    }
+
+
+
+//    관리자 페이지=======================================================
+
+//    최신순, 금액 큰 순
+    public Page<MoneyDTO> moneyListSearch(Integer page, String keyword) {
+        if (page == null) page = 0;
+        Pageable pageable = PageRequest.of(page, 7);
+        if (keyword == null) {
+            keyword = null;
+        }
+        List<MoneyDTO> list = moneyRepository.findMoneySearch(pageable, keyword);
+        Page<MoneyDTO> money = new PageImpl<>(list, pageable, Integer.valueOf("" + moneyRepository.countByCreatedDate(pageable, keyword)));
+        return money;
+    }
+
+    //    오래된 순, 금액 큰 순
+    public Page<MoneyDTO> moneyListSearchAsc(Integer page, String keyword) {
+        if (page == null) page = 0;
+        Pageable pageable = PageRequest.of(page, 7);
+        if (keyword == null) {
+            keyword = null;
+        }
+        List<MoneyDTO> list = moneyRepository.findMoneySearchAsc(pageable, keyword);
+        Page<MoneyDTO> money = new PageImpl<>(list, pageable, Integer.valueOf("" + moneyRepository.countByCreatedDate(pageable, keyword)));
+        return money;
+    }
+
+    //    최신순, 금액 적은 순
+    public Page<MoneyDTO> moneyListSearchAmount(Integer page, String keyword) {
+        if (page == null) page = 0;
+        Pageable pageable = PageRequest.of(page, 7);
+        if (keyword == null) {
+            keyword = null;
+        }
+        List<MoneyDTO> list = moneyRepository.findMoneySearchAmount(pageable, keyword);
+        Page<MoneyDTO> money = new PageImpl<>(list, pageable, Integer.valueOf("" + moneyRepository.countByCreatedDate(pageable, keyword)));
+        return money;
+    }
+    //    오래된 순, 금액 적은 순
+    public Page<MoneyDTO> moneyListSearchAmountAsc(Integer page, String keyword) {
+        if (page == null) page = 0;
+        Pageable pageable = PageRequest.of(page, 7);
+        if (keyword == null) {
+            keyword = null;
+        }
+        List<MoneyDTO> list = moneyRepository.findMoneySearchAmountAsc(pageable, keyword);
+        Page<MoneyDTO> money = new PageImpl<>(list, pageable, Integer.valueOf("" + moneyRepository.countByCreatedDate(pageable, keyword)));
+        return money;
     }
 
 }
