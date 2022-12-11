@@ -13,11 +13,8 @@ public interface PeopleCustomRepository {
     public List<Tuple> sortByVisitRank();
     public List<Tuple> sortBytalentRank();
 
-    public List<PeopleDTO> findByPeopleOnly();
-    public List<PeopleDTO> findByPeopleOnlyAsc();
-
-    public Long countByCreatedDate (Pageable pageable, Search search);
-    public List<PeopleDTO> findPeopleSearch(Pageable pageable,Search search);
-    public List<PeopleDTO> findPeopleSearchAsc(Pageable pageable,Search search);
+    public Long countByCreatedDate (Pageable pageable, String keyword);
+    public List<PeopleDTO> findPeopleSearch(Pageable pageable,String keyword);
+    public List<PeopleDTO> findPeopleSearchAsc(Pageable pageable,String keyword);
 
 }

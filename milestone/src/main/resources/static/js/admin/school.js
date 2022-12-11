@@ -299,24 +299,12 @@ $userType.on('mouseout', function () {
 
 
 /*=========================================================*/
-const $search = $('input[name = search]');
+// const $search = $('input[name = search]');
+let $search = $("#search-bar");
 globalThis.page = 0;
 let $pagingBtnFlex = $('.paging-number-flex');
+
 /*처음 목록 가져오기*/
-showList();
-
-
-function showList(){
-    console.log('몇페이지 : '+page);
-
-    getList1({
-        schoolAddress: $search.text(),
-        schoolName: $search.text(),
-        page: globalThis.page
-    }, getList)
-}
-
-
 
 let pageInfo;
 
@@ -357,19 +345,19 @@ function getList(schoolResp) {
 }
 
 
+
 /* 통합검색 */
 function getList1(param, callback, error){
 
-    let existAddress = param.schoolAddress.length != 0;
-    let existSchoolName = param.schoolName.length != 0;
+    console.log(param.page);
+
+    let existKeyword = param.keyword.length != 0;
     let queryString = "/" + param.page || 1;
 
-    queryString += existAddress ? "/" + param.schoolAddress : "";
+    queryString += existKeyword ? "/" + param.keyword : "";
 
-    if (!existAddress && existSchoolName) {
-        queryString += "/null";
-    }
-    queryString += existSchoolName ? "/" + param.schoolName : "";
+    console.log("queryString : " + queryString);
+
     $.ajax({
         url : "/adminRest/schoolbudget"+queryString,
         type : "get",
@@ -385,18 +373,14 @@ function getList1(param, callback, error){
         }
     });
 }
+
 function getList1Asc(param, callback, error){
 
-    let existAddress = param.schoolAddress.length != 0;
-    let existSchoolName = param.schoolName.length != 0;
+    let existKeyword = param.keyword.length != 0;
     let queryString = "/" + param.page || 1;
 
-    queryString += existAddress ? "/" + param.schoolAddress : "";
+    queryString += existKeyword ? "/" + param.keyword : "";
 
-    if (!existAddress && existSchoolName) {
-        queryString += "/null";
-    }
-    queryString += existSchoolName ? "/" + param.schoolName : "";
     $.ajax({
         url : "/adminRest/schoolbudgetAsc"+queryString,
         type : "get",
@@ -413,22 +397,34 @@ function getList1Asc(param, callback, error){
     });
 }
 
+function showList(){
+    getList1({
+        keyword : $search.val(),
+        page: globalThis.page
+    }, getList)
+}
+
+showList();
 
 /* 검색 */
 function search() {
-    console.log("$search.text() : "+$search.val())
+
+    console.log("search() 실행");
+    console.log("$search val : "+ $search.val())
+
     getList1({
-        schoolAddress: $search.val(),
-        schoolName: $search.val(),
+        keyword: $search.val(),
         page: globalThis.page
     }, getList);
 }
 
 function search2() {
-    console.log("$search.text() : "+$search.val())
+
+    console.log("search2() 실행");
+    console.log("$search val : "+ $search.val())
+
     getList1Asc({
-        schoolAddress: $search.val(),
-        schoolName: $search.val(),
+        keyword: $search.val(),
         page: globalThis.page
     }, getList);
 }
@@ -442,6 +438,7 @@ $search.on("keyup", function (event) {
 });
 
 //-----------------------------페이징 버튼 처리-----------------------------
+
 function pageingBtn() {
     let text = "";
     let nowPage = pageInfo.pageable.pageNumber + 1;
@@ -490,9 +487,6 @@ $pagingBtnFlex.on('click', ".page-number-link", function (e) {
     search();
 })
 
-
-
-
 /*  페이지 이동  */
 $pagingBtnFlex.on('mouseover', "a.page-number-link", function () {
     $(this).css('background-color', '#f4f6fa');
@@ -503,7 +497,3 @@ $pagingBtnFlex.on('mouseout', "a.page-number-link", function () {
     $(this).css('background-color', '#fff');
     $(this).css('color', '#9a9ba7');
 })
-
-window.onresize = function () {
-    document.location.reload();
-};

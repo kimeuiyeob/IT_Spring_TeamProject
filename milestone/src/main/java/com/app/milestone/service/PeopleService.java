@@ -2,6 +2,7 @@ package com.app.milestone.service;
 
 import com.app.milestone.domain.PeopleDTO;
 import com.app.milestone.domain.Ranking;
+import com.app.milestone.domain.SchoolDTO;
 import com.app.milestone.domain.Search;
 import com.app.milestone.entity.Like;
 import com.app.milestone.entity.People;
@@ -115,46 +116,25 @@ public class PeopleService {
 
 
     /* ==============관리자페이지================================================= */
-    //    회원 수
-    public Long peopleListCount(Pageable pageable, Search search) {
-        return peopleRepository.countByCreatedDate(pageable, search);
-    }
-
-    public Page<PeopleDTO> peopleListSearch(Integer page, Search search) {
+    public Page<PeopleDTO> peopleListSearch(Integer page, String keyword) {
         if (page == null) page = 0;
         Pageable pageable = PageRequest.of(page, 7);
-
-        if (search.getUserName() == null) {
-            search.setUserName(null);
+        if (keyword == null) {
+            keyword = null;
         }
-        if (search.getPeopleNickname() == null) {
-            search.setPeopleNickname(null);
-        }
-        List<PeopleDTO> list = peopleRepository.findPeopleSearch(pageable, search);
-        int start = list.size() >= (int) pageable.getOffset() ? (int) pageable.getOffset() : (int) pageable.getOffset() - 10;
-        int end = Math.min((start + pageable.getPageSize()), list.size());
-
-        Page<PeopleDTO> people = new PageImpl<>(list.subList(start, end), pageable, Integer.valueOf("" + peopleRepository.countByCreatedDate(pageable, search)));
-
+        List<PeopleDTO> list = peopleRepository.findPeopleSearch(pageable, keyword);
+        Page<PeopleDTO> people = new PageImpl<>(list, pageable, Integer.valueOf("" + peopleRepository.countByCreatedDate(pageable, keyword)));
         return people;
     }
 
-    public Page<PeopleDTO> peopleListSearchAsc(Integer page, Search search) {
+    public Page<PeopleDTO> peopleListSearchAsc(Integer page, String keyword) {
         if (page == null) page = 0;
         Pageable pageable = PageRequest.of(page, 7);
-
-        if (search.getUserName() == null) {
-            search.setUserName(null);
+        if (keyword == null) {
+            keyword = null;
         }
-        if (search.getPeopleNickname() == null) {
-            search.setPeopleNickname(null);
-        }
-        List<PeopleDTO> list = peopleRepository.findPeopleSearchAsc(pageable, search);
-        int start = list.size() >= (int) pageable.getOffset() ? (int) pageable.getOffset() : (int) pageable.getOffset() - 10;
-        int end = Math.min((start + pageable.getPageSize()), list.size());
-
-        Page<PeopleDTO> people = new PageImpl<>(list.subList(start, end), pageable, Integer.valueOf("" + peopleRepository.countByCreatedDate(pageable, search)));
-
+        List<PeopleDTO> list = peopleRepository.findPeopleSearchAsc(pageable, keyword);
+        Page<PeopleDTO> people = new PageImpl<>(list, pageable, Integer.valueOf("" + peopleRepository.countByCreatedDate(pageable, keyword)));
         return people;
     }
 

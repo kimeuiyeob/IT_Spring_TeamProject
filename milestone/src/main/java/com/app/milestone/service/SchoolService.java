@@ -83,9 +83,6 @@ public class SchoolService {
     public Long schoolListCount(Pageable pageable, Search search) {
         return schoolRepository.countByCreatedDate(pageable, search);
     }
-    public Long schoolListCount2(Pageable pageable, Search search) {
-        return schoolRepository.countByCreatedDate2(pageable, search);
-    }
 
     //    총 보육원 수
     public Long schoolTotal() {
@@ -119,54 +116,25 @@ public class SchoolService {
         return schoolRepository.findByCreatedDate(pageable);
     }
 
-    public Page<SchoolDTO> schoolOnly(Integer page, Search search) {
+    public Page<SchoolDTO> schoolListSearch(Integer page, String keyword) {
         if (page == null) page = 0;
         Pageable pageable = PageRequest.of(page, 7);
-        List<SchoolDTO> list = schoolRepository.findBySchoolOnly(pageable, search);
-        int start = list.size() > (int) pageable.getOffset() ? (int) pageable.getOffset() : (int) pageable.getOffset() - 10;
-        int end = Math.min((start + pageable.getPageSize()), list.size());
-
-        Page<SchoolDTO> schools = new PageImpl<>(list.subList(start, end), pageable, Integer.valueOf("" + schoolRepository.countByCreatedDate(pageable, search)));
-
-        return schools;
-    }
-/*========================================================================================*/
-
-    public Page<SchoolDTO> schoolListSearch(Integer page, Search search) {
-        if (page == null) page = 0;
-        Pageable pageable = PageRequest.of(page, 7);
-
-        if (search.getUserName() == null) {
-            search.setUserName(null);
+        if (keyword == null) {
+            keyword = null;
         }
-        if (search.getSchoolName() == null) {
-            search.setSchoolName(null);
-        }
-        List<SchoolDTO> list = schoolRepository.findSchoolSearch(pageable, search);
-        int start = list.size() >= (int) pageable.getOffset() ? (int) pageable.getOffset() : (int) pageable.getOffset() - 10;
-        int end = Math.min((start + pageable.getPageSize()), list.size());
-
-        Page<SchoolDTO> school = new PageImpl<>(list.subList(start, end), pageable, Integer.valueOf("" + schoolRepository.countByCreatedDate2(pageable, search)));
-
+        List<SchoolDTO> list = schoolRepository.findSchoolSearch(pageable, keyword);
+        Page<SchoolDTO> school = new PageImpl<>(list, pageable, Integer.valueOf("" + schoolRepository.countByCreatedDate2(pageable, keyword)));
         return school;
     }
 
-    public Page<SchoolDTO> schoolListSearchAsc(Integer page, Search search) {
+    public Page<SchoolDTO> schoolListSearchAsc(Integer page, String keyword) {
         if (page == null) page = 0;
         Pageable pageable = PageRequest.of(page, 7);
-
-        if (search.getUserName() == null) {
-            search.setUserName(null);
+        if (keyword == null) {
+            keyword = null;
         }
-        if (search.getSchoolName() == null) {
-            search.setSchoolName(null);
-        }
-        List<SchoolDTO> list = schoolRepository.findSchoolSearchAsc(pageable, search);
-        int start = list.size() >= (int) pageable.getOffset() ? (int) pageable.getOffset() : (int) pageable.getOffset() - 10;
-        int end = Math.min((start + pageable.getPageSize()), list.size());
-
-        Page<SchoolDTO> school = new PageImpl<>(list.subList(start, end), pageable, Integer.valueOf("" + schoolRepository.countByCreatedDate2(pageable, search)));
-
+        List<SchoolDTO> list = schoolRepository.findSchoolSearchAsc(pageable, keyword);
+        Page<SchoolDTO> school = new PageImpl<>(list, pageable, Integer.valueOf("" + schoolRepository.countByCreatedDate2(pageable, keyword)));
         return school;
     }
 
@@ -174,41 +142,29 @@ public class SchoolService {
 
 
     //    보육원 검색 + 예산 내림차순
-    public Page<SchoolDTO> schoolListBudgetSearch(Integer page, Search search) {
+    public Page<SchoolDTO> schoolListBudgetSearch(Integer page, String keyword) {
         if (page == null) page = 0;
         Pageable pageable = PageRequest.of(page, 7);
-        if (search.getSchoolAddress() == null) {
-            search.setSchoolAddress(new ArrayList<>());
-            search.getSchoolAddress().add(null);
+        if (keyword == null) {
+            keyword = null;
         }
-        if (search.getSchoolName() == null) {
-            search.setSchoolName(null);
-        }
-        List<SchoolDTO> list = schoolRepository.findByBudgetAndSearch(pageable, search);
-        int start = list.size() >= (int) pageable.getOffset() ? (int) pageable.getOffset() : (int) pageable.getOffset() - 10;
-        int end = Math.min((start + pageable.getPageSize()), list.size());
-
-        Page<SchoolDTO> schools = new PageImpl<>(list.subList(start, end), pageable, Integer.valueOf("" + schoolRepository.countByCreatedDate(pageable, search)));
-
+        List<SchoolDTO> list = schoolRepository.findByBudgetAndSearch(pageable, keyword);
+        Page<SchoolDTO> schools = new PageImpl<>(list, pageable, Integer.valueOf("" + schoolRepository.countByCreatedDate3(pageable, keyword)));
         return schools;
     }
 
     //    보육원 검색 + 예산 오름차순
-    public Page<SchoolDTO> schoolListBudgetSearchAsc(Integer page, Search search) {
+    public Page<SchoolDTO> schoolListBudgetSearchAsc(Integer page, String keyword) {
         if (page == null) page = 0;
         Pageable pageable = PageRequest.of(page, 7);
-        if (search.getSchoolAddress() == null) {
-            search.setSchoolAddress(new ArrayList<>());
-            search.getSchoolAddress().add(null);
+        if (keyword == null) {
+            keyword = null;
         }
-        if (search.getSchoolName() == null) {
-            search.setSchoolName(null);
-        }
-        List<SchoolDTO> list = schoolRepository.findByBudgetAndSearchAsc(pageable, search);
+        List<SchoolDTO> list = schoolRepository.findByBudgetAndSearchAsc(pageable, keyword);
         int start = list.size() >= (int) pageable.getOffset() ? (int) pageable.getOffset() : (int) pageable.getOffset() - 10;
         int end = Math.min((start + pageable.getPageSize()), list.size());
 
-        Page<SchoolDTO> schools = new PageImpl<>(list.subList(start, end), pageable, Integer.valueOf("" + schoolRepository.countByCreatedDate(pageable, search)));
+        Page<SchoolDTO> schools = new PageImpl<>(list.subList(start, end), pageable, Integer.valueOf("" + schoolRepository.countByCreatedDate3(pageable, keyword)));
 
         return schools;
     }
