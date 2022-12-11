@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,22 +22,22 @@
                 <ul class="footer4">
                     <li class="footer4">
                         <p class="nav-text6" id="mobile-nav-text6-1">
-                            <a color="inherit" target="_self" href="#" class="footer-text1">마일스톤 메인</a>
+                            <a color="inherit" target="_self" th:href="@{/main/main}" class="footer-text1">마일스톤 메인</a>
                         </p>
                     </li>
                     <li class="footer4">
                         <p class="nav-text6" id="mobile-nav-text6-2">
-                            <a color="inherit" target="_self" href="#" class="footer-text1">보육원 목록</a>
+                            <a color="inherit" target="_self" th:href="@{/school/list}" class="footer-text1">보육원 목록</a>
                         </p>
                     </li>
                     <li class="footer4">
                         <p class="nav-text6" id="mobile-nav-text6-3">
-                            <a color="inherit" target="_self" href="#" class="footer-text1">도움이 필요한 보육원</a>
+                            <a color="inherit" target="_self" th:href="@{/talent/talent}" class="footer-text1">재능기부</a>
                         </p>
                     </li>
                     <li class="footer4">
                         <p class="nav-text6" id="mobile-nav-text6-4">
-                            <a color="inherit" target="_self" href="#" class="footer-text1">기부랭킹</a>
+                            <a color="inherit" target="_self" th:href="@{/ranking/ranking}" class="footer-text1">기부랭킹</a>
                         </p>
                     </li>
                 </ul>
@@ -47,7 +47,7 @@
                 <ul class="footer4">
                     <li class="footer4">
                         <p class="nav-text6" id="mobile-nav-text6-5">
-                            <a color="inherit" target="_self" href="#" class="footer-text1">서비스 소개</a>
+                            <a color="inherit" target="_self" th:href="@{/introduce/introduce}" class="footer-text1">서비스 소개</a>
                         </p>
                     </li>
                 </ul>

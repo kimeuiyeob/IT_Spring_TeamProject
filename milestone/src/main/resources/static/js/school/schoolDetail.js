@@ -2,6 +2,9 @@ let check2 = false;
 
 /* 찜하기 버튼 마우스 올렸을 때*/
 $("button.zzimButton").mouseover(function () {
+    if(!sessionId){
+        return;
+    }
     $(this).css({"background-color": "rgb(102 102 102 / 29%)"})
     $(this).css({"border-radius": "3px"})
     $(this).css({"transition": "all .2s ease"})
@@ -16,6 +19,9 @@ $(".redHeart").css({"display": "none"})
 
 /* 찜하기 버튼 클릭 */
 $(".zzimButton").click(function () {
+    if(!sessionId){
+        return;
+    }
     if (!check2) {
         $(this).children(".redHeart").css({"display": "inline"})
         $(this).children(".emptyHeart").css({"display": "none"})
@@ -184,9 +190,9 @@ function getRecent1(param, callback, error) {
     $.ajax({
         url: "/schoolrest/recent/" + param.userId,
         type: "get",
-        success: function (schoolDTO, status, xhr) {
+        success: function (recentDonations, status, xhr) {
             if (callback) {
-                callback(schoolDTO);
+                callback(recentDonations);
             }
         },
         error: function (xhr, status, err) {
@@ -202,9 +208,9 @@ function getRanking1(param, callback, error) {
     $.ajax({
         url: "/schoolrest/ranking/" + param.userId,
         type: "get",
-        success: function (schoolDTO, status, xhr) {
+        success: function (donationRanking, status, xhr) {
             if (callback) {
-                callback(schoolDTO);
+                callback(donationRanking);
             }
         },
         error: function (xhr, status, err) {

@@ -167,7 +167,7 @@
                 </div>
 
                 <!--============= 등록============== -->
-                <div class="comment" id="noBorderBottom" style="border-bottom: transparent;">
+                <div class="comment display-none" id="noBorderBottom" style="border-bottom: transparent;">
                     <div class="commentsInfo">
                         <div class="profilePicture">
                             <img src="/imgs/myPage/normalProfile.png">
@@ -286,7 +286,7 @@
 
                         </div>
                     </div>
-                    <div>
+                    <div class="display-none">
                         <div class="donateDIV">
                             <button class="donate" id="donateMoney">
                                 <span>기부하기</span>
@@ -338,7 +338,7 @@
                                         </tr>
                                     </table>
                                 </div>
-                                <button class="donate" id="donateVisit">
+                                <button class="donate display-none" id="donateVisit">
                                     <span>신청하기</span>
                                 </button>
                             </div>
@@ -397,6 +397,23 @@
 <script src="/js/fix/header.js"></script>
 <script th:inline="javascript">
     let nowPage = 0;
+    let modelSchoolDTO = [[${schoolDTO}]]
+    let modelPeopleDTO = [[${peopleDTO}]]
+    //세션에 있다고 생각
+    let sessionId;
+
+    if (modelSchoolDTO || modelPeopleDTO) {
+        $('.display-none').show();
+        if(modelPeopleDTO){
+            $(".nickName").text(modelPeopleDTO.peopleNickname);
+            sessionId = modelPeopleDTO.userId;
+        }
+        if (modelSchoolDTO) {
+            $(".nickName").text(modelSchoolDTO.schoolName);
+            $('.donate').hide();
+            sessionId = modelPeopleDTO.userId;
+        }
+    }
 
     show();
     showReply();
@@ -422,11 +439,10 @@
     }
 
     //보육원 하나에 대한 최근 기부
-    function getRecent(schoolDTO) {
+    function getRecent(recentDonations) {
         let text = "";
         let count = 0;
-        console.log(schoolDTO.length == 0)
-        if (schoolDTO.length == 0) {
+        if (recentDonations.length == 0) {
             $('#userTable').hide();
             $('#userTable2').hide();
             $('.noneDonation').show();
@@ -435,7 +451,7 @@
             $('#userTable2').show();
             $('.noneDonation').hide();
         }
-        schoolDTO.forEach(school => {
+        recentDonations.forEach(school => {
             if (count == 6) return;
             count++;
             text += `<tr">`
@@ -446,7 +462,7 @@
             text += `</div>`
             text += `</th>`
             // <!-- 닉네임 -->
-            text += `<th class="userTr userNickname">` + school.peopleNickName + `</th>`
+            text += `<th class="userTr userNickname">` + school.peopleNickname + `</th>`
             // <!-- 기부금액 -->
             text += `<th class="userTr donation"><span>` + school.moneyCash + `</span>원</th>`
             text += `</tr>`
@@ -455,17 +471,17 @@
     }
 
     //보육원 하나에 대한 기부 랭킹
-    function getRanking(schoolDTO) {
+    function getRanking(donationRanking) {
         let text = "";
         let count = 0;
-        schoolDTO.forEach(school => {
+        donationRanking.forEach(school => {
             if (count == 5) return;
             count++;
             text += `<tr class="oneUser">`
             // 순위
             text += `<th>` + count + `</th>`
             // 닉네임
-            text += `<th class="userTr userNickname">` + school.peopleNickName + `</th>`
+            text += `<th class="userTr userNickname">` + school.peopleNickname + `</th>`
             // 금액
             text += `<th class="userTr donation"><span class="amount">` + school.moneyCash + `</span>원</th>`
             text += `</tr>`
@@ -511,13 +527,6 @@
     //==========================댓글=============================
     let replyText = "";
     let lastReplyFlag;
-
-    //세션에 있다고 생각
-    let sessionId = 132;
-    // console.log($('.reply').val())
-    // console.log($('.reply').text())
-    // $('.reply').val();
-    // $('.reply').text();
 
     function getReply(replys) {
         replyText = "";
@@ -651,7 +660,6 @@
             userId: $('.userId').val(),
             serviceVisitDate: saveDate
         })
-        // location.href = "/school/donation?userId=" + $('.userId').val();
     })
 
 </script>

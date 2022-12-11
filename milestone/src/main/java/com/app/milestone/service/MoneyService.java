@@ -1,6 +1,7 @@
 package com.app.milestone.service;
 
 import com.app.milestone.domain.MoneyDTO;
+import com.app.milestone.domain.Ranking;
 import com.app.milestone.entity.Donation;
 import com.app.milestone.entity.Money;
 import com.app.milestone.entity.People;
@@ -9,10 +10,14 @@ import com.app.milestone.repository.DonationRepository;
 import com.app.milestone.repository.MoneyRepository;
 import com.app.milestone.repository.PeopleRepository;
 import com.app.milestone.repository.SchoolRepository;
+import com.querydsl.core.Tuple;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +27,21 @@ public class MoneyService {
     private final SchoolRepository schoolRepository;
     private final DonationRepository donationRepository;
     private final MoneyRepository moneyRepository;
+    
+//    전체 기부금 랭킹
+public List<Ranking> donationMoneyRanking() {
+    List<Ranking> arRanking = new ArrayList<>();
+    List<Tuple> rankingInfo = moneyRepository.sortByMoneyCash();
+    for (Tuple tuple : rankingInfo) {
+        Ranking ranking = new Ranking();
+        String peopleNickname = peopleRepository.findById(tuple.get(1, Long.TYPE)).get().getPeopleNickname();
+        ranking.setPeopleNickname(peopleNickname);
+        ranking.setUserId(tuple.get(1, Long.TYPE));
+        ranking.setRankingItem(tuple.get(0, Long.TYPE));
+        arRanking.add(ranking);
+    }
+    return arRanking;
+}
     
 //    결제
     @Transactional

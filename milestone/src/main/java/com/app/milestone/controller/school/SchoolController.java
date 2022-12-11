@@ -1,7 +1,12 @@
 package com.app.milestone.controller.school;
 
 import com.app.milestone.domain.MoneyDTO;
+import com.app.milestone.domain.PeopleDTO;
+import com.app.milestone.domain.SchoolDTO;
 import com.app.milestone.domain.Search;
+import com.app.milestone.entity.People;
+import com.app.milestone.entity.User;
+import com.app.milestone.service.PeopleService;
 import com.app.milestone.service.SchoolService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +17,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,16 +28,36 @@ import java.util.List;
 @Slf4j
 public class SchoolController {
     private final SchoolService schoolService;
+    private final PeopleService peopleService;
 
     //    보육원 목록
     @GetMapping("/list")
-    public void list(Search search, Model model) {
-        model.addAttribute("search",search);
+    public void list(HttpServletRequest request, Search search, Model model) {
+        HttpSession session = request.getSession();
+        User user = (User)session.getAttribute("loginMember");
+        Long userId = null;
+        if(user != null){
+            userId = user.getUserId();
+        }
+        model.addAttribute("userId", userId);
+        model.addAttribute("search", search);
     }
 
     //    보육원 상세
     @GetMapping("/read")
-    public void read(Long userId, Model model) {
+    public void read(HttpServletRequest request, Long userId, Model model) {
+        HttpSession session = request.getSession();
+        User user = (User)session.getAttribute("loginMember");
+        PeopleDTO peopleDTO = null;
+        SchoolDTO schoolDTO = null;
+        if(user != null){
+            peopleDTO = peopleService.onesInfo(user.getUserId());
+            if(peopleDTO == null){
+                schoolDTO = schoolService.schoolInfo(user.getUserId());
+            }
+        }
+        model.addAttribute("peopleDTO", peopleDTO);
+        model.addAttribute("schoolDTO", schoolDTO);
         model.addAttribute("userId", userId);
     }
 
@@ -44,7 +71,6 @@ public class SchoolController {
     //    결제진행
     @PostMapping("/payment")
     public RedirectView payment(@RequestBody MoneyDTO moneyDTO) {
-        log.info("==============asd==================="+moneyDTO);
 //        replyService.register(replyDTO);
         return new RedirectView("/school/read");
     }

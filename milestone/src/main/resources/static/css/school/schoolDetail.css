@@ -380,7 +380,6 @@ aside {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 447px;
     color: rgb(48, 52, 65);
     border: 1px solid rgb(228, 229, 237);
 }
@@ -388,6 +387,7 @@ aside {
 .rightBox2 {
     padding: 24px 24px 0px;
     margin-bottom: 24px;
+    height: 297px;
 }
 
 .introTitle {
@@ -844,4 +844,8 @@ table#userTable2 {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.display-none{
+    display: none;
 }

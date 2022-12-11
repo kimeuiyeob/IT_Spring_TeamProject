@@ -8,5 +8,6 @@ import org.springframework.stereotype.Component;
 public class Ranking {
     private Long userId;
     private String userName;
+    private String peopleNickname;
     private Long rankingItem;
 }

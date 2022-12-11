@@ -1,11 +1,16 @@
 package com.app.milestone.service;
 
+import com.app.milestone.domain.Ranking;
 import com.app.milestone.domain.ServiceDTO;
 import com.app.milestone.entity.People;
 import com.app.milestone.entity.School;
 import com.app.milestone.repository.*;
+import com.querydsl.core.Tuple;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -15,13 +20,29 @@ public class ServiceService {
     private final DonationRepository donationRepository;
     private final ServiceRepository serviceRepository;
 
-    public void donationReservation (Long userId, ServiceDTO serviceDTO){
+    //    방문횟수 랭킹
+    public List<Ranking> donationVisitRanking() {
+        List<Ranking> arRanking = new ArrayList<>();
+        List<Tuple> rankingInfo = serviceRepository.sortByVisitRank();
+        for (Tuple tuple : rankingInfo) {
+            Ranking ranking = new Ranking();
+            String peopleNickname = peopleRepository.findById(tuple.get(1, Long.TYPE)).get().getPeopleNickname();
+            ranking.setPeopleNickname(peopleNickname);
+            ranking.setUserId(tuple.get(1, Long.TYPE));
+            ranking.setRankingItem(tuple.get(0, Long.TYPE));
+            arRanking.add(ranking);
+        }
+        return arRanking;
+    }
+
+    //    방문기부 신청
+    public void donationReservation(Long userId, ServiceDTO serviceDTO) {
         int donationCount = 0;
         People people = peopleRepository.findById(userId).get();
 
         School school = schoolRepository.findById(serviceDTO.getUserId()).get();
 
-        com.app.milestone.entity.Service service = new com.app.milestone.entity.Service(school,people,serviceDTO.getServiceVisitDate());
+        com.app.milestone.entity.Service service = new com.app.milestone.entity.Service(school, people, serviceDTO.getServiceVisitDate());
         serviceRepository.save(service);
         donationCount = donationRepository.countByPeopleUserId(userId);
         people.update(donationCount);

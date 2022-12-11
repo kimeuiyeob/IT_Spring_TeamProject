@@ -127,7 +127,7 @@
                     <ul class="ranking3">
                         <th:block th:object="${moneys.get(i)}" th:each="i:${#numbers.sequence(0,8)}">
                             <li class="ranking4" th:if="${i <= 3}">
-                                <a href="#" class="ranking5">
+                                <a class="ranking5">
                                     <div class="ranking6">
                                         <span style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 48px; height: 48px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
                                             <img alt="프로필 아이콘" srcset="/imgs/main/rangking_icon01.png 1x"
@@ -135,11 +135,11 @@
                                                  style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
                                         </span>
                                     </div>
-                                    <span class="ranking-text2" th:text="*{userName}"></span>
+                                    <span class="ranking-text2" th:text="*{peopleNickname}"></span>
                                 </a>
                             </li>
                             <li class="ranking4 mobile-ranking4" th:if="${i > 3}">
-                                <a href="#" class="ranking5">
+                                <a class="ranking5">
                                     <div class="ranking6">
                                         <span style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 48px; height: 48px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
                                             <img alt="프로필 아이콘" srcset="/imgs/main/rangking_icon01.png 1x"
@@ -147,7 +147,7 @@
                                                  style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
                                         </span>
                                     </div>
-                                    <span class="ranking-text2" th:text="*{userName}"></span>
+                                    <span class="ranking-text2" th:text="*{peopleNickname}"></span>
                                 </a>
                             </li>
                         </th:block>
@@ -162,7 +162,7 @@
                     <ul class="ranking3">
                         <th:block th:object="${services.get(i)}" th:each="i:${#numbers.sequence(0,8)}">
                             <li class="ranking4" th:if="${i <= 3}">
-                                <a href="#" class="ranking5">
+                                <a class="ranking5">
                                     <div class="ranking6">
                                         <span style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 48px; height: 48px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
                                             <img alt="프로필 아이콘" srcset="/imgs/main/rangking_icon09.png 1x"
@@ -170,11 +170,11 @@
                                                  style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
                                         </span>
                                     </div>
-                                    <span class="ranking-text2" th:text="*{userName}">한예슬</span>
+                                    <span class="ranking-text2" th:text="*{peopleNickname}">한예슬</span>
                                 </a>
                             </li>
                             <li class="ranking4 mobile-ranking4" th:if="${i > 3}">
-                                <a href="#" class="ranking5">
+                                <a class="ranking5">
                                     <div class="ranking6">
                                         <span style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 48px; height: 48px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
                                             <img alt="프로필 아이콘" srcset="/imgs/main/rangking_icon09.png 1x"
@@ -182,7 +182,7 @@
                                                  style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
                                         </span>
                                     </div>
-                                    <span class="ranking-text2" th:text="*{userName}">한예슬</span>
+                                    <span class="ranking-text2" th:text="*{peopleNickname}">한예슬</span>
                                 </a>
                             </li>
                         </th:block>

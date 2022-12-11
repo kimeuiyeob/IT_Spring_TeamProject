@@ -64,8 +64,8 @@ public class MainController {
     @GetMapping("main")
     public void main(Model model) {
 //        도움이 필요한 보육원
-        model.addAttribute("moneys", peopleService.donationMoneyRanking());
-        model.addAttribute("services", peopleService.donationVisitRanking());
+        model.addAttribute("moneys", moneyService.donationMoneyRanking());
+        model.addAttribute("services", serviceService.donationVisitRanking());
         model.addAttribute("talents", peopleService.donationTalentRanking());
         model.addAttribute("schools", schoolService.needHelpList());
     }
