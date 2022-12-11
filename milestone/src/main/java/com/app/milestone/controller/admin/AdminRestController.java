@@ -2,10 +2,7 @@ package com.app.milestone.controller.admin;
 
 import com.app.milestone.domain.*;
 import com.app.milestone.entity.Withdrawal;
-import com.app.milestone.service.PeopleService;
-import com.app.milestone.service.SchoolService;
-import com.app.milestone.service.UserService;
-import com.app.milestone.service.WithdrawalService;
+import com.app.milestone.service.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -24,8 +21,8 @@ import java.util.List;
 public class AdminRestController {
     private final SchoolService schoolService;
     private final PeopleService peopleService;
-    private final UserService userService;
     private final WithdrawalService withdrawalService;
+    private final MoneyService moneyService;
 
 
 //    전체회원에서 일반회원 선택 후 검색 및 조회
@@ -127,6 +124,49 @@ public class AdminRestController {
         withdrawalResp.setArWithdrawalDTO(arWithdrawalDTO);
         withdrawalResp.setTotal(withdrawalService.withdrawalListCount(pageable, search));
         return withdrawalResp;
+    }
+
+
+
+
+    //    현금기부 조회 : 최신순, 많은순
+    @GetMapping(value= {"/money/{page}", "/money/{page}/{keyword}"})
+    public MoneyResp moneyList(@PathVariable("page") Integer page, @PathVariable(required = false)String keyword) {
+        if(keyword == null){keyword= "";}
+        MoneyResp moneyResp = new MoneyResp();
+        Page<MoneyDTO> arMoneyDTO = moneyService.moneyListSearch(page, keyword);
+        moneyResp.setArMoneyDTO(arMoneyDTO);
+        return moneyResp;
+    }
+
+    //    현금기부 조회 : 오래된순, 많은순
+    @GetMapping(value= {"/moneyAsc/{page}", "/moneyAsc/{page}/{keyword}"})
+    public MoneyResp moneyListAsc(@PathVariable("page") Integer page, @PathVariable(required = false)String keyword) {
+        if(keyword == null){keyword= "";}
+        MoneyResp moneyResp = new MoneyResp();
+        Page<MoneyDTO> arMoneyDTO = moneyService.moneyListSearchAsc(page, keyword);
+        moneyResp.setArMoneyDTO(arMoneyDTO);
+        return moneyResp;
+    }
+
+    //    현금기부 조회 : 최신순, 적은순
+    @GetMapping(value= {"/moneyAmount/{page}", "/moneyAmount/{page}/{keyword}"})
+    public MoneyResp moneyAmountList(@PathVariable("page") Integer page, @PathVariable(required = false)String keyword) {
+        if(keyword == null){keyword= "";}
+        MoneyResp moneyResp = new MoneyResp();
+        Page<MoneyDTO> arMoneyDTO = moneyService.moneyListSearchAmount(page, keyword);
+        moneyResp.setArMoneyDTO(arMoneyDTO);
+        return moneyResp;
+    }
+
+    //    현금기부 조회 : 오래된순, 적은순
+    @GetMapping(value= {"/moneyAmountAsc/{page}", "/moneyAmountAsc/{page}/{keyword}"})
+    public MoneyResp moneyAmountListAsc(@PathVariable("page") Integer page, @PathVariable(required = false)String keyword) {
+        if(keyword == null){keyword= "";}
+        MoneyResp moneyResp = new MoneyResp();
+        Page<MoneyDTO> arMoneyDTO = moneyService.moneyListSearchAmountAsc(page, keyword);
+        moneyResp.setArMoneyDTO(arMoneyDTO);
+        return moneyResp;
     }
 
 }
