@@ -67,7 +67,7 @@ div.dropdown{
     min-width : 90px;
     border-radius: 8px;
     height : 160px;
-    overflow : scroll;
+    overflow : auto;
     box-shadow: 0px 0px 10px 3px rgba(190, 190, 190, 0.6);
     width: 30%;
 }
@@ -450,4 +450,15 @@ h2.schoolName{
     }
 
 }
-/* ============================================ */
+/* ====================황지수==================== */
+
+.noneSearchWrap{
+    display: flex;
+    height: 200px;
+    justify-content: center;
+    align-items: center;
+}
+
+.noneSearch{
+    display: flex;
+}

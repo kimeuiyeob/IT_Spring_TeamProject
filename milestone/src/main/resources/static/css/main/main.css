@@ -3,16 +3,23 @@ li {
 }
 
 @media screen and (max-width: 768px) {
+
+
     #mobile-slide-text1 {
         display: none;
+    }
+
+    .bannerWrap{
+        display: grid;
+        grid-gap: 40px;
+        margin: auto;
+        grid-template-columns: auto;
     }
 
     #mobile-mySwiper {
         width: 440px;
         height: 280px;
-        top: 9%;
         border-radius: 8px;
-        position: relative;
         margin: 0 auto;
     }
 
@@ -20,7 +27,7 @@ li {
 
     }
     #mobile-banner2 {
-        background-color: #00D3C7;
+        background-color: rgb(48, 52, 65);
         width: 483px;
         height: 120%;
     }
