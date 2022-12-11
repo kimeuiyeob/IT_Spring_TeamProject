@@ -12,18 +12,24 @@ public interface SchoolCustomRepository {
     public List<SchoolDTO> findAllByDonationCount ();
     public List<SchoolDTO> findAllByCreatedDate (Pageable pageable, Search search);
     public Long countByCreatedDate (Pageable pageable, Search search);
-    public Long countByCreatedDate2(Pageable pageable, Search search);
 
         public SchoolDTO findByUserId (Long userId);
 
 //    관리자
     public List<School> findByCreatedDate (Pageable pageable);
-    public List<SchoolDTO> findBySchoolOnly (Pageable pageable, Search search);
-    public List<SchoolDTO> findBySchoolOnlyAsc ();
 
 
-    public List<SchoolDTO> findSchoolSearch (Pageable pageable, Search search);
-    public List<SchoolDTO> findSchoolSearchAsc (Pageable pageable, Search search);
-    public List<SchoolDTO> findByBudgetAndSearchAsc (Pageable pageable, Search search);
-    public List<SchoolDTO> findByBudgetAndSearch (Pageable pageable, Search search);
+
+
+
+
+    public List<SchoolDTO> findSchoolSearch (Pageable pageable, String keyword);
+    public List<SchoolDTO> findSchoolSearchAsc (Pageable pageable, String keyword);
+    public Long countByCreatedDate2(Pageable pageable, String keyword);
+
+
+    public List<SchoolDTO> findByBudgetAndSearchAsc (Pageable pageable, String keyword);
+    public List<SchoolDTO> findByBudgetAndSearch (Pageable pageable, String keyword);
+    public Long countByCreatedDate3(Pageable pageable, String keyword);
+
 }

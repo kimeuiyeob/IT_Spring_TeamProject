@@ -5,6 +5,7 @@ import com.app.milestone.domain.QPeopleDTO;
 import com.app.milestone.domain.Search;
 import com.app.milestone.entity.QTalent;
 import com.app.milestone.entity.QUser;
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -135,62 +136,20 @@ public class PeopleCustomRepositoryImpl implements PeopleCustomRepository {
 
 
     /*=================관리자 페이지=================*/
-    @Override
-    public List<PeopleDTO> findByPeopleOnly(){
-        return jpaQueryFactory.select(new QPeopleDTO(
-                people.userId,
-                people.peopleNickname,
-                people.userEmail,
-                people.userName,
-                people.userPassword,
-                people.userPhoneNumber,
-                people.donationCount,
-                people.createdDate
-        )).from(people)
-                .orderBy(people.createdDate.desc())
-                .fetch();
-    }
-    @Override
-    public List<PeopleDTO> findByPeopleOnlyAsc(){
-        return jpaQueryFactory.select(new QPeopleDTO(
-                people.userId,
-                people.peopleNickname,
-                people.userEmail,
-                people.userName,
-                people.userPassword,
-                people.userPhoneNumber,
-                people.donationCount,
-                people.createdDate
-        )).from(people)
-                .orderBy(people.createdDate.asc())
-                .fetch();
-    }
-
-
-    //    이름검색
-    private BooleanExpression peopleNameContaining(String userName) {
-        return StringUtils.hasText(userName) ? people.userName.contains(userName) : null;
-    }
-    //    닉네임 검색
-    private BooleanExpression peopleNicknameContaining(String peopleNickname) {
-        return StringUtils.hasText(peopleNickname) ? people.peopleNickname.contains(peopleNickname) : null;
-    }
-
     //    검색 결과 count
     @Override
-    public Long countByCreatedDate(Pageable pageable, Search search) {
+    public Long countByCreatedDate(Pageable pageable, String keyword) {
         return jpaQueryFactory.select(people.count())
                 .from(people)
                 .where(
-                        peopleNicknameContaining(search.getPeopleNickname()),
-                        peopleNameContaining(search.getUserName())
+                    userNameAndNicknameContaining(keyword)
                 )
                 .orderBy(people.createdDate.asc())
                 .fetchOne();
     }
 
     @Override
-    public List<PeopleDTO> findPeopleSearch(Pageable pageable, Search search){
+    public List<PeopleDTO> findPeopleSearch(Pageable pageable, String keyword){
         return jpaQueryFactory.select(new QPeopleDTO(
                 people.userId,
                 people.peopleNickname,
@@ -202,15 +161,16 @@ public class PeopleCustomRepositoryImpl implements PeopleCustomRepository {
                 people.createdDate
         )).from(people)
                 .where(
-                        peopleNicknameContaining(search.getPeopleNickname()),
-                        peopleNameContaining(search.getUserName())
+                    userNameAndNicknameContaining(keyword)
                 )
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
                 .orderBy(people.createdDate.desc())
                 .fetch();
     }
 
     @Override
-    public List<PeopleDTO> findPeopleSearchAsc(Pageable pageable, Search search){
+    public List<PeopleDTO> findPeopleSearchAsc(Pageable pageable, String keyword){
         return jpaQueryFactory.select(new QPeopleDTO(
                 people.userId,
                 people.peopleNickname,
@@ -222,11 +182,24 @@ public class PeopleCustomRepositoryImpl implements PeopleCustomRepository {
                 people.createdDate
         )).from(people)
                 .where(
-                        peopleNicknameContaining(search.getPeopleNickname()),
-                        peopleNameContaining(search.getUserName())
+                    userNameAndNicknameContaining(keyword)
                 )
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
                 .orderBy(people.createdDate.asc())
                 .fetch();
     }
 
+    // 통합검색
+    private BooleanBuilder userNameAndNicknameContaining(String keyword) {
+        if (keyword == null) {
+            return null;
+        }
+        BooleanBuilder booleanBuilder = new BooleanBuilder();
+        if (keyword!=null) {
+            booleanBuilder.or(people.userName.contains(keyword));
+            booleanBuilder.or(people.peopleNickname.contains(keyword));
+        }
+        return booleanBuilder;
+    }
 }

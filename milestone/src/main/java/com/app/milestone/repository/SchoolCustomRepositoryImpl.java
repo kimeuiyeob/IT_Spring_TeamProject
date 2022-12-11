@@ -137,20 +137,6 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
                 .fetchOne();
     }
 
-    @Override
-    public Long countByCreatedDate2(Pageable pageable, Search search) {
-        return jpaQueryFactory.select(school.count())
-                .from(school)
-                .where(
-//                        보육원 이름 검색
-                        schoolNameContaining(search.getSchoolName()),
-                        userNameContaining(search.getUserName())
-                )
-                .orderBy(school.createdDate.asc())
-                .offset(pageable.getOffset())
-                .limit(pageable.getPageSize())
-                .fetchOne();
-    }
 
     //    User검색
     private BooleanExpression userNameContaining(String userName) {
@@ -197,8 +183,10 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
     }
 
 
+
+
+
     //========================관리자페이지===========================
-    //보육원 목록
     @Override
     public List<School> findByCreatedDate(Pageable pageable) {
         return jpaQueryFactory.selectFrom(school)
@@ -208,82 +196,35 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
                 .fetch();
     }
 
+    //========================관리자페이지===========================
+
+    //    통합검색 보육원 수2
     @Override
-    public List<SchoolDTO> findBySchoolOnly(Pageable pageable, Search search) {
-        return jpaQueryFactory.select(new QSchoolDTO(
-                school.userId,
-                school.schoolName,
-                school.address.schoolAddress,
-                school.address.schoolAddressDetail,
-                school.address.schoolZipcode,
-                school.schoolTeachers,
-                school.schoolKids,
-                school.schoolBudget,
-                school.schoolBank,
-                school.schoolAccount,
-                school.schoolPhoneNumber,
-                school.schoolQR,
-                school.introduce.schoolTitle,
-                school.introduce.schoolContent,
-                school.userEmail,
-                school.userName,
-                school.userPassword,
-                school.userPhoneNumber,
-                school.donationCount,
-                school.createdDate
-        ))
+    public Long countByCreatedDate2(Pageable pageable, String keyword) {
+        return jpaQueryFactory.select(school.count())
                 .from(school)
                 .where(
-                        schoolNameContaining(search.getSchoolName()),
-                        schoolAddressContaining0(search.getSchoolAddress())
+                        userNameAndSchoolNameContaining(keyword)
                 )
-                .orderBy(school.createdDate.desc())
-                .fetch();
+                .orderBy(school.createdDate.asc())
+                .fetchOne();
     }
 
-
-        @Override
-        public List<SchoolDTO> findBySchoolOnlyAsc() {
-            return jpaQueryFactory.select(new QSchoolDTO(
-                    school.userId,
-                    school.schoolName,
-                    school.address.schoolAddress,
-                    school.address.schoolAddressDetail,
-                    school.address.schoolZipcode,
-                    school.schoolTeachers,
-                    school.schoolKids,
-                    school.schoolBudget,
-                    school.schoolBank,
-                    school.schoolAccount,
-                    school.schoolPhoneNumber,
-                    school.schoolQR,
-                    school.introduce.schoolTitle,
-                    school.introduce.schoolContent,
-                    school.userEmail,
-                    school.userName,
-                    school.userPassword,
-                    school.userPhoneNumber,
-                    school.donationCount,
-                    school.createdDate
-            ))
-                    .from(school)
-                    .orderBy(school.createdDate.asc())
-                    .fetch();
-        }
-
-
-
-
-
-
-/*====================================================================*/
-/*====================================================================*/
-/*====================================================================*/
-/*====================================================================*/
-/*====================================================================*/
-    //    예산 순 내림차순, 검색(기본)
+    //    통합검색 보육원 수3
     @Override
-    public List<SchoolDTO> findByBudgetAndSearch(Pageable pageable, Search search) {
+    public Long countByCreatedDate3(Pageable pageable, String keyword) {
+        return jpaQueryFactory.select(school.count())
+                .from(school)
+                .where(
+                        schoolNameAndAddressContaining(keyword)
+                )
+                .orderBy(school.createdDate.asc())
+                .fetchOne();
+    }
+
+    //    예산 순 내림차순, 검색
+    @Override
+    public List<SchoolDTO> findByBudgetAndSearch(Pageable pageable, String keyword) {
         return jpaQueryFactory.select(new QSchoolDTO(
                 school.userId,
                 school.schoolName,
@@ -308,16 +249,17 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
         ))
                 .from(school)
                 .where(
-                        schoolNameContaining(search.getSchoolName()),
-                        schoolAddressContaining0(search.getSchoolAddress())
+                        schoolNameAndAddressContaining(keyword)
                 )
+                .offset(pageable.getOffset()) //여기서부터 10개를 가져온다 <-10개는 아래 limit ex)2페이지면 10부터 10개
+                .limit(pageable.getPageSize()) //목록에 뿌릴갯수 -> 10을보냈으니까 10으로 limit걸어논거다.
                 .orderBy(school.schoolBudget.desc())
                 .fetch();
     }
 
     //    예산 순 오름차순, 검색
     @Override
-    public List<SchoolDTO> findByBudgetAndSearchAsc(Pageable pageable, Search search) {
+    public List<SchoolDTO> findByBudgetAndSearchAsc(Pageable pageable, String keyword) {
         return jpaQueryFactory.select(new QSchoolDTO(
                 school.userId,
                 school.schoolName,
@@ -342,17 +284,15 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
         ))
                 .from(school)
                 .where(
-                        //                  보육원 이름 검색
-                        schoolNameContaining(search.getSchoolName()),
-                        schoolAddressContaining0(search.getSchoolAddress())
+                        schoolNameAndAddressContaining(keyword)
                 )
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
                 .orderBy(school.schoolBudget.asc())
-//                .offset(pageable.getOffset())
-//                .limit(pageable.getPageSize())
                 .fetch();
     }
 
-    public List<SchoolDTO> findSchoolSearch (Pageable pageable, Search search){
+    public List<SchoolDTO> findSchoolSearch (Pageable pageable, String keyword){
         return jpaQueryFactory.select(new QSchoolDTO(
                 school.userId,
                 school.schoolName,
@@ -377,14 +317,15 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
         ))
                 .from(school)
                 .where(
-                        schoolNameContaining(search.getUserName()),
-                        userNameContaining(search.getSchoolName())
+                        userNameAndSchoolNameContaining(keyword)
                 )
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
                 .orderBy(school.createdDate.desc())
                 .fetch();
     };
 
-    public List<SchoolDTO> findSchoolSearchAsc (Pageable pageable, Search search){
+    public List<SchoolDTO> findSchoolSearchAsc (Pageable pageable, String keyword){
         return jpaQueryFactory.select(new QSchoolDTO(
                 school.userId,
                 school.schoolName,
@@ -409,14 +350,40 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
         ))
                 .from(school)
                 .where(
-                        schoolNameContaining(search.getUserName()),
-                        userNameContaining(search.getSchoolName())
+                        userNameAndSchoolNameContaining(keyword)
                 )
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
                 .orderBy(school.createdDate.asc())
                 .fetch();
     };
 
 
+    // 통합검색2
+    private BooleanBuilder userNameAndSchoolNameContaining(String keyword) {
+        if (keyword == null) {
+            return null;
+        }
+        BooleanBuilder booleanBuilder = new BooleanBuilder();
+        if (keyword!=null) {
+            booleanBuilder.or(school.userName.contains(keyword));
+            booleanBuilder.or(school.schoolName.contains(keyword));
+        }
+        return booleanBuilder;
+    }
+
+    // 통합검색3
+    private BooleanBuilder schoolNameAndAddressContaining(String keyword) {
+        if (keyword == null) {
+            return null;
+        }
+        BooleanBuilder booleanBuilder = new BooleanBuilder();
+        if (keyword!=null) {
+            booleanBuilder.or(school.schoolName.contains(keyword));
+            booleanBuilder.or(school.address.schoolAddress.contains(keyword));
+        }
+        return booleanBuilder;
+    }
 
 
 }

@@ -303,11 +303,8 @@ let pageInfo;
 peopleListShow();
 
 function peopleListShow(){
-    console.log('몇페이지 : '+page);
-
     getPeopleList1({
-        peopleNickName: $search.text(),
-        userName: $search.text(),
+        keyword: $search.text(),
         page: globalThis.page
     }, getPeopleList)
 }
@@ -407,17 +404,13 @@ function getSchoolList(schoolResp) {
 }
 
 function getPeopleList1(param, callback, error) {
-
-    let existPeopleNickName = param.peopleNickName.length != 0;
-    let existUserName = param.userName.length != 0;
+    let existKeyword = param.keyword.length != 0;
     let queryString = "/" + param.page || 1;
 
-    queryString += existPeopleNickName ? "/" + param.peopleNickName : "";
+    queryString += existKeyword ? "/" + param.keyword : "";
 
-    if (!existPeopleNickName && existUserName) {
-        queryString += "/null";
-    }
-    queryString += existUserName ? "/" + param.userName : "";
+    console.log("queryString : " + queryString);
+
     $.ajax({
         url: "/adminRest/userpeople" + queryString,
         type: "get",
@@ -435,17 +428,13 @@ function getPeopleList1(param, callback, error) {
 }
 
 function getPeopleList1Asc(param, callback, error){
-
-    let existPeopleNickName = param.peopleNickName.length != 0;
-    let existUserName = param.userName.length != 0;
+    let existKeyword = param.keyword.length != 0;
     let queryString = "/" + param.page || 1;
 
-    queryString += existPeopleNickName ? "/" + param.peopleNickName : "";
+    queryString += existKeyword ? "/" + param.keyword : "";
 
-    if (!existPeopleNickName && existUserName) {
-        queryString += "/null";
-    }
-    queryString += existUserName ? "/" + param.userName : "";
+    console.log("queryString : " + queryString);
+
     $.ajax({
         url : "/adminRest/userpeopleAsc"+queryString,
         type : "get",
@@ -463,17 +452,13 @@ function getPeopleList1Asc(param, callback, error){
 }
 
 function getSchoolList1(param, callback, error){
-
-    let existSchoolName = param.schoolName.length != 0;
-    let existUserName = param.userName.length != 0;
+    let existKeyword = param.keyword.length != 0;
     let queryString = "/" + param.page || 1;
 
-    queryString += existSchoolName ? "/" + param.schoolName : "";
+    queryString += existKeyword ? "/" + param.keyword : "";
 
-    if (!existSchoolName && existUserName) {
-        queryString += "/null";
-    }
-    queryString += existUserName ? "/" + param.userName : "";
+    console.log("queryString : " + queryString);
+
     $.ajax({
         url : "/adminRest/userschool"+queryString,
         type : "get",
@@ -491,17 +476,13 @@ function getSchoolList1(param, callback, error){
 }
 
 function getSchoolList1Asc(param, callback, error){
-
-    let existSchoolName = param.schoolName.length != 0;
-    let existUserName = param.userName.length != 0;
+    let existKeyword = param.keyword.length != 0;
     let queryString = "/" + param.page || 1;
 
-    queryString += existSchoolName ? "/" + param.schoolName : "";
+    queryString += existKeyword ? "/" + param.keyword : "";
 
-    if (!existSchoolName && existUserName) {
-        queryString += "/null";
-    }
-    queryString += existUserName ? "/" + param.userName : "";
+    console.log("queryString : " + queryString);
+
     $.ajax({
         url : "/adminRest/userschoolAsc"+queryString,
         type : "get",
@@ -523,14 +504,12 @@ function search() {
     console.log("$search.text() : "+$search.val())
     if($(".user-type").text().match("일반")){
         getPeopleList1({
-            peopleNickName: $search.val(),
-            userName: $search.val(),
+            keyword: $search.val(),
             page: globalThis.page
         }, getPeopleList);
     }else if($(".user-type").text().match("보육원")){
         getSchoolList1({
-            schoolName : $search.val(),
-            userName: $search.val(),
+            keyword: $search.val(),
             page: globalThis.page
         }, getSchoolList);
     }
@@ -538,16 +517,14 @@ function search() {
 
 $(".right-people").on('click',function () {
     getPeopleList1({
-        peopleNickName: $search.text(),
-        userName: $search.text(),
+        keyword: $search.val(),
         page: globalThis.page
     }, getPeopleList)
 })
 
 $(".right-school").on('click',function () {
     getSchoolList1({
-        schoolName: $search.text(),
-        userName: $search.text(),
+        keyword: $search.val(),
         page: globalThis.page
     }, getSchoolList)
 })
@@ -557,14 +534,12 @@ function search2() {
     console.log("$search.text() : "+$search.val())
     if($(".user-type").text().match("일반")){
         getPeopleList1Asc({
-            peopleNickName: $search.val(),
-            userName: $search.val(),
+            keyword: $search.val(),
             page: globalThis.page
         }, getPeopleList);
     }else if($(".user-type").text().match("보육원")){
         getSchoolList1Asc({
-            schoolName : $search.val(),
-            userName: $search.val(),
+            keyword: $search.val(),
             page: globalThis.page
         }, getSchoolList);
     }
@@ -642,7 +617,3 @@ $pagingBtnFlex.on('mouseout', "a.page-number-link", function () {
 window.onresize = function () {
     document.location.reload();
 };
-
-$(".add-submit").on('click', function () {
-    console.log()
-})
