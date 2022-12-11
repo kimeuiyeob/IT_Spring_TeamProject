@@ -2,6 +2,7 @@ package com.app.milestone.controller.notice;
 
 
 import com.app.milestone.domain.NoticeDTO;
+import com.app.milestone.domain.QNoticeDTO;
 import com.app.milestone.service.NoticeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +29,11 @@ public class NoticeController {
     @GetMapping("/noticeList")
     public void noticeList(Long noticeId, Model model){
         model.addAttribute("notice",  noticeService.noticeInfo(noticeId));
+        log.info("컨트롤러 -> 화면으로 가져갈값1 : " +  noticeService.noticeInfo(noticeId));
+
+        model.addAttribute("noticeAll" ,noticeService.selectNoticeAll());
+
+        log.info("컨트롤러 -> 화면으로 가져갈값2 : " + noticeService.selectNoticeAll());
     }
 
     /*==================================================================================================*/

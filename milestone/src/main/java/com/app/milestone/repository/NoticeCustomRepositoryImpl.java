@@ -88,6 +88,21 @@ public class NoticeCustomRepositoryImpl implements NoticeCustomRepository{
                 .fetch();
     }
 
+    /*Notice 공지사항 찾아오기*/
+    @Override
+    public List<NoticeDTO> selectNoticeAll() {
+        return jpaQueryFactory.select(new QNoticeDTO(
+                notice.noticeId,
+                notice.noticeTitle,
+                notice.noticeContent,
+                notice.createdDate
+        ))
+                .from(notice)
+                .orderBy(notice.createdDate.desc())
+                .limit(7)
+                .fetch();
+    }
+
     @Override
     public List<NoticeDTO> findBySearch(Pageable pageable, Search search) {
         return jpaQueryFactory.select(new QNoticeDTO(

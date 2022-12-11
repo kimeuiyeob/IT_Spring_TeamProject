@@ -15,7 +15,6 @@ import org.springframework.util.StringUtils;
 import java.util.List;
 
 import static com.app.milestone.entity.QDonation.donation;
-import static com.app.milestone.entity.QPeople.people;
 import static com.app.milestone.entity.QTalent.talent;
 
 @Repository

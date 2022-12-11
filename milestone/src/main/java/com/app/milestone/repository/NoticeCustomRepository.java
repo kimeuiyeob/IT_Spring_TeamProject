@@ -17,4 +17,7 @@ public interface NoticeCustomRepository {
 
     //Notice공지사항 글 순서대로 조회
     public List<NoticeDTO> findBySearchAsc(Pageable pageable, Search search);
+    //Notice공지사항 글 순서대로 조회
+    public List<NoticeDTO> selectNoticeAll();
+
 }
