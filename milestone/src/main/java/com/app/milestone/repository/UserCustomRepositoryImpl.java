@@ -1,5 +1,6 @@
 package com.app.milestone.repository;
 
+import com.app.milestone.entity.QUser;
 import com.app.milestone.entity.User;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -56,4 +57,18 @@ public class UserCustomRepositoryImpl implements UserCustomRepository {
     public void clearStore() {
         store.clear();
     }
+
+    @Override
+    public Long findByUserEmailAndUserPassword(String userEmail, String userPassword) {
+        return jpaQueryFactory
+                .select(user.userId)
+                .from(user)
+                .where(
+                        user.userEmail.eq(userEmail),
+                        user.userPassword.eq(userPassword)
+                )
+                .fetchOne();
+    }
+
+
 }
