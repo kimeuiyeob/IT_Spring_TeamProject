@@ -8,6 +8,7 @@ import com.app.milestone.service.TalentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,12 +37,23 @@ public class TalentRestController {
         return talentService.talentDetail(donationId);
     }
     /*===============================================*/
-    //글 작성시 저장
+    //쟈능기부 글 작성시 저장
     @PostMapping("/write")
-    public void saveBoard(@RequestBody TalentDTO talentDTO){
+    public void saveWrite(@RequestBody TalentDTO talentDTO){
         talentDTO.setPeopleUserId(101L); // <=======================================세션값으로 변경
         talentService.registerTalent(talentDTO);
     }
-
+    /*===============================================*/
+    //***마이페이지*** 재능기부 목록 글 수정
+    @PostMapping("/change")
+    public void changeWrite(@RequestBody TalentDTO talentDTO){
+        talentService.changeWrite(talentDTO);
+    }
+    /*===============================================*/
+    //***마이페이지*** 재능기부 목록 글 삭제
+    @PostMapping("/delete")
+    public void deleteWrite(@RequestBody TalentDTO talentDTO){
+        talentService.deleteByDonationId(talentDTO.getDonationId());
+    }
 
 }

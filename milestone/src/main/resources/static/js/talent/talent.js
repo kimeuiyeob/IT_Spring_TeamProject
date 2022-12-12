@@ -1,5 +1,7 @@
 let save = [];
 
+/*===========================================================================================*/
+/*카테고리 하단 노란색 줄 */
 window.onload = function () {
 
     $("#all").css({"display": "flex"})
@@ -109,9 +111,8 @@ $(".program").click(function () {
     $(".art").css({"font-weight": "normal", "color": "rgb(154, 155, 167)"})
 
 })
-
-/*=====================지역 드랍 다운===========================*/
-
+/*===========================================================================================*/
+/*지역 드랍 다운*/
 
 $(".location").mouseover(function () {
     $(this).css({"padding-bottom": "10px"})
@@ -124,8 +125,9 @@ $(".location").mouseout(function () {
 $(".wholeLocation").css({"background-color": "transparent"});
 $(".wholeLocation").css({"border": "solid 1px black"});
 
+/*===========================================================================================*/
+/*전체보기를 눌렀을 땐 작은 지역들 선택을 해제한다 */
 
-/* 전체보기를 눌렀을 땐 작은 지역들 선택을 해제한다 */
 $(".wholeLocation").click(function () {
     $(".wholeLocation").css({"background-color": "transparent"});
     $(".wholeLocation").css({"border": "solid 1px black"});
@@ -134,7 +136,9 @@ $(".wholeLocation").click(function () {
     save = [];
 })
 
+/*===========================================================================================*/
 /* 지역선택시 지역저장 */
+
 $(".location2").click(function () {
     $(".wholeLocation").css({"background-color": "#f2f3f7"})
     $(".wholeLocation").css({"border": "none"})
@@ -166,8 +170,8 @@ $(".location2").click(function () {
     }
 })
 
-
-/*===================글작성 선택 모달==========================*/
+/*===========================================================================================*/
+/*글작성 선택 모달 */
 
 let $cancels = $('#pencil');
 
@@ -197,9 +201,8 @@ document.addEventListener('click', function (e) {
     }
 })
 
-/*========================================================*/
-
-/*===================목록 클릭 상세페이지====================*/
+/*===========================================================================================*/
+/*목록 클릭 상세페이지*/
 
 let $talentModal = $('.talentModal');
 let talentModal = document.querySelector('.talentModal');
@@ -312,12 +315,11 @@ $(".AllTalentBox").on("click", ".talentBox", function (){
     })
 })
 
-/*==============================================================*/
-
-/*==============================================================*/
-/*재능기부 목록 취소버튼*/
+/*===========================================================================================*/
+/*재능기부 목록 취소버튼 = 상세페이지모달 취소*/
 
 $(".talentModal").on('click', ".css-nh621w", function () {
+    console.log("취소1")
     $talentModal.hide();
     $modalWrap.hide();
     $writePlease.hide();
@@ -327,10 +329,11 @@ $(".talentModal").on('click', ".css-nh621w", function () {
 
 })
 
-/*=============================================================*/
-/*재능기부 목록 취소버튼*/
+/*===========================================================================================*/
+/*재능기부 목록 취소버튼 = 글작성모달 취소*/
 
 $('.css-nh621w').on('click', function () {
+    console.log("취소2")
     $talentModal.hide();
     $modalWrap.hide();
     $writePlease.hide();
@@ -350,7 +353,8 @@ document.addEventListener('click', function (e) {
     }
 })
 
-/*==================모달 내부 카테고리 드랍다운====================*/
+/*===========================================================================================*/
+/*모달 내부 카테고리 드랍다운*/
 
 const $moreSelect = $('div.inputCos');
 const $moreSelectList = $('div.moreSelectWrap');
@@ -386,7 +390,8 @@ document.addEventListener('click', function (e) {
     }
 })
 
-/*==================모달 내부 지역 드랍다운======================*/
+/*===========================================================================================*/
+/*모달 내부 지역 드랍다운*/
 
 const $inputCos = $('#inputCos');
 const $moreSelectWrap = $('#moreSelectWrap');
@@ -411,21 +416,24 @@ document.addEventListener('click', function (e) {
         $moreSelectWrap.toggle();
     }
 })
-/*==================글자수 제한====================*/
+
+/*===========================================================================================*/
+/*글자수 제한*/
 
 const $textareaCos = $('#kimeuiyeob');
 const $contentLength = $('.contentLength');
 const maxContent = 300;
 
-$textareaCos.keyup(function (e) {
+$textareaCos.keyup(function () {
     $contentLength.text($textareaCos.val().length)
     if ($textareaCos.val().length > maxContent) {
         $textareaCos.val($textareaCos.val().substring(0, maxContent));
         $contentLength.text(maxContent);
     }
 })
-/*================================================================*/
-/*================글 작성 모달 유효성 검사 / 글작성 완료================ */
+
+/*===========================================================================================*/
+/*글 작성 모달 유효성 검사 = 글작성 완료*/
 
 let $writeFinish = $('#writeFinish');
 let $writePlease = $('#writePlease');
@@ -433,13 +441,10 @@ let $writePlease = $('#writePlease');
 let $category = $('input[name=bank]');
 let $telent = $('#talent');
 
-
 let $cateDate = $('#dateTime');
 
 let $cateTitle = $('#kim2');
 let $cateContent = $('#kimeuiyeob');
-let $catePlace = $('.place');
-let $cateCategory = $('.moreSelectItem');
 
 
 $($writeFinish).on('click', function () {
@@ -452,7 +457,7 @@ $($writeFinish).on('click', function () {
             talentAbleDate: $cateDate.val(),
             talentCategory: textCategory,
             talentPlace: textPlace,
-        }, hideModal); //콜백 함수
+        }, hideModal);
     }
 });
 
@@ -465,7 +470,6 @@ function registerTalent(talentDTO, callback, error) {
         data: JSON.stringify(talentDTO),
         contentType: "application/json; charset=utf-8",
         success: function () {
-            console.log("에이작스 성공했을때!!!!")
             if (callback) {
                 callback();
             }
@@ -479,36 +483,34 @@ function registerTalent(talentDTO, callback, error) {
     });
 }
 
-function hideModal() { //콜백 함수 실행
-    console.log("콜백함수 성공했을때!!!!")
+function hideModal() {
     $talentModal.hide();
     $modalWrap.hide();
     $writePlease.hide();
     $category.val("") & $cateDate.val("") & $cateTitle.val("") & $cateContent.val("");
     $telent.val("");
     body.css('overflow', 'auto');
-    location.reload();
+    show();
 }
 
-
-/*===============재능기부 목록에서 신청하기 버튼=====================*/
-
-let $writeApply = $('#writeApply');
+/*===========================================================================================*/
+/*재능기부 목록에서 신청하기 버튼*/
 
 $(".talentModal").on('click', "#writeApply", function () {
     $talentModal.hide();
     body.css('overflow', 'auto');
-    // alert("신청완료되었습니다.")
 })
 
-
-/*==============검색창 옆 드롭다운 버튼 선택(중복가능)============== */
+/*===========================================================================================*/
+/*검색창 옆 드롭다운 버튼 선택(중복가능)*/
 
 var checkDrop = false;
 var checkLocal = {
     checkSeoul: false, checkKyungki: false, checkKangwon: false,
     checkChungcheong: false, checkJeolla: false, checkGyeongsang: false, checkJeju: false
 };
+
+/*===========================================================================================*/
 /* 저장된 지역 */
 var saveLocal = [];
 
@@ -535,7 +537,6 @@ $(".dropbtn").on('click', function () {
         }
     }
 })
-
 
 /* 드롭다운 버튼 선택(중복가능) */
 $(".dropLoc").on('click', function () {
@@ -660,23 +661,27 @@ $(".dropLoc").on('click', function () {
             }
             break;
     }
-    console.log("여기가 지역 저장한 곳2 : " +saveLocal);
 });
-/*========================인풋 데이트 타입 오늘전날짜 클릭 못하게============================*/
+
+/*===========================================================================================*/
+/* 인풋 데이트 타입 오늘전날짜 클릭 금지 */
+
 var now_utc = Date.now()
 var timeOff = new Date().getTimezoneOffset() * 60000;
 var today = new Date(now_utc - timeOff).toISOString().split("T")[0];
 document.getElementById("dateTime").setAttribute("min", today);
 
-/*====================================검색창 제목 입력시==================================*/
+/*===========================================================================================*/
+/* 검색창 제목 입력시 */
 
 const $talentSearch = $('input[name = talentName]');
 const $talentName = $('#talentName');
 const $realSearhBox = $('.realSearhBox');
 const $talentClick = $('.css-7kp13n');
 
-/*=====================================================================================*/
+/*===========================================================================================*/
 /*전체 클릭시*/
+
 function getTalentList(param, callback, error) {
 
     const list = [];
@@ -709,12 +714,10 @@ function getTalentList(param, callback, error) {
         queryString = queryString.substring(0, queryString.length - 1);
     }
 
-    console.log("최종 경로 : /talentrest/list" + queryString)
-
     $.ajax({
-        url: "/talentrest/list" + queryString, ///talentrest/list경로에 + queryString 전달한다.
+        url: "/talentrest/list" + queryString,
         type: "get",
-        success: function (schoolResp, status, xhr) { //talentrest controller에서 받아서 함수가 성공했다면 리턴값을 schoolResp로 받는다.
+        success: function (schoolResp, status, xhr) {
             if (callback) {
                 callback(schoolResp);
             }
@@ -727,7 +730,7 @@ function getTalentList(param, callback, error) {
     });
 }
 
-/*=====================================================================================*/
+/*===========================================================================================*/
 
 
 

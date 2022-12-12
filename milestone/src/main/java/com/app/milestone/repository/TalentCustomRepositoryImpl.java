@@ -60,6 +60,8 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
                 .fetch();
     }
 
+    /*=============================================================================================================*/
+
     @Override
     public List<TalentDTO> findAllTalentById(Pageable pageable, Long peopleId) {
         //pageale쓰면 pageale.of(파라미터 2개를 받을수있다) 첫번째가 현재페이지(page), 두번째가 페이지 사이즈(amount)
@@ -166,6 +168,7 @@ public List<Tuple> sortBytalentRank() {
                 .where(talent.donationId.eq(donationId))
                 .fetch();
     }
+    /*=============================================================================================================*/
 
     //============제목 검색==============//
     private BooleanExpression talentTitleContaining(String talentTitle) { //booleanExpression은 null 일때 무시될 수 있고, and또는 or절을 통해서 조합을 할 수 있다.
