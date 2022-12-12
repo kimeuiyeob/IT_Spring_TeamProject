@@ -26,3 +26,10 @@ spring:
   output:
     ansi:
       enabled: always
+  servlet:
+    multipart:
+      enabled: true
+      max-request-size: 40MB
+      max-file-size: 40MB
+      file-size-threshold: 100MB
+      location: c:\\storage\\temp

@@ -111,12 +111,12 @@
         <div id="mobile-etc1" style="flex-grow: 1;"></div>
         <div class="button1 login-header-button1" id="mobile-button1">
             <button role="button" color="default" class="button2 button3"
-                    th:style="${session.loginMember == null ? 'display:block' : 'display:none'}">
+                    th:style="${session.userId == null ? 'display:block' : 'display:none'}">
                 <span class="button4 button3">보육원 등록</span>
             </button>
             <div class="relative">
                 <button role="button" color="default" class="button2 button3" id="message-button"
-                        th:style="${session.loginMember != null ? 'display:block' : 'display:none'}">
+                        th:style="${session.userId != null ? 'display:block' : 'display:none'}">
                     <span class="button4 button3">알림</span>
                 </button>
                 <div class="message1" id="message-id1">
@@ -137,20 +137,20 @@
             </div>
             <form th:action="@{/login/login}" method="get">
                 <button role="button" type="submit" color="default" id="loginBtn" class="button5 button3"
-                        th:style="${session.loginMember == null ? 'display:block' : 'display:none'}">
+                        th:style="${session.userId == null ? 'display:block' : 'display:none'}">
                     <span class="button6 button3">로그인</span>
                 </button>
             </form>
             <button role="button" color="default" id="loginBtn" class="button5 button3"
-                    th:style="${session.loginMember != null ? 'display:block' : 'display:none'}">
+                    th:style="${session.userId != null ? 'display:block' : 'display:none'}">
                 <span class="button6 button3">내 정보</span>
             </button>
             <a role="link" color="yellow" href="../join/select" class="button7 button3" style="display: none;"
-               th:style="${session.loginMember == null ? 'display:block' : 'display:none'}">
+               th:style="${session.userId == null ? 'display:block' : 'display:none'}">
                 <span class="button8 button3">무료 회원가입</span>
             </a>
             <div class="profile1 profile2" id="profile1"
-                 th:style="${session.loginMember != null ? 'display:block' : 'display:none'}">
+                 th:style="${session.userId != null ? 'display:block' : 'display:none'}">
                 <a role="link" color="default" href="#" class="profile3 profile4" aria-expanded="false">
                     <span class="profile5 profile6">
                         <div size="32" shape="0" role="article" class="profile7 profile8">
@@ -288,7 +288,7 @@
         <div class="header7">
             <div class="header8">
                 <form th:action="@{/login/logout}" method="post">
-                    <button th:style="${session.loginMember != null ? 'display:block' : 'display:none'}" type="submit">
+                    <button th:style="${session.userId != null ? 'display:block' : 'display:none'}" type="submit">
                         로그아웃
                     </button>
                 </form>
