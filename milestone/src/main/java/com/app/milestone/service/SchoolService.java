@@ -36,9 +36,9 @@ public class SchoolService {
         schoolDTO.setUserPassword(Base64.getEncoder().encodeToString(school.getUserPassword().getBytes()));
         schoolDTO.setUserName(school.getUserName());
         schoolDTO.setSchoolName(school.getSchoolName());
-        schoolDTO.setSchoolZipcode("13405");
-        schoolDTO.setSchoolAddress("아튼빌 아파트");
-        schoolDTO.setSchoolAddressDetail("1009동 1404호");
+        schoolDTO.setSchoolZipcode(school.getAddress().getSchoolZipcode());
+        schoolDTO.setSchoolAddress(school.getAddress().getSchoolAddress());
+        schoolDTO.setSchoolAddressDetail(school.getAddress().getSchoolAddressDetail());
         schoolDTO.setSchoolTeachers(school.getSchoolTeachers());
         schoolDTO.setSchoolKids(school.getSchoolKids());
         schoolDTO.setSchoolBudget(school.getSchoolBudget());
