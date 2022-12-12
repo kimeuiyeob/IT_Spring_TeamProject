@@ -22,9 +22,9 @@ public class LikeService {
 
     //    ============================좋아요=========================
     //    내가 누른 좋아요
-    public List<Long> likeSchoolList(Long sessionId) {
+    public List<Long> likeSchoolList(Long userId) {
         List<Long> arUserId = new ArrayList<>();
-        List<Like> likes = likeRepository.findByPeopleUserId(sessionId);
+        List<Like> likes = likeRepository.findByPeopleUserId(userId);
         for (Like like : likes) {
             arUserId.add(like.getSchool().getUserId());
         }

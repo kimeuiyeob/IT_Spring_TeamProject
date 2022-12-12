@@ -85,8 +85,8 @@ public class TalentService {
         List<Tuple> rankingInfo = talentRepository.sortBytalentRank();
         for (Tuple tuple : rankingInfo) {
             Ranking ranking = new Ranking();
-            String userName = peopleRepository.findById(tuple.get(1, Long.TYPE)).get().getUserName();
-            ranking.setUserName(userName);
+            String peopleNickname = peopleRepository.findById(tuple.get(1, Long.TYPE)).get().getPeopleNickname();
+            ranking.setPeopleNickname(peopleNickname);
             ranking.setUserId(tuple.get(1, Long.TYPE));
             ranking.setRankingItem(tuple.get(0, Long.TYPE));
             arRanking.add(ranking);
