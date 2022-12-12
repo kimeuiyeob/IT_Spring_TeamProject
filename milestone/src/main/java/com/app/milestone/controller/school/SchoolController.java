@@ -80,7 +80,7 @@ public class SchoolController {
     public RedirectView school(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
         Long userId = (Long) session.getAttribute("userId");
-        model.addAttribute("schoolDTO", schoolService.schoolInfo(userId));
+        model.addAttribute("schoolDTO", schoolService.schoolInfo(763L));
         return new RedirectView("/mypage/schoolinfo");
     }
 }

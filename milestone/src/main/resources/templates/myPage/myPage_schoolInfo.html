@@ -18,6 +18,10 @@
 
 <body>
 <header th:replace="/fix/header.html :: header"></header>
+<script th:inline="javascript">
+    let test = [[${schoolDTO}]]
+    console.log(test);
+</script>
 <div class="myPageWrap flex">
     <!-- 어사이드 -->
     <aside th:replace="/myPage/myPage_aside :: aside"></aside>
@@ -91,7 +95,7 @@
                                 <div class="essential">*</div>
                             </div>
                             <div class="margin-bottom-8 flexBetween">
-                                <input name="zipCode" id="zipCode" type="hidden" value="">
+                                <input name="zipCode" id="zipCode" type="hidden" th:value="*{schoolZipcode}">
                                 <input class="inputCos" name="address" id="address" type="text"
                                        placeholder="주소 검색 버튼을 이용해 주세요"
                                        th:value="*{schoolAddress}" disabled>
@@ -136,7 +140,7 @@
                             <div class="margin-bottom-8 flexRow">
                                 <div class="inputTitle">추가 연락처</div>
                             </div>
-                            <input class="inputCos" name="plusPhone" id="plusPhone" type="text" value="028456453"
+                            <input class="inputCos" name="plusPhone" id="plusPhone" type="text" th:value="*{schoolPhoneNumber}"
                                    placeholder="보육원 연락처를 입력해 주세요. 미입력시 가입시 입력한 번호로 등록됩니다.">
                             <div class="margin-top-6" style="display: none;">
                                 <div class="warningMsg">전화번호를 입력해 주세요.</div>
@@ -146,7 +150,7 @@
                             <div class="margin-bottom-8 flexRow">
                                 <div class="inputTitle">보육원 교사 수</div>
                             </div>
-                            <input class="inputCos" name="teacherPersonnel" id="teacherPersonnel" type="text" value="3"
+                            <input class="inputCos" name="teacherPersonnel" id="teacherPersonnel" type="text" th:value="*{schoolTeachers}"
                                    placeholder="0">
                         </div>
                         <div class="margin-bottom-20">
@@ -164,7 +168,7 @@
                             <div class="margin-bottom-8 flexRow">
                                 <div class="inputTitle">1년 예산</div>
                             </div>
-                            <input class="inputCos" name="budget" id="budget" type="text" value="200000000"
+                            <input class="inputCos" name="budget" id="budget" type="text" th:value="*{schoolBudget}"
                                    placeholder="0">
                         </div>
 
@@ -218,7 +222,7 @@
                                 <div class="essential">*</div>
                             </div>
                             <div class="margin-bottom-8">
-                                <input class="inputCos" name="title" id="title" type="text" value="함께하는 코끼리 보육원입니다."
+                                <input class="inputCos" name="title" id="title" type="text" th:value="*{schoolTitle}"
                                        placeholder="제목을 입력해 주세요">
                                 <div class="margin-top-6" style="display: none;">
                                     <div class="warningMsg">소개글 제목을 입력해 주세요.</div>
@@ -230,7 +234,7 @@
                             </div>
                             <div class="relative">
                                 <div class="textareaCos">
-                                    <textarea name="content" id="content">저희 보육원에 전달된 기부금은 모두 아이들을 위해 사용됩니다.</textarea>
+                                    <textarea name="content" id="content" th:value="*{schoolContent}"></textarea>
                                 </div>
                                 <div class="maxContentLength"><span class="contentLength">0</span>/500</div>
                             </div>

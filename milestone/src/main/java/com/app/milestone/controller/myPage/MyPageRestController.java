@@ -1,5 +1,6 @@
 package com.app.milestone.controller.myPage;
 
+import com.app.milestone.domain.SchoolDTO;
 import com.app.milestone.domain.Search;
 import com.app.milestone.domain.TalentDTO;
 import com.app.milestone.domain.TalentResp;
@@ -7,10 +8,7 @@ import com.app.milestone.service.TalentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -34,5 +32,11 @@ public class MyPageRestController {
         return talentResp;
     }
     /*=============================================================================*/
+    
+    /*황지수*/
+    @PostMapping(value = "/register")
+    public void register(@RequestBody SchoolDTO schoolDTO){
+        log.info("=============asdfas============="+schoolDTO);
+    }
 
 }
