@@ -73,16 +73,16 @@ public class School extends User {
 
         this.userEmail = schoolDTO.getUserEmail();
         this.userName = schoolDTO.getUserName();
-        this.userPassword = schoolDTO.getUserPassword();
-        this.userPhoneNumber = schoolDTO.getUserPhoneNumber();
+//        this.userPassword = schoolDTO.getUserPassword();
         this.schoolName = schoolDTO.getSchoolName();
         this.address = address;
+        this.userPhoneNumber = schoolDTO.getUserPhoneNumber();
+        this.schoolPhoneNumber = schoolDTO.getSchoolPhoneNumber();
         this.schoolTeachers = schoolDTO.getSchoolTeachers();
         this.schoolKids = schoolDTO.getSchoolKids();
         this.schoolBudget = schoolDTO.getSchoolBudget();
         this.schoolBank = schoolDTO.getSchoolBank();
         this.schoolAccount = schoolDTO.getSchoolAccount();
-        this.schoolPhoneNumber = schoolDTO.getSchoolPhoneNumber();
         this.introduce = introduce;
     }
 

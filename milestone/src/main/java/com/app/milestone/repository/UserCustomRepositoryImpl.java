@@ -69,6 +69,18 @@ public class UserCustomRepositoryImpl implements UserCustomRepository {
                 )
                 .fetchOne();
     }
+    
+    /*황지수*/
+//    @Override
+//    public Long countByUserEmail(String userEmail) {
+//        return jpaQueryFactory.select(user.count())
+//                .from(user)
+//                .where(
+//                        user.userEmail.ne(userEmail).and(user.userEmail.eq(userEmail))
+//                )
+//                .fetchOne();
+//    }
+    /*/황지수*/
 
 
 }
