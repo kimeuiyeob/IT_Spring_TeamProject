@@ -1,5 +1,6 @@
 package com.app.milestone.controller.myPage;
 
+import com.app.milestone.domain.Search;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,4 +58,13 @@ public class MyPageController {
 
     ;
 
+    /*=============================아래부터 의엽씨가 건든거입니다.==================================*/
+    @GetMapping("/alarm")
+    public void alarm() {
+       ;
+    }
+
+    @GetMapping("/talent")
+    public void talent(Search search) {;
+    }
 }
