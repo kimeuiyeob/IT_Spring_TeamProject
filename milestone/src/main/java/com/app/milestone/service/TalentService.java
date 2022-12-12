@@ -15,9 +15,12 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -44,17 +47,8 @@ public class TalentService {
         if (search.getTalentPlace() == null) {
             search.setTalentPlace(new ArrayList<>());
         }
-//        if (search.getTalentTitle() == null) {
-//            search.setTalentTitle(null);
-//        }
-
-        log.info("페이지 : " + page);
-        log.info("써치 : " + search);
-
         //List타입으로  list에담는다  talentRepository에있는 findAllByTalentAbleDate 메소드로 pageable의 값과 search값을 보낸다.
         List<TalentDTO> list = talentRepository.findAllByTalentAbleDate(pageable, search);
-
-        log.info("리스트 : " + list);
 
         //Page타입     talents담는다.  페이지구현체  사용자가 요청한 10개 게시글 / 자를때사용한도구 / 앞에 사용자가 요청한 게시글을 자르기 위해서 총 게시글의 개수
         Page<TalentDTO> talents = new PageImpl<>(list, pageable, Integer.valueOf("" + talentRepository.countByAbleDate(pageable, search)));
@@ -94,50 +88,48 @@ public class TalentService {
         return arRanking;
     }
 
-
-    public Page<TalentDTO> searchedTalentList(Integer page, Search search){
+    public Page<TalentDTO> searchedTalentList(Integer page, Search search) {
         if (page == null) page = 0;
         Pageable pageable = PageRequest.of(page, 7);
-
         if (search.getKeyword() == null) {
             search.setKeyword(null);
         }
-
         if (search.getTalentCategory() == null) {
             search.setTalentCategory(null);
         }
-
-//        if (search.getTalentPlaceOne() == null) {
-//            search.setTalentPlaceOne(null);
-//        }
-
-        log.info("써치 : " + search);
-        log.info("담은 검색어 : " + search.getKeyword());
-        log.info("담은 카테고리 : " + search.getTalentCategory());
-        log.info("담은지역 : " + search.getTalentPlaceOne());
-
-
         List<TalentDTO> list = talentRepository.findTalentSearch(pageable, search);
         Page<TalentDTO> talents = new PageImpl<>(list, pageable, Integer.valueOf("" + talentRepository.countByCreatedDate(pageable, search)));
 
         return talents;
     }
 
-
+    /*========================================================================*/
     //  재능기부 삭제
-    public void deleteByDonationId(Long donationId){
+    public void deleteByDonationId(Long donationId) {
         talentRepository.deleteById(donationId);
     }
 
     /*========================================================================*/
     //마이페이지 재능기부 목록
-    public Page<TalentDTO> findAllTalentById(Integer page,Long peopleId) {
+    public Page<TalentDTO> findAllTalentById(Integer page, Long peopleId) {
         if (page == null) page = 0;
         Pageable pageable = PageRequest.of(page, 5);
-        List<TalentDTO> list = talentRepository.findAllTalentById(pageable,peopleId);
+        List<TalentDTO> list = talentRepository.findAllTalentById(pageable, peopleId);
         Page<TalentDTO> talents = new PageImpl<>(list, pageable, Integer.valueOf("" + talentRepository.countByAbleDate2(pageable, peopleId)));
         return talents;
     }
 
+    /*========================================================================*/
+    //마이페이지 재능기부 -> 해당 도네이션 아이디로 삭제
+    public void deleteDonationId(Long donationId) {
+        talentRepository.deleteAllById(Collections.singleton(donationId));
+    }
+
+    /*========================================================================*/
+    //마이페이지 재능기부 -> 해당 도네이션 수정
+    @Transactional
+    public void changeWrite(TalentDTO talentDTO) {
+        talentRepository.findById(talentDTO.getDonationId()).get().update(talentDTO);
+    }
 
 }
