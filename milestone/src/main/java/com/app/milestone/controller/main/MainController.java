@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,7 +33,7 @@ public class MainController {
     private final SessionManager sessionManager;
 
     @PostMapping("/main/people")
-    public String createPeople(@Valid PeopleDTO peopleDTO, BindingResult result) {
+    public String createPeople(@RequestBody PeopleDTO peopleDTO, BindingResult result) {
         if (result.hasErrors()) {
             return "join/joinUser";
         }
@@ -42,10 +43,11 @@ public class MainController {
     }
 
     @PostMapping("/main/school")
-    public String createSchool(@Valid SchoolDTO schoolDTO, BindingResult result) {
-        if (result.hasErrors()) {
-            return "join/joinSchool";
-        }
+    public String createSchool(SchoolDTO schoolDTO) {
+        log.info("=========================" + schoolDTO);
+//        if (result.hasErrors()) {
+//            return "join/joinSchool";
+//        }
         schoolService.createSchool(schoolDTO);
 
         return "redirect:/main/main";

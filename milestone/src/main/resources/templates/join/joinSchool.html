@@ -76,10 +76,10 @@
                     <div class="essential">*</div>
                 </div>
                 <div class="flexBetween">
-                    <input name="zipCode" id="zipCode" type="hidden" value="">
-                    <input class="inputCos" name="address" id="address" type="text"
+                    <input name="schoolZipcode" id="schoolZipcode" type="hidden" value="">
+                    <input class="inputCos" name="schoolAddress" id="schoolAddress" type="text"
                            placeholder="주소 검색 버튼을 이용해 주세요"
-                           value="" disabled>
+                           value="">
                     <input type="text" id="addressFocus">
                     <button type="button" class="searchAddressBtn" id="searchAddressBtn" onclick="find()">주소
                         검색
@@ -94,7 +94,7 @@
                     <div class="inputTitle">보육원 상세 주소</div>
                     <div class="essential">*</div>
                 </div>
-                <input class="inputCos" name="addressDetail" id="addressDetail" type="text"
+                <input class="inputCos" name="schoolAddressDetail" id="schoolAddressDetail" type="text"
                        placeholder="상세 주소를 입력해 주세요">
                 <div class="margin-top-4" style="display: none;">
                     <div class="warningMsg">상세주소가 없다면 주소지의 특징을 입력해 주세요.</div>
@@ -140,7 +140,7 @@
                     </div>
                     <div class="inputCos flex" style="padding: 0;">
                         <div class="inputSpace flexRow">
-                            <input th:field="*{schoolBank}" type=text name="bank" id="bank" placeholder="은행을 선택해주세요" disabled>
+                            <input th:field="*{schoolBank}" type=text name="bank" id="bank" placeholder="은행을 선택해주세요">
                             <input type=text id="bankFocus">
                         </div>
                         <div class="arrowWrap flexPublic">
