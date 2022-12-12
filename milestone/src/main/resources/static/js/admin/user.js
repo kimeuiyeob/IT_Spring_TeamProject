@@ -9,6 +9,8 @@ $(document).on('click', function (e) {
     if (check1) {
         if (e.target.closest('.menu-sub-dropdown') == e.currentTarget.querySelector('.menu-sub-dropdown').closest('.menu-sub-dropdown')) {
             if($(".apply-button").text().match('적용')){
+                console.log("e.target : "+ e.target)
+
                 $filterDropdown.css('display', 'none');
                 $filter.css('background-color', '#f6f8fa');
                 $filter.css('color', '#009ef7');
@@ -17,6 +19,7 @@ $(document).on('click', function (e) {
                     'background-size': '13px'
                 });
                 check1 = !check1;
+                globalThis.page= 0;
                 if($("#option9").text().match('내림차순')) {
                     search();
                 }else if($("#option9").text().match('오름차순')){
@@ -239,7 +242,10 @@ function fnGetdata(){
             ,traditional: true
             ,success : function(result) {
                 alert("해당 회원이 정상적으로 삭제되었습니다.");
-                location.replace("user")
+                getSchoolList1({
+                    keyword: "",
+                    page: globalThis.page
+                }, getSchoolList);
             },
             error: function(request, status, error) {
             }
@@ -319,6 +325,8 @@ let pageInfo;
 peopleListShow();
 
 function peopleListShow(){
+    $("#check-user-type").val('일반');
+
     getPeopleList1({
         keyword: $search.text(),
         page: globalThis.page
@@ -517,13 +525,12 @@ function getSchoolList1Asc(param, callback, error){
 
 /* 회원 검색 */
 function search() {
-    console.log("$search.text() : "+$search.val())
-    if($(".user-type").text().match("일반")){
+    if($(".user-type").text().match("일반")||$("#check-user-type").val()=='일반'){
         getPeopleList1({
             keyword: $search.val(),
             page: globalThis.page
         }, getPeopleList);
-    }else if($(".user-type").text().match("보육원")){
+    }else if($(".user-type").text().match("보육원")||$("#check-user-type").val()=='보육원'){
         getSchoolList1({
             keyword: $search.val(),
             page: globalThis.page
@@ -532,13 +539,20 @@ function search() {
 }
 
 $(".right-people").on('click',function () {
+    $("#check-user-type").val('일반');
+    $search.val('');
+
     getPeopleList1({
         keyword: $search.val(),
         page: globalThis.page
     }, getPeopleList)
 })
 
+
 $(".right-school").on('click',function () {
+    $("#check-user-type").val('보육원');
+    $search.val('');
+
     getSchoolList1({
         keyword: $search.val(),
         page: globalThis.page
@@ -565,6 +579,7 @@ function search2() {
 /* 이름, 주소 검색 */
 $search.on("keyup", function (event) {
     if (event.keyCode === 13) {
+        globalThis.page=0;
         search()
     }
 });

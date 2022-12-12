@@ -20,6 +20,8 @@ $(document).on('click', function (e) {
                     'background-size': '13px'
                 });
                 check1 = !check1;
+
+                globalThis.page=0;
                 if($("#option9").text().match('내림차순')) {
                     console.log('333333 : '+$("#option9").text())
                     console.log('내림차순 실행')

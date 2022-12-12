@@ -23,7 +23,7 @@ public class NoticeRestController {
     private final NoticeService noticeService;
 
     @GetMapping(value= {"/list/{page}", "/list/{page}/{noticeTitle}"})
-    public NoticeResp userListPeople(@PathVariable("page") Integer page, Search search, Model model) {
+    public NoticeResp adminNoticeList(@PathVariable("page") Integer page, Search search, Model model) {
         NoticeResp noticeResp = new NoticeResp();
         Pageable pageable = PageRequest.of(page, 7);
         Page<NoticeDTO> arNoticeDTO = noticeService.noticeListBySearch(page, search);
@@ -33,7 +33,7 @@ public class NoticeRestController {
     }
 
     @GetMapping(value= {"/listAsc/{page}", "/listAsc/{page}/{noticeTitle}"})
-    public NoticeResp userListPeopleAsc(@PathVariable("page") Integer page, Search search, Model model) {
+    public NoticeResp adminNoticeListAsc(@PathVariable("page") Integer page, Search search, Model model) {
         NoticeResp noticeResp = new NoticeResp();
         Pageable pageable = PageRequest.of(page, 7);
         Page<NoticeDTO> arNoticeDTO = noticeService.noticeListBySearchAsc(page, search);

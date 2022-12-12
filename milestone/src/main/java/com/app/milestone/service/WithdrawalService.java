@@ -29,41 +29,27 @@ public class WithdrawalService {
         return withdrawalRepository.findByCreatedDateAsc();
     }
 
-    public Long withdrawalListCount(Pageable pageable, Search search) {
-        return withdrawalRepository.countByCreatedDate(pageable, search);
-    }
-
-    public Page<WithdrawalDTO> withdrawalListSearch(Integer page, Search search) {
+    public Page<WithdrawalDTO> withdrawalListSearch(Integer page, String reason) {
         if (page == null) page = 0;
         Pageable pageable = PageRequest.of(page, 7);
-
-        if (search.getWithdrawalReason() == null) {
-            search.setWithdrawalReason(null);
+        if (reason == null) {
+            reason = null;
         }
-
-        List<WithdrawalDTO> list = withdrawalRepository.findWithdrawalSearch(pageable, search);
-        int start = list.size() >= (int) pageable.getOffset() ? (int) pageable.getOffset() : (int) pageable.getOffset() - 10;
-        int end = Math.min((start + pageable.getPageSize()), list.size());
-
-        Page<WithdrawalDTO> withdrawals = new PageImpl<>(list.subList(start, end), pageable, Integer.valueOf("" + withdrawalRepository.countByCreatedDate(pageable, search)));
-
-        return withdrawals;
+        List<WithdrawalDTO> list = withdrawalRepository.findWithdrawalSearch(pageable, reason);
+        Page<WithdrawalDTO> withdrawal = new PageImpl<>(list, pageable, Integer.valueOf("" + withdrawalRepository.countByCreatedDate(pageable, reason)));
+        return withdrawal;
     }
-    public Page<WithdrawalDTO> withdrawalListSearchAsc(Integer page, Search search) {
+
+
+    public Page<WithdrawalDTO> withdrawalListSearchAsc(Integer page, String reason) {
         if (page == null) page = 0;
         Pageable pageable = PageRequest.of(page, 7);
-
-        if (search.getWithdrawalReason() == null) {
-            search.setWithdrawalReason(null);
+        if (reason == null) {
+            reason = null;
         }
-
-        List<WithdrawalDTO> list = withdrawalRepository.findWithdrawalSearchAsc(pageable, search);
-        int start = list.size() >= (int) pageable.getOffset() ? (int) pageable.getOffset() : (int) pageable.getOffset() - 10;
-        int end = Math.min((start + pageable.getPageSize()), list.size());
-
-        Page<WithdrawalDTO> withdrawals = new PageImpl<>(list.subList(start, end), pageable, Integer.valueOf("" + withdrawalRepository.countByCreatedDate(pageable, search)));
-
-        return withdrawals;
+        List<WithdrawalDTO> list = withdrawalRepository.findWithdrawalSearchAsc(pageable, reason);
+        Page<WithdrawalDTO> withdrawal = new PageImpl<>(list, pageable, Integer.valueOf("" + withdrawalRepository.countByCreatedDate(pageable, reason)));
+        return withdrawal;
     }
 
 

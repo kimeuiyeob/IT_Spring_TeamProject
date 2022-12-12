@@ -84,7 +84,7 @@ public class NoticeCustomRepositoryImpl implements NoticeCustomRepository{
                 .where(
                         titleContaining(search.getNoticeTitle())
                 )
-                .orderBy(notice.createdDate.desc())
+                .orderBy(notice.createdDate.asc())
                 .fetch();
     }
 

@@ -17,7 +17,7 @@ let check1 = false;
                         'background': `url('/imgs/admin/filterBlue.png')`,
                         'background-size': '13px'
                     });
-
+                    globalThis.page=0;
                     check1 = !check1;
                     search();
                 }
@@ -429,6 +429,7 @@ function search() {
 
 $search.on("keyup", function (event) {
     if (event.keyCode === 13) {
+        globalThis.page=0;
         search()
     }
 });

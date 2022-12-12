@@ -108,23 +108,23 @@ public class AdminRestController {
 
     //    탈퇴회원 조회
     @GetMapping(value= {"/withdrawal/{page}", "/withdrawal/{page}/{withdrawalReason}"})
-    public WithdrawalResp witthdrawal(@PathVariable("page") Integer page, Search search, Model model) {
+    public WithdrawalResp withdrawalList(@PathVariable("page") Integer page, @PathVariable(required = false) String withdrawalReason) {
+        log.info("=========================reason : "+withdrawalReason);
+        if(withdrawalReason == null){withdrawalReason= "";}
         WithdrawalResp withdrawalResp = new WithdrawalResp();
-        Pageable pageable = PageRequest.of(page, 7);
-        Page<WithdrawalDTO> arWithdrawalDTO = withdrawalService.withdrawalListSearch(page, search);
+        Page<WithdrawalDTO> arWithdrawalDTO = withdrawalService.withdrawalListSearch(page, withdrawalReason);
         withdrawalResp.setArWithdrawalDTO(arWithdrawalDTO);
-        withdrawalResp.setTotal(withdrawalService.withdrawalListCount(pageable, search));
         return withdrawalResp;
     }
 
     //    탈퇴회원 조회 asc
     @GetMapping(value= {"/withdrawalAsc/{page}", "/withdrawalAsc/{page}/{withdrawalReason}"})
-    public WithdrawalResp withdrawalAsc(@PathVariable("page") Integer page, Search search, Model model) {
+    public WithdrawalResp withdrawalListAsc(@PathVariable("page") Integer page, @PathVariable(required = false) String withdrawalReason) {
+        log.info("컨트롤러에 들어온 withdrawalReason : "+withdrawalReason);
+        if(withdrawalReason == null){withdrawalReason= "";}
         WithdrawalResp withdrawalResp = new WithdrawalResp();
-        Pageable pageable = PageRequest.of(page, 7);
-        Page<WithdrawalDTO> arWithdrawalDTO = withdrawalService.withdrawalListSearchAsc(page, search);
+        Page<WithdrawalDTO> arWithdrawalDTO = withdrawalService.withdrawalListSearchAsc(page, withdrawalReason);
         withdrawalResp.setArWithdrawalDTO(arWithdrawalDTO);
-        withdrawalResp.setTotal(withdrawalService.withdrawalListCount(pageable, search));
         return withdrawalResp;
     }
 
