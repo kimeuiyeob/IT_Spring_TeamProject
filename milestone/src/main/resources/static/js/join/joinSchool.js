@@ -17,10 +17,10 @@ function find() {
                 addr = data.jibunAddress;
             }
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
-            $("input[name='zipCode']").val(data.zonecode);
-            $("input[name='address']").val(addr);
+            $("input[name='schoolZipcode']").val(data.zonecode);
+            $("input[name='schoolAddress']").val(addr);
             // 커서를 상세주소 필드로 이동한다.
-            $("input[name='addressDetail']")[0].focus();
+            $("input[name='schoolAddressDetail']")[0].focus();
             addressCheckFlag = true;
             $('#searchAddressBtn').parent().next().hide();
         }
@@ -187,12 +187,12 @@ $schoolName.on('blur', function () {
 
 /*-------------------------보육원 주소--------------------------*/
 /*보육원 주소*/
-const $address = $('#address');
+const $address = $('#schoolAddress');
 const existingAddress = $address.val();
 let addressCheckFlag = false;
 
 /*보육원 상세 주소*/
-const $addressDetail = $('#addressDetail');
+const $addressDetail = $('#schoolAddressDetail');
 const existingAddressDetail = $addressDetail.val();
 let addressDetailCheckFlag = false;
 

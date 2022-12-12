@@ -38,7 +38,7 @@
                 </div>
                 <!-- 메인컨텐츠 -->
                 <div class="inputWrap margin-left-40 flexCol">
-                    <form action="" name="updateForm">
+                    <form action="" name="updateForm" th:object="${schoolDTO}">
                         <div class="margin-bottom-20">
                             <div class="margin-bottom-8 flexBetween">
                                 <div class="inputTitle">보육원 대표 사진</div>
@@ -57,7 +57,7 @@
                                 <div class="inputTitle">이메일</div>
                                 <div class="essential">*</div>
                             </div>
-                            <input class="inputCos" name="email" id="email" type="text" value="email@gmail.com"
+                            <input class="inputCos" name="email" id="email" type="text" th:value="*{userEmail}"
                                    placeholder="이메일을 입력해 주세요">
                             <div class="margin-top-6" style="display: none;">
                                 <div class="warningMsg">보육원 이름을 입력해 주세요.</div>
@@ -68,7 +68,7 @@
                                 <div class="inputTitle">이름</div>
                                 <div class="essential">*</div>
                             </div>
-                            <input class="inputCos" name="name" id="name" type="text" value="임장원"
+                            <input class="inputCos" name="name" id="name" type="text" th:value="*{userName}"
                                    placeholder="이름을 입력해 주세요">
                             <div class="margin-top-6" style="display: none;">
                                 <div class="warningMsg">보육원 이름을 입력해 주세요.</div>
@@ -79,7 +79,7 @@
                                 <div class="inputTitle">보육원 이름</div>
                                 <div class="essential">*</div>
                             </div>
-                            <input class="inputCos" name="schoolName" id="schoolName" type="text" value="코끼리보육원"
+                            <input class="inputCos" name="schoolName" id="schoolName" type="text" th:value="*{schoolName}"
                                    placeholder="보육원 이름을 입력해 주세요">
                             <div class="margin-top-6" style="display: none;">
                                 <div class="warningMsg">보육원 이름을 입력해 주세요.</div>
@@ -94,7 +94,7 @@
                                 <input name="zipCode" id="zipCode" type="hidden" value="">
                                 <input class="inputCos" name="address" id="address" type="text"
                                        placeholder="주소 검색 버튼을 이용해 주세요"
-                                       value="서울 강남구 강남대로 0길 0" disabled>
+                                       th:value="*{schoolAddress}" disabled>
                                 <button type="button" class="searchAddressBtn" id="searchAddressBtn" onclick="find()">주소
                                     검색
                                 </button>
@@ -107,7 +107,7 @@
                                 <div class="essential">*</div>
                             </div>
                             <input class="inputCos" name="addressDetail" id="addressDetail" type="text"
-                                   value="강남빌딩 0층 0호"
+                                   th:value="*{schoolAddressDetail}"
                                    placeholder="상세 주소를 입력해 주세요">
                             <div class="margin-top-6" style="display: none;">
                                 <div class="warningMsg">상세주소가 없다면 주소지의 특징을 입력해 주세요.</div>
@@ -119,7 +119,7 @@
                                 <div class="essential">*</div>
                             </div>
                             <div class="margin-bottom-8 flexBetween">
-                                <input class="inputCos" name="phone" id="phone" type="text" value="01012341234"
+                                <input class="inputCos" name="phone" id="phone" type="text" th:value="*{userPhoneNumber}"
                                        placeholder="보육원 연락처를 입력해 주세요. 미입력시 가입시 입력한 번호로 등록됩니다.">
                                 <button type="button" class="certificationBtn">인증번호 받기</button>
                             </div>
@@ -154,7 +154,7 @@
                                 <div class="inputTitle">보육원 아이들 수</div>
                                 <div class="essential">*</div>
                             </div>
-                            <input class="inputCos" name="childPersonnel" id="childPersonnel" type="text" value="20"
+                            <input class="inputCos" name="childPersonnel" id="childPersonnel" type="text" th:value="*{schoolKids}"
                                    placeholder="0">
                             <div class="margin-top-6" style="display: none;">
                                 <div class="warningMsg">보육원 아이들 수를 입력해 주세요.</div>
@@ -184,7 +184,7 @@
                                 </div>
                                 <div class="inputCos flex" style="padding: 0;">
                                     <div class="inputSpace flexRow">
-                                        <input type=text name="bank" id="bank" value="하나은행" placeholder="은행을 선택해주세요"
+                                        <input type=text name="bank" id="bank" th:value="*{schoolBank}" placeholder="은행을 선택해주세요"
                                                disabled>
                                         <input type=text id="bankFocus">
                                     </div>
@@ -205,7 +205,7 @@
                                 <div class="essential">*</div>
                             </div>
                             <input class="inputCos" name="accountNumber" id="accountNumber" type="text"
-                                   value="0000000000000"
+                                   th:value="*{schoolAccount}"
                                    placeholder=" - 를 제외한 숫자만 입력해 주세요">
                             <div class="margin-top-6" style="display: none;">
                                 <div class="warningMsg">계좌 번호를 입력해 주세요.</div>

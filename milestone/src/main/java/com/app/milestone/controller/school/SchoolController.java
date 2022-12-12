@@ -47,7 +47,7 @@ public class SchoolController {
     @GetMapping("/read")
     public void read(HttpServletRequest request, Long userId, Model model) {
         HttpSession session = request.getSession();
-        Long sessionId = (Long)session.getAttribute("userId");
+        Long sessionId = (Long) session.getAttribute("userId");
         PeopleDTO peopleDTO = null;
         SchoolDTO schoolDTO = null;
         if (sessionId != null) {
@@ -75,4 +75,12 @@ public class SchoolController {
         return new RedirectView("/school/read");
     }
 
+    //    마이페이지 등록
+    @GetMapping("/school")
+    public RedirectView school(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        Long userId = (Long) session.getAttribute("userId");
+        model.addAttribute("schoolDTO", schoolService.schoolInfo(userId));
+        return new RedirectView("/mypage/schoolinfo");
+    }
 }
