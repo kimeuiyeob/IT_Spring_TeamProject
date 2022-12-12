@@ -5,21 +5,34 @@ const $filters = $('.card-toolbar-item');
 const $filtersLast = $('.card-toolbar-itemBox').children().last()
 let check1 = false;
 
-$body.on('click', function (e) {
-    if (check1) {
-        if (e.target.closest('.menu-sub-dropdown') == e.currentTarget.querySelector('.menu-sub-dropdown').closest('.menu-sub-dropdown')) {
-        } else {
-            $filterDropdown.css('display', 'none');
-            $filter.css('background-color', '#f6f8fa');
-            $filter.css('color', '#009ef7');
-            $filter.find('#filter-img').css({
-                'background': `url('/imgs/admin/filterBlue.png')`,
-                'background-size': '13px'
-            });
-            check1 = !check1;
+    $(document).on('click', function (e) {
+        if (check1) {
+            if (e.target.closest('.menu-sub-dropdown') == e.currentTarget.querySelector('.menu-sub-dropdown').closest('.menu-sub-dropdown')) {
+                if($(".apply-button").text().match('적용')){
+
+                    $filterDropdown.css('display', 'none');
+                    $filter.css('background-color', '#f6f8fa');
+                    $filter.css('color', '#009ef7');
+                    $filter.find('#filter-img').css({
+                        'background': `url('/imgs/admin/filterBlue.png')`,
+                        'background-size': '13px'
+                    });
+
+                    check1 = !check1;
+                    search();
+                }
+            } else {
+                $filterDropdown.css('display', 'none');
+                $filter.css('background-color', '#f6f8fa');
+                $filter.css('color', '#009ef7');
+                $filter.find('#filter-img').css({
+                    'background': `url('/imgs/admin/filterBlue.png')`,
+                    'background-size': '13px'
+                });
+                check1 = !check1;
+            }
         }
-    }
-})
+    })
 
 $filter.on("click", function () {
     if ($filterDropdown.css('display') == 'none') {
@@ -93,7 +106,6 @@ $(".delete-modal-cancel1").on('click', function () {
 const $selectOption = $('.menu-sub-dropdown-option-box');
 
 $selectOption.on('click', function () {
-    console.log('방가')
     if ($(this).find('input').is(':checked')) {
         $(this).find('.menu-sub-dropdown-option-sub').css('display', 'flex');
         $(this).find('input').prop('checked', true);
@@ -141,10 +153,13 @@ $subOptionApllyChoose.on('mouseout', function () {
 })
 
 /* ----------------체크박스-------------------- */
-const $checkBox = $('.notice-checked');
-const $checkBoxAll = $('.notice-checked-all');
 
-$checkBoxAll.on('click', function () {
+/*전체선택*/
+$('.card-body-title-box').on('click','.notice-checked-all' , function(e) {
+
+    const $checkBox = $('.notice-checked');
+    const $checkBoxAll = $('.notice-checked-all');
+
     if ($checkBoxAll.is(':checked')) {
         $checkBoxAll.closest('.card-body-title-user-checkbox').css('background-color', '#009ef7');
         $checkBoxAll.prev().css('display', 'flex');
@@ -158,9 +173,14 @@ $checkBoxAll.on('click', function () {
         $checkBox.prev().css('display', 'none');
         $checkBox.prop('checked', false);
     }
+
 })
 
-$checkBox.on('click', function (e) {
+/* 하나 선택 */
+$('.card-body-main-box').on('click', '.notice-checked', function (e) {
+
+    const $checkBox = $('.notice-checked');
+    const $checkBoxAll = $('.notice-checked-all');
 
     if ($(this).is(':checked')) {
         $(this).closest('.card-body-title-user-checkbox').css('background-color', '#009ef7');
@@ -177,7 +197,35 @@ $checkBox.on('click', function (e) {
         $checkBoxAll.closest('.card-body-title-user-checkbox').css('background-color', '#009ef7');
         $checkBoxAll.prev().css('display', 'flex');
     }
+
 })
+
+function fnGetdata(){
+    var chkArray = new Array(); // 배열 선언
+
+    $('input:checkbox[name=check]:checked').each(function() { // 체크된 체크박스의 value 값을 가지고 온다.
+        chkArray.push($(this).siblings('.talentId').val());
+    });
+
+    // 삭제할 회원번호들
+    $('#hiddenValue').val(chkArray);
+    console.log('chkArray : ' + chkArray)
+    // console.log('hidden : '+$('#hiddenValue').val());
+    // console.log('chkArray : '+chkArray[0]);
+
+    $.ajax({
+        type : 'POST'
+        ,url : '/adminRest/talentDelete'
+        ,data : {chkArray: chkArray}
+        ,traditional: true
+        ,success : function(result) {
+            alert("해당 게시물이 정상적으로 삭제되었습니다.");
+            location.replace("talent")
+        },
+        error: function(request, status, error) {
+        }
+    })
+}
 
 /* -----------삭제 모달창-------------- */
 const $delete = $('.donate-outBox');
@@ -185,9 +233,11 @@ const $finalDelete = $('.delete-modal-delete');
 const $finalDeleteCancel = $('.delete-modal-cancel');
 const deleteModal = $('.delete-modal')[0];
 
+/* 삭제 OK 모달*/
 $finalDelete.on('click', function () {
     deleteModal.classList.toggle('show');
     body.style.overflow = 'auto';
+    fnGetdata();    //회원삭제
 })
 
 $finalDeleteCancel.on('click', function () {
@@ -226,3 +276,221 @@ $pageNumberLink.on('mouseout', function () {
 })
 
 
+
+
+
+
+
+
+
+let $search = $("#search-bar");
+let $searchCategory = $("#option8");
+let $searchPlace = $("#option12");
+
+globalThis.page = 0;
+let $pagingBtnFlex = $('.paging-number-flex');
+let pageInfo;
+
+showList()
+
+function showList(){
+    console.log("showList()실행")
+
+    getList1({
+        keyword : $search.val(),
+        talentCategory : $searchCategory.val(),
+        // talentPlaceOne : $searchPlace.val(),
+        page: globalThis.page
+    }, getList)
+}
+
+function getList(talentResp) {
+    let text = "";
+    pageInfo = talentResp.arTalentDTO;
+    talentResp.arTalentDTO.content.forEach(talent => {
+        text += `<tr>`
+        text += `<th class="card-body-title-checkbox-padding" style="width: 5%;">`
+        text += `<label class="card-body-title-user-checkbox">`
+        text += `<div class="check-img"></div>`
+        text += `<input class="notice-checked" type="checkbox" name="check">`
+        text += `<input type="hidden" value="` + talent.donationId + `"name ="check2" class="talentId">`
+        text += `</label>`
+        text += `</th>`
+        // text += `<th class="card-body-title-padding" style="width: 17%;">`
+        text += `<th class="card-body-title-padding" style="width: 0;">`
+        text += `<div class="donater-info">`
+        text += `<div class="donater-info-text">`
+
+        // text += `<div class="donater-name">`+ talent.userName +`</div>`
+        // text += `<div>`+ talent.userEmail +`</div>`
+        text += `<div class="donater-name"></div>`
+        text += `<div></div>`
+
+        text += `</div>`
+        text += `</div>`
+        text += `</th>`
+        // text += `<th class="card-body-title-padding" style="width: 15%;">`
+        text += `<th class="card-body-title-padding" style="width: 25%;">`
+        text += `<div class="donate-info-height">` + talent.peopleNickname + `</div>`
+        text += `</th>`
+        text += `<th class="card-body-title-padding" style="width: 13%;">`
+        text += `<div class="donate-info-height">`
+        text += `<div class="donate-info-text">` + talent.talentCategory+`</div>`
+        text += `</div>`
+        text += `</th>`
+        text += `<th class="card-body-title-padding" style="width: 13%;">`
+        text += `<div class="donate-info-height">` + talent.talentPlace+ `</div>`
+        text += `</th>`
+
+        var createdDateYear = talent.createdDate.split("T")[0].split("-")[0]+'년 ';
+        var createdDateMonth = talent.createdDate.split("T")[0].split("-")[1]+'월 ';
+        var createdDateDate = talent.createdDate.split("T")[0].split("-")[2]+'일';
+        var createdDate = createdDateYear + createdDateMonth + createdDateDate;
+
+        text += `<th class="card-body-title-padding" style="width: 17%;">`
+        text += `<div class="donate-info-height">` + createdDate +`</div>`
+        text += `</th>`
+
+        var ableDateYear = talent.talentAbleDate.split(" ")[0].split("-")[0]+'년 ';
+        var ableDateMonth = talent.talentAbleDate.split(" ")[0].split("-")[1]+'월 ';
+        var ableDateDate = talent.talentAbleDate.split(" ")[0].split("-")[2]+'일';
+        var ableDate = createdDateYear + createdDateMonth + createdDateDate;
+
+        text += `<th class="card-body-title-padding" style="width: 17%;">`
+        text += `<div class="donate-info-height">` + ableDate + `</div>`
+        text += `</th>`
+
+    })
+    $(".card-body-main-box").html(text)
+    pageingBtn();
+}
+
+
+
+function getList1(param, callback, error){
+    console.log("param으로 들어온 값 : " + JSON.stringify(param))
+    let existKeyword = param.keyword.length != 0;
+
+    console.log("검색어를 전하지 않았을 떄 : "+ existKeyword);
+
+    let existTalentCategory = param.talentCategory.length != 0;
+    // let existTalentPlace = param.talentPlaceOne.length != 0;
+
+    let queryString = "/" + param.page || 1;
+    console.log("페이지 더해주고 : "+queryString)
+
+
+    queryString += existKeyword ? "/" + param.keyword : "";
+    console.log("검색어 더해주고 : "+queryString)
+
+    queryString += existTalentCategory ? "/" + param.talentCategory : "";
+    console.log("카테고리 더해주고 : "+queryString)
+
+    // queryString += existTalentPlace ? "/" + param.talentPlaceOne : "";
+    // console.log("지역 더함 : "+queryString)
+
+    $.ajax({
+        url : "/adminRest/talent"+queryString,
+        type : "get",
+        success : function (talentResp, status, xhr) {
+            if(callback){
+                callback(talentResp)
+            }
+        },
+        error: function (xhr, status, err) {
+            if (error) {
+                error(err);
+            }
+        }
+    });
+}
+
+/* 검색 */
+function search() {
+    if($searchCategory.text()=="옵션 선택"){
+        $searchCategory.empty();
+    }
+    if($searchPlace.text()=="옵션 선택"){
+        $searchPlace.empty();
+    }
+    console.log("초기화 됏니?"+$searchCategory.text())
+    console.log("초기화 됏니?"+$searchPlace.text())
+
+    getList1({
+        keyword : $search.val(),
+        talentCategory : $searchCategory.text(),
+        // talentPlaceOne : $searchPlace.text(),
+        page: globalThis.page
+    }, getList);
+
+    // $searchCategory.innerText = "옵션 선택";
+    // $searchPlace.innerText = "옵션 선택";
+}
+
+$search.on("keyup", function (event) {
+    if (event.keyCode === 13) {
+        search()
+    }
+});
+
+
+    //-----------------------------페이징 버튼 처리-----------------------------
+
+    function pageingBtn() {
+        let text = "";
+        let nowPage = pageInfo.pageable.pageNumber + 1;
+        let endPage = Math.ceil(nowPage / 5) * 5;
+        let startPage = endPage - 5 + 1;
+        // <!--페이징 처리-->
+        // 이전
+        if (startPage > 1) {
+            text += `<div class="prev-page page-number-padding">`
+            text += `<a class="page-number-link" href="` + (startPage - 2) + `">`
+            text += `<div class="prev-page-prevArrow"></div>`
+            text += `</a>`
+            text += `</div>`
+        } else {
+            text += `<div class="prev-page page-number-padding">`
+            text += `</div>`
+        }
+        // 페이지 버튼
+
+        for (let i = startPage; i < startPage + 5 && i <= pageInfo.totalPages; i++) {
+            text += `<div class="page-number-padding">`
+            if (i == nowPage) {
+                text += `<div class="page-number-link" style="color:#303441">` + i + `</div>`
+            } else {
+                text += `<a class="page-number-link" href="` + (i - 1) + `">` + i + `</a>`
+            }
+            text += `</div>`
+        }
+        //이후
+        if (4 < endPage && endPage < pageInfo.totalPages) {
+            text += `<div class="next-page page-number-padding">`
+            text += `<a class="page-number-link" href="` + (endPage) + `">`
+            text += `<div class="prev-page-nextArrow"></div>`
+            text += `</a>`
+            text += `</div>`
+            text += `</div>`
+            text += `</div>`
+        }
+        $pagingBtnFlex.html(text);
+    }
+
+    $pagingBtnFlex.on('click', ".page-number-link", function (e) {
+        e.preventDefault();
+        window.scrollTo({top: 0})
+        globalThis.page = $(this).attr("href");
+        search();
+    })
+
+    /*  페이지 이동  */
+    $pagingBtnFlex.on('mouseover', "a.page-number-link", function () {
+        $(this).css('background-color', '#f4f6fa');
+        // $(this).css('color', '#009ef7');
+    })
+
+    $pagingBtnFlex.on('mouseout', "a.page-number-link", function () {
+        $(this).css('background-color', '#fff');
+        $(this).css('color', '#9a9ba7');
+    })

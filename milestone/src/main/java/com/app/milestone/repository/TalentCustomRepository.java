@@ -1,5 +1,6 @@
 package com.app.milestone.repository;
 
+import com.app.milestone.domain.SchoolDTO;
 import com.app.milestone.domain.Search;
 import com.app.milestone.domain.TalentDTO;
 import com.querydsl.core.Tuple;
@@ -20,4 +21,7 @@ public interface TalentCustomRepository {
     //재능기부 클릭시 DONATION ID로 상세페이지 보기
     public List<TalentDTO> talentDetail(Long donationId);
 
+
+    public List<TalentDTO> findTalentSearch (Pageable pageable, Search search);
+    public Long countByCreatedDate(Pageable pageable, Search search);
 }

@@ -24,6 +24,7 @@ public class AdminRestController {
     private final WithdrawalService withdrawalService;
     private final MoneyService moneyService;
     private final ServiceService serviceService;
+    private final TalentService talentService;
 
 
 //    전체회원에서 일반회원 선택 후 검색 및 조회
@@ -129,7 +130,6 @@ public class AdminRestController {
 
 
 
-
     //    현금기부 조회 : 최신순, 많은순
     @GetMapping(value= {"/money/{page}", "/money/{page}/{keyword}"})
     public MoneyResp moneyList(@PathVariable("page") Integer page, @PathVariable(required = false)String keyword) {
@@ -190,4 +190,27 @@ public class AdminRestController {
         return serviceResp;
     }
 
+    //    재능기부 조회
+//    @GetMapping(value = {"/talent/{page}", "/talent/{page}/{keyword}", "/talent/{page}/{keyword}/{talentCategory}", "/talent/{page}/{keyword}/{talentCategory}/{talentPlaceOne}"})
+    @GetMapping(value = {"/talent/{page}", "/talent/{page}/{keyword}", "/talent/{page}/{keyword}/{talentCategory}"})
+    public TalentResp talentList(@PathVariable("page") Integer page, Search search) {
+
+//        log.info("컨트롤러 키워드 : "+search.getKeyword());
+//        log.info("컨트롤러 카테고리 : "+search.getTalentCategory());
+//        log.info("컨트롤러 지역 : "+search.getTalentPlaceOne());    //왜안들어와
+
+        TalentResp talentResp = new TalentResp();
+        Page<TalentDTO> arTalentDTO = talentService.searchedTalentList(page, search);
+        talentResp.setArTalentDTO(arTalentDTO);
+        return talentResp;
+    }
+
+    //     재능기부 삭제
+    @RequestMapping("/talentDelete")
+    public void deleteTalent(HttpServletRequest request){
+        String [] donationIds = request.getParameterValues("chkArray");
+        for (int i = 0; i<donationIds.length; i++){
+            talentService.deleteByDonationId(Long.valueOf(donationIds[i]));
+        }
+    }
 }
