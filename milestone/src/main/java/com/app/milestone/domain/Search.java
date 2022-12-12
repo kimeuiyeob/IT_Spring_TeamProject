@@ -14,12 +14,15 @@ public class Search {
 
     /*===============================*/
 
+    private String keyword;
     private String talentTitle;
     private String talentCategory;
+    private String talentPlaceOne;
     private List<String> talentPlace;
 
     /*===============================*/
 
+    private String peopleUserId;
     private String peopleNickname;
     private String userName;
 

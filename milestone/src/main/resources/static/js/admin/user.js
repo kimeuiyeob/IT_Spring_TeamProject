@@ -218,18 +218,34 @@ function fnGetdata(){
     // console.log('hidden : '+$('#hiddenValue').val());
     // console.log('chkArray : '+chkArray[0]);
 
-    $.ajax({
-        type : 'POST'
-        ,url : '/adminRest/peopleDelete'
-        ,data : {chkArray: chkArray}
-        ,traditional: true
-        ,success : function(result) {
-            alert("해당 회원이 정상적으로 삭제되었습니다.");
-            location.replace("user")
-        },
-        error: function(request, status, error) {
-        }
-    })
+    if($(".user-type").text().match('일반')){
+        $.ajax({
+            type : 'POST'
+            ,url : '/adminRest/peopleDelete'
+            ,data : {chkArray: chkArray}
+            ,traditional: true
+            ,success : function(result) {
+                alert("해당 회원이 정상적으로 삭제되었습니다.");
+                location.replace("user")
+            },
+            error: function(request, status, error) {
+            }
+        })
+    }else if($(".user-type").text().match('보육원')){
+        $.ajax({
+            type : 'POST'
+            ,url : '/adminRest/schoolDelete'
+            ,data : {chkArray: chkArray}
+            ,traditional: true
+            ,success : function(result) {
+                alert("해당 회원이 정상적으로 삭제되었습니다.");
+                location.replace("user")
+            },
+            error: function(request, status, error) {
+            }
+        })
+    }
+
 }
 
 

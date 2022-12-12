@@ -29,11 +29,14 @@ public class TalentDTO {
     private String talentContent;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime talentAbleDate;
+    private LocalDateTime createdDate;
     private String talentCategory;
     private String talentPlace;
     private String peopleNickname;
     private Long schoolUserId;
     private Long peopleUserId;
+    private String peopleUserName;
+    private String peopleUserEmail;
 
 
     public Talent toEntity() { //Service 단에서, 데이터를 저장시키기 위해서, DTO를 Entity로 변환해주는 메소드
@@ -50,16 +53,19 @@ public class TalentDTO {
 
     @QueryProjection
     //@QueryProjection은 생성자를 통해 DTO를 조회 -> Q파일 생성 , DTO의 생성자를 사용하는 것이 아니라 DTO 기반으로 생성된 QDTO 객체의 생성자를 사용하는 것이다.
-    public TalentDTO(Long donationId,String talentTitle, String talentContent, LocalDateTime talentAbleDate, String talentCategory, String talentPlace,  String peopleNickname, Long schoolUserId, Long peopleUserId) {
+    public TalentDTO(Long donationId,String talentTitle, String talentContent, LocalDateTime talentAbleDate, LocalDateTime createdDate, String talentCategory, String talentPlace,  String peopleNickname, Long schoolUserId, Long peopleUserId, String peopleUserName, String peopleUserEmail) {
         this.donationId = donationId;
         this.talentTitle = talentTitle;
         this.talentContent = talentContent;
         this.talentAbleDate = talentAbleDate;
+        this.createdDate = createdDate;
         this.talentCategory = talentCategory;
         this.talentPlace = talentPlace;
         this.peopleNickname = peopleNickname;
         this.schoolUserId = schoolUserId;
         this.peopleUserId = peopleUserId;
+        this.peopleUserEmail = peopleUserEmail;
+        this.peopleUserName = peopleUserName;
 
     }
 }

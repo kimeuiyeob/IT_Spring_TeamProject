@@ -1,6 +1,7 @@
 package com.app.milestone.service;
 
 import com.app.milestone.domain.Ranking;
+import com.app.milestone.domain.SchoolDTO;
 import com.app.milestone.domain.Search;
 import com.app.milestone.domain.TalentDTO;
 import com.app.milestone.entity.Talent;
@@ -91,6 +92,41 @@ public class TalentService {
             arRanking.add(ranking);
         }
         return arRanking;
+    }
+
+
+    public Page<TalentDTO> searchedTalentList(Integer page, Search search){
+        if (page == null) page = 0;
+        Pageable pageable = PageRequest.of(page, 7);
+
+        if (search.getKeyword() == null) {
+            search.setKeyword(null);
+        }
+
+        if (search.getTalentCategory() == null) {
+            search.setTalentCategory(null);
+        }
+
+//        if (search.getTalentPlaceOne() == null) {
+//            search.setTalentPlaceOne(null);
+//        }
+
+        log.info("써치 : " + search);
+        log.info("담은 검색어 : " + search.getKeyword());
+        log.info("담은 카테고리 : " + search.getTalentCategory());
+        log.info("담은지역 : " + search.getTalentPlaceOne());
+
+
+        List<TalentDTO> list = talentRepository.findTalentSearch(pageable, search);
+        Page<TalentDTO> talents = new PageImpl<>(list, pageable, Integer.valueOf("" + talentRepository.countByCreatedDate(pageable, search)));
+
+        return talents;
+    }
+
+
+    //  재능기부 삭제
+    public void deleteByDonationId(Long donationId){
+        talentRepository.deleteById(donationId);
     }
 
 }
