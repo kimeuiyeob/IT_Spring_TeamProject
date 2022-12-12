@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface FileCustomRepository {
     public List<FileDTO> findByUserId(Long userId);
+    public FileDTO findProfileByUserId(Long userId);
 }

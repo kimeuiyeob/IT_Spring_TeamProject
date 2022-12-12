@@ -26,6 +26,8 @@ repositories {
 }
 
 dependencies {
+//    썸네일
+    implementation group: 'net.coobird', name: 'thumbnailator', version: '0.4.11'
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.14.1'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'

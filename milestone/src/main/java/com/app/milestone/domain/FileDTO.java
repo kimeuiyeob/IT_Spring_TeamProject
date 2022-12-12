@@ -17,6 +17,7 @@ public class FileDTO {
     private String filePath;
     private String fileUuid;
     private Long fileSize;
+    private boolean fileImageCheck;
     private FileType fileType;
     private Long userId;
 
@@ -26,16 +27,18 @@ public class FileDTO {
                 .filePath(filePath)
                 .fileUuid(fileUuid)
                 .fileSize(fileSize)
+                .fileImageCheck(fileImageCheck)
                 .fileType(fileType)
                 .build();
     }
 
     @QueryProjection
-    public FileDTO(String fileName, String filePath, String fileUuid, Long fileSize, FileType fileType, Long userId) {
+    public FileDTO(String fileName, String filePath, String fileUuid, Long fileSize, boolean fileImageCheck, FileType fileType, Long userId) {
         this.fileName = fileName;
         this.filePath = filePath;
         this.fileUuid = fileUuid;
         this.fileSize = fileSize;
+        this.fileImageCheck = fileImageCheck;
         this.fileType = fileType;
         this.userId = userId;
     }

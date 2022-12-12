@@ -37,14 +37,18 @@ public class File extends Period {
     private User user;
 
     @Builder
-    public File(String fileName, String filePath, String fileUuid, Long fileSize, FileType fileType, User user) {
+    public File(String fileName, String filePath, String fileUuid, Long fileSize, boolean fileImageCheck, FileType fileType) {
         this.fileName = fileName;
         this.filePath = filePath;
         this.fileUuid = fileUuid;
         this.fileSize = fileSize;
-//        this.fileImageCheck = fileImageCheck;
+        this.fileImageCheck = fileImageCheck;
         this.fileType = fileType;
+    }
+
+    public void changeUser(User user){
         this.user = user;
+        user.getFiles().add(this);
     }
 
     public void update(Boolean fileImageCheck) {

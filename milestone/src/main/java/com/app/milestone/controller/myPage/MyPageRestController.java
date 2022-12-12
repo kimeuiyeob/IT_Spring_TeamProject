@@ -1,13 +1,7 @@
 package com.app.milestone.controller.myPage;
 
-import com.app.milestone.domain.SchoolDTO;
-import com.app.milestone.domain.Search;
-import com.app.milestone.domain.TalentDTO;
-import com.app.milestone.domain.TalentResp;
-import com.app.milestone.service.CertificationService;
-import com.app.milestone.service.SchoolService;
-import com.app.milestone.service.TalentService;
-import com.app.milestone.service.UserService;
+import com.app.milestone.domain.*;
+import com.app.milestone.service.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -43,21 +37,32 @@ public class MyPageRestController {
     private final SchoolService schoolService;
     private final UserService userService;
     private final CertificationService certificationService;
+    private final FileService fileService;
 
     @PostMapping(value = {"/checkEmail"})
-    public Long checkEmail(@RequestBody String userEmail){
+    public Long checkEmail(@RequestBody String userEmail) {
         return userService.checkEmail(userEmail);
     }
 
-//    휴대폰인증
+    //    휴대폰인증
     @GetMapping("/phoneCheck")
     @ResponseBody
     public String sendSMS(@RequestParam("phone") String userPhoneNumber) { // 휴대폰 문자보내기
         int randomNumber = (int) ((Math.random() * (9999 - 1000 + 1)) + 1000);//난수 생성
 
+//        문자 발송
         certificationService.certifiedPhoneNumber(userPhoneNumber, randomNumber);
 
         return Integer.toString(randomNumber);
+    }
+
+    //    프로필 등록
+    @PostMapping("/profile")
+    public void profile(HttpServletRequest request, @RequestBody FileDTO fileDTO) {
+        HttpSession session = request.getSession();
+        Long userId = (Long) session.getAttribute("userId");
+        log.info("========================" + fileDTO);
+        fileService.register(1L, fileDTO);
     }
 
 }

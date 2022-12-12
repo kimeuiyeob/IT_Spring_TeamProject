@@ -18,15 +18,21 @@ public class FileService {
     private final UserRepository userRepository;
 
     //    추가
-    public void register(FileDTO fileDTO) {
-        User user = userRepository.findById(fileDTO.getUserId()).get();
-        File file = new File(fileDTO.getFileName(), fileDTO.getFilePath(), fileDTO.getFileUuid(), fileDTO.getFileSize(), fileDTO.getFileType(), user);
+    public void register(Long userId, FileDTO fileDTO) {
+        User user = userRepository.findById(userId).get();
+        File file = new File(fileDTO.getFileName(), fileDTO.getFilePath(), fileDTO.getFileUuid(), fileDTO.getFileSize(), fileDTO.isFileImageCheck(), fileDTO.getFileType());
+        file.changeUser(user);
         fileRepository.save(file);
     }
 
     //    삭제
     public void remove(Long fileId) {
         fileRepository.deleteById(fileId);
+    }
+
+//    프로필 조회
+    public FileDTO showProfile(Long userId) {
+        return fileRepository.findProfileByUserId(userId);
     }
 
     //    전체조회
