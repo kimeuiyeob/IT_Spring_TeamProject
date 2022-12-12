@@ -32,4 +32,10 @@ public class UserService {
     public List<User> userList(Pageable pageable) {
         return userRepository.findByCreatedDate(pageable);
     }
+
+    /*황지수*/
+    public Long checkEmail(String userEmail){
+        return userRepository.findByUserEmail(userEmail).get().getUserId();
+    }
+    /*/황지수*/
 }

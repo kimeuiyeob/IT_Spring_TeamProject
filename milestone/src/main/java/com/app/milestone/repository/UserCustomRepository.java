@@ -18,4 +18,8 @@ public interface UserCustomRepository {
     public void clearStore();
 
     public Long findByUserEmailAndUserPassword(String userEmail, String userPassword);
+
+    /*황지수*/
+//    public Long countByUserEmail(String userEmail);
+    /*/황지수*/
 }

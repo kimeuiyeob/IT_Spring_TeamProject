@@ -32,17 +32,17 @@ public class MainController {
     private final ServiceService serviceService;
     private final SessionManager sessionManager;
 
-    @PostMapping("/main/people")
-    public String createPeople(@RequestBody PeopleDTO peopleDTO, BindingResult result) {
-        if (result.hasErrors()) {
-            return "join/joinUser";
-        }
+    @PostMapping("/people")
+    public String createPeople(PeopleDTO peopleDTO) {
+//        if (result.hasErrors()) {
+//            return "join/joinUser";
+//        }
         peopleService.createPeople(peopleDTO);
 
         return "redirect:/main/main";
     }
 
-    @PostMapping("/main/school")
+    @PostMapping("/school")
     public String createSchool(SchoolDTO schoolDTO) {
         log.info("=========================" + schoolDTO);
 //        if (result.hasErrors()) {

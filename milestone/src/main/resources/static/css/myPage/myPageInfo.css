@@ -110,14 +110,14 @@
     fill: rgb(200, 202, 210);
 }
 
-input[name = "bank"] {
+input[name = "schoolBank"] {
     outline: none;
     width: 100%;
     background-color: rgb(250, 250, 252);
     border: none;
 }
 
-input[name = "bank"]::placeholder {
+input[name = "schoolBank"]::placeholder {
     color: rgb(200, 201, 207);
 }
 

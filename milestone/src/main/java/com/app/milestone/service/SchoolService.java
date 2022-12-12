@@ -16,6 +16,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Base64;
@@ -51,8 +52,9 @@ public class SchoolService {
     }
 
     //    보육원 등록
-    public void registerSchool(SchoolDTO schoolDTO) {
-        schoolRepository.save(schoolDTO.toEntity());
+    @Transactional
+    public void registerSchool(Long userId, SchoolDTO schoolDTO) {
+        schoolRepository.findById(userId).get().update(schoolDTO);
     }
 
     //    도움이 필요한 보육원(메인)
