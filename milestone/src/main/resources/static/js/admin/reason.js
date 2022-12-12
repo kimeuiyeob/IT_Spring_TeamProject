@@ -7,7 +7,7 @@ let check1 = false;
 $(document).on('click', function (e) {
     if (check1) {
         if (e.target.closest('.menu-sub-dropdown') == e.currentTarget.querySelector('.menu-sub-dropdown').closest('.menu-sub-dropdown')) {
-            if($(".apply-button").text().match('적용')){
+            if($(".apply-button").text().match('닫기')){
                 $filterDropdown.css('display', 'none');
                 $filter.css('background-color', '#f6f8fa');
                 $filter.css('color', '#009ef7');

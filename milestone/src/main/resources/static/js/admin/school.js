@@ -9,7 +9,7 @@ $(document).on('click', function (e) {
     console.log('1 : '+$("#option9").text())
     if (check1) {
         if (e.target.closest('.menu-sub-dropdown') == e.currentTarget.querySelector('.menu-sub-dropdown').closest('.menu-sub-dropdown')) {
-            if($(".apply-button").text().match('적용')){
+            if($(".apply-button").text().match('닫기')){
                 console.log('2222 : '+$("#option9").text())
 
                 $filterDropdown.css('display', 'none');
