@@ -24,4 +24,9 @@ public interface TalentCustomRepository {
 
     public List<TalentDTO> findTalentSearch (Pageable pageable, Search search);
     public Long countByCreatedDate(Pageable pageable, Search search);
+
+    //마이페이지 재능기부목록 가져오기
+    public List<TalentDTO> findAllTalentById(Pageable pageable, Long peopleId);
+
+    public Long countByAbleDate2 (Pageable pageable, Long peopleId);
 }

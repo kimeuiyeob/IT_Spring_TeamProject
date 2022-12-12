@@ -170,6 +170,7 @@ $(".location2").click(function () {
 /*===================글작성 선택 모달==========================*/
 
 let $cancels = $('#pencil');
+
 let $modalWrap = $('.modalWrap');
 let body = $('body');
 let $modalBtn = $('.modalBtn');
@@ -678,7 +679,6 @@ const $talentClick = $('.css-7kp13n');
 /*전체 클릭시*/
 function getTalentList(param, callback, error) {
 
-        console.log("파람 값 : " + JSON.stringify(param))
     const list = [];
 
     list.push(param.talentCategory);

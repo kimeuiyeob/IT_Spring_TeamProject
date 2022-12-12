@@ -1,156 +1,108 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>talent</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/fix/header.css">
+    <link rel="stylesheet" href="/css/fix/footer.css">
+    <!--============================================-->
+    <link rel="stylesheet" href="/css/myPage/myPageMain.css">
+    <link rel="stylesheet" href="/css/myPage/myPageAside.css">
+    <link rel="stylesheet" href="/css/myPage/myPageInfo.css">
+    <link rel="stylesheet" href="/css/myPage/public.css">
+    <link rel="icon" href="/imgs/fix/favicon.png">
+    <!--=======================================-->
+    <link rel="stylesheet" href="/css/talent/talent.css">
+
+    <title>나의 재능기부</title>
+    <style>
+
+        /* =============================페이징 처리====================================== */
+
+        .flexPublic {
+
+        }
+
+        .pageBtns {
+            margin-top: 48px;
+            font-size: 12px;
+        }
+
+        .pageBtns a {
+            border-radius: 4px;
+            align-items: center;
+            height: 36px;
+            min-width: 36px;
+            color: rgb(154, 155, 167);
+            transition: background-color 0.3s;
+        }
+
+        .pageBtns a:hover {
+            background-color: rgb(242, 243, 247);
+        }
+
+        .prevNextBtn {
+            height: 24px;
+            width: 24px;
+            fill: rgb(154, 155, 167);
+        }
+
+        .page {
+            height: 36px;
+            min-width: 36px;
+        }
+
+        /*================================================================================*/
+
+        /*===============================================================================*/
+
+
+    </style>
 </head>
-<!-- ================================================================================================================ -->
-<link rel="stylesheet" href="/css/myPage/myPageMain.css">
-<link rel="stylesheet" href="/css/myPage/myPageInfo.css">
-<link rel="stylesheet" href="/css/myPage/myPageAside.css">
-<link rel="stylesheet" href="/css/myPage/public.css">
-<!-- ================================================================================================================ -->
-<link rel="stylesheet" href="/css/talent/talent.css">
-<link rel="stylesheet" href="/css/fix/menu.css"/>
-<link rel="icon" href="/imgs/fix/favicon.png">
-<!-- ================================================================================================================ -->
-<link rel="stylesheet" href="/css/fix/header.css">
-<link rel="stylesheet" href="/css/fix/footer.css">
-<!-- ================================================================================================================ -->
+
 <body>
-<!-- ================================================================================================================ -->
+
 <header th:replace="/fix/header.html :: header"></header>
-<!-- ================================================================================================================ -->
-<div class="wholePage" style="padding-bottom: 100px";>
-    <div class="main" style="position: relative;">
+<div class="myPageWrap flex">
+    <!-- 어사이드 -->
+    <aside th:replace="/myPage/myPage_aside :: aside"></aside>
+    <!-- 메인 -->
+    <main class="main">
+        <div>
+            <div class="mainWrap flexCol">
+                <div class="mainTitle flexRow">나의 재능 기부</div>
+                <div class="mainBodyWrap flexCol flexPublic">
 
-        <div style="display: flex; justify-content: space-between; ">
-            <div data-aos="fade-right">
-                <h3 style="font-size: 28px; margin-bottom: 20px; cursor:default;">여러분의 재능을 나눠주세요.</h3>
-            </div>
-            <div style="padding-top: 20px" id="pencil">
-                <div class="talentButton">
-                    <span class="talentButton1">글 작성하기</span>
-                </div>
-            </div>
-        </div>
+                    <!--================================================================================-->
+                    <!-- 메인컨텐츠 -->
 
-
-        <div class="talentChoice">
-
-            <div class="talentChoicebar">
-
-                <div class="all" id="showAll">
-                    <div class="cateAll">전체</div>
-                </div>
-
-                <div class="education" id="education">
-                    <div class="cateEdu">교육</div>
-                </div>
-
-                <div class="exercise" id="exercise">
-                    <div class="cateExe">운동</div>
-                </div>
-
-                <div class="music" id="music">
-                    <div class="cateMus">음악</div>
-                </div>
-
-                <div class="art" id="art">
-                    <div class="cateArt">미술</div>
-                </div>
-
-                <div class="program" id="program">
-                    <div class="cateIt">IT</div>
-                </div>
-
-                <div id="pseudo"></div>
-            </div>
-
-            <!-- ====================================================================================================== -->
-
-            <!-- =================================선택한 지역=======================================-->
-            <div class="beforeSelectLocations" style="display: none">
-                <th:block th:each="talentPlace : ${talentPlaces}">
-                    <div class="beforeLocation" th:text="*{talentPlace}"></div>
-                </th:block>
-                <div class="beforeName" th:text="${talentTitle}"></div>
-            </div>
-
-            <!-- 검색창 -->
-            <form th:action="@{/talent/talent}" name="talentForm" onsubmit="return false">
-
-                <div style="display: flex;">
-                    <div class="searchBox realSearhBox">
-
-                        <input type="hidden" name="talentName">
-
-                        <input type="text" name="talentName" id="talentName" placeholder=" &nbsp;제목을 검색하세요" value=""
-                               style="border: solid white;">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
-                             style="cursor:pointer"
-                             focusable="false" preserveAspectRatio="xMidYMid meet" class="css-7kp13n e181xm9y0">
-                            <path xmlns="http://www.w3.org/2000/svg"
-                                  d="M11.2307008,3.5 C15.5002489,3.5 18.9614015,6.96828437 18.9614015,11.24663 C18.9614015,13.0978372 18.3133954,14.7973826 17.2322825,16.1299241 L20.2742127,19.178378 C20.5762688,19.4810023 20.5764739,19.9714482 20.2746708,20.2738195 C19.9728678,20.5761908 19.4833433,20.5759857 19.1812873,20.2733614 L19.1812873,20.2733614 L16.1426973,17.2288066 C14.8071694,18.3312107 13.0960911,18.9932599 11.2307008,18.9932599 C6.96115262,18.9932599 3.5,15.5249756 3.5,11.24663 C3.5,6.96828437 6.96115262,3.5 11.2307008,3.5 Z M11.2307008,5.04932599 C7.81506225,5.04932599 5.04614015,7.82395349 5.04614015,11.24663 C5.04614015,14.6693064 7.81506225,17.4439339 11.2307008,17.4439339 C14.6463393,17.4439339 17.4152614,14.6693064 17.4152614,11.24663 C17.4152614,7.82395349 14.6463393,5.04932599 11.2307008,5.04932599 Z">
-                            </path>
-                        </svg>
+                    <div class="AllTalentBox" style="width: 100%;">
+                        <div class="talentBoxAll" id="all">
+                        </div>
                     </div>
-                    <!-- ====================================================================================================== -->
 
-                    <section class="loc centerContent" style="padding-left:10px">
-                        <div class="dropdown" style="justify-content: flex-end; position: relative;">
-                            <button class="dropbtn" type="button">
-                                <span class="dropbtn_content placeholder">전체</span>
-                                <span class="awdasws" style=" font-size : 16px; color : #3b3b3b; float:right;">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
-                                     focusable="false" preserveAspectRatio="xMidYMid meet" class="qwdqwd e181xm9y0">
-                                    <polygon id="Triangle"
-                                             transform="translate(12.000000, 12.000000) rotate(-180.000000) translate(-12.000000, -12.000000) "
-                                             points="12 9 18 15 6 15"></polygon></svg>
-                            </span>
-                            </button>
-                            <div class="dropdown-content" style="position: absolute;top: 40px;">
-                                <div class="dropLoc checkSeoul">서울</div>
-                                <div class="dropLoc checkKyungki">경기도</div>
-                                <div class="dropLoc checkKangwon">강원도</div>
-                                <div class="dropLoc checkChungcheong">충청도</div>
-                                <div class="dropLoc checkJeolla">전라도</div>
-                                <div class="dropLoc checkGyeong">경상도</div>
-                                <div class="dropLoc checkJeju">제주도</div>
+
+                    <!--===============================================페이징 처리==============================================================-->
+                    <!-- 페이지 버튼 전체 -->
+                    <div class="paging-number-box">
+                        <div class="paging-number">
+                            <div class="paging-number-flex">
                             </div>
                         </div>
-                    </section>
+                    </div>
 
-                    <!-- ===================================================================================== -->
                 </div>
-            </form>
+                <!--=============================================================================================================================-->
 
-        </div>
-
-    </div>
-
-    <!--==========================================재능 기부 목록===========================================-->
-
-    <div class="AllTalentBox" style=" display: flex; justify-content: center">
-        <div class="talentBoxAll" id="all" style="display: flex; justify-content: space-between;">
-        </div>
-    </div>
-
-    <!-- ============================================================================================= -->
-
-
-    <!-- 페이지 버튼 전체 -->
-    <div class="paging-number-box">
-        <div class="paging-number">
-            <div class="paging-number-flex">
             </div>
         </div>
-    </div>
-
-
+    </main>
 </div>
-<!--=========================================================================================================-->
-<!-- 글작성 클릭시 모달 -->
+
+
+<!--==========================================여기서부터 모달================================================================================-->
 
 <div class="modalWrap">
     <div class="modalScope flexCol">
@@ -212,7 +164,8 @@
                                     </div>
                                     <div class="inputCos flex" style="padding: 0;">
                                         <div class="inputSpace flexRow">
-                                            <input type=text name="bank" class="pleasehear1" placeholder="카테고리를 선택해주세요"
+                                            <input type=text name="bank" class="pleasehear1"
+                                                   placeholder="카테고리를 선택해주세요"
                                                    disabled>
                                         </div>
                                         <div class="arrowWrap">
@@ -298,119 +251,66 @@
                     </div>
 
                 </div>
-
             </div>
-
-
         </div>
     </div>
 </div>
 
-<!--================================================================================================================-->
+<!--=============================================================================================================-->
 
-<!-- 재능 목록 클릭시 상세 모달-->
-<div class="talentModal">
-</div>
-
-<!--================================================================================================================-->
 <footer th:replace="/fix/footer.html :: footer"></footer>
-<!--================================================================================================================-->
+
 </body>
-<!--================================================================================================================-->
+
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-<!--================================================================================================================-->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/js/fix/header.js"></script>
-<script src="/js/talent/talent.js"></script>
-<!--================================================================================================================-->
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-    AOS.init();
-</script>
-<!--================================================================================================================-->
+<!--<script src="/js/myPage/mypagetalent.js"></script>-->
+
 <script th:inline="javascript">
 
     globalThis.page = 0;
 
-    let savecategory = "";
+    let $pagingBtnFlex = $('.paging-number-flex');
+    let pageInfo;
 
     show();
 
-    // 처음 목록 가져오기
-    const $checkSeoul = $(".checkSeoul"); //서울
-    const $checkKyungki = $(".checkKyungki"); //경기도
-    const $checkKangwon = $(".checkKangwon"); //강원도
-    const $checkChungcheong = $(".checkChungcheong"); //충청도
-    const $checkJeolla = $(".checkJeolla"); //전라도
-    const $checkGyeong = $(".checkGyeong"); //경상도
-    const $checkJeju = $(".checkJeju"); //제주도
+    function show() {
+        getTalentList({
+            page: globalThis.page
+        }, getList)
+    }
 
-    const $wholePlace = $(".dropbtn"); //전체
+    /*===============================*/
 
+    function getTalentList(param, callback, error) {
+        let queryString = "/" + param.page || 1;
+        $.ajax({
+            url: "/myPageRest/list" + queryString,
+            type: "get",
+            success: function (noticeResp, status, xhr) {
+                if (callback) {
+                    callback(noticeResp)
+                }
+            },
+            error: function (xhr, status, err) {
+                if (error) {
+                    error(err);
+                }
+            }
+        });
+    }
 
-    $checkSeoul.on('click', function () { // 작은지역들 클릭시 search()실행
-        globalThis.page = 0;
-        search()
-    })
-    $checkKyungki.on('click', function () { // 작은지역들 클릭시 search()실행
-        globalThis.page = 0;
-        search()
-    })
-    $checkKangwon.on('click', function () { // 작은지역들 클릭시 search()실행
-        globalThis.page = 0;
-        search()
-    })
-    $checkChungcheong.on('click', function () { //  작은지역들 클릭시 search()실행
-        globalThis.page = 0;
-        search()
-    })
-    $checkJeolla.on('click', function () { //  작은지역들 클릭시 search()실행
-        globalThis.page = 0;
-        search()
-    })
-    $checkGyeong.on('click', function () { //  작은지역들 클릭시 search()실행
-        globalThis.page = 0;
-        search()
-    })
-    $checkJeju.on('click', function () { //  작은지역들 클릭시 search()실행
-        globalThis.page = 0;
-        search()
-    })
-    $wholePlace.on('click', function () { // 전체 클릭시 search()실행
-        globalThis.page = 0;
-        search()
-    })
+    /*===============================*/
 
-
-    /*검색창 엔터*/
-    $talentName.on('keyup', function (e) {
-        if (e.keyCode == 13) {
-            $('input[name = talentName]').val($talentName.val());
-            console.log($('input[name = talentName]').val($talentName.val()));
-            globalThis.page = 0;
-            search()
-        }
-    })
-
-    /*검색창 클릭*/
-    $talentClick.on('click', function (e) {
-        $('input[name = talentName]').val($talentName.val());
-        console.log($('input[name = talentName]').val($talentName.val()));
-        globalThis.page = 0;
-        search()
-    })
-
-    //==========================페이징===========================================
-    let pageInfo;
-
-    //=========================처음 들어갈때 전체 페이지============================
     function getList(talentResp) {
         let text = "";
         pageInfo = talentResp.arTalentDTO;
         talentResp.arTalentDTO.content.forEach(talent => {
 
             text += `<div style="padding-bottom:20px">`
-            text += `<article class="talentBox">`
+            text += `<article class="talentBox" style="width: 65%;">`
             text += `<div class="talentBox2">`
             text += `<div class="talentBox3">`
             text += `<img src="../imgs/myPage/normalProfile.png" class="talentImg">`
@@ -422,10 +322,10 @@
             text += `<p class="talentTitle">` + talent.talentTitle + `</p>`
             text += `<p class="talentContent" style="overflow: hidden; height: 43px">` + talent.talentContent + `</p>`
             text += `<div class="talentboxs">`
-            text += `<div class="talentType">`
+            text += `<div class="talentType" style="width: 150px;">`
             text += `<img src="/imgs/talent/care2.png" style="width: 25px; height: 25px; margin-bottom: -6px; margin-left: -10px;">` + talent.talentCategory
             text += `</div>`
-            text += `<div class="talentPlace">`
+            text += `<div class="talentPlace" style="width: 150px;">`
             text += `<img src="/imgs/talent/pin.png" style="width: 25px; height: 25px; margin-bottom: -6px; margin-left: -10px;">` + talent.talentPlace
             text += `</div>`
 
@@ -434,7 +334,7 @@
             let month = date.getMonth() + 1;
             let day = date.getDate();
 
-            text += `<div class="talentTime">`
+            text += `<div class="talentTime" style="width: 200px;">`
             text += `<img src="/imgs/talent/mylove.png" style="width: 25px; height: 25px; margin-bottom: -7px; margin-left: -15px;">` + year + '년 ' + ("00" + month.toString()).slice(-2) + "월 " + ("00" + day.toString()).slice(-2) + "일"
             text += `</div>`
             text += `</div>`
@@ -448,64 +348,46 @@
         pageingBtn();
     }
 
-    /*=======================================================================================================*/
+    /*============================================================================*/
 
 
-    $(".cateAll").on("click", function () {
-        savecategory = $(this).text();
-        globalThis.page = 0;
-        show();
-    })
-    $(".cateEdu").on("click", function () {
-        savecategory = $(this).text();
-        globalThis.page = 0;
-        show();
-    })
-    $(".cateExe").on("click", function () {
-        savecategory = $(this).text();
-        globalThis.page = 0;
-        show();
-    })
-    $(".cateMus").on("click", function () {
-        savecategory = $(this).text();
-        globalThis.page = 0;
-        show();
-    })
-    $(".cateArt").on("click", function () {
-        savecategory = $(this).text();
-        globalThis.page = 0;
-        show();
-    })
-    $(".cateIt").on("click", function () {
-        savecategory = $(this).text();
-        globalThis.page = 0;
-        show();
+
+    let $talentBox = $('.talentBox');
+
+    let $modalWrap = $('.modalWrap');
+    let body = $('body');
+
+    let $modalBtn = $('.modalBtn');
+    let modalWrap = document.querySelector('.modalWrap');
+
+
+    $talentBox.on('click', function () {
+        alert("클릭!!!!")
+        $modalWrap.show();
+        body.css('overflow', 'hidden');
     })
 
-    /*==========================================================================*/
 
-    /*==========지역 및 제목 검색시========*/
-    function search() {
-        getTalentList({
-            talentCategory: savecategory,
-            talentPlace: saveLocal,
-            talentTitle: $('input[name = "talentName"]').val(),
-            page: globalThis.page
-        }, getList);
-    }
 
-    /*============전체 클릭시============*/
-    function show() {
-        getTalentList({
-            talentCategory: savecategory,
-            talentPlace: saveLocal,
-            talentTitle: $('input[name = "talentName"]').val(),
-            page: globalThis.page
-        }, getList)
-    }
 
-    //============================페이징 버튼 처리 전체================================
-    let $pagingBtnFlex = $('.paging-number-flex');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //=====================페이징 버튼 처리 전체=========================
 
     function pageingBtn() {
         let text = "";
@@ -551,7 +433,7 @@
         e.preventDefault();
         window.scrollTo({top: 0})
         globalThis.page = $(this).attr("href");
-        search();
+        show();
     })
 
     /*  페이지 이동  */
@@ -570,7 +452,7 @@
         document.location.reload();
     };
 
-    /*===========================================================================*/
+    /*=========================================================*/
 
 </script>
 </html>

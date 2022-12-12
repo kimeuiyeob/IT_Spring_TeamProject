@@ -129,4 +129,15 @@ public class TalentService {
         talentRepository.deleteById(donationId);
     }
 
+    /*========================================================================*/
+    //마이페이지 재능기부 목록
+    public Page<TalentDTO> findAllTalentById(Integer page,Long peopleId) {
+        if (page == null) page = 0;
+        Pageable pageable = PageRequest.of(page, 5);
+        List<TalentDTO> list = talentRepository.findAllTalentById(pageable,peopleId);
+        Page<TalentDTO> talents = new PageImpl<>(list, pageable, Integer.valueOf("" + talentRepository.countByAbleDate2(pageable, peopleId)));
+        return talents;
+    }
+
+
 }

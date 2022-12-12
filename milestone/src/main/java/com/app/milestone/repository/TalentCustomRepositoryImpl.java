@@ -1,7 +1,8 @@
 package com.app.milestone.repository;
 
-import com.app.milestone.domain.*;
-import com.app.milestone.entity.QUser;
+import com.app.milestone.domain.QTalentDTO;
+import com.app.milestone.domain.Search;
+import com.app.milestone.domain.TalentDTO;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -16,11 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.app.milestone.entity.QDonation.donation;
-import static com.app.milestone.entity.QMoney.money;
 import static com.app.milestone.entity.QPeople.people;
-import static com.app.milestone.entity.QSchool.school;
 import static com.app.milestone.entity.QTalent.talent;
-import static com.app.milestone.entity.QUser.user;
 
 @Repository
 @RequiredArgsConstructor
@@ -60,6 +58,32 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
                 .fetch();
     }
 
+    @Override
+    public List<TalentDTO> findAllTalentById(Pageable pageable, Long peopleId) {
+        //pageale쓰면 pageale.of(파라미터 2개를 받을수있다) 첫번째가 현재페이지(page), 두번째가 페이지 사이즈(amount)
+        return jpaQueryFactory.select(new QTalentDTO(
+                talent.donationId,
+                talent.talentTitle,
+                talent.talentContent,
+                talent.talentAbleDate,
+                talent.createdDate,
+                talent.talentCategory,
+                talent.talentPlace,
+                talent.people.peopleNickname,
+                talent.school.userId,
+                talent.people.userId,
+                talent.people.userName,
+                talent.people.userEmail
+        ))
+                .where(talent.people.userId.eq(peopleId))
+                .from(talent)
+                .orderBy(talent.talentAbleDate.asc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
+    }
+
+
     /*=============================================================================================================*/
     //조건에 따른 보육원 수
     @Override
@@ -72,6 +96,19 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
                         talentPlaceContaining(search.getTalentPlace()),
                         talentCategoryContainingAll(search.getTalentCategory())
                 )
+                .orderBy(talent.talentAbleDate.asc())
+//                .offset(pageable.getOffset())
+//                .limit(pageable.getPageSize())
+                .fetchOne();
+    }
+
+    /*=============================================================================================================*/
+    //조건에 따른 보육원 수
+    @Override
+    public Long countByAbleDate2(Pageable pageable, Long peopleId) {
+        return jpaQueryFactory.select(talent.count())
+                .from(talent)
+                .where(talent.people.userId.eq(peopleId))
                 .orderBy(talent.talentAbleDate.asc())
 //                .offset(pageable.getOffset())
 //                .limit(pageable.getPageSize())

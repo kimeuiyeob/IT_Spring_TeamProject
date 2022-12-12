@@ -34,10 +34,6 @@ public class NoticeRestController {
 
     @GetMapping(value= {"/listAsc/{page}", "/listAsc/{page}/{noticeTitle}"})
     public NoticeResp userListPeopleAsc(@PathVariable("page") Integer page, Search search, Model model) {
-
-        log.info("의엽이가 레스트 컨트롤러에 들어왔습니다! 페이지 : " + page);
-        log.info("의엽이가 레스트 컨트롤러에 들어왔습니다! search : " + search);
-
         NoticeResp noticeResp = new NoticeResp();
         Pageable pageable = PageRequest.of(page, 7);
         Page<NoticeDTO> arNoticeDTO = noticeService.noticeListBySearchAsc(page, search);
