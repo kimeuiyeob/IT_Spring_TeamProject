@@ -31,6 +31,7 @@ let check1 = false;
                 });
                 check1 = !check1;
             }
+            $(".menu-sub-dropdown-option-sub").css('display', 'none');
         }
     })
 
@@ -309,7 +310,8 @@ function getList(talentResp) {
     pageInfo = talentResp.arTalentDTO;
     talentResp.arTalentDTO.content.forEach(talent => {
         text += `<tr>`
-        text += `<th class="card-body-title-checkbox-padding" style="width: 5%;">`
+        // text += `<th class="card-body-title-checkbox-padding" style="width: 5%;">`
+        text += `<th class="card-body-title-checkbox-padding" style="width: 5%;margin-top: 17px;padding-bottom: 26px;padding-right: 0px;}">`
         text += `<label class="card-body-title-user-checkbox">`
         text += `<div class="check-img"></div>`
         text += `<input class="notice-checked" type="checkbox" name="check">`
@@ -317,7 +319,7 @@ function getList(talentResp) {
         text += `</label>`
         text += `</th>`
         // text += `<th class="card-body-title-padding" style="width: 17%;">`
-        text += `<th class="card-body-title-padding" style="width: 0;">`
+        text += `<th class="card-body-title-padding" style="width: 0; padding-bottom: 63px;">`
         text += `<div class="donater-info">`
         text += `<div class="donater-info-text">`
 
@@ -408,13 +410,20 @@ function getList1(param, callback, error){
 /* 검색 */
 function search() {
     if($searchCategory.text()=="옵션 선택"){
-        $searchCategory.empty();
+        getList1({
+            keyword : $search.val(),
+            talentCategory : "",
+            // talentPlaceOne : $searchPlace.text(),
+            page: globalThis.page
+        }, getList);
+        return;
     }
-    if($searchPlace.text()=="옵션 선택"){
-        $searchPlace.empty();
-    }
-    console.log("초기화 됏니?"+$searchCategory.text())
-    console.log("초기화 됏니?"+$searchPlace.text())
+    
+    // if($searchPlace.text()=="옵션 선택"){
+    //     $searchPlace.empty();
+    // }
+    // console.log("초기화 됏니?"+$searchCategory.text())
+    // console.log("초기화 됏니?"+$searchPlace.text())
 
     getList1({
         keyword : $search.val(),
