@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "USER_TYPE")
@@ -28,6 +29,9 @@ public class User extends Period {
     @NotNull
     protected String userPhoneNumber;
     protected int donationCount;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<File> files;
 
 
     public User(String userEmail, String userName, String userPassword, String userPhoneNumber, int donationCount) {

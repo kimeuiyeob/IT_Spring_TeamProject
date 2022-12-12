@@ -2,6 +2,7 @@ package com.app.milestone.controller.myPage;
 
 import com.app.milestone.domain.SchoolDTO;
 import com.app.milestone.domain.Search;
+import com.app.milestone.service.FileService;
 import com.app.milestone.service.SchoolService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -43,10 +44,12 @@ public class MyPageController {
     
     /*황지수*/
     private final SchoolService schoolService;
+    private final FileService fileService;
     @GetMapping("/schoolinfo")
     public String schoolInfo(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
         Long userId = (Long) session.getAttribute("userId");
+        model.addAttribute("fileDTO", fileService.showProfile(1L));
         model.addAttribute("schoolDTO", schoolService.schoolInfo(1L));
         return "/myPage/myPage_schoolInfo";
     }

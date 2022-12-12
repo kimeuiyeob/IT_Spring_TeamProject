@@ -39,15 +39,15 @@
     width: 100%;
 }
 
-.warningMsg{
+.warningMsg {
     color: rgb(255, 64, 43);
 }
 
-#certification:disabled{
+#certification:disabled {
     cursor: no-drop;
 }
 
-#certification:disabled:hover{
+#certification:disabled:hover {
     border: 1px solid rgb(228, 229, 237);
 }
 
@@ -136,7 +136,12 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }
 
-.submitBtn:disabled:hover{
+.submitBtn:disabled:hover {
 
+}
+
+/*===============파일==============*/
+.fileInfo {
+    display: none;
 }
 
