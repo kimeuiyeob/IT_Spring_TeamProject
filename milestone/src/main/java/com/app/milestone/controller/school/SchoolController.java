@@ -34,11 +34,11 @@ public class SchoolController {
     @GetMapping("/list")
     public void list(HttpServletRequest request, Search search, Model model) {
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("loginMember");
-        Long userId = null;
-        if (user != null) {
-            userId = user.getUserId();
-        }
+        Long userId = (Long) session.getAttribute("userId");
+//        Long userId = null;
+//        if (user != null) {
+//            userId = user.getUserId();
+//        }
         model.addAttribute("userId", userId);
         model.addAttribute("search", search);
     }
@@ -48,7 +48,6 @@ public class SchoolController {
     public void read(HttpServletRequest request, Long userId, Model model) {
         HttpSession session = request.getSession();
         Long sessionId = (Long)session.getAttribute("userId");
-        log.info("===================="+sessionId);
         PeopleDTO peopleDTO = null;
         SchoolDTO schoolDTO = null;
         if (sessionId != null) {

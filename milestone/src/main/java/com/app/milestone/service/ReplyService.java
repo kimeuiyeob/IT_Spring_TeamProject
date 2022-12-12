@@ -28,8 +28,8 @@ public class ReplyService {
 
     //    추가
     @Transactional
-    public void register(ReplyDTO replyDTO) {
-        People people = peopleRepository.findById(replyDTO.getPeopleUserId()).get();
+    public void register(Long userId, ReplyDTO replyDTO) {
+        People people = peopleRepository.findById(userId).get();
         School school = schoolRepository.findById(replyDTO.getSchoolUserId()).get();
         Reply reply = replyRepository.save(replyDTO.toEntity());
         reply.changeSchool(school);

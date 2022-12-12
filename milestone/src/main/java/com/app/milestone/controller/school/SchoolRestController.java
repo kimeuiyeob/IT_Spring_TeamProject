@@ -13,6 +13,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,17 +80,20 @@ public class SchoolRestController {
 
     //    보육원 댓글 등록
     @PostMapping("/register")
-    public void register(@RequestBody ReplyDTO replyDTO) {
-        replyService.register(replyDTO);
+    public void register(HttpServletRequest request, @RequestBody ReplyDTO replyDTO) {
+        HttpSession session = request.getSession();
+        Long userId = (Long) session.getAttribute("userId");
+        replyService.register(userId, replyDTO);
     }
 
     //  ==============좋아요=============
     //    내가 누른 좋아요
     @Transactional
     @GetMapping(value = {"/likeSchool"})
-    public List<Long> likeSchool() {
-        Long sessionId = 132L;
-        return likeService.likeSchoolList(sessionId);
+    public List<Long> likeSchool(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Long userId = (Long) session.getAttribute("userId");
+        return likeService.likeSchoolList(userId);
     }
 
     //    좋아요 개수
@@ -98,30 +104,34 @@ public class SchoolRestController {
 
     //    좋아요 누름
     @GetMapping(value = {"/like/{userId}"})
-    public void like(@PathVariable("userId") Long userId) {
-        Long sessionId = 132L;
+    public void like(HttpServletRequest request, @PathVariable("userId") Long userId) {
+        HttpSession session = request.getSession();
+        Long sessionId = (Long) session.getAttribute("userId");
         likeService.likeSchool(userId, sessionId);
     }
 
     //    좋아요 취소
     @GetMapping(value = {"/cancel/{userId}"})
-    public void cancel(@PathVariable("userId") Long userId) {
-        Long sessionId = 132L;
+    public void cancel(HttpServletRequest request, @PathVariable("userId") Long userId) {
+        HttpSession session = request.getSession();
+        Long sessionId = (Long) session.getAttribute("userId");
         likeService.cancelLikeSchool(userId, sessionId);
     }
 
     //    ======================기부==========================
     //    결제진행
     @PostMapping("/payment")
-    public void payment(@RequestBody MoneyDTO moneyDTO) {
-        Long sessionId = 132L;
+    public void payment(HttpServletRequest request, @RequestBody MoneyDTO moneyDTO) {
+        HttpSession session = request.getSession();
+        Long sessionId = (Long) session.getAttribute("userId");
         moneyService.payment(sessionId, moneyDTO);
     }
 
     //    방문기부
     @PostMapping("/visit")
-    public void visit(@RequestBody ServiceDTO serviceDTO) {
-        Long sessionId = 132L;
+    public void visit(HttpServletRequest request, @RequestBody ServiceDTO serviceDTO) {
+        HttpSession session = request.getSession();
+        Long sessionId = (Long) session.getAttribute("userId");
         serviceService.donationReservation(sessionId, serviceDTO);
     }
 

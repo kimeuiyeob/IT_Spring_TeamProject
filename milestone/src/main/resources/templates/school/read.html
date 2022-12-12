@@ -129,35 +129,6 @@
 
                 <!-- 댓글리스트 -->
                 <div class="commentsList">
-                    <!-- 댓글 하나 -->
-                    <!--                    <div class="comment">-->
-                    <!--                        &lt;!&ndash; show 부분 &ndash;&gt;-->
-                    <!--                        <div class="commentsInfo">-->
-                    <!--                            <div class="profilePicture">-->
-                    <!--                                <img src="/imgs/myPage/normalProfile.png">-->
-                    <!--                            </div>-->
-                    <!--                            <div class="nameAndDate">-->
-                    <!--                                <div class="nickName">해피123</div>-->
-                    <!--                            </div>-->
-                    <!--                            <div class="modifyAndDelete">-->
-                    <!--                                <span class="mAd modifyReady">수정</span>-->
-                    <!--                                <span class="between">&nbsp;&nbsp;|&nbsp;&nbsp;</span>-->
-                    <!--                                <span class="mAd deleteReady">삭제</span>-->
-                    <!--                                <span class="cancel">취소</span>-->
-                    <!--                            </div>-->
-                    <!--                        </div>-->
-                    <!--                        <div class="commentContent modifyShow">-->
-                    <!--                            <div class="commentContent2">-->
-                    <!--                                <p class="commentContent3">아이들이 너무 밝아 보여서 좋아요!</p>-->
-                    <!--                            </div>-->
-                    <!--                        </div>-->
-                    <!--                        <div class="commentContent modifyHide">-->
-                    <!--                            <div class="commentContent2">-->
-                    <!--                                <textarea name="" class="reply" cols="30" rows="3">아이들이 너무 밝아 보여서 좋아요!</textarea>-->
-                    <!--                                <input type="button" class="replyRegisterButton" value="수정">-->
-                    <!--                            </div>-->
-                    <!--                        </div>-->
-                    <!--                    </div>-->
                 </div>
 
                 <div class="more">
@@ -405,18 +376,18 @@
     console.log(modelSchoolDTO)
     console.log(modelPeopleDTO)
 
-    // if (modelSchoolDTO || modelPeopleDTO) {
-    //     $('.display-none').show();
-    //     if(modelPeopleDTO){
-    //         $(".nickName").text(modelPeopleDTO.peopleNickname);
-    //         sessionId = modelPeopleDTO.userId;
-    //     }
-    //     if (modelSchoolDTO) {
-    //         $(".nickName").text(modelSchoolDTO.schoolName);
-    //         $('.donate').hide();
-    //         sessionId = modelPeopleDTO.userId;
-    //     }
-    // }
+    if (modelSchoolDTO || modelPeopleDTO) {
+        $('.display-none').show();
+        if(modelPeopleDTO){
+            $(".nickName").text(modelPeopleDTO.peopleNickname);
+            sessionId = modelPeopleDTO.userId;
+        }
+        if (modelSchoolDTO) {
+            $(".nickName").text(modelSchoolDTO.schoolName);
+            $('.donate').hide();
+            sessionId = modelPeopleDTO.userId;
+        }
+    }
 
     show();
 
@@ -611,7 +582,6 @@
         register({
             replyContent: replyContent,
             schoolUserId: $('.userId').val(),
-            peopleUserId: sessionId
         }, showReply)
         $(this).prev().val("");
         window.scrollTo({top: 0})
@@ -650,7 +620,7 @@
         getInfo1({
             userId: $('.userId').val()
         }, getInfo);
-        showReply;
+        showReply();
         getLikeCount($('.userId').val(), likeCount);
         getLikeSchoolList(clickLikeBtn);
     }
