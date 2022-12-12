@@ -8,7 +8,7 @@ let check1 = false;
     $(document).on('click', function (e) {
         if (check1) {
             if (e.target.closest('.menu-sub-dropdown') == e.currentTarget.querySelector('.menu-sub-dropdown').closest('.menu-sub-dropdown')) {
-                if($(".apply-button").text().match('적용')){
+                if($(".apply-button").text().match('닫기')){
 
                     $filterDropdown.css('display', 'none');
                     $filter.css('background-color', '#f6f8fa');
@@ -306,33 +306,32 @@ function showList(){
 }
 
 function getList(talentResp) {
+    // console.log(JSON.stringify(talent));
+
     let text = "";
     pageInfo = talentResp.arTalentDTO;
     talentResp.arTalentDTO.content.forEach(talent => {
         text += `<tr>`
-        // text += `<th class="card-body-title-checkbox-padding" style="width: 5%;">`
-        text += `<th class="card-body-title-checkbox-padding" style="width: 5%;margin-top: 17px;padding-bottom: 26px;padding-right: 0px;}">`
+        text += `<th class="card-body-title-checkbox-padding" style="width: 5%;">`
         text += `<label class="card-body-title-user-checkbox">`
         text += `<div class="check-img"></div>`
         text += `<input class="notice-checked" type="checkbox" name="check">`
         text += `<input type="hidden" value="` + talent.donationId + `"name ="check2" class="talentId">`
         text += `</label>`
         text += `</th>`
-        // text += `<th class="card-body-title-padding" style="width: 17%;">`
-        text += `<th class="card-body-title-padding" style="width: 0; padding-bottom: 63px;">`
+        text += `<th class="card-body-title-padding" style="width: 17%;">`
         text += `<div class="donater-info">`
         text += `<div class="donater-info-text">`
 
-        // text += `<div class="donater-name">`+ talent.userName +`</div>`
-        // text += `<div>`+ talent.userEmail +`</div>`
+        text += `<div class="donater-name">`+ talent.peopleUserName +`</div>`
+        text += `<div>`+ talent.peopleUserEmail +`</div>`
         text += `<div class="donater-name"></div>`
         text += `<div></div>`
 
         text += `</div>`
         text += `</div>`
         text += `</th>`
-        // text += `<th class="card-body-title-padding" style="width: 15%;">`
-        text += `<th class="card-body-title-padding" style="width: 25%;">`
+        text += `<th class="card-body-title-padding" style="width: 15%;">`
         text += `<div class="donate-info-height">` + talent.peopleNickname + `</div>`
         text += `</th>`
         text += `<th class="card-body-title-padding" style="width: 13%;">`

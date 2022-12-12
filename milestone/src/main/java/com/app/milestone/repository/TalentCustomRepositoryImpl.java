@@ -3,6 +3,7 @@ package com.app.milestone.repository;
 import com.app.milestone.domain.QTalentDTO;
 import com.app.milestone.domain.Search;
 import com.app.milestone.domain.TalentDTO;
+import com.app.milestone.entity.QUser;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -19,6 +20,7 @@ import java.util.List;
 import static com.app.milestone.entity.QDonation.donation;
 import static com.app.milestone.entity.QPeople.people;
 import static com.app.milestone.entity.QTalent.talent;
+import static com.app.milestone.entity.QUser.user;
 
 @Repository
 @RequiredArgsConstructor
@@ -251,6 +253,8 @@ public List<Tuple> sortBytalentRank() {
     /*=================================================================================================*/
     /*=================================================================================================*/
 
+
+    /* 관리자 페이지=============================================================*/
     @Override
     public Long countByCreatedDate(Pageable pageable, Search search) {
         return jpaQueryFactory.select(talent.count())
@@ -291,17 +295,6 @@ public List<Tuple> sortBytalentRank() {
 
         return booleanBuilder;
     }
-    private BooleanBuilder peopleNameAndEmailAndNicknameAndCategoryAndPlace3(String talentPlaceOne) {
-        BooleanBuilder booleanBuilder = new BooleanBuilder();
-
-        if (talentPlaceOne == null) {
-            return null;
-        }
-        if (talentPlaceOne!=null) {
-            booleanBuilder.or(talent.talentPlace.contains(talentPlaceOne));
-        }
-        return booleanBuilder;
-    }
 
     public List<TalentDTO> findTalentSearch (Pageable pageable, Search search){
         return jpaQueryFactory.select(new QTalentDTO(
@@ -318,8 +311,11 @@ public List<Tuple> sortBytalentRank() {
                 talent.people.userName,
                 talent.people.userEmail
                 ))
-                .from(talent)
+                .from(talent,donation, people, user)
                 .where(
+                        talent.donationId.eq(donation.donationId),
+                        donation.people.userId.eq(people.userId),
+                        people.userId.eq(user.userId),
                         peopleNameAndEmailAndNicknameAndCategoryAndPlace(search.getKeyword()),
                         peopleNameAndEmailAndNicknameAndCategoryAndPlace2(search.getTalentCategory())
 //                        peopleNameAndEmailAndNicknameAndCategoryAndPlace3(search.getTalentPlaceOne())
