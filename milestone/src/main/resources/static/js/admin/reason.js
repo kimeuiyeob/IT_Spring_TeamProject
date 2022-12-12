@@ -5,12 +5,9 @@ const $filters = $('.card-toolbar-item');
 let check1 = false;
 
 $(document).on('click', function (e) {
-    console.log('들어옴1')
     if (check1) {
         if (e.target.closest('.menu-sub-dropdown') == e.currentTarget.querySelector('.menu-sub-dropdown').closest('.menu-sub-dropdown')) {
-            console.log('들어옴2')
             if($(".apply-button").text().match('적용')){
-                console.log('들어옴3')
                 $filterDropdown.css('display', 'none');
                 $filter.css('background-color', '#f6f8fa');
                 $filter.css('color', '#009ef7');
@@ -19,6 +16,7 @@ $(document).on('click', function (e) {
                     'background-size': '13px'
                 });
                 check1 = !check1;
+                globalThis.page=0;
                 search();
             }
         } else {
@@ -151,6 +149,135 @@ let $pagingBtnFlex = $('.paging-number-flex');
 let pageInfo;
 
 
+/* Asc이 최신순으로 바뀌었음*/
+/* 처음 뿌리기 */
+showList();
+
+function showList(){
+    getList1({
+        withdrawalReason: "",
+        page: globalThis.page
+    }, getList)
+}
+
+function getList(withdrawalResp) {
+    let text = "";
+    pageInfo = withdrawalResp.arWithdrawalDTO;
+    withdrawalResp.arWithdrawalDTO.content.forEach(withdrawal => {
+        text += `<tr>`
+        text += `<th class="card-body-title-padding" style="width: 25%;">`
+        text += `<div class="donater-info" style="height: 50px">`
+        text += `<div class="donater-info-text">`
+        text += `<div class="donater-name">`+withdrawal.withdrawalUserType+`</div>`
+        text += `</div>`
+        text += `</div>`
+        text += `</th>`
+        text += `<th class="card-body-title-padding" style="width: 43%;">`
+        text += `<div class="donate-info-height">`+withdrawal.withdrawalReason+`</div>`
+        text += `<th class="card-body-title-padding" style="width: 30%;">`
+
+        var createdDateView = withdrawal.createdDate.split('T')[0].split('-');
+
+        var year = createdDateView[0]+'년 ';
+        var month = createdDateView[1]+'월 ';
+        var date = createdDateView[2]+'일';
+
+        var result = year + month + date;
+
+        text += `<div class="donate-info-height date-time">`+ result +`</div>`
+        text += `</th>`
+        text += `</tr>`
+    })
+    $(".card-body-main-box").html(text)
+    pageingBtn();
+}
+
+function getList1(param, callback, error) {
+
+    let existWithdrawal = param.withdrawalReason.length != 0;
+    let queryString = "/" + param.page || 1;
+
+    queryString += existWithdrawal ? "/" + param.withdrawalReason : "";
+
+    console.log("queryString : "+queryString)
+
+    $.ajax({
+        url: "/adminRest/withdrawal" + queryString,
+        type: "get",
+        success: function (withdrawalResp, status, xhr) {
+            if (callback) {
+                callback(withdrawalResp)
+            }
+        },
+        error: function (xhr, status, err) {
+            if (error) {
+                error(err);
+            }
+        }
+    });
+}
+
+function getList1Asc(param, callback, error) {
+
+    let existWithdrawal = param.withdrawalReason.length != 0;
+    let queryString = "/" + param.page || 1;
+
+    queryString += existWithdrawal ? "/" + param.withdrawalReason : "";
+
+    console.log("queryString : "+queryString)
+
+    $.ajax({
+        url: "/adminRest/withdrawalAsc" + queryString,
+        type: "get",
+        success: function (withdrawalResp, status, xhr) {
+            if (callback) {
+                callback(withdrawalResp)
+            }
+        },
+        error: function (xhr, status, err) {
+            if (error) {
+                error(err);
+            }
+        }
+    });
+}
+
+/* 회원 검색 */
+function search() {
+
+    var word1 = $("#option5").text();   //탈퇴이유
+    var word2 = $("#option6").text();   //탈퇴날짜
+    console.log(word1);
+    console.log(word2);
+
+    // globalThis.page=0;
+
+    if(word1.match('옵션')){
+        word1 = "";
+    }
+
+    // 옵션이면
+    if(word2=="최신순" || word2=="옵션 선택"){
+        getList1({
+            withdrawalReason: word1,
+            page: globalThis.page
+        }, getList)
+    }else if(word2=="오래된순"){
+        getList1Asc({
+            withdrawalReason: word1,
+            page: globalThis.page
+        }, getList)
+    }
+
+}
+
+$("#reset3").on('click',function () {
+    getList1({
+        withdrawalReason: "",
+        page: globalThis.page
+    }, getList)
+})
+
 /* 페이징 처리 */
 function pageingBtn() {
     let text = "";
@@ -214,130 +341,3 @@ $pagingBtnFlex.on('mouseout', "a.page-number-link", function () {
 window.onresize = function () {
     document.location.reload();
 };
-
-/* Asc이 최신순으로 바뀌었음*/
-/* 처음 뿌리기 */
-showList();
-
-function showList(){
-    getList1Asc({
-        withdrawalReason: "",
-        page: globalThis.page
-    }, getList)
-}
-
-function getList(withdrawalResp) {
-    let text = "";
-    pageInfo = withdrawalResp.arWithdrawalDTO;
-    withdrawalResp.arWithdrawalDTO.content.forEach(withdrawal => {
-        text += `<tr>`
-        text += `<th class="card-body-title-padding" style="width: 25%;">`
-        text += `<div class="donater-info" style="height: 50px">`
-        text += `<div class="donater-info-text">`
-        text += `<div class="donater-name">`+withdrawal.withdrawalUserType+`</div>`
-        text += `</div>`
-        text += `</div>`
-        text += `</th>`
-        text += `<th class="card-body-title-padding" style="width: 43%;">`
-        text += `<div class="donate-info-height">`+withdrawal.withdrawalReason+`</div>`
-        text += `<th class="card-body-title-padding" style="width: 30%;">`
-
-        var createdDateView = withdrawal.createdDate.split('T')[0].split('-');
-
-        var year = createdDateView[0]+'년 ';
-        var month = createdDateView[1]+'월 ';
-        var date = createdDateView[2]+'일';
-
-        var result = year + month + date;
-
-        text += `<div class="donate-info-height date-time">`+ result +`</div>`
-        text += `</th>`
-        text += `</tr>`
-    })
-    $(".card-body-main-box").html(text)
-    pageingBtn();
-}
-
-function getList1(param, callback, error) {
-
-    let existWithdrawal = param.withdrawalReason.length != 0;
-    let queryString = "/" + param.page || 1;
-
-    queryString += existWithdrawal ? "/" + param.withdrawalReason : "";
-
-    $.ajax({
-        url: "/adminRest/withdrawalAsc" + queryString,
-        type: "get",
-        success: function (withdrawalResp, status, xhr) {
-            if (callback) {
-                callback(withdrawalResp)
-            }
-        },
-        error: function (xhr, status, err) {
-            if (error) {
-                error(err);
-            }
-        }
-    });
-}
-function getList1Asc(param, callback, error) {
-
-    let existWithdrawal = param.withdrawalReason.length != 0;
-    let queryString = "/" + param.page || 1;
-
-    queryString += existWithdrawal ? "/" + param.withdrawalReason : "";
-
-    $.ajax({
-        url: "/adminRest/withdrawalAsc" + queryString,
-        type: "get",
-        success: function (withdrawalResp, status, xhr) {
-            if (callback) {
-                callback(withdrawalResp)
-            }
-        },
-        error: function (xhr, status, err) {
-            if (error) {
-                error(err);
-            }
-        }
-    });
-}
-/* 회원 검색 */
-function search() {
-    var word = $("#option5").text();
-    console.log(word);
-
-    if($("#option6").text().match("최신순")){
-        getList1Asc({
-            withdrawalReason: word,
-            page: globalThis.page
-        }, getList)
-        console.log('어디')
-    }else if($("#option6").text().match("오래된순")){
-        getList1({
-            withdrawalReason: word,
-            page: globalThis.page
-        }, getList)
-        console.log('들어')
-    }else if($("#option6").text().match("옵션")){
-        if(word==="옵션 선택"){
-            getList1Asc({
-                withdrawalReason: "",
-                page: globalThis.page
-            }, getList)
-            console.log('갔니')
-        }
-        getList1Asc({
-            withdrawalReason: word,
-            page: globalThis.page
-        }, getList)
-        console.log('응?')
-    }
-}
-
-$("#reset3").on('click',function () {
-    getList1Asc({
-        withdrawalReason: "",
-        page: globalThis.page
-    }, getList)
-})

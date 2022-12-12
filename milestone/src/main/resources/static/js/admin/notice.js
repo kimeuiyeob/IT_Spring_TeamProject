@@ -20,9 +20,12 @@ $(document).on('click', function (e) {
                     'background-size': '13px'
                 });
                 check1 = !check1;
+                globalThis.page=0;
                 if($("#option4").text().match('내림차순')) {
+                    console.log('search()실행')
                     search();
                 }else if($("#option4").text().match('오름차순')){
+                    console.log('search()2실행')
                     search2();
                 }
             }
@@ -402,7 +405,7 @@ function getNoticeList(noticeResp) {
     pageInfo = noticeResp.arNoticeDTO;
     noticeResp.arNoticeDTO.content.forEach(notice => {
         text += `<tr>`
-        text += `<th class="card-body-title-checkbox-padding" style="width: 14%;">`
+        text += `<th class="card-body-title-checkbox-padding" style="width: 14%;margin-top: 22px;padding-bottom: 31px;padding-top: 7px;}">`
         text += `<label class="card-body-title-user-checkbox">`
         text += `<div class="check-img"></div>`
         text += `<input class="notice-checked checked" type="checkbox" name="check">`
@@ -508,6 +511,7 @@ function search2() {
 /* 이름, 주소 검색 */
 $search.on("keyup", function (event) {
     if (event.keyCode === 13) {
+        globalThis.page=0;
         search()
     }
 });
@@ -606,7 +610,7 @@ function showDetail(noticeId) {
         success: function (result) {
             $(".hidden-noticeId").val(noticeId);
             $(".modal-info-padding").val(result.noticeTitle);
-            $(".note-editable").eq(0).text(result.noticeContent);
+            $(".note-editable").eq(0).html(result.noticeContent);
         },
     });
 
@@ -617,7 +621,7 @@ function update() {
 
     let noticeId = $(".hidden-noticeId").val()
     let noticeTitle = $(".modal-info-padding").eq(0).val();
-    let noticeContent = $(".note-editable").eq(0).text();
+    let noticeContent = $(".note-editable").eq(0).html();
     console.log("noticeId" + noticeId);
     console.log(noticeTitle);
     console.log(noticeContent);

@@ -17,6 +17,7 @@ $(document).on('click', function (e) {
                     'background-size': '13px'
                 });
                 check1 = !check1;
+                globalThis.page=0;
                 if($("#option7").text().match('최신순')) {
                     search();
                 }else if($("#option7").text().match('오래된순')){
@@ -269,6 +270,7 @@ function searchAsc() {
 /* 엔터키 이벤트 */
 $search.on("keyup", function (event) {
     if (event.keyCode === 13) {
+        globalThis.page=0;
         search()
     }
 });

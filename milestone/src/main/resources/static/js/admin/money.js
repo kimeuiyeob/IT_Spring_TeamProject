@@ -17,6 +17,7 @@ $(document).on('click', function (e) {
                     'background-size': '13px'
                 });
                 check1 = !check1;
+                globalThis.page=0;
 
                 if($("#option2").text().match('최신순')||$("#option2").text().match('옵션 선택')) {
                     console.log("option1 : "+$("#option1").text());
@@ -352,7 +353,7 @@ function search2asc() {
 /* 엔터키 이벤트 */
 $search.on("keyup", function (event) {
     if (event.keyCode === 13) {
-        console.log("enter키 이벤트 : search1()실행")
+        globalThis.page=0;
         search1()
     }
 });
