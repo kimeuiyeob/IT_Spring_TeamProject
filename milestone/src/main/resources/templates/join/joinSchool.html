@@ -76,8 +76,8 @@
                     <div class="essential">*</div>
                 </div>
                 <div class="flexBetween">
-                    <input name="schoolZipcode" id="schoolZipcode" type="hidden" value="">
-                    <input class="inputCos" name="schoolAddress" id="schoolAddress" type="text"
+                    <input th:field="*{schoolZipcode}" name="schoolZipcode" id="schoolZipcode" type="hidden" value="">
+                    <input th:field="*{schoolAddress}" class="inputCos" name="schoolAddress" id="schoolAddress" type="text"
                            placeholder="주소 검색 버튼을 이용해 주세요"
                            value="">
                     <input type="text" id="addressFocus">
@@ -94,7 +94,7 @@
                     <div class="inputTitle">보육원 상세 주소</div>
                     <div class="essential">*</div>
                 </div>
-                <input class="inputCos" name="schoolAddressDetail" id="schoolAddressDetail" type="text"
+                <input th:field="*{schoolAddressDetail}" class="inputCos" name="schoolAddressDetail" id="schoolAddressDetail" type="text"
                        placeholder="상세 주소를 입력해 주세요">
                 <div class="margin-top-4" style="display: none;">
                     <div class="warningMsg">상세주소가 없다면 주소지의 특징을 입력해 주세요.</div>

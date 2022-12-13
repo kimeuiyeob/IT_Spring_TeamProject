@@ -58,11 +58,10 @@ public class MyPageRestController {
 
     //    프로필 등록
     @PostMapping("/profile")
-    public void profile(HttpServletRequest request, @RequestBody FileDTO fileDTO) {
-        HttpSession session = request.getSession();
+    public void profile(HttpSession session, @RequestBody FileDTO fileDTO) {
         Long userId = (Long) session.getAttribute("userId");
         log.info("========================" + fileDTO);
-        fileService.register(1L, fileDTO);
+        fileService.register(userId, fileDTO);
     }
 
 }

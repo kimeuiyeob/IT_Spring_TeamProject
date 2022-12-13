@@ -47,7 +47,7 @@ public class SchoolService {
         schoolDTO.setSchoolAccount(school.getSchoolAccount());
         schoolDTO.setUserPhoneNumber(school.getUserPhoneNumber());
         schoolDTO.setSchoolPhoneNumber(school.getSchoolPhoneNumber());
-        schoolRepository.save(school);
+        schoolRepository.save(schoolDTO.toEntity());
         return school.getUserId();
     }
 
