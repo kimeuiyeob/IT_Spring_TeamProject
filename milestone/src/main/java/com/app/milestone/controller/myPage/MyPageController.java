@@ -1,9 +1,6 @@
 package com.app.milestone.controller.myPage;
 
-import com.app.milestone.domain.FileDTO;
-import com.app.milestone.domain.PeopleDTO;
-import com.app.milestone.domain.SchoolDTO;
-import com.app.milestone.domain.Search;
+import com.app.milestone.domain.*;
 import com.app.milestone.service.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +31,7 @@ public class MyPageController {
         model.addAttribute("peopleDTO", peopleService.onesInfo(userId));
         return "/myPage/myPage_myInfo";
     }
+
     //    프로필 등록
     @PostMapping("/profile")
     public void profile(HttpSession session, @RequestBody FileDTO fileDTO) {
@@ -48,6 +46,15 @@ public class MyPageController {
         Long userId = (Long) session.getAttribute("userId");
         peopleService.updatePeople(userId, peopleDTO);
         return new RedirectView("/mypage/myinfo");
+    }
+
+    @PostMapping("/passwordUpdate")
+    public RedirectView updatePeoplePassword(HttpSession session, PasswordDTO passwordDTO) {
+        Long userId = (Long) session.getAttribute("userId");
+        log.info("마페컨 유저 비밀번호 : " + passwordDTO);
+        log.info("마페컨 유저 아이디 : " + userId);
+        peopleService.updatePeoplePassword(userId, passwordDTO);
+        return new RedirectView("/main/main");
     }
 
     @PostMapping(value = {"/checkEmail"})
@@ -66,12 +73,13 @@ public class MyPageController {
         return Integer.toString(randomNumber);
     }
 
+    /**
+     * 회원 수정하기 전 비밀번호 확인
+     **/
     @GetMapping("/password")
-    public String password() {
-        return "/myPage/myPage_password";
+    public String checkPwdView() {
+        return "mypage/myPage_password";
     }
-
-    ;
 
     @GetMapping("/schedule")
     public String schedule() {

@@ -1,7 +1,5 @@
 package com.app.milestone.repository;
 
-import com.app.milestone.domain.MoneyDTO;
-import com.app.milestone.domain.QMoneyDTO;
 import com.app.milestone.domain.QServiceDTO;
 import com.app.milestone.domain.ServiceDTO;
 import com.querydsl.core.BooleanBuilder;
@@ -14,15 +12,36 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.app.milestone.entity.QMoney.money;
 import static com.app.milestone.entity.QPeople.people;
 import static com.app.milestone.entity.QSchool.school;
 import static com.app.milestone.entity.QService.service;
 
 @Repository
 @RequiredArgsConstructor
-public class ServiceCustomRepositoryImpl implements ServiceCustomRepository{
+public class ServiceCustomRepositoryImpl implements ServiceCustomRepository {
     private final JPAQueryFactory jpaQueryFactory;
+
+//    //    마이페이지 개인 일정관리
+//    @Override
+//    public List<ServiceDTO> findServiceById(Pageable pageable, String keyword) {
+//        return jpaQueryFactory.select(new QServiceDTO(
+//                service.school.schoolName,
+//                service.people.peopleNickname,
+//                service.people.userId,
+//                service.school.address.schoolAddress,
+//                service.school.address.schoolAddressDetail,
+//                service.serviceVisitDate
+//        ))
+//                .from(service)
+//                .where(
+//                        service.people.userId.eq(userId)
+//                )
+//                .offset(pageable.getOffset())
+//                .limit(pageable.getPageSize())
+//                .fetch();
+//    }
+
+    ;
 
     //  방문기부 랭킹 정렬
     @Override
@@ -73,7 +92,7 @@ public class ServiceCustomRepositoryImpl implements ServiceCustomRepository{
             return null;
         }
         BooleanBuilder booleanBuilder = new BooleanBuilder();
-        if (keyword!=null) {
+        if (keyword != null) {
             booleanBuilder.or(people.peopleNickname.contains(keyword));
             booleanBuilder.or(school.schoolName.contains(keyword));
         }
@@ -81,11 +100,13 @@ public class ServiceCustomRepositoryImpl implements ServiceCustomRepository{
     }
 
     //   봉사날짜 최신순
-    public List<ServiceDTO> findServiceSearch (Pageable pageable, String keyword){
+    public List<ServiceDTO> findServiceSearch(Pageable pageable, String keyword) {
         return jpaQueryFactory.select(new QServiceDTO(
                 service.school.schoolName,
                 service.people.peopleNickname,
                 service.people.userId,
+                service.school.address.schoolAddress,
+                service.school.address.schoolAddressDetail,
                 service.serviceVisitDate
         ))
                 .from(service)
@@ -96,14 +117,18 @@ public class ServiceCustomRepositoryImpl implements ServiceCustomRepository{
                 .limit(pageable.getPageSize())
                 .orderBy(service.serviceVisitDate.desc())
                 .fetch();
-    };
+    }
+
+    ;
 
     //   봉사날짜 오래된순
-    public List<ServiceDTO> findServiceSearchAsc (Pageable pageable, String keyword){
+    public List<ServiceDTO> findServiceSearchAsc(Pageable pageable, String keyword) {
         return jpaQueryFactory.select(new QServiceDTO(
                 service.school.schoolName,
                 service.people.peopleNickname,
                 service.people.userId,
+                service.school.address.schoolAddress,
+                service.school.address.schoolAddressDetail,
                 service.serviceVisitDate
         ))
                 .from(service)
@@ -114,6 +139,8 @@ public class ServiceCustomRepositoryImpl implements ServiceCustomRepository{
                 .limit(pageable.getPageSize())
                 .orderBy(service.serviceVisitDate.asc())
                 .fetch();
-    };
+    }
+
+    ;
 
 }

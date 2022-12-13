@@ -7,7 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @RestController
@@ -15,7 +14,7 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/myPageRest/*")
 @Slf4j
 public class MyPageRestController {
-
+    private final ServiceService serviceService;
     private final TalentService talentService;
 
     /*=============================================================================*/
@@ -64,4 +63,23 @@ public class MyPageRestController {
         fileService.register(userId, fileDTO);
     }
 
+    //    비밀번호 변경(비밀번호 확인)
+    @GetMapping("/checkPassword")
+    public boolean checkPassword(HttpSession session, @RequestParam String userPassword) {
+        log.info("checkPassword 진입");
+        Long userId = (Long) session.getAttribute("userId");
+        log.info("유저번호 : " + userId);
+        log.info("비밀번호 : " + userPassword);
+        return userService.checkPassword(userId, userPassword);
+    }
+
+    //  일반회원 일정 조회
+    @GetMapping(value= {"/service/{page}", "/service/{page}/{keyword}"})
+    public ServiceResp serviceList(@PathVariable("page") Integer page, @PathVariable(required = false)String keyword) {
+        if(keyword == null){keyword= "";}
+        ServiceResp serviceResp = new ServiceResp();
+        Page<ServiceDTO> arServiceDTO = serviceService.serviceListSearch(page, keyword);
+        serviceResp.setArServiceDTO(arServiceDTO);
+        return serviceResp;
+    }
 }
