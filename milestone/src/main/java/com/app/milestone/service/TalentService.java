@@ -1,10 +1,8 @@
 package com.app.milestone.service;
 
-import com.app.milestone.domain.Ranking;
-import com.app.milestone.domain.SchoolDTO;
-import com.app.milestone.domain.Search;
-import com.app.milestone.domain.TalentDTO;
+import com.app.milestone.domain.*;
 import com.app.milestone.entity.Talent;
+import com.app.milestone.repository.FileRepository;
 import com.app.milestone.repository.PeopleRepository;
 import com.app.milestone.repository.TalentRepository;
 import com.querydsl.core.Tuple;
@@ -29,6 +27,7 @@ public class TalentService {
 
     private final TalentRepository talentRepository;
     private final PeopleRepository peopleRepository;
+    private final FileRepository fileRepository;
 
     //재능기부 목록 조회
     //페이지객체는 list가 가지고있지 않은 realEnd(마지막페이지) total구할수있다(총갯수)
@@ -80,6 +79,8 @@ public class TalentService {
         for (Tuple tuple : rankingInfo) {
             Ranking ranking = new Ranking();
             String peopleNickname = peopleRepository.findById(tuple.get(1, Long.TYPE)).get().getPeopleNickname();
+            FileDTO fileDTO = fileRepository.findProfileByUserId(tuple.get(1, Long.TYPE));
+            ranking.setFile(fileDTO);
             ranking.setPeopleNickname(peopleNickname);
             ranking.setUserId(tuple.get(1, Long.TYPE));
             ranking.setRankingItem(tuple.get(0, Long.TYPE));

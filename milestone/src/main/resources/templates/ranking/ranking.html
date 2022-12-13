@@ -56,7 +56,8 @@
                                 <div href="" class="css-65gs3l eegfgsa3">
                                     <div size="48" shape="0" role="article" class="css-1jm5h8a e1cdqjir2">
                                         <!--해당회원 프로필사진-->
-                                        <img src="/imgs/ranking/normalProfile.png" class="css-on9gcz e1cdqjir1">
+                                        <img th:if="*{file == null}" src="/imgs/ranking/normalProfile.png" class="css-on9gcz e1cdqjir1">
+                                        <img th:if="*{file != null}" th:src="'/file/display?fileName='+ *{file.filePath} + '/' + *{file.fileUuid} + '_' + *{file.fileName}" class="css-on9gcz e1cdqjir1">
                                     </div>
                                 </div>
                             </article>
@@ -87,7 +88,8 @@
                                 <div href="" class="css-65gs3l eegfgsa3">
                                     <div size="48" shape="0" role="article" class="css-1jm5h8a e1cdqjir2">
                                         <!--해당회원 프로필사진-->
-                                        <img src="/imgs/ranking/normalProfile.png" class="css-on9gcz e1cdqjir1">
+                                        <img th:if="*{file == null}" src="/imgs/ranking/normalProfile.png" class="css-on9gcz e1cdqjir1">
+                                        <img th:if="*{file != null}" th:src="'/file/display?fileName='+ *{file.filePath} + '/' + *{file.fileUuid} + '_' + *{file.fileName}" class="css-on9gcz e1cdqjir1">
                                     </div>
                                 </div>
                             </article>
@@ -119,7 +121,8 @@
                                 <div href="" class="css-65gs3l eegfgsa3">
                                     <div size="48" shape="0" role="article" class="css-1jm5h8a e1cdqjir2">
                                         <!--해당회원 프로필사진-->
-                                        <img src="/imgs/ranking/normalProfile.png" class="css-on9gcz e1cdqjir1">
+                                        <img th:if="*{file == null}" src="/imgs/ranking/normalProfile.png" class="css-on9gcz e1cdqjir1">
+                                        <img th:if="*{file != null}" th:src="'/file/display?fileName='+ *{file.filePath} + '/' + *{file.fileUuid} + '_' + *{file.fileName}" class="css-on9gcz e1cdqjir1">
                                     </div>
                                 </div>
                             </article>
@@ -150,7 +153,8 @@
                                 <div href="" class="css-65gs3l eegfgsa3">
                                     <div size="48" shape="0" role="article" class="css-1jm5h8a e1cdqjir2">
                                         <!--해당회원 프로필사진-->
-                                        <img src="/imgs/ranking/normalProfile.png" class="css-on9gcz e1cdqjir1">
+                                        <img th:if="*{file == null}" src="/imgs/ranking/normalProfile.png" class="css-on9gcz e1cdqjir1">
+                                        <img th:if="*{file != null}" th:src="'/file/display?fileName='+ *{file.filePath} + '/' + *{file.fileUuid} + '_' + *{file.fileName}" class="css-on9gcz e1cdqjir1">
                                     </div>
                                 </div>
                             </article>
@@ -182,7 +186,8 @@
                                 <div href="" class="css-65gs3l eegfgsa3">
                                     <div size="48" shape="0" role="article" class="css-1jm5h8a e1cdqjir2">
                                         <!--해당회원 프로필사진-->
-                                        <img src="/imgs/ranking/normalProfile.png" class="css-on9gcz e1cdqjir1">
+                                        <img th:if="*{file == null}" src="/imgs/ranking/normalProfile.png" class="css-on9gcz e1cdqjir1">
+                                        <img th:if="*{file != null}" th:src="'/file/display?fileName='+ *{file.filePath} + '/' + *{file.fileUuid} + '_' + *{file.fileName}" class="css-on9gcz e1cdqjir1">
                                     </div>
                                 </div>
                             </article>
@@ -213,7 +218,8 @@
                                 <div href="" class="css-65gs3l eegfgsa3">
                                     <div size="48" shape="0" role="article" class="css-1jm5h8a e1cdqjir2">
                                         <!--해당회원 프로필사진-->
-                                        <img src="/imgs/ranking/normalProfile.png" class="css-on9gcz e1cdqjir1">
+                                        <img th:if="*{file == null}" src="/imgs/ranking/normalProfile.png" class="css-on9gcz e1cdqjir1">
+                                        <img th:if="*{file != null}" th:src="'/file/display?fileName='+ *{file.filePath} + '/' + *{file.fileUuid} + '_' + *{file.fileName}" class="css-on9gcz e1cdqjir1">
                                     </div>
                                 </div>
                             </article>

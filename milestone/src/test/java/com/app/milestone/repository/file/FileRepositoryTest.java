@@ -49,13 +49,13 @@ public class FileRepositoryTest {
         test.get().forEach(o -> log.info(""+o));
     }
 
-    //    사진 추가
-    @Test
-    public void saveTest() {
-        People people = peopleRepository.findById(105L).get();
-        File file = new File("testImg.png", "test", "abc111", 30L, FileType.profile, people);
-        fileRepository.save(file);
-    }
+//    //    사진 추가
+//    @Test
+//    public void saveTest() {
+//        People people = peopleRepository.findById(105L).get();
+//        File file = new File("testImg.png", "test", "abc111", 30L, FileType.profile, people);
+//        fileRepository.save(file);
+//    }
 
     //    사진 조회
     @Test

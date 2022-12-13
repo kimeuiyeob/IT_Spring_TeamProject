@@ -1,16 +1,11 @@
 package com.app.milestone.service;
 
+import com.app.milestone.domain.FileDTO;
 import com.app.milestone.domain.MoneyDTO;
 import com.app.milestone.domain.Ranking;
 import com.app.milestone.domain.SchoolDTO;
-import com.app.milestone.entity.Donation;
-import com.app.milestone.entity.Money;
-import com.app.milestone.entity.People;
-import com.app.milestone.entity.School;
-import com.app.milestone.repository.DonationRepository;
-import com.app.milestone.repository.MoneyRepository;
-import com.app.milestone.repository.PeopleRepository;
-import com.app.milestone.repository.SchoolRepository;
+import com.app.milestone.entity.*;
+import com.app.milestone.repository.*;
 import com.querydsl.core.Tuple;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +27,7 @@ public class MoneyService {
     private final SchoolRepository schoolRepository;
     private final DonationRepository donationRepository;
     private final MoneyRepository moneyRepository;
+    private final FileRepository fileRepository;
 
     //    전체 기부금 랭킹
     public List<Ranking> donationMoneyRanking() {
@@ -40,6 +36,8 @@ public class MoneyService {
         for (Tuple tuple : rankingInfo) {
             Ranking ranking = new Ranking();
             String peopleNickname = peopleRepository.findById(tuple.get(1, Long.TYPE)).get().getPeopleNickname();
+            FileDTO fileDTO = fileRepository.findProfileByUserId(tuple.get(1, Long.TYPE));
+            ranking.setFile(fileDTO);
             ranking.setPeopleNickname(peopleNickname);
             ranking.setUserId(tuple.get(1, Long.TYPE));
             ranking.setRankingItem(tuple.get(0, Long.TYPE));

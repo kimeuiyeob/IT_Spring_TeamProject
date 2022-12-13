@@ -30,6 +30,7 @@ public class MainController {
     private final MoneyService moneyService;
     private final TalentService talentService;
     private final ServiceService serviceService;
+    private final FileService fileService;
     private final SessionManager sessionManager;
 
     @PostMapping("/people")
@@ -64,8 +65,11 @@ public class MainController {
     }
 
     @GetMapping("main")
-    public void main(Model model) {
+    public void main(HttpServletRequest request, Model model) {
+//        HttpSession session = request.getSession();
+//        Long userId = (Long)session.getAttribute("userId");
 //        도움이 필요한 보육원
+//        model.addAttribute("fileDTO", fileService.showProfile(userId));
         model.addAttribute("moneys", moneyService.donationMoneyRanking());
         model.addAttribute("services", serviceService.donationVisitRanking());
         model.addAttribute("talents", talentService.donationTalentRanking());

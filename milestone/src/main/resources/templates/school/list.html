@@ -105,6 +105,7 @@
                 <div>&nbsp;에 대한 검색 결과가 없습니다.</div>
             </div>
         </div>
+        <div class = "schoolListItem"></div>
     </section>
 
     <!--페이지 버튼-->
@@ -128,6 +129,10 @@
     const $wholeLocation = $(".wholeLocation");
     const $location = $(".location");
     let sessionId = [[${userId}]];
+    let sessionType = [[${session.type}]];
+    // console.log(sessionTest)
+    // console.log(sessionTest.type)
+
     let searchFromMain = [[${search.schoolName}]];
     console.log(sessionId);
 
@@ -170,14 +175,21 @@
     function getList(schoolDTO) {
         let text = "";
         console.log(schoolDTO)
+
         console.log(schoolDTO.content.length)
 
         pageInfo = schoolDTO;
         schoolDTO.content.forEach(school => {
+            console.log(school.files)
+            console.log(school.files[0])
             text += `<article>`
             text += `<span class="schoolImg">`
-            text += `<img src="https://kmong.com/_next/image?url=https%3A%2F%2Fd2v80xjmx68n4w.cloudfront.net%2Fassets%2Fenterprise%2Fquote-guide%2F1-3.jpg&w=320&q=75">`
-            if (sessionId) {
+            if(school.files.length == 0){
+                text += `<img width="214px" height="214px" src="/imgs/school/defaultSchoolImg.png">`
+            }else{
+                text += `<img width="214px" height="214px" src= "/file/display?fileName=`+ school.files[0].filePath + `/` + school.files[0].fileUuid + `_` + school.files[0].fileName +`">`
+            }
+            if (sessionType == "people") {
                 text += `<span class="heartWrap">`
                 text += `<span role="img" color="#ffffff" rotate="0" class="heart emptyHeart">`
                 text += `<svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"`
@@ -218,7 +230,7 @@
             text += `</span>`
             text += `<div class="rightBox">`
             text += `<div class="QR">`
-            text += `<img src="https://ko.qr-code-generator.com/wp-content/themes/qr/new_structure/markets/basic_market/generator/dist/generator/assets/images/websiteQRCode_noFrame.png">`
+            text += `<img src="`+school.schoolQR + `">`
             text += `</div>`
             text += `<a class="donationButton" href = "` + school.userId + `"><span>보육원 보러가기</span></a>`
             text += `</div>`
@@ -227,8 +239,12 @@
 
         if (schoolDTO.content.length == 0) {
             $('.noneSearch').children().first().text("'" + searchFromMain + "'")
+            $('.noneSearchWrap').show()
+            $(".schoolListItem").html(text)
+            $pagingBtnFlex.html(text);
         } else {
-            $(".schoolList").html(text)
+            $('.noneSearchWrap').hide()
+            $(".schoolListItem").html(text)
             $(".redHeart").css({"display": "none"})
             pageingBtn();
             getLikeSchoolList1(clickLikeBtn);
@@ -295,6 +311,7 @@
             text += `</div>`
             text += `</div>`
         }
+
         $pagingBtnFlex.html(text);
     }
 

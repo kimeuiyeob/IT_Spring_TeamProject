@@ -42,7 +42,8 @@
                         <div class="updateProfileBtnWrap flexCol">
                             <label class="updateProfileBtn flexPublic">
                                 <div>프로필 변경</div>
-                                <input type="file" name="profile" id="profile" style="display: none">
+                                <input type="file" name="profile" id="profile" style="display: none"
+                                       accept="image/gif,image/jpeg,image/png">
                             </label>
                         </div>
                     </form>
@@ -280,26 +281,23 @@
     let fileDTO = [[${fileDTO}]];
     let arrayFile = [];
     let fileType = "schoolImg";
+    let updateProfileMoment = false;
 
     if (fileDTO) {
-        $('.profile').css("background-image", `url(/file/display?fileName=` + fileDTO.filePath + `/s_` + fileDTO.fileUuid + "_" + fileDTO.fileName + `)`)
+        $('.profile').css("background-image", `url(/file/display?fileName=` + fileDTO.filePath + `/` + fileDTO.fileUuid + "_" + fileDTO.fileName + `)`)
     }
     showSchoolImg(showUploadResult);
 
     $("input[type='file']").on("change", function () {
         let formData = new FormData();
         let $inputFile = $("input[type='file']");
-        // console.log($(this).index())
-        // console.log($('input[name = "schoolImg"]').attr("name"))
-        // console.log($(this).attr("name"))
-        // console.log($(this).attr("name") == $('input[name = "schoolImg"]').attr("name"))
         let files;
         if ($(this).attr("name") == $('input[name = "schoolImg"]').attr("name")) {
             files = $inputFile[1].files;
         } else {
             files = $inputFile[0].files;
         }
-
+        $submitBtn.attr("disabled", false)
 
         console.log(Array.from(files));
 
@@ -313,6 +311,14 @@
         $(files).each(function (i, file) {
             formData.append("upload", file);
         });
+
+        if(updateProfileMoment){
+            arrayFile.splice(0, 1);
+            const dataTransfer = new DataTransfer();
+            arrayFile.forEach(file => dataTransfer.items.add(file));
+            $("input[type='file']")[1].files = dataTransfer.files;
+            updateProfileMoment = !updateProfileMoment;
+        }
 
         fileType = $(this).attr("name");
         console.log(fileType)
@@ -345,19 +351,8 @@
         let file1;
         $(files).each(function (i, file) {
             file1 = file;
-            // text += `<input type="hidden" name="files[` + i + `].fileName" value="` + file.fileName + `">`;
-            // text += `<input type="hidden" name="files[` + i + `].fileUploadPath" value="` + file.filePath + `">`;
-            // text += `<input type="hidden" name="files[` + i + `].fileUuid" value="` + file.fileUuid + `">`;
-            // text += `<input type="hidden" name="files[` + i + `].fileSize" value="` + file.fileSize + `">`;
-            // text += `<input type="hidden" name="files[` + i + `].fileImageCheck" value="` + file.fileImageCheck + `">`;
-            // text += `<input type="hidden" name="files[` + i + `].fileType" value="` + fileType + `">`;
-            // if (!file.fileImageCheck) {
-            //     text += `<img src="/images/attach.png" width="100">`;
-            // } else {
-            //     text += `<img src="/file/display?fileName=` + file.filePath + `/s_` + file.fileUuid + "_" + file.fileName + `">`;
-            // }
         });
-        $('.profile').css("background-image", `url(/file/display?fileName=` + file1.filePath + `/s_` + file1.fileUuid + "_" + file1.fileName + `)`)
+        $('.profile').css("background-image", `url(/file/display?fileName=` + file1.filePath + `/` + file1.fileUuid + "_" + file1.fileName + `)`)
         saveProfile({
             fileName: file1.fileName,
             filePath: file1.filePath,
@@ -367,19 +362,21 @@
             fileType: fileType
         })
     }
+
     let schoolImgCount = 0;
+
     function showUploadResult(files) {
         console.log(fileType)
         let text = "";
 
         $(files).each(function (i, file) {
             text += `<div class = "imgsWrap">`
-            text += `<input type="hidden" class = "fileName" name="files[` + (i+schoolImgCount) + `].fileName" value="` + file.fileName + `">`;
-            text += `<input type="hidden" class = "filePath" name="files[` + (i+schoolImgCount) + `].filePath" value="` + file.filePath + `">`;
-            text += `<input type="hidden" class = "fileUuid" name="files[` + (i+schoolImgCount) + `].fileUuid" value="` + file.fileUuid + `">`;
-            text += `<input type="hidden" class = "fileSize" name="files[` + (i+schoolImgCount) + `].fileSize" value="` + file.fileSize + `">`;
-            text += `<input type="hidden" class = "fileImageCheck" name="files[` + (i+schoolImgCount) + `].fileImageCheck" value="` + file.fileImageCheck + `">`;
-            text += `<input type="hidden" class = "fileType" name="files[` + (i+schoolImgCount) + `].fileType" value="` + fileType + `">`;
+            text += `<input type="hidden" class = "fileName" name="files[` + (i + schoolImgCount) + `].fileName" value="` + file.fileName + `">`;
+            text += `<input type="hidden" class = "filePath" name="files[` + (i + schoolImgCount) + `].filePath" value="` + file.filePath + `">`;
+            text += `<input type="hidden" class = "fileUuid" name="files[` + (i + schoolImgCount) + `].fileUuid" value="` + file.fileUuid + `">`;
+            text += `<input type="hidden" class = "fileSize" name="files[` + (i + schoolImgCount) + `].fileSize" value="` + file.fileSize + `">`;
+            text += `<input type="hidden" class = "fileImageCheck" name="files[` + (i + schoolImgCount) + `].fileImageCheck" value="` + file.fileImageCheck + `">`;
+            text += `<input type="hidden" class = "fileType" name="files[` + (i + schoolImgCount) + `].fileType" value="` + fileType + `">`;
             if (!file.fileImageCheck) {
                 text += `<img src="/images/attach.png" width="100">`;
             } else {
@@ -396,6 +393,8 @@
     }
 
     function saveProfile(fileDTO) {
+        updateProfileMoment = true;
+        console.log("드러옴")
         console.log(fileDTO)
         $.ajax({
             url: "/myPageRest/profile",
@@ -403,8 +402,6 @@
             data: JSON.stringify(fileDTO),
             contentType: "application/json; charset=utf-8",
             success: function () {
-                alert("파일 저장 성공!!")
-                console.log("들어왔니?")
             },
             error: function (xhr, status, err) {
                 if (error) {
@@ -414,66 +411,39 @@
         })
     }
 
+
+    let uploadPaths = [];
+    let fileNames = [];
+
     $('.imgList').on('click', '.cancelX', function () {
+        $submitBtn.attr("disabled", false)
         console.log($(this).closest(".imgsWrap"))
         const $imgsWrap = $(this).closest(".imgsWrap");
+        let i = $(".cancelX").index($(this));
         let uploadPath = $imgsWrap.find(".filePath").val();
         let fileName = $imgsWrap.find(".fileUuid").val() + "_" + $imgsWrap.find(".fileName").val();
+        uploadPaths.push(uploadPath);
+        fileNames.push(fileName);
+        $imgsWrap.remove();
         // console.log($imgsWrap.find(".filePath").val())
         // console.log($imgsWrap.find(".fileUuid").val())
         // console.log($imgsWrap.find(".fileName").val())
         // console.log($(this).prev());
         // console.log($(this).prev().attr("src"));
-        $.ajax({
-            url: "/file/delete",
-            type: "post",
-            data: {uploadPath: uploadPath, fileName: fileName},
-            success: function () {
-                $imgsWrap.remove();
-                arrayFile.splice(i, 1);
-                const dataTransfer = new DataTransfer();
-                arrayFile.forEach(file => dataTransfer.items.add(file));
-                $("input[type='file']")[0].files = dataTransfer.files;
-            }
-        });
+        // $.ajax({
+        //     url: "/file/delete",
+        //     type: "post",
+        //     data: {uploadPath: uploadPaths, fileName: fileNames},
+        //     success: function () {
+        //         $imgsWrap.remove();
+        //         arrayFile.splice(i, 1);
+        //         const dataTransfer = new DataTransfer();
+        //         arrayFile.forEach(file => dataTransfer.items.add(file));
+        //         $("input[type='file']")[1].files = dataTransfer.files;
+        //     }
+        // });
     })
 
 
-    // $(".uploadResult ul").on("click", "span", function(){
-    //     const $li = $(this).closest("li");
-    //     let i = $(".uploadResult ul span").index($(this));
-    //     let uploadPath = $li.data("file-upload-path");
-    //     let fileName = $li.data("file-uuid") + "_" + $li.data("file-name");
-    //     $.ajax({
-    //         url: "/file/delete",
-    //         type: "post",
-    //         data: {uploadPath: uploadPath, fileName: fileName, fileImageCheck: $li.data("file-image-check")},
-    //         success: function(){
-    //             $li.remove();
-    //             arrayFile.splice(i, 1);
-    //             const dataTransfer = new DataTransfer();
-    //             arrayFile.forEach(file => dataTransfer.items.add(file));
-    //             $("input[name='upload']")[0].files = dataTransfer.files;
-    //         }
-    //     });
-    // });
-
-    // $("input[type='submit']").on("click", function (e) {
-    //     e.preventDefault();
-    //     let text = "";
-    //     $.each($(".uploadResult ul li"), function (i, li) {
-    //         let fileName = $(li).data("file-name");
-    //         let fileUploadPath = $(li).data("file-upload-path");
-    //         let fileUuid = $(li).data("file-uuid");
-    //         let fileSize = $(li).data("file-size");
-    //         let fileImageCheck = $(li).data("file-image-check");
-    //         text += `<input type="hidden" name="files[` + i + `].fileName" value="` + fileName + `">`;
-    //         text += `<input type="hidden" name="files[` + i + `].fileUploadPath" value="` + fileUploadPath + `">`;
-    //         text += `<input type="hidden" name="files[` + i + `].fileUuid" value="` + fileUuid + `">`;
-    //         text += `<input type="hidden" name="files[` + i + `].fileSize" value="` + fileSize + `">`;
-    //         text += `<input type="hidden" name="files[` + i + `].fileImageCheck" value="` + fileImageCheck + `">`;
-    //     });
-    //     $("form#writeForm").append(text).submit();
-    // });
 </script>
 </html>

@@ -56,6 +56,9 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
                 .orderBy(school.donationCount.asc())
                 .offset(0)
                 .limit(5)
+                .where(
+                        school.schoolQR.isNotNull()
+                )
                 .fetch();
     }
 
@@ -85,6 +88,7 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
                 school.createdDate
         ))
                 .where(
+                        school.schoolQR.isNotNull(),
                         schoolNameContaining(search.getSchoolName()),
                         schoolAddressContaining(search.getSchoolAddress())
                 ).from(school)

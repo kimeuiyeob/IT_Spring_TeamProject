@@ -31,8 +31,7 @@ public class File extends Period {
 //    @JoinColumn(name = "USER_ID")
 //    private User user;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn
-    @NotNull
+    @JoinColumn(name = "USER_ID")
     private User user;
 
     @Builder

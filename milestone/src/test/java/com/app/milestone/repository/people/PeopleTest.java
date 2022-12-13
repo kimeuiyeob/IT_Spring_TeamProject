@@ -32,15 +32,21 @@ public class PeopleTest {
     //    개인 샘플 데이터(100명)
     @Test
     public void saveTest() {
-        String[] names = {"이지은", "이승철", "윤도현", "이문세", "정은지", "김광석"};
+        String[] names = {"이지은", "이승철", "윤도현", "이문세", "정은지", "김광석", "김세정","김경호","유인나","유해진","마동석"};
         for (int i = 0; i < 100; i++) {
             try {
-                Thread.sleep(500);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-//            PeopleDTO peopleDTO = new PeopleDTO("독수리" + i + "호", "asd@ads.com", names[i % 6], "12341234", "01045614561", 0);
-//            peopleRepository.save(peopleDTO.toEntity());
+            PeopleDTO peopleDTO = new PeopleDTO();
+            peopleDTO.setPeopleNickname("독수리" + i + "호");
+            peopleDTO.setUserEmail("qwe"+i+"@qwe.qwe");
+            peopleDTO.setUserName(names[i % 11]);
+            peopleDTO.setUserPassword("cXdlcjEyMzQh");
+            peopleDTO.setUserPhoneNumber("01011112222");
+
+            peopleRepository.save(peopleDTO.toEntity());
         }
 
     }
@@ -116,8 +122,8 @@ public class PeopleTest {
 
         for (int i = 0; i < 30; i++) {
             // 기부자 피기부자 샘플
-            Long giver = 111L + (i % 5);
-            Long taker = 5L;
+            Long giver = 1L + (i % 11);
+            Long taker = 105L;
             // 개인 총 기부 횟수 카운트
             People people = peopleRepository.findById(giver).get();
             donationCount = donationRepository.countByPeopleUserId(giver);
@@ -139,8 +145,8 @@ public class PeopleTest {
 
         for (int i = 0; i < 30; i++) {
             // 기부자 피기부자 샘플
-            Long giver = 125L + (i % 5);
-            Long taker = 5L;
+            Long giver = 1L + (i % 11);
+            Long taker = 105L;
             // 개인 총 기부 횟수 카운트
             People people = peopleRepository.findById(giver).get();
             donationCount = donationRepository.countByPeopleUserId(giver);
@@ -162,8 +168,8 @@ public class PeopleTest {
 
         for (int i = 0; i < 18; i++) {
             // 기부자 피기부자 샘플
-            Long giver = 101L + (i % 5);
-            Long taker = 5L;
+            Long giver = 1L + (i % 11);
+            Long taker = 105L;
             // 개인 총 기부 횟수 카운트
             People people = peopleRepository.findById(giver).get();
             donationCount = donationRepository.countByPeopleUserId(giver);

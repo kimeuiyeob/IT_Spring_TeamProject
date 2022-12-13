@@ -591,7 +591,18 @@ $submitBtn.on('click', function () {
         return;
     }
 
-    console.log("들옴")
+    $.ajax({
+        url: "/file/delete",
+        type: "post",
+        data: {uploadPath: uploadPaths, fileName: fileNames},
+        success: function () {
+            // $imgsWrap.remove();
+            arrayFile.splice(i, 1);
+            const dataTransfer = new DataTransfer();
+            arrayFile.forEach(file => dataTransfer.items.add(file));
+            $("input[type='file']")[1].files = dataTransfer.files;
+        }
+    });
     updateForm.submit();
 })
 

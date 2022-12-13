@@ -20,14 +20,14 @@ public class ReplyServiceTest {
     private ReplyService replyService;
 
     //    추가
-    @Test
-    public void registerTest() {
-        ReplyDTO replyDTO = new ReplyDTO();
-        replyDTO.setPeopleUserId(101L);
-        replyDTO.setSchoolUserId(5L);
-        replyDTO.setReplyContent("이것도 댓글이예요");
-        replyService.register(replyDTO);
-    }
+//    @Test
+//    public void registerTest() {
+//        ReplyDTO replyDTO = new ReplyDTO();
+//        replyDTO.setPeopleUserId(101L);
+//        replyDTO.setSchoolUserId(5L);
+//        replyDTO.setReplyContent("이것도 댓글이예요");
+//        replyService.register(replyDTO);
+//    }
 
     //    조회
     @Test
