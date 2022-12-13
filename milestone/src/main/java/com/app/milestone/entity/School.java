@@ -8,6 +8,7 @@ import lombok.*;
 import org.hibernate.hql.internal.ast.tree.IntoClause;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "TBL_SCHOOL")
@@ -26,12 +27,16 @@ public class School extends User {
 
     private int schoolBudget;
     @NotNull
+    @Size(max=50)
     private String schoolBank;
     @NotNull
+    @Size(max=100)
     private String schoolAccount;
     @NotNull
+    @Size(max=500)
     private String schoolPhoneNumber;
     @Column(name = "SCHOOL_QR")
+    @Size(max=500)
     private String schoolQR;
     @Embedded
     private Introduce introduce;
@@ -84,6 +89,7 @@ public class School extends User {
         this.schoolBank = schoolDTO.getSchoolBank();
         this.schoolAccount = schoolDTO.getSchoolAccount();
         this.introduce = introduce;
+        this.schoolQR = schoolDTO.getSchoolQR();
     }
 
 //    public void update(SchoolDTO schoolDTO) {

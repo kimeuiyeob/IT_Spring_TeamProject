@@ -20,14 +20,14 @@ public class FileService {
     private final FileRepository fileRepository;
     private final UserRepository userRepository;
 
-    //    추가
+    //   프로필 추가
     @Transactional
     public void register(Long userId, FileDTO fileDTO) {
         log.info("=============" + userId);
         log.info("=============" + userRepository.findById(userId).get());
         log.info("=============" + fileDTO);
-        User user = userRepository.findById(userId).get();
         fileRepository.deleteByUserId(userId);
+        User user = userRepository.findById(userId).get();
         fileRepository.save(fileDTO.toEntity()).changeUser(user);
     }
 

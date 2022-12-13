@@ -10,4 +10,5 @@ public class Ranking {
     private String userName;
     private String peopleNickname;
     private Long rankingItem;
+    private FileDTO file;
 }

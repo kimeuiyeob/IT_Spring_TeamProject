@@ -59,17 +59,17 @@ public class FileServiceTest {
 
 
     //     추가
-    @Test
-    public void registerTest() {
-        FileDTO fileDTO = new FileDTO();
-        fileDTO.setUserId(105L);
-        fileDTO.setFileName("testImg.png");
-        fileDTO.setFilePath("test");
-        fileDTO.setFileUuid("abc111");
-        fileDTO.setFileType(FileType.profile);
-        fileDTO.setFileSize(30L);
-        fileService.register(fileDTO);
-    }
+//    @Test
+//    public void registerTest() {
+//        FileDTO fileDTO = new FileDTO();
+//        fileDTO.setUserId(105L);
+//        fileDTO.setFileName("testImg.png");
+//        fileDTO.setFilePath("test");
+//        fileDTO.setFileUuid("abc111");
+//        fileDTO.setFileType(FileType.profile);
+//        fileDTO.setFileSize(30L);
+//        fileService.register(fileDTO);
+//    }
 
     //    삭제
     @Test

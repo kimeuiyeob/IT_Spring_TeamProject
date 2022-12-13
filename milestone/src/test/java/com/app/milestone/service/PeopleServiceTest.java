@@ -43,21 +43,21 @@ public class PeopleServiceTest {
         peopleService.likeSchool(5L, 105L);
     }
 
-    //    기부금 랭킹
-    @Test
-    public void donationMoneyRankingTest() {
-        log.info("" + peopleService.donationMoneyRanking());
-    }
-
-    //    방문횟수 랭킹
-    @Test
-    public void donationVisitRankingTest() {
-        log.info("" + peopleService.donationVisitRanking());
-    }
-
-    //    재능기부 횟수 랭킹
-    @Test
-    public void donationTalentRankingTest() {
-        log.info("" + peopleService.donationTalentRanking());
-    }
+//    //    기부금 랭킹
+//    @Test
+//    public void donationMoneyRankingTest() {
+//        log.info("" + peopleService.donationMoneyRanking());
+//    }
+//
+//    //    방문횟수 랭킹
+//    @Test
+//    public void donationVisitRankingTest() {
+//        log.info("" + peopleService.donationVisitRanking());
+//    }
+//
+//    //    재능기부 횟수 랭킹
+//    @Test
+//    public void donationTalentRankingTest() {
+//        log.info("" + peopleService.donationTalentRanking());
+//    }
 }

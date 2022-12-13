@@ -47,22 +47,22 @@ public class SchoolServiceTest {
         schoolService.schoolList(0, search).forEach(o -> log.info("adsdafas" + o));
     }
 
-    //    총 보육원 수
-    @Test
-    public void schoolTotalTest() {
-        log.info(schoolService.schoolTotal() + "sadfasdfads");
-    }
+//    //    총 보육원 수
+//    @Test
+//    public void schoolTotalTest() {
+//        log.info(schoolService.schoolTotal() + "sadfasdfads");
+//    }
 
-    //   보육원 하나에 대한 최근 기부받은 내역
-    @Test
-    public void recentDonationList() {
-        schoolService.recentDonationList(105L).forEach(o -> log.info("기부자 : " + o.getPeopleNickName() + " 기부금 : " + o.getMoneyCash()));
-    }
-
-    //    보육원 하나에 대한 기부금 랭킹
-    @Test
-    public void moneyDonationRankingForOneSchool() {
-        schoolService.moneyDonationRankingForOneSchool(105L).forEach(o -> log.info("기부금 : " + o.getMoneyCash() + " 기부자 : " + o.getPeopleNickName()));
-    }
+//    //   보육원 하나에 대한 최근 기부받은 내역
+//    @Test
+//    public void recentDonationList() {
+//        schoolService.recentDonationList(105L).forEach(o -> log.info("기부자 : " + o.getPeopleNickName() + " 기부금 : " + o.getMoneyCash()));
+//    }
+//
+//    //    보육원 하나에 대한 기부금 랭킹
+//    @Test
+//    public void moneyDonationRankingForOneSchool() {
+//        schoolService.moneyDonationRankingForOneSchool(105L).forEach(o -> log.info("기부금 : " + o.getMoneyCash() + " 기부자 : " + o.getPeopleNickName()));
+//    }
 
 }

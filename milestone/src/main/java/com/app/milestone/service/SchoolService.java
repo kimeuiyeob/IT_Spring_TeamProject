@@ -1,10 +1,8 @@
 package com.app.milestone.service;
 
-import com.app.milestone.domain.MoneyDTO;
-import com.app.milestone.domain.PeopleDTO;
-import com.app.milestone.domain.SchoolDTO;
-import com.app.milestone.domain.Search;
+import com.app.milestone.domain.*;
 import com.app.milestone.entity.School;
+import com.app.milestone.repository.FileRepository;
 import com.app.milestone.repository.MoneyRepository;
 import com.app.milestone.repository.PeopleRepository;
 import com.app.milestone.repository.SchoolRepository;
@@ -29,6 +27,7 @@ public class SchoolService {
     private final SchoolRepository schoolRepository;
     private final PeopleRepository peopleRepository;
     private final MoneyRepository moneyRepository;
+    private final FileRepository fileRepository;
 
     //    보육원 회원가입
     public Long createSchool(SchoolDTO schoolDTO) {
@@ -54,6 +53,7 @@ public class SchoolService {
     //    보육원 등록
     @Transactional
     public void registerSchool(Long userId, SchoolDTO schoolDTO) {
+        schoolDTO.setSchoolQR("https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=http://localhost:9999/school/donation?userId="+ userId);
         schoolRepository.findById(userId).get().update(schoolDTO);
     }
 
@@ -82,7 +82,14 @@ public class SchoolService {
         if (search.getSchoolName() == null) {
             search.setSchoolName(null);
         }
+
         List<SchoolDTO> list = schoolRepository.findAllByCreatedDate(pageable, search);
+        for (SchoolDTO schoolDTO : list){
+            List<FileDTO> arFileDTO = fileRepository.findByUserId(schoolDTO.getUserId());
+            schoolDTO.setFiles(arFileDTO);
+            log.info("=============스쿨===============");
+        }
+
         Page<SchoolDTO> schools = new PageImpl<>(list, pageable, Integer.valueOf("" + schoolRepository.countByCreatedDate(pageable, search)));
 
         return schools;

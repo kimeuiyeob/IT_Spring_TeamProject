@@ -1,5 +1,6 @@
 package com.app.milestone.domain;
 
+import com.app.milestone.entity.File;
 import com.app.milestone.entity.People;
 import com.app.milestone.entity.School;
 import com.querydsl.core.annotations.QueryProjection;
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Component
 @Data
@@ -23,6 +25,7 @@ public class PeopleDTO {
     private String userPhoneNumber;
     private int donationCount;
     private LocalDateTime createdDate;
+    private List<FileDTO> files;
 
     public People toEntity() {
         return People.builder()
@@ -45,6 +48,7 @@ public class PeopleDTO {
         this.userPhoneNumber = userPhoneNumber;
         this.donationCount = donationCount;
         this.createdDate = createdDate;
+//        this.files = files;
     }
 
 }

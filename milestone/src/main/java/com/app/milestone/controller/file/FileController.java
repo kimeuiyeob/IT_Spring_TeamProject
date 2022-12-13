@@ -77,16 +77,19 @@ public class FileController {
     }
 
     @PostMapping("/delete")
-    public void delete(String uploadPath, String fileName) {
-        File file = new File("C:/upload", uploadPath + "/" + fileName);
-        if (file.exists()) {
-            file.delete();
+    public void delete(List<String> uploadPath, List<String> fileName) {
+        for (int i = 0; i < uploadPath.size(); i++){
+            File file = new File("C:/upload", uploadPath.get(i) + "/" + fileName.get(i));
+            if (file.exists()) {
+                file.delete();
+            }
+
+            file = new File("C:/upload", uploadPath.get(i) + "/s_" + fileName.get(i));
+            if (file.exists()) {
+                file.delete();
+            }
         }
 
-        file = new File("C:/upload", uploadPath + "/s_" + fileName);
-        if (file.exists()) {
-            file.delete();
-        }
     }
 
     @GetMapping("/download")

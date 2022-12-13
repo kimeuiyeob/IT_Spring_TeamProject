@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,7 +42,7 @@ public class SchoolTest {
         String[] locations = {"서울 성동구 서울숲길 17 (성수파크빌)", "경기 가평군 가평읍 가랫골길 1", "인천 강화군 강화읍 갑룡길 3", "강원 강릉시 가작로 6", "충북 괴산군 감물면 감물로 7", "충남 계룡시 계룡대로 239", "전북 고창군 고수면 가협길 12", "세종특별자치시 가름로 143 (KT&G세종타워B)", "대전 대덕구 갑천도시고속도로 336", "전남 강진군 강진읍 강진공단길 8", "광주 광산구 가마길 2-21", "부산 강서구 가달1로 7"
                 , "울산 남구 갈밭로 3", "대구 남구 경상길 1", "경북 경산시 감못둑길 70 (가산건업, 백마화물)", "경남 거제시 거제면 거제남서로 3233", "제주특별자치도 서귀포시 가가로 14"};
         String[] schoolNames = {"코끼리", "거북이", "하마", "기린", "돌고래", "비둘기", "뉴트리아", "뱀"};
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 107; i++) {
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
@@ -57,17 +58,16 @@ public class SchoolTest {
             schoolDTO.setSchoolBudget(100000);
             schoolDTO.setSchoolBank("하나은행");
             schoolDTO.setSchoolAccount("000000000000");
-            schoolDTO.setSchoolPhoneNumber("12312341234");
-            schoolDTO.setSchoolQR(null);
+            schoolDTO.setSchoolPhoneNumber("01012341234");
+            schoolDTO.setSchoolQR("https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=http://localhost:9999/school/donation?userId="+ (101 + i));
             schoolDTO.setSchoolTitle("치지직" + i);
             schoolDTO.setSchoolContent("두루미두루미" + i);
-            schoolDTO.setUserEmail("qwe@qwe.qwe");
+            schoolDTO.setUserEmail("asd" + i + "@asd.asd");
             schoolDTO.setUserName("황지수");
-            schoolDTO.setUserPassword("12341234");
+            schoolDTO.setUserPassword("cXdlcjEyMzQh");
             schoolDTO.setUserPhoneNumber("01012341234");
             schoolDTO.setUserProfile(null);
             schoolDTO.setDonationCount(i);
-
             schoolRepository.save(schoolDTO.toEntity());
         }
     }
@@ -82,7 +82,7 @@ public class SchoolTest {
     //    보육원 정보(하나)
     @Test
     public void findByUserId() {
-        log.info(""+schoolRepository.findByUserId(5L));
+        log.info("" + schoolRepository.findByUserId(5L));
     }
 
     //  보육원 목록(10개, 지역과 보육원 이름 검색 조건추가 후 최신순)
@@ -169,6 +169,7 @@ public class SchoolTest {
 
     @Test
     public void deleteTest() {
+        schoolRepository.deleteByUserPassword("12341234");
 //        jpaQueryFactory.delete(school).where(school.userId.eq(2L)).execute();
     }
 

@@ -1,5 +1,6 @@
 package com.app.milestone.service;
 
+import com.app.milestone.domain.FileDTO;
 import com.app.milestone.domain.MoneyDTO;
 import com.app.milestone.domain.Ranking;
 import com.app.milestone.domain.ServiceDTO;
@@ -24,6 +25,7 @@ public class ServiceService {
     private final SchoolRepository schoolRepository;
     private final DonationRepository donationRepository;
     private final ServiceRepository serviceRepository;
+    private final FileRepository fileRepository;
 
 //  개인 일정 조회
     public Page<ServiceDTO> peopleServiceListSearch(Integer page, String keyword) {
@@ -44,6 +46,8 @@ public class ServiceService {
         for (Tuple tuple : rankingInfo) {
             Ranking ranking = new Ranking();
             String peopleNickname = peopleRepository.findById(tuple.get(1, Long.TYPE)).get().getPeopleNickname();
+            FileDTO fileDTO = fileRepository.findProfileByUserId(tuple.get(1, Long.TYPE));
+            ranking.setFile(fileDTO);
             ranking.setPeopleNickname(peopleNickname);
             ranking.setUserId(tuple.get(1, Long.TYPE));
             ranking.setRankingItem(tuple.get(0, Long.TYPE));

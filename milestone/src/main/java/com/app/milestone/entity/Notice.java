@@ -4,6 +4,7 @@ import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "TBL_NOTICE")
@@ -16,6 +17,7 @@ public class Notice extends Period {
     @NotNull
     private String noticeTitle;
     @NotNull
+    @Size(max = 3500)
     private String noticeContent;
 
     @Builder
