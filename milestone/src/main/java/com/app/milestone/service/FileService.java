@@ -7,6 +7,7 @@ import com.app.milestone.repository.FileRepository;
 import com.app.milestone.repository.UserRepository;
 import com.app.milestone.type.FileType;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +15,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class FileService {
     private final FileRepository fileRepository;
     private final UserRepository userRepository;
@@ -21,12 +23,11 @@ public class FileService {
     //    추가
     @Transactional
     public void register(Long userId, FileDTO fileDTO) {
+        log.info("============="+userId);
+        log.info("============="+userRepository.findById(userId).get());
+        log.info("============="+fileDTO);
         User user = userRepository.findById(userId).get();
         fileRepository.deleteByUserId(userId);
-
-//        fileDTO.toEntity().changeUser(user);
-//        File file = new File(fileDTO.getFileName(), fileDTO.getFilePath(), fileDTO.getFileUuid(), fileDTO.getFileSize(), fileDTO.isFileImageCheck(), fileDTO.getFileType());
-//        file.changeUser(user);
         fileRepository.save(fileDTO.toEntity()).changeUser(user);
     }
 

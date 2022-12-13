@@ -15,5 +15,4 @@ public interface PeopleCustomRepository {
     public Long countByCreatedDate (Pageable pageable, String keyword);
     public List<PeopleDTO> findPeopleSearch(Pageable pageable,String keyword);
     public List<PeopleDTO> findPeopleSearchAsc(Pageable pageable,String keyword);
-
 }

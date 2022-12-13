@@ -23,9 +23,9 @@ public class UserService {
     private final LoginDTO loginDTO;
     
     //    로그인
-    public Long login(String userEmail, String userPassword) {
-        String encodingUserPassword = Base64.getEncoder().encodeToString(userPassword.getBytes());
-        return userRepository.findByUserEmailAndUserPassword(userEmail, encodingUserPassword);
+    public Long login(LoginDTO loginDTO) {
+        String encodingUserPassword = Base64.getEncoder().encodeToString(loginDTO.getUserPassword().getBytes());
+        return userRepository.findByUserEmailAndUserPassword(loginDTO.getUserEmail(), encodingUserPassword);
     }
 
     //    전체 회원 (보육원 + 일반)

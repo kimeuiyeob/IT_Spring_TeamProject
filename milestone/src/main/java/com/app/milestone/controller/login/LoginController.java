@@ -38,7 +38,7 @@ public class LoginController {
     // 서블릿 HTTP 세션 사용
     @PostMapping("/login")
     public String login(@Valid @ModelAttribute("loginDTO") LoginDTO loginDTO, BindingResult bindingResult, HttpServletRequest request) {
-        userService.login(loginDTO.getUserEmail(), loginDTO.getUserPassword());
+        userService.login(loginDTO);
         log.info("로그인 컨트롤러");
         if (bindingResult.hasErrors()) {
             log.info("실패");
@@ -47,7 +47,7 @@ public class LoginController {
         log.info("이메일: " + loginDTO.getUserEmail());
         log.info("pw: " + loginDTO.getUserPassword());
 
-        Long userId = userService.login(loginDTO.getUserEmail(), loginDTO.getUserPassword());
+        Long userId = userService.login(loginDTO);
 
         if (userId == null) {
             bindingResult.reject("loginFail", "아이디 또는 비밀번호가 맞지 않습니다.");

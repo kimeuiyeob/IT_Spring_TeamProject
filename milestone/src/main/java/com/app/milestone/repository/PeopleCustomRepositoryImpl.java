@@ -3,6 +3,7 @@ package com.app.milestone.repository;
 import com.app.milestone.domain.PeopleDTO;
 import com.app.milestone.domain.QPeopleDTO;
 import com.app.milestone.domain.Search;
+import com.app.milestone.entity.People;
 import com.app.milestone.entity.QTalent;
 import com.app.milestone.entity.QUser;
 import com.querydsl.core.BooleanBuilder;
@@ -47,6 +48,7 @@ public class PeopleCustomRepositoryImpl implements PeopleCustomRepository {
                 .fetchOne();
 
     }
+
 
     /*=================관리자 페이지=================*/
     //    검색 결과 count
