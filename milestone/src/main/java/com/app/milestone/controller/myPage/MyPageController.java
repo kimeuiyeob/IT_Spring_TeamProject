@@ -11,6 +11,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.time.LocalDateTime;
 
 @Controller
 @RequiredArgsConstructor
@@ -21,6 +22,7 @@ public class MyPageController {
     private final PeopleService peopleService;
     private final CertificationService certificationService;
     private final UserService userService;
+    private final WithdrawalService withdrawalService;
 
 
     //    일반회원 정보 보기
@@ -147,5 +149,32 @@ public class MyPageController {
     @GetMapping("/talent")
     public void talent(Search search) {
         ;
+    }
+    //회원 탈퇴
+    @PostMapping("/deleteUser")
+    public RedirectView deleteAndSave(HttpServletRequest request, @RequestBody String reason) {
+
+        HttpSession session = request.getSession();
+        Long userId = (Long) session.getAttribute("userId"); //<=========================세션 userId
+        String type = (String) session.getAttribute("type");
+        WithdrawalDTO withdrawalDTO = new WithdrawalDTO();
+
+        /*withdrawal테이블에 새로운값 추가*/
+        withdrawalDTO.setCreatedDate(LocalDateTime.now());
+        withdrawalDTO.setWithdrawalReason(reason);
+        withdrawalDTO.setWithdrawalUserType("개인");
+
+        //user서비스에서 type people,school확인하려구 만든거
+        if(type.equals("people")){
+            withdrawalDTO.setWithdrawalUserType("일반");
+        }else if(type.equals("school")){
+            withdrawalDTO.setWithdrawalUserType("보육원");
+        }
+
+        withdrawalService.insertReason(withdrawalDTO);
+        userService.saveReasonAnddeleteUserID(userId); //<=========================세션 userId 넣어야됩니다.
+
+        session.removeAttribute("userId");
+        return new RedirectView("/main/main");
     }
 }

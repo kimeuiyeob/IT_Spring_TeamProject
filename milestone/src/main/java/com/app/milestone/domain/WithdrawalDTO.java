@@ -1,10 +1,8 @@
 package com.app.milestone.domain;
 
-import com.app.milestone.entity.User;
 import com.app.milestone.entity.Withdrawal;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -24,6 +22,7 @@ public class WithdrawalDTO {
                 .withdrawalUserType(withdrawalUserType)
                 .build();
     }
+
 
     @QueryProjection
     public WithdrawalDTO(String withdrawalReason, String withdrawalUserType, LocalDateTime createdDate) {

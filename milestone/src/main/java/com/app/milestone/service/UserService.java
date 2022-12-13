@@ -61,4 +61,9 @@ public class UserService {
         return false;
     }
 
+    //마이페이지 회원탈퇴시 회원삭제
+    public void saveReasonAnddeleteUserID(Long userId) {
+        userRepository.deleteById(userId);
+    }
+
 }
