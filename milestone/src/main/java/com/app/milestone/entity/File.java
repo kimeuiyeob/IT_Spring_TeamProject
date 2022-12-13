@@ -48,7 +48,7 @@ public class File extends Period {
 
     public void changeUser(User user){
         this.user = user;
-        user.getFiles().add(this);
+//        user.getFiles().add(this);
     }
 
     public void update(Boolean fileImageCheck) {

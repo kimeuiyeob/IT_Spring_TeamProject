@@ -30,8 +30,8 @@ public class User extends Period {
     protected String userPhoneNumber;
     protected int donationCount;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<File> files;
+//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+//    private List<File> files;
 
 
     public User(String userEmail, String userName, String userPassword, String userPhoneNumber, int donationCount) {
