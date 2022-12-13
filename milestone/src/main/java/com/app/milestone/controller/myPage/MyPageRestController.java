@@ -85,37 +85,39 @@ public class MyPageRestController {
         return serviceResp;
     }
 
-    //    찜한 보육원
+
+    //    찜한 보육원 목록
     @GetMapping(value = {"/likeList/{page}"})
     public LikeResp likeSchool(HttpSession session, @PathVariable("page") Integer page) {
         Long userId = (Long) session.getAttribute("userId");
-
         LikeResp likeResp = new LikeResp();
         Page<LikeDTO> arLikeDTO = likeService.likedSchools(page, userId);
         likeResp.setArLikeDTO(arLikeDTO);
-
         return likeResp;
     }
 
+    //    찜한 보육원 검색
+    @GetMapping(value = {"/likeListSearch/{page}","/likeListSearch/{page}/{schoolAddress}","/likeListSearch/{page}/{schoolAddress}/{schoolName}"})
+    public LikeResp likeSchoolSearch(HttpSession session, @PathVariable("page") Integer page, Search search) {
+        Long userId = (Long) session.getAttribute("userId");
+        LikeResp likeResp = new LikeResp();
+        Page<LikeDTO> arLikeDTO = likeService.likedSchoolsSearch(page, userId, search);
+        likeResp.setArLikeDTO(arLikeDTO);
+        return likeResp;
+    }
+
+    //    찜한 보육원 취소
+    @GetMapping(value = {"/cancel/{likeId}"})
+    public void cancel(@PathVariable("likeId") Long likeId) {
+        likeService.deleteByLikeId(likeId);
+    }
+
     //    좋아요 개수
-    @GetMapping(value = {"/likeCount/{userId}"})
-    public Long likeCount(@PathVariable("userId") Long userId) {
-        return likeService.likeCount(userId);
-    }
-
-    //    좋아요 누름
-    @GetMapping(value = {"/like/{userId}"})
-    public void like(HttpServletRequest request, @PathVariable("userId") Long userId) {
+    @GetMapping(value = {"/likeCount"})
+    public Long likeCount(HttpServletRequest request) {
         HttpSession session = request.getSession();
         Long sessionId = (Long) session.getAttribute("userId");
-        likeService.likeSchool(userId, sessionId);
+        return likeService.likeCountMyPage(sessionId);
     }
 
-    //    좋아요 취소
-    @GetMapping(value = {"/cancel/{userId}"})
-    public void cancel(HttpServletRequest request, @PathVariable("userId") Long userId) {
-        HttpSession session = request.getSession();
-        Long sessionId = (Long) session.getAttribute("userId");
-        likeService.cancelLikeSchool(userId, sessionId);
-    }
 }

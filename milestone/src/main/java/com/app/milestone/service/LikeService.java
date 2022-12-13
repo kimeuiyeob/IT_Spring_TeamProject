@@ -2,6 +2,7 @@ package com.app.milestone.service;
 
 import com.app.milestone.domain.LikeDTO;
 import com.app.milestone.domain.SchoolDTO;
+import com.app.milestone.domain.Search;
 import com.app.milestone.entity.Like;
 import com.app.milestone.entity.People;
 import com.app.milestone.entity.School;
@@ -63,14 +64,36 @@ public class LikeService {
     public Page<LikeDTO> likedSchools(Integer page, Long sessionId) {
         if (page == null) page = 0;
 
-        log.info("서비스에 들어온 sessionId : "+sessionId);
-
         Pageable pageable = PageRequest.of(page, 5);
         List<LikeDTO> list = likeRepository.findSchoolLiked(pageable, sessionId);
-
-        log.info("서비스에 들어온 list : "+list);
 
         Page<LikeDTO> likes = new PageImpl<>(list, pageable, Integer.valueOf("" + likeRepository.countByCreatedDate(pageable, sessionId)));
         return likes;
     }
+
+    //    좋아요 검색
+    public Page<LikeDTO> likedSchoolsSearch(Integer page, Long sessionId, Search search) {
+        if (page == null) page = 0;
+
+        if (search.getSchoolAddress() == null) {
+            search.setSchoolAddress(new ArrayList<>());
+        }
+
+        Pageable pageable = PageRequest.of(page, 5);
+        List<LikeDTO> list = likeRepository.findSchoolLikedSearch(pageable, sessionId, search);
+
+        Page<LikeDTO> likes = new PageImpl<>(list, pageable, Integer.valueOf("" + likeRepository.countByCreatedDate2(pageable, sessionId, search)));
+        return likes;
+    }
+
+    //   마이페이지 좋아요 개수
+    public Long likeCountMyPage(Long userId) {
+        return likeRepository.countByPeopleUserId(userId);
+    }
+
+    //  id로 좋아요 취소
+    public void deleteByLikeId(Long likeId){
+        likeRepository.deleteById(likeId);
+    }
+
 }
