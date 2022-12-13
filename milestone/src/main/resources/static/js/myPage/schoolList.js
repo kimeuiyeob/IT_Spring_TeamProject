@@ -23,6 +23,7 @@ $(".wholeLocation").click(function() {
     $(".wholeLocation").css({"border":"solid 1px black"});
     $(".location2").css({"background-color":"#f2f3f7"})
     $(".location2").css({"border":"none"})
+    globalThis.page=0;
     save=[];
 })
 
@@ -59,14 +60,13 @@ $(".location2").click(function(){
     console.log(save);
 })
 
+let likeId;
 
 /* 찜하기 하트 버튼 */
-$(".heartWrap").click(function () {
-    if ($(".redHeart").eq(0).css("display") == 'block') {
-        $(this).closest('article').remove();
-    } else {
-        $(this).children(".redHeart").show();
-    }
+$("section.schoolList").on('click', "span.heartWrap", function () {
+    $(this).closest('article').remove();
+    likeId = $(this).closest('article').find('input[name="likeId"]').val();
+    cancelLikeSchool(likeId);
 })
 
 $("span.heart").mouseover(function(){
@@ -98,9 +98,6 @@ window.onresize = function(){
     document.location.reload();
 };
 
-
-$(".dropdown").hide();
-
 if (window.matchMedia('(max-width: 768px)').matches){
     $('div.loactions').css('display','none');
     $('div.dropdown').css('display','block');
@@ -109,187 +106,15 @@ if (window.matchMedia('(max-width: 768px)').matches){
 
 
 
-/*=====================반응형 지역선택=========================*/
-
-var checkDrop=false;
-var checkLocal={checkSeoul:false,checkKyungki:false,checkKangwon:false,
-    checkChungcheong:false,checkJeolla:false,checkGyeongsang:false,checkJeju:false};
-/* 저장된 지역 */
-var saveLocal=[];
-
-/* 드롭다운 버튼 */
-$("button.dropbtn").on('click',function(){
-
-    if(!checkDrop){
-        $(".dropdown-content").show();
-        checkDrop=true;
-    }else{
-        var placeholderText="";
-
-        $(".dropdown-content").hide();
-        checkDrop=false;
-
-        /* 눌린 값들 불러와서 검색창에 띄우기 */
-        if(0<saveLocal.length && saveLocal.length<7){
-            for (let i = 0; i < saveLocal.length; i++) {
-                placeholderText += saveLocal[i]+" ";
-            }
-            $(".placeholder").text(placeholderText);
-        }else {
-            // console.log(saveLocal.length);
-            $(".placeholder").text("전체");
-        }
-    }
-})
-
-
-/* 드롭다운 버튼 선택(중복가능) */
-$(".dropLoc").on('click',function(){
-
-    switch($(this).text()){
-        case "서울" :
-            if(!checkLocal.checkSeoul && saveLocal){
-                $(this).css('background-color','#e2e2e2');
-                checkLocal.checkSeoul=true;
-                saveLocal.push("서울");
-            }else{
-                $(this).css('background-color','transparent');
-                if(saveLocal){
-                    for(var i = 0; i<saveLocal.length; i++){
-                        if(saveLocal[i]=="서울"){
-                            saveLocal.splice(i,1);
-                            checkLocal.checkSeoul=false;
-                        }
-                    }
-                }
-            }
-            break;
-        case "경기도" :
-            if(!checkLocal.checkKyungki && saveLocal){
-                $(this).css('background-color','#e2e2e2');
-                checkLocal.checkKyungki=true;
-                saveLocal.push("경기도");
-            }else{
-                $(this).css('background-color','transparent');
-                if(saveLocal){
-                    for(var i = 0; i<saveLocal.length; i++){
-                        if(saveLocal[i]=="경기도"){
-                            saveLocal.splice(i,1);
-                            checkLocal.checkKyungki=false;
-                        }
-                    }
-                }
-            }
-            break;
-        case "강원도" :
-            if(!checkLocal.checkKangwon && saveLocal){
-                $(this).css('background-color','#e2e2e2');
-                checkLocal.checkKangwon=true;
-                saveLocal.push("강원도");
-            }else{
-                $(this).css('background-color','transparent');
-                if(saveLocal){
-                    for(var i = 0; i<saveLocal.length; i++){
-                        if(saveLocal[i]=="강원도"){
-                            saveLocal.splice(i,1);
-                            checkLocal.checkKangwon=false;
-                        }
-                    }
-                }
-            }
-            break;
-        case "충청도" :
-            if(!checkLocal.checkChungcheong && saveLocal){
-                $(this).css('background-color','#e2e2e2');
-                checkLocal.checkChungcheong=true;
-                saveLocal.push("충청도");
-            }else{
-                $(this).css('background-color','transparent');
-                if(saveLocal){
-                    for(var i = 0; i<saveLocal.length; i++){
-                        if(saveLocal[i]=="충청도"){
-                            saveLocal.splice(i,1);
-                            checkLocal.checkChungcheong=false;
-                        }
-                    }
-                }
-            }
-            break;
-        case "전라도" :
-            if(!checkLocal.checkJeolla && saveLocal){
-                $(this).css('background-color','#e2e2e2');
-                checkLocal.checkJeolla=true;
-                saveLocal.push("전라도");
-            }else{
-                $(this).css('background-color','transparent');
-                if(saveLocal){
-                    for(var i = 0; i<saveLocal.length; i++){
-                        if(saveLocal[i]=="전라도"){
-                            saveLocal.splice(i,1);
-                            checkLocal.checkJeolla=false;
-                        }
-                    }
-                }
-            }
-            break;
-        case "경상도" :
-            if(!checkLocal.checkGyeongsang && saveLocal){
-                $(this).css('background-color','#e2e2e2');
-                checkLocal.checkGyeongsang=true;
-                saveLocal.push("경상도");
-            }else{
-                $(this).css('background-color','transparent');
-                if(saveLocal){
-                    for(var i = 0; i<saveLocal.length; i++){
-                        if(saveLocal[i]=="경상도"){
-                            saveLocal.splice(i,1);
-                            checkLocal.checkGyeongsang=false;
-                        }
-                    }
-                }
-            }
-            break;
-        case "제주도" :
-            if(!checkLocal.checkJeju && saveLocal){
-                $(this).css('background-color','#e2e2e2');
-                checkLocal.checkJeju=true;
-                saveLocal.push("제주도");
-            }else{
-                $(this).css('background-color','transparent');
-                if(saveLocal){
-                    for(var i = 0; i<saveLocal.length; i++){
-                        if(saveLocal[i]=="제주도"){
-                            saveLocal.splice(i,1);
-                            checkLocal.checkJeju=false;
-                        }
-                    }
-                }
-            }
-            break;
-    }
-    console.log(saveLocal);
-});
-
-
-
-
-
-
-
-
-
-
-
-
 /*정서림*/
 /*보육원 검색*/
 globalThis.page = 0;
-let $search = $("#search-bar");
 let $pagingBtnFlex = $('.paging-number-flex');
 let pageInfo;
+const $location = $(".location");
 
-// 처음 목록 가져오기
 show();
+likeCount();
 
 function getList(likeResp) {
     let text = "";
@@ -307,6 +132,7 @@ function getList(likeResp) {
         text += `<div class="intro">`+ likes.schoolContent+`</div>`
         text += `<div class="miniLocationTag"><div class="schoolLocation1">`
         text += `<span class="schoolLocation2">`+likes.schoolAddress
+        text += `<input type="hidden" name="likeId" value="`+likes.likeId+`">`
         text += `</span>`
         text += `<span class="schoolLocation2 schoolName">`+likes.schoolName+`</span>`
         text += `</div>`
@@ -316,8 +142,7 @@ function getList(likeResp) {
         text += `<div class="QR">`
         text += `<img src="https://ko.qr-code-generator.com/wp-content/themes/qr/new_structure/markets/basic_market/generator/dist/generator/assets/images/websiteQRCode_noFrame.png">`
         text += `</div>`
-        // text += `<a href="`+ likes.url 인가 ?+`" class="donationButton"><span>보육원 보러가기</span></a>`
-        text += `<a class="donationButton"><span>보육원 보러가기</span></a>`
+        text += `<a class="donationButton" href="`+likes.schoolId+`"><span>보육원 보러가기</span></a>`
         text += `</div>`
         text += `</article>`
     })
@@ -329,9 +154,6 @@ function getList(likeResp) {
 function getListSend(param, callback, error){
 
     let queryString = "/" + param.page || 1;
-
-    console.log(JSON.stringify(param));
-    console.log("queryString : " + queryString);
 
     $.ajax({
         url : "/myPageRest/likeList" + queryString,
@@ -349,6 +171,55 @@ function getListSend(param, callback, error){
     });
 }
 
+function getListSearch(param, callback, error){
+    let existAddress = param.schoolAddress.length != 0;
+    let existSchoolName =  param.schoolName != null && param.schoolName.length != 0;
+    let queryString = "/" + param.page || 1;
+    queryString += existAddress ? "/" + param.schoolAddress : "";
+    if (!existAddress && existSchoolName) {
+        queryString += "/null";
+    }
+    queryString += existSchoolName ? "/" + param.schoolName : "";
+    $.ajax({
+        url : "/myPageRest/likeListSearch" + queryString,
+        type : "get",
+        success : function (likeResp, status, xhr) {
+            if(callback){
+                callback(likeResp)
+            }
+        },
+        error: function (xhr, status, err) {
+            if (error) {
+                error(err);
+            }
+        }
+    });
+}
+
+/*좋아요 취소*/
+function cancelLikeSchool(likeId){
+    console.log("likeId : "+likeId)
+    $.ajax({
+        url:"/myPageRest/cancel/" + likeId,
+        type: "get",
+        success:function(result){
+            likeCount()
+            search()
+        },
+    })
+}
+
+/*좋아요 개수*/
+function likeCount(){
+    $.ajax({
+        url:"/myPageRest/likeCount",
+        type: "get",
+        success:function(result){
+            $("#totalCountNumber").html(result);
+        },
+    })
+}
+
 
 function show() {
     getListSend({
@@ -356,7 +227,34 @@ function show() {
     }, getList)
 }
 
+function search() {
+    getListSearch({
+        schoolAddress: save,
+        schoolName: $("#search-box").val(),
+        page: globalThis.page
+    }, getList);
+}
 
+
+//지역으로 검색
+$location.on('click', function () {
+    globalThis.page = 0;
+    search()
+})
+
+//보육원 이름으로 검색
+$("#search-box").on('keyup', function (e) {
+    if (e.keyCode == 13) {
+        globalThis.page = 0;
+        search()
+    }
+})
+
+//    보육원 상세 이동
+$(".schoolList").on('click', '.donationButton', function (e) {
+    e.preventDefault();
+    location.href = "/school/read?userId=" + $(this).attr("href");
+})
 
 
 /* 페이징 처리 */
@@ -418,21 +316,4 @@ $pagingBtnFlex.on('mouseout', "a.page-number-link", function () {
     $(this).css('background-color', '#fff');
     $(this).css('color', '#9a9ba7');
 })
-
-//좋아요 취소
-function cancelLikeSchool(userId, callback, error){
-    console.log("좋아요 취소")
-    $.ajax({
-        url:"/myPageRest/cancel/" + userId,
-        type: "get",
-        success:function(likeCount){
-            // callback(likeCount);
-        },
-        error: function (xhr, status, err) {
-            if (error) {
-                error(err);
-            }
-        }
-    })
-}
 

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 @Data
 @NoArgsConstructor
 public class LikeDTO {
+    private Long likeId;
     private Long schoolId;
     private Long peopleId;
     private String schoolName;
@@ -21,7 +22,8 @@ public class LikeDTO {
     private String schoolAddress;
 
     @QueryProjection
-    public LikeDTO(Long schoolId, Long peopleId, String schoolName, String schoolContent, String schoolAddress) {
+    public LikeDTO(Long likeId, Long schoolId, Long peopleId, String schoolName, String schoolContent, String schoolAddress) {
+        this.likeId = likeId;
         this.schoolId = schoolId;
         this.peopleId = peopleId;
         this.schoolName = schoolName;
