@@ -1,9 +1,7 @@
 package com.app.milestone.entity;
 
+import com.app.milestone.domain.PasswordDTO;
 import com.app.milestone.domain.PeopleDTO;
-import com.app.milestone.domain.SchoolDTO;
-import com.app.milestone.embeddable.Address;
-import com.app.milestone.embeddable.Introduce;
 import com.sun.istack.NotNull;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -45,5 +43,9 @@ public class People extends User {
         this.userName = peopleDTO.getUserName();
         this.peopleNickname = peopleDTO.getPeopleNickname();
         this.userPhoneNumber = peopleDTO.getUserPhoneNumber();
+    }
+    public void updatePassword(PasswordDTO passwordDTO) {
+//        People people = peopleDTO.toEntity();
+        this.userPassword= passwordDTO.getChangePassword();
     }
 }

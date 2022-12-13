@@ -1,5 +1,6 @@
 package com.app.milestone.service;
 
+import com.app.milestone.domain.PasswordDTO;
 import com.app.milestone.domain.PeopleDTO;
 import com.app.milestone.entity.Like;
 import com.app.milestone.entity.People;
@@ -8,7 +9,7 @@ import com.app.milestone.repository.LikeRepository;
 import com.app.milestone.repository.PeopleRepository;
 import com.app.milestone.repository.SchoolRepository;
 import lombok.RequiredArgsConstructor;
-import org.junit.Test;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -19,10 +20,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class PeopleService {
     private final PeopleRepository peopleRepository;
     private final SchoolRepository schoolRepository;
@@ -38,10 +39,21 @@ public class PeopleService {
         peopleDTO.setUserPhoneNumber(people.getUserPhoneNumber());
         peopleRepository.save(peopleDTO.toEntity());
     }
-//  정보수정
+
+    //  정보수정
     @Transactional
     public void updatePeople(Long userId, PeopleDTO peopleDTO) {
         peopleRepository.findById(userId).get().update(peopleDTO);
+    }
+
+    //  비밀번호 수정
+    @Transactional
+    public void updatePeoplePassword(Long userId, PasswordDTO passwordDTO) {
+        String changePassword = Base64.getEncoder().encodeToString(passwordDTO.getChangePassword().getBytes());
+        passwordDTO.setChangePassword(changePassword);
+        log.info("피플 서비스 유저 비밀번호 : " +changePassword);
+        log.info("피플 서비스 유저 아이디 : " + userId);
+        peopleRepository.findById(userId).get().updatePassword(passwordDTO);
     }
 
     //    개인회원 한 명의 정보

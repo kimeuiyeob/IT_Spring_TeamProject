@@ -25,6 +25,18 @@ public class ServiceService {
     private final DonationRepository donationRepository;
     private final ServiceRepository serviceRepository;
 
+//  개인 일정 조회
+    public Page<ServiceDTO> peopleServiceListSearch(Integer page, String keyword) {
+        if (page == null) page = 0;
+        Pageable pageable = PageRequest.of(page, 3);
+        if (keyword == null) {
+            keyword = null;
+        }
+        List<ServiceDTO> list = serviceRepository.findServiceSearch(pageable, keyword);
+        Page<ServiceDTO> service = new PageImpl<>(list, pageable, Integer.valueOf("" + serviceRepository.countByCreatedDate(pageable, keyword)));
+        return service;
+    }
+
     //    방문횟수 랭킹
     public List<Ranking> donationVisitRanking() {
         List<Ranking> arRanking = new ArrayList<>();

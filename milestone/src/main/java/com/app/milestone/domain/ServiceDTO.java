@@ -19,6 +19,9 @@ public class ServiceDTO {
     private String schoolName;
     private String peopleNickname;
     private Long userId;
+    private String schoolAddress;
+    private String schoolAddressDetail;
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 //    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime serviceVisitDate;
@@ -30,10 +33,12 @@ public class ServiceDTO {
     }
 
     @QueryProjection
-    public ServiceDTO(String schoolName, String peopleNickname, Long userId, LocalDateTime serviceVisitDate) {
+    public ServiceDTO(String schoolName, String peopleNickname, Long userId, String schoolAddress, String schoolAddressDetail, LocalDateTime serviceVisitDate) {
         this.schoolName = schoolName;
         this.peopleNickname = peopleNickname;
         this.userId = userId;
+        this.schoolAddress = schoolAddress;
+        this.schoolAddressDetail = schoolAddressDetail;
         this.serviceVisitDate = serviceVisitDate;
     }
 }

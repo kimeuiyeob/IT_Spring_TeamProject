@@ -29,6 +29,7 @@ public class LoginController {
     private final SchoolService schoolService;
     private final UserService userService;
 
+
     //    로그인페이지
     @GetMapping("/login")
     public String loginForm(@ModelAttribute("loginDTO") LoginDTO loginDTO) {
@@ -61,6 +62,13 @@ public class LoginController {
         HttpSession session = request.getSession();
         // 세션에 로그인 회원 정보 보관
         session.setAttribute("userId", userId);
+
+        if(userService.typeCheck(userId)){
+            session.setAttribute("type", "people");
+        }else {
+            session.setAttribute("type", "school");
+        }
+
 
 //        log.info("유저 : " + loginMember.getUserEmail());
 //        log.info("유저 : " + loginMember.getUserEmail());

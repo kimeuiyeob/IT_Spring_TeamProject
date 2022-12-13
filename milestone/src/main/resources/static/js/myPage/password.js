@@ -65,7 +65,7 @@
 // });
 
 /*-----------------------------------------------------------------*/
-const $submitBtn = $('.submitBtn');
+const $submitButton = $('.submitButton');
 const $password = $('#password');
 let pwCheckFlag = false;
 const $changePassword = $('#changePassword')
@@ -73,16 +73,44 @@ let changePwCheckFlag = false;
 const $checkPassword = $('#checkPassword')
 let checkPwCheckFlag = false;
 let tempPw = "";
-const existingPw = "qwer1234!";
 
 //8자리 이상, 대문자/소문자/숫자/특수문자 모두 포함되어 있는 지 검사
 var pwCheck = /^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$/;
 //공백검사
 var spaceCheck = /\s/;
 
-$password.on('blur', function () {
-    pwCheckFlag = existingPw == $password.val();
-})
+$password.on('blur', function() {
+    const checkPassword = $('#password').val();
+    if (!$password.val()) {
+        $password.focus();
+        $password.next().show();
+    }
+    if ($password.val().length < 8) {
+        $password.next().show();
+        $password.next().text("8자 이상 입력해 주세요.");
+    }else{
+        $.ajax({
+            type: 'GET',
+            url: '/myPageRest/checkPassword',
+            data: {'userPassword': checkPassword},
+            datatype: "text"
+        }).done(function(result){
+            console.log(result);
+            if(result){
+                console.log("비밀번호 일치");
+                pwCheckFlag = true;
+            } else if(!result){
+                console.log("비밀번호 틀림");
+                $password.next().show();
+                $password.next().text("비밀번호가 맞지 않습니다.")
+            }
+        }).fail(function(error){
+            alert(JSON.stringify(error));
+        })
+    }
+});
+
+
 
 $changePassword.on('blur', function () {
     if (!pwCheck.test($changePassword.val())) {
@@ -101,7 +129,7 @@ $checkPassword.on('blur', function () {
     }
 })
 
-$submitBtn.on('click', function () {
+$submitButton.on('click', function () {
 
     if (!$checkPassword.val()) {
         $checkPassword.focus();
@@ -111,17 +139,17 @@ $submitBtn.on('click', function () {
         $changePassword.focus();
         $changePassword.next().show();
     }
-    if (!$password.val()) {
-        $password.focus();
-        $password.next().show();
-    }
-    if ($password.val().length < 8) {
-        $password.next().show();
-        $password.next().text("8자 이상 입력해 주세요.")
-    } else if (existingPw != $password.val()) {
-        $password.next().show();
-        $password.next().text("비밀번호가 맞지 않습니다.")
-    }
+    // if (!$password.val()) {
+    //     $password.focus();
+    //     $password.next().show();
+    // }
+    // if ($password.val().length < 8) {
+    //     $password.next().show();
+    //     $password.next().text("8자 이상 입력해 주세요.")
+    // } else if (existingPw != $password.val()) {
+    //     $password.next().show();
+    //     $password.next().text("비밀번호가 맞지 않습니다.")
+    // }
 
     $password.on('keyup', function () {
         $password.next().show();
@@ -129,7 +157,7 @@ $submitBtn.on('click', function () {
             $password.next().text("8자 이상 입력해 주세요.")
             return;
         }
-        if (existingPw != $password.val()) {
+        if ($checkPassword != $password.val()) {
             $password.next().text("")
             return;
         }
@@ -160,6 +188,6 @@ $submitBtn.on('click', function () {
     console.log(checkPwCheckFlag)
     console.log(pwCheckFlag)
     if (changePwCheckFlag && checkPwCheckFlag && pwCheckFlag) {
-        updatePassword.submit();
+        $submitButton.submit();
     }
 })

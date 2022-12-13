@@ -10,6 +10,7 @@ import java.util.List;
 public interface ServiceCustomRepository {
     public List<Tuple> sortByVisitRank();
 
+//    public List<ServiceDTO> findServiceById (Pageable pageable, String keyword);
     public List<ServiceDTO> findServiceSearch (Pageable pageable, String keyword);
     public List<ServiceDTO> findServiceSearchAsc (Pageable pageable, String keyword);
     public Long countByCreatedDate(Pageable pageable, String keyword);
