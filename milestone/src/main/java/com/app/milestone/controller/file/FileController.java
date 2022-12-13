@@ -1,6 +1,8 @@
 package com.app.milestone.controller.file;
 
 import com.app.milestone.domain.FileDTO;
+import com.app.milestone.service.FileService;
+import lombok.RequiredArgsConstructor;
 import net.coobird.thumbnailator.Thumbnailator;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -26,8 +30,11 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/file/*")
 public class FileController {
+    private final FileService fileService;
+
     @PostMapping("/upload")
     public List<FileDTO> upload(List<MultipartFile> upload) throws IOException {
         String rootPath = "C:/upload";
@@ -70,17 +77,15 @@ public class FileController {
     }
 
     @PostMapping("/delete")
-    public void delete(String uploadPath, String fileName, boolean fileImageCheck) {
+    public void delete(String uploadPath, String fileName) {
         File file = new File("C:/upload", uploadPath + "/" + fileName);
         if (file.exists()) {
             file.delete();
         }
 
-        if (fileImageCheck) {
-            file = new File("C:/upload", uploadPath + "/s_" + fileName);
-            if (file.exists()) {
-                file.delete();
-            }
+        file = new File("C:/upload", uploadPath + "/s_" + fileName);
+        if (file.exists()) {
+            file.delete();
         }
     }
 
@@ -92,6 +97,13 @@ public class FileController {
         name = name.substring(name.indexOf("_") + 1);
         header.add("Content-Disposition", "attachment;filename=" + new String(name.getBytes("UTF-8")));
         return new ResponseEntity<>(resource, header, HttpStatus.OK);
+    }
+
+    @GetMapping("/schoolImg")
+    public List<FileDTO> schoolImg(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Long userId = (Long) session.getAttribute("userId");
+        return fileService.showAll(userId);
     }
 
     public boolean checkImageType(File file) throws IOException {
