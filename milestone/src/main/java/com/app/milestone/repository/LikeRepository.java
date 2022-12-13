@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public interface LikeRepository extends JpaRepository<Like, Long> {
+public interface LikeRepository extends JpaRepository<Like, Long>, LikeCustomRepository {
     public Long countBySchoolUserId(Long userId);
     public List<Like> findByPeopleUserId(Long userId);
     @Modifying(clearAutomatically = true)

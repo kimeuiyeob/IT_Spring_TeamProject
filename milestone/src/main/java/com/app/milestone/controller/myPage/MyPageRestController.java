@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @RestController
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpSession;
 public class MyPageRestController {
     private final ServiceService serviceService;
     private final TalentService talentService;
+    private final LikeService likeService;
 
     /*=============================================================================*/
     //마이페이지 재능기부 목록 수정
@@ -81,5 +83,39 @@ public class MyPageRestController {
         Page<ServiceDTO> arServiceDTO = serviceService.serviceListSearch(page, keyword);
         serviceResp.setArServiceDTO(arServiceDTO);
         return serviceResp;
+    }
+
+    //    찜한 보육원
+    @GetMapping(value = {"/likeList/{page}"})
+    public LikeResp likeSchool(HttpSession session, @PathVariable("page") Integer page) {
+        Long userId = (Long) session.getAttribute("userId");
+
+        LikeResp likeResp = new LikeResp();
+        Page<LikeDTO> arLikeDTO = likeService.likedSchools(page, userId);
+        likeResp.setArLikeDTO(arLikeDTO);
+
+        return likeResp;
+    }
+
+    //    좋아요 개수
+    @GetMapping(value = {"/likeCount/{userId}"})
+    public Long likeCount(@PathVariable("userId") Long userId) {
+        return likeService.likeCount(userId);
+    }
+
+    //    좋아요 누름
+    @GetMapping(value = {"/like/{userId}"})
+    public void like(HttpServletRequest request, @PathVariable("userId") Long userId) {
+        HttpSession session = request.getSession();
+        Long sessionId = (Long) session.getAttribute("userId");
+        likeService.likeSchool(userId, sessionId);
+    }
+
+    //    좋아요 취소
+    @GetMapping(value = {"/cancel/{userId}"})
+    public void cancel(HttpServletRequest request, @PathVariable("userId") Long userId) {
+        HttpSession session = request.getSession();
+        Long sessionId = (Long) session.getAttribute("userId");
+        likeService.cancelLikeSchool(userId, sessionId);
     }
 }

@@ -1,5 +1,6 @@
 package com.app.milestone.domain;
 
+import com.app.milestone.embeddable.Address;
 import com.app.milestone.entity.Like;
 import com.app.milestone.entity.School;
 import com.app.milestone.entity.User;
@@ -15,11 +16,16 @@ import org.springframework.stereotype.Component;
 public class LikeDTO {
     private Long schoolId;
     private Long peopleId;
-
+    private String schoolName;
+    private String schoolContent;
+    private String schoolAddress;
 
     @QueryProjection
-    public LikeDTO(Long schoolId, Long peopleId) {
+    public LikeDTO(Long schoolId, Long peopleId, String schoolName, String schoolContent, String schoolAddress) {
         this.schoolId = schoolId;
         this.peopleId = peopleId;
+        this.schoolName = schoolName;
+        this.schoolContent = schoolContent;
+        this.schoolAddress = schoolAddress;
     }
 }
