@@ -49,8 +49,7 @@
                 </div>
                 <!-- 메인컨텐츠 -->
                 <div class="inputWrap margin-left-40 flexCol">
-                    <form th:action="@{/mypage/register}" method="post" name="updateForm" th:object="${schoolDTO}"
-                          enctype="multipart/form-data">
+                    <form th:action="@{/mypage/register}" method="post" name="updateForm" th:object="${schoolDTO}">
                         <div class="margin-bottom-20">
                             <div class="margin-bottom-8 flexBetween">
                                 <div class="inputTitle">보육원 대표 사진</div>
@@ -280,16 +279,27 @@
 <script th:inline="javascript">
     let fileDTO = [[${fileDTO}]];
     let arrayFile = [];
-    let fileType = "profile";
+    let fileType = "schoolImg";
 
     if (fileDTO) {
         $('.profile').css("background-image", `url(/file/display?fileName=` + fileDTO.filePath + `/s_` + fileDTO.fileUuid + "_" + fileDTO.fileName + `)`)
     }
+    showSchoolImg(showUploadResult);
 
     $("input[type='file']").on("change", function () {
         let formData = new FormData();
         let $inputFile = $("input[type='file']");
-        let files = $inputFile[0].files;
+        // console.log($(this).index())
+        // console.log($('input[name = "schoolImg"]').attr("name"))
+        // console.log($(this).attr("name"))
+        // console.log($(this).attr("name") == $('input[name = "schoolImg"]').attr("name"))
+        let files;
+        if ($(this).attr("name") == $('input[name = "schoolImg"]').attr("name")) {
+            files = $inputFile[1].files;
+        } else {
+            files = $inputFile[0].files;
+        }
+
 
         console.log(Array.from(files));
 
@@ -306,37 +316,46 @@
 
         fileType = $(this).attr("name");
         console.log(fileType)
-        $.ajax({
-            url: "/file/upload",
-            type: "post",
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: showUploadResult
-        });
+        if (fileType == "profile") {
+            $.ajax({
+                url: "/file/upload",
+                type: "post",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: showUploadProfile
+            });
+        } else {
+            $.ajax({
+                url: "/file/upload",
+                type: "post",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: showUploadResult
+            });
+        }
+
     });
 
-    function showUploadResult(files) {
+    function showUploadProfile(files) {
         let text = "";
         let fileImgCheck;
-
+        console.log(fileType)
         let file1;
         $(files).each(function (i, file) {
             file1 = file;
-            // text += `<div class = 'fileInfo' data-file-size="` + file.fileSize + `" data-file-name="` + file.fileName + `" data-file-upload-path="` + file.filePath + `" data-file-uuid="` + file.fileUuid + `" data-file-image-check="` + file.fileImageCheck + `">`;
-            // text += `<span>X</span>`;
-            text += `<input type="hidden" name="files[` + i + `].fileName" value="` + file.fileName + `">`;
-            text += `<input type="hidden" name="files[` + i + `].fileUploadPath" value="` + file.filePath + `">`;
-            text += `<input type="hidden" name="files[` + i + `].fileUuid" value="` + file.fileUuid + `">`;
-            text += `<input type="hidden" name="files[` + i + `].fileSize" value="` + file.fileSize + `">`;
-            text += `<input type="hidden" name="files[` + i + `].fileImageCheck" value="` + file.fileImageCheck + `">`;
-            if (!file.fileImageCheck) {
-                text += `<img src="/images/attach.png" width="100">`;
-            } else {
-                text += `<img src="/file/display?fileName=` + file.filePath + `/s_` + file.fileUuid + "_" + file.fileName + `">`;
-            }
-            // text += `<p>` + file.fileName + `(` + parseInt(file.fileSize / 1024) + `KB)</p>`
-            // text += `</li>`;
+            // text += `<input type="hidden" name="files[` + i + `].fileName" value="` + file.fileName + `">`;
+            // text += `<input type="hidden" name="files[` + i + `].fileUploadPath" value="` + file.filePath + `">`;
+            // text += `<input type="hidden" name="files[` + i + `].fileUuid" value="` + file.fileUuid + `">`;
+            // text += `<input type="hidden" name="files[` + i + `].fileSize" value="` + file.fileSize + `">`;
+            // text += `<input type="hidden" name="files[` + i + `].fileImageCheck" value="` + file.fileImageCheck + `">`;
+            // text += `<input type="hidden" name="files[` + i + `].fileType" value="` + fileType + `">`;
+            // if (!file.fileImageCheck) {
+            //     text += `<img src="/images/attach.png" width="100">`;
+            // } else {
+            //     text += `<img src="/file/display?fileName=` + file.filePath + `/s_` + file.fileUuid + "_" + file.fileName + `">`;
+            // }
         });
         $('.profile').css("background-image", `url(/file/display?fileName=` + file1.filePath + `/s_` + file1.fileUuid + "_" + file1.fileName + `)`)
         saveProfile({
@@ -347,8 +366,33 @@
             fileImageCheck: file1.fileImageCheck,
             fileType: fileType
         })
-        // $(profileForm).append(text).submit();
-        // $(".imgTest").append(text);
+    }
+    let schoolImgCount = 0;
+    function showUploadResult(files) {
+        console.log(fileType)
+        let text = "";
+
+        $(files).each(function (i, file) {
+            text += `<div class = "imgsWrap">`
+            text += `<input type="hidden" class = "fileName" name="files[` + (i+schoolImgCount) + `].fileName" value="` + file.fileName + `">`;
+            text += `<input type="hidden" class = "filePath" name="files[` + (i+schoolImgCount) + `].filePath" value="` + file.filePath + `">`;
+            text += `<input type="hidden" class = "fileUuid" name="files[` + (i+schoolImgCount) + `].fileUuid" value="` + file.fileUuid + `">`;
+            text += `<input type="hidden" class = "fileSize" name="files[` + (i+schoolImgCount) + `].fileSize" value="` + file.fileSize + `">`;
+            text += `<input type="hidden" class = "fileImageCheck" name="files[` + (i+schoolImgCount) + `].fileImageCheck" value="` + file.fileImageCheck + `">`;
+            text += `<input type="hidden" class = "fileType" name="files[` + (i+schoolImgCount) + `].fileType" value="` + fileType + `">`;
+            if (!file.fileImageCheck) {
+                text += `<img src="/images/attach.png" width="100">`;
+            } else {
+                text += `<img width="136" height="100" src="/file/display?fileName=` + file.filePath + `/` + file.fileUuid + "_" + file.fileName + `">`;
+            }
+            text += `<div class = "cancelX">`
+            text += `<span>x</span>`
+            text += `</div>`
+            text += `</div>`
+        });
+        $(".imgList").append(text);
+        schoolImgCount = schoolImgCount = $('.imgsWrap').length;
+        $('.imgBox').show();
     }
 
     function saveProfile(fileDTO) {
@@ -370,6 +414,31 @@
         })
     }
 
+    $('.imgList').on('click', '.cancelX', function () {
+        console.log($(this).closest(".imgsWrap"))
+        const $imgsWrap = $(this).closest(".imgsWrap");
+        let uploadPath = $imgsWrap.find(".filePath").val();
+        let fileName = $imgsWrap.find(".fileUuid").val() + "_" + $imgsWrap.find(".fileName").val();
+        // console.log($imgsWrap.find(".filePath").val())
+        // console.log($imgsWrap.find(".fileUuid").val())
+        // console.log($imgsWrap.find(".fileName").val())
+        // console.log($(this).prev());
+        // console.log($(this).prev().attr("src"));
+        $.ajax({
+            url: "/file/delete",
+            type: "post",
+            data: {uploadPath: uploadPath, fileName: fileName},
+            success: function () {
+                $imgsWrap.remove();
+                arrayFile.splice(i, 1);
+                const dataTransfer = new DataTransfer();
+                arrayFile.forEach(file => dataTransfer.items.add(file));
+                $("input[type='file']")[0].files = dataTransfer.files;
+            }
+        });
+    })
+
+
     // $(".uploadResult ul").on("click", "span", function(){
     //     const $li = $(this).closest("li");
     //     let i = $(".uploadResult ul span").index($(this));
@@ -389,22 +458,22 @@
     //     });
     // });
 
-    $("input[type='submit']").on("click", function (e) {
-        e.preventDefault();
-        let text = "";
-        $.each($(".uploadResult ul li"), function (i, li) {
-            let fileName = $(li).data("file-name");
-            let fileUploadPath = $(li).data("file-upload-path");
-            let fileUuid = $(li).data("file-uuid");
-            let fileSize = $(li).data("file-size");
-            let fileImageCheck = $(li).data("file-image-check");
-            text += `<input type="hidden" name="files[` + i + `].fileName" value="` + fileName + `">`;
-            text += `<input type="hidden" name="files[` + i + `].fileUploadPath" value="` + fileUploadPath + `">`;
-            text += `<input type="hidden" name="files[` + i + `].fileUuid" value="` + fileUuid + `">`;
-            text += `<input type="hidden" name="files[` + i + `].fileSize" value="` + fileSize + `">`;
-            text += `<input type="hidden" name="files[` + i + `].fileImageCheck" value="` + fileImageCheck + `">`;
-        });
-        $("form#writeForm").append(text).submit();
-    });
+    // $("input[type='submit']").on("click", function (e) {
+    //     e.preventDefault();
+    //     let text = "";
+    //     $.each($(".uploadResult ul li"), function (i, li) {
+    //         let fileName = $(li).data("file-name");
+    //         let fileUploadPath = $(li).data("file-upload-path");
+    //         let fileUuid = $(li).data("file-uuid");
+    //         let fileSize = $(li).data("file-size");
+    //         let fileImageCheck = $(li).data("file-image-check");
+    //         text += `<input type="hidden" name="files[` + i + `].fileName" value="` + fileName + `">`;
+    //         text += `<input type="hidden" name="files[` + i + `].fileUploadPath" value="` + fileUploadPath + `">`;
+    //         text += `<input type="hidden" name="files[` + i + `].fileUuid" value="` + fileUuid + `">`;
+    //         text += `<input type="hidden" name="files[` + i + `].fileSize" value="` + fileSize + `">`;
+    //         text += `<input type="hidden" name="files[` + i + `].fileImageCheck" value="` + fileImageCheck + `">`;
+    //     });
+    //     $("form#writeForm").append(text).submit();
+    // });
 </script>
 </html>

@@ -24,8 +24,7 @@ public class File extends Period {
     private Long fileSize;
     private boolean fileImageCheck;
     @NotNull
-    @Enumerated(value = EnumType.STRING)
-    private FileType fileType;
+    private String fileType;
 
     //
 //    @ManyToOne(fetch = FetchType.LAZY)
@@ -37,7 +36,7 @@ public class File extends Period {
     private User user;
 
     @Builder
-    public File(String fileName, String filePath, String fileUuid, Long fileSize, boolean fileImageCheck, FileType fileType) {
+    public File(String fileName, String filePath, String fileUuid, Long fileSize, boolean fileImageCheck, String fileType) {
         this.fileName = fileName;
         this.filePath = filePath;
         this.fileUuid = fileUuid;

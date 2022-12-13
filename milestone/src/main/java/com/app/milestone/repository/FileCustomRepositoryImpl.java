@@ -32,7 +32,7 @@ public class FileCustomRepositoryImpl implements FileCustomRepository {
                 file.fileID
         )).from(file)
                 .where(
-                        file.user.userId.eq(userId).and(file.fileType.eq(FileType.profile))
+                        file.user.userId.eq(userId).and(file.fileType.eq("profile"))
                 )
                 .fetchOne();
     }
@@ -48,7 +48,9 @@ public class FileCustomRepositoryImpl implements FileCustomRepository {
                 file.fileType,
                 file.fileID
         )).from(file)
-                .where(file.user.userId.eq(userId))
+                .where(
+                        file.user.userId.eq(userId).and(file.fileType.eq("schoolImg"))
+                )
                 .fetch();
     }
 }

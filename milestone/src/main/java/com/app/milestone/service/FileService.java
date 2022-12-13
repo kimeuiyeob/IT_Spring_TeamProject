@@ -23,20 +23,39 @@ public class FileService {
     //    추가
     @Transactional
     public void register(Long userId, FileDTO fileDTO) {
-        log.info("============="+userId);
-        log.info("============="+userRepository.findById(userId).get());
-        log.info("============="+fileDTO);
+        log.info("=============" + userId);
+        log.info("=============" + userRepository.findById(userId).get());
+        log.info("=============" + fileDTO);
         User user = userRepository.findById(userId).get();
         fileRepository.deleteByUserId(userId);
         fileRepository.save(fileDTO.toEntity()).changeUser(user);
     }
 
-    //    삭제
-    public void remove(Long fileId) {
-        fileRepository.deleteById(fileId);
+    //    보육원 이미지 추가
+    @Transactional
+    public void register(Long userId, List<FileDTO> fileDTO) {
+        User user = userRepository.findById(userId).get();
+        for (FileDTO file : fileDTO) {
+            fileRepository.save(file.toEntity()).changeUser(user);
+        }
     }
 
-//    프로필 조회
+    //    보육원 이미지 삭제
+    @Transactional
+    public void removeSchoolImg(Long userId) {
+        fileRepository.deleteSchoolImgByUserId(userId);
+//        User user = userRepository.findById(userId).get();
+//        for (FileDTO file : fileDTO) {
+//            fileRepository.save(file.toEntity()).changeUser(user);
+//        }
+    }
+
+    //    삭제
+    public void remove(Long userId) {
+        fileRepository.deleteById(userId);
+    }
+
+    //    프로필 조회
     public FileDTO showProfile(Long userId) {
         return fileRepository.findProfileByUserId(userId);
     }

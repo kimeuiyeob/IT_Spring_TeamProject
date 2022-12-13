@@ -96,16 +96,23 @@ public class MyPageController {
     public String schoolInfo(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
         Long userId = (Long) session.getAttribute("userId");
-        model.addAttribute("fileDTO", fileService.showProfile(1L));
-        model.addAttribute("schoolDTO", schoolService.schoolInfo(1L));
+        model.addAttribute("fileDTO", fileService.showProfile(userId));
+        model.addAttribute("schoolDTO", schoolService.schoolInfo(userId));
         return "/myPage/myPage_schoolInfo";
     }
 
+    //    application/json charset=utf-8
+    //    보육원 등록(수정)
     @PostMapping("/register")
     public RedirectView register(HttpServletRequest request, SchoolDTO schoolDTO) {
+        log.info("================="+schoolDTO);
         HttpSession session = request.getSession();
         Long userId = (Long) session.getAttribute("userId");
-        schoolService.registerSchool(1L, schoolDTO);
+        if(schoolDTO.getFiles() != null){
+            fileService.removeSchoolImg(userId);
+            fileService.register(userId, schoolDTO.getFiles());
+        }
+        schoolService.registerSchool(userId, schoolDTO);
         return new RedirectView("/mypage/schoolinfo");
     }
 //    ==========================================

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Component
 @Data
@@ -37,6 +38,7 @@ public class SchoolDTO {
     private String userProfile;
     private int donationCount;
     private LocalDateTime createdDate;
+    private List<FileDTO> files;
 
 
     public School toEntity() {

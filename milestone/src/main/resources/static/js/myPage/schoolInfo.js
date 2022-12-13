@@ -88,33 +88,33 @@ $content.keyup(function () {
 
 
 /*----------------------사진 추가 썸네일---------------------------*/
-const $fileTest = $(`#schoolImg`);
-const $thumbnail = $(`.profile`);
-
-$fileTest.on('change', function (e) {
-    var reader = new FileReader();
-    let text = "";
-    reader.readAsDataURL(e.target.files[0]);
-    reader.onload = function (e) {
-        let url = e.target.result;
-        text += `<div class = "imgsWrap">`;
-        if (url.includes('image')) {
-            text += `<img src="` + url + `" width="136" height="100">`;
-            // $thumbnail.css('background-image', "url('" + url + "')");
-        } else {
-            text += `<img src="/imgs/fix/normalProfile.png" width="136" height="100">`;
-            // $thumbnail.css('background-image', "url('imgs/fix/normalProfile.png')");
-        }
-        text += `</div>`;
-        $('.imgList').append(text);
-        if ($('.imgsWrap').length > 0) {
-            $('.imgBox').show();
-        } else {
-            $('.imgBox').hide();
-        }
-    }
-
-})
+// const $fileTest = $(`#schoolImg`);
+// const $thumbnail = $(`.profile`);
+//
+// $fileTest.on('change', function (e) {
+//     var reader = new FileReader();
+//     let text = "";
+//     reader.readAsDataURL(e.target.files[0]);
+//     reader.onload = function (e) {
+//         let url = e.target.result;
+//         text += `<div class = "imgsWrap">`;
+//         if (url.includes('image')) {
+//             text += `<img src="` + url + `" width="136" height="100">`;
+//             // $thumbnail.css('background-image', "url('" + url + "')");
+//         } else {
+//             text += `<img src="/imgs/fix/normalProfile.png" width="136" height="100">`;
+//             // $thumbnail.css('background-image', "url('imgs/fix/normalProfile.png')");
+//         }
+//         text += `</div>`;
+//         $('.imgList').append(text);
+//         if ($('.imgsWrap').length > 0) {
+//             $('.imgBox').show();
+//         } else {
+//             $('.imgBox').hide();
+//         }
+//     }
+//
+// })
 
 /*-----------------------------------유효성 검사-------------------------------*/
 /*----------------------------이메일 유효성 검사----------------------------*/
@@ -594,3 +594,17 @@ $submitBtn.on('click', function () {
     console.log("들옴")
     updateForm.submit();
 })
+
+/*-============================황지수 ajax=======================*/
+function showSchoolImg(callback){
+    $.ajax({
+        url: "/file/schoolImg",
+        type: "get",
+        contentType: false,
+        processData: false,
+        success: function(data){
+            callback(data);
+        }
+    })
+
+}
