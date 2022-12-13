@@ -49,12 +49,14 @@
                 </div>
                 <!-- 메인컨텐츠 -->
                 <div class="inputWrap margin-left-40 flexCol">
-                    <form th:action="@{/mypage/register}" method="post" name="updateForm" th:object="${schoolDTO}">
+                    <form th:action="@{/mypage/register}" method="post" name="updateForm" th:object="${schoolDTO}"
+                          enctype="multipart/form-data">
                         <div class="margin-bottom-20">
                             <div class="margin-bottom-8 flexBetween">
                                 <div class="inputTitle">보육원 대표 사진</div>
                             </div>
-                            <input type="file" class="tempImgBackground" name="schoolImg" id="schoolImg" multiple>
+                            <input type="file" class="tempImgBackground" name="schoolImg" id="schoolImg" multiple
+                                   accept="image/gif,image/jpeg,image/png">
                             <div class="imgBox">
                                 <div class="flexRow">
                                     <div class="imgList flexRow">
@@ -278,6 +280,7 @@
 <script th:inline="javascript">
     let fileDTO = [[${fileDTO}]];
     let arrayFile = [];
+    let fileType = "profile";
 
     if (fileDTO) {
         $('.profile').css("background-image", `url(/file/display?fileName=` + fileDTO.filePath + `/s_` + fileDTO.fileUuid + "_" + fileDTO.fileName + `)`)
@@ -301,6 +304,8 @@
             formData.append("upload", file);
         });
 
+        fileType = $(this).attr("name");
+        console.log(fileType)
         $.ajax({
             url: "/file/upload",
             type: "post",
@@ -314,7 +319,7 @@
     function showUploadResult(files) {
         let text = "";
         let fileImgCheck;
-        let fileType = "profile";
+
         let file1;
         $(files).each(function (i, file) {
             file1 = file;
