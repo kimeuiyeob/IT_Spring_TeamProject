@@ -168,7 +168,6 @@ public List<Tuple> sortBytalentRank() {
                 .where(talent.donationId.eq(donationId))
                 .fetch();
     }
-    /*=============================================================================================================*/
 
     //============제목 검색==============//
     private BooleanExpression talentTitleContaining(String talentTitle) { //booleanExpression은 null 일때 무시될 수 있고, and또는 or절을 통해서 조합을 할 수 있다.

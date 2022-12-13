@@ -110,26 +110,8 @@ public class TalentTest {
         doantionId202.stream().map(Talent::toString).forEach(log::info);
     }
 
-    @Test/*=========================실험중=======================================*/
-    public void findTest1() {
-        List<TalentDTO> doantionId202 = jpaQueryFactory
-                .select(new QTalentDTO(
-                        talent.donationId,
-                        talent.talentTitle,
-                        talent.talentContent,
-                        talent.talentAbleDate,
-                        talent.talentCategory,
-                        talent.talentPlace,
-                        talent.people.peopleNickname,
-                        talent.school.userId,
-                        talent.people.userId
-                )).from(talent, donation, people)
-                .where(talent.donationId.eq(donation.donationId))
-                .where(donation.people.userId.eq(people.userId))
-                .where(people.userId.eq(101L))
-                .fetch();
-        doantionId202.stream().map(TalentDTO::toString).forEach(log::info);
-    }
+
+    /*=============================================================*/
 
 
     @Test

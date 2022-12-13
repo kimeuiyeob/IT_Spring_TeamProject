@@ -2,7 +2,9 @@ package com.app.milestone.service;
 
 import com.app.milestone.domain.PeopleDTO;
 import com.app.milestone.domain.Search;
+import com.app.milestone.domain.TalentDTO;
 import com.app.milestone.domain.WithdrawalDTO;
+import com.app.milestone.entity.Talent;
 import com.app.milestone.entity.Withdrawal;
 import com.app.milestone.repository.WithdrawalRepository;
 import lombok.RequiredArgsConstructor;
@@ -50,6 +52,12 @@ public class WithdrawalService {
         List<WithdrawalDTO> list = withdrawalRepository.findWithdrawalSearchAsc(pageable, reason);
         Page<WithdrawalDTO> withdrawal = new PageImpl<>(list, pageable, Integer.valueOf("" + withdrawalRepository.countByCreatedDate(pageable, reason)));
         return withdrawal;
+    }
+
+    //회원탈퇴시 탈퇴이유 저장
+    public void insertReason(WithdrawalDTO withdrawalDTO) {
+        Withdrawal entity = withdrawalDTO.toEntity();
+        withdrawalRepository.save(entity);
     }
 
 
