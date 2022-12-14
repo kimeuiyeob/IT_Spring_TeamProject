@@ -27,6 +27,14 @@ public class UserTest {
     @Autowired
     private UserRepository userRepository;
 
+    @Test
+    public void test(){
+        log.info("==============");
+        log.info("==============getSimpleName===" + userRepository.findById(2L).get().getClass().getSimpleName().toLowerCase());
+        log.info("==============getSimpleName===" + userRepository.findById(200L).get().getClass().getSimpleName().toLowerCase());
+        log.info("==============");
+    }
+
 //    회원 전체목록 조회
     @Test
     public void getListTest() {
