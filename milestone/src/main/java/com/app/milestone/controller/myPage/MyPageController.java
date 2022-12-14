@@ -50,12 +50,23 @@ public class MyPageController {
         return new RedirectView("/mypage/myinfo");
     }
 
-    @PostMapping("/passwordUpdate")
+    //  비밀번호 변경
+    @PostMapping("/peoplePasswordUpdate")
     public RedirectView updatePeoplePassword(HttpSession session, PasswordDTO passwordDTO) {
         Long userId = (Long) session.getAttribute("userId");
         log.info("마페컨 유저 비밀번호 : " + passwordDTO);
         log.info("마페컨 유저 아이디 : " + userId);
         peopleService.updatePeoplePassword(userId, passwordDTO);
+        return new RedirectView("/main/main");
+    }
+
+    //  비밀번호 변경
+    @PostMapping("/schoolPasswordUpdate")
+    public RedirectView updateSchoolPassword(HttpSession session, PasswordDTO passwordDTO) {
+        Long userId = (Long) session.getAttribute("userId");
+        log.info("마페컨 유저 비밀번호 : " + passwordDTO);
+        log.info("마페컨 유저 아이디 : " + userId);
+        schoolService.updateSchoolPassword(userId, passwordDTO);
         return new RedirectView("/main/main");
     }
 
@@ -107,10 +118,10 @@ public class MyPageController {
     //    보육원 등록(수정)
     @PostMapping("/register")
     public RedirectView register(HttpServletRequest request, SchoolDTO schoolDTO) {
-        log.info("================="+schoolDTO);
+        log.info("=================" + schoolDTO);
         HttpSession session = request.getSession();
         Long userId = (Long) session.getAttribute("userId");
-        if(schoolDTO.getFiles() != null){
+        if (schoolDTO.getFiles() != null) {
             fileService.removeSchoolImg(userId);
             fileService.register(userId, schoolDTO.getFiles());
         }
@@ -150,12 +161,13 @@ public class MyPageController {
     public void talent(Search search) {
         ;
     }
+
     //회원 탈퇴
     @PostMapping("/deleteUser")
     public RedirectView deleteAndSave(HttpServletRequest request, @RequestBody String reason) {
 
         HttpSession session = request.getSession();
-        Long userId = (Long) session.getAttribute("userId");
+        Long userId = (Long) session.getAttribute("userId"); //<=========================세션 userId
         String type = (String) session.getAttribute("type");
         WithdrawalDTO withdrawalDTO = new WithdrawalDTO();
 
@@ -165,14 +177,14 @@ public class MyPageController {
         withdrawalDTO.setWithdrawalUserType("개인");
 
         //user서비스에서 type people,school확인하려구 만든거
-        if(type.equals("people")){
+        if (type.equals("people")) {
             withdrawalDTO.setWithdrawalUserType("일반");
-        }else if(type.equals("school")){
+        } else if (type.equals("school")) {
             withdrawalDTO.setWithdrawalUserType("보육원");
         }
 
         withdrawalService.insertReason(withdrawalDTO);
-        userService.saveReasonAnddeleteUserID(userId);
+        userService.saveReasonAnddeleteUserID(userId); //<=========================세션 userId 넣어야됩니다.
 
         session.removeAttribute("userId");
         return new RedirectView("/main/main");

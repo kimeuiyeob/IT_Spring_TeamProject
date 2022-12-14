@@ -16,7 +16,7 @@ let count = 0;
 planDates.push({ "planDay": '2022년 11월 2일' });
 planDates.push({ "planDay": '2022년 11월 5일' });
 planDates.push({ "planDay": '2022년 11월 15일' });
-planDates.push({ "planDay": '2022년 12월 25일' });
+// planDates.push({ "planDay": '2022년 12월 25일' });
 
 createCallender();
 

@@ -319,7 +319,7 @@ function getList(schoolResp) {
         text += `<label class="card-body-title-user-checkbox">`
         text += `<div class="check-img"></div>`
         text += `<input class="notice-checked" type="checkbox" name="check">`
-        text += `<input type="hidden" value="` + school.userId + `"name ="check2" class="userId">`
+        text += `<input type="hidden" value="` + school.userId + `" name ="check2" class="userId">`
         text += `<input type="hidden" name="hiddenValue" id="hiddenValue" value=""/>`
         text += `</label>`
         text += `</th>`

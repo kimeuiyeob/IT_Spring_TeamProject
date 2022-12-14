@@ -2,28 +2,16 @@ package com.app.milestone.repository;
 
 import com.app.milestone.domain.PeopleDTO;
 import com.app.milestone.domain.QPeopleDTO;
-import com.app.milestone.domain.Search;
-import com.app.milestone.entity.People;
-import com.app.milestone.entity.QTalent;
-import com.app.milestone.entity.QUser;
 import com.querydsl.core.BooleanBuilder;
-import com.querydsl.core.Tuple;
-import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
-import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static com.app.milestone.entity.QMoney.*;
-import static com.app.milestone.entity.QPeople.*;
-import static com.app.milestone.entity.QSchool.school;
-import static com.app.milestone.entity.QService.*;
-import static com.app.milestone.entity.QTalent.*;
+import static com.app.milestone.entity.QPeople.people;
 
 @Repository
 @RequiredArgsConstructor
@@ -33,7 +21,7 @@ public class PeopleCustomRepositoryImpl implements PeopleCustomRepository {
 
     // 개인 한 명정보 조회
     @Override
-    public PeopleDTO findInfoById(Long userId){
+    public PeopleDTO findInfoById(Long userId) {
         return jpaQueryFactory.select(new QPeopleDTO(
                 people.userId,
                 people.peopleNickname,
@@ -57,14 +45,14 @@ public class PeopleCustomRepositoryImpl implements PeopleCustomRepository {
         return jpaQueryFactory.select(people.count())
                 .from(people)
                 .where(
-                    userNameAndNicknameContaining(keyword)
+                        userNameAndNicknameContaining(keyword)
                 )
                 .orderBy(people.createdDate.asc())
                 .fetchOne();
     }
 
     @Override
-    public List<PeopleDTO> findPeopleSearch(Pageable pageable, String keyword){
+    public List<PeopleDTO> findPeopleSearch(Pageable pageable, String keyword) {
         return jpaQueryFactory.select(new QPeopleDTO(
                 people.userId,
                 people.peopleNickname,
@@ -76,7 +64,7 @@ public class PeopleCustomRepositoryImpl implements PeopleCustomRepository {
                 people.createdDate
         )).from(people)
                 .where(
-                    userNameAndNicknameContaining(keyword)
+                        userNameAndNicknameContaining(keyword)
                 )
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
@@ -85,7 +73,7 @@ public class PeopleCustomRepositoryImpl implements PeopleCustomRepository {
     }
 
     @Override
-    public List<PeopleDTO> findPeopleSearchAsc(Pageable pageable, String keyword){
+    public List<PeopleDTO> findPeopleSearchAsc(Pageable pageable, String keyword) {
         return jpaQueryFactory.select(new QPeopleDTO(
                 people.userId,
                 people.peopleNickname,
@@ -97,7 +85,7 @@ public class PeopleCustomRepositoryImpl implements PeopleCustomRepository {
                 people.createdDate
         )).from(people)
                 .where(
-                    userNameAndNicknameContaining(keyword)
+                        userNameAndNicknameContaining(keyword)
                 )
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
@@ -111,7 +99,7 @@ public class PeopleCustomRepositoryImpl implements PeopleCustomRepository {
             return null;
         }
         BooleanBuilder booleanBuilder = new BooleanBuilder();
-        if (keyword!=null) {
+        if (keyword != null) {
             booleanBuilder.or(people.userName.contains(keyword));
             booleanBuilder.or(people.peopleNickname.contains(keyword));
         }

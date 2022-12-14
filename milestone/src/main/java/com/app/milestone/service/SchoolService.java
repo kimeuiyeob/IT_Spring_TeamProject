@@ -1,13 +1,14 @@
 package com.app.milestone.service;
 
-import com.app.milestone.domain.*;
+import com.app.milestone.domain.FileDTO;
+import com.app.milestone.domain.PasswordDTO;
+import com.app.milestone.domain.SchoolDTO;
+import com.app.milestone.domain.Search;
 import com.app.milestone.entity.School;
-import com.app.milestone.entity.Talent;
 import com.app.milestone.repository.FileRepository;
 import com.app.milestone.repository.MoneyRepository;
 import com.app.milestone.repository.PeopleRepository;
 import com.app.milestone.repository.SchoolRepository;
-import com.querydsl.core.Tuple;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -160,5 +161,13 @@ public class SchoolService {
     //   재능기부 보육원 로그인 => 신청하기 school 아이디 저장
     public School selectSchoolId(Long userId) {
         return schoolRepository.findById(userId).get();
+    //  비밀번호 수정
+    @Transactional
+    public void updateSchoolPassword(Long userId, PasswordDTO passwordDTO) {
+        String changePassword = Base64.getEncoder().encodeToString(passwordDTO.getChangePassword().getBytes());
+        passwordDTO.setChangePassword(changePassword);
+        log.info("피플 서비스 유저 비밀번호 : " + changePassword);
+        log.info("피플 서비스 유저 아이디 : " + userId);
+        schoolRepository.findById(userId).get().updatePassword(passwordDTO);
     }
 }
