@@ -14,9 +14,7 @@ $(".listSection").on('click', ".items-cancel" ,function () {
     cancelSchedule = $(this).parent();
     $modalWrap.show();
     body.css('overflow', 'hidden');
-    console.log($('input:hidden[name=donationId]').val());
     console.log($(this).siblings('.donationId').val());
-    fnGetdata()
 });
 
 
