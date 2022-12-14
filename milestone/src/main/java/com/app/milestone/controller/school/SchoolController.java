@@ -1,11 +1,9 @@
 package com.app.milestone.controller.school;
 
-import com.app.milestone.domain.MoneyDTO;
-import com.app.milestone.domain.PeopleDTO;
-import com.app.milestone.domain.SchoolDTO;
-import com.app.milestone.domain.Search;
+import com.app.milestone.domain.*;
 import com.app.milestone.entity.People;
 import com.app.milestone.entity.User;
+import com.app.milestone.service.FileService;
 import com.app.milestone.service.PeopleService;
 import com.app.milestone.service.SchoolService;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +27,7 @@ import java.util.List;
 public class SchoolController {
     private final SchoolService schoolService;
     private final PeopleService peopleService;
+    private final FileService fileService;
 
     //    보육원 목록
     @GetMapping("/list")
@@ -46,6 +45,7 @@ public class SchoolController {
     //    보육원 상세
     @GetMapping("/read")
     public void read(HttpServletRequest request, Long userId, Model model) {
+        UserDTO userDTO = new UserDTO();
         HttpSession session = request.getSession();
         Long sessionId = (Long) session.getAttribute("userId");
         PeopleDTO peopleDTO = null;
@@ -56,8 +56,21 @@ public class SchoolController {
                 schoolDTO = schoolService.schoolInfo(sessionId);
             }
         }
-        model.addAttribute("peopleDTO", peopleDTO);
+        if (peopleDTO != null) {
+            userDTO.setPeopleNickname(peopleDTO.getPeopleNickname());
+        }
+        if (schoolDTO != null) {
+            userDTO.setSchoolName(schoolDTO.getSchoolName());
+        }
+//        log.info("nickName======="+ peopleDTO.getPeopleNickname());
+//        log.info("schoolName======="+ schoolDTO.getSchoolName());
+//        FileDTO fileDTO = fileService.showProfile(sessionId);
+        if(sessionId != null){
+            userDTO.setFile(fileService.showProfile(sessionId));
+        }
+        schoolDTO = schoolService.schoolInfo(userId);
         model.addAttribute("schoolDTO", schoolDTO);
+        model.addAttribute("userDTO", userDTO);
         model.addAttribute("userId", userId);
     }
 

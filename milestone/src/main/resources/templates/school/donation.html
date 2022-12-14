@@ -128,6 +128,7 @@
         $('#bank').html(schoolDTO.schoolBank)
         $('#teacher').html(schoolDTO.schoolTeachers.toLocaleString('ko-KR'))
         $('#children').html(schoolDTO.schoolKids.toLocaleString('ko-KR'))
+        $('.schoolImg').children().attr("src", `/file/display?fileName=` + schoolDTO.files[0].filePath + `/` + schoolDTO.files[0].fileUuid + `_` + schoolDTO.files[0].fileName)
     }
 
     getSchoolInfo($('#userId').val(), schoolInfo)

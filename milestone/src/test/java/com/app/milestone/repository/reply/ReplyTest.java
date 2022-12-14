@@ -47,7 +47,7 @@ public class ReplyTest {
             ReplyDTO replyDTO = new ReplyDTO();
             replyDTO.setReplyContent(content+i);
             replyDTO.setSchoolUserId(schoolId);
-            replyDTO.setPeopleUserId(peopleId+i);
+            replyDTO.setUserId(peopleId+i);
             Reply reply = replyRepository.save(replyDTO.toEntity());
             reply.changeSchool(school);
             reply.changePeople(people);
@@ -59,7 +59,7 @@ public class ReplyTest {
     @Test
     public void findAllTest() {
         Pageable pageable = PageRequest.of(0,10);
-        replyRepository.findBySchoolId(pageable,1L).forEach(o -> log.info("보육원 : " + o.getSchoolUserId() + " 유저 : " + o.getPeopleUserId() + " 댓글 : " + o.getReplyContent()));
+        replyRepository.findBySchoolId(pageable,1L).forEach(o -> log.info("보육원 : " + o.getSchoolUserId() + " 유저 : " + o.getUserId() + " 댓글 : " + o.getReplyContent()));
     }
 
     //    수정

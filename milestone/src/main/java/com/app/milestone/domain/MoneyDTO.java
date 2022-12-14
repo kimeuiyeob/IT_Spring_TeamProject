@@ -25,8 +25,10 @@ public class MoneyDTO {
     private String schoolName;
     private String peopleNickname;
     private Long userId;
+    private Long giverId;
     private Long moneyCash;
     private LocalDateTime createdDate;
+    private FileDTO file;
 
     public Money toEntity() {
         return Money.builder()
@@ -35,10 +37,11 @@ public class MoneyDTO {
     }
 
     @QueryProjection
-    public MoneyDTO(String schoolName, String peopleNickname, Long userId, Long moneyCash, LocalDateTime createdDate) {
+    public MoneyDTO(String schoolName, String peopleNickname, Long userId,Long giverId, Long moneyCash, LocalDateTime createdDate) {
         this.schoolName = schoolName;
         this.peopleNickname = peopleNickname;
         this.userId = userId;
+        this.giverId = giverId;
         this.moneyCash = moneyCash;
         this.createdDate = createdDate;
     }

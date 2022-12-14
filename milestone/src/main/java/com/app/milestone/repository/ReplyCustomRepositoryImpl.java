@@ -22,10 +22,9 @@ public class ReplyCustomRepositoryImpl implements ReplyCustomRepository {
         return jpaQueryFactory.select(new QReplyDTO(
                 reply.replyId,
                 reply.replyContent,
-                reply.people.peopleNickname,
                 reply.createdDate,
                 reply.school.userId,
-                reply.people.userId
+                reply.user.userId
         )).from(reply)
                 .where(reply.school.userId.eq(userId))
                 .offset(pageable.getOffset())

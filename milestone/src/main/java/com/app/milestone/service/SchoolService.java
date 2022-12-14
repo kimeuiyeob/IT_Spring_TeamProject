@@ -70,7 +70,10 @@ public class SchoolService {
 
     //    보육원 정보(하나)
     public SchoolDTO schoolInfo(Long userId) {
-        return schoolRepository.findByUserId(userId);
+        SchoolDTO schoolDTO = schoolRepository.findByUserId(userId);
+        List<FileDTO> files = fileRepository.findByUserId(userId);
+        schoolDTO.setFiles(files);
+        return schoolDTO;
     }
 
     //    보육원 목록(보육원 목록)(Page버전)
