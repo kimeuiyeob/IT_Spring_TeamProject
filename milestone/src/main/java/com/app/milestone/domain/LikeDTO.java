@@ -20,14 +20,16 @@ public class LikeDTO {
     private String schoolName;
     private String schoolContent;
     private String schoolAddress;
+    private String schoolQr;
 
     @QueryProjection
-    public LikeDTO(Long likeId, Long schoolId, Long peopleId, String schoolName, String schoolContent, String schoolAddress) {
+    public LikeDTO(Long likeId, Long schoolId, Long peopleId, String schoolName, String schoolContent, String schoolAddress, String schoolQr) {
         this.likeId = likeId;
         this.schoolId = schoolId;
         this.peopleId = peopleId;
         this.schoolName = schoolName;
         this.schoolContent = schoolContent;
         this.schoolAddress = schoolAddress;
+        this.schoolQr = schoolQr;
     }
 }

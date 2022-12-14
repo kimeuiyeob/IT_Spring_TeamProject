@@ -66,7 +66,8 @@ public class LikeCustomRepositoryImpl implements LikeCustomRepository {
                 like.people.userId,
                 like.school.schoolName,
                 like.school.introduce.schoolContent,
-                like.school.address.schoolAddress
+                like.school.address.schoolAddress,
+                like.school.schoolQR
         ))
                 .from(like,people,school)
                 .where(
@@ -89,7 +90,8 @@ public class LikeCustomRepositoryImpl implements LikeCustomRepository {
                 like.people.userId,
                 like.school.schoolName,
                 like.school.introduce.schoolContent,
-                like.school.address.schoolAddress
+                like.school.address.schoolAddress,
+                like.school.schoolQR
         ))
                 .from(like,people,school)
                 .where(

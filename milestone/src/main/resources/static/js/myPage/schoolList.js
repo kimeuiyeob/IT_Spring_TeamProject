@@ -140,7 +140,7 @@ function getList(likeResp) {
         text += `</span>`
         text += `<div class="rightBox">`
         text += `<div class="QR">`
-        text += `<img src="https://ko.qr-code-generator.com/wp-content/themes/qr/new_structure/markets/basic_market/generator/dist/generator/assets/images/websiteQRCode_noFrame.png">`
+        text += `<img src="`+likes.schoolQr+`">`
         text += `</div>`
         text += `<a class="donationButton" href="`+likes.schoolId+`"><span>보육원 보러가기</span></a>`
         text += `</div>`

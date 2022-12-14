@@ -321,22 +321,16 @@ globalThis.page = 0;
 let $pagingBtnFlex = $('.paging-number-flex');
 let pageInfo;
 
-/* 처음 뿌리기 */
-peopleListShow();
 
-function peopleListShow(){
-    $("#check-user-type").val('일반');
-
-    getPeopleList1({
-        keyword: $search.text(),
-        page: globalThis.page
-    }, getPeopleList)
-}
 
 function getPeopleList(peopleResp) {
+
+    // console.log("이 안에 file이 있는지 ? : "+JSON.stringify(peopleResp))
+
     let text = "";
     pageInfo = peopleResp.arPeopleDTO;
     peopleResp.arPeopleDTO.content.forEach(person => {
+
         text += `<tr>`
         text += `<th class="card-body-title-checkbox-padding" style="width: 3%; margin-top: 29px;padding-top: 0; padding-bottom: 31px;">`
         text += `<label class="card-body-title-user-checkbox">`
@@ -348,7 +342,17 @@ function getPeopleList(peopleResp) {
         text += `</th>`
         text += `<th class="card-body-title-padding" style="width: 22%;">`
         text += `<div class="donater-info" style="height: 50px">`
-        text += `<div class="donater-info-img1"></div>`
+
+
+        if(person.fileName==null){
+            console.log("디폴트이미지 넣어줌")
+            text += `<img class="donater-info-img1" src="/imgs/myPage/normalProfile.png">`
+        }else{
+            console.log("불러온 이미지 넣어줌")
+            text += `<img class="donater-info-img1" src="/file/display?fileName=`+ person.filePath + `/` + person.fileUuid + `_` + person.fileName +`">`
+        }
+
+
         text += `<div class="donater-info-text">`
         text += `<div class="donater-name">`+person.userName+`</div>`
         text += `<div>`+ person.userEmail +`</div>`
