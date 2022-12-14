@@ -2,16 +2,22 @@ package com.app.milestone.repository;
 
 import com.app.milestone.domain.PeopleDTO;
 import com.app.milestone.domain.QPeopleDTO;
+import com.app.milestone.entity.QFile;
 import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
+import static com.app.milestone.entity.QFile.file;
+import static com.app.milestone.entity.QLike.like;
 import static com.app.milestone.entity.QPeople.people;
+import static com.app.milestone.entity.QSchool.school;
 
 @Repository
 @RequiredArgsConstructor
@@ -30,9 +36,15 @@ public class PeopleCustomRepositoryImpl implements PeopleCustomRepository {
                 people.userPassword,
                 people.userPhoneNumber,
                 people.donationCount,
-                people.createdDate
-        )).from(people)
-                .where(people.userId.eq(userId))
+                people.createdDate,
+                file.fileName,
+                file.filePath,
+                file.fileUuid
+        )).from(people,file)
+                .where(
+                        people.userId.eq(userId),
+                        people.userId.eq(file.user.userId)
+                )
                 .fetchOne();
 
     }
@@ -61,8 +73,13 @@ public class PeopleCustomRepositoryImpl implements PeopleCustomRepository {
                 people.userPassword,
                 people.userPhoneNumber,
                 people.donationCount,
-                people.createdDate
+                people.createdDate,
+                file.fileName,
+                file.filePath,
+                file.fileUuid
         )).from(people)
+                .leftJoin(file)
+                .on(people.userId.eq(file.user.userId))
                 .where(
                         userNameAndNicknameContaining(keyword)
                 )
@@ -82,9 +99,14 @@ public class PeopleCustomRepositoryImpl implements PeopleCustomRepository {
                 people.userPassword,
                 people.userPhoneNumber,
                 people.donationCount,
-                people.createdDate
-        )).from(people)
-                .where(
+                people.createdDate,
+                file.fileName,
+                file.filePath,
+                file.fileUuid
+            )).from(people)
+              .leftJoin(file)
+              .on(people.userId.eq(file.user.userId))
+              .where(
                         userNameAndNicknameContaining(keyword)
                 )
                 .offset(pageable.getOffset())
@@ -105,4 +127,5 @@ public class PeopleCustomRepositoryImpl implements PeopleCustomRepository {
         }
         return booleanBuilder;
     }
+
 }

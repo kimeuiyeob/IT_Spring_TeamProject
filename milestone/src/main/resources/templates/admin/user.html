@@ -469,5 +469,25 @@
 <script src="/js/admin/user.js"></script>
 
 <script th:inline="javascript">
+    let fileDTO = [[${fileDTO}]];
+    let arrayFile = [];
+    let fileType = "profile";
+
+
+
+    peopleListShow();
+
+
+    /* 사람 목록 */
+    function peopleListShow(){
+        $("#check-user-type").val('일반');
+
+        getPeopleList1({
+            keyword: $search.text(),
+            page: globalThis.page
+        }, getPeopleList)
+    }
+
+
 </script>
 </html>
