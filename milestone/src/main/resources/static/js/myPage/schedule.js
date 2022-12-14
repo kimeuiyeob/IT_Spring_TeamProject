@@ -9,14 +9,12 @@ modalCancel.on('click', function () {
     $modalWrap.hide();
     body.css('overflow', 'auto');
     // cancelSchedule.remove();
-    // fnGetdata()
+    fnGetdata();
 })
 
 function fnGetdata() {
 
     $('input:hidden[name=donationId]').each(function () { // 체크된 체크박스의 value 값을 가지고 온다.
-        delectArray.push($(this).siblings('.donationId').val());
-
         // 삭제할 회원번호들
         // console.log('hidden : '+$('#hiddenValue').val());
         // console.log('chkArray : '+chkArray[0]);

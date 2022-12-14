@@ -161,6 +161,7 @@ public class SchoolService {
     //   재능기부 보육원 로그인 => 신청하기 school 아이디 저장
     public School selectSchoolId(Long userId) {
         return schoolRepository.findById(userId).get();
+    }
     //  비밀번호 수정
     @Transactional
     public void updateSchoolPassword(Long userId, PasswordDTO passwordDTO) {
