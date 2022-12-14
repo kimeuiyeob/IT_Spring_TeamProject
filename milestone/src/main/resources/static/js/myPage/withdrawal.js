@@ -56,7 +56,6 @@ $reasonRadio.on('click', function () {
 $withdrawalBtn.on('click', function () {
     deleteAndSave(reason);
 })
-
 /*====================================================================*/
 function deleteAndSave(reason) {
     $.ajax({

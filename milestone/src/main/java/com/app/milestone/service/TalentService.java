@@ -103,6 +103,11 @@ public class TalentService {
 
         return talents;
     }
+    /*====================================================================================================================*/
+    //  재능기부 신청하기 -> 해당 도네이션 아이디로
+    public TalentDTO findByDonationId(Long donationId) {
+        return talentRepository.findByDonationId(donationId).get(0);
+    }
 
     /*========================================================================*/
     //  재능기부 삭제
@@ -133,4 +138,8 @@ public class TalentService {
         talentRepository.findById(talentDTO.getDonationId()).get().update(talentDTO);
     }
 
+    //   재능기부 보육원 로그인 => 신청하기
+    public Talent selectDonation(TalentDTO talentDTO) {
+       return talentRepository.findById(talentDTO.getDonationId()).get();
+    }
 }

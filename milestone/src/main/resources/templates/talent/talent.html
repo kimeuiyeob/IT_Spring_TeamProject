@@ -29,8 +29,17 @@
                 <h3 style="font-size: 28px; margin-bottom: 20px; cursor:default;">여러분의 재능을 나눠주세요.</h3>
             </div>
             <div style="padding-top: 20px" id="pencil">
-                <div class="talentButton">
-                    <span class="talentButton1">글 작성하기</span>
+                <div class="talentButton" id="talentButton123" style="display: none">
+
+<!--                    <script language="JavaScript">-->
+<!--                        console.log("이거되는거 맞아?")-->
+<!--                        if(sessionId === "people") {-->
+<!--                            $("#talentButton123").show();-->
+<!--                        }-->
+<!--                    </script>-->
+
+                    <span class="talentButton1" >글 작성하기</span>
+
                 </div>
             </div>
         </div>
@@ -130,11 +139,13 @@
     </div>
 
     <!--==========================================재능 기부 목록===========================================-->
-
     <div class="AllTalentBox" style=" display: flex; justify-content: center">
         <div class="talentBoxAll" id="all" style="display: flex; justify-content: space-between;">
         </div>
     </div>
+
+    <input type="hidden" th:value="${session.type}" id="sessionId"><!--===================================세션값 저장==========================-->
+
 
     <!-- ============================================================================================= -->
 
@@ -197,9 +208,7 @@
 
                                 <div class="margin-bottom-8 flexBetween" style="margin-bottom: 0px;">
                                     <div class="inputTitle">카테고리</div>
-                                    <div id="writePlease"
-                                         style="display: none; color :rgb(255, 64, 43); margin-top: -15px;">내용을 전부
-                                        작성해주세요.
+                                    <div id="writePlease" style="display: none; color :rgb(255, 64, 43); margin-top: -15px;">내용을 전부 작성해주세요.
                                     </div>
                                 </div>
                                 <div class="margin-bottom-8 relative" style="width: 350px;">
@@ -335,6 +344,29 @@
     let pageInfo;
     show();
 
+    let sessionId = $("#sessionId").val();
+
+    console.log("세션아이디값 잘갖고왔니?" + sessionId);
+
+    window.onload = function () {
+
+        $("#all").css({"display": "flex"})
+        $("#pseudo").css({"transform": "translateX(0%)"})
+
+        $(this).css({"color": "rgb(48, 52, 65)", "font-weight": "700"})
+
+        $(".education").css({"font-weight": "normal", "color": "rgb(154, 155, 167)"})
+        $(".exercise").css({"font-weight": "normal", "color": "rgb(154, 155, 167)"})
+        $(".music").css({"font-weight": "normal", "color": "rgb(154, 155, 167)"})
+        $(".art").css({"font-weight": "normal", "color": "rgb(154, 155, 167)"})
+        $(".program").css({"font-weight": "normal", "color": "rgb(154, 155, 167)"})
+
+        //맨처음 들어갔을때 세션아이디로 글작성 버튼 생성하거나 지우거나
+        if(sessionId === "people") {
+            $("#talentButton123").show();
+        }
+    }
+
     // 처음 목록 가져오기
     const $checkSeoul = $(".checkSeoul"); //서울
     const $checkKyungki = $(".checkKyungki"); //경기도
@@ -404,6 +436,7 @@
     function getList(talentResp) {
         let text = "";
         pageInfo = talentResp.arTalentDTO;
+
         talentResp.arTalentDTO.content.forEach(talent => {
 
             text += `<div style="padding-bottom:20px">`

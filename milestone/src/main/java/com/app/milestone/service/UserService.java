@@ -53,6 +53,7 @@ public class UserService {
         return matches;
     }
 
+    //로그인시 세션값 스쿨인지 피플인지 구분
     public boolean typeCheck(Long userId){
         Optional<People> people = peopleRepository.findById(userId);
         if(people.isPresent()){
@@ -64,6 +65,11 @@ public class UserService {
     //마이페이지 회원탈퇴시 회원삭제
     public void saveReasonAnddeleteUserID(Long userId) {
         userRepository.deleteById(userId);
+    }
+
+    //세션아이디로 스쿨인지,피플인지 타입검사
+    public void isPeopleorSchool(Long userId) {
+//        peopleRepository.findById(userId)
     }
 
 }

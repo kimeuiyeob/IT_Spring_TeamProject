@@ -155,7 +155,7 @@ public class MyPageController {
     public RedirectView deleteAndSave(HttpServletRequest request, @RequestBody String reason) {
 
         HttpSession session = request.getSession();
-        Long userId = (Long) session.getAttribute("userId"); //<=========================세션 userId
+        Long userId = (Long) session.getAttribute("userId");
         String type = (String) session.getAttribute("type");
         WithdrawalDTO withdrawalDTO = new WithdrawalDTO();
 
@@ -172,7 +172,7 @@ public class MyPageController {
         }
 
         withdrawalService.insertReason(withdrawalDTO);
-        userService.saveReasonAnddeleteUserID(userId); //<=========================세션 userId 넣어야됩니다.
+        userService.saveReasonAnddeleteUserID(userId);
 
         session.removeAttribute("userId");
         return new RedirectView("/main/main");

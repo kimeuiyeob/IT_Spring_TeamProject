@@ -1,5 +1,6 @@
 package com.app.milestone.domain;
 
+import com.app.milestone.entity.School;
 import com.app.milestone.entity.Talent;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.querydsl.core.annotations.QueryProjection;
