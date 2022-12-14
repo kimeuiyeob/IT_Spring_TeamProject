@@ -60,7 +60,7 @@ public class SchoolRestController {
 
     //    ================댓글=================
 
-    //    보육원 댓글
+    //    보육원 댓글 보기
     @GetMapping(value = {"/reply/{page}/{userId}"})
     public Page<ReplyDTO> reply(@PathVariable("page") Integer page, @PathVariable("userId") Long userId) {
         return replyService.showAll(page, userId);

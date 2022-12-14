@@ -63,7 +63,11 @@ public class MoneyService {
 
     //    최근 기부
     public List<MoneyDTO> recentDonationList(Long userId) {
-        return moneyRepository.findByCreateDateByUserId(userId);
+        List<MoneyDTO> list = moneyRepository.findByCreateDateByUserId(userId);
+        for (MoneyDTO moneyDTO : list){
+            moneyDTO.setFile(fileRepository.findProfileByUserId(moneyDTO.getGiverId()));
+        }
+        return list;
     }
 
     //    결제

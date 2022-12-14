@@ -32,6 +32,7 @@ public class MoneyCustomRepositoryImpl implements MoneyCustomRepository {
                 money.school.schoolName,
                 money.people.peopleNickname,
                 money.school.userId,
+                money.people.userId,
                 money.moneyCash,
                 money.createdDate
         )).from(money)
@@ -134,6 +135,7 @@ public class MoneyCustomRepositoryImpl implements MoneyCustomRepository {
         return jpaQueryFactory.select(new QMoneyDTO(
                 money.school.schoolName,
                 money.people.peopleNickname,
+                money.school.userId,
                 money.people.userId,
                 money.moneyCash,
                 money.createdDate
@@ -153,6 +155,7 @@ public class MoneyCustomRepositoryImpl implements MoneyCustomRepository {
         return jpaQueryFactory.select(new QMoneyDTO(
                 money.school.schoolName,
                 money.people.peopleNickname,
+                money.school.userId,
                 money.people.userId,
                 money.moneyCash,
                 money.createdDate
@@ -172,6 +175,7 @@ public class MoneyCustomRepositoryImpl implements MoneyCustomRepository {
         return jpaQueryFactory.select(new QMoneyDTO(
                 money.school.schoolName,
                 money.people.peopleNickname,
+                money.school.userId,
                 money.people.userId,
                 money.moneyCash,
                 money.createdDate
@@ -191,6 +195,7 @@ public class MoneyCustomRepositoryImpl implements MoneyCustomRepository {
         return jpaQueryFactory.select(new QMoneyDTO(
                 money.school.schoolName,
                 money.people.peopleNickname,
+                money.school.userId,
                 money.people.userId,
                 money.moneyCash,
                 money.createdDate

@@ -19,9 +19,11 @@ public class ReplyDTO {
     private Long replyId;
     private String replyContent;
     private Long schoolUserId;
-    private Long peopleUserId;
+    private Long userId;
     private String peopleNickName;
+    private String schoolName;
     private LocalDateTime createdDate;
+    private FileDTO file;
 
     public Reply toEntity() {
         return Reply.builder()
@@ -30,12 +32,11 @@ public class ReplyDTO {
     }
 
     @QueryProjection
-    public ReplyDTO(Long replyId, String replyContent,String peopleNickName, LocalDateTime createdDate, Long schoolUserId, Long peopleUserId) {
+    public ReplyDTO(Long replyId, String replyContent, LocalDateTime createdDate, Long schoolUserId, Long userId) {
         this.replyId = replyId;
         this.replyContent = replyContent;
-        this.peopleNickName = peopleNickName;
         this.createdDate = createdDate;
         this.schoolUserId = schoolUserId;
-        this.peopleUserId = peopleUserId;
+        this.userId = userId;
     }
 }

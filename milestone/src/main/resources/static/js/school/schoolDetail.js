@@ -2,7 +2,7 @@ let check2 = false;
 
 /* 찜하기 버튼 마우스 올렸을 때*/
 $("button.zzimButton").mouseover(function () {
-    if(!sessionId){
+    if(sessionType != "people"){
         return;
     }
     $(this).css({"background-color": "rgb(102 102 102 / 29%)"})
@@ -19,19 +19,19 @@ $(".redHeart").css({"display": "none"})
 
 /* 찜하기 버튼 클릭 */
 $(".zzimButton").click(function () {
-    if(!sessionId){
+    if(sessionType != "people"){
         return;
     }
     if (!check2) {
         $(this).children(".redHeart").css({"display": "inline"})
         $(this).children(".emptyHeart").css({"display": "none"})
         check2 = true;
-        likeSchool($('.userId').val(),showLikeCount)
+        likeSchool(schoolId,showLikeCount)
     } else {
         $(this).children(".redHeart").css({"display": "none"})
         $(this).children(".emptyHeart").css({"display": "inline"})
         check2 = false;
-        cancelLikeSchool($('.userId').val(),showLikeCount)
+        cancelLikeSchool(schoolId,showLikeCount)
     }
 })
 
@@ -344,9 +344,9 @@ function getLikeSchoolList(callback, error){
 }
 
 //좋아요 개수
-function getLikeCount(userId, callback, error){
+function getLikeCount(param, callback, error){
     $.ajax({
-        url:"/schoolrest/likeCount/" + userId,
+        url:"/schoolrest/likeCount/" + param,
         type: "get",
         success:function(likeCount){
             callback(likeCount);
@@ -360,9 +360,9 @@ function getLikeCount(userId, callback, error){
 }
 
 //좋아요 누름
-function likeSchool(userId, callback, error){
+function likeSchool(param, callback, error){
     $.ajax({
-        url:"/schoolrest/like/" + userId,
+        url:"/schoolrest/like/" + param,
         type: "get",
         success:function(likeCount){
             callback(likeCount);
@@ -376,9 +376,9 @@ function likeSchool(userId, callback, error){
 }
 
 //좋아요 취소
-function cancelLikeSchool(userId, callback, error){
+function cancelLikeSchool(param, callback, error){
     $.ajax({
-        url:"/schoolrest/cancel/" + userId,
+        url:"/schoolrest/cancel/" + param,
         type: "get",
         success:function(likeCount){
             callback(likeCount);
@@ -400,7 +400,6 @@ function serviceVisitDate (serviceDTO, callback, error){
         contentType: "application/json; charset=utf-8",
         success: function(){
             alert("신청 완료!!")
-            console.log("들어왔니?")
         },
         error: function (xhr, status, err) {
             if (error) {
@@ -412,5 +411,5 @@ function serviceVisitDate (serviceDTO, callback, error){
 
 //기부하기로 이동
 $('#donateMoney').on('click',function(){
-    location.href = "/school/donation?userId=" + $('.userId').val();
+    location.href = "/school/donation?userId=" + schoolId;
 })

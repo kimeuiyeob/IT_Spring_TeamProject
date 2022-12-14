@@ -109,7 +109,9 @@ public class MyPageController {
     public String schoolInfo(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
         Long userId = (Long) session.getAttribute("userId");
-        model.addAttribute("fileDTO", fileService.showProfile(userId));
+        if(userId != null){
+            model.addAttribute("fileDTO", fileService.showProfile(userId));
+        }
         model.addAttribute("schoolDTO", schoolService.schoolInfo(userId));
         return "/myPage/myPage_schoolInfo";
     }

@@ -43,30 +43,13 @@
             </section>
 
             <!-- 이미지 -->
-            <section id="imgsSection">
-
+            <section id="imgsSection" th:object="${schoolDTO}">
                 <!-- 메인이미지 -->
                 <div class="mainImage">
-                    <img id="mainImage" src="https://d2v80xjmx68n4w.cloudfront.net/gigs/QlD1o1641276709.jpg">
+                    <img id="mainImage" src="/imgs/school/defaultSchoolImg.png">
                 </div>
-
-
                 <!-- 작은 이미지들 보이는 div 1-->
                 <div id="list">
-                    <!-- 좌 버튼 -->
-                    <!--                    <button aria-label="carousel-arrow-button" data-testid="carousel-arrow" direction="prev"
-                                                class="css-jrc4xu emgxp40 prevButton" style="left:1%">
-                                                <span role="img" rotate="0" data-testid="left-icon" class="css-aah4od e181xm9y1">
-                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
-                                                         focusable="false" preserveAspectRatio="xMidYMid meet" class="css-7kp13n e181xm9y0"
-                                                         style="padding-top: 3px;">
-                                                        <path xmlns="http://www.w3.org/2000/svg"
-                                                              d="M9.41421356,12 L15.7071068,5.70710678 C16.0976311,5.31658249 16.0976311,4.68341751 15.7071068,4.29289322 C15.3165825,3.90236893 14.6834175,3.90236893 14.2928932,4.29289322 L7.29289322,11.2928932 C6.90236893,11.6834175 6.90236893,12.3165825 7.29289322,12.7071068 L14.2928932,19.7071068 C14.6834175,20.0976311 15.3165825,20.0976311 15.7071068,19.7071068 C16.0976311,19.3165825 16.0976311,18.6834175 15.7071068,18.2928932 L9.41421356,12 Z">
-                                                        </path>
-                                                    </svg>
-                                                </span>
-                                        </button>-->
-
                     <!-- 작은 이미지들 보이는 div 2-->
                     <div class="images">
                         <!-- 긴 div -->
@@ -76,43 +59,23 @@
                                 <!-- 작은 이미지 하나 -->
                                 <div class="miniImage">
                                     <img class="one"
-                                         src="https://d2v80xjmx68n4w.cloudfront.net/gigs/QlD1o1641276709.jpg">
+                                         src="/imgs/school/defaultSchoolImg.png">
                                 </div>
                                 <div class="miniImage">
                                     <img class="one"
-                                         src="https://d2v80xjmx68n4w.cloudfront.net/gigs/x4YZO1667465133.jpg">
+                                         src="/imgs/school/defaultSchoolImg.png">
                                 </div>
                                 <div class="miniImage">
                                     <img class="one"
-                                         src="https://d2v80xjmx68n4w.cloudfront.net/gigs/QlD1o1641276709.jpg">
+                                         src="/imgs/school/defaultSchoolImg.png">
                                 </div>
                                 <div class="miniImage">
                                     <img class="one"
-                                         src="https://d2v80xjmx68n4w.cloudfront.net/gigs/x4YZO1667465133.jpg">
+                                         src="/imgs/school/defaultSchoolImg.png">
                                 </div>
-                                <!--                                <div class="miniImage">
-                                                                    <img class="one" src="https://d2v80xjmx68n4w.cloudfront.net/gigs/QlD1o1641276709.jpg">
-                                                                </div>
-                                                                <div class="miniImage">
-                                                                    <img class="one" src="https://d2v80xjmx68n4w.cloudfront.net/gigs/x4YZO1667465133.jpg">
-                                                                </div>-->
                             </div>
                         </div>
                     </div>
-                    <!-- 우버튼 -->
-                    <!--                    <button aria-label="carousel-arrow-button" data-testid="carousel-arrow" direction="next"
-                                                class="css-1ogxzj emgxp40 nextButton" style="right:1%">
-                                                    <span role="img" rotate="0" data-testid="right-icon" class="css-aah4od e181xm9y1">
-                                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"
-                                                             aria-hidden="true" focusable="false" preserveAspectRatio="xMidYMid meet"
-                                                             class="css-7kp13n e181xm9y0" style="padding-top: 3px;">
-                                                            <path xmlns="http://www.w3.org/2000/svg"
-                                                                  d="M9.41421356,12 L15.7071068,5.70710678 C16.0976311,5.31658249 16.0976311,4.68341751 15.7071068,4.29289322 C15.3165825,3.90236893 14.6834175,3.90236893 14.2928932,4.29289322 L7.29289322,11.2928932 C6.90236893,11.6834175 6.90236893,12.3165825 7.29289322,12.7071068 L14.2928932,19.7071068 C14.6834175,20.0976311 15.3165825,20.0976311 15.7071068,19.7071068 C16.0976311,19.3165825 16.0976311,18.6834175 15.7071068,18.2928932 L9.41421356,12 Z"
-                                                                  transform="translate(11.500000, 12.000000) scale(-1, 1) translate(-11.500000, -12.000000) ">
-                                                            </path>
-                                                        </svg>
-                                                    </span>
-                                        </button>-->
                 </div>
             </section>
 
@@ -141,7 +104,7 @@
                 <div class="comment display-none" id="noBorderBottom" style="border-bottom: transparent;">
                     <div class="commentsInfo">
                         <div class="profilePicture">
-                            <img src="/imgs/myPage/normalProfile.png">
+                            <img class = "replyProfile" src="/imgs/myPage/normalProfile.png">
                         </div>
                         <div class="nameAndDate">
                             <div class="nickName">해피123</div>
@@ -257,7 +220,7 @@
 
                         </div>
                     </div>
-                    <div class="display-none">
+                    <div class="display-none donationWrap">
                         <div class="donateDIV">
                             <button class="donate" id="donateMoney">
                                 <span>기부하기</span>
@@ -368,26 +331,53 @@
 <script src="/js/fix/header.js"></script>
 <script th:inline="javascript">
     let nowPage = 0;
-    let modelSchoolDTO = [[${schoolDTO}]]
-    let modelPeopleDTO = [[${peopleDTO}]]
-    //세션에 있다고 생각
-    let sessionId;
+    let schoolDTO = [[${schoolDTO}]]
+    let userDTO = [[${userDTO}]]
+    let sessionType = [[${session.type}]]
+    let sessionId = [[${session.userId}]];
+    let schoolId = $('.userId').val();
 
-    console.log(modelSchoolDTO)
-    console.log(modelPeopleDTO)
-
-    if (modelSchoolDTO || modelPeopleDTO) {
+    if (sessionId) {
         $('.display-none').show();
-        if(modelPeopleDTO){
-            $(".nickName").text(modelPeopleDTO.peopleNickname);
-            sessionId = modelPeopleDTO.userId;
-        }
-        if (modelSchoolDTO) {
-            $(".nickName").text(modelSchoolDTO.schoolName);
-            $('.donate').hide();
-            sessionId = modelPeopleDTO.userId;
-        }
     }
+    if (sessionType == "people") {
+        $(".nickName").text(userDTO.peopleNickname);
+    }
+    if (sessionType == "school") {
+        $(".nickName").text(userDTO.schoolName);
+        $('.donationWrap').hide();
+    }
+    if(userDTO.file){
+        $('.replyProfile').attr("src", `/file/display?fileName=` + userDTO.file.filePath + `/` + userDTO.file.fileUuid + `_` + userDTO.file.fileName)
+    }
+
+    showSchoolImg();
+
+    function showSchoolImg() {
+        let count = 0;
+        schoolDTO.files.forEach(file => {
+            if (!count) {
+                $('#mainImage').attr("src", `/file/display?fileName=` + file.filePath + `/` + file.fileUuid + `_` + file.fileName)
+            } else {
+                $('.one').eq(count-1).attr("src", `/file/display?fileName=` + file.filePath + `/` + file.fileUuid + `_` + file.fileName)
+            }
+            count++;
+        })
+        $('#modalQR').children().attr("src",schoolDTO.schoolQR);
+    }
+
+    // if (modelSchoolDTO || modelPeopleDTO) {
+    //     $('.display-none').show();
+    //     if(modelPeopleDTO){
+    //         $(".nickName").text(modelPeopleDTO.peopleNickname);
+    //         sessionId = modelPeopleDTO.userId;
+    //     }
+    //     if (modelSchoolDTO) {
+    //         $(".nickName").text(modelSchoolDTO.schoolName);
+    //         $('.donate').hide();
+    //         sessionId = modelPeopleDTO.userId;
+    //     }
+    // }
 
     show();
 
@@ -422,13 +412,18 @@
         }
         //
         recentDonations.forEach(school => {
+            console.log(school)
             if (count == 6) return;
             count++;
             text += `<tr">`
             // <!-- 프로필 사진 -->
             text += `<th class="userTr userProfile">`
             text += `<div class="profilePicture">`
-            text += `<img src="/imgs/myPage/normalProfile.png">`
+            if(school.file){
+                text += `<img src="/file/display?fileName=`+ school.file.filePath + `/` + school.file.fileUuid + `_` + school.file.fileName +`">`
+            }else {
+                text += `<img src="/imgs/myPage/normalProfile.png">`
+            }
             text += `</div>`
             text += `</th>`
             text += `<th class="userTr userNickname">` + school.peopleNickname + `</th>`
@@ -458,7 +453,7 @@
     //내가 좋아한 보육원
     function clickLikeBtn(likeSchoolList) {
         likeSchoolList.forEach(id => {
-            if (id == $('.userId').val()) {
+            if (id == schoolId) {
                 $(".redHeart").css({"display": "inline"})
                 $(".emptyHeart").css({"display": "none"})
                 check2 = true;
@@ -484,18 +479,29 @@
         } else {
             $('.more').hide();
         }
+
         replys.content.forEach(reply => {
+            console.log(reply)
             replyText += `<div class="comment">`
             replyText += `<div class="commentsInfo">`
             replyText += `<div class="profilePicture">`
-            replyText += `<img src="/imgs/myPage/normalProfile.png">`
+            if(reply.file){
+                replyText += `<img src="/file/display?fileName=`+ reply.file.filePath + `/` + reply.file.fileUuid + `_` + reply.file.fileName +`">`
+            }else {
+                replyText += `<img src="/imgs/myPage/normalProfile.png">`
+            }
             replyText += `</div>`
             replyText += `<div class="nameAndDate">`
-            replyText += `<div class="nickName">` + reply.peopleNickName + `</div>`
+            if(reply.peopleNickName){
+                replyText += `<div class="nickName">` + reply.peopleNickName + `</div>`
+            }
+            if(reply.schoolName){
+                replyText += `<div class="nickName">` + reply.schoolName + `</div>`
+            }
             replyText += `<div class="regDate">` + timeForToday(reply.createdDate) + `</div>`
             replyText += `</div>`
             replyText += `<input type = "hidden" class = "replyId" value ="` + reply.replyId + `">`
-            if (reply.peopleUserId == sessionId) {
+            if (reply.userId == sessionId) {
                 replyText += `<div class="modifyAndDelete">`
                 replyText += `<span class="mAd modifyReady">수정</span>`
                 replyText += `<span class="between">&nbsp;&nbsp;|&nbsp;&nbsp;</span>`
@@ -581,7 +587,7 @@
         nowPage = 0;
         register({
             replyContent: replyContent,
-            schoolUserId: $('.userId').val(),
+            schoolUserId: schoolId,
         }, showReply)
         $(this).prev().val("");
         window.scrollTo({top: 0})
@@ -591,7 +597,7 @@
     function showReply() {
         getReply1({
             page: nowPage,
-            userId: $('.userId').val()
+            userId: schoolId
         }, getReply)
     }
 
@@ -603,7 +609,7 @@
             return;
         }
         serviceVisitDate({
-            userId: $('.userId').val(),
+            userId: schoolId,
             serviceVisitDate: saveDate
         })
     })
@@ -612,17 +618,21 @@
     //show!!
     function show() {
         getRanking1({
-            userId: $('.userId').val()
+            userId: schoolId
         }, getRanking)
         getRecent1({
-            userId: $('.userId').val()
+            userId: schoolId
         }, getRecent);
         getInfo1({
-            userId: $('.userId').val()
+            userId: schoolId
         }, getInfo);
         showReply();
-        getLikeCount($('.userId').val(), likeCount);
+        showLikeCount();
         getLikeSchoolList(clickLikeBtn);
+    }
+
+    function showLikeCount(){
+        getLikeCount(schoolId, likeCount);
     }
 </script>
 </html>
