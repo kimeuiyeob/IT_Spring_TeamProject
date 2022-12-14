@@ -29,24 +29,27 @@ public class Talent extends Donation {
     @NotNull
     private String talentPlace;
 
-
+    public void changeSchool(School school){
+        super.changeSchool(school);
+    }
+    public void changePeople(People people){
+        super.changePeople(people);
+    }
     @Builder //Builder pattern을 사용하게 해주는 어노테이션!
-    public Talent(School school, People people, String talentTitle, String talentContent, LocalDateTime talentAbleDate, String talentCategory,String talentPlace) {
-        super(school, people);
+    public Talent(String talentTitle, String talentContent, LocalDateTime talentAbleDate, String talentCategory,String talentPlace) {
         this.talentTitle = talentTitle;
         this.talentContent = talentContent;
         this.talentAbleDate = talentAbleDate;
         this.talentCategory = talentCategory;
         this.talentPlace = talentPlace;
-
     }
 
-    public void update(TalentDTO talentDTO) {
-        Talent talent = talentDTO.toEntity();
-        this.talentTitle = talent.talentTitle;
-        this.talentContent = talent.talentContent;
-        this.talentAbleDate = talent.talentAbleDate;
-        this.talentCategory = talent.talentCategory;
-        this.talentPlace = talent.talentPlace;
+    public void update(TalentDTO talent) {
+        this.talentTitle = talent.getTalentTitle();
+        this.talentContent = talent.getTalentContent();
+        this.talentAbleDate = talent.getTalentAbleDate();
+        this.talentCategory = talent.getTalentCategory();
+        this.talentPlace = talent.getTalentPlace();
+
     }
 }

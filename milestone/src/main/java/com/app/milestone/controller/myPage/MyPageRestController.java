@@ -22,12 +22,13 @@ public class MyPageRestController {
     /*=============================================================================*/
     //마이페이지 재능기부 목록 수정
     @GetMapping(value = {"/list/{page}"})
-    public TalentResp search(@PathVariable("page") Integer page) {
+    public TalentResp search(@PathVariable("page") Integer page , HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Long userId = (Long) session.getAttribute("userId");
+
         TalentResp talentResp = new TalentResp();
 
-        log.info("마이페이지 레스트 컨트롤러에 도착했습니다!!!");
-
-        Page<TalentDTO> arTalentDTO = talentService.findAllTalentById(page, 101L); // <=================== 세션값 들어가야됩니다.
+        Page<TalentDTO> arTalentDTO = talentService.findAllTalentById(page, userId);
 
         talentResp.setArTalentDTO(arTalentDTO);
         return talentResp;

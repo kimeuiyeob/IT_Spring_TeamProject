@@ -87,6 +87,27 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
                 .fetch();
     }
 
+    @Override
+    public List<TalentDTO> findByDonationId(Long donationId) {
+        return jpaQueryFactory.select(new QTalentDTO(
+                talent.donationId,
+                talent.talentTitle,
+                talent.talentContent,
+                talent.talentAbleDate,
+                talent.createdDate,
+                talent.talentCategory,
+                talent.talentPlace,
+                talent.people.peopleNickname,
+                talent.school.userId,
+                talent.people.userId,
+                talent.people.userName,
+                talent.people.userEmail
+        ))
+                .where(talent.donationId.eq(donationId))
+                .from(talent)
+                .fetch();
+    }
+
 
     /*=============================================================================================================*/
     //조건에 따른 보육원 수
@@ -119,7 +140,7 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
                 .fetchOne();
     }
 
-//    =====================================재능기부 랭킹======================================
+//    /*=============================================================================================================*/
 //  재능기부 랭킹 정렬
 @Override
 public List<Tuple> sortBytalentRank() {

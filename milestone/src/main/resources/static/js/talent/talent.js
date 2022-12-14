@@ -2,20 +2,6 @@ let save = [];
 
 /*===========================================================================================*/
 /*카테고리 하단 노란색 줄 */
-window.onload = function () {
-
-    $("#all").css({"display": "flex"})
-    $("#pseudo").css({"transform": "translateX(0%)"})
-
-    $(this).css({"color": "rgb(48, 52, 65)", "font-weight": "700"})
-
-    $(".education").css({"font-weight": "normal", "color": "rgb(154, 155, 167)"})
-    $(".exercise").css({"font-weight": "normal", "color": "rgb(154, 155, 167)"})
-    $(".music").css({"font-weight": "normal", "color": "rgb(154, 155, 167)"})
-    $(".art").css({"font-weight": "normal", "color": "rgb(154, 155, 167)"})
-    $(".program").css({"font-weight": "normal", "color": "rgb(154, 155, 167)"})
-}
-
 
 $(".all").click(function () {
 
@@ -180,6 +166,8 @@ let body = $('body');
 let $modalBtn = $('.modalBtn');
 let modalWrap = document.querySelector('.modalWrap');
 
+let $writeApply = $('#writeApply');
+
 
 $cancels.on('click', function () {
     $modalWrap.show();
@@ -202,15 +190,15 @@ document.addEventListener('click', function (e) {
 })
 
 /*===========================================================================================*/
-/*목록 클릭 상세페이지*/
+/*목록 클릭 신청하기 상세페이지*/
 
 let $talentModal = $('.talentModal');
 let talentModal = document.querySelector('.talentModal');
 
-$(".AllTalentBox").on("click", ".talentBox", function (){
-
+$(".AllTalentBox").on("click", ".talentBox", function () {
     $talentModal.show()
     body.css('overflow', 'hidden');
+
     let donationId = $(this).find("div.donationId").html();
 
     $.ajax({
@@ -237,6 +225,8 @@ $(".AllTalentBox").on("click", ".talentBox", function (){
             text += `</div>`
             text += `</div>`
 
+            text += `<div class="donationId2" style="display: none">` + talent.donationId + `</div>`
+
             text += `<span class="css-1oteowz eklkj751">`
             text += `<span role="img" color="#e4e5ed" rotate="0" class="css-nh621w e181xm9y1">`
             text += `<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false" style="cursor: pointer"
@@ -248,13 +238,12 @@ $(".AllTalentBox").on("click", ".talentBox", function (){
             text += `</span>`
             text += `</div>`
 
-
             text += `<div style = "display:flex; justify-content: space-between; border-bottom: 1px solid rgb(228, 229, 237); padding-bottom: 15px;margin-top: -15px; width: 100%;" >`
 
             text += `<div style="padding-top: 10px;font-size: 18px;margin-top: 15px;">` + "저의 재능으로 아이들에게 보답할께요." + `</div>`
 
             text += `<div style = "display: flex;">`
-            text += `<div role = "link" color = "yellow" href = "#" class = "css-8x0gm eklkj752" id = "writeApply" style = "width:125px" >`
+            text += `<div role = "link" color = "yellow" href = "#" class = "css-8x0gm eklkj752" id = "writeApply" style = "width:125px;">`
             text += `<span class = "css-1oteowz eklkj751" >` + "신청하기" + `</span>`
             text += `</div>`
             text += `</div>`
@@ -311,8 +300,16 @@ $(".AllTalentBox").on("click", ".talentBox", function (){
             text += `</div>`
 
             $(".talentModal").html(text);
+            if (sessionId === "" || sessionId === "people") {
+                $("#writeApply").hide();
+            } else if (sessionId === "school") {
+                $("#writeApply").show();
+            }
+
         }
+
     })
+
 })
 
 /*===========================================================================================*/
@@ -446,7 +443,6 @@ let $cateDate = $('#dateTime');
 let $cateTitle = $('#kim2');
 let $cateContent = $('#kimeuiyeob');
 
-
 $($writeFinish).on('click', function () {
     if ($category.val() == "" || $telent.val() == "" || $cateDate.val() == "" || $cateTitle.val() == "" || $cateContent.val() == "") {
         $writePlease.show();
@@ -493,13 +489,47 @@ function hideModal() {
     show();
 }
 
-/*===========================================================================================*/
+/*======================================================================================================================================================*/
+/*===========================================================================================================================================================*/
 /*재능기부 목록에서 신청하기 버튼*/
 
 $(".talentModal").on('click', "#writeApply", function () {
+
+    let donationId2 = $("div.donationId2").html();
+
+    console.log("도네이션아이디 잘갖고왔지?" + donationId2)
+
+    signTalent(
+       donationId2
+    , hiddenModal);
+})
+
+
+function signTalent(donationId, callback, error) {
+    $.ajax({
+        url: "/talentrest/sign",
+        type: "post",
+        data: JSON.stringify(donationId),
+        contentType: "application/json; charset=utf-8",
+        success: function () {
+            if (callback) {
+                callback();
+            }
+        },
+        error: function (xhr, status, err) {
+            if (error) {
+                error(err);
+            }
+        }
+    });
+}
+
+
+function hiddenModal() {
     $talentModal.hide();
     body.css('overflow', 'auto');
-})
+    show();
+}
 
 /*===========================================================================================*/
 /*검색창 옆 드롭다운 버튼 선택(중복가능)*/
@@ -680,6 +710,7 @@ const $realSearhBox = $('.realSearhBox');
 const $talentClick = $('.css-7kp13n');
 
 /*===========================================================================================*/
+
 /*전체 클릭시*/
 
 function getTalentList(param, callback, error) {
@@ -691,7 +722,7 @@ function getTalentList(param, callback, error) {
     let talentPlaceList = param.talentPlace;
 
     let talentPlaceVal = "";
-    for (let i = 0; i < talentPlaceList.length; i++){
+    for (let i = 0; i < talentPlaceList.length; i++) {
         talentPlaceVal += talentPlaceList[i];
     }
     list.push(talentPlaceVal);

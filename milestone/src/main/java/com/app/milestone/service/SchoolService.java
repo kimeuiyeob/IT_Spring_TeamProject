@@ -2,6 +2,7 @@ package com.app.milestone.service;
 
 import com.app.milestone.domain.*;
 import com.app.milestone.entity.School;
+import com.app.milestone.entity.Talent;
 import com.app.milestone.repository.FileRepository;
 import com.app.milestone.repository.MoneyRepository;
 import com.app.milestone.repository.PeopleRepository;
@@ -53,7 +54,7 @@ public class SchoolService {
     //    보육원 등록
     @Transactional
     public void registerSchool(Long userId, SchoolDTO schoolDTO) {
-        schoolDTO.setSchoolQR("https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=http://localhost:9999/school/donation?userId="+ userId);
+        schoolDTO.setSchoolQR("https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=http://localhost:9999/school/donation?userId=" + userId);
         schoolRepository.findById(userId).get().update(schoolDTO);
     }
 
@@ -84,7 +85,7 @@ public class SchoolService {
         }
 
         List<SchoolDTO> list = schoolRepository.findAllByCreatedDate(pageable, search);
-        for (SchoolDTO schoolDTO : list){
+        for (SchoolDTO schoolDTO : list) {
             List<FileDTO> arFileDTO = fileRepository.findByUserId(schoolDTO.getUserId());
             schoolDTO.setFiles(arFileDTO);
             log.info("=============스쿨===============");
@@ -152,7 +153,12 @@ public class SchoolService {
     }
 
     //    회원 삭제
-    public void deleteByUserId(Long userId){
+    public void deleteByUserId(Long userId) {
         schoolRepository.deleteById(userId);
+    }
+
+    //   재능기부 보육원 로그인 => 신청하기 school 아이디 저장
+    public School selectSchoolId(Long userId) {
+        return schoolRepository.findById(userId).get();
     }
 }
