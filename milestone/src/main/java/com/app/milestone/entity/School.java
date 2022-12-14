@@ -1,11 +1,14 @@
 package com.app.milestone.entity;
 
+import com.app.milestone.domain.PasswordDTO;
 import com.app.milestone.domain.SchoolDTO;
 import com.app.milestone.embeddable.Address;
 import com.app.milestone.embeddable.Introduce;
 import com.sun.istack.NotNull;
-import lombok.*;
-import org.hibernate.hql.internal.ast.tree.IntoClause;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -27,16 +30,16 @@ public class School extends User {
 
     private int schoolBudget;
     @NotNull
-    @Size(max=50)
+    @Size(max = 50)
     private String schoolBank;
     @NotNull
-    @Size(max=100)
+    @Size(max = 100)
     private String schoolAccount;
     @NotNull
-    @Size(max=500)
+    @Size(max = 500)
     private String schoolPhoneNumber;
     @Column(name = "SCHOOL_QR")
-    @Size(max=500)
+    @Size(max = 500)
     private String schoolQR;
     @Embedded
     private Introduce introduce;
@@ -90,6 +93,11 @@ public class School extends User {
         this.schoolAccount = schoolDTO.getSchoolAccount();
         this.introduce = introduce;
         this.schoolQR = schoolDTO.getSchoolQR();
+    }
+
+    public void updatePassword(PasswordDTO passwordDTO) {
+//        People people = peopleDTO.toEntity();
+        this.userPassword = passwordDTO.getChangePassword();
     }
 
 //    public void update(SchoolDTO schoolDTO) {

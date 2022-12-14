@@ -2,6 +2,7 @@ package com.app.milestone.repository;
 
 import com.app.milestone.domain.QServiceDTO;
 import com.app.milestone.domain.ServiceDTO;
+import com.app.milestone.entity.QDonation;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.Tuple;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -9,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,27 +23,40 @@ import static com.app.milestone.entity.QService.service;
 public class ServiceCustomRepositoryImpl implements ServiceCustomRepository {
     private final JPAQueryFactory jpaQueryFactory;
 
-//    //    마이페이지 개인 일정관리
-//    @Override
-//    public List<ServiceDTO> findServiceById(Pageable pageable, String keyword) {
-//        return jpaQueryFactory.select(new QServiceDTO(
-//                service.school.schoolName,
-//                service.people.peopleNickname,
-//                service.people.userId,
-//                service.school.address.schoolAddress,
-//                service.school.address.schoolAddressDetail,
-//                service.serviceVisitDate
-//        ))
-//                .from(service)
-//                .where(
-//                        service.people.userId.eq(userId)
-//                )
-//                .offset(pageable.getOffset())
-//                .limit(pageable.getPageSize())
-//                .fetch();
-//    }
+    //    마이페이지 개인 일정관리
+    @Override
+    public Long countByCreatedDate(Pageable pageable, Long peopleId) {
+        return jpaQueryFactory.select(service.count())
+                .from(service)
+                .where(service.people.userId.eq(peopleId))
+                .orderBy(service.createdDate.asc())
+                .fetchOne();
+    }
+
+    @Override
+    public List<ServiceDTO> findService(Pageable pageable, Long peopleId) {
+        return jpaQueryFactory.select(new QServiceDTO(
+                service.school.schoolName,
+                service.people.peopleNickname,
+                service.school.userId,
+                service.school.address.schoolAddress,
+                service.school.address.schoolAddressDetail,
+                service.serviceVisitDate,
+                service.donationId
+        ))
+                .from(service)
+                .where(
+                        service.people.userId.eq(peopleId),
+                        service.serviceVisitDate.goe(LocalDateTime.now())
+                )
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .orderBy(service.serviceVisitDate.asc())
+                .fetch();
+    }
 
     ;
+
 
     //  방문기부 랭킹 정렬
     @Override
@@ -104,10 +119,11 @@ public class ServiceCustomRepositoryImpl implements ServiceCustomRepository {
         return jpaQueryFactory.select(new QServiceDTO(
                 service.school.schoolName,
                 service.people.peopleNickname,
-                service.people.userId,
+                service.school.userId,
                 service.school.address.schoolAddress,
                 service.school.address.schoolAddressDetail,
-                service.serviceVisitDate
+                service.serviceVisitDate,
+                service.donationId
         ))
                 .from(service)
                 .where(
@@ -126,10 +142,11 @@ public class ServiceCustomRepositoryImpl implements ServiceCustomRepository {
         return jpaQueryFactory.select(new QServiceDTO(
                 service.school.schoolName,
                 service.people.peopleNickname,
-                service.people.userId,
+                service.school.userId,
                 service.school.address.schoolAddress,
                 service.school.address.schoolAddressDetail,
-                service.serviceVisitDate
+                service.serviceVisitDate,
+                service.donationId
         ))
                 .from(service)
                 .where(

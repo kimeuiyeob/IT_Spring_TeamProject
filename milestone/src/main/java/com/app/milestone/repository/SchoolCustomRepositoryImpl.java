@@ -3,10 +3,8 @@ package com.app.milestone.repository;
 import com.app.milestone.domain.QSchoolDTO;
 import com.app.milestone.domain.SchoolDTO;
 import com.app.milestone.domain.Search;
-import com.app.milestone.entity.QSchool;
 import com.app.milestone.entity.School;
 import com.querydsl.core.BooleanBuilder;
-import com.querydsl.core.Tuple;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -15,10 +13,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static com.app.milestone.entity.QSchool.*;
+import static com.app.milestone.entity.QSchool.school;
 
 
 @Repository
@@ -146,6 +143,7 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
     private BooleanExpression userNameContaining(String userName) {
         return StringUtils.hasText(userName) ? school.userName.contains(userName) : null;
     }
+
     //    SchoolName 검색
     private BooleanExpression schoolNameContaining(String schoolName) {
         return StringUtils.hasText(schoolName) ? school.schoolName.contains(schoolName) : null;
@@ -185,9 +183,6 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
         }
         return booleanBuilder;
     }
-
-
-
 
 
     //========================관리자페이지===========================
@@ -296,7 +291,7 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
                 .fetch();
     }
 
-    public List<SchoolDTO> findSchoolSearch (Pageable pageable, String keyword){
+    public List<SchoolDTO> findSchoolSearch(Pageable pageable, String keyword) {
         return jpaQueryFactory.select(new QSchoolDTO(
                 school.userId,
                 school.schoolName,
@@ -327,9 +322,11 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
                 .limit(pageable.getPageSize())
                 .orderBy(school.createdDate.desc())
                 .fetch();
-    };
+    }
 
-    public List<SchoolDTO> findSchoolSearchAsc (Pageable pageable, String keyword){
+    ;
+
+    public List<SchoolDTO> findSchoolSearchAsc(Pageable pageable, String keyword) {
         return jpaQueryFactory.select(new QSchoolDTO(
                 school.userId,
                 school.schoolName,
@@ -360,7 +357,9 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
                 .limit(pageable.getPageSize())
                 .orderBy(school.createdDate.asc())
                 .fetch();
-    };
+    }
+
+    ;
 
 
     // 통합검색2
@@ -369,7 +368,7 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
             return null;
         }
         BooleanBuilder booleanBuilder = new BooleanBuilder();
-        if (keyword!=null) {
+        if (keyword != null) {
             booleanBuilder.or(school.userName.contains(keyword));
             booleanBuilder.or(school.schoolName.contains(keyword));
         }
@@ -382,7 +381,7 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
             return null;
         }
         BooleanBuilder booleanBuilder = new BooleanBuilder();
-        if (keyword!=null) {
+        if (keyword != null) {
             booleanBuilder.or(school.schoolName.contains(keyword));
             booleanBuilder.or(school.address.schoolAddress.contains(keyword));
         }

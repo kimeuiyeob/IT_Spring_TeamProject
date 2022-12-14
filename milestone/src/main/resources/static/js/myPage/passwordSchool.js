@@ -79,7 +79,7 @@ var pwCheck = /^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$/;
 //공백검사
 var spaceCheck = /\s/;
 
-$password.on('blur', function () {
+$password.on('blur', function() {
     const checkPassword = $('#password').val();
     if (!$password.val()) {
         $password.focus();
@@ -88,28 +88,28 @@ $password.on('blur', function () {
     if ($password.val().length < 8) {
         $password.next().show();
         $password.next().text("8자 이상 입력해 주세요.");
-    } else {
+    }else{
         $.ajax({
             type: 'GET',
             url: '/myPageRest/checkPassword',
             data: {'userPassword': checkPassword},
             datatype: "text"
-        }).done(function (result) {
+        }).done(function(result){
             console.log(result);
-            if (result) {
-                alert("비밀번호가 일치합니다");
+            if(result){
                 console.log("비밀번호 일치");
                 pwCheckFlag = true;
-            } else {
+            } else if(!result){
                 console.log("비밀번호 틀림");
                 $password.next().show();
-                $password.next().text("비밀번호가 맞지 않습니다.");
+                $password.next().text("비밀번호가 맞지 않습니다.")
             }
-        }).fail(function (error) {
+        }).fail(function(error){
             alert(JSON.stringify(error));
         })
     }
 });
+
 
 
 $changePassword.on('blur', function () {
@@ -150,46 +150,44 @@ $submitButton.on('click', function () {
     //     $password.next().show();
     //     $password.next().text("비밀번호가 맞지 않습니다.")
     // }
-});
-$password.on('keyup', function () {
-    $password.next().show();
-    if ($password.val().length < 8) {
-        $password.next().text("8자 이상 입력해 주세요.");
-        return;
-    } else {
-        $password.next().text('\u00A0');
-    }
-    if ($checkPassword != $password.val()) {
-        $password.next().text("")
-        return;
-    }
-    $password.next().hide();
-});
-$changePassword.on('keyup', function () {
-    $changePassword.next().show();
-    if (!pwCheck.test($changePassword.val())) {
-        return;
-    }
-    if (spaceCheck.test($changePassword.val())) {
-        return;
-    }
-    tempPw = $changePassword.val();
-    $changePassword.next().hide();
-});
-$checkPassword.on('keyup', function () {
-    $checkPassword.next().show();
 
-    if (tempPw == $checkPassword.val()) {
-        console.log("emfdjdha")
-        $checkPassword.next().hide();
-    } else {
-        $checkPassword.next().text("비밀번호를 확인해 주세요.")
-    }
-});
-console.log(changePwCheckFlag)
-console.log(checkPwCheckFlag)
-console.log(pwCheckFlag)
-if (changePwCheckFlag && checkPwCheckFlag && pwCheckFlag) {
-    $submitButton.submit();
-}
+    $password.on('keyup', function () {
+        $password.next().show();
+        if ($password.val().length < 8) {
+            $password.next().text("8자 이상 입력해 주세요.")
+            return;
+        }
+        if ($checkPassword != $password.val()) {
+            $password.next().text("")
+            return;
+        }
+        $password.next().hide();
+    })
+    $changePassword.on('keyup', function () {
+        $changePassword.next().show();
+        if (!pwCheck.test($changePassword.val())) {
+            return;
+        }
+        if (spaceCheck.test($changePassword.val())) {
+            return;
+        }
+        tempPw = $changePassword.val();
+        $changePassword.next().hide();
+    })
+    $checkPassword.on('keyup', function () {
+        $checkPassword.next().show();
 
+        if (tempPw == $checkPassword.val()) {
+            console.log("emfdjdha")
+            $checkPassword.next().hide();
+        } else {
+            $checkPassword.next().text("비밀번호를 확인해 주세요.")
+        }
+    })
+    console.log(changePwCheckFlag)
+    console.log(checkPwCheckFlag)
+    console.log(pwCheckFlag)
+    if (changePwCheckFlag && checkPwCheckFlag && pwCheckFlag) {
+        $submitButton.submit();
+    }
+})

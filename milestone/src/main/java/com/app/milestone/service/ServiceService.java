@@ -1,7 +1,6 @@
 package com.app.milestone.service;
 
 import com.app.milestone.domain.FileDTO;
-import com.app.milestone.domain.MoneyDTO;
 import com.app.milestone.domain.Ranking;
 import com.app.milestone.domain.ServiceDTO;
 import com.app.milestone.entity.People;
@@ -9,6 +8,7 @@ import com.app.milestone.entity.School;
 import com.app.milestone.repository.*;
 import com.querydsl.core.Tuple;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -20,24 +20,13 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ServiceService {
     private final PeopleRepository peopleRepository;
     private final SchoolRepository schoolRepository;
     private final DonationRepository donationRepository;
     private final ServiceRepository serviceRepository;
     private final FileRepository fileRepository;
-
-//  개인 일정 조회
-    public Page<ServiceDTO> peopleServiceListSearch(Integer page, String keyword) {
-        if (page == null) page = 0;
-        Pageable pageable = PageRequest.of(page, 3);
-        if (keyword == null) {
-            keyword = null;
-        }
-        List<ServiceDTO> list = serviceRepository.findServiceSearch(pageable, keyword);
-        Page<ServiceDTO> service = new PageImpl<>(list, pageable, Integer.valueOf("" + serviceRepository.countByCreatedDate(pageable, keyword)));
-        return service;
-    }
 
     //    방문횟수 랭킹
     public List<Ranking> donationVisitRanking() {
@@ -93,6 +82,21 @@ public class ServiceService {
         List<ServiceDTO> list = serviceRepository.findServiceSearchAsc(pageable, keyword);
         Page<ServiceDTO> service = new PageImpl<>(list, pageable, Integer.valueOf("" + serviceRepository.countByCreatedDate(pageable, keyword)));
         return service;
+    }
+
+    //    개인 일정 관리
+    public Page<ServiceDTO> peopleScheduleList(Integer page, Long sessionId) {
+        if (page == null) page = 0;
+
+        log.info("서비스에 들어온 sessionId : " + sessionId);
+
+        Pageable pageable = PageRequest.of(page, 3);
+        List<ServiceDTO> list = serviceRepository.findService(pageable, sessionId);
+
+        log.info("서비스에 들어온 list : " + list);
+
+        Page<ServiceDTO> services = new PageImpl<>(list, pageable, Integer.valueOf("" + serviceRepository.countByCreatedDate(pageable, sessionId)));
+        return services;
     }
 
 }

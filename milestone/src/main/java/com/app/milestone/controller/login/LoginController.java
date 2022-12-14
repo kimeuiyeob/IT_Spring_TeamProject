@@ -100,5 +100,24 @@ public class LoginController {
         log.info("로그아웃 성공");
         return "redirect:/main/main";
     }
+    @GetMapping("/logout")
+    public String logoutGet(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+
+        log.info("sessionId={}", session.getId());
+        log.info("getMaxInactiveInterval={}", session.getMaxInactiveInterval());
+        log.info("creationTime={}", new Date(session.getCreationTime()));
+        log.info("lastAccessedTime={}", new Date(session.getLastAccessedTime()));
+        log.info("isNew={}", session.isNew());
+
+        session = request.getSession(false);
+        if (session != null) {
+            log.info("세션 날림");
+            session.invalidate();   // 세션 날림
+        }
+        log.info("sessionId={}", session.getId());
+        log.info("로그아웃 성공");
+        return "redirect:/main/main";
+    }
 
 }

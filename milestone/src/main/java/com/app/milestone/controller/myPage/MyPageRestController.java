@@ -76,17 +76,6 @@ public class MyPageRestController {
         return userService.checkPassword(userId, userPassword);
     }
 
-    //  일반회원 일정 조회
-    @GetMapping(value= {"/service/{page}", "/service/{page}/{keyword}"})
-    public ServiceResp serviceList(@PathVariable("page") Integer page, @PathVariable(required = false)String keyword) {
-        if(keyword == null){keyword= "";}
-        ServiceResp serviceResp = new ServiceResp();
-        Page<ServiceDTO> arServiceDTO = serviceService.serviceListSearch(page, keyword);
-        serviceResp.setArServiceDTO(arServiceDTO);
-        return serviceResp;
-    }
-
-
     //    찜한 보육원 목록
     @GetMapping(value = {"/likeList/{page}"})
     public LikeResp likeSchool(HttpSession session, @PathVariable("page") Integer page) {
@@ -98,7 +87,7 @@ public class MyPageRestController {
     }
 
     //    찜한 보육원 검색
-    @GetMapping(value = {"/likeListSearch/{page}","/likeListSearch/{page}/{schoolAddress}","/likeListSearch/{page}/{schoolAddress}/{schoolName}"})
+    @GetMapping(value = {"/likeListSearch/{page}", "/likeListSearch/{page}/{schoolAddress}", "/likeListSearch/{page}/{schoolAddress}/{schoolName}"})
     public LikeResp likeSchoolSearch(HttpSession session, @PathVariable("page") Integer page, Search search) {
         Long userId = (Long) session.getAttribute("userId");
         LikeResp likeResp = new LikeResp();
@@ -119,6 +108,18 @@ public class MyPageRestController {
         HttpSession session = request.getSession();
         Long sessionId = (Long) session.getAttribute("userId");
         return likeService.likeCountMyPage(sessionId);
+    }
+
+    //    개인 일정 조회
+    @GetMapping(value = {"/schedule/{page}"})
+    public ServiceResp peopleScheduleList(HttpSession session, @PathVariable("page") Integer page) {
+        Long userId = (Long) session.getAttribute("userId");
+
+        ServiceResp serviceResp = new ServiceResp();
+        Page<ServiceDTO> arServiceDTO = serviceService.peopleScheduleList(page, userId);
+        serviceResp.setArServiceDTO(arServiceDTO);
+
+        return serviceResp;
     }
 
 }
