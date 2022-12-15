@@ -29,7 +29,9 @@ public class ServiceCustomRepositoryImpl implements ServiceCustomRepository {
     public Long countByCreatedDate(Pageable pageable, Long peopleId) {
         return jpaQueryFactory.select(service.count())
                 .from(service)
-                .where(service.people.userId.eq(peopleId))
+                .where(service.people.userId.eq(peopleId),
+                        service.serviceVisitDate.goe(LocalDateTime.now())
+                )
                 .orderBy(service.createdDate.asc())
                 .fetchOne();
     }
@@ -71,7 +73,10 @@ public class ServiceCustomRepositoryImpl implements ServiceCustomRepository {
                 service.people.userName,
                 service.people.userEmail))
                 .from(service)
-                .where(service.people.userId.eq(peopleId))
+                .where(
+                        service.people.userId.eq(peopleId),
+                        service.serviceVisitDate.goe(LocalDateTime.now())
+                )
                 .fetch();
     }
 
@@ -81,7 +86,9 @@ public class ServiceCustomRepositoryImpl implements ServiceCustomRepository {
     public Long countByCreatedDate1(Pageable pageable, Long schoolId) {
         return jpaQueryFactory.select(service.count())
                 .from(service)
-                .where(service.school.userId.eq(schoolId))
+                .where(service.school.userId.eq(schoolId),
+                        service.serviceVisitDate.goe(LocalDateTime.now())
+                )
                 .orderBy(service.createdDate.asc())
                 .fetchOne();
     }
@@ -123,7 +130,9 @@ public class ServiceCustomRepositoryImpl implements ServiceCustomRepository {
                 service.people.userName,
                 service.people.userEmail))
                 .from(service)
-                .where(service.school.userId.eq(schoolId))
+                .where(service.school.userId.eq(schoolId),
+                        service.serviceVisitDate.goe(LocalDateTime.now())
+                )
                 .fetch();
     }
 

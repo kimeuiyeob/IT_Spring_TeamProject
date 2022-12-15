@@ -28,7 +28,7 @@
             <div class="flex" style="align-items: center; margin: 1px 0 0 1px;">
                 <div class="nav-logo-wrapper">
                     <a class="sendGATriggerClz cursor" data-ga-category="header" data-ga-action="click on logo_intro"
-                       href="#">
+                       th:href="@{/main/main}">
                         <img style="margin-top: 1px; width: 85px; height: 26px;" class="ic-nav-bar-kmong"
                              src="/imgs/fix/logo.png">
                     </a>
@@ -71,24 +71,14 @@
                                         로그인
                                     </button>
                                 </div>
-                                <div class="row margin-top-10 margin-bottom-35">
-                                    <div class="col-xs-6 text-left">
-                                        <div class="row">
-                                            <a class="font-color-base sendGATriggerClz underline"  data-ga-category="로그인" data-ga-action="아이디/비밀번호 찾기" data-ga-label="">
-                                                아이디/비밀번호 찾기
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-6 text-right" style="left: 87px;">
-                                        <div class="row">
-                                            <a class="font-color-base sendGATriggerClz underline"  data-ga-category="로그인" data-ga-action="무료 회원가입" data-ga-label="" >
-                                                무료회원가입
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <section class="sns-login-btn-wrapper">
+                                <section class="sns-login-btn-wrapper" style="margin-top: 6px;">
 
+                                    <div class="row">
+                                        <a id="milestoneLoginBtn" href="../join/select" style=" padding-right: 54px;" class="btn btn-block btn-default font-size-small sns-login-btn sendGATriggerClz" data-ga-category="로그인" data-ga-label="SNS 회원가입" data-ga-action="네이버">
+                                            <img class="width-25px margin-right-10" style="margin-top: -2px;" src="/imgs/fix/favicon.png">
+                                            무료 회원가입
+                                        </a>
+                                    </div>
                                     <div class="row">
                                         <a id="naverLoginBtn" class="btn btn-block btn-default font-size-small sns-login-btn sendGATriggerClz" data-ga-category="로그인" data-ga-label="SNS 회원가입" data-ga-action="네이버">
                                             <img class="width-25px margin-right-10" style="margin-top: -2px" src="https://d2v80xjmx68n4w.cloudfront.net/assets/icon/icon_fill_naver.png">
@@ -96,7 +86,7 @@
                                         </a>
                                     </div>
                                     <div class="row">
-                                        <a id="kakaoLoginBtn" class="btn btn-block btn-default font-size-small sns-login-btn sendGATriggerClz" data-ga-category="로그인" data-ga-label="SNS 회원가입" data-ga-action="카카오톡">
+                                        <a href="https://kauth.kakao.com/oauth/authorize?client_id=ec88be2bdb89985381291c974eac293a&redirect_uri=http://localhost:9999/kakao/login&&response_type=code&scope=account_email" id="kakaoLoginBtn" class="btn btn-block btn-default font-size-small sns-login-btn sendGATriggerClz" data-ga-category="로그인" data-ga-label="SNS 회원가입" data-ga-action="카카오톡">
                                             <img class="width-25px margin-right-10" style="margin-top: -2px" src="https://d2v80xjmx68n4w.cloudfront.net/assets/icon/icon_fill_kakao.png">
                                             카카오톡으로 시작하기
                                         </a>

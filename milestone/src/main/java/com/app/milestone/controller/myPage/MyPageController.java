@@ -43,7 +43,7 @@ public class MyPageController {
         fileService.register(userId, fileDTO);
     }
 
-    //    수정
+    //    일반회원 개인정보 수정
     @PostMapping("/update")
     public RedirectView updatePeople(HttpSession session, PeopleDTO peopleDTO) {
         Long userId = (Long) session.getAttribute("userId");
@@ -51,7 +51,7 @@ public class MyPageController {
         return new RedirectView("/mypage/myinfo");
     }
 
-    //  비밀번호 변경
+    //   비밀번호 변경
     @PostMapping("/peoplePasswordUpdate")
     public RedirectView updatePeoplePassword(HttpSession session, PasswordDTO passwordDTO) {
         Long userId = (Long) session.getAttribute("userId");
@@ -61,7 +61,7 @@ public class MyPageController {
         return new RedirectView("/main/main");
     }
 
-    //  보육원 회원 비밀번호 변경
+    //   보육원 회원 비밀번호 변경
     @PostMapping("/schoolPasswordUpdate")
     public RedirectView updateSchoolPassword(HttpSession session, PasswordDTO passwordDTO) {
         Long userId = (Long) session.getAttribute("userId");
@@ -87,25 +87,27 @@ public class MyPageController {
         return Integer.toString(randomNumber);
     }
 
-    /**
-     * 회원 수정하기 전 비밀번호 확인
-     **/
+    //    개인 비밀번호 변경 화면
     @GetMapping("/peoplePassword")
     public String checkPasswordView() {
         return "mypage/myPage_password";
     }
 
+    //    보육원 비밀번호 변경 화면
     @GetMapping("/schoolPassword")
     public String schoolCheckPasswordView() {
         return "mypage/myPage_password_school";
     }
 
+    //    개인 일정 관리
     @GetMapping("/peopleSchedule")
     public String peopleSchedule(HttpSession session, Model model) throws Exception {
         Long userId = (Long) session.getAttribute("userId");
         model.addAttribute("serviceDTO", serviceService.findPeopleVisitDate(userId));
         return "/myPage/myPage_schedule";
     }
+
+    //    보육원 일정 관리
     @GetMapping("/schoolSchedule")
     public String schoolSchedule(HttpSession session, Model model) throws Exception {
         Long userId = (Long) session.getAttribute("userId");

@@ -96,6 +96,7 @@
     <!--        </div>-->
     <!--    </section>-->
     <!--진짜 헤더-->
+    <input type="hidden" th:value="${session.type}" id="sessionId">
     <section class="header2" id="mobile-header2">
         <div class="mobile-menu-icon1" id="mobile-menu-icon2">
             <img id="menu-icon" src="/imgs/fix/menu_icon.png" alt="네비게이션 메뉴 아이콘" style="cursor:pointer">
@@ -110,15 +111,11 @@
         </div>
         <div id="mobile-etc1" style="flex-grow: 1;"></div>
         <div class="button1 login-header-button1" id="mobile-button1">
-            <button role="button" color="default" class="button2 button3"
-                    th:style="${session.userId == null ? 'display:block' : 'display:none'}">
-                <span class="button4 button3">보육원 등록</span>
-            </button>
             <div class="relative">
                 <button role="button" color="default" class="button2 button3" id="message-button"
                         th:style="${session.userId != null ? 'display:block' : 'display:none'}">
                     <span class="button4 button3">알림</span>
-                    <div class = "redDot" th:if="${checkAlarm != null}"></div>
+                    <div class="redDot" th:if="${checkAlarm != null}"></div>
                 </button>
                 <div class="message1" id="message-id1">
                     <div class="message2">
@@ -129,8 +126,13 @@
                     <div class="message4 list1">
                         <li class="message7">모든 메시지를 확인했습니다.</li>
                     </div>
-                    <ul class="message5 list1">
-                        <a href="#" class="message8">
+                    <ul class="message5 list1" th:style="${session.userId != null && session.type == 'people' ? 'display:block' : 'display:none'}">
+                        <a th:href="@{/mypage/peopleAlarm}" class="message8">
+                            <li class="message6">받은 전체 메시지 확인</li>
+                        </a>
+                    </ul>
+                    <ul class="message5 list1" th:style="${session.userId != null && session.type == 'school' ? 'display:block' : 'display:none'}">
+                        <a th:href="@{/mypage/schoolAlarm}" class="message8">
                             <li class="message6">받은 전체 메시지 확인</li>
                         </a>
                     </ul>
@@ -143,14 +145,20 @@
                 </button>
             </form>
             <form th:action="@{/mypage/myinfo}" method="get">
-                <button role="button" color="default" id="loginBtn" class="button5 button3"
-                        th:style="${session.userId != null ? 'display:block' : 'display:none'}">
+                <button role="button" color="default" id="peopleInfo" class="button5 button3"
+                        th:style="${session.userId != null && session.type == 'people' ? 'display:block' : 'display:none'}">
+                    <span class="button6 button3">내 정보</span>
+                </button>
+            </form>
+            <form th:action="@{/mypage/schoolinfo}" method="get">
+                <button role="button" color="default" id="schoolInfo" class="button5 button3"
+                        th:style="${session.userId != null && session.type == 'school'? 'display:block' : 'display:none'}">
                     <span class="button6 button3">내 정보</span>
                 </button>
             </form>
             <a role="link" color="yellow" href="../join/select" class="button7 button3" style="display: none;"
                th:style="${session.userId == null ? 'display:block' : 'display:none'}">
-                <span class="button8 button3" style = "margin: 9px 0">무료 회원가입</span>
+                <span class="button8 button3" style="margin: 9px 0">무료 회원가입</span>
             </a>
             <div class="profile1 profile2" id="profile1"
                  th:style="${session.userId != null ? 'display:block' : 'display:none'}">
@@ -164,27 +172,41 @@
                 </a>
                 <div class="profile-menu1" id="login-profile-menu1">
                     <div class="profile-menu2">
-                        <ul class="profile-menu3">
-                            <a href="#" class="line1">
-                                <li>프로필관리</li>
-                            </a>
-                        </ul>
-                        <ul class="profile-menu3">
-                            <a href="#" class="line1">
-                                <li>나의 찜목록</li>
-                            </a>
-                        </ul>
-                        <ul class="profile-menu3">
-                            <a href="#" class="line1">
+                        <ul class="profile-menu3" style="padding-left: 0;"
+                            th:style="${session.userId != null && session.type == 'people' ? 'display:block' : 'display:none'}">
+                            <a th:href="@{/mypage/myinfo}" class="line1">
                                 <li>마이페이지</li>
                             </a>
                         </ul>
-
-                            <ul class="profile-menu3" >
-                                <a th:href="@{/login/logout}" class="line1">
-                                    <li>로그아웃</li>
-                                </a>
-                            </ul>
+                        <ul class="profile-menu3" style="padding-left: 0;"
+                            th:style="${session.userId != null && session.type == 'school'? 'display:block' : 'display:none'}">
+                            <a th:href="@{/mypage/schoolinfo}" class="line1">
+                                <li>마이페이지</li>
+                            </a>
+                        </ul>
+                        <ul class="profile-menu3" style="padding-left: 0;">
+                            <a th:href="@{/mypage/peopleSchedule}" class="line1"
+                               th:style="${session.userId != null && session.type == 'people' ? 'display:block' : 'display:none'}">
+                                <li>일정 관리</li>
+                            </a>
+                        </ul>
+                        <ul class="profile-menu3" style="padding-left: 0;">
+                            <a th:href="@{/mypage/schoolSchedule}" class="line1"
+                               th:style="${session.userId != null && session.type == 'school' ? 'display:block' : 'display:none'}">
+                                <li>일정 관리</li>
+                            </a>
+                        </ul>
+                        <ul style="padding-left: 0px" class="profile-menu3"
+                            th:style=" ${session.userId != null && session.type == 'people' ? 'display:block' : 'display:none'}">
+                            <a th:href="@{/mypage/likelist}" class="line1">
+                                <li>나의 찜목록</li>
+                            </a>
+                        </ul>
+                        <ul class="profile-menu3" style="padding-left: 0;">
+                            <a th:href="@{/login/logout}" class="line1">
+                                <li>로그아웃</li>
+                            </a>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -205,11 +227,6 @@
                     <ul class="big_menu">
                         <a href="../join/select">
                             <li>무료 회원가입</li>
-                        </a>
-                    </ul>
-                    <ul class="big_menu">
-                        <a href="#">
-                            <li>보육원 등록</li>
                         </a>
                     </ul>
                     <ul class="small_menu">
@@ -290,11 +307,11 @@
     <section class="header6" id="mobile-header3">
         <div class="header7">
             <div class="header8">
-<!--                <form th:action="@{/login/logout}" method="post">-->
-<!--                    <button th:style="${session.userId != null ? 'display:block' : 'display:none'}" type="submit">-->
-<!--                        로그아웃-->
-<!--                    </button>-->
-<!--                </form>-->
+                <!--                <form th:action="@{/login/logout}" method="post">-->
+                <!--                    <button th:style="${session.userId != null ? 'display:block' : 'display:none'}" type="submit">-->
+                <!--                        로그아웃-->
+                <!--                    </button>-->
+                <!--                </form>-->
                 <nav>
                     <ul class="nav1">
                         <li class="nav2 nav3" style="padding-right: 10px">
@@ -335,4 +352,7 @@
     </section>
 </header>
 </body>
+<script th:inline="javascript">
+    let sessionId = $("#sessionId").val();
+</script>
 </html>
