@@ -133,7 +133,9 @@ public class PeopleTest {
             donationCount = donationRepository.countBySchoolUserId(taker);
             school.update(donationCount);
 
-            Money money = new Money(school, people, 10000L * (i % 8 + 1));
+            Money money = new Money(10000L * (i % 8 + 1));
+            money.changePeople(people);
+            money.changeSchool(school);
             moneyRepository.save(money);
         }
     }
@@ -156,7 +158,9 @@ public class PeopleTest {
             donationCount = donationRepository.countBySchoolUserId(taker);
             school.update(donationCount);
 
-            Service service = new Service(school, people, LocalDateTime.now());
+            Service service = new Service(LocalDateTime.now());
+            service.changePeople(people);
+            service.changeSchool(school);
             serviceRepository.save(service);
         }
     }

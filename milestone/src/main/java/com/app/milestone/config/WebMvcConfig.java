@@ -23,8 +23,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addInterceptor(alarmInterceptor)
 //                excludePathPatterns() 특정 패턴의 주소(URI)를 추가 또는 제외할 수 있다.(반대로 addPathPatterns()는 인터셉터 호출에서 경로를 추가(허용)한다.
 //                src/main/resources 디렉터리의 static 폴더에 포함된 정적 리소스 파일을 제외
-//                .addPathPatterns("/**");
-                .excludePathPatterns("/css/**", "/imgs/**", "/file/**", "/images/**", "/js/**", "/schoolrest/**");
+                .addPathPatterns("/error/**", "/faq/**", "/find/**", "/introduce/**", "/join/**", "/kakao/**", "/login/**", "/main/**", "/mypage/**", "/notice/**", "/ranking/**", "/school/**", "/talent/**", "/logout/**");
+//                .excludePathPatterns("/css/**", "/imgs/**", "/file/**", "/images/**", "/js/**", "/schoolrest/**");
     }
 
 //    @Bean

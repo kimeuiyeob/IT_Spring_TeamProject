@@ -27,7 +27,9 @@ public class AlarmCustomRepositoryImpl implements AlarmCustomRepository {
                 alarm.receiver,
                 alarm.type,
                 alarm.item,
-                alarm.checkAlarm
+                alarm.checkAlarm,
+                alarm.giver.userId,
+                alarm.taker.userId
         )).from(alarm)
                 .where(
                         alarm.taker.userId.eq(userId),
@@ -47,7 +49,9 @@ public class AlarmCustomRepositoryImpl implements AlarmCustomRepository {
                 alarm.receiver,
                 alarm.type,
                 alarm.item,
-                alarm.checkAlarm
+                alarm.checkAlarm,
+                alarm.giver.userId,
+                alarm.taker.userId
         )).from(alarm)
                 .where(
                         alarm.taker.userId.eq(userId).and(alarm.checkAlarm.eq(false)),

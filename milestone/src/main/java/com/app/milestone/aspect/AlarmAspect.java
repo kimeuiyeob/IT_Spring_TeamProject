@@ -29,30 +29,14 @@ public class AlarmAspect {
     private final SchoolRepository schoolRepository;
     private final PeopleRepository peopleRepository;
 
-
     // 조인포인트 : 메소드가 실행되기 전 시점을 저장하는 곳
 //    .getArgs : 메소드실행시 인자 가져옴
-//    public void saveAlarm(ProceedingJoinPoint proceedingJoinPoint){
-//        log.info("====================================");
-//        log.info("pointCut: " + proceedingJoinPoint.getArgs());
-//        log.info("====================================");
-////        alarmRepository.
-//    }
     @After("@annotation(com.app.milestone.aspect.Alarm)")
     public void saveAlarm(JoinPoint joinPoint) {
-//        ServiceDTO serviceDTO = Arrays.stream(joinPoint.getArgs()).filter()
         AlarmDTO alarmDTO = new AlarmDTO();
-        log.info("====================================");
-        log.info("pointCut: " + joinPoint.getArgs()[0]);
-        log.info("pointCut: " + joinPoint.getArgs()[0]);
-        log.info("pointCut: " + joinPoint.getArgs()[0]);
-        log.info("pointCut: " + Money.class.isInstance(joinPoint.getArgs()[0]));
-        log.info("pointCut: " + Service.class.isInstance(joinPoint.getArgs()[0]));
-        log.info("pointCut: " + TalentDTO.class.isInstance(joinPoint.getArgs()[0]));
-        log.info("====================================");
 
         if (Money.class.isInstance(joinPoint.getArgs()[0])) {
-            alarmDTO = new AlarmDTO();
+//            alarmDTO = new AlarmDTO();
             Money money = Money.class.cast(joinPoint.getArgs()[0]);
             alarmDTO.setReceiver("school");
             alarmDTO.setItem(money.getMoneyCash() + "");
@@ -63,7 +47,7 @@ public class AlarmAspect {
             alarm.changeTaker(money.getSchool());
         }
         if (Service.class.isInstance(joinPoint.getArgs()[0])) {
-            alarmDTO = new AlarmDTO();
+//            alarmDTO = new AlarmDTO();
             Service service = Service.class.cast(joinPoint.getArgs()[0]);
             String visitDate = service.getServiceVisitDate() + "";
             alarmDTO.setReceiver("school");
@@ -75,7 +59,7 @@ public class AlarmAspect {
             alarm.changeTaker(service.getSchool());
         }
         if (TalentDTO.class.isInstance(joinPoint.getArgs()[0])) {
-            alarmDTO = new AlarmDTO();
+//            alarmDTO = new AlarmDTO();
             TalentDTO talentDTO = TalentDTO.class.cast(joinPoint.getArgs()[0]);
             String ableDate = talentDTO.getTalentAbleDate() + "";
             log.info("============================"+ ableDate);
@@ -87,7 +71,6 @@ public class AlarmAspect {
             alarm.changeGiver(schoolRepository.findById(talentDTO.getSchoolUserId()).get());
             alarm.changeTaker(peopleRepository.findById(talentDTO.getPeopleUserId()).get());
         }
-//        alarmRepository.
     }
 
 //    매개변수를 어떤순서로 어떻게 받게 했는지 모르기 때문에

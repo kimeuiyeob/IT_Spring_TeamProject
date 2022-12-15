@@ -12,7 +12,7 @@ let $message = $("#message-button");
 let $myMessage = $("#message-id1");
 
 $profile.click(function () {
-    $myMenu.fadeToggle(300);
+    $myMenu.toggle(0);
     $myMessage.hide();
 });
 
@@ -21,21 +21,49 @@ $(window).scroll(function () {
 });
 
 $message.click(function () {
-    $myMessage.fadeToggle(300);
+    // 주황불 떠있을 때만 실행 가능
+    getAlarm(showAlarm)
+    $myMessage.toggle(0);
     $myMenu.hide();
 });
+
+/*===============황지수=============*/
+
+/*안읽은 알람 목록*/
+/*ajax*/
+function getAlarm(callback) {
+    $.ajax({
+        url: "/alarm/noneCheckAlarm",
+        success: function (data) {
+            callback(data);
+        }
+    })
+}
+/*뿌리기*/
+function showAlarm(alarmList){
+    console.log(alarmList)
+    let text;
+    alarmList.forEach(alarm => {
+        // text +=
+    })
+}
+
+/*/안읽은 알람 목록*/
+
 $(window).scroll(function () {
     $myMessage.hide();
 });
 
-$(document).mouseup(function (e) {
-    if ($myMenu.has(e.target).length === 0) {
-        $myMenu.hide();
+$(document).click(function (e) {
+    if ($(e.target).closest('#message-id1').length == 0 && $(e.target).closest('#message-button').length == 0) {
+        if ($myMessage.css("display") == "block") {
+            $myMessage.toggle(0);
+        }
     }
-});
-$(document).mouseup(function (e) {
-    if ($myMessage.has(e.target).length === 0) {
-        $myMessage.hide();
+    if ($(e.target).closest('#profile1').length == 0) {
+        if ($myMenu.css("display") == "block") {
+            $myMenu.toggle(0);
+        }
     }
 });
 
