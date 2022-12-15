@@ -1,5 +1,6 @@
 package com.app.milestone.repository;
 
+import com.app.milestone.entity.People;
 import com.app.milestone.entity.QUser;
 import com.app.milestone.entity.User;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -19,6 +20,7 @@ import static com.app.milestone.entity.QUser.user;
 public class UserCustomRepositoryImpl implements UserCustomRepository {
     private final JPAQueryFactory jpaQueryFactory;
     private static Map<Long, User> store = new HashMap<>();   // static 사용
+
 
     @Override
     public List<User> findByCreatedDate(Pageable pageable) {
@@ -69,7 +71,14 @@ public class UserCustomRepositoryImpl implements UserCustomRepository {
                 )
                 .fetchOne();
     }
-    
+
+    @Override
+    public User OAuthIdFind(String password) {
+        return jpaQueryFactory.selectFrom(user)
+                .where(user.userPassword.eq(password))
+                .fetchOne();
+    }
+
     /*황지수*/
 //    @Override
 //    public Long countByUserEmail(String userEmail) {

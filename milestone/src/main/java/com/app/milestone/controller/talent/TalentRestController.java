@@ -53,6 +53,7 @@ public class TalentRestController {
     //재능기부 글 작성시 저장
     @PostMapping("/write")
     public void saveWrite(@RequestBody TalentDTO talentDTO, HttpServletRequest request){
+
         HttpSession session = request.getSession();
         Long userId = (Long) session.getAttribute("userId");
         talentDTO.setPeopleUserId(userId);
@@ -64,7 +65,6 @@ public class TalentRestController {
     @PostMapping("/sign")
     @Transactional
     public void signWrite(@RequestBody Long donationId, HttpServletRequest request){
-
 
         HttpSession session = request.getSession();
         Long userId = (Long) session.getAttribute("userId");
