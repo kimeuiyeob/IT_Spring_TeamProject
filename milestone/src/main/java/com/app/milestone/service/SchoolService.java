@@ -92,7 +92,6 @@ public class SchoolService {
         for (SchoolDTO schoolDTO : list) {
             List<FileDTO> arFileDTO = fileRepository.findByUserId(schoolDTO.getUserId());
             schoolDTO.setFiles(arFileDTO);
-            log.info("=============스쿨===============");
         }
 
         Page<SchoolDTO> schools = new PageImpl<>(list, pageable, Integer.valueOf("" + schoolRepository.countByCreatedDate(pageable, search)));
