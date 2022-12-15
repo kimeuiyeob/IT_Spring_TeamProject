@@ -20,41 +20,85 @@
         <div class="joinTitleWrap" style="margin-top: 0; word-spacing: -5px;">
             딱 이것만 체크하면 가입완료!
         </div>
-        <form role="form" th:action="@{/main/OAuth}" th:object="${peopleDTO}" method="post" id="joinForm" name="joinForm">
+        <form role="form" th:action="@{/main/OAuth}" th:object="${peopleDTO}" method="post" id="joinForm"
+              name="joinForm">
             <div class="inputWrap flexCol">
                 <div class="flexRow margin-bottom-8">
                     <div class="inputTitleWrap">이메일</div>
                     <div class="essential">*</div>
                 </div>
-                <input class="inputCos" name="userEmail" id="email" type="email" th:value="${param.userEmail}" autofocus>
+
+                <th:block th:if="${join == 'google'}">
+                    <input class="inputCos" name="userEmail" id="email" type="email" th:value="${userEmail}" autofocus>
+                </th:block>
+
+                <th:block th:unless="${join == 'google'}">
+                    <input class="inputCos" name="userEmail" id="email" type="email" th:value="${param.userEmail}"
+                           autofocus>
+                </th:block>
+
                 <div class="flexRow margin-top-4" style="display: none;">
                     <div class="warningMsg">이메일 형식이 유효하지 않습니다.</div>
                 </div>
+
             </div>
             <div class="inputWrap flexCol padding-bottom-8">
                 <div class="flexRow margin-bottom-8">
                     <div class="inputTitleWrap">비밀번호</div>
                     <div class="essential">*</div>
                 </div>
-                <input th:field="*{userPassword}" class="inputCos" name="password" id="password" type="password"
-                       placeholder="비밀번호를 입력해 주세요.(8자리 이상)">
+
+                <th:block th:if="${join == 'google'}">
+                    <input th:value="${userPassword}" class="inputCos" name="userPassword" id="password" type="password"
+                           placeholder="비밀번호를 입력해 주세요.(8자리 이상)" readonly>
+                </th:block>
+
+                <th:block th:unless="${join == 'google'}">
+                    <input th:field="*{userPassword}" class="inputCos" name="password" id="password" type="password"
+                           placeholder="비밀번호를 입력해 주세요.(8자리 이상)">
+                </th:block>
+
+
                 <div class="flexRow margin-top-4" style="display: none;">
                     <div class="warningMsg">비밀번호 형식이 유효하지 않습니다.</div>
                 </div>
             </div>
+
             <div class="inputWrap flexCol">
-                <input class="inputCos" name="checkPassword" id="checkPassword" type="password"
-                       placeholder="비밀번호를 한 번 더 입력해 주세요.">
+
+                <th:block th:if="${join == 'google'}">
+                    <input class="inputCos" th:value="${userPassword}" name="checkPassword" id="checkPassword"
+                           type="password"
+                           placeholder="비밀번호를 한 번 더 입력해 주세요." readonly>
+                </th:block>
+
+                <th:block th:unless="${join == 'google'}">
+                    <input class="inputCos" name="checkPassword" id="checkPassword" type="password"
+                           placeholder="비밀번호를 한 번 더 입력해 주세요." >
+                </th:block>
+
                 <div class="flexRow margin-top-4" style="display: none;">
                     <div class="warningMsg">비밀번호가 일치하지 않습니다.</div>
                 </div>
             </div>
+
             <div class="inputWrap flexCol">
                 <div class="flexRow margin-bottom-8">
                     <div class="inputTitleWrap">이름</div>
                     <div class="essential">*</div>
                 </div>
-                <input th:field="*{userName}" class="inputCos" name="name" id="name" type="text" placeholder="이름을 입력해 주세요.">
+
+                <th:block th:if="${join == 'google'}">
+                    <input th:value="${userName}" class="inputCos" name="name" id="name" type="text"
+                           placeholder="이름을 입력해 주세요.">
+                </th:block>
+
+                <th:block th:unless="${join == 'google'}">
+                    <input th:field="*{userName}" class="inputCos" name="name" id="name" type="text"
+                           placeholder="이름을 입력해 주세요.">
+                </th:block>
+
+
                 <div class="flexRow margin-top-4" style="display: none;">
                     <div class="warningMsg">이름을 정확히 입력해 주세요.</div>
                 </div>
@@ -64,7 +108,8 @@
                     <div class="inputTitleWrap">닉네임</div>
                     <div class="essential">*</div>
                 </div>
-                <input th:field="*{peopleNickname}" class="inputCos" name="nickName" id="nickName" type="text" placeholder="닉네임 입력해 주세요.">
+                <input th:field="*{peopleNickname}" class="inputCos" name="nickName" id="nickName" type="text"
+                       placeholder="닉네임 입력해 주세요.">
                 <div class="flexRow margin-top-4" style="display: none;">
                     <div class="warningMsg">이미 마일스톤에 등록된 닉네임입니다.</div>
                 </div>
@@ -75,7 +120,8 @@
                     <div class="essential">*</div>
                 </div>
                 <div class="flexBetween">
-                    <input th:field="*{userPhoneNumber}" class="inputCos" name="phone" id="phone" type="text" placeholder="전화번호를 입력해 주세요.">
+                    <input th:field="*{userPhoneNumber}" class="inputCos" name="phone" id="phone" type="text"
+                           placeholder="전화번호를 입력해 주세요.">
                 </div>
                 <div class="flexRow margin-top-4" style="display: none;">
                     <div class="warningMsg">전화번호를 정확히 입력해 주세요</div>
@@ -145,4 +191,9 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script src="/js/join/joinOAuth.js"></script>
+<script th:inline="javascript">
+    const google = [[${join}]];
+
+
+</script>
 </html>

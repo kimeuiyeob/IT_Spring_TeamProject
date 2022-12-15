@@ -39,6 +39,15 @@ public class TalentDTO {
     private String peopleUserName;
     private String peopleUserEmail;
 
+    private String fileName;
+    private String filePath;
+    private String fileUuid;
+    private Long fileSize;
+    private boolean fileImageCheck;
+    private String fileType;
+
+    //profile에필요한필드
+
 
     public Talent toEntity() { //Service 단에서, 데이터를 저장시키기 위해서, DTO를 Entity로 변환해주는 메소드
         return Talent.builder()
@@ -68,5 +77,27 @@ public class TalentDTO {
         this.peopleUserEmail = peopleUserEmail;
         this.peopleUserName = peopleUserName;
 
+    }
+
+    @QueryProjection
+    public TalentDTO(Long donationId, String talentTitle, String talentContent, LocalDateTime talentAbleDate, LocalDateTime createdDate, String talentCategory, String talentPlace, String peopleNickname, Long schoolUserId, Long peopleUserId, String peopleUserName, String peopleUserEmail, String fileName, String filePath, String fileUuid, Long fileSize, boolean fileImageCheck, String fileType) {
+        this.donationId = donationId;
+        this.talentTitle = talentTitle;
+        this.talentContent = talentContent;
+        this.talentAbleDate = talentAbleDate;
+        this.createdDate = createdDate;
+        this.talentCategory = talentCategory;
+        this.talentPlace = talentPlace;
+        this.peopleNickname = peopleNickname;
+        this.schoolUserId = schoolUserId;
+        this.peopleUserId = peopleUserId;
+        this.peopleUserName = peopleUserName;
+        this.peopleUserEmail = peopleUserEmail;
+        this.fileName = fileName;
+        this.filePath = filePath;
+        this.fileUuid = fileUuid;
+        this.fileSize = fileSize;
+        this.fileImageCheck = fileImageCheck;
+        this.fileType = fileType;
     }
 }

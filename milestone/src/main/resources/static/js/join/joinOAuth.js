@@ -41,7 +41,7 @@ let pwOk = false;
 
 $password.on("blur", function () {
     //8자리 이상, 대문자/소문자/숫자/특수문자 모두 포함되어 있는 지 검사
-    var pwCheck = /^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$/;
+    var pwCheck = /^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,30}$/;
     //한글이 포함되었는 지 검사
     var hangleCheck = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
     //같은 문자 4번 이상
@@ -220,13 +220,22 @@ $certificationBtn.on('click', function () {
         return false;
     }
 });
-
+// let allConditionClear = passwordCheckFlag && nameCheckFlag && nickNameCheckFlag && $allCheckboxFlag;
+//
+// function joinSubmit() {
+//     allConditionClear = emailFlag && passwordCheckFlag && nameCheckFlag && nickNameCheckFlag && $allCheckboxFlag;
+//     if (allConditionClear) {
+//         $joinBtn.attr('disabled', false);
+//     } else {
+//         $joinBtn.attr('disabled', true);
+//     }
+// }
 
 /*---------------------------- 가입완료 버튼 활성화----------------------------*/
-let allConditionClear = passwordCheckFlag && nameCheckFlag && nickNameCheckFlag && $allCheckboxFlag;
+let allConditionClear = nameCheckFlag && nickNameCheckFlag && $allCheckboxFlag;
 
 function joinSubmit() {
-    allConditionClear = emailFlag && passwordCheckFlag && nameCheckFlag && nickNameCheckFlag && $allCheckboxFlag;
+    allConditionClear = emailFlag  && nameCheckFlag && nickNameCheckFlag && $allCheckboxFlag;
     if (allConditionClear) {
         $joinBtn.attr('disabled', false);
     } else {

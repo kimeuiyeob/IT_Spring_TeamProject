@@ -156,6 +156,7 @@
     //마이페이지 나의 재능기부 목록
 
     function getList(talentResp) {
+
         let text = "";
         pageInfo = talentResp.arTalentDTO;
         talentResp.arTalentDTO.content.forEach(talent => {
@@ -163,8 +164,17 @@
             text += `<div style="padding-bottom:20px">`
             text += `<article class="talentBox" style="width: 65%;">`
             text += `<div class="talentBox2">`
-            text += `<div class="talentBox3">`
-            text += `<img src="../imgs/myPage/normalProfile.png" class="talentImg">`
+            text += `<div class="talentBox3" style="width: 170px;">`
+
+            /*=========================================================================================================*/
+
+            if(talent.fileName == null){
+                text += `<img id="profilepicture" src="/imgs/myPage/normalProfile.png" class="talentImg">`
+            }else {
+                text += `<img class="talentImg" src="/file/display?fileName=`+ talent.filePath + `/` + talent.fileUuid + `_` + talent.fileName +`">`
+            }
+            /*=========================================================================================================*/
+
             text += `</div>`
             text += `<div class="talentBox4">`
 
@@ -225,6 +235,8 @@
             type: "get",
             success: function (lists) {
 
+                console.log("상세모달 : " + JSON.stringify(lists));
+
                 var talent = lists[0];
                 let thisTime = talent.talentAbleDate.substring(0, 10)
 
@@ -276,8 +288,20 @@
                 text += `<div>`
                 text += `<div style = "display:flex; justify-content: space-between; padding-top: 35px;">`
                 text += `<div class = "abc" style = "padding-right: 50px;">`
-                text += `<span class= "abcd" >`
-                text += `<img src = "../imgs/talent/normalProfile.png" style = "border-radius: 10px; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block;" >`
+                text += `<span class= "abcd" style="width: 220px; height: 200px;">`
+
+                /*=========================================================================================================*/
+                if(talent.fileName == null){
+                    //텍스트 추가 이미지src 에다 talent로 가져온 filePath + fileUUid _ fileName으로 이미지를 찾아온다.
+                    text += `<img id="profilepicture" src="/imgs/myPage/normalProfile.png" class="talentImg">`
+                }else {
+                    text += `<img class="talentImg" src="/file/display?fileName=`+ talent.filePath + `/` + talent.fileUuid + `_` + talent.fileName +`"  style="border-radius: :10px">`
+                }
+                /*=========================================================================================================*/
+
+                text += `<!--<img src = "../imgs/talent/normalProfile.png" style = "border-radius: 10px; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block;" >-->`
+
+
                 text += `</span>`
                 text += ` <div class = "css-pea598 e1y81j3a5">`
                 text += `</div>`

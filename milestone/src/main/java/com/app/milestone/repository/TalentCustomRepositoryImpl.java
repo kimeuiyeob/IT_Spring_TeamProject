@@ -3,7 +3,7 @@ package com.app.milestone.repository;
 import com.app.milestone.domain.QTalentDTO;
 import com.app.milestone.domain.Search;
 import com.app.milestone.domain.TalentDTO;
-import com.app.milestone.entity.QUser;
+import com.app.milestone.entity.QFile;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.app.milestone.entity.QDonation.donation;
+import static com.app.milestone.entity.QFile.file;
 import static com.app.milestone.entity.QPeople.people;
 import static com.app.milestone.entity.QTalent.talent;
 import static com.app.milestone.entity.QUser.user;
@@ -46,22 +47,33 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
                 talent.school.userId,
                 talent.people.userId,
                 talent.people.userName,
-                talent.people.userEmail
+                talent.people.userEmail,
+                file.fileName,
+                file.filePath,
+                file.fileUuid,
+                file.fileSize,
+                file.fileImageCheck,
+                file.fileType
         ))
+                .from(talent)
+                .leftJoin(file)
+                .on((file.user.userId.eq(talent.people.userId)))
                 .where(
                         talentTitleContaining(search.getTalentTitle()),
                         talentPlaceContaining(search.getTalentPlace()),
                         talentCategoryContainingAll(search.getTalentCategory()) //카테고리 클릭시
                 )
-                .from(talent)
+                .where(talent.school.userId.isNull())
                 .orderBy(talent.talentAbleDate.asc())
                 .offset(pageable.getOffset()) //여기서부터 10개를 가져온다 <-10개는 아래 limit ex)2페이지면 10부터 10개
                 .limit(pageable.getPageSize()) //목록에 뿌릴갯수 -> 10을보냈으니까 10으로 limit걸어논거다.
                 .fetch();
     }
 
+
     /*=============================================================================================================*/
 
+    //마이페이지 나의 재능기부 목록
     @Override
     public List<TalentDTO> findAllTalentById(Pageable pageable, Long peopleId) {
         //pageale쓰면 pageale.of(파라미터 2개를 받을수있다) 첫번째가 현재페이지(page), 두번째가 페이지 사이즈(amount)
@@ -77,15 +89,24 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
                 talent.school.userId,
                 talent.people.userId,
                 talent.people.userName,
-                talent.people.userEmail
+                talent.people.userEmail,
+                file.fileName,
+                file.filePath,
+                file.fileUuid,
+                file.fileSize,
+                file.fileImageCheck,
+                file.fileType
         ))
                 .where(talent.people.userId.eq(peopleId))
                 .from(talent)
+                .leftJoin(file)
+                .on((file.user.userId.eq(talent.people.userId)))
                 .orderBy(talent.talentAbleDate.asc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetch();
     }
+
 
     @Override
     public List<TalentDTO> findByDonationId(Long donationId) {
@@ -140,36 +161,36 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
                 .fetchOne();
     }
 
-//    /*=============================================================================================================*/
+    //    /*=============================================================================================================*/
 //  재능기부 랭킹 정렬
-@Override
-public List<Tuple> sortBytalentRank() {
-    List<Tuple> tuples = new ArrayList<>();
-    Tuple temp = null;
+    @Override
+    public List<Tuple> sortBytalentRank() {
+        List<Tuple> tuples = new ArrayList<>();
+        Tuple temp = null;
 
-    tuples = jpaQueryFactory.select(talent.talentAbleDate.count(), talent.people.userId)
-            .from(talent)
-            .groupBy(people.userId)
-            .fetch();
+        tuples = jpaQueryFactory.select(talent.talentAbleDate.count(), talent.people.userId)
+                .from(talent)
+                .groupBy(people.userId)
+                .fetch();
 
 //        sortTuples
-    for (int i = 0; i < tuples.size(); i++) {
-        for (int j = 0; j < tuples.size(); j++) {
-            String icash = tuples.get(i).get(0, Long.class) + "";
-            String jcash = tuples.get(j).get(0, Long.class) + "";
-            Long longIcash = Long.valueOf(icash);
-            Long longJcash = Long.valueOf(jcash);
-            if (longIcash >= longJcash) {
-                temp = tuples.get(i);
-                tuples.set(i, tuples.get(j));
-                tuples.set(j, temp);
+        for (int i = 0; i < tuples.size(); i++) {
+            for (int j = 0; j < tuples.size(); j++) {
+                String icash = tuples.get(i).get(0, Long.class) + "";
+                String jcash = tuples.get(j).get(0, Long.class) + "";
+                Long longIcash = Long.valueOf(icash);
+                Long longJcash = Long.valueOf(jcash);
+                if (longIcash >= longJcash) {
+                    temp = tuples.get(i);
+                    tuples.set(i, tuples.get(j));
+                    tuples.set(j, temp);
+                }
             }
         }
+        return tuples;
     }
-    return tuples;
-}
 
-    /*=============================================================================================================*/
+    /*===============================================================================================================================================================================*/
     @Override  //게시글 상세보기
     public List<TalentDTO> talentDetail(Long donationId) {
         return jpaQueryFactory.select(new QTalentDTO(
@@ -184,11 +205,21 @@ public List<Tuple> sortBytalentRank() {
                 talent.school.userId,
                 talent.people.userId,
                 talent.people.userName,
-                talent.people.userEmail
-        )).from(talent, donation)
+                talent.people.userEmail,
+                file.fileName,
+                file.filePath,
+                file.fileUuid,
+                file.fileSize,
+                file.fileImageCheck,
+                file.fileType
+        ))
+                .from(talent)
+                .leftJoin(file)
+                .on((file.user.userId.eq(talent.people.userId)))
                 .where(talent.donationId.eq(donationId))
                 .fetch();
     }
+
 
     //============제목 검색==============//
     private BooleanExpression talentTitleContaining(String talentTitle) { //booleanExpression은 null 일때 무시될 수 있고, and또는 or절을 통해서 조합을 할 수 있다.
@@ -196,8 +227,8 @@ public List<Tuple> sortBytalentRank() {
     } //booleanExpression 조건문을 반환한다, null일때 메소드 사라진다.
     //talentTitle에값이 있다면  talent.talentTitle.contains(talentTitle) 이걸 where절에 반환하고 false면 null을 반환해서 where절의 talentTitleContaining 메소드를 삭제한다.
 
-    //============카테고리 전체===========//
 
+    //============카테고리 전체===========//
     private BooleanBuilder talentCategoryContainingAll(String talentCategory) {
         if (talentCategory == null) {
             return null;
@@ -306,20 +337,21 @@ public List<Tuple> sortBytalentRank() {
         }
         return booleanBuilder;
     }
+
     private BooleanBuilder peopleNameAndEmailAndNicknameAndCategoryAndPlace2(String talentCategory) {
         BooleanBuilder booleanBuilder = new BooleanBuilder();
         if (talentCategory == null) {
             return null;
         }
 
-        if (talentCategory!=null) {
+        if (talentCategory != null) {
             booleanBuilder.or(talent.talentCategory.contains(talentCategory));
         }
 
         return booleanBuilder;
     }
 
-    public List<TalentDTO> findTalentSearch (Pageable pageable, Search search){
+    public List<TalentDTO> findTalentSearch(Pageable pageable, Search search) {
         return jpaQueryFactory.select(new QTalentDTO(
                 talent.donationId,
                 talent.talentTitle,
@@ -333,8 +365,8 @@ public List<Tuple> sortBytalentRank() {
                 talent.people.userId,
                 talent.people.userName,
                 talent.people.userEmail
-                ))
-                .from(talent,donation, people, user)
+        ))
+                .from(talent, donation, people, user)
                 .where(
                         talent.donationId.eq(donation.donationId),
                         donation.people.userId.eq(people.userId),
@@ -347,8 +379,9 @@ public List<Tuple> sortBytalentRank() {
                 .limit(pageable.getPageSize())
                 .orderBy(talent.createdDate.desc())
                 .fetch();
-    };
+    }
 
+    ;
 
 
 }
