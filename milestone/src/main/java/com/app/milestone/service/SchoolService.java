@@ -111,7 +111,14 @@ public class SchoolService {
         if (keyword == null) {
             keyword = null;
         }
+
         List<SchoolDTO> list = schoolRepository.findSchoolSearch(pageable, keyword);
+
+        for (SchoolDTO schoolDTO : list) {
+            FileDTO arFileDTO = fileRepository.findProfileByUserId(schoolDTO.getUserId());
+            schoolDTO.setUserProfile(arFileDTO);
+        }
+
         Page<SchoolDTO> school = new PageImpl<>(list, pageable, Integer.valueOf("" + schoolRepository.countByCreatedDate2(pageable, keyword)));
         return school;
     }
@@ -123,6 +130,12 @@ public class SchoolService {
             keyword = null;
         }
         List<SchoolDTO> list = schoolRepository.findSchoolSearchAsc(pageable, keyword);
+
+        for (SchoolDTO schoolDTO : list) {
+            FileDTO arFileDTO = fileRepository.findProfileByUserId(schoolDTO.getUserId());
+            schoolDTO.setUserProfile(arFileDTO);
+        }
+
         Page<SchoolDTO> school = new PageImpl<>(list, pageable, Integer.valueOf("" + schoolRepository.countByCreatedDate2(pageable, keyword)));
         return school;
     }
@@ -135,6 +148,13 @@ public class SchoolService {
             keyword = null;
         }
         List<SchoolDTO> list = schoolRepository.findByBudgetAndSearch(pageable, keyword);
+
+
+        for (SchoolDTO schoolDTO : list) {
+            FileDTO arFileDTO = fileRepository.findProfileByUserId(schoolDTO.getUserId());
+            schoolDTO.setUserProfile(arFileDTO);
+        }
+
         Page<SchoolDTO> schools = new PageImpl<>(list, pageable, Integer.valueOf("" + schoolRepository.countByCreatedDate3(pageable, keyword)));
         return schools;
     }
@@ -147,6 +167,13 @@ public class SchoolService {
             keyword = null;
         }
         List<SchoolDTO> list = schoolRepository.findByBudgetAndSearchAsc(pageable, keyword);
+
+
+        for (SchoolDTO schoolDTO : list) {
+            FileDTO arFileDTO = fileRepository.findProfileByUserId(schoolDTO.getUserId());
+            schoolDTO.setUserProfile(arFileDTO);
+        }
+
         int start = list.size() >= (int) pageable.getOffset() ? (int) pageable.getOffset() : (int) pageable.getOffset() - 10;
         int end = Math.min((start + pageable.getPageSize()), list.size());
 

@@ -311,9 +311,16 @@ let $pagingBtnFlex = $('.paging-number-flex');
 let pageInfo;
 
 function getList(schoolResp) {
+
+    // console.log("이중에 파일이 있니? userProfile"+JSON.stringify(schoolResp))
+
     let text = "";
     pageInfo = schoolResp.arSchoolDTO;
     schoolResp.arSchoolDTO.content.forEach(school => {
+
+        // console.log("school이란 객체는 111: "+school.userProfile)
+        // console.log("school이란 객체는 2222222222: "+school)
+
         text += `<tr>`
         text += ` <th class="card-body-title-checkbox-padding" style="width: 5%;margin-top: 29px;padding-top: 0; padding-bottom: 31px;">`
         text += `<label class="card-body-title-user-checkbox">`
@@ -327,10 +334,10 @@ function getList(schoolResp) {
         text += `<div class="donater-info" style="height: 50px;">`
         // text += `<div class="donater-info-img1"></div>`
 
-        if(school.fileName==null){
+        if(school.userProfile==null){
             text += `<img class="donater-info-img1" src="/imgs/myPage/normalProfile.png">`
         }else{
-            text += `<img class="donater-info-img1" src="/file/display?fileName=`+ school.filePath + `/` + school.fileUuid + `_` + school.fileName +`">`
+            text += `<img class="donater-info-img1" src="/file/display?fileName=`+ school.userProfile.filePath + `/` + school.userProfile.fileUuid + `_` + school.userProfile.fileName +`">`
         }
 
 

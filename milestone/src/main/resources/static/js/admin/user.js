@@ -399,16 +399,13 @@ function getSchoolList(schoolResp) {
         text += `</th>`
         text += `<th class="card-body-title-padding" style="width: 22%;">`
         text += `<div class="donater-info" style="height: 50px">`
-        // text += `<div class="donater-info-img1"></div>`
 
-
-        if(school.fileName==null){
+        if(school.userProfile==null){
             text += `<img class="donater-info-img1" src="/imgs/myPage/normalProfile.png">`
         }else{
-            text += `<img class="donater-info-img1" src="/file/display?fileName=`+ school.filePath + `/` + school.fileUuid + `_` + school.fileName +`">`
+            text += `<img class="donater-info-img1" src="/file/display?fileName=`+ school.userProfile.filePath + `/` + school.userProfile.fileUuid + `_` + school.userProfile.fileName +`">`
         }
-
-
+        
         text += `<div class="donater-info-text">`
         text += `<div class="donater-name">`+school.userName+`</div>`
         text += `<div>`+ school.userEmail +`</div>`
