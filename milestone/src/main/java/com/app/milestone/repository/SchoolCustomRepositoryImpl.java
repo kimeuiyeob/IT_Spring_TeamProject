@@ -3,6 +3,7 @@ package com.app.milestone.repository;
 import com.app.milestone.domain.QSchoolDTO;
 import com.app.milestone.domain.SchoolDTO;
 import com.app.milestone.domain.Search;
+import com.app.milestone.entity.QFile;
 import com.app.milestone.entity.School;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -15,6 +16,7 @@ import org.springframework.util.StringUtils;
 
 import java.util.List;
 
+import static com.app.milestone.entity.QFile.file;
 import static com.app.milestone.entity.QSchool.school;
 
 
@@ -47,9 +49,13 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
                 school.userPassword,
                 school.userPhoneNumber,
                 school.donationCount,
-                school.createdDate
-
+                school.createdDate,
+                file.fileName,
+                file.filePath,
+                file.fileUuid
         )).from(school)
+                .leftJoin(file)
+                .on(school.userId.eq(file.user.userId))
                 .orderBy(school.donationCount.asc())
                 .offset(0)
                 .limit(5)
@@ -82,8 +88,13 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
                 school.userPassword,
                 school.userPhoneNumber,
                 school.donationCount,
-                school.createdDate
-        ))
+                school.createdDate,
+                file.fileName,
+                file.filePath,
+                file.fileUuid
+        )).from(school)
+                .leftJoin(file)
+                .on(school.userId.eq(file.user.userId))
                 .where(
                         school.schoolQR.isNotNull(),
                         schoolNameContaining(search.getSchoolName()),
@@ -118,8 +129,13 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
                 school.userPassword,
                 school.userPhoneNumber,
                 school.donationCount,
-                school.createdDate
+                school.createdDate,
+                file.fileName,
+                file.filePath,
+                file.fileUuid
         )).from(school)
+                .leftJoin(file)
+                .on(school.userId.eq(file.user.userId))
                 .where(school.userId.eq(userId))
                 .fetchOne();
     }
@@ -244,9 +260,13 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
                 school.userPassword,
                 school.userPhoneNumber,
                 school.donationCount,
-                school.createdDate
-        ))
-                .from(school)
+                school.createdDate,
+                file.fileName,
+                file.filePath,
+                file.fileUuid
+        )).from(school)
+                .leftJoin(file)
+                .on(school.userId.eq(file.user.userId))
                 .where(
                         schoolNameAndAddressContaining(keyword)
                 )
@@ -279,9 +299,13 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
                 school.userPassword,
                 school.userPhoneNumber,
                 school.donationCount,
-                school.createdDate
-        ))
-                .from(school)
+                school.createdDate,
+                file.fileName,
+                file.filePath,
+                file.fileUuid
+        )).from(school)
+                .leftJoin(file)
+                .on(school.userId.eq(file.user.userId))
                 .where(
                         schoolNameAndAddressContaining(keyword)
                 )
@@ -312,9 +336,13 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
                 school.userPassword,
                 school.userPhoneNumber,
                 school.donationCount,
-                school.createdDate
-        ))
-                .from(school)
+                school.createdDate,
+                file.fileName,
+                file.filePath,
+                file.fileUuid
+        )).from(school)
+                .leftJoin(file)
+                .on(school.userId.eq(file.user.userId))
                 .where(
                         userNameAndSchoolNameContaining(keyword)
                 )
@@ -347,9 +375,13 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
                 school.userPassword,
                 school.userPhoneNumber,
                 school.donationCount,
-                school.createdDate
-        ))
-                .from(school)
+                school.createdDate,
+                file.fileName,
+                file.filePath,
+                file.fileUuid
+        )).from(school)
+                .leftJoin(file)
+                .on(school.userId.eq(file.user.userId))
                 .where(
                         userNameAndSchoolNameContaining(keyword)
                 )

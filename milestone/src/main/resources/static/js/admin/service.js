@@ -180,19 +180,22 @@ function getList(serviceResp) {
     pageInfo = serviceResp.arServiceDTO;
     serviceResp.arServiceDTO.content.forEach(service => {
         text += `<tr>`
-        text += `<th class="card-body-title-padding" style="width: 29%;">`
+        text += `<th class="card-body-title-padding" style="width: 27%; padding-top: 20px; padding-bottom: 21px;">`
         text += `<div class="donater-info">`
-        text += `<div class="donater-info-img1"></div>`
+        // text += `<div class="donater-info-img1"></div>`
         text += `<div class="donater-info-text">`
-        text += `<div class="donater-name">`+service.peopleNickname+`</div>`
-        /*text += `<div>`+ money.user.userEmail+`</div>`*/      //userEmail은 어떻게 가져오나
+        text += `<div class="donater-name">`+service.peopleUserName+`</div>`
+        text += `<div>`+ service.peopleUserEmail +`</div>`
         text += `</div>`
         text += `</div>`
         text += `</th>`
-        text += `<th class="card-body-title-padding" style="width: 23%;">`
+        text += `<th class="card-body-title-padding" style="width: 20%;">`
+        text += `<div class="donate-info-height">` + service.peopleNickname + `</div>`
+        text += `</th>`
+        text += `<th class="card-body-title-padding" style="width: 27%;">`
         text += `<div class="donate-info-height">`+ service.schoolName +`</div>`
         text += `</th>`
-        text += `<th class="card-body-title-padding" style="width: 23%;">`
+        text += `<th class="card-body-title-padding" style="width: 26%;">`
 
         var createdDateView = service.serviceVisitDate.split('-')
         var year = createdDateView[0]+'년 ';

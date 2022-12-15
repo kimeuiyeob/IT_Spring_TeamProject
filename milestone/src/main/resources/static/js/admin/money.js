@@ -181,23 +181,28 @@ function showList(){
 }
 
 function getList(moneyResp) {
+
+    console.log("들어온 것 : "+JSON.stringify(moneyResp))
+
     let text = "";
     pageInfo = moneyResp.arMoneyDTO;
     moneyResp.arMoneyDTO.content.forEach(money => {
         text += `<tr>`
-        text += `<th class="card-body-title-padding" style="width: 29%;">`
+        text += `<th class="card-body-title-padding" style="width: 20%;">`
         text += `<div class="donater-info">`
-        text += `<div class="donater-info-img1"></div>`
         text += `<div class="donater-info-text">`
-        text += `<div class="donater-name">`+money.peopleNickname+`</div>`
-        /*text += `<div>`+ money.user.userEmail+`</div>`*/      //userEmail은 어떻게 가져오나
+        text += `<div class="donater-name">`+money.peopleUserName+`</div>`
+        text += `<div>`+ money.peopleUserEmail+`</div>`
         text += `</div>`
         text += `</div>`
         text += `</th>`
-        text += `<th class="card-body-title-padding" style="width: 23%;">`
+        text += `<th class="card-body-title-padding" style="width: 15%;">`
+        text += `<div class="donate-info-height">` + money.peopleNickname + `</div>`
+        text += `</th>`
+        text += `<th class="card-body-title-padding" style="width: 21%;">`
         text += `<div class="donate-info-height">`+ money.schoolName +`</div>`
         text += `</th>`
-        text += `<th class="card-body-title-padding" style="width: 23%;">`
+        text += `<th class="card-body-title-padding" style="width: 20%;">`
         text += `<div class="donate-info-height">`+ money.moneyCash +`</div>`
         text += `</th>`
         text += `<th class="card-body-title-padding" style="width: 23%;">`

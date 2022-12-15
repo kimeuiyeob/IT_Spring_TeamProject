@@ -325,7 +325,15 @@ function getList(schoolResp) {
         text += `</th>`
         text += `<th class="card-body-title-padding" style="width: 17%;">`
         text += `<div class="donater-info" style="height: 50px;">`
-        text += `<div class="donater-info-img1"></div>`
+        // text += `<div class="donater-info-img1"></div>`
+
+        if(school.fileName==null){
+            text += `<img class="donater-info-img1" src="/imgs/myPage/normalProfile.png">`
+        }else{
+            text += `<img class="donater-info-img1" src="/file/display?fileName=`+ school.filePath + `/` + school.fileUuid + `_` + school.fileName +`">`
+        }
+
+
         text += `<div class="donater-info-text">`
         text += `<div class="donater-name">`+ school.schoolName +`</div>`
         text += `</div>`
@@ -337,7 +345,7 @@ function getList(schoolResp) {
         text += `<th class="card-body-title-padding" style="width: 17%;">`
         text += `<div class="donate-info-height">`+school.schoolPhoneNumber+`</div>`
         text += `</th>`
-        text += `<th class="card-body-title-padding" style="width: 18%; padding-bottom: 31px;padding-top: 0; margin-top: 32px;">`
+        text += `<th class="card-body-title-padding" style="width: 18%; padding-bottom: 17px; padding-top: 16px;">`
         text += `<div class="donate-info-height">`+school.schoolBudget+`</div>`
         text += `</th>`
         text += `</tr>`

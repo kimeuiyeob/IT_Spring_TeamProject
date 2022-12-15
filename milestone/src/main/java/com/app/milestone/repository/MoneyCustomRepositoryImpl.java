@@ -19,6 +19,7 @@ import static com.app.milestone.entity.QDonation.donation;
 import static com.app.milestone.entity.QMoney.*;
 import static com.app.milestone.entity.QPeople.people;
 import static com.app.milestone.entity.QSchool.*;
+import static com.app.milestone.entity.QUser.user;
 
 @Repository
 @RequiredArgsConstructor
@@ -29,12 +30,15 @@ public class MoneyCustomRepositoryImpl implements MoneyCustomRepository {
     @Override
     public List<MoneyDTO> findByCreateDateByUserId(Long userId) {
         return jpaQueryFactory.select(new QMoneyDTO(
+                money.donationId,
                 money.school.schoolName,
                 money.people.peopleNickname,
                 money.school.userId,
                 money.people.userId,
                 money.moneyCash,
-                money.createdDate
+                money.createdDate,
+                money.people.userName,
+                money.people.userEmail
         )).from(money)
                 .where(money.school.userId.eq(userId))
                 .orderBy(money.createdDate.desc())
@@ -133,15 +137,22 @@ public class MoneyCustomRepositoryImpl implements MoneyCustomRepository {
     //   최신순, 기부금 많은순
     public List<MoneyDTO> findMoneySearch (Pageable pageable, String keyword){
         return jpaQueryFactory.select(new QMoneyDTO(
+                money.donationId,
                 money.school.schoolName,
                 money.people.peopleNickname,
                 money.school.userId,
                 money.people.userId,
                 money.moneyCash,
-                money.createdDate
+                money.createdDate,
+                money.people.userName,
+                money.people.userEmail
         ))
-                .from(money)
+                .from(money, donation, people, school, user)
                 .where(
+                        money.donationId.eq(donation.donationId),
+                        donation.people.userId.eq(people.userId),
+                        donation.school.userId.eq(school.userId),
+                        people.userId.eq(user.userId),
                         peopleNicknameAndSchoolNameContaining(keyword)
                 )
                 .offset(pageable.getOffset())
@@ -153,15 +164,22 @@ public class MoneyCustomRepositoryImpl implements MoneyCustomRepository {
     //   오래된순, 기부금 많은순
     public List<MoneyDTO> findMoneySearchAsc (Pageable pageable, String keyword){
         return jpaQueryFactory.select(new QMoneyDTO(
+                money.donationId,
                 money.school.schoolName,
                 money.people.peopleNickname,
                 money.school.userId,
                 money.people.userId,
                 money.moneyCash,
-                money.createdDate
+                money.createdDate,
+                money.people.userName,
+                money.people.userEmail
         ))
-                .from(money)
+                .from(money, donation, people, school, user)
                 .where(
+                        money.donationId.eq(donation.donationId),
+                        donation.people.userId.eq(people.userId),
+                        donation.school.userId.eq(school.userId),
+                        people.userId.eq(user.userId),
                         peopleNicknameAndSchoolNameContaining(keyword)
                 )
                 .offset(pageable.getOffset())
@@ -173,15 +191,22 @@ public class MoneyCustomRepositoryImpl implements MoneyCustomRepository {
     //   최신순, 기부금 적은순
     public List<MoneyDTO> findMoneySearchAmount (Pageable pageable, String keyword){
         return jpaQueryFactory.select(new QMoneyDTO(
+                money.donationId,
                 money.school.schoolName,
                 money.people.peopleNickname,
                 money.school.userId,
                 money.people.userId,
                 money.moneyCash,
-                money.createdDate
+                money.createdDate,
+                money.people.userName,
+                money.people.userEmail
         ))
-                .from(money)
+                .from(money, donation, people, school, user)
                 .where(
+                        money.donationId.eq(donation.donationId),
+                        donation.people.userId.eq(people.userId),
+                        donation.school.userId.eq(school.userId),
+                        people.userId.eq(user.userId),
                         peopleNicknameAndSchoolNameContaining(keyword)
                 )
                 .offset(pageable.getOffset())
@@ -193,15 +218,22 @@ public class MoneyCustomRepositoryImpl implements MoneyCustomRepository {
     //   오래된순, 기부금 적은순
     public List<MoneyDTO> findMoneySearchAmountAsc (Pageable pageable, String keyword){
         return jpaQueryFactory.select(new QMoneyDTO(
+                money.donationId,
                 money.school.schoolName,
                 money.people.peopleNickname,
                 money.school.userId,
                 money.people.userId,
                 money.moneyCash,
-                money.createdDate
+                money.createdDate,
+                money.people.userName,
+                money.people.userEmail
         ))
-                .from(money)
+                .from(money, donation, people, school, user)
                 .where(
+                        money.donationId.eq(donation.donationId),
+                        donation.people.userId.eq(people.userId),
+                        donation.school.userId.eq(school.userId),
+                        people.userId.eq(user.userId),
                         peopleNicknameAndSchoolNameContaining(keyword)
                 )
                 .offset(pageable.getOffset())

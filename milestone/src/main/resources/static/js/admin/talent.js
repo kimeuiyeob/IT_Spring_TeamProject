@@ -312,7 +312,7 @@ function getList(talentResp) {
     pageInfo = talentResp.arTalentDTO;
     talentResp.arTalentDTO.content.forEach(talent => {
         text += `<tr>`
-        text += `<th class="card-body-title-checkbox-padding" style="width: 5%;">`
+        text += `<th class="card-body-title-checkbox-padding" style="width: 5%; padding-top: 24px; padding-bottom: 26px;">`
         text += `<label class="card-body-title-user-checkbox">`
         text += `<div class="check-img"></div>`
         text += `<input class="notice-checked" type="checkbox" name="check">`

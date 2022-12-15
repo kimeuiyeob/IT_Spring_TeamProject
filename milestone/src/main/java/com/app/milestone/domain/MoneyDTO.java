@@ -22,6 +22,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 public class MoneyDTO {
+    private Long donationId;
     private String schoolName;
     private String peopleNickname;
     private Long userId;
@@ -29,6 +30,8 @@ public class MoneyDTO {
     private Long moneyCash;
     private LocalDateTime createdDate;
     private FileDTO file;
+    private String peopleUserName;
+    private String peopleUserEmail;
 
     public Money toEntity() {
         return Money.builder()
@@ -37,13 +40,17 @@ public class MoneyDTO {
     }
 
     @QueryProjection
-    public MoneyDTO(String schoolName, String peopleNickname, Long userId,Long giverId, Long moneyCash, LocalDateTime createdDate) {
+    public MoneyDTO(Long donationId, String schoolName, String peopleNickname, Long userId,Long giverId, Long moneyCash, LocalDateTime createdDate, String peopleUserName, String peopleUserEmail) {
+        this.donationId = donationId;
         this.schoolName = schoolName;
         this.peopleNickname = peopleNickname;
         this.userId = userId;
         this.giverId = giverId;
         this.moneyCash = moneyCash;
         this.createdDate = createdDate;
+        this.peopleNickname = peopleNickname;
+        this.peopleUserName = peopleUserName;
+        this.peopleUserEmail = peopleUserEmail;
     }
 }
 
