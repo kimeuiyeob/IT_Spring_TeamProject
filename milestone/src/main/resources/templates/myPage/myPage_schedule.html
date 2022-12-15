@@ -38,6 +38,9 @@
     <aside th:replace="/myPage/myPage_aside :: aside"></aside>
     <!-- 메인 -->
     <main class="main">
+        <th:block  th:each="service, i: ${serviceDTO}">
+            <input type="hidden" name="serviceVisitDate" th:value="${service.serviceVisitDate}">
+        </th:block>
         <div class="mainWrap flexCol">
             <div class="mainTitle flexRow">일정 관리</div>
             <div class="mainBodyWrap flexCol flexPublic">

@@ -24,8 +24,7 @@
             <div class="exclamationMark flexPublic">
                 <div>!</div>
             </div>
-            <h2 class="modalContent">황지수보육원 일정을 <br>
-                정말로 취소할까요?</h2>
+            <h2 class="modalContent">일정을 정말로 취소할까요?</h2>
         </div>
         <div class="modalFooter">
             <button class="modalBtn">YES</button>
@@ -39,6 +38,9 @@
     <aside th:replace="/myPage/myPage_aside_school :: aside"></aside>
     <!-- 메인 -->
     <main class="main">
+        <th:block  th:each="service1, i: ${serviceDTO1}">
+        <input type="hidden" name="serviceVisitDate" th:value="${service1.serviceVisitDate}">
+        </th:block>
         <div class="mainWrap flexCol">
             <div class="mainTitle flexRow">일정 관리</div>
             <div class="mainBodyWrap flexCol flexPublic">
@@ -69,51 +71,29 @@
                     <div class="margin-top-16"></div>
                     <div class="listItems flexBetween">
                         <div class="items-names">신청자</div>
-                        <div class="items-locations">기부 형태</div>
-                        <div class="items-dates">신청일</div>
+                        <div class="items-dates">방문일</div>
                         <div class="items-cancels">일정 취소</div>
                     </div>
-                    <div class="listItems flexBetween">
-                        <div class="items-name flexCol">닉네임</div>
-                        <div class="items-location">방문 기부</div>
-                        <div class="items-date flexCol">2022년 11월 11일</div>
-                        <div class="items-cancel flexCol">취소</div>
-                    </div>
-                    <div class="listItems flexBetween">
-                        <div class="items-name flexCol">닉네임</div>
-                        <div class="items-location">방문 기부</div>
-                        <div class="items-date flexCol">2022년 11월 11일</div>
-                        <div class="items-cancel flexCol">취소</div>
-                    </div>
-                    <div class="listItems flexBetween">
-                        <div class="items-name flexCol">닉네임</div>
-                        <div class="items-location">방문 기부</div>
-                        <div class="items-date flexCol">2022년 11월 11일</div>
-                        <div class="items-cancel flexCol">취소</div>
-                    </div>
-                    <div class="pageBtns flexPublic">
-                        <a class="pageBtn flexPublic">
-                            <svg class="prevNextBtn flexPublic">
-                                <path xmlns="http://www.w3.org/2000/svg"
-                                      d="M9.41421356,12 L15.7071068,5.70710678 C16.0976311,5.31658249 16.0976311,4.68341751 15.7071068,4.29289322 C15.3165825,3.90236893 14.6834175,3.90236893 14.2928932,4.29289322 L7.29289322,11.2928932 C6.90236893,11.6834175 6.90236893,12.3165825 7.29289322,12.7071068 L14.2928932,19.7071068 C14.6834175,20.0976311 15.3165825,20.0976311 15.7071068,19.7071068 C16.0976311,19.3165825 16.0976311,18.6834175 15.7071068,18.2928932 L9.41421356,12 Z"></path>
-                            </svg>
-                        </a>
-                        <code class="pageBtn flexPublic page">
-                            <div>1</div>
-                        </code>
-                        <a class="pageBtn flexPublic">
-                            <div>2</div>
-                        </a>
-                        <a class="pageBtn flexPublic">
-                            <div>3</div>
-                        </a>
-                        <a class="pageBtn flexPublic">
-                            <svg class="prevNextBtn flexPublic">
-                                <path xmlns="http://www.w3.org/2000/svg"
-                                      d="M9.41421356,12 L15.7071068,5.70710678 C16.0976311,5.31658249 16.0976311,4.68341751 15.7071068,4.29289322 C15.3165825,3.90236893 14.6834175,3.90236893 14.2928932,4.29289322 L7.29289322,11.2928932 C6.90236893,11.6834175 6.90236893,12.3165825 7.29289322,12.7071068 L14.2928932,19.7071068 C14.6834175,20.0976311 15.3165825,20.0976311 15.7071068,19.7071068 C16.0976311,19.3165825 16.0976311,18.6834175 15.7071068,18.2928932 L9.41421356,12 Z"
-                                      transform="translate(11.500000, 12.000000) scale(-1, 1) translate(-11.500000, -12.000000) "></path>
-                            </svg>
-                        </a>
+                    <section class="listSection">
+                        <!--<div class="listItems flexBetween">
+
+                            &lt;!&ndash; 보육원 이름&ndash;&gt;
+                            <div class="items-name flexCol">닉네임</div>
+
+                            &lt;!&ndash; 방문 신청일&ndash;&gt;
+                            <div class="items-date flexCol">2022년 11월 11일</div>
+
+                            <div class="items-cancel flexCol">취소</div>
+                        </div>-->
+                    </section>
+                    <div class="card-footer">
+                        <div class="empty-div"></div>
+                        <div class="paging-number-box">
+                            <div class="paging-number">
+                                <div class="paging-number-flex">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -123,8 +103,8 @@
 <footer th:replace="/fix/footer.html :: footer"></footer>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-<script src="/js/myPage/callender.js"></script>
-<script src="/js/myPage/modal.js"></script>
+<script src="/js/myPage/schoolCallender.js"></script>
+<script src="/js/myPage/schoolModal.js"></script>
 <script src="/js/myPage/schoolSchedule.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/js/fix/header.js"></script>

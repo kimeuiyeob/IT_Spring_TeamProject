@@ -11,9 +11,13 @@ public interface ServiceCustomRepository {
 
     //    개인 일정 조회
     public List<ServiceDTO> findService(Pageable pageable, Long peopleId);
+    public List<ServiceDTO> findVisitDate(Long peopleId);
+//    보육원 일정 조회
+    public List<ServiceDTO> findService1(Pageable pageable, Long schoolId);
+    public List<ServiceDTO> findVisitDate1(Long schoolId);
 
     public Long countByCreatedDate(Pageable pageable, Long peopleId);
-
+    public Long countByCreatedDate1(Pageable pageable, Long schoolId);
 
     public List<ServiceDTO> findServiceSearch(Pageable pageable, String keyword);
 

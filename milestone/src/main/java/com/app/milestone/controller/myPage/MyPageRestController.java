@@ -22,7 +22,7 @@ public class MyPageRestController {
     /*=============================================================================*/
     //마이페이지 재능기부 목록 수정
     @GetMapping(value = {"/list/{page}"})
-    public TalentResp search(@PathVariable("page") Integer page , HttpServletRequest request) {
+    public TalentResp search(@PathVariable("page") Integer page, HttpServletRequest request) {
         HttpSession session = request.getSession();
         Long userId = (Long) session.getAttribute("userId");
 
@@ -111,7 +111,7 @@ public class MyPageRestController {
     }
 
     //    개인 일정 조회
-    @GetMapping(value = {"/schedule/{page}"})
+    @GetMapping(value = {"/peopleSchedule/{page}"})
     public ServiceResp peopleScheduleList(HttpSession session, @PathVariable("page") Integer page) {
         Long userId = (Long) session.getAttribute("userId");
 
@@ -121,5 +121,24 @@ public class MyPageRestController {
 
         return serviceResp;
     }
+
+    //    일정 취소
+    @GetMapping(value = {"/serviceDelete/{donationId}"})
+    public void ServiceDelete(@PathVariable("donationId") Long donationId) {
+        serviceService.deleteByDonationId(donationId);
+    }
+
+    //    보육원 일정 조회
+    @GetMapping(value = {"/schoolSchedule/{page}"})
+    public ServiceResp schoolScheduleList(HttpSession session, @PathVariable("page") Integer page) {
+        Long userId = (Long) session.getAttribute("userId");
+
+        ServiceResp serviceResp = new ServiceResp();
+        Page<ServiceDTO> arServiceDTO = serviceService.schoolScheduleList(page, userId);
+        serviceResp.setArServiceDTO(arServiceDTO);
+
+        return serviceResp;
+    }
+
 
 }

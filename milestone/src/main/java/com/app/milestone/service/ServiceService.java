@@ -104,4 +104,33 @@ public class ServiceService {
         return services;
     }
 
+    //  donationId로 일정 취소
+    public void deleteByDonationId(Long donationId) {
+        donationRepository.deleteById(donationId);
+    }
+
+    //    보육원 일정 관리
+    public Page<ServiceDTO> schoolScheduleList(Integer page, Long sessionId) {
+        if (page == null) page = 0;
+
+        log.info("서비스에 들어온 sessionId : " + sessionId);
+
+        Pageable pageable = PageRequest.of(page, 3);
+        List<ServiceDTO> list = serviceRepository.findService1(pageable, sessionId);
+
+        log.info("서비스에 들어온 list : " + list);
+
+        Page<ServiceDTO> services = new PageImpl<>(list, pageable, Integer.valueOf("" + serviceRepository.countByCreatedDate1(pageable, sessionId)));
+        return services;
+    }
+
+    //    날짜 불러오기
+    public List<ServiceDTO> findSchoolVisitDate1(Long sessionId) {
+        return serviceRepository.findVisitDate1(sessionId);
+    }
+    //    날짜 불러오기
+    public List<ServiceDTO> findPeopleVisitDate(Long sessionId) {
+        return serviceRepository.findVisitDate(sessionId);
+    }
+
 }

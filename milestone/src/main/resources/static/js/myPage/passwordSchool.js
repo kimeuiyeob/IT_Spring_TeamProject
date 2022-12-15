@@ -98,6 +98,8 @@ $password.on('blur', function() {
             console.log(result);
             if(result){
                 console.log("비밀번호 일치");
+                $password.next().show();
+                $password.next().text("비밀번호가 일치합니다.")
                 pwCheckFlag = true;
             } else if(!result){
                 console.log("비밀번호 틀림");
