@@ -18,8 +18,15 @@ public class Money extends Donation {
     private Long moneyCash;
 
     @Builder
-    public Money(School school, People people, Long moneyCash) {
-        super(school, people);
+    public Money(Long moneyCash) {
         this.moneyCash = moneyCash;
+    }
+
+    public void changeSchool(School school){
+        super.changeSchool(school);
+    }
+
+    public void changePeople(People people){
+        super.changePeople(people);
     }
 }

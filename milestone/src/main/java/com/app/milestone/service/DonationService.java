@@ -1,6 +1,7 @@
 package com.app.milestone.service;
 
 
+import com.app.milestone.aspect.Alarm;
 import com.app.milestone.repository.DonationRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,5 +15,12 @@ public class DonationService {
 
     public void findDonation(Long donationId) {
         donationRepository.findById(donationId);
+    }
+
+    @Alarm
+    public void alarm(Object object) {
+        log.info("========================");
+        log.info("=========서비스쪽===========" + object);
+        log.info("========================");
     }
 }

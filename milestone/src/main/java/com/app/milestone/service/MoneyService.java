@@ -28,6 +28,7 @@ public class MoneyService {
     private final DonationRepository donationRepository;
     private final MoneyRepository moneyRepository;
     private final FileRepository fileRepository;
+    private final DonationService donationService;
 
     //    전체 기부금 랭킹
     public List<Ranking> donationMoneyRanking() {
@@ -75,11 +76,15 @@ public class MoneyService {
     public void payment(Long userId, MoneyDTO moneyDTO) {
         int donationCount = 0;
         People people = peopleRepository.findById(userId).get();
-
         School school = schoolRepository.findById(moneyDTO.getUserId()).get();
 
-        Money money = new Money(school, people, moneyDTO.getMoneyCash());
-        moneyRepository.save(money);
+
+
+        Money money = moneyDTO.toEntity();
+        money.changePeople(people);
+        money.changeSchool(school);
+        money = moneyRepository.save(money);
+        donationService.alarm(money);
         donationCount = donationRepository.countByPeopleUserId(userId);
         people.update(donationCount);
         donationCount = donationRepository.countBySchoolUserId(moneyDTO.getUserId());

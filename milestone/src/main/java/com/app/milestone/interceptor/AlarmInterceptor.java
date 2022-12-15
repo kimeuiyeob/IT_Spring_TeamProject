@@ -47,7 +47,7 @@ public class AlarmInterceptor implements HandlerInterceptor {
             String type = userRepository.findById(userId).get().getClass().getSimpleName().toLowerCase();
             List<AlarmDTO> alarmDTOList = alarmRepository.findNoneCheckAlarmByType(userId, type);
             if (alarmDTOList.size() > 0) {
-                modelAndView.addObject("checkAlarm", alarmRepository.findNoneCheckAlarmByType(userId, type));
+                modelAndView.addObject("checkAlarm", alarmDTOList);
             }
 //            log.info("==================== END ======================" + alarmRepository.findNoneCheckAlarmByType(type).size());
         }

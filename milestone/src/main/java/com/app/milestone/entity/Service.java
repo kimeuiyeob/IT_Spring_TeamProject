@@ -21,9 +21,15 @@ public class Service extends Donation {
     private LocalDateTime serviceVisitDate;
 
 
+    public void changeSchool(School school){
+        super.changeSchool(school);
+    }
+    public void changePeople(People people){
+        super.changePeople(people);
+    }
+
     @Builder
-    public Service(School school, People people, LocalDateTime serviceVisitDate) {
-        super(school, people);
+    public Service(LocalDateTime serviceVisitDate) {
         this.serviceVisitDate = serviceVisitDate;
     }
 

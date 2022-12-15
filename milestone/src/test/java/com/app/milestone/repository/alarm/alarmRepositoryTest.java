@@ -67,7 +67,7 @@ public class alarmRepositoryTest {
         String type = "school";
         Pageable pageable = PageRequest.of(0,10);
         log.info("====================================================================");
-        log.info("========================"+alarmRepository.findAlarmByType(pageable,type).size());
+        log.info("========================"+alarmRepository.findAlarmByType(105L, pageable, type).size());
         log.info("====================================================================");
     }
 
@@ -76,7 +76,7 @@ public class alarmRepositoryTest {
     public void findSchoolCheckAlarmByTypeTest(){
         String type = "school";
         log.info("====================================================================");
-        log.info("========================"+alarmRepository.findNoneCheckAlarmByType(type).size());
+        log.info("========================"+alarmRepository.findNoneCheckAlarmByType(105L, type).size());
         log.info("====================================================================");
     }
 }

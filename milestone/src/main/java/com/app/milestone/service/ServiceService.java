@@ -1,5 +1,6 @@
 package com.app.milestone.service;
 
+import com.app.milestone.aspect.Alarm;
 import com.app.milestone.domain.FileDTO;
 import com.app.milestone.domain.Ranking;
 import com.app.milestone.domain.ServiceDTO;
@@ -27,6 +28,7 @@ public class ServiceService {
     private final DonationRepository donationRepository;
     private final ServiceRepository serviceRepository;
     private final FileRepository fileRepository;
+    private final DonationService donationService;
 
     //    방문횟수 랭킹
     public List<Ranking> donationVisitRanking() {
@@ -49,16 +51,19 @@ public class ServiceService {
     public void donationReservation(Long userId, ServiceDTO serviceDTO) {
         int donationCount = 0;
         People people = peopleRepository.findById(userId).get();
-
         School school = schoolRepository.findById(serviceDTO.getUserId()).get();
 
-        com.app.milestone.entity.Service service = new com.app.milestone.entity.Service(school, people, serviceDTO.getServiceVisitDate());
-        serviceRepository.save(service);
+        com.app.milestone.entity.Service service = serviceDTO.toEntity();
+        service.changeSchool(school);
+        service.changePeople(people);
+        service = serviceRepository.save(service);
+        donationService.alarm(service);
         donationCount = donationRepository.countByPeopleUserId(userId);
         people.update(donationCount);
         donationCount = donationRepository.countBySchoolUserId(serviceDTO.getUserId());
         school.update(donationCount);
     }
+
 
     //    관리자 페이지=======================================================
 
