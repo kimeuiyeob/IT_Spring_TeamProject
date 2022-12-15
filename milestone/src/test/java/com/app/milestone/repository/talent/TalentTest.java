@@ -1,5 +1,6 @@
 package com.app.milestone.repository.talent;
 
+import com.app.milestone.domain.PeopleDTO;
 import com.app.milestone.domain.QTalentDTO;
 import com.app.milestone.domain.Search;
 import com.app.milestone.domain.TalentDTO;
@@ -41,36 +42,29 @@ public class TalentTest {
     @Autowired
     private PeopleRepository peopleRepository;
 
+    //탤러트 글작성 테스트
     @Test
-    public void save2Test() {
+    public void saveTest123() {
+        for (int i = 0; i < 10; i++) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            TalentDTO talentDTO = new TalentDTO();
+            People people = peopleRepository.findById(5L).get();
+            talentDTO.setTalentTitle("안녕하세요여러분" + i);
+            talentDTO.setTalentContent("이건내용이에요여러분!!" + i);
+            talentDTO.setTalentAbleDate(LocalDateTime.now());
+            talentDTO.setTalentCategory("교육");
+            talentDTO.setTalentPlace("강원도");
 
-//        String[] talentPlaces = {"서울","경기도","강원도","충청도","전라도","경상도","제주도"};
-//        String[] talentTitles = {"코끼리", "거북이", "하마", "기린", "돌고래", "비둘기", "뉴트리아", "뱀", "준성이"};
-//        String[] talentContents = {"나는내용입니다", "나는내용일까요?", "나는김의엽입니다", "나는누구일까요?", "이제저도모르겠습니다."};
-//        String[] talentCategorys = {"교육", "운동", "음악", "미술","IT"};
-//        for (int i = 0; i < 50; i++) {
+            Talent talent = talentRepository.save(talentDTO.toEntity());
 
-        TalentDTO talentDTO = new TalentDTO();
+            talent.changePeople(people);
+        }
 
-        People people = peopleRepository.findById(110L).get();
-
-//            talentDTO.setTalentTitle(talentTitles[i % 8]);
-//            talentDTO.setTalentContent(talentContents[i % 5]);
-//            talentDTO.setTalentAbleDate(LocalDateTime.now());
-//            talentDTO.setTalentCategory(talentCategorys[i % 5]);
-//            talentDTO.setTalentPlace(talentPlaces[i % 7]);
-
-        talentDTO.setTalentTitle("안녕10");
-        talentDTO.setTalentContent("이건내용10");
-        talentDTO.setTalentAbleDate(LocalDateTime.now());
-        talentDTO.setTalentCategory("음악");
-        talentDTO.setTalentPlace("전라도");
-
-        Talent talent = talentRepository.save(talentDTO.toEntity()); //talentRepository.save(talentDTO.toEntity()) 리턴타입 Entity
-
-        talent.changePeople(people);
-//    }
-}
+    }
 
     @Test
     public void saveTest() {

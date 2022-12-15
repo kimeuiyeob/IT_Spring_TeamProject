@@ -254,10 +254,19 @@ $(".AllTalentBox").on("click", ".talentBox", function () {
             text += `<div style = "display:flex; justify-content: space-between; padding-top: 35px;">`
             text += `<div class = "abc" style = "padding-right: 50px;">`
             text += `<span class = "abcd" style = "padding-bottom: 20px;">`
-            text += `<img src = "../imgs/talent/normalProfile.png"
-                style = "border-radius: 10px; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block;">`
-            text += `</span>`
 
+            /*=========================================================================================================*/
+
+            if(talent.fileName == null) {
+                //텍스트 추가 이미지src 에다 talent로 가져온 filePath + fileUUid _ fileName으로 이미지를 찾아온다.
+                text += `<img src="/imgs/myPage/normalProfile.png" style = "border-radius: 10px; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block;">`
+            }else {
+                text += `<img style="width:203px; height:204px; border-radius: 10px; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block;" class="talentImg" src="/file/display?fileName=`+ talent.filePath + `/` + talent.fileUuid + `_` + talent.fileName +`">`
+            }
+
+            /*=========================================================================================================*/
+
+            text += `</span>`
 
             text += `<div class = "talentType" style = "display: flex; justify-content: space-between; width: 100%; background: none;" >`
             text += `<img src = "/imgs/talent/care2.png" style = "margin-top: 7px; width: 25px; height: 25px; margin-bottom: -6px;" >` + talent.talentCategory + `</div>`

@@ -21,7 +21,7 @@
 <!-- ================================================================================================================ -->
 <header th:replace="/fix/header.html :: header"></header>
 <!-- ================================================================================================================ -->
-<div class="wholePage" style="padding-bottom: 100px";>
+<div class="wholePage" style="padding-bottom: 100px" ;>
     <div class="main" style="position: relative;">
 
         <div style="display: flex; justify-content: space-between; ">
@@ -31,14 +31,7 @@
             <div style="padding-top: 20px" id="pencil">
                 <div class="talentButton" id="talentButton123" style="display: none">
 
-<!--                    <script language="JavaScript">-->
-<!--                        console.log("이거되는거 맞아?")-->
-<!--                        if(sessionId === "people") {-->
-<!--                            $("#talentButton123").show();-->
-<!--                        }-->
-<!--                    </script>-->
-
-                    <span class="talentButton1" >글 작성하기</span>
+                    <span class="talentButton1">글 작성하기</span>
 
                 </div>
             </div>
@@ -144,8 +137,7 @@
         </div>
     </div>
 
-    <input type="hidden" th:value="${session.type}" id="sessionId"><!--===================================세션값 저장==========================-->
-
+    <input type="hidden" th:value="${session.type}" id="sessionId">
 
     <!-- ============================================================================================= -->
 
@@ -208,7 +200,9 @@
 
                                 <div class="margin-bottom-8 flexBetween" style="margin-bottom: 0px;">
                                     <div class="inputTitle">카테고리</div>
-                                    <div id="writePlease" style="display: none; color :rgb(255, 64, 43); margin-top: -15px;">내용을 전부 작성해주세요.
+                                    <div id="writePlease"
+                                         style="display: none; color :rgb(255, 64, 43); margin-top: -15px;">내용을 전부
+                                        작성해주세요.
                                     </div>
                                 </div>
                                 <div class="margin-bottom-8 relative" style="width: 350px;">
@@ -221,7 +215,8 @@
                                     </div>
                                     <div class="inputCos flex" style="padding: 0;">
                                         <div class="inputSpace flexRow">
-                                            <input type=text name="bank" style="border : none" class="pleasehear1" placeholder="카테고리를 선택해주세요"
+                                            <input type=text name="bank" style="border : none" class="pleasehear1"
+                                                   placeholder="카테고리를 선택해주세요"
                                                    disabled>
                                         </div>
                                         <div class="arrowWrap">
@@ -362,7 +357,7 @@
         $(".program").css({"font-weight": "normal", "color": "rgb(154, 155, 167)"})
 
         //맨처음 들어갔을때 세션아이디로 글작성 버튼 생성하거나 지우거나
-        if(sessionId === "people") {
+        if (sessionId === "people") {
             $("#talentButton123").show();
         }
     }
@@ -436,14 +431,23 @@
     function getList(talentResp) {
         let text = "";
         pageInfo = talentResp.arTalentDTO;
-
+        //탤런트 임플에 조건에 맞는 모든 값들을 가져와 talent로 반복 돌린다.
         talentResp.arTalentDTO.content.forEach(talent => {
 
             text += `<div style="padding-bottom:20px">`
             text += `<article class="talentBox">`
             text += `<div class="talentBox2">`
             text += `<div class="talentBox3">`
-            text += `<img src="../imgs/myPage/normalProfile.png" class="talentImg">`
+
+            /*=========================================================================================================*/
+            if(talent.fileName == null){
+                //텍스트 추가 이미지src 에다 talent로 가져온 filePath + fileUUid _ fileName으로 이미지를 찾아온다.
+                text += `<img id="profilepicture" src="/imgs/myPage/normalProfile.png" class="talentImg">`
+            }else {
+                text += `<img class="talentImg" src="/file/display?fileName=`+ talent.filePath + `/` + talent.fileUuid + `_` + talent.fileName +`">`
+            }
+            /*=========================================================================================================*/
+
             text += `</div>`
             text += `<div class="talentBox4">`
 
@@ -477,7 +481,6 @@
         $(".talentBoxAll").html(text)
         pageingBtn();
     }
-
     /*===========================================================================================*/
     /*각 카테고리 클릭시*/
 
