@@ -206,8 +206,8 @@ public class AdminRestController {
     }
 
     //     재능기부 삭제
-    @RequestMapping("/talentDelete")
-    public void deleteTalent(HttpServletRequest request){
+    @RequestMapping("/serviceDelete")
+    public void deleteSchedule(HttpServletRequest request){
         String [] donationIds = request.getParameterValues("chkArray");
         for (int i = 0; i<donationIds.length; i++){
             talentService.deleteByDonationId(Long.valueOf(donationIds[i]));

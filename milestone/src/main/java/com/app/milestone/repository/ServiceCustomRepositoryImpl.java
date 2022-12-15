@@ -2,7 +2,6 @@ package com.app.milestone.repository;
 
 import com.app.milestone.domain.QServiceDTO;
 import com.app.milestone.domain.ServiceDTO;
-import com.app.milestone.entity.QDonation;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.Tuple;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -15,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.app.milestone.entity.QDonation.donation;
-import static com.app.milestone.entity.QMoney.money;
 import static com.app.milestone.entity.QPeople.people;
 import static com.app.milestone.entity.QSchool.school;
 import static com.app.milestone.entity.QService.service;
@@ -60,7 +58,74 @@ public class ServiceCustomRepositoryImpl implements ServiceCustomRepository {
                 .fetch();
     }
 
-    ;
+    @Override
+    public List<ServiceDTO> findVisitDate(Long peopleId) {
+        return jpaQueryFactory.select(new QServiceDTO(
+                service.school.schoolName,
+                service.people.peopleNickname,
+                service.people.userId,
+                service.school.address.schoolAddress,
+                service.school.address.schoolAddressDetail,
+                service.serviceVisitDate,
+                service.donationId,
+                service.people.userName,
+                service.people.userEmail))
+                .from(service)
+                .where(service.people.userId.eq(peopleId))
+                .fetch();
+    }
+
+
+    //    마이페이지 보육원 일정관리
+    @Override
+    public Long countByCreatedDate1(Pageable pageable, Long schoolId) {
+        return jpaQueryFactory.select(service.count())
+                .from(service)
+                .where(service.school.userId.eq(schoolId))
+                .orderBy(service.createdDate.asc())
+                .fetchOne();
+    }
+
+    @Override
+    public List<ServiceDTO> findService1(Pageable pageable, Long schoolId) {
+        return jpaQueryFactory.select(new QServiceDTO(
+                service.school.schoolName,
+                service.people.peopleNickname,
+                service.people.userId,
+                service.school.address.schoolAddress,
+                service.school.address.schoolAddressDetail,
+                service.serviceVisitDate,
+                service.donationId,
+                service.people.userName,
+                service.people.userEmail
+        ))
+                .from(service)
+                .where(
+                        service.school.userId.eq(schoolId),
+                        service.serviceVisitDate.goe(LocalDateTime.now())
+                )
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .orderBy(service.serviceVisitDate.asc())
+                .fetch();
+    }
+
+    @Override
+    public List<ServiceDTO> findVisitDate1(Long schoolId) {
+        return jpaQueryFactory.select(new QServiceDTO(
+                service.school.schoolName,
+                service.people.peopleNickname,
+                service.people.userId,
+                service.school.address.schoolAddress,
+                service.school.address.schoolAddressDetail,
+                service.serviceVisitDate,
+                service.donationId,
+                service.people.userName,
+                service.people.userEmail))
+                .from(service)
+                .where(service.school.userId.eq(schoolId))
+                .fetch();
+    }
 
 
     //  방문기부 랭킹 정렬

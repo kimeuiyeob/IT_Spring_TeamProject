@@ -124,7 +124,9 @@ body{
     width: 85px;
     height: 100%;
 }
-
+.button3{
+    line-height: 40px;
+}
 .header4 {
     margin: 0px 16px;
     display: flex;

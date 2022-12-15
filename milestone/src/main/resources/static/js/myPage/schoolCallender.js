@@ -11,7 +11,6 @@ let year = todayYear;
 let month = todayMonth;
 let planDates = [];
 let count = 0;
-
 let $serviceVisitDate = $('input[name="serviceVisitDate"]');
 console.log($serviceVisitDate.eq(2).val());
 $("input[name='serviceVisitDate']").each(function (i) {
@@ -26,7 +25,7 @@ $("input[name='serviceVisitDate']").each(function (i) {
     console.log(dates);
     planDates.push({ "planDay": dates });
 });
-
+// planDates.push({"planDay": ''})
 /* 지금은 기부일정 임시로 넣어놓은 값 */
 // planDates.push({ "planDay": '2022년 11월 2일' });
 // planDates.push({ "planDay": '2022년 11월 5일' });

@@ -23,6 +23,7 @@ public class MyPageController {
     private final CertificationService certificationService;
     private final UserService userService;
     private final WithdrawalService withdrawalService;
+    private final ServiceService serviceService;
 
 
     //    일반회원 정보 보기
@@ -60,7 +61,7 @@ public class MyPageController {
         return new RedirectView("/main/main");
     }
 
-    //  비밀번호 변경
+    //  보육원 회원 비밀번호 변경
     @PostMapping("/schoolPasswordUpdate")
     public RedirectView updateSchoolPassword(HttpSession session, PasswordDTO passwordDTO) {
         Long userId = (Long) session.getAttribute("userId");
@@ -89,17 +90,28 @@ public class MyPageController {
     /**
      * 회원 수정하기 전 비밀번호 확인
      **/
-    @GetMapping("/password")
-    public String checkPwdView() {
+    @GetMapping("/peoplePassword")
+    public String checkPasswordView() {
         return "mypage/myPage_password";
     }
 
-    @GetMapping("/schedule")
-    public String schedule() {
-        return "/myPage/myPage_schedule";
+    @GetMapping("/schoolPassword")
+    public String schoolCheckPasswordView() {
+        return "mypage/myPage_password_school";
     }
 
-    ;
+    @GetMapping("/peopleSchedule")
+    public String peopleSchedule(HttpSession session, Model model) throws Exception {
+        Long userId = (Long) session.getAttribute("userId");
+        model.addAttribute("serviceDTO", serviceService.findPeopleVisitDate(userId));
+        return "/myPage/myPage_schedule";
+    }
+    @GetMapping("/schoolSchedule")
+    public String schoolSchedule(HttpSession session, Model model) throws Exception {
+        Long userId = (Long) session.getAttribute("userId");
+        model.addAttribute("serviceDTO1", serviceService.findSchoolVisitDate1(userId));
+        return "/myPage/myPage_school_schedule";
+    }
 
     /*황지수*/
     private final SchoolService schoolService;
@@ -109,7 +121,7 @@ public class MyPageController {
     public String schoolInfo(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
         Long userId = (Long) session.getAttribute("userId");
-        if(userId != null){
+        if (userId != null) {
             model.addAttribute("fileDTO", fileService.showProfile(userId));
         }
         model.addAttribute("schoolDTO", schoolService.schoolInfo(userId));
@@ -139,25 +151,29 @@ public class MyPageController {
 
     ;
 
-    @GetMapping("/withdrawal")
+    @GetMapping("/withdrawalPeople")
     public String withdrawal() {
         return "/myPage/myPage_withdrawal";
     }
 
-    ;
-
-    @GetMapping("/school-schedule")
-    public String schoolSchedule() {
-        return "/myPage/myPage_school_schedule";
+    @GetMapping("/withdrawalSchool")
+    public String withdrawalSchool() {
+        return "/myPage/myPage_withdrawalSchool";
     }
 
-    ;
+    ;;
+
+    @GetMapping("/schoolAlarm")
+    public String schoolAlarm() {
+        return "/myPage/myPage_alarm_school";
+    }
 
     /*=============================아래부터 의엽씨가 건든거입니다.==================================*/
-    @GetMapping("/alarm")
-    public void alarm() {
-        ;
+    @GetMapping("/peopleAlarm")
+    public String alarm() {
+        return "/myPage/myPage_alarm";
     }
+
 
     @GetMapping("/talent")
     public void talent(Search search) {
@@ -191,4 +207,5 @@ public class MyPageController {
         session.removeAttribute("userId");
         return new RedirectView("/main/main");
     }
+
 }
