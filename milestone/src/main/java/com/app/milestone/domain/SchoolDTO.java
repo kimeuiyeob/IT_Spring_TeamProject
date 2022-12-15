@@ -35,7 +35,7 @@ public class SchoolDTO {
     private String userName;
     private String userPassword;
     private String userPhoneNumber;
-    private String userProfile;
+    private FileDTO userProfile;
     private int donationCount;
     private LocalDateTime createdDate;
     private List<FileDTO> files;
