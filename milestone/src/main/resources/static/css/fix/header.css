@@ -713,7 +713,8 @@ input[type = 'checkbox']:checked + .checkboxCos {
     color: #333;
     font-size: 15px;
     font-weight: 600;
-    padding-left: 15px;
+    display: flex;
+    justify-content: center;
     padding-top: 9px;
     padding-bottom: 9px;
 }
