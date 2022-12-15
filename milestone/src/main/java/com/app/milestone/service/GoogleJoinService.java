@@ -20,6 +20,7 @@ import java.util.Map;
 @Slf4j
 @RequiredArgsConstructor
 public class GoogleJoinService {    //브라우저에서 오어스로 로그인시 authCode를 보내서 받는다.
+
     public ArrayList<String> getGoogleAccessTokenInfo(String authCode) throws Exception{
 
         try {

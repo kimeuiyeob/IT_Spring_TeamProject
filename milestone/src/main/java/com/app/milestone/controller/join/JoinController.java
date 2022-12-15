@@ -2,10 +2,10 @@ package com.app.milestone.controller.join;
 
 import com.app.milestone.domain.PeopleDTO;
 import com.app.milestone.domain.SchoolDTO;
-import com.app.milestone.service.CertificationService;
-import com.app.milestone.service.GoogleJoinService;
-import com.app.milestone.service.PeopleService;
-import com.app.milestone.service.SchoolService;
+import com.app.milestone.entity.People;
+import com.app.milestone.repository.PeopleRepository;
+import com.app.milestone.repository.UserCustomRepository;
+import com.app.milestone.service.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -30,6 +30,8 @@ public class JoinController {
     private final SchoolService schoolService;
     private final CertificationService certificationService;
     private final GoogleJoinService googleJoinService;
+    private final PeopleRepository peopleRepository;
+    private final GoogleJoinSupportService googleJoinSupportService;
 
     @GetMapping("/user")
     public String createPeople(Model model) {
@@ -96,15 +98,26 @@ public class JoinController {
 
         String email = list.get(0);
         String name = list.get(1);
-        String password = list.get(2)+"-google";
-        redirectAttributes.addFlashAttribute("join", "google");
-        redirectAttributes.addFlashAttribute("userEmail", email);
+        String password = list.get(2) + "-google";
 
-        redirectAttributes.addFlashAttribute("userName", name);
+        if (googleJoinSupportService.PeopleDuplicated(password) == null) {
+            PeopleDTO peopleDTO = new PeopleDTO();
 
-        redirectAttributes.addFlashAttribute("userPassword", password);
+            peopleDTO.setUserEmail(email);
+            peopleDTO.setUserPassword(password);
+            peopleDTO.setUserName(name);
+            peopleDTO.setPeopleNickname(name);
+            peopleDTO.setUserPhoneNumber("01012345678");
+            peopleDTO.setDonationCount(0);
 
-        return new RedirectView("/join/joinOauth");
+
+            People people = peopleDTO.toEntity();
+            peopleRepository.save(people);
+        }else{
+            return new RedirectView("/main/main?joinGoogle=true");
+        }
+
+        return new RedirectView("/main/main");
     }
 
 }

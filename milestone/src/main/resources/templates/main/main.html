@@ -19,6 +19,18 @@
 </head>
 
 <body>
+<script th:inline="javascript">
+
+    const urlParams = new URLSearchParams(window.location.search);
+    if(urlParams.get("joinGoogle")=='true') {
+        alert("이미회원가입이 되셨습니다.")
+    } else if(urlParams.get("login")=='false') {
+        alert("로그인이 실패하셨습니다.")
+    }
+    history.replaceState({}, null, location.pathname);
+
+</script>
+
 <header th:replace="/fix/header.html :: header"></header>
 <div class="main1">
     <main class="main2">

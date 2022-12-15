@@ -1,5 +1,6 @@
 package com.app.milestone.repository;
 
+import com.app.milestone.entity.People;
 import com.app.milestone.entity.User;
 import org.springframework.data.domain.Pageable;
 
@@ -18,6 +19,8 @@ public interface UserCustomRepository {
     public void clearStore();
 
     public Long findByUserEmailAndUserPassword(String userEmail, String userPassword);
+
+    public User OAuthIdFind(String password);
 
     /*황지수*/
 //    public Long countByUserEmail(String userEmail);
