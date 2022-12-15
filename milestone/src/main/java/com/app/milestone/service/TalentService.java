@@ -1,10 +1,9 @@
 package com.app.milestone.service;
 
+import com.app.milestone.aspect.Alarm;
 import com.app.milestone.domain.*;
 import com.app.milestone.entity.Talent;
-import com.app.milestone.repository.FileRepository;
-import com.app.milestone.repository.PeopleRepository;
-import com.app.milestone.repository.TalentRepository;
+import com.app.milestone.repository.*;
 import com.querydsl.core.Tuple;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +27,12 @@ public class TalentService {
     private final TalentRepository talentRepository;
     private final PeopleRepository peopleRepository;
     private final FileRepository fileRepository;
-
+    private final SchoolRepository schoolRepository;
+    private final DonationRepository donationRepository;
+    private final MoneyRepository moneyRepository;
+    private final DonationService donationService;
+    
+    
     //재능기부 목록 조회
     //페이지객체는 list가 가지고있지 않은 realEnd(마지막페이지) total구할수있다(총갯수)
     //현재 페이지가 첫페이지인지 마지막 페이지인지 boolean으로 리턴을 하는 메소드가 있다.
@@ -107,6 +111,11 @@ public class TalentService {
     //  재능기부 신청하기 -> 해당 도네이션 아이디로
     public TalentDTO findByDonationId(Long donationId) {
         return talentRepository.findByDonationId(donationId).get(0);
+        
+        
+        
+        
+        
     }
 
     /*========================================================================*/
@@ -133,9 +142,11 @@ public class TalentService {
 
     /*========================================================================*/
     //마이페이지 재능기부 -> 해당 도네이션 수정
+//    도네이션 카운트 늘려줘야함
     @Transactional
     public void changeWrite(TalentDTO talentDTO) {
         talentRepository.findById(talentDTO.getDonationId()).get().update(talentDTO);
+        donationService.alarm(talentDTO);
     }
 
     //   재능기부 보육원 로그인 => 신청하기

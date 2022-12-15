@@ -184,8 +184,22 @@
                 <div style="display:flex; justify-content: space-between; padding-top: 35px;">
                     <div class="abc" style="padding-right: 50px;">
                      <span class="abcd">
-                         <img src="../imgs/talent/normalProfile.png"
-                              style="border-radius: 10px; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block;"></span>
+
+                         <!--========================================== 사진 ==========================================-->
+
+                         <th:block th:if="${picture == 'mypicture'}" >
+                             <img style="border-radius: 10px; width: 203px; height: 204px" th:src="${'/file/display?fileName='+talentPicture.filePath+'/'+talentPicture.fileUuid+'_'+talentPicture.fileName}">
+                        </th:block>
+                         <th:block th:unless="${picture == 'mypicture'}">
+                              <img src="../imgs/talent/normalProfile.png"
+                                   style="border-radius: 10px; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block;">
+                         </th:block>
+
+                         <!--========================================== 사진 ==========================================-->
+
+                     </span>
+
+
                         <div class="css-pea598 e1y81j3a5">
 
                         </div>
@@ -440,11 +454,11 @@
             text += `<div class="talentBox3">`
 
             /*=========================================================================================================*/
-            if(talent.fileName == null){
+            if (talent.fileName == null) {
                 //텍스트 추가 이미지src 에다 talent로 가져온 filePath + fileUUid _ fileName으로 이미지를 찾아온다.
                 text += `<img id="profilepicture" src="/imgs/myPage/normalProfile.png" class="talentImg">`
-            }else {
-                text += `<img class="talentImg" src="/file/display?fileName=`+ talent.filePath + `/` + talent.fileUuid + `_` + talent.fileName +`">`
+            } else {
+                text += `<img class="talentImg" src="/file/display?fileName=` + talent.filePath + `/` + talent.fileUuid + `_` + talent.fileName + `">`
             }
             /*=========================================================================================================*/
 
@@ -481,6 +495,7 @@
         $(".talentBoxAll").html(text)
         pageingBtn();
     }
+
     /*===========================================================================================*/
     /*각 카테고리 클릭시*/
 

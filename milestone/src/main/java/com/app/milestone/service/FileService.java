@@ -1,11 +1,9 @@
 package com.app.milestone.service;
 
 import com.app.milestone.domain.FileDTO;
-import com.app.milestone.entity.File;
 import com.app.milestone.entity.User;
 import com.app.milestone.repository.FileRepository;
 import com.app.milestone.repository.UserRepository;
-import com.app.milestone.type.FileType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
