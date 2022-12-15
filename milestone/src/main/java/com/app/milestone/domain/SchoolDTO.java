@@ -39,9 +39,6 @@ public class SchoolDTO {
     private int donationCount;
     private LocalDateTime createdDate;
     private List<FileDTO> files;
-    private String fileName;
-    private String filePath;
-    private String fileUuid;
 
 
     public School toEntity() {
@@ -62,7 +59,6 @@ public class SchoolDTO {
                 .schoolBank(schoolBank)
                 .schoolAccount(schoolAccount)
                 .schoolPhoneNumber(schoolPhoneNumber)
-                .schoolQR(schoolQR)
                 .introduce(introduce)
                 .userEmail(userEmail)
                 .userName(userName)
@@ -73,7 +69,7 @@ public class SchoolDTO {
     }
 
     @QueryProjection
-    public SchoolDTO(Long userId, String schoolName, String schoolAddress, String schoolAddressDetail, String schoolZipcode, int schoolTeachers, int schoolKids, int schoolBudget, String schoolBank, String schoolAccount, String schoolPhoneNumber, String schoolQR, String schoolTitle, String schoolContent, String userEmail, String userName, String userPassword, String userPhoneNumber, int donationCount, LocalDateTime createdDate,String fileName, String filePath, String fileUuid) {
+    public SchoolDTO(Long userId, String schoolName, String schoolAddress, String schoolAddressDetail, String schoolZipcode, int schoolTeachers, int schoolKids, int schoolBudget, String schoolBank, String schoolAccount, String schoolPhoneNumber, String schoolQR, String schoolTitle, String schoolContent, String userEmail, String userName, String userPassword, String userPhoneNumber, int donationCount, LocalDateTime createdDate) {
         this.userId = userId;
         this.schoolName = schoolName;
         this.schoolAddress = schoolAddress;
@@ -94,8 +90,5 @@ public class SchoolDTO {
         this.userPhoneNumber = userPhoneNumber;
         this.donationCount = donationCount;
         this.createdDate = createdDate;
-        this.fileName = fileName;
-        this.filePath = filePath;
-        this.fileUuid = fileUuid;
     }
 }
