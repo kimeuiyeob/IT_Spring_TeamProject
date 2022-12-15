@@ -1,5 +1,6 @@
 package com.app.milestone.controller.talent;
 
+import com.app.milestone.domain.FileDTO;
 import com.app.milestone.service.FileService;
 import com.app.milestone.service.TalentService;
 import lombok.RequiredArgsConstructor;
@@ -24,13 +25,18 @@ public class TalentController {
     @GetMapping("/talent")
     public String talentlist(HttpSession session, Model model) {
         Long userId = (Long) session.getAttribute("userId");
+        FileDTO fileDTO = null;
 
         log.info("세션값 잘갖고왔니?" + userId);
 
         if(userId != null){
             model.addAttribute("picture","mypicture");
-            model.addAttribute("talentPicture", fileService.showProfile(userId));
+            fileDTO = fileService.showProfile(userId);
+            if(fileDTO != null) {
+                model.addAttribute("talentPicture", fileDTO);
+            }
         }
+
         return "/talent/talent";
     }
 

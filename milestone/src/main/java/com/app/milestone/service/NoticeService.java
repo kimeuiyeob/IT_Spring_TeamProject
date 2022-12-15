@@ -39,7 +39,7 @@ public class NoticeService {
         return notices;
     }
     /*============================================================*/
-    //Notice리스트 가져오기
+    //Notice상세페이지 왼쪽 최근세션7개 제목 가져오는 메소드
     public List<NoticeDTO> selectNoticeAll() {
         List<NoticeDTO> list = noticeRepository.selectNoticeAll();
         return list;

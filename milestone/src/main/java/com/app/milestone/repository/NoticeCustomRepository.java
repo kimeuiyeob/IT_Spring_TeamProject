@@ -17,7 +17,7 @@ public interface NoticeCustomRepository {
 
     //Notice공지사항 글 순서대로 조회
     public List<NoticeDTO> findBySearchAsc(Pageable pageable, Search search);
-    //Notice공지사항 글 순서대로 조회
+    //Notice공지사항 공지사항 상세페이지 왼쪽 7개 제목 순서대로 가져오는 메소드
     public List<NoticeDTO> selectNoticeAll();
 
 }

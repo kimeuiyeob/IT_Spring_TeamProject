@@ -1,9 +1,7 @@
 package com.app.milestone.repository;
 
-import com.app.milestone.domain.SchoolDTO;
 import com.app.milestone.domain.Search;
 import com.app.milestone.domain.TalentDTO;
-import com.app.milestone.entity.Talent;
 import com.querydsl.core.Tuple;
 import org.springframework.data.domain.Pageable;
 
@@ -30,6 +28,9 @@ public interface TalentCustomRepository {
     public List<TalentDTO> findAllTalentById(Pageable pageable, Long peopleId);
 
     public Long countByAbleDate2 (Pageable pageable, Long peopleId);
+
+    //재능기부 목록 페이징
+    public Long countByAbleDate3 (Pageable pageable, Search search);
 
     //도네이션 아이디로 해당 DTO 조회
     public List<TalentDTO> findByDonationId (Long donationId);

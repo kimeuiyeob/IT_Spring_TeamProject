@@ -299,9 +299,6 @@
                 }
                 /*=========================================================================================================*/
 
-                text += `<!--<img src = "../imgs/talent/normalProfile.png" style = "border-radius: 10px; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block;" >-->`
-
-
                 text += `</span>`
                 text += ` <div class = "css-pea598 e1y81j3a5">`
                 text += `</div>`
@@ -541,6 +538,8 @@
         myTitle = $('#kim2').val();
         myContent = $('#kimeuiyeob').val();
         let donationId = globalThis.donationId
+
+        console.log("수정 클릭!!!")
 
         if (myCategory == "" || myPlace == "" || myTime == "" || myTitle == "" || myContent == "") {
             $('#writePlease').show();
