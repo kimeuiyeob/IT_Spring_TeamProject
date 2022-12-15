@@ -127,12 +127,14 @@
                         <li class="message7">모든 메시지를 확인했습니다.</li>
                         <div class = "alarmList"></div>
                     </div>
-                    <ul class="message5 list1" th:style="${session.userId != null && session.type == 'people' ? 'display:block' : 'display:none'}">
+                    <ul class="message5 list1"
+                        th:style="${session.userId != null && session.type == 'people' ? 'display:block' : 'display:none'}">
                         <a th:href="@{/mypage/peopleAlarm}" class="message8">
                             <li class="message6">받은 전체 메시지 확인</li>
                         </a>
                     </ul>
-                    <ul class="message5 list1" th:style="${session.userId != null && session.type == 'school' ? 'display:block' : 'display:none'}">
+                    <ul class="message5 list1"
+                        th:style="${session.userId != null && session.type == 'school' ? 'display:block' : 'display:none'}">
                         <a th:href="@{/mypage/schoolAlarm}" class="message8">
                             <li class="message6">받은 전체 메시지 확인</li>
                         </a>
@@ -157,7 +159,7 @@
                     <span class="button6 button3">내 정보</span>
                 </button>
             </form>
-            <a role="link" color="yellow" href="../join/select" class="button7 button3" style="display: none;"
+            <a role="link" color="yellow" th:href="@{/join/select}" class="button7 button3" style="display: none;"
                th:style="${session.userId == null ? 'display:block' : 'display:none'}">
                 <span class="button8 button3" style="margin: 9px 0">무료 회원가입</span>
             </a>
@@ -173,15 +175,15 @@
                 </div>
                 <div class="profile-menu1" id="login-profile-menu1">
                     <div class="profile-menu2">
-                        <ul class="profile-menu3" style="padding-left: 0;"
-                            th:style="${session.userId != null && session.type == 'people' ? 'display:block' : 'display:none'}">
-                            <a th:href="@{/mypage/myinfo}" class="line1">
+                        <ul class="profile-menu3" style="padding-left: 0;">
+                            <a th:href="@{/mypage/myinfo}" class="line1"
+                               th:style="${session.userId != null && session.type == 'people' ? 'display:block' : 'display:none'}">
                                 <li>마이페이지</li>
                             </a>
                         </ul>
-                        <ul class="profile-menu3" style="padding-left: 0;"
-                            th:style="${session.userId != null && session.type == 'school'? 'display:block' : 'display:none'}">
-                            <a th:href="@{/mypage/schoolinfo}" class="line1">
+                        <ul class="profile-menu3" style="padding-left: 0;">
+                            <a th:href="@{/mypage/schoolinfo}" class="line1"
+                               th:style="${session.userId != null && session.type == 'school'? 'display:block' : 'display:none'}">
                                 <li>마이페이지</li>
                             </a>
                         </ul>
@@ -197,9 +199,9 @@
                                 <li>일정 관리</li>
                             </a>
                         </ul>
-                        <ul style="padding-left: 0px" class="profile-menu3"
-                            th:style=" ${session.userId != null && session.type == 'people' ? 'display:block' : 'display:none'}">
-                            <a th:href="@{/mypage/likelist}" class="line1">
+                        <ul class="profile-menu3" style="padding-left: 0;">
+                            <a th:href="@{/mypage/likelist}" class="line1"
+                               th:style=" ${session.userId != null && session.type == 'people' ? 'display:block' : 'display:none'}">
                                 <li>나의 찜목록</li>
                             </a>
                         </ul>
@@ -218,16 +220,31 @@
             <!-- 왼쪽 서브 메뉴 -->
             <div class="left_sub_menu">
                 <div class="sub_menu">
-                    <form>
-                        <ul class="big_menu">
-                            <a th:action="@{/login/login}">
-                                <li>로그인</li>
-                            </a>
-                        </ul>
-                    </form>
-                    <ul class="big_menu">
-                        <a href="../join/select">
+                    <ul class="big_menu" th:style=" ${session.userId != null ? 'display:none' : 'display:block'}">
+                        <a th:href="@{/login/login}">
+                            <li>로그인</li>
+                        </a>
+                    </ul>
+                    <ul class="big_menu" th:style=" ${session.userId != null ? 'display:block' : 'display:none'}">
+                        <a th:href="@{/login/logout}">
+                            <li>로그아웃</li>
+                        </a>
+                    </ul>
+                    <ul class="big_menu" th:style=" ${session.userId != null ? 'display:none' : 'display:block'}">
+                        <a th:href="@{/join/select}">
                             <li>무료 회원가입</li>
+                        </a>
+                    </ul>
+                    <ul class="big_menu"
+                        th:style=" ${session.userId != null && session.type == 'people'? 'display:block' : 'display:none'}">
+                        <a th:href="@{/mypage/myinfo}">
+                            <li>마이페이지</li>
+                        </a>
+                    </ul>
+                    <ul class="big_menu"
+                        th:style=" ${session.userId != null && session.type == 'school'? 'display:block' : 'display:none'}">
+                        <a th:href="@{/mypage/schoolinfo}">
+                            <li>마이페이지</li>
                         </a>
                     </ul>
                     <ul class="small_menu">
