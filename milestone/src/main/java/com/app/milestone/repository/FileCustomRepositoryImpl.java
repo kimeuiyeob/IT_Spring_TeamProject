@@ -2,18 +2,13 @@ package com.app.milestone.repository;
 
 import com.app.milestone.domain.FileDTO;
 import com.app.milestone.domain.QFileDTO;
-import com.app.milestone.entity.File;
-import com.app.milestone.entity.QFile;
-import com.app.milestone.entity.QUser;
-import com.app.milestone.type.FileType;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-import static com.app.milestone.entity.QFile.*;
-import static com.app.milestone.entity.QUser.*;
+import static com.app.milestone.entity.QFile.file;
 
 @Repository
 @RequiredArgsConstructor

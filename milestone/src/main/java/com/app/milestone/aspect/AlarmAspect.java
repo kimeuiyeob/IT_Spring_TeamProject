@@ -2,11 +2,12 @@ package com.app.milestone.aspect;
 
 import com.app.milestone.domain.AlarmDTO;
 import com.app.milestone.domain.ServiceDTO;
+import com.app.milestone.domain.TalentDTO;
+import com.app.milestone.entity.*;
 import com.app.milestone.entity.Alarm;
-import com.app.milestone.entity.Money;
-import com.app.milestone.entity.Service;
-import com.app.milestone.entity.Talent;
 import com.app.milestone.repository.AlarmRepository;
+import com.app.milestone.repository.PeopleRepository;
+import com.app.milestone.repository.SchoolRepository;
 import com.app.milestone.service.AlarmService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +26,8 @@ import java.util.Arrays;
 @Slf4j
 public class AlarmAspect {
     private final AlarmRepository alarmRepository;
+    private final SchoolRepository schoolRepository;
+    private final PeopleRepository peopleRepository;
 
 
     // 조인포인트 : 메소드가 실행되기 전 시점을 저장하는 곳
@@ -45,7 +48,7 @@ public class AlarmAspect {
         log.info("pointCut: " + joinPoint.getArgs()[0]);
         log.info("pointCut: " + Money.class.isInstance(joinPoint.getArgs()[0]));
         log.info("pointCut: " + Service.class.isInstance(joinPoint.getArgs()[0]));
-        log.info("pointCut: " + Talent.class.isInstance(joinPoint.getArgs()[0]));
+        log.info("pointCut: " + TalentDTO.class.isInstance(joinPoint.getArgs()[0]));
         log.info("====================================");
 
         if (Money.class.isInstance(joinPoint.getArgs()[0])) {
@@ -71,18 +74,18 @@ public class AlarmAspect {
             alarm.changeGiver(service.getPeople());
             alarm.changeTaker(service.getSchool());
         }
-        if (Talent.class.isInstance(joinPoint.getArgs()[0])) {
+        if (TalentDTO.class.isInstance(joinPoint.getArgs()[0])) {
             alarmDTO = new AlarmDTO();
-            Talent talent = Talent.class.cast(joinPoint.getArgs()[0]);
-            String ableDate = talent.getTalentAbleDate() + "";
+            TalentDTO talentDTO = TalentDTO.class.cast(joinPoint.getArgs()[0]);
+            String ableDate = talentDTO.getTalentAbleDate() + "";
             log.info("============================"+ ableDate);
             alarmDTO.setReceiver("people");
-            alarmDTO.setItem(ableDate);
+            alarmDTO.setItem(ableDate.substring(0,ableDate.indexOf('T')));
             alarmDTO.setType("재능기부일");
             alarmDTO.setCheckAlarm(false);
             Alarm alarm = alarmRepository.save(alarmDTO.toEntity());
-            alarm.changeGiver(talent.getPeople());
-            alarm.changeTaker(talent.getSchool());
+            alarm.changeGiver(schoolRepository.findById(talentDTO.getSchoolUserId()).get());
+            alarm.changeTaker(peopleRepository.findById(talentDTO.getPeopleUserId()).get());
         }
 //        alarmRepository.
     }

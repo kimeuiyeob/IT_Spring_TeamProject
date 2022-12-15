@@ -1,10 +1,7 @@
 package com.app.milestone.repository;
 
-import com.app.milestone.domain.TalentDTO;
 import com.app.milestone.entity.Talent;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Component;
 
 

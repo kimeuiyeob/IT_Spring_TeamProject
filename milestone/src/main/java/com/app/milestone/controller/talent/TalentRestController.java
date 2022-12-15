@@ -65,8 +65,6 @@ public class TalentRestController {
     @Transactional
     public void signWrite(@RequestBody Long donationId, HttpServletRequest request){
 
-        log.info("레스트 컨트롤러에 왔습니다.");
-        log.info("도네이션 아이디 : " + donationId);
 
         HttpSession session = request.getSession();
         Long userId = (Long) session.getAttribute("userId");
@@ -77,6 +75,7 @@ public class TalentRestController {
         Talent talent = talentService.selectDonation(talentDTO);
 
         talent.changeSchool(school);
+        talentDTO.setSchoolUserId(userId);
 
         talentService.changeWrite(talentDTO);
     }
