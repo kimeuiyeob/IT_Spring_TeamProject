@@ -235,7 +235,7 @@ function fnGetdata(){
         ,traditional: true
         ,success : function(result) {
             alert("해당 게시글이 정상적으로 삭제되었습니다.");
-            location.replace("notice")
+            location.replace("/admin/notice")
         },
         error: function(request, status, error) {
         }
@@ -298,6 +298,10 @@ $addNotice.on('click', function () {
     if (addNoticeModal.classList.contains('show')) {
         body.style.overflow = 'hidden';
     }
+})
+
+$("#hover6").on('click',function () {
+    $(".notice-title").val('');
 })
 
 /* -----------삭제 모달창-------------- */
