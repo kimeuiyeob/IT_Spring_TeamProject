@@ -89,6 +89,7 @@ public class SchoolService {
         }
 
         List<SchoolDTO> list = schoolRepository.findAllByCreatedDate(pageable, search);
+
         for (SchoolDTO schoolDTO : list) {
             List<FileDTO> arFileDTO = fileRepository.findByUserId(schoolDTO.getUserId());
             schoolDTO.setFiles(arFileDTO);

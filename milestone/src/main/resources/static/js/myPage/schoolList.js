@@ -94,9 +94,6 @@ $pageNumberLink.on('mouseout', function () {
     $(this).css('color', '#5e6278');
 })
 
-window.onresize = function(){
-    document.location.reload();
-};
 
 if (window.matchMedia('(max-width: 768px)').matches){
     $('div.loactions').css('display','none');
@@ -122,23 +119,26 @@ function getList(likeResp) {
 
     let text = "";
     pageInfo = likeResp.arLikeDTO;
+
     likeResp.arLikeDTO.content.forEach(likes => {
+
+        // console.log("1 rmfjsrk?: " +likes.files[0].fileName)
+        // console.log("1 안돼?: " +likes.files[0])
+        // console.log("2 : "+ likes.files[1].filePath)
+        // console.log("3 : "+likes.files[2].fileUuid)
+
+        // console.log("/file/display?fileName="+ likes.files[1].filePath + "/" + likes.files[2].fileUuid + "_" + likes.files[0].fileName)
+
         text += `<article>`
         text += `<span class="schoolImg">`
 
 
-        // text += `<img src="https://kmong.com/_next/image?url=https%3A%2F%2Fd2v80xjmx68n4w.cloudfront.net%2Fassets%2Fenterprise%2Fquote-guide%2F1-3.jpg&w=320&q=75">
-
-        // if(school.files.length == 0){
-        //     text += `<img src="/imgs/school/defaultSchoolImg.png">`
-        // }else{
-        //     text += `<img src= "/file/display?fileName=`+ school.files[0].filePath + `/` + school.files[0].fileUuid + `_` + school.files[0].fileName +`">`
-        // }
-        if(likes.files == null){
+        if(likes.files[0] == null){
             text += `<img src="/imgs/school/defaultSchoolImg.png">`
         }else{
-            // text += `<img src= "/file/display?fileName=`+ school.files[0].filePath + `/` + school.files[0].fileUuid + `_` + school.files[0].fileName +`">`
-            text += `<img src="/file/display?fileName=`+ school.filePath + `/` + school.fileUuid + `_` + school.fileName +`">`
+            text += `<img width="195px" height="195px" src= "/file/display?fileName=`+ likes.files[1].filePath + `/` + likes.files[0].fileUuid + `_` + likes.files[0].fileName +`">`
+            // text += `<img class="donater-info-img1" src="/file/display?fileName=`+ school.userProfile.filePath + `/` + school.userProfile.fileUuid + `_` + school.userProfile.fileName +`">`
+
         }
 
         text += `<span class="heartWrap">`
