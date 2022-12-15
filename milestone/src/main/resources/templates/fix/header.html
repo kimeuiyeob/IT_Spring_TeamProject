@@ -125,6 +125,7 @@
                     </div>
                     <div class="message4 list1">
                         <li class="message7">모든 메시지를 확인했습니다.</li>
+                        <div class = "alarmList"></div>
                     </div>
                     <ul class="message5 list1" th:style="${session.userId != null && session.type == 'people' ? 'display:block' : 'display:none'}">
                         <a th:href="@{/mypage/peopleAlarm}" class="message8">
@@ -162,14 +163,14 @@
             </a>
             <div class="profile1 profile2" id="profile1"
                  th:style="${session.userId != null ? 'display:block' : 'display:none'}">
-                <a role="link" color="default" href="#" class="profile3 profile4" aria-expanded="false">
+                <div color="default" class="profile3 profile4">
                     <span class="profile5 profile6">
                         <div size="32" shape="0" role="article" class="profile7 profile8">
                             <img src="/imgs/fix/login.png" alt="avatar" shape="0" loading="lazy"
                                  class="profile9 profile10" id="login-profile9">
                         </div>
                     </span>
-                </a>
+                </div>
                 <div class="profile-menu1" id="login-profile-menu1">
                     <div class="profile-menu2">
                         <ul class="profile-menu3" style="padding-left: 0;"

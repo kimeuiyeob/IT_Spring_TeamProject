@@ -36,14 +36,10 @@ public class PeopleCustomRepositoryImpl implements PeopleCustomRepository {
                 people.userPassword,
                 people.userPhoneNumber,
                 people.donationCount,
-                people.createdDate,
-                file.fileName,
-                file.filePath,
-                file.fileUuid
-        )).from(people,file)
+                people.createdDate
+        )).from(people)
                 .where(
-                        people.userId.eq(userId),
-                        people.userId.eq(file.user.userId)
+                        people.userId.eq(userId)
                 )
                 .fetchOne();
 
@@ -73,10 +69,7 @@ public class PeopleCustomRepositoryImpl implements PeopleCustomRepository {
                 people.userPassword,
                 people.userPhoneNumber,
                 people.donationCount,
-                people.createdDate,
-                file.fileName,
-                file.filePath,
-                file.fileUuid
+                people.createdDate
         )).from(people)
                 .leftJoin(file)
                 .on(people.userId.eq(file.user.userId))
@@ -99,10 +92,7 @@ public class PeopleCustomRepositoryImpl implements PeopleCustomRepository {
                 people.userPassword,
                 people.userPhoneNumber,
                 people.donationCount,
-                people.createdDate,
-                file.fileName,
-                file.filePath,
-                file.fileUuid
+                people.createdDate
             )).from(people)
               .leftJoin(file)
               .on(people.userId.eq(file.user.userId))

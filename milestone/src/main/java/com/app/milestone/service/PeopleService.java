@@ -58,7 +58,11 @@ public class PeopleService {
 
     //    개인회원 한 명의 정보
     public PeopleDTO onesInfo(Long userId) {
-        return peopleRepository.findInfoById(userId);
+        PeopleDTO peopleDTO = peopleRepository.findInfoById(userId);
+        log.info("======================================userId====================" + userId);
+        log.info("======================================peopleDTO====================" + peopleDTO);
+        log.info("==========================================================");
+        return peopleDTO;
     }
 
     //    ============================좋아요=========================

@@ -857,5 +857,14 @@ input[type = 'checkbox']:checked + .checkboxCos {
 
 }
 
+.alarmList{
+    max-height: 90px;
+    overflow: auto;
+    margin: 10px 0;
+}
 
+.alarmStyle{
+    font-size: 13px;
+    text-align: center;
+}
 
