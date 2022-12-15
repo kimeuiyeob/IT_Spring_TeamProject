@@ -25,6 +25,7 @@ $(".wholeLocation").click(function() {
     $(".location2").css({"border":"none"})
     globalThis.page=0;
     save=[];
+    show();
 })
 
 /* 지역선택시 지역저장 */
@@ -56,6 +57,7 @@ $(".location2").click(function(){
                 save.splice(save.indexOf(element),1);
             }
         });
+        show();
     }
     console.log(save);
 })
@@ -150,7 +152,7 @@ function getList(likeResp) {
         text += `<h2 class="schoolName">`+likes.schoolName+`</h2>`
         text += `<div class="intro">`+ likes.schoolContent+`</div>`
         text += `<div class="miniLocationTag"><div class="schoolLocation1">`
-        text += `<span class="schoolLocation2">`+likes.schoolAddress
+        text += `<span class="schoolLocation2" style="margin-right: 5px;">`+likes.schoolAddress
         text += `<input type="hidden" name="likeId" value="`+likes.likeId+`">`
         text += `</span>`
         text += `<span class="schoolLocation2 schoolName">`+likes.schoolName+`</span>`
@@ -161,7 +163,7 @@ function getList(likeResp) {
         text += `<div class="QR">`
         text += `<img src="`+likes.schoolQr+`">`
         text += `</div>`
-        text += `<a class="donationButton" href="`+likes.schoolId+`"><span>보육원 보러가기</span></a>`
+        text += `<a class="donationButton" href="`+likes.schoolId+`"><span>보육원<br>보러가기</span></a>`
         text += `</div>`
         text += `</article>`
     })
