@@ -88,7 +88,7 @@ public class NoticeCustomRepositoryImpl implements NoticeCustomRepository{
                 .fetch();
     }
 
-    /*Notice 공지사항 찾아오기*/
+    //Notice공지사항 공지사항 상세페이지 왼쪽 7개 제목 순서대로 가져오는 메소드
     @Override
     public List<NoticeDTO> selectNoticeAll() {
         return jpaQueryFactory.select(new QNoticeDTO(
@@ -98,7 +98,7 @@ public class NoticeCustomRepositoryImpl implements NoticeCustomRepository{
                 notice.createdDate
         ))
                 .from(notice)
-                .orderBy(notice.createdDate.desc())
+                .orderBy(notice.createdDate.asc())
                 .limit(7)
                 .fetch();
     }

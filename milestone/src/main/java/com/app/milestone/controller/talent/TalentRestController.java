@@ -76,7 +76,6 @@ public class TalentRestController {
 
         talent.changeSchool(school);
         talentDTO.setSchoolUserId(userId);
-
         talentService.changeWrite(talentDTO);
     }
 
@@ -84,7 +83,8 @@ public class TalentRestController {
     //***마이페이지*** 재능기부 목록 글 수정
     @PostMapping("/change")
     public void changeWrite(@RequestBody TalentDTO talentDTO){
-        talentService.changeWrite(talentDTO);
+        log.info("탤런트 디티오 가져왔어요 : " + talentDTO);
+        talentService.changeWriteMypage(talentDTO);
     }
 
     /*===============================================*/

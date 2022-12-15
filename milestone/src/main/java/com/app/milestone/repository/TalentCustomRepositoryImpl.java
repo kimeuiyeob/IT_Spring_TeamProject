@@ -3,7 +3,6 @@ package com.app.milestone.repository;
 import com.app.milestone.domain.QTalentDTO;
 import com.app.milestone.domain.Search;
 import com.app.milestone.domain.TalentDTO;
-import com.app.milestone.entity.QFile;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -143,8 +142,23 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
                         talentCategoryContainingAll(search.getTalentCategory())
                 )
                 .orderBy(talent.talentAbleDate.asc())
-//                .offset(pageable.getOffset())
-//                .limit(pageable.getPageSize())
+                .fetchOne();
+    }
+    /*=============================================================================================================*/
+    //재능기부 목록 페이징
+    @Override
+    public Long countByAbleDate3(Pageable pageable, Search search) {
+        return jpaQueryFactory.select(talent.count())
+                .from(talent)
+                .where(
+//                        보육원 이름 검색
+                        talentTitleContaining(search.getTalentTitle()),
+                        talentPlaceContaining(search.getTalentPlace()),
+                        talentCategoryContainingAll(search.getTalentCategory())
+                )
+//                .where(talent.school.userId.isNotNull().and(talent.people.userId.isNotNull()))
+                .where(talent.school.userId.isNull())
+                .orderBy(talent.talentAbleDate.asc())
                 .fetchOne();
     }
 
@@ -156,13 +170,12 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
                 .from(talent)
                 .where(talent.people.userId.eq(peopleId))
                 .orderBy(talent.talentAbleDate.asc())
-//                .offset(pageable.getOffset())
-//                .limit(pageable.getPageSize())
                 .fetchOne();
     }
 
-    //    /*=============================================================================================================*/
-//  재능기부 랭킹 정렬
+
+    /*=============================================================================================================*/
+    //  재능기부 랭킹 정렬
     @Override
     public List<Tuple> sortBytalentRank() {
         List<Tuple> tuples = new ArrayList<>();

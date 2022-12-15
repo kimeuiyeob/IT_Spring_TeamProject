@@ -187,10 +187,10 @@
 
                          <!--========================================== 사진 ==========================================-->
 
-                         <th:block th:if="${picture == 'mypicture'}" >
+                         <th:block th:if="${talentPicture != null}" >
                              <img style="border-radius: 10px; width: 203px; height: 204px" th:src="${'/file/display?fileName='+talentPicture.filePath+'/'+talentPicture.fileUuid+'_'+talentPicture.fileName}">
                         </th:block>
-                         <th:block th:unless="${picture == 'mypicture'}">
+                         <th:block th:unless="${talentPicture != null}">
                               <img src="../imgs/talent/normalProfile.png"
                                    style="border-radius: 10px; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block;">
                          </th:block>

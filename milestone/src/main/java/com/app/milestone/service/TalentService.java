@@ -1,7 +1,9 @@
 package com.app.milestone.service;
 
-import com.app.milestone.aspect.Alarm;
-import com.app.milestone.domain.*;
+import com.app.milestone.domain.FileDTO;
+import com.app.milestone.domain.Ranking;
+import com.app.milestone.domain.Search;
+import com.app.milestone.domain.TalentDTO;
 import com.app.milestone.entity.Talent;
 import com.app.milestone.repository.*;
 import com.querydsl.core.Tuple;
@@ -17,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -27,9 +28,6 @@ public class TalentService {
     private final TalentRepository talentRepository;
     private final PeopleRepository peopleRepository;
     private final FileRepository fileRepository;
-    private final SchoolRepository schoolRepository;
-    private final DonationRepository donationRepository;
-    private final MoneyRepository moneyRepository;
     private final DonationService donationService;
     
     
@@ -54,7 +52,7 @@ public class TalentService {
         List<TalentDTO> list = talentRepository.findAllByTalentAbleDate(pageable, search);
 
         //Page타입     talents담는다.  페이지구현체  사용자가 요청한 10개 게시글 / 자를때사용한도구 / 앞에 사용자가 요청한 게시글을 자르기 위해서 총 게시글의 개수
-        Page<TalentDTO> talents = new PageImpl<>(list, pageable, Integer.valueOf("" + talentRepository.countByAbleDate(pageable, search)));
+        Page<TalentDTO> talents = new PageImpl<>(list, pageable, Integer.valueOf("" + talentRepository.countByAbleDate3(pageable, search)));
         //리턴 talents
         return talents;
     }
@@ -111,11 +109,6 @@ public class TalentService {
     //  재능기부 신청하기 -> 해당 도네이션 아이디로
     public TalentDTO findByDonationId(Long donationId) {
         return talentRepository.findByDonationId(donationId).get(0);
-        
-        
-        
-        
-        
     }
 
     /*========================================================================*/
@@ -131,6 +124,7 @@ public class TalentService {
         Pageable pageable = PageRequest.of(page, 5);
         List<TalentDTO> list = talentRepository.findAllTalentById(pageable, peopleId);
         Page<TalentDTO> talents = new PageImpl<>(list, pageable, Integer.valueOf("" + talentRepository.countByAbleDate2(pageable, peopleId)));
+
         return talents;
     }
 
@@ -142,11 +136,15 @@ public class TalentService {
 
     /*========================================================================*/
     //마이페이지 재능기부 -> 해당 도네이션 수정
-//    도네이션 카운트 늘려줘야함
     @Transactional
     public void changeWrite(TalentDTO talentDTO) {
         talentRepository.findById(talentDTO.getDonationId()).get().update(talentDTO);
         donationService.alarm(talentDTO);
+    }
+
+    @Transactional
+    public void changeWriteMypage(TalentDTO talentDTO) {
+        talentRepository.findById(talentDTO.getDonationId()).get().update(talentDTO);
     }
 
     //   재능기부 보육원 로그인 => 신청하기
