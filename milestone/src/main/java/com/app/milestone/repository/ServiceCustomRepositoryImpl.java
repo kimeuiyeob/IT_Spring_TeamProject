@@ -14,9 +14,12 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.app.milestone.entity.QDonation.donation;
+import static com.app.milestone.entity.QMoney.money;
 import static com.app.milestone.entity.QPeople.people;
 import static com.app.milestone.entity.QSchool.school;
 import static com.app.milestone.entity.QService.service;
+import static com.app.milestone.entity.QUser.user;
 
 @Repository
 @RequiredArgsConstructor
@@ -42,7 +45,9 @@ public class ServiceCustomRepositoryImpl implements ServiceCustomRepository {
                 service.school.address.schoolAddress,
                 service.school.address.schoolAddressDetail,
                 service.serviceVisitDate,
-                service.donationId
+                service.donationId,
+                service.people.userName,
+                service.people.userEmail
         ))
                 .from(service)
                 .where(
@@ -123,10 +128,16 @@ public class ServiceCustomRepositoryImpl implements ServiceCustomRepository {
                 service.school.address.schoolAddress,
                 service.school.address.schoolAddressDetail,
                 service.serviceVisitDate,
-                service.donationId
+                service.donationId,
+                service.people.userName,
+                service.people.userEmail
         ))
-                .from(service)
+                .from(service, donation, people, school, user)
                 .where(
+                        service.donationId.eq(donation.donationId),
+                        donation.people.userId.eq(people.userId),
+                        donation.school.userId.eq(school.userId),
+                        people.userId.eq(user.userId),
                         peopleNicknameAndSchoolNameContaining(keyword)
                 )
                 .offset(pageable.getOffset())
@@ -146,10 +157,16 @@ public class ServiceCustomRepositoryImpl implements ServiceCustomRepository {
                 service.school.address.schoolAddress,
                 service.school.address.schoolAddressDetail,
                 service.serviceVisitDate,
-                service.donationId
+                service.donationId,
+                service.people.userName,
+                service.people.userEmail
         ))
-                .from(service)
+                .from(service, donation, people, school, user)
                 .where(
+                        service.donationId.eq(donation.donationId),
+                        donation.people.userId.eq(people.userId),
+                        donation.school.userId.eq(school.userId),
+                        people.userId.eq(user.userId),
                         peopleNicknameAndSchoolNameContaining(keyword)
                 )
                 .offset(pageable.getOffset())
