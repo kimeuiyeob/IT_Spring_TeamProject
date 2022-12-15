@@ -55,7 +55,11 @@ public class FileService {
 
     //    프로필 조회
     public FileDTO showProfile(Long userId) {
-        return fileRepository.findProfileByUserId(userId);
+        FileDTO fileDTO = fileRepository.findProfileByUserId(userId);
+        log.info("==================================userId========================" + userId);
+        log.info("==================================fileDTO========================" + fileDTO);
+        log.info("==========================================================");
+        return fileDTO;
     }
 
     //    전체조회

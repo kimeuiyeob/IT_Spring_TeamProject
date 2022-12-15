@@ -42,10 +42,30 @@ function getAlarm(callback) {
 /*뿌리기*/
 function showAlarm(alarmList){
     console.log(alarmList)
-    let text;
+    let text = "";
     alarmList.forEach(alarm => {
-        // text +=
+        console.log(alarm.name)
+        text += `<li class = "alarmStyle">`
+        text += alarm.name
+        if(alarm.type == "방문일"){
+            text += `님이 방문기부를 신청했습니다.`
+        }else if(alarm.type == "기부금"){
+            text += `님이 기부금을 전달했습니다.`
+        }else if(alarm.type == "재능기부일"){
+            text += `에서 재능기부를 신청했습니다.`
+        }
+        text += `</li>`
+        console.log(text)
     })
+    if(alarmList.length != 0){
+        $('.message7').hide();
+        $('.alarmList').show();
+        $('.alarmList').html(text);
+    }else{
+        $('.message7').show();
+        $('.alarmList').hide();
+        $('.alarmList').html(text);
+    }
 }
 
 /*/안읽은 알람 목록*/

@@ -346,6 +346,8 @@
     if (sessionType == "school") {
         $(".nickName").text(userDTO.schoolName);
         $('.donationWrap').hide();
+        $('#donateVisit').hide();
+
     }
     if(userDTO.file){
         $('.replyProfile').attr("src", `/file/display?fileName=` + userDTO.file.filePath + `/` + userDTO.file.fileUuid + `_` + userDTO.file.fileName)

@@ -26,9 +26,6 @@ public class PeopleDTO {
     private int donationCount;
     private LocalDateTime createdDate;
     private List<FileDTO> files;
-    private String fileName;
-    private String filePath;
-    private String fileUuid;
 
     public People toEntity() {
         return People.builder()
@@ -42,7 +39,7 @@ public class PeopleDTO {
     }
 
     @QueryProjection
-    public PeopleDTO(Long userId, String peopleNickname , String userEmail,String userName, String userPassword,String userPhoneNumber, int donationCount, LocalDateTime createdDate, String fileName, String filePath, String fileUuid) {
+    public PeopleDTO(Long userId, String peopleNickname , String userEmail,String userName, String userPassword,String userPhoneNumber, int donationCount, LocalDateTime createdDate) {
         this.userId = userId;
         this.peopleNickname = peopleNickname;
         this.userEmail = userEmail;
@@ -51,9 +48,6 @@ public class PeopleDTO {
         this.userPhoneNumber = userPhoneNumber;
         this.donationCount = donationCount;
         this.createdDate = createdDate;
-        this.fileName = fileName;
-        this.filePath = filePath;
-        this.fileUuid = fileUuid;
 //        this.files = files;
     }
 
