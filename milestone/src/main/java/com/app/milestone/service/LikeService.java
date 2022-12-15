@@ -1,11 +1,13 @@
 package com.app.milestone.service;
 
+import com.app.milestone.domain.FileDTO;
 import com.app.milestone.domain.LikeDTO;
 import com.app.milestone.domain.SchoolDTO;
 import com.app.milestone.domain.Search;
 import com.app.milestone.entity.Like;
 import com.app.milestone.entity.People;
 import com.app.milestone.entity.School;
+import com.app.milestone.repository.FileRepository;
 import com.app.milestone.repository.LikeRepository;
 import com.app.milestone.repository.PeopleRepository;
 import com.app.milestone.repository.SchoolRepository;
@@ -28,6 +30,7 @@ public class LikeService {
     public final SchoolRepository schoolRepository;
     public final PeopleRepository peopleRepository;
     public final LikeRepository likeRepository;
+    public final FileRepository fileRepository;
 
     //    ============================좋아요=========================
     //    내가 누른 좋아요
@@ -67,6 +70,11 @@ public class LikeService {
         Pageable pageable = PageRequest.of(page, 5);
         List<LikeDTO> list = likeRepository.findSchoolLiked(pageable, sessionId);
 
+        for(LikeDTO likeDTO:list){
+            List<FileDTO> arFileDTO = fileRepository.findByUserId(likeDTO.getSchoolId());
+            likeDTO.setFiles(arFileDTO);
+        }
+
         Page<LikeDTO> likes = new PageImpl<>(list, pageable, Integer.valueOf("" + likeRepository.countByCreatedDate(pageable, sessionId)));
         return likes;
     }
@@ -81,6 +89,11 @@ public class LikeService {
 
         Pageable pageable = PageRequest.of(page, 5);
         List<LikeDTO> list = likeRepository.findSchoolLikedSearch(pageable, sessionId, search);
+
+        for(LikeDTO likeDTO:list){
+            List<FileDTO> arFileDTO = fileRepository.findByUserId(likeDTO.getSchoolId());
+            likeDTO.setFiles(arFileDTO);
+        }
 
         Page<LikeDTO> likes = new PageImpl<>(list, pageable, Integer.valueOf("" + likeRepository.countByCreatedDate2(pageable, sessionId, search)));
         return likes;

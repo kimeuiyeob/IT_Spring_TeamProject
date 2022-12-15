@@ -10,6 +10,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @Data
 @NoArgsConstructor
@@ -21,6 +23,7 @@ public class LikeDTO {
     private String schoolContent;
     private String schoolAddress;
     private String schoolQr;
+    private List<FileDTO> files;
 
     @QueryProjection
     public LikeDTO(Long likeId, Long schoolId, Long peopleId, String schoolName, String schoolContent, String schoolAddress, String schoolQr) {
