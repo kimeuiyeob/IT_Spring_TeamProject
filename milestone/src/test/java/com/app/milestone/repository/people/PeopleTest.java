@@ -149,7 +149,7 @@ public class PeopleTest {
 
         for (int i = 0; i < 30; i++) {
             // 기부자 피기부자 샘플
-            Long giver = 5L + (i % 11);
+            Long giver = 10L + (i % 11);
             Long taker = 105L;
             // 개인 총 기부 횟수 카운트
             People people = peopleRepository.findById(giver).get();
@@ -172,9 +172,9 @@ public class PeopleTest {
     public void talentTest() {
         int donationCount = 0;
         String[] talentTitle = {"저는 헬스 3년차 태릉인 입니다.", "피아노 선생님 입니다.", "이 바닥에 소문난 IT절대 고수 한동석 입니다.", "저는 국어 선생님 입니다.", "미술인생 20년 입니다."};
-        String[] talentContent = {"저는 헬스 3년차 태릉인 입니다. 제가 아이들에게 운동을 가르치겠습니다.", "아이들에게 피아노를 가르치고 싶어요.","자바가 뭔지 차근 차근 가르칠게요.", "아이들에게 언어와 한국말의 아름다움을 전달 할게요.","그림을 배우면 아이들이 좋아할 거예요"};
-        String[] category = {"운동","음악","IT","교육","미술"};
-        String[] location = {"서울","경기도","강원도","충청도","전라도","경상도","제주도"};
+        String[] talentContent = {"저는 헬스 3년차 태릉인 입니다. 제가 아이들에게 운동을 가르치겠습니다.", "아이들에게 피아노를 가르치고 싶어요.", "자바가 뭔지 차근 차근 가르칠게요.", "아이들에게 언어와 한국말의 아름다움을 전달 할게요.", "그림을 배우면 아이들이 좋아할 거예요"};
+        String[] category = {"운동", "음악", "IT", "교육", "미술"};
+        String[] location = {"서울", "경기도", "강원도", "충청도", "전라도", "경상도", "제주도"};
 
         for (int i = 0; i < 69; i++) {
             // 기부자 피기부자 샘플
@@ -189,9 +189,11 @@ public class PeopleTest {
             donationCount = donationRepository.countBySchoolUserId(taker);
             school.update(donationCount);
 
-            Talent talent = new Talent(talentTitle[i%5], talentContent[i%5], LocalDateTime.of(2023,2,10,0,0,0), category[i%5], location[i%7]);
+            Talent talent = new Talent(talentTitle[i % 5], talentContent[i % 5], LocalDateTime.of(2023, 2, 10, 0, 0, 0), category[i % 5], location[i % 7]);
             talent.changePeople(people);
-            talent.changeSchool(school);
+            if (i % 2 == 0) {
+                talent.changeSchool(school);
+            }
             talentRepository.save(talent);
         }
     }

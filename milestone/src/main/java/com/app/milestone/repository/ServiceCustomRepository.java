@@ -9,7 +9,7 @@ import java.util.List;
 public interface ServiceCustomRepository {
     //    ===============황지수===============
     public List<Tuple> sortByVisitRank();
-    public void checkOverlap();
+    public Long checkOverlap(Long userId, ServiceDTO serviceDTO);
     //    ===============황지수===============
     //    개인 일정 조회
     public List<ServiceDTO> findService(Pageable pageable, Long peopleId);

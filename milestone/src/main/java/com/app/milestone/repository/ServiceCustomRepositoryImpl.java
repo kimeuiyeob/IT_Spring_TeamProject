@@ -2,6 +2,7 @@ package com.app.milestone.repository;
 
 import com.app.milestone.domain.QServiceDTO;
 import com.app.milestone.domain.ServiceDTO;
+import com.app.milestone.entity.QService;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.Tuple;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -164,10 +165,16 @@ public class ServiceCustomRepositoryImpl implements ServiceCustomRepository {
         }
         return tuples;
     }
+
 //    중복신청 확인
     @Override
-    public void checkOverlap(){
-
+    public Long checkOverlap(Long userId, ServiceDTO serviceDTO){
+        return jpaQueryFactory.select(service.count())
+                .from(service)
+                .where(
+                    service.people.userId.eq(userId).and(service.serviceVisitDate.eq(serviceDTO.getServiceVisitDate()))
+                )
+                .fetchOne();
     }
 //========================/황지수======================
 
