@@ -1,6 +1,7 @@
 package com.app.milestone.config;
 
 import com.app.milestone.interceptor.AlarmInterceptor;
+import com.app.milestone.interceptor.LoginInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @RequiredArgsConstructor
 public class WebMvcConfig implements WebMvcConfigurer {
     private final AlarmInterceptor alarmInterceptor;
+    private final LoginInterceptor loginInterceptor;
 
 //    addInterceptors 어플리케이션 내에서 인터셉터가 작동할 수 있도록 빈(Bean)으로 등록
     @Override
@@ -25,6 +27,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 //                src/main/resources 디렉터리의 static 폴더에 포함된 정적 리소스 파일을 제외
                 .addPathPatterns("/error/**", "/faq/**", "/find/**", "/introduce/**", "/join/**", "/kakao/**", "/login/**", "/main/**", "/mypage/**", "/notice/**", "/ranking/**", "/school/**", "/talent/**", "/logout/**");
 //                .excludePathPatterns("/css/**", "/imgs/**", "/file/**", "/images/**", "/js/**", "/schoolrest/**");
+        registry.addInterceptor(loginInterceptor).addPathPatterns("/error/**", "/faq/**", "/find/**", "/introduce/**", "/join/**", "/kakao/**", "/login/**", "/main/**", "/mypage/**", "/notice/**", "/ranking/**", "/school/**", "/talent/**", "/logout/**");
     }
 
 //    @Bean

@@ -59,6 +59,7 @@ public class SchoolDTO {
                 .schoolBank(schoolBank)
                 .schoolAccount(schoolAccount)
                 .schoolPhoneNumber(schoolPhoneNumber)
+                .schoolQR(schoolQR)
                 .introduce(introduce)
                 .userEmail(userEmail)
                 .userName(userName)

@@ -7,8 +7,10 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface ServiceCustomRepository {
+    //    ===============황지수===============
     public List<Tuple> sortByVisitRank();
-
+    public void checkOverlap();
+    //    ===============황지수===============
     //    개인 일정 조회
     public List<ServiceDTO> findService(Pageable pageable, Long peopleId);
     public List<ServiceDTO> findVisitDate(Long peopleId);
