@@ -17,4 +17,5 @@ public interface FileRepository extends JpaRepository<File, Long>, FileCustomRep
     @Query("delete from File f where f.user.userId = :userId and f.fileType = 'schoolImg'")
     public void deleteSchoolImgByUserId(@Param("userId") Long userId);
 
+    public void deleteByUserUserId(Long userId);
 }

@@ -4,6 +4,8 @@ import com.sun.istack.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -21,10 +23,13 @@ public abstract class Donation extends Period {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
     @NotNull
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private School school;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
     @NotNull
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private People people;
 
     public void changeSchool(School school) {

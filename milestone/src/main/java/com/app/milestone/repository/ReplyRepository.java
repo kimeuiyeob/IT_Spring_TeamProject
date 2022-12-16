@@ -6,4 +6,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public interface ReplyRepository extends JpaRepository<Reply, Long>, ReplyCustomRepository {
+    public void deleteByUserUserId(Long userId);
+    public void deleteBySchoolUserId(Long userId);
 }

@@ -161,6 +161,7 @@ public class LoginController {
         log.info("로그아웃 성공");
         return "redirect:/main/main";
     }
+
     @GetMapping("/logout")
     public String logoutGet(HttpServletRequest request) {
         HttpSession session = request.getSession();
