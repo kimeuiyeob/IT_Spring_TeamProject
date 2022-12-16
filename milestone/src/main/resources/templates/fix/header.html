@@ -205,7 +205,10 @@
                             </a>
                         </ul>
                         <ul class="profile-menu3" style="padding-left: 0;">
-                            <a th:href="@{/login/logout}" class="line1">
+                            <a th:if="${session.OAuth2 == 'naver'}" th:href="@{/login/naver-logout}" class="line1">
+                                <li>로그아웃</li>
+                            </a>
+                            <a th:if="${session.OAuth2 == null}" th:href="@{/login/logout}" class="line1">
                                 <li>로그아웃</li>
                             </a>
                         </ul>
