@@ -30,7 +30,9 @@ public class MyPageController {
     @GetMapping("/myinfo")
     public String myinfo(HttpSession session, Model model) throws Exception {
         Long userId = (Long) session.getAttribute("userId");
-        model.addAttribute("fileDTO", fileService.showProfile(userId));
+        if (userId != null) {
+            model.addAttribute("fileDTO", fileService.showProfile(userId));
+        }
         model.addAttribute("peopleDTO", peopleService.onesInfo(userId));
         return "/myPage/myPage_myInfo";
     }

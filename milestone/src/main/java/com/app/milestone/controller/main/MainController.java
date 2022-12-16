@@ -65,15 +65,18 @@ public class MainController {
     }
 
     @GetMapping("main")
-    public void main(HttpServletRequest request, Model model) {
+    public void main(HttpSession session, Model model) {
 //        HttpSession session = request.getSession();
-//        Long userId = (Long)session.getAttribute("userId");
+        Long userId = (Long)session.getAttribute("userId");
 //        도움이 필요한 보육원
 //        model.addAttribute("fileDTO", fileService.showProfile(userId));
         model.addAttribute("moneys", moneyService.donationMoneyRanking());
         model.addAttribute("services", serviceService.donationVisitRanking());
         model.addAttribute("talents", talentService.donationTalentRanking());
         model.addAttribute("schools", schoolService.needHelpList());
+        if (userId != null) {
+            model.addAttribute("fileDTO", fileService.showProfile(userId));
+        }
     }
 
     // 서블릿 HTTP 세션 사용

@@ -284,4 +284,3 @@ $(window).load(function () {
     $closeIconRight.css('display', 'none');
 
 });
-
