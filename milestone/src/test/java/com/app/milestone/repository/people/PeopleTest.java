@@ -32,17 +32,19 @@ public class PeopleTest {
     //    개인 샘플 데이터(100명)
     @Test
     public void saveTest() {
-        String[] names = {"이지은", "이승철", "윤도현", "이문세", "정은지", "김광석", "김세정","김경호","유인나","유해진","마동석"};
+        String[] names = {"이지은", "이승철", "윤도현", "이문세", "정은지", "김광석", "김세정", "김경호", "유인나", "유해진", "마동석", "정우성", "이정재", "유재석", "이광수", "송지효", "김종국", "정호석", "전소민", "한동석", "김유정", "김태희", "김태희", "한가인", "전지현", "성은지", "정재훈", "문승희", "홍준성", "홍수현", "김인영", "배다빈", "박종우", "김민혁"};
+//        log.info("==============================="+names.length);
+        String[] nickNames = {"독수리", "흰개미", "고구마"};
         for (int i = 0; i < 100; i++) {
             try {
-                Thread.sleep(100);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             PeopleDTO peopleDTO = new PeopleDTO();
-            peopleDTO.setPeopleNickname("독수리" + i + "호");
-            peopleDTO.setUserEmail("qwe"+i+"@qwe.qwe");
-            peopleDTO.setUserName(names[i % 11]);
+            peopleDTO.setPeopleNickname(nickNames[i % 3] + i + "호");
+            peopleDTO.setUserEmail("qwe" + i + "@qwe.qwe");
+            peopleDTO.setUserName(names[i % 34]);
             peopleDTO.setUserPassword("cXdlcjEyMzQh");
             peopleDTO.setUserPhoneNumber("01011112222");
 
@@ -52,8 +54,8 @@ public class PeopleTest {
     }
 
     @Test
-    public void findOneTest(){
-        log.info(""+peopleRepository.findById(132L).get());
+    public void findOneTest() {
+        log.info("" + peopleRepository.findById(132L).get());
     }
 
     //    개인 한 명의 정보
@@ -94,10 +96,10 @@ public class PeopleTest {
     }
 
     @Test
-    public void likeFindByPeopleTest(){
+    public void likeFindByPeopleTest() {
         String text = "";
-        for (Like o :likeRepository.findByPeopleUserId(105L)){
-            text += "\n"+o.getSchool().getUserId();
+        for (Like o : likeRepository.findByPeopleUserId(105L)) {
+            text += "\n" + o.getSchool().getUserId();
         }
         log.info(text);
     }
@@ -147,7 +149,7 @@ public class PeopleTest {
 
         for (int i = 0; i < 30; i++) {
             // 기부자 피기부자 샘플
-            Long giver = 1L + (i % 11);
+            Long giver = 5L + (i % 11);
             Long taker = 105L;
             // 개인 총 기부 횟수 카운트
             People people = peopleRepository.findById(giver).get();
@@ -169,11 +171,15 @@ public class PeopleTest {
     @Test
     public void talentTest() {
         int donationCount = 0;
+        String[] talentTitle = {"저는 헬스 3년차 태릉인 입니다.", "피아노 선생님 입니다.", "이 바닥에 소문난 IT절대 고수 한동석 입니다.", "저는 국어 선생님 입니다.", "미술인생 20년 입니다."};
+        String[] talentContent = {"저는 헬스 3년차 태릉인 입니다. 제가 아이들에게 운동을 가르치겠습니다.", "아이들에게 피아노를 가르치고 싶어요.","자바가 뭔지 차근 차근 가르칠게요.", "아이들에게 언어와 한국말의 아름다움을 전달 할게요.","그림을 배우면 아이들이 좋아할 거예요"};
+        String[] category = {"운동","음악","IT","교육","미술"};
+        String[] location = {"서울","경기도","강원도","충청도","전라도","경상도","제주도"};
 
-        for (int i = 0; i < 18; i++) {
+        for (int i = 0; i < 69; i++) {
             // 기부자 피기부자 샘플
-            Long giver = 1L + (i % 11);
-            Long taker = 105L;
+            Long giver = 20L + (i % 11);
+            Long taker = 110L;
             // 개인 총 기부 횟수 카운트
             People people = peopleRepository.findById(giver).get();
             donationCount = donationRepository.countByPeopleUserId(giver);
@@ -183,7 +189,7 @@ public class PeopleTest {
             donationCount = donationRepository.countBySchoolUserId(taker);
             school.update(donationCount);
 
-            Talent talent = new Talent("재능제목", "재능내용", LocalDateTime.now(), "교육", "서울");
+            Talent talent = new Talent(talentTitle[i%5], talentContent[i%5], LocalDateTime.of(2023,2,10,0,0,0), category[i%5], location[i%7]);
             talent.changePeople(people);
             talent.changeSchool(school);
             talentRepository.save(talent);

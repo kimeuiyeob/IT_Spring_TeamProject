@@ -53,7 +53,14 @@ public class ServiceService {
         People people = peopleRepository.findById(userId).get();
         School school = schoolRepository.findById(serviceDTO.getUserId()).get();
 
+        log.info("==============================방문기부========================="+ serviceDTO);
+        log.info("==============================방문기부========================="+ serviceDTO);
+        log.info("==============================방문기부========================="+ serviceDTO);
+
         com.app.milestone.entity.Service service = serviceDTO.toEntity();
+        log.info("==============================방문기부========================="+ service.getServiceVisitDate());
+        log.info("==============================방문기부========================="+ service.getServiceVisitDate());
+        log.info("==============================방문기부========================="+ service.getServiceVisitDate());
         service.changeSchool(school);
         service.changePeople(people);
         service = serviceRepository.save(service);
