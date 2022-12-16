@@ -21,32 +21,35 @@
             3초안에 가입하고,
             <br>기부랭킹에 도전하세요!
         </div>
-            <a href="https://nid.naver.com/oauth2.0/authorize?client_id=zX1vXQ8A64kO_j3A6aq1&response_type=code&redirect_uri=http://localhost:9999/join/naver"
-            style="text-decoration: none;">
-                <div class="snsBtns">
-                    <div class="snsBtnWrap">
-                        <div class="snsBtn flexPublic" style="background-color : limegreen;">
-                            <div class="flexPublic">
-                                <img src="https://d2v80xjmx68n4w.cloudfront.net/assets/icon/icon_naver.png" width="30px"
-                                     style="margin-right: 5px;" alt="">
-                                <div>네이버 간편 가입하기</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-            <a href="https://kauth.kakao.com/oauth/authorize?client_id=ec88be2bdb89985381291c974eac293a&redirect_uri=http://localhost:9999/kakao/login&&response_type=code&scope=account_email" style="text-decoration: none;">
+        <a href="https://nid.naver.com/oauth2.0/authorize?client_id=zX1vXQ8A64kO_j3A6aq1&response_type=code&redirect_uri=http://localhost:9999/join/naver"
+           style="text-decoration: none;">
+            <div class="snsBtns">
                 <div class="snsBtnWrap">
-                    <div class="snsBtn flexPublic" style=" background-color : yellow; color:#333333;">
+                    <div class="snsBtn flexPublic" style="background-color : limegreen;">
                         <div class="flexPublic">
-                            <img src="https://d2v80xjmx68n4w.cloudfront.net/assets/icon/icon_kakao.png" width="30px"
+                            <img src="https://d2v80xjmx68n4w.cloudfront.net/assets/icon/icon_naver.png" width="30px"
                                  style="margin-right: 5px;" alt="">
-                            <div>카카오 간편 가입하기</div>
+                            <div>네이버 간편 가입하기</div>
                         </div>
                     </div>
                 </div>
-            </a>
-            <a href="https://accounts.google.com/o/oauth2/v2/auth?client_id=851815765886-2pjd7fk60akbteuo5ulom9e13abo9tnm.apps.googleusercontent.com&redirect_uri=http://localhost:9999/join/google&response_type=code&scope=email%20profile%20openid&access_type=offline&prompt=consent">
+            </div>
+        </a>
+        <a href="https://kauth.kakao.com/oauth/authorize?client_id=ec88be2bdb89985381291c974eac293a&redirect_uri=http://localhost:9999/kakao/login&&response_type=code&scope=account_email"
+           style="text-decoration: none;">
+            <div class="snsBtnWrap">
+                <div class="snsBtn flexPublic" style=" background-color : yellow; color:#333333;">
+                    <div class="flexPublic">
+                        <img src="https://d2v80xjmx68n4w.cloudfront.net/assets/icon/icon_kakao.png" width="30px"
+                             style="margin-right: 5px;" alt="">
+                        <div>카카오 간편 가입하기</div>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <a style="text-decoration: none;"
+           href="https://accounts.google.com/o/oauth2/v2/auth?client_id=851815765886-2pjd7fk60akbteuo5ulom9e13abo9tnm.apps.googleusercontent.com&redirect_uri=http://localhost:9999/join/google&response_type=code&scope=email%20profile%20openid&access_type=offline&prompt=consent">
             <div class="snsBtnWrap">
                 <div class="snsBtn flexPublic" style="background-color : rgb(225, 83, 63);">
                     <div class="flexPublic">
@@ -56,19 +59,21 @@
                     </div>
                 </div>
             </div>
+        </a>
+
+
+    </div>
+    <div class="divisionLine">
+        <div class="emailWrap">
+            <a href="" class="snsBtn flexPublic"
+               style="background-color : /*rgb(255, 253, 236)*/#e4e5ed; color:#333333;" th:href="@{/join/user}">
+                <div class="flexPublic">
+                    <div>이메일로 가입하기</div>
+                </div>
             </a>
         </div>
-        <div class="divisionLine">
-            <div class="emailWrap">
-                <a href="" class="snsBtn flexPublic"
-                   style="background-color : /*rgb(255, 253, 236)*/#e4e5ed; color:#333333;" th:href="@{/join/user}">
-                    <div class="flexPublic">
-                        <div>이메일로 가입하기</div>
-                    </div>
-                </a>
-            </div>
-        </div>
     </div>
+</div>
 </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>

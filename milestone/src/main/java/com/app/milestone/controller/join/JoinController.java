@@ -92,6 +92,12 @@ public class JoinController {
         return Integer.toString(randomNumber);
     }
 
+    @GetMapping("/join")
+    public String joinGoogle() {
+        return "/join/joinGooglePhone";
+    }
+
+
     //구글 오어스 회원가입
     @GetMapping("/google")
     public RedirectView googleJoin(@RequestParam String code, RedirectAttributes redirectAttributes) throws Exception {

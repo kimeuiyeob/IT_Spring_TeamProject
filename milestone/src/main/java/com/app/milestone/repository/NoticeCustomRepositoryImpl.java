@@ -84,9 +84,10 @@ public class NoticeCustomRepositoryImpl implements NoticeCustomRepository{
                 .where(
                         titleContaining(search.getNoticeTitle())
                 )
-                .orderBy(notice.createdDate.asc())
+                .orderBy(notice.createdDate.desc())
                 .fetch();
     }
+
 
     //Notice공지사항 공지사항 상세페이지 왼쪽 7개 제목 순서대로 가져오는 메소드
     @Override
@@ -98,7 +99,7 @@ public class NoticeCustomRepositoryImpl implements NoticeCustomRepository{
                 notice.createdDate
         ))
                 .from(notice)
-                .orderBy(notice.createdDate.asc())
+                .orderBy(notice.createdDate.desc())
                 .limit(7)
                 .fetch();
     }

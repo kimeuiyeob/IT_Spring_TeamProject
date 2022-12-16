@@ -137,7 +137,7 @@ public class TalentService {
     /*========================================================================*/
     //마이페이지 재능기부 -> 해당 도네이션 수정
     @Transactional
-    public void changeWrite(TalentDTO talentDTO) {
+    public void signTalentPeople(TalentDTO talentDTO) {
         talentRepository.findById(talentDTO.getDonationId()).get().update(talentDTO);
         donationService.alarm(talentDTO);
     }
