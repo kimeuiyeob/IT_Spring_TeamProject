@@ -45,7 +45,7 @@ public class TalentTest {
     //탤러트 글작성 테스트
     @Test
     public void saveTest123() {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 5; i++) {
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
@@ -53,8 +53,8 @@ public class TalentTest {
             }
             TalentDTO talentDTO = new TalentDTO();
             People people = peopleRepository.findById(5L).get();
-            talentDTO.setTalentTitle("안녕하세요여러분" + i);
-            talentDTO.setTalentContent("이건내용이에요여러분!!" + i);
+            talentDTO.setTalentTitle(i + "안녕하세요 여러분");
+            talentDTO.setTalentContent(i + "안녕하세요.여러분 제가 아이들에게 희망을 전달할께요");
             talentDTO.setTalentAbleDate(LocalDateTime.now());
             talentDTO.setTalentCategory("교육");
             talentDTO.setTalentPlace("강원도");

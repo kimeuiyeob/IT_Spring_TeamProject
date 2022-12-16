@@ -187,8 +187,9 @@
 
                          <!--========================================== 사진 ==========================================-->
 
-                         <th:block th:if="${talentPicture != null}" >
-                             <img style="border-radius: 10px; width: 203px; height: 204px" th:src="${'/file/display?fileName='+talentPicture.filePath+'/'+talentPicture.fileUuid+'_'+talentPicture.fileName}">
+                         <th:block th:if="${talentPicture != null}">
+                             <img style="border-radius: 10px; width: 203px; height: 204px"
+                                  th:src="${'/file/display?fileName='+talentPicture.filePath+'/'+talentPicture.fileUuid+'_'+talentPicture.fileName}">
                         </th:block>
                          <th:block th:unless="${talentPicture != null}">
                               <img src="../imgs/talent/normalProfile.png"
@@ -331,20 +332,25 @@
 </div>
 
 <!--================================================================================================================-->
+
+
+
 <footer th:replace="/fix/footer.html :: footer"></footer>
-<!--================================================================================================================-->
 </body>
 <!--================================================================================================================-->
+
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-<!--================================================================================================================-->
 <script src="/js/fix/header.js"></script>
 <script src="/js/talent/talent.js"></script>
+
 <!--================================================================================================================-->
+
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
     AOS.init();
 </script>
+
 <!--================================================================================================================-->
 <script th:inline="javascript">
 
@@ -354,8 +360,6 @@
     show();
 
     let sessionId = $("#sessionId").val();
-
-    console.log("세션아이디값 잘갖고왔니?" + sessionId);
 
     window.onload = function () {
 
@@ -499,33 +503,110 @@
     /*===========================================================================================*/
     /*각 카테고리 클릭시*/
 
-    $(".cateAll").on("click", function () {
-        savecategory = $(this).text();
+    $("#showAll").on("click", function () {
+
+        $("#all").css({"display": "flex"})
+        $("#pseudo").css({"transform": "translateX(0%)"})
+
+        $(this).css({"color": "rgb(48, 52, 65)", "font-weight": "700"})
+
+        $(".education").css({"font-weight": "normal", "color": "rgb(154, 155, 167)"})
+        $(".exercise").css({"font-weight": "normal", "color": "rgb(154, 155, 167)"})
+        $(".music").css({"font-weight": "normal", "color": "rgb(154, 155, 167)"})
+        $(".art").css({"font-weight": "normal", "color": "rgb(154, 155, 167)"})
+        $(".program").css({"font-weight": "normal", "color": "rgb(154, 155, 167)"})
+
+        savecategory = $(this).find(".cateAll").text();
         globalThis.page = 0;
         show();
     })
-    $(".cateEdu").on("click", function () {
-        savecategory = $(this).text();
+
+    $("#education").on("click", function () {
+
+        $("#education").css({"display": "flex"})
+        $("#pseudo").css({"transform": "translateX(100%)"})
+
+        $(this).css({"color": "rgb(48, 52, 65)", "font-weight": "700"})
+
+        $(".all").css({"font-weight": "normal", "color": "rgb(154, 155, 167)"})
+        $(".exercise").css({"font-weight": "normal", "color": "rgb(154, 155, 167)"})
+        $(".music").css({"font-weight": "normal", "color": "rgb(154, 155, 167)"})
+        $(".art").css({"font-weight": "normal", "color": "rgb(154, 155, 167)"})
+        $(".program").css({"font-weight": "normal", "color": "rgb(154, 155, 167)"})
+
+        savecategory = $(this).find(".cateEdu").text();
         globalThis.page = 0;
         show();
     })
-    $(".cateExe").on("click", function () {
-        savecategory = $(this).text();
+    $("#exercise").on("click", function () {
+
+        $("#exercise").css({"display": "flex"})
+        $("#pseudo").css({"transform": "translateX(200%)"})
+
+        $(this).css({"color": "rgb(48, 52, 65)", "font-weight": "700"})
+
+        $(".all").css({"font-weight": "normal", "color": "rgb(154, 155, 167)"})
+        $(".education").css({"font-weight": "normal", "color": "rgb(154, 155, 167)"})
+        $(".music").css({"font-weight": "normal", "color": "rgb(154, 155, 167)"})
+        $(".art").css({"font-weight": "normal", "color": "rgb(154, 155, 167)"})
+        $(".program").css({"font-weight": "normal", "color": "rgb(154, 155, 167)"})
+
+        savecategory = $(this).find(".cateExe").text();
         globalThis.page = 0;
         show();
     })
-    $(".cateMus").on("click", function () {
-        savecategory = $(this).text();
+    $("#music").on("click", function () {
+
+        $("#music").css({"display": "flex"})
+        $("#pseudo").css({"transform": "translateX(300%)"})
+
+        $(this).css({"color": "rgb(48, 52, 65)", "font-weight": "700"})
+
+        $(".all").css({"font-weight": "normal", "color": "rgb(154, 155, 167)"})
+        $(".education").css({"font-weight": "normal", "color": "rgb(154, 155, 167)"})
+        $(".exercise").css({"font-weight": "normal", "color": "rgb(154, 155, 167)"})
+        $(".art").css({"font-weight": "normal", "color": "rgb(154, 155, 167)"})
+        $(".program").css({"font-weight": "normal", "color": "rgb(154, 155, 167)"})
+
+        savecategory = $(this).find(".cateMus").text();
         globalThis.page = 0;
         show();
     })
-    $(".cateArt").on("click", function () {
-        savecategory = $(this).text();
+    $("#art").on("click", function () {
+
+        $("#art").css({"display": "flex"})
+        $("#pseudo").css({"transform": "translateX(400%)"})
+
+        $(this).css({"color": "rgb(48, 52, 65)", "font-weight": "700"})
+
+        $(".all").css({"font-weight": "normal"})
+        $(".all").css({"color": "rgb(154, 155, 167)"})
+
+        $(".all").css({"font-weight": "normal", "color": "rgb(154, 155, 167)"})
+        $(".education").css({"font-weight": "normal", "color": "rgb(154, 155, 167)"})
+        $(".exercise").css({"font-weight": "normal", "color": "rgb(154, 155, 167)"})
+        $(".music").css({"font-weight": "normal", "color": "rgb(154, 155, 167)"})
+        $(".program").css({"font-weight": "normal", "color": "rgb(154, 155, 167)"})
+
+        savecategory = $(this).find(".cateArt").text();
         globalThis.page = 0;
         show();
     })
-    $(".cateIt").on("click", function () {
-        savecategory = $(this).text();
+
+    $("#program").on("click", function () {
+
+        $("#program").css({"display": "flex"})
+        $("#pseudo").css({"transform": "translateX(500%)"})
+
+        $(this).css({"color": "rgb(48, 52, 65)", "font-weight": "700"})
+
+        $(".all").css({"font-weight": "normal", "color": "rgb(154, 155, 167)"})
+        $(".education").css({"font-weight": "normal", "color": "rgb(154, 155, 167)"})
+        $(".exercise").css({"font-weight": "normal", "color": "rgb(154, 155, 167)"})
+        $(".music").css({"font-weight": "normal", "color": "rgb(154, 155, 167)"})
+        $(".art").css({"font-weight": "normal", "color": "rgb(154, 155, 167)"})
+
+        savecategory = $(this).find(".cateIt").text();
         globalThis.page = 0;
         show();
     })

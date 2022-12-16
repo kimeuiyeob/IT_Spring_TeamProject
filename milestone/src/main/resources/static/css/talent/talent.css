@@ -103,6 +103,7 @@ body {
 .program {
     padding-left: 25px;
     cursor: pointer;
+    padding-right: 20px;
 }
 
 /*=============아래 노란줄 CSS 그리고 JS부분 참고====================*/

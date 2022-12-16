@@ -76,7 +76,7 @@ public class TalentRestController {
 
         talent.changeSchool(school);
         talentDTO.setSchoolUserId(userId);
-        talentService.changeWrite(talentDTO);
+        talentService.signTalentPeople(talentDTO);
     }
 
     /*===============================================*/
