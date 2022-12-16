@@ -114,9 +114,9 @@
             개인정보관리책임자 : 황지수
             <span class="footer-text2"></span>
             사업자등록번호 : 012-34-56789
-            <a role="link" color="default" th:href="@{/admin/user}" target="_blank" class="footer9">
+            <span role="link" color="default" onclick="adminLogin()" target="_blank" class="footer9">
                 <span class="footer-text3">관리자 모드</span>
-            </a>
+            </span>
             <br>통신판매업신고 : 2018-서울서초-2134
             <span class="footer-text2"></span>
             유료직업소개사업등록번호 : 제2021-3210195-14-5-00035호
@@ -142,4 +142,8 @@
     </div>
 </footer>
 </body>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script th:inline="javascript">
+    let sessionId = $("#sessionId").val();
+</script>
 </html>

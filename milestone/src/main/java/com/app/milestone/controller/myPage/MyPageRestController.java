@@ -22,8 +22,7 @@ public class MyPageRestController {
     /*=============================================================================*/
     //마이페이지 재능기부 목록 수정
     @GetMapping(value = {"/list/{page}"})
-    public TalentResp search(@PathVariable("page") Integer page, HttpServletRequest request) {
-        HttpSession session = request.getSession();
+    public TalentResp search(@PathVariable("page") Integer page, HttpSession session) {
         Long userId = (Long) session.getAttribute("userId");
 
         TalentResp talentResp = new TalentResp();

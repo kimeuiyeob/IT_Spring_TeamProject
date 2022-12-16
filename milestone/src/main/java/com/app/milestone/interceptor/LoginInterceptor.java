@@ -38,7 +38,9 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         Long userId = (Long) request.getSession().getAttribute("userId");
-        modelAndView.addObject("fileDTO", fileService.showProfile(userId));
+        if (userId !=null) {
+            modelAndView.addObject("fileDTO", fileService.showProfile(userId));
+        }
         HandlerInterceptor.super.postHandle(request, response, handler, modelAndView);
     }
 }

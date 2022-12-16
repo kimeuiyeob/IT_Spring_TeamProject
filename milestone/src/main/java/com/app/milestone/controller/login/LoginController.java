@@ -85,12 +85,14 @@ public class LoginController {
         }else {
             session.setAttribute("type", "school");
         }
-
+        if(userId==1){
+            session.setAttribute("type", "admin");
+        }
 
 //        log.info("유저 : " + loginMember.getUserEmail());
 //        log.info("유저 : " + loginMember.getUserEmail());
 //        log.info("성공");
-//        log.info("sessionId={}", session.getId());
+        log.info("sessionId={}", session.getId());
 //        log.info("getMaxInactiveInterval={}", session.getMaxInactiveInterval());
 //        log.info("creationTime={}", new Date(session.getCreationTime()));
 //        log.info("lastAccessedTime={}", new Date(session.getLastAccessedTime()));

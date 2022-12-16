@@ -33,6 +33,10 @@ public class IntroduceController {
         model.addAttribute("people", introduceService.PeopleCount());
         model.addAttribute("school", introduceService.SchoolCount());
         model.addAttribute("donation", introduceService.DonationCount());
+
+        log.info("값있니1? : " + introduceService.PeopleCount());
+        log.info("값있니2? : " + introduceService.SchoolCount());
+        log.info("값있니3? : " + introduceService.DonationCount());
     }
 
 }

@@ -22,9 +22,9 @@
 <script th:inline="javascript">
 
     const urlParams = new URLSearchParams(window.location.search);
-    if(urlParams.get("joinGoogle")=='true') {
+    if (urlParams.get("joinGoogle") == 'true') {
         alert("이미회원가입이 되셨습니다.")
-    } else if(urlParams.get("login")=='false') {
+    } else if (urlParams.get("login") == 'false') {
         alert("로그인이 실패하셨습니다.")
     }
     history.replaceState({}, null, location.pathname);
@@ -62,7 +62,8 @@
                                     <span class="search-text2 search-text3">|</span>
                                 </div>
                                 <label for="hero-search2">
-                                    <input name = "schoolName" id="hero-search2" role="search" maxlength="15" autocomplete="off"
+                                    <input name="schoolName" id="hero-search2" role="search" maxlength="15"
+                                           autocomplete="off"
                                            autocorrect="off" autocapitalize="off" class="search4" value="">
                                 </label>
                                 <div class="search-icon1">
@@ -102,7 +103,8 @@
                     <div class="swiper mySwiper" id="mobile-mySwiper" style="margin: 0">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
-                                <a th:href="@{/introduce/introduce}"><img class="banner-imgs1" src="/imgs/main/slide01.gif"></a>
+                                <a th:href="@{/introduce/introduce}"><img class="banner-imgs1"
+                                                                          src="/imgs/main/slide01.gif"></a>
                             </div>
                             <div class="swiper-slide">
                                 <a th:href="@{/ranking/ranking}"><img class="banner-imgs1" src="/imgs/main/slide02.png"></a>
@@ -111,7 +113,8 @@
                                 <a th:href="@{/school/list}"><img class="banner-imgs1" src="/imgs/main/slide03.png"></a>
                             </div>
                             <div class="swiper-slide">
-                                <a th:href="@{/talent/talent}"><img class="banner-imgs1" src="/imgs/main/slide04.png"></a>
+                                <a th:href="@{/talent/talent}"><img class="banner-imgs1"
+                                                                    src="/imgs/main/slide04.png"></a>
                             </div>
                         </div>
                         <div>
@@ -139,11 +142,13 @@
                                 <a class="ranking5">
                                     <div class="ranking6">
                                         <span style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 48px; height: 48px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
-                                            <img alt="프로필 아이콘" srcset="/imgs/main/rangking_icon01.png 1x" th:if="*{file == null}"
+                                            <img alt="프로필 아이콘" srcset="/imgs/main/rangking_icon01.png 1x"
+                                                 th:if="*{file == null}"
                                                  src="/imgs/main/rangking_icon01.png" decoding="async" data-nimg="fixed"
                                                  style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
                                             <img alt="프로필 아이콘" th:if="*{file != null}"
-                                                 th:src="'/file/display?fileName='+ *{file.filePath} + '/' + *{file.fileUuid} + '_' + *{file.fileName}" decoding="async" data-nimg="fixed"
+                                                 th:src="'/file/display?fileName='+ *{file.filePath} + '/' + *{file.fileUuid} + '_' + *{file.fileName}"
+                                                 decoding="async" data-nimg="fixed"
                                                  style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
                                         </span>
                                     </div>
@@ -154,11 +159,14 @@
                                 <a class="ranking5">
                                     <div class="ranking6">
                                         <span style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 48px; height: 48px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
-                                             <img alt="프로필 아이콘" srcset="/imgs/main/rangking_icon01.png 1x" th:if="*{file == null}"
-                                                  src="/imgs/main/rangking_icon01.png" decoding="async" data-nimg="fixed"
+                                             <img alt="프로필 아이콘" srcset="/imgs/main/rangking_icon01.png 1x"
+                                                  th:if="*{file == null}"
+                                                  src="/imgs/main/rangking_icon01.png" decoding="async"
+                                                  data-nimg="fixed"
                                                   style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
                                             <img alt="프로필 아이콘" th:if="*{file != null}"
-                                                 th:src="'/file/display?fileName='+ *{file.filePath} + '/' + *{file.fileUuid} + '_' + *{file.fileName}" decoding="async" data-nimg="fixed"
+                                                 th:src="'/file/display?fileName='+ *{file.filePath} + '/' + *{file.fileUuid} + '_' + *{file.fileName}"
+                                                 decoding="async" data-nimg="fixed"
                                                  style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
                                         </span>
                                     </div>
@@ -180,11 +188,14 @@
                                 <a class="ranking5">
                                     <div class="ranking6">
                                         <span style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 48px; height: 48px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
-                                             <img alt="프로필 아이콘" srcset="/imgs/main/rangking_icon01.png 1x" th:if="*{file == null}"
-                                                  src="/imgs/main/rangking_icon01.png" decoding="async" data-nimg="fixed"
+                                             <img alt="프로필 아이콘" srcset="/imgs/main/rangking_icon01.png 1x"
+                                                  th:if="*{file == null}"
+                                                  src="/imgs/main/rangking_icon01.png" decoding="async"
+                                                  data-nimg="fixed"
                                                   style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
                                             <img alt="프로필 아이콘" th:if="*{file != null}"
-                                                 th:src="'/file/display?fileName='+ *{file.filePath} + '/' + *{file.fileUuid} + '_' + *{file.fileName}" decoding="async" data-nimg="fixed"
+                                                 th:src="'/file/display?fileName='+ *{file.filePath} + '/' + *{file.fileUuid} + '_' + *{file.fileName}"
+                                                 decoding="async" data-nimg="fixed"
                                                  style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
                                         </span>
                                     </div>
@@ -195,11 +206,13 @@
                                 <a class="ranking5">
                                     <div class="ranking6">
                                         <span style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 48px; height: 48px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
-                                           <img alt="프로필 아이콘" srcset="/imgs/main/rangking_icon01.png 1x" th:if="*{file == null}"
+                                           <img alt="프로필 아이콘" srcset="/imgs/main/rangking_icon01.png 1x"
+                                                th:if="*{file == null}"
                                                 src="/imgs/main/rangking_icon01.png" decoding="async" data-nimg="fixed"
                                                 style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
                                             <img alt="프로필 아이콘" th:if="*{file != null}"
-                                                 th:src="'/file/display?fileName='+ *{file.filePath} + '/' + *{file.fileUuid} + '_' + *{file.fileName}" decoding="async" data-nimg="fixed"
+                                                 th:src="'/file/display?fileName='+ *{file.filePath} + '/' + *{file.fileUuid} + '_' + *{file.fileName}"
+                                                 decoding="async" data-nimg="fixed"
                                                  style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
                                         </span>
                                     </div>
@@ -329,7 +342,8 @@
                         <h3 class="video-text6" id="mobile-video-text6-1">
                             안전한 기부
                         </h3>
-                        <h4 class="video-text7" id="mobile-video-text7-2">기부한 내 돈, 걱정되지 않나요?<br>실시간 기부 랭킹으로<br>즉시 확인시켜드려요!</h4>
+                        <h4 class="video-text7" id="mobile-video-text7-2">기부한 내 돈, 걱정되지 않나요?<br>실시간 기부 랭킹으로<br>즉시
+                            확인시켜드려요!</h4>
                         <div class="video-text8">
                             <span style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 28px; height: 28px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
                                 <img alt="카드 1" srcset="/imgs/main/video2.png 1x" src="/imgs/main/video2.png"
@@ -343,7 +357,8 @@
                         <h3 class="video-text6" id="mobile-video-text6-1">
                             간단한 검색
                         </h3>
-                        <h4 class="video-text7" id="mobile-video-text7-3">찾기 어려웠던 보육원 정보!<br>다양한 검색 방법으로<br>보육원의 정보를 볼 수 있습니다.</h4>
+                        <h4 class="video-text7" id="mobile-video-text7-3">찾기 어려웠던 보육원 정보!<br>다양한 검색 방법으로<br>보육원의 정보를 볼 수
+                            있습니다.</h4>
                         <div class="video-text8">
                             <span style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 28px; height: 28px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
                                 <img alt="카드 2" srcset="/imgs/main/video3.png 1x" src="/imgs/main/video3.png"
@@ -365,4 +380,15 @@
 <script src="/js/main/main.js"></script>
 <script src="/js/main/banner.js"></script>
 <script src="/js/fix/header.js"></script>
+<script src="/js/fix/footer.js"></script>
+<script th:inline="javascript">
+    // let fileDTO = [[${fileDTO}]];
+    // console.log(fileDTO)
+    // if (fileDTO) {
+    //     $('#login-profile9').css("background-image", `url(/file/display?fileName=` + fileDTO.filePath + `/s_` + fileDTO.fileUuid + "_" + fileDTO.fileName + `)`)
+    // } else if (!fileDTO) {
+    //     $('#login-profile9').css("background-image", `url(/imgs/myPage/normalProfile.png)`)
+    //     $('#login-profile9').css("background-size", "32px")
+    // }
+</script>
 </html>
