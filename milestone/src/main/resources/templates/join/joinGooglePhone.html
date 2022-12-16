@@ -20,61 +20,38 @@
         <div class="joinTitleWrap" style="margin-top: 0; word-spacing: -5px;">
             딱 이것만 체크하면 가입완료!
         </div>
-<!--        <form role="form" th:action="@{/main/people}" th:object="${peopleDTO}" method="post" id="joinForm" name="joinForm">-->
-<!--            <div class="inputWrap flexCol">-->
-<!--                <div class="flexRow margin-bottom-8">-->
-<!--                    <div class="inputTitleWrap">이메일</div>-->
-<!--                    <div class="essential">*</div>-->
-<!--                </div>-->
-<!--                <input  class="inputCos" name="email" id="email" type="email" placeholder="이메일을 입력해 주세요.">-->
-<!--                <div class="flexRow margin-top-4" style="display: none;">-->
-<!--                    <div class="warningMsg">이메일 형식이 유효하지 않습니다.</div>-->
-<!--                </div>-->
-<!--            </div>-->
-
-<!--            <div class="inputWrap flexCol padding-bottom-8">-->
-<!--                <div class="flexRow margin-bottom-8">-->
-<!--                    <div class="inputTitleWrap">비밀번호</div>-->
-<!--                    <div class="essential">*</div>-->
-<!--                </div>-->
-<!--                <input class="inputCos" name="password" id="password" type="password"-->
-<!--                       placeholder="비밀번호를 입력해 주세요.(8자리 이상)">-->
-<!--                <div class="flexRow margin-top-4" style="display: none;">-->
-<!--                    <div class="warningMsg">비밀번호 형식이 유효하지 않습니다.</div>-->
-<!--                </div>-->
-<!--            </div>-->
-
-<!--            <div class="inputWrap flexCol">-->
-<!--                <input class="inputCos" name="checkPassword" id="checkPassword" type="password"-->
-<!--                       placeholder="비밀번호를 한 번 더 입력해 주세요.">-->
-<!--                <div class="flexRow margin-top-4" style="display: none;">-->
-<!--                    <div class="warningMsg">비밀번호가 일치하지 않습니다.</div>-->
-<!--                </div>-->
-<!--            </div>-->
-
-<!--            <div class="inputWrap flexCol">-->
-<!--                <div class="flexRow margin-bottom-8">-->
-<!--                    <div class="inputTitleWrap">이름</div>-->
-<!--                    <div class="essential">*</div>-->
-<!--                </div>-->
-<!--                <input th:field="*{userName}" class="inputCos" name="name" id="name" type="text" placeholder="이름을 입력해 주세요.">-->
-<!--                <div class="flexRow margin-top-4" style="display: none;">-->
-<!--                    <div class="warningMsg">이름을 정확히 입력해 주세요.</div>-->
-<!--                </div>-->
-<!--            </div>-->
-
-<!--            <div class="inputWrap flexCol">-->
-<!--                <div class="flexRow margin-bottom-8">-->
-<!--                    <div class="inputTitleWrap">닉네임</div>-->
-<!--                    <div class="essential">*</div>-->
-<!--                </div>-->
-<!--                <input th:field="*{peopleNickname}" class="inputCos" name="nickName" id="nickName" type="text" placeholder="닉네임 입력해 주세요.">-->
-<!--                <div class="flexRow margin-top-4" style="display: none;">-->
-<!--                    <div class="warningMsg">이미 마일스톤에 등록된 닉네임입니다.</div>-->
-<!--                </div>-->
-<!--            </div>-->
+        <form th:action="@{/join/joinOK}" id="joinForm" name="joinForm">
 
             <div class="inputWrap flexCol padding-bottom-8">
+                <div class="flexRow margin-bottom-8">
+                    <div class="inputTitleWrap">이름</div>
+                    <div class="essential">*</div>
+                </div>
+                <div class="flexBetween">
+                    <input class="inputCos" name="userName" id="nickName" type="text" th:value="${name}" readonly>
+                </div>
+                <div class="flexRow margin-bottom-8">
+                    <div class="inputTitleWrap">비밀번호</div>
+                    <div class="essential">*</div>
+                </div>
+                <div class="flexBetween">
+                    <input class="inputCos" name="userPassword" id="password" type="password" th:value="${password}" readonly>
+                </div>
+                <div class="flexRow margin-bottom-8">
+                    <div class="inputTitleWrap">이메일</div>
+                    <div class="essential">*</div>
+                </div>
+                <div class="flexBetween">
+                    <input class="inputCos" name="userEmail" id="email" type="text" th:value="${email}" readonly>
+                </div>
+                <div class="flexRow margin-bottom-8">
+                    <div class="inputTitleWrap">닉네임</div>
+                    <div class="essential">*</div>
+                </div>
+                <div class="flexBetween">
+                    <input class="inputCos" name="peopleNickname" id="name" type="text"  >
+                </div>
+
                 <div class="flexRow margin-bottom-8">
                     <div class="inputTitleWrap">휴대전화</div>
                     <div class="essential">*</div>
@@ -148,8 +125,8 @@
                     </label>
                 </div>
             </div>
-            <button type="submit" class="joinBtn" disabled>버튼만 누르면 가입완료!</button>
-<!--        </form>-->
+            <button type="button" class="joinBtn">버튼만 누르면 가입완료!</button>
+        </form>
     </div>
     <div class="joinFooter">
         마일스톤은 회원님의 원할한 서비스 이용에 필요한 정보를
