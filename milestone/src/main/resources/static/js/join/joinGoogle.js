@@ -316,3 +316,7 @@ $smallCheckbox.on('click', function () {
         joinSubmit();
     }
 })
+
+$(".joinBtn").on("click",function () {
+    $("#joinForm").submit();
+})

@@ -208,6 +208,9 @@
                             <a th:if="${session.OAuth2 == 'naver'}" th:href="@{/login/naver-logout}" class="line1">
                                 <li>로그아웃</li>
                             </a>
+                            <a th:if="${session.OAuth2 == 'google'}" href="https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:9999/login/logout-google" class="line1">
+                                <li>로그아웃</li>
+                            </a>
                             <a th:if="${session.OAuth2 == null}" th:href="@{/login/logout}" class="line1">
                                 <li>로그아웃</li>
                             </a>

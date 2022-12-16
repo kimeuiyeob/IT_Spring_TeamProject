@@ -38,6 +38,7 @@ public class LoginController {
             Long userId = user.getUserId();
 
             session.setAttribute("userId", userId);
+            session.setAttribute("OAuth2","google");
 
             if(userService.typeCheck(userId)){
                 session.setAttribute("type", "people");
@@ -86,6 +87,12 @@ public class LoginController {
     @GetMapping("/login")
     public String loginForm(@ModelAttribute("loginDTO") LoginDTO loginDTO) {
         return "login/login";
+    }
+
+    @GetMapping("/logout-google")
+    public RedirectView googleLogout(HttpSession session){
+        session.invalidate();
+        return new RedirectView("/main/main");
     }
 
     // 서블릿 HTTP 세션 사용

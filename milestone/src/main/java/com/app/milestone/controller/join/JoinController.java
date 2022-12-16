@@ -10,10 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -94,7 +91,31 @@ public class JoinController {
 
     @GetMapping("/join")
     public String joinGoogle() {
+
+        PeopleDTO peopleDTO = new PeopleDTO();
+//
+//        peopleDTO.setUserEmail(email);
+//        peopleDTO.setUserPassword(password);
+//        peopleDTO.setUserName(name);
+//        peopleDTO.setPeopleNickname(name);
+//        peopleDTO.setUserPhoneNumber("01012345678");
+//        peopleDTO.setDonationCount(0);
+//
+//
+//        People people = peopleDTO.toEntity();
+//        peopleRepository.save(people);
         return "/join/joinGooglePhone";
+    }
+
+
+    @GetMapping("/joinOK")
+    public RedirectView joinGoogle(PeopleDTO peopleDTO){
+        peopleDTO.setDonationCount(0);
+
+        People people = peopleDTO.toEntity();
+        peopleRepository.save(people);
+
+        return new RedirectView("/main/main?join=true");
     }
 
 
@@ -107,24 +128,15 @@ public class JoinController {
         String name = list.get(1);
         String password = list.get(2) + "-google";
 
+        redirectAttributes.addFlashAttribute("email",email);
+        redirectAttributes.addFlashAttribute("name",name);
+        redirectAttributes.addFlashAttribute("password",password);
+
         if (googleJoinSupportService.PeopleDuplicated(password) == null) {
-            PeopleDTO peopleDTO = new PeopleDTO();
-
-            peopleDTO.setUserEmail(email);
-            peopleDTO.setUserPassword(password);
-            peopleDTO.setUserName(name);
-            peopleDTO.setPeopleNickname(name);
-            peopleDTO.setUserPhoneNumber("01012345678");
-            peopleDTO.setDonationCount(0);
-
-
-            People people = peopleDTO.toEntity();
-            peopleRepository.save(people);
+                return new RedirectView("/join/join");
         } else {
             return new RedirectView("/main/main?join=false");
         }
-
-        return new RedirectView("/main/main?join=true");
     }
 
     // 네이버
