@@ -136,7 +136,7 @@ public class ServiceCustomRepositoryImpl implements ServiceCustomRepository {
                 .fetch();
     }
 
-
+//========================황지수======================
     //  방문기부 랭킹 정렬
     @Override
     public List<Tuple> sortByVisitRank() {
@@ -164,7 +164,12 @@ public class ServiceCustomRepositoryImpl implements ServiceCustomRepository {
         }
         return tuples;
     }
+//    중복신청 확인
+    @Override
+    public void checkOverlap(){
 
+    }
+//========================/황지수======================
 
 
     /* 관리자 ==================================================*/
