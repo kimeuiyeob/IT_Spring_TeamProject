@@ -22,10 +22,12 @@
 <script th:inline="javascript">
 
     const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get("joinGoogle") == 'true') {
+    if(urlParams.get("join")=='false') {
         alert("이미회원가입이 되셨습니다.")
-    } else if (urlParams.get("login") == 'false') {
+    } else if(urlParams.get("login")=='false') {
         alert("로그인이 실패하셨습니다.")
+    }else if(urlParams.get("join")=='true'){
+        alert("회원가입 되셨습니다.")
     }
     history.replaceState({}, null, location.pathname);
 

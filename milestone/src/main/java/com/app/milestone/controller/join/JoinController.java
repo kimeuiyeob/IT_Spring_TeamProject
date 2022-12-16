@@ -32,6 +32,7 @@ public class JoinController {
     private final GoogleJoinService googleJoinService;
     private final PeopleRepository peopleRepository;
     private final GoogleJoinSupportService googleJoinSupportService;
+    private final NaverService naverService;
 
     @GetMapping("/user")
     public String createPeople(Model model) {
@@ -113,11 +114,44 @@ public class JoinController {
 
             People people = peopleDTO.toEntity();
             peopleRepository.save(people);
-        }else{
-            return new RedirectView("/main/main?joinGoogle=true");
+        } else {
+            return new RedirectView("/main/main?join=false");
         }
 
-        return new RedirectView("/main/main");
+        return new RedirectView("/main/main?join=true");
     }
 
+    // 네이버
+    @GetMapping("/naver")
+    public RedirectView naverJoin(@RequestParam String code, RedirectAttributes redirectAttributes) throws Exception {
+        String token = naverService.getNaverAccessToken(code);
+        ArrayList<String> infos = naverService.getNaverProfileByToken(token);
+        String oAuthId = infos.get(0)+"-naver";
+        String name = infos.get(1);
+        String phone = infos.get(2);
+        String email = infos.get(3);
+
+
+
+        log.info("이메일 : " +email);
+
+
+
+        if(googleJoinSupportService.PeopleDuplicated(oAuthId) == null){
+            PeopleDTO peopleDTO = new PeopleDTO();
+
+            peopleDTO.setUserEmail(email);
+            peopleDTO.setUserPassword(oAuthId);
+            peopleDTO.setUserName(name);
+            peopleDTO.setPeopleNickname(name);
+            peopleDTO.setUserPhoneNumber(phone);
+            peopleDTO.setDonationCount(0);
+            People people = peopleDTO.toEntity();
+            peopleRepository.save(people);
+        }else{
+            return new RedirectView("/main/main?join=false");
+        }
+
+        return new RedirectView("/main/main?join=true");
+    }
 }

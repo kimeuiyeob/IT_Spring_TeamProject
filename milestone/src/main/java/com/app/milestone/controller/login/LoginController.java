@@ -5,6 +5,7 @@ import com.app.milestone.entity.User;
 import com.app.milestone.service.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +26,7 @@ public class LoginController {
     private final UserService userService;
     private final GoogleJoinSupportService googleJoinSupportService;
     private final GoogleJoinService googleJoinService;
+    private final NaverService naverService;
 
     @GetMapping("/google")
     public RedirectView googleLogin(@RequestParam String code, HttpSession session) throws Exception {
@@ -46,6 +48,39 @@ public class LoginController {
         return new RedirectView("/main/main");
     }
 
+
+    @GetMapping("/naver")
+    public RedirectView naverLogin(@RequestParam String code, HttpSession session) throws Exception {
+        String token = naverService.getNaverAccessToken(code);
+
+        String password = naverService.getNaverProfileByToken(token).get(0)+"-naver";
+        User user = googleJoinSupportService.PeopleDuplicated(password);
+        if(user == null) {
+            return new RedirectView("/main/main?login=false");
+        }else{
+            Long userId = user.getUserId();
+
+            session.setAttribute("userId", userId);
+            session.setAttribute("OAuth2","naver");
+            session.setAttribute("token",token);
+            if(userService.typeCheck(userId)){
+                session.setAttribute("type", "people");
+            }else {
+                session.setAttribute("type", "school");
+            }
+        }
+        return new RedirectView("/main/main");
+    }
+
+    @GetMapping("/naver-logout")
+    public RedirectView naverLogout(HttpSession session){
+        String token= (String)session.getAttribute("token");
+
+        naverService.logoutNaver(token);
+        session.invalidate();
+
+        return new RedirectView("/main/main");
+    }
 
     //    로그인페이지
     @GetMapping("/login")
@@ -92,7 +127,7 @@ public class LoginController {
 //        log.info("유저 : " + loginMember.getUserEmail());
 //        log.info("유저 : " + loginMember.getUserEmail());
 //        log.info("성공");
-        log.info("sessionId={}", session.getId());
+//        log.info("sessionId={}", session.getId());
 //        log.info("getMaxInactiveInterval={}", session.getMaxInactiveInterval());
 //        log.info("creationTime={}", new Date(session.getCreationTime()));
 //        log.info("lastAccessedTime={}", new Date(session.getLastAccessedTime()));

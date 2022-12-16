@@ -3,6 +3,8 @@ package com.app.milestone.entity;
 import com.app.milestone.type.FileType;
 import com.sun.istack.NotNull;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -32,6 +34,7 @@ public class File extends Period {
 //    private User user;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
     @Builder
