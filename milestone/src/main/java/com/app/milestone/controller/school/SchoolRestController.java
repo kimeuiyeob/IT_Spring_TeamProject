@@ -129,10 +129,10 @@ public class SchoolRestController {
 
     //    방문기부
     @PostMapping("/visit")
-    public void visit(HttpServletRequest request, @RequestBody ServiceDTO serviceDTO) {
+    public boolean visit(HttpServletRequest request, @RequestBody ServiceDTO serviceDTO) {
         HttpSession session = request.getSession();
         Long sessionId = (Long) session.getAttribute("userId");
-        serviceService.donationReservation(sessionId, serviceDTO);
+        return serviceService.donationReservation(sessionId, serviceDTO);
     }
 
 }

@@ -48,19 +48,16 @@ public class ServiceService {
     }
 
     //    방문기부 신청
-    public void donationReservation(Long userId, ServiceDTO serviceDTO) {
+    public boolean donationReservation(Long userId, ServiceDTO serviceDTO) {
         int donationCount = 0;
         People people = peopleRepository.findById(userId).get();
         School school = schoolRepository.findById(serviceDTO.getUserId()).get();
 
-        log.info("==============================방문기부========================="+ serviceDTO);
-        log.info("==============================방문기부========================="+ serviceDTO);
-        log.info("==============================방문기부========================="+ serviceDTO);
-
         com.app.milestone.entity.Service service = serviceDTO.toEntity();
-        log.info("==============================방문기부========================="+ service.getServiceVisitDate());
-        log.info("==============================방문기부========================="+ service.getServiceVisitDate());
-        log.info("==============================방문기부========================="+ service.getServiceVisitDate());
+        if (serviceRepository.checkOverlap(userId, serviceDTO) > 0) {
+            return false;
+        }
+
         service.changeSchool(school);
         service.changePeople(people);
         service = serviceRepository.save(service);
@@ -69,6 +66,7 @@ public class ServiceService {
         people.update(donationCount);
         donationCount = donationRepository.countBySchoolUserId(serviceDTO.getUserId());
         school.update(donationCount);
+        return true;
     }
 
 
@@ -135,6 +133,7 @@ public class ServiceService {
     public List<ServiceDTO> findSchoolVisitDate1(Long sessionId) {
         return serviceRepository.findVisitDate1(sessionId);
     }
+
     //    날짜 불러오기
     public List<ServiceDTO> findPeopleVisitDate(Long sessionId) {
         return serviceRepository.findVisitDate(sessionId);

@@ -2,7 +2,7 @@ let check2 = false;
 
 /* 찜하기 버튼 마우스 올렸을 때*/
 $("button.zzimButton").mouseover(function () {
-    if(sessionType != "people"){
+    if (sessionType != "people") {
         return;
     }
     $(this).css({"background-color": "rgb(102 102 102 / 29%)"})
@@ -19,19 +19,19 @@ $(".redHeart").css({"display": "none"})
 
 /* 찜하기 버튼 클릭 */
 $(".zzimButton").click(function () {
-    if(sessionType != "people"){
+    if (sessionType != "people") {
         return;
     }
     if (!check2) {
         $(this).children(".redHeart").css({"display": "inline"})
         $(this).children(".emptyHeart").css({"display": "none"})
         check2 = true;
-        likeSchool(schoolId,showLikeCount)
+        likeSchool(schoolId, showLikeCount)
     } else {
         $(this).children(".redHeart").css({"display": "none"})
         $(this).children(".emptyHeart").css({"display": "inline"})
         check2 = false;
-        cancelLikeSchool(schoolId,showLikeCount)
+        cancelLikeSchool(schoolId, showLikeCount)
     }
 })
 
@@ -220,6 +220,7 @@ function getRanking1(param, callback, error) {
         }
     });
 }
+
 //==============================댓글============================
 //보육원 댓글
 function getReply1(param, callback, error) {
@@ -279,7 +280,7 @@ function remove(replyId, callback, error) {
     $.ajax({
         url: "/schoolrest/" + replyId,
         type: "get",
-        success: function(){
+        success: function () {
             callback();
         },
         error: function (xhr, status, err) {
@@ -297,7 +298,7 @@ function modify(reply, callback, error) {
         type: "post",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(reply),
-        success: function(){
+        success: function () {
             callback();
         },
         error: function (xhr, status, err) {
@@ -315,7 +316,7 @@ function register(reply, callback, error) {
         type: "post",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(reply),
-        success: function(){
+        success: function () {
             callback();
         },
         error: function (xhr, status, err) {
@@ -328,11 +329,11 @@ function register(reply, callback, error) {
 
 //========================좋아요=========================
 //내가 좋아한 보육원
-function getLikeSchoolList(callback, error){
+function getLikeSchoolList(callback, error) {
     $.ajax({
-        url:"/schoolrest/likeSchool",
+        url: "/schoolrest/likeSchool",
         type: "get",
-        success:function(likeSchoolList){
+        success: function (likeSchoolList) {
             callback(likeSchoolList);
         },
         error: function (xhr, status, err) {
@@ -344,11 +345,11 @@ function getLikeSchoolList(callback, error){
 }
 
 //좋아요 개수
-function getLikeCount(param, callback, error){
+function getLikeCount(param, callback, error) {
     $.ajax({
-        url:"/schoolrest/likeCount/" + param,
+        url: "/schoolrest/likeCount/" + param,
         type: "get",
-        success:function(likeCount){
+        success: function (likeCount) {
             callback(likeCount);
         },
         error: function (xhr, status, err) {
@@ -360,11 +361,11 @@ function getLikeCount(param, callback, error){
 }
 
 //좋아요 누름
-function likeSchool(param, callback, error){
+function likeSchool(param, callback, error) {
     $.ajax({
-        url:"/schoolrest/like/" + param,
+        url: "/schoolrest/like/" + param,
         type: "get",
-        success:function(likeCount){
+        success: function (likeCount) {
             callback(likeCount);
         },
         error: function (xhr, status, err) {
@@ -376,11 +377,11 @@ function likeSchool(param, callback, error){
 }
 
 //좋아요 취소
-function cancelLikeSchool(param, callback, error){
+function cancelLikeSchool(param, callback, error) {
     $.ajax({
-        url:"/schoolrest/cancel/" + param,
+        url: "/schoolrest/cancel/" + param,
         type: "get",
-        success:function(likeCount){
+        success: function (likeCount) {
             callback(likeCount);
         },
         error: function (xhr, status, err) {
@@ -392,14 +393,19 @@ function cancelLikeSchool(param, callback, error){
 }
 
 //========================기부=======================
-function serviceVisitDate (serviceDTO, callback, error){
+function serviceVisitDate(serviceDTO, callback, error) {
     $.ajax({
         url: "/schoolrest/visit",
         type: "post",
         data: JSON.stringify(serviceDTO),
         contentType: "application/json; charset=utf-8",
-        success: function(){
-            alert("신청 완료!!")
+        success: function (data) {
+            console.log(data)
+            if (data) {
+                alert("신청 완료!!")
+            } else {
+                alert("해당 날짜에 이미 방문기부를 신청하셨습니다.")
+            }
         },
         error: function (xhr, status, err) {
             if (error) {
@@ -410,6 +416,6 @@ function serviceVisitDate (serviceDTO, callback, error){
 }
 
 //기부하기로 이동
-$('#donateMoney').on('click',function(){
+$('#donateMoney').on('click', function () {
     location.href = "/school/donation?userId=" + schoolId;
 })
