@@ -37,7 +37,7 @@ public class PeopleTest {
         String[] nickNames = {"독수리", "흰개미", "고구마"};
         for (int i = 0; i < 100; i++) {
             try {
-                Thread.sleep(500);
+                Thread.sleep(0);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

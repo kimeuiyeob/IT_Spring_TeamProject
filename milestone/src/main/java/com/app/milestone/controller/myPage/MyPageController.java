@@ -1,10 +1,12 @@
 package com.app.milestone.controller.myPage;
 
 import com.app.milestone.domain.*;
+import com.app.milestone.repository.*;
 import com.app.milestone.service.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
@@ -24,6 +26,12 @@ public class MyPageController {
     private final UserService userService;
     private final WithdrawalService withdrawalService;
     private final ServiceService serviceService;
+    private final DonationRepository donationRepository;
+    private final FileRepository fileRepository;
+    private final AlarmRepository alarmRepository;
+    private final ReplyRepository replyRepository;
+    private final WithdrawalRepository withdrawalRepository;
+
 
 
     //    일반회원 정보 보기
@@ -184,31 +192,58 @@ public class MyPageController {
         ;
     }
 
+
     //회원 탈퇴
+    @Transactional
     @PostMapping("/deleteUser")
     public RedirectView deleteAndSave(HttpServletRequest request, @RequestBody String reason) {
 
         HttpSession session = request.getSession();
-        Long userId = (Long) session.getAttribute("userId"); //<=========================세션 userId
+        Long userId = (Long) session.getAttribute("userId");
         String type = (String) session.getAttribute("type");
         WithdrawalDTO withdrawalDTO = new WithdrawalDTO();
+
+        log.info("세션값 맞지? : " + userId);
 
         /*withdrawal테이블에 새로운값 추가*/
         withdrawalDTO.setCreatedDate(LocalDateTime.now());
         withdrawalDTO.setWithdrawalReason(reason);
-        withdrawalDTO.setWithdrawalUserType("개인");
-
         //user서비스에서 type people,school확인하려구 만든거
         if (type.equals("people")) {
             withdrawalDTO.setWithdrawalUserType("일반");
+            log.info("여기로왔니? 피플");
         } else if (type.equals("school")) {
             withdrawalDTO.setWithdrawalUserType("보육원");
+            log.info("여기로왔니? 보육원");
         }
-
+        //withdrawal테이블에 회원탈퇴 이유 저장
         withdrawalService.insertReason(withdrawalDTO);
-        userService.saveReasonAnddeleteUserID(userId); //<=========================세션 userId 넣어야됩니다.
 
+        //================================================================
+
+        donationRepository.deleteByPeopleUserId(userId);
+        donationRepository.deleteBySchoolUserId(userId);
+        alarmRepository.deleteByGiverUserId(userId);
+        alarmRepository.deleteByTakerUserId(userId);
+        fileRepository.deleteByUserId(userId);
+        replyRepository.deleteBySchoolUserId(userId);
+        replyRepository.deleteByUserUserId(userId);
+
+        //================================================================
+
+        //연관관계 때문에 @OnDelete(action = OnDeleteAction.CASCADE) 사용하였지만
+        //삭제가 잘안되어 하나하나 연관관계를 찾아 삭제시켜주었다.
+
+//        donationRepository.deleteById(userId);
+//        fileRepository.deleteByUserId(userId);
+
+        //해당 세션아이디 삭제
+        userService.saveReasonAnddeleteUserID(userId);
+        //세션값을 없앤다.
         session.removeAttribute("userId");
+
+        log.info("여기까지 왔습니다.1");
+
         return new RedirectView("/main/main");
     }
 
