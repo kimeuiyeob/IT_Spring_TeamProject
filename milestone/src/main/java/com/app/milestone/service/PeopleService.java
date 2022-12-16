@@ -1,10 +1,12 @@
 package com.app.milestone.service;
 
+import com.app.milestone.domain.FileDTO;
 import com.app.milestone.domain.PasswordDTO;
 import com.app.milestone.domain.PeopleDTO;
 import com.app.milestone.entity.Like;
 import com.app.milestone.entity.People;
 import com.app.milestone.entity.School;
+import com.app.milestone.repository.FileRepository;
 import com.app.milestone.repository.LikeRepository;
 import com.app.milestone.repository.PeopleRepository;
 import com.app.milestone.repository.SchoolRepository;
@@ -28,6 +30,7 @@ public class PeopleService {
     private final PeopleRepository peopleRepository;
     private final SchoolRepository schoolRepository;
     private final LikeRepository likeRepository;
+    private final FileRepository fileRepository;
 
     //    회원가입
     public void createPeople(PeopleDTO peopleDTO) {
@@ -97,6 +100,12 @@ public class PeopleService {
             keyword = null;
         }
         List<PeopleDTO> list = peopleRepository.findPeopleSearch(pageable, keyword);
+
+        for (PeopleDTO peopleDTO : list) {
+            FileDTO arFileDTO = fileRepository.findProfileByUserId(peopleDTO.getUserId());
+            peopleDTO.setUserProfile(arFileDTO);
+        }
+
         Page<PeopleDTO> people = new PageImpl<>(list, pageable, Integer.valueOf("" + peopleRepository.countByCreatedDate(pageable, keyword)));
         return people;
     }
@@ -108,6 +117,12 @@ public class PeopleService {
             keyword = null;
         }
         List<PeopleDTO> list = peopleRepository.findPeopleSearchAsc(pageable, keyword);
+
+        for (PeopleDTO peopleDTO : list) {
+            FileDTO arFileDTO = fileRepository.findProfileByUserId(peopleDTO.getUserId());
+            peopleDTO.setUserProfile(arFileDTO);
+        }
+
         Page<PeopleDTO> people = new PageImpl<>(list, pageable, Integer.valueOf("" + peopleRepository.countByCreatedDate(pageable, keyword)));
         return people;
     }

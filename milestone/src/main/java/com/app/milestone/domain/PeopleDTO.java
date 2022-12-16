@@ -26,6 +26,7 @@ public class PeopleDTO {
     private int donationCount;
     private LocalDateTime createdDate;
     private List<FileDTO> files;
+    private FileDTO userProfile;
 
     public People toEntity() {
         return People.builder()
