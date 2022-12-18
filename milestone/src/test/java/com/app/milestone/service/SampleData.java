@@ -92,7 +92,7 @@ public class SampleData {
             schoolDTO.setSchoolBudget((random.nextInt(50) + 1) * 10000000);
             schoolDTO.setSchoolBank(bank[random.nextInt(6)]);
             schoolDTO.setSchoolAccount(String.format("%014d", random.nextInt(100000000)));
-            schoolDTO.setSchoolPhoneNumber("010" + String.format("%08d", random.nextInt(99999999)));
+            schoolDTO.setUserPhoneNumber("010" + String.format("%08d", random.nextInt(99999999)));
             schoolDTO.setSchoolQR("https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=http://localhost:9999/school/donation?userId=" + (101 + i));
             schoolDTO.setSchoolTitle("안녕하세요. " + schoolNames[i % 22] + "입니다.");
             schoolDTO.setSchoolContent("안녕하세요. " + schoolNames[i % 22] + "보육원입니다. " + contents[random.nextInt(5)]);
@@ -100,7 +100,7 @@ public class SampleData {
             schoolDTO.setUserName(names[random.nextInt(38)]);
             schoolDTO.setUserPassword("cXdlcjEyMzQh");
             if (i % 2 == 0) {
-                schoolDTO.setUserPhoneNumber("010" + String.format("%08d", random.nextInt(99999999)));
+                schoolDTO.setSchoolPhoneNumber("010" + String.format("%08d", random.nextInt(99999999)));
             }
             schoolDTO.setUserProfile(null);
             schoolDTO.setDonationCount(0);

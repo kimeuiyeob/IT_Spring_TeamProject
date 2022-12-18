@@ -25,13 +25,13 @@
     <div class="wrapper">
         <div class="long">
             <section class="leftFirst">
-                <div style="width:736px">
+                <div style="width:736px; height: 100%">
                     <h3 id="miniTitle">기부내역</h3>
                     <div class="secWrapper">
                         <div class="schoolImg" th:object="${schoolImgs}">
-                            <img th:if="${schoolImgs.size == 0}" data-type="1-1" width="386px" height="auto"
+                            <img th:if="${schoolImgs.size == 0}" data-type="1-1" width="275" height="100%"
                                  src="/imgs/school/defaultSchoolImg.png">
-                            <img th:if="${schoolImgs.size > 0}" data-type="1-1" width="386px" height="auto"
+                            <img th:if="${schoolImgs.size > 0}" data-type="1-1" width="275" height="100%"
                                  th:src="'/file/display?fileName='+ *{get(0).filePath} + '/' + *{get(0).fileUuid} + '_' + *{get(0).fileName}">
                         </div>
                         <div class="schoolInfo">
