@@ -1,22 +1,13 @@
 package com.app.milestone.controller.admin;
 
 import com.app.milestone.domain.*;
-import com.app.milestone.entity.Withdrawal;
 import com.app.milestone.service.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
-import com.app.milestone.repository.AlarmRepository;
-import com.app.milestone.repository.DonationRepository;
-import com.app.milestone.repository.FileRepository;
-import com.app.milestone.repository.ReplyRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
@@ -36,6 +27,9 @@ public class AdminRestController {
     @GetMapping(value= {"/userpeople/{page}", "/userpeople/{page}/{keyword}"})
     public PeopleResp userListPeople(@PathVariable("page") Integer page, @PathVariable(required = false) String keyword) {
         if(keyword == null){keyword= "";}
+        // 검색어가 들어가지 않았을 때(변수를 넣어주지않으면) 오류가 나므로
+        // 파라미터 속성을 required=false로 변경후, 기본값("")을 설정해줍니다.
+
         PeopleResp peopleResp = new PeopleResp();
         Page<PeopleDTO> arPeopleDTO = peopleService.peopleListSearch(page, keyword);
         peopleResp.setArPeopleDTO(arPeopleDTO);
@@ -76,7 +70,7 @@ public class AdminRestController {
     //    보육원회원에서 검색 및 예산
     @GetMapping(value= {"/schoolbudget/{page}", "/schoolbudget/{page}/{keyword}"})
     public SchoolResp schoolListBudget(@PathVariable("page") Integer page, @PathVariable(required = false) String keyword) {
-        if(keyword == null){keyword= "보육원";}
+        if(keyword == null){keyword= "";}
         SchoolResp schoolResp = new SchoolResp();
         Page<SchoolDTO> arSchoolDTO = schoolService.schoolListBudgetSearch(page, keyword);
         schoolResp.setArSchoolDTO(arSchoolDTO);
@@ -86,7 +80,7 @@ public class AdminRestController {
     //    보육원회원에서 검색 및 예산 asc
     @GetMapping(value= {"/schoolbudgetAsc/{page}", "/schoolbudgetAsc/{page}/{keyword}"})
     public SchoolResp schoolListBudgetAsc(@PathVariable("page") Integer page, @PathVariable(required = false) String keyword) {
-        if(keyword == null){keyword= "보육원";}
+        if(keyword == null){keyword= "";}
         SchoolResp schoolResp = new SchoolResp();
         Page<SchoolDTO> arSchoolDTO = schoolService.schoolListBudgetSearchAsc(page, keyword);
         schoolResp.setArSchoolDTO(arSchoolDTO);
@@ -94,12 +88,13 @@ public class AdminRestController {
     }
 
     //   전체회원 중 일반회원 삭제
-    @RequestMapping("/peopleDelete")
     @Transactional
+    @RequestMapping("/peopleDelete")
     public void deletePeople(HttpServletRequest request){
         String [] userIds = request.getParameterValues("chkArray");
         for (int i = 0; i<userIds.length; i++){
-            withdrawalService.deleteEverything(Long.valueOf(userIds[i]));
+            withdrawalService.deleteEverything(Long.valueOf(userIds[i]));   //회원삭제시 연관관계가 있는 것들을 모두 찾아 삭제해준 후
+            peopleService.deleteByUserId(Long.valueOf(userIds[i]));         //회원을 삭제하였습니다.
         }
     }
 
@@ -110,13 +105,13 @@ public class AdminRestController {
         String [] userIds = request.getParameterValues("chkArray");
         for (int i = 0; i<userIds.length; i++){
             withdrawalService.deleteEverything(Long.valueOf(userIds[i]));
+            schoolService.deleteByUserId(Long.valueOf(userIds[i]));
         }
     }
 
     //    탈퇴회원 조회
     @GetMapping(value= {"/withdrawal/{page}", "/withdrawal/{page}/{withdrawalReason}"})
     public WithdrawalResp withdrawalList(@PathVariable("page") Integer page, @PathVariable(required = false) String withdrawalReason) {
-        log.info("=========================reason : "+withdrawalReason);
         if(withdrawalReason == null){withdrawalReason= "";}
         WithdrawalResp withdrawalResp = new WithdrawalResp();
         Page<WithdrawalDTO> arWithdrawalDTO = withdrawalService.withdrawalListSearch(page, withdrawalReason);
@@ -127,7 +122,6 @@ public class AdminRestController {
     //    탈퇴회원 조회 asc
     @GetMapping(value= {"/withdrawalAsc/{page}", "/withdrawalAsc/{page}/{withdrawalReason}"})
     public WithdrawalResp withdrawalListAsc(@PathVariable("page") Integer page, @PathVariable(required = false) String withdrawalReason) {
-        log.info("컨트롤러에 들어온 withdrawalReason : "+withdrawalReason);
         if(withdrawalReason == null){withdrawalReason= "";}
         WithdrawalResp withdrawalResp = new WithdrawalResp();
         Page<WithdrawalDTO> arWithdrawalDTO = withdrawalService.withdrawalListSearchAsc(page, withdrawalReason);
@@ -198,14 +192,8 @@ public class AdminRestController {
     }
 
     //    재능기부 조회
-//    @GetMapping(value = {"/talent/{page}", "/talent/{page}/{keyword}", "/talent/{page}/{keyword}/{talentCategory}", "/talent/{page}/{keyword}/{talentCategory}/{talentPlaceOne}"})
     @GetMapping(value = {"/talent/{page}", "/talent/{page}/{keyword}", "/talent/{page}/{keyword}/{talentCategory}"})
     public TalentResp talentList(@PathVariable("page") Integer page, Search search) {
-
-//        log.info("컨트롤러 키워드 : "+search.getKeyword());
-//        log.info("컨트롤러 카테고리 : "+search.getTalentCategory());
-//        log.info("컨트롤러 지역 : "+search.getTalentPlaceOne());    //왜안들어와
-
         TalentResp talentResp = new TalentResp();
         Page<TalentDTO> arTalentDTO = talentService.searchedTalentList(page, search);
         talentResp.setArTalentDTO(arTalentDTO);
@@ -213,8 +201,8 @@ public class AdminRestController {
     }
 
     //     재능기부 삭제
-    @RequestMapping("/talentDelete")
     @Transactional
+    @RequestMapping("/talentDelete")
     public void deleteSchedule(HttpServletRequest request){
         String [] donationIds = request.getParameterValues("chkArray");
         for (int i = 0; i<donationIds.length; i++){

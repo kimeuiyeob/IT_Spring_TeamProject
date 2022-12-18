@@ -26,6 +26,8 @@ import static com.app.milestone.entity.QTalent.talent;
 public class LikeCustomRepositoryImpl implements LikeCustomRepository {
     private final JPAQueryFactory jpaQueryFactory;
 
+    /*==========================정서림===========================*/
+    //  전체목록 총 개수 : 처음 목록을 불러오면서 List를 Page타입으로 페이징처리시 전체개수를 구하는 메소드입니다.
     @Override
     public Long countByCreatedDate(Pageable pageable, Long peopleId) {
         return jpaQueryFactory.select(like.count())
@@ -39,6 +41,7 @@ public class LikeCustomRepositoryImpl implements LikeCustomRepository {
                 .fetchOne();
     }
 
+    //  검색목록 총 개수 : 이름과 주소 검색한 경우, 위와같이 페이징처리를 위해 전체개수를 구하는 메소드입니다.
     @Override
     public Long countByCreatedDate2(Pageable pageable, Long peopleId, Search search) {
         return jpaQueryFactory.select(like.count())
@@ -50,8 +53,6 @@ public class LikeCustomRepositoryImpl implements LikeCustomRepository {
                         schoolNameContaining(search.getSchoolName()),
                         schoolAddressContaining(search.getSchoolAddress())
                 )
-                .offset(pageable.getOffset())
-                .limit(pageable.getPageSize())
                 .orderBy(like.createdDate.desc())
                 .fetchOne();
     }
@@ -71,7 +72,7 @@ public class LikeCustomRepositoryImpl implements LikeCustomRepository {
         ))
                 .from(like,people,school)
                 .where(
-                        like.people.userId.eq(peopleId),
+                        like.people.userId.eq(peopleId),    //로그인한 회원의 아이디로 찾아온 찜목록
                         like.people.userId.eq(people.userId),
                         like.school.userId.eq(school.userId)
                 )
@@ -81,7 +82,7 @@ public class LikeCustomRepositoryImpl implements LikeCustomRepository {
                 .fetch();
     };
 
-    //검색 목록
+    //  검색목록
     @Override
     public List<LikeDTO> findSchoolLikedSearch (Pageable pageable, Long peopleId, Search search){
         return jpaQueryFactory.select(new QLikeDTO(

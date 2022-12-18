@@ -63,26 +63,27 @@ public class LikeService {
     }
 
 
-    //    좋아요 목록
+    /*==========================정서림===========================*/
+    //    좋아요 목록 : 로그인한 회원의 찜목록 전체를 불러오는 메소드입니다.
     public Page<LikeDTO> likedSchools(Integer page, Long sessionId) {
         if (page == null) page = 0;
-
         Pageable pageable = PageRequest.of(page, 5);
         List<LikeDTO> list = likeRepository.findSchoolLiked(pageable, sessionId);
 
+        //  보육원에 등록된 사진들을 가져옵니다.
         for(LikeDTO likeDTO:list){
             List<FileDTO> arFileDTO = fileRepository.findByUserId(likeDTO.getSchoolId());
             likeDTO.setFiles(arFileDTO);
         }
-
         Page<LikeDTO> likes = new PageImpl<>(list, pageable, Integer.valueOf("" + likeRepository.countByCreatedDate(pageable, sessionId)));
         return likes;
     }
 
-    //    좋아요 검색
-    public Page<LikeDTO> likedSchoolsSearch(Integer page, Long sessionId, Search search) {
-        if (page == null) page = 0;
 
+    /*==========================정서림===========================*/
+    //    좋아요 검색 : 로그인한 회원이 보육원 이름과 지역을 검색하여 가져온 목록입니다.
+     public Page<LikeDTO> likedSchoolsSearch(Integer page, Long sessionId, Search search) {
+        if (page == null) page = 0;
         if (search.getSchoolAddress() == null) {
             search.setSchoolAddress(new ArrayList<>());
         }
@@ -94,17 +95,18 @@ public class LikeService {
             List<FileDTO> arFileDTO = fileRepository.findByUserId(likeDTO.getSchoolId());
             likeDTO.setFiles(arFileDTO);
         }
-
         Page<LikeDTO> likes = new PageImpl<>(list, pageable, Integer.valueOf("" + likeRepository.countByCreatedDate2(pageable, sessionId, search)));
         return likes;
     }
 
+    /*==========================정서림===========================*/
     //   마이페이지 좋아요 개수
     public Long likeCountMyPage(Long userId) {
         return likeRepository.countByPeopleUserId(userId);
     }
 
-    //  id로 좋아요 취소
+    /*==========================정서림===========================*/
+    //  마이페이지 좋아요 취소
     public void deleteByLikeId(Long likeId){
         likeRepository.deleteById(likeId);
     }

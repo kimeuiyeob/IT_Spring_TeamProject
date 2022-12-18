@@ -10,7 +10,6 @@ import java.util.List;
 
 public interface WithdrawalCustomRepository {
     public List<WithdrawalDTO> findByCreatedDate (Pageable pageable);
-    public List<WithdrawalDTO> findByCreatedDateAsc ();
 
     public Long countByCreatedDate(Pageable pageable, String reason);
     public List<WithdrawalDTO> findWithdrawalSearch(Pageable pageable, String reason);

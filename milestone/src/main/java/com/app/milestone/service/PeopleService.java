@@ -92,37 +92,42 @@ public class PeopleService {
         return likeRepository.countBySchoolUserId(userId);
     }
 
-    /* ==============관리자페이지================================================= */
+
+
+
+
+    /*==========================정서림===========================*/
+    //      전체목록 및 검색목록
     public Page<PeopleDTO> peopleListSearch(Integer page, String keyword) {
         if (page == null) page = 0;
         Pageable pageable = PageRequest.of(page, 7);
         if (keyword == null) {
             keyword = null;
         }
-        List<PeopleDTO> list = peopleRepository.findPeopleSearch(pageable, keyword);
 
+        // 개인회원의 프로필사진을 불러와서 같이 넣어줍니다.
+        List<PeopleDTO> list = peopleRepository.findPeopleSearch(pageable, keyword);
         for (PeopleDTO peopleDTO : list) {
             FileDTO arFileDTO = fileRepository.findProfileByUserId(peopleDTO.getUserId());
             peopleDTO.setUserProfile(arFileDTO);
         }
-
         Page<PeopleDTO> people = new PageImpl<>(list, pageable, Integer.valueOf("" + peopleRepository.countByCreatedDate(pageable, keyword)));
         return people;
     }
 
+    /*==========================정서림===========================*/
     public Page<PeopleDTO> peopleListSearchAsc(Integer page, String keyword) {
         if (page == null) page = 0;
         Pageable pageable = PageRequest.of(page, 7);
         if (keyword == null) {
             keyword = null;
         }
-        List<PeopleDTO> list = peopleRepository.findPeopleSearchAsc(pageable, keyword);
 
+        List<PeopleDTO> list = peopleRepository.findPeopleSearchAsc(pageable, keyword);
         for (PeopleDTO peopleDTO : list) {
             FileDTO arFileDTO = fileRepository.findProfileByUserId(peopleDTO.getUserId());
             peopleDTO.setUserProfile(arFileDTO);
         }
-
         Page<PeopleDTO> people = new PageImpl<>(list, pageable, Integer.valueOf("" + peopleRepository.countByCreatedDate(pageable, keyword)));
         return people;
     }

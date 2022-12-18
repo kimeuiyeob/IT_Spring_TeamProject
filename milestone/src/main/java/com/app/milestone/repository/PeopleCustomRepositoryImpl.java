@@ -46,8 +46,8 @@ public class PeopleCustomRepositoryImpl implements PeopleCustomRepository {
     }
 
 
-    /*=================관리자 페이지=================*/
-    //    검색 결과 count
+    /*==========================정서림===========================*/
+    //    검색 결과 총개수 : 검색목록을 불러오면서 List를 Page타입으로 페이징처리시 전체개수를 구하는 메소드입니다.
     @Override
     public Long countByCreatedDate(Pageable pageable, String keyword) {
         return jpaQueryFactory.select(people.count())
@@ -59,6 +59,7 @@ public class PeopleCustomRepositoryImpl implements PeopleCustomRepository {
                 .fetchOne();
     }
 
+    //      전체목록 및 검색목록
     @Override
     public List<PeopleDTO> findPeopleSearch(Pageable pageable, String keyword) {
         return jpaQueryFactory.select(new QPeopleDTO(
@@ -71,7 +72,7 @@ public class PeopleCustomRepositoryImpl implements PeopleCustomRepository {
                 people.donationCount,
                 people.createdDate
         )).from(people)
-                .leftJoin(file)
+                .leftJoin(file)     //회원 프로필을 불러오기위한 join으로, 사진이 한장인 경우에만 가능합니다.
                 .on(people.userId.eq(file.user.userId))
                 .where(
                         userNameAndNicknameContaining(keyword)
@@ -105,7 +106,7 @@ public class PeopleCustomRepositoryImpl implements PeopleCustomRepository {
                 .fetch();
     }
 
-    // 통합검색
+    // 이름 및 닉네임 검색
     private BooleanBuilder userNameAndNicknameContaining(String keyword) {
         if (keyword == null) {
             return null;
