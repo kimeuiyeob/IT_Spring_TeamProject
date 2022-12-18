@@ -41,7 +41,7 @@ public class NoticeTest {
         };
 
 
-        for (int i = 0; i < 14; i++) {
+        for (int i = 0; i < 50; i++) {
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
