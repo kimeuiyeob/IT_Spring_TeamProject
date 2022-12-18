@@ -27,7 +27,9 @@ import static com.app.milestone.entity.QSchool.*;
 public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
     private final JPAQueryFactory jpaQueryFactory;
 
-    //  메인 도움이 필요해요
+    //====================황지수====================
+    //  메인 도움이 필요해요(기부받은 횟수가 적은 수)
+    //  QR코드를 기준으로 등록된 보육원을 도움받은 횟수가 적을 순으로 정렬했습니다.
     @Override
     public List<SchoolDTO> findAllByDonationCount() {
         return jpaQueryFactory.select(new QSchoolDTO(
@@ -62,7 +64,10 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
                 .fetch();
     }
 
+    //====================황지수====================
     //    보육원 목록(최신순)
+    //  QR코드를 기준으로 등록된 보육원을 최신 등록순으로 정렬했습니다.
+    //  동적쿼리를 사용하여 여러 지역을 선택하거나 보육원이름을 직접검색했을 때에 유동적으로 쿼리가 바뀔 수 있게 구현했습니다.
     @Override
     public List<SchoolDTO> findAllByCreatedDate(Pageable pageable, Search search) {
         return jpaQueryFactory.select(new QSchoolDTO(
@@ -94,11 +99,31 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
                 ).from(school)
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
-                .orderBy(school.createdDate.desc())
+                .orderBy(school.updatedDate.desc())
                 .fetch();
     }
 
+    //====================황지수====================
+    //    조건에 따른 보육원 수
+    //  List타입을 Page타입으로 바꾸게 될 때 총개수가 필요한데 그 때 사용하게 될 메소드입니다.
+    //  위의 메소드와 마찬가지로 동적쿼리로 여러지역과 보육원이름으로 조회하게 했습니다.
+    @Override
+    public Long countByCreatedDate(Pageable pageable, Search search) {
+        return jpaQueryFactory.select(school.count())
+                .from(school)
+                .where(
+//                        보육원 이름 검색
+                        school.schoolQR.isNotNull(),
+                        schoolNameContaining(search.getSchoolName()),
+                        schoolAddressContaining(search.getSchoolAddress())
+                )
+                .orderBy(school.createdDate.asc())
+                .fetchOne();
+    }
+
+    //====================황지수====================
     //    보육원 정보(하나)
+    //  보육원의 아이디를 통하여 해당 보육원의 정보를 조회합니다.
     @Override
     public SchoolDTO findByUserId(Long userId) {
         return jpaQueryFactory.select(new QSchoolDTO(
@@ -127,32 +152,24 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
                 .fetchOne();
     }
 
-    //    조건에 따른 보육원 수
-    @Override
-    public Long countByCreatedDate(Pageable pageable, Search search) {
-        return jpaQueryFactory.select(school.count())
-                .from(school)
-                .where(
-//                        보육원 이름 검색
-                        school.schoolQR.isNotNull(),
-                        schoolNameContaining(search.getSchoolName()),
-                        schoolAddressContaining(search.getSchoolAddress())
-                )
-                .orderBy(school.createdDate.asc())
-                .fetchOne();
-    }
-
-
+//
     //    User검색
     private BooleanExpression userNameContaining(String userName) {
         return StringUtils.hasText(userName) ? school.userName.contains(userName) : null;
     }
+
+    //====================황지수====================
     //    SchoolName 검색
+    //  동적쿼리에 사용될 메소드입니다. 파라미터로 전달한 값이 있다면 조건문을 아니라면 null을 반환합니다.
     private BooleanExpression schoolNameContaining(String schoolName) {
         return StringUtils.hasText(schoolName) ? school.schoolName.contains(schoolName) : null;
     }
 
+    //====================황지수====================
     //    지역검색
+    //  서울, 인천, 경기도, 강원도, 충청도, 전라도, 경상도, 제주도로 지역을 검색하게 되는데
+    //  충청도일 경우 충북과 충남이 들어가고 지역쪽에 위치한 시들도 포함하여 검색하게 하였습니다.
+    //  BooleanBuiler를 사용하여 조건에 맞는 조건문을 쌓아가며 리턴했습니다.
     private BooleanBuilder schoolAddressContaining(List<String> schoolAddresses) {
         if (schoolAddresses.get(0) == null) {
             return null;
@@ -186,9 +203,6 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
         }
         return booleanBuilder;
     }
-
-
-
 
 
     //========================관리자페이지===========================
@@ -297,7 +311,7 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
                 .fetch();
     }
 
-    public List<SchoolDTO> findSchoolSearch (Pageable pageable, String keyword){
+    public List<SchoolDTO> findSchoolSearch(Pageable pageable, String keyword) {
         return jpaQueryFactory.select(new QSchoolDTO(
                 school.userId,
                 school.schoolName,
@@ -328,9 +342,11 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
                 .limit(pageable.getPageSize())
                 .orderBy(school.createdDate.desc())
                 .fetch();
-    };
+    }
 
-    public List<SchoolDTO> findSchoolSearchAsc (Pageable pageable, String keyword){
+    ;
+
+    public List<SchoolDTO> findSchoolSearchAsc(Pageable pageable, String keyword) {
         return jpaQueryFactory.select(new QSchoolDTO(
                 school.userId,
                 school.schoolName,
@@ -361,7 +377,9 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
                 .limit(pageable.getPageSize())
                 .orderBy(school.createdDate.asc())
                 .fetch();
-    };
+    }
+
+    ;
 
 
     // 통합검색2
@@ -370,7 +388,7 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
             return null;
         }
         BooleanBuilder booleanBuilder = new BooleanBuilder();
-        if (keyword!=null) {
+        if (keyword != null) {
             booleanBuilder.or(school.userName.contains(keyword));
             booleanBuilder.or(school.schoolName.contains(keyword));
         }
@@ -383,7 +401,7 @@ public class SchoolCustomRepositoryImpl implements SchoolCustomRepository {
             return null;
         }
         BooleanBuilder booleanBuilder = new BooleanBuilder();
-        if (keyword!=null) {
+        if (keyword != null) {
             booleanBuilder.or(school.schoolName.contains(keyword));
             booleanBuilder.or(school.address.schoolAddress.contains(keyword));
         }

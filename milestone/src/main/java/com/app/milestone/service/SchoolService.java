@@ -31,6 +31,7 @@ public class SchoolService {
     private final MoneyRepository moneyRepository;
     private final FileRepository fileRepository;
 
+
     //    보육원 회원가입
     public Long createSchool(SchoolDTO schoolDTO) {
         School school = schoolDTO.toEntity();
@@ -52,14 +53,18 @@ public class SchoolService {
         return school.getUserId();
     }
 
+    //====================황지수====================
     //    보육원 등록
+    //  보육원 등록시 QR코드를 생성하여 저장한다.
     @Transactional
     public void registerSchool(Long userId, SchoolDTO schoolDTO) {
         schoolDTO.setSchoolQR("https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=http://localhost:9999/school/donation?userId=" + userId);
         schoolRepository.findById(userId).get().update(schoolDTO);
     }
 
+    //====================황지수====================
     //    도움이 필요한 보육원(메인)
+    //  도움이 필요한 보육원을 조회하고 지역이름을 잘라서 돌려줍니다.
     public List<SchoolDTO> needHelpList() {
         List<SchoolDTO> arSchoolDTO = schoolRepository.findAllByDonationCount();
         for (SchoolDTO schoolDTO : arSchoolDTO) {
@@ -68,7 +73,9 @@ public class SchoolService {
         return arSchoolDTO;
     }
 
+    //====================황지수====================
     //    보육원 정보(하나)
+    //  보육원정보와 보육원에 등록된 사진을 같이 돌려줍니다.
     public SchoolDTO schoolInfo(Long userId) {
         SchoolDTO schoolDTO = schoolRepository.findByUserId(userId);
         List<FileDTO> files = fileRepository.findByUserId(userId);
@@ -76,7 +83,9 @@ public class SchoolService {
         return schoolDTO;
     }
 
-    //    보육원 목록(보육원 목록)(Page버전)
+    //====================황지수====================
+    //    보육원 목록(보육원 목록)
+    //  페이지에 대한 정보와 검색 조건을 받아와 페이징 처리후 돌려준다.
     public Page<SchoolDTO> schoolList(Integer page, Search search) {
         if (page == null) page = 0;
         Pageable pageable = PageRequest.of(page, 10);
