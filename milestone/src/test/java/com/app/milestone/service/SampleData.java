@@ -211,7 +211,7 @@ public class SampleData {
         };
 
 
-        for (int i = 0; i < 14; i++) {
+        for (int i = 0; i < 30; i++) {
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
