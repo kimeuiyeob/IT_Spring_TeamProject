@@ -145,3 +145,16 @@ input::-webkit-inner-spin-button {
     display: none;
 }
 
+.updateSchoolImgBtn{
+    background-color: #fff;
+    border-radius: 4px;
+    border: 1px solid rgb(48, 52, 65);
+    height: 30px;
+    width: 75px;
+    transition: filter 0.3s;
+    margin-bottom: 5px;
+}
+
+.updateSchoolImgBtn:hover{
+    background-color: rgba(48, 52, 65, 0.1);
+}

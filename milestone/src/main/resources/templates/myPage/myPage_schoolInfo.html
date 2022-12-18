@@ -55,8 +55,11 @@
                             <div class="margin-bottom-8 flexBetween">
                                 <div class="inputTitle">보육원 대표 사진</div>
                             </div>
-                            <input type="file" class="tempImgBackground" name="schoolImg" id="schoolImg" multiple
-                                   accept="image/gif,image/jpeg,image/png">
+                            <label class="updateSchoolImgBtn flexPublic">
+                                <div>파일 추가</div>
+                                <input type="file" class="tempImgBackground" name="schoolImg" style="display: none" id="schoolImg" multiple
+                                       accept="image/gif,image/jpeg,image/png">
+                            </label>
                             <div class="imgBox">
                                 <div class="flexRow">
                                     <div class="imgList flexRow">
@@ -312,7 +315,7 @@
             formData.append("upload", file);
         });
 
-        if(updateProfileMoment){
+        if (updateProfileMoment) {
             arrayFile.splice(0, 1);
             const dataTransfer = new DataTransfer();
             arrayFile.forEach(file => dataTransfer.items.add(file));

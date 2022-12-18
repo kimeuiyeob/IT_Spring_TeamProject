@@ -63,7 +63,7 @@ public class SchoolTest {
             schoolDTO.setSchoolPhoneNumber("01012341234");
             schoolDTO.setSchoolQR("https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=http://localhost:9999/school/donation?userId="+ (101 + i));
             schoolDTO.setSchoolTitle("안녕하세요" + schoolNames[i%22] + "입니다" + i);
-            schoolDTO.setSchoolContent("안녕하세요" + schoolNames[i%22] + "입니다. 잘 부탁드립니다." + i);
+            schoolDTO.setSchoolContent("안녕하세요" + schoolNames[i%22] + "보육원 입니다. 잘 부탁드립니다." + i);
             schoolDTO.setUserEmail("asd" + i + "@asd.asd");
             schoolDTO.setUserName("임장원");
             schoolDTO.setUserPassword("cXdlcjEyMzQh");

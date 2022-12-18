@@ -65,7 +65,7 @@ public class SchoolController {
 //        log.info("nickName======="+ peopleDTO.getPeopleNickname());
 //        log.info("schoolName======="+ schoolDTO.getSchoolName());
 //        FileDTO fileDTO = fileService.showProfile(sessionId);
-        if(sessionId != null){
+        if (sessionId != null) {
             userDTO.setFile(fileService.showProfile(sessionId));
         }
         schoolDTO = schoolService.schoolInfo(userId);
@@ -78,6 +78,10 @@ public class SchoolController {
     //    결제페이지 이동
     @GetMapping("/donation")
     public void donation(Long userId, Model model) {
+        log.info("=============================" +userId);
+        log.info("=============================" + fileService.showAll(userId));
+        log.info("=============================");
+        model.addAttribute("schoolImgs",fileService.showAll(userId));
         model.addAttribute("schoolDTO", schoolService.schoolInfo(userId));
     }
 

@@ -461,3 +461,7 @@ h2.schoolName{
 .noneSearch{
     display: flex;
 }
+
+.schoolName{
+    margin-left: 10px;
+}

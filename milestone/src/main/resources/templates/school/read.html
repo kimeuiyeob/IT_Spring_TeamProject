@@ -284,25 +284,6 @@
 
         </aside>
 
-
-        <!-- 기부하기 우측 fix버튼 -->
-        <a href="" style="text-decoration: none; color:black">
-            <button color="yellow" class="e190ttj42 css-5l78y0 eklkj752 rightFixButton">
-                <span class="css-1oteowz eklkj751">기부하기</span>
-                <span class="css-0 ">
-                        <span role="img" rotate="0" class="css-aah4od e181xm9y1">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
-                                 focusable="false" preserveAspectRatio="xMidYMid meet" class="css-7kp13n e181xm9y0">
-                                <path xmlns="http://www.w3.org/2000/svg"
-                                      d="m16.2207159 5.10870583c.3709653-.36661304.3725805-.96261511.0036077-1.33120789s-.9688111-.37019768-1.3397764-.00358465l-7.10526311 7.15575681c-.37101087.3666581-.37257421.7742828-.00349159 1.1428571l7.1052631 7.1500909c.3690373.368529.9688759.3700303 1.339777.0033532.3709012-.3666771.3724122-.9626794.0033749-1.3312085l-6.4742075-6.3936642z"
-                                      transform="matrix(0 1 -1 0 23.5 -.5)">
-                                </path>
-                            </svg>
-                        </span>
-                    </span>
-            </button>
-        </a>
-
     </section>
 
 </div>
@@ -318,7 +299,7 @@
     </div>
     <!-- QR 코드 -->
     <div id="modalQR">
-        <img src="https://ko.qr-code-generator.com/wp-content/themes/qr/new_structure/markets/basic_market/generator/dist/generator/assets/images/websiteQRCode_noFrame.png">
+        <img src="">
     </div>
     <div id="scanPlz">QR코드를 스캔하세요!</div>
 </div>
@@ -355,6 +336,7 @@
 
     showSchoolImg();
 
+    //보육원 이미지추가와 모달이미지 추가
     function showSchoolImg() {
         let count = 0;
         schoolDTO.files.forEach(file => {
@@ -414,7 +396,6 @@
         }
         //
         recentDonations.forEach(school => {
-            console.log(school)
             if (count == 6) return;
             count++;
             text += `<tr">`
@@ -483,7 +464,6 @@
         }
 
         replys.content.forEach(reply => {
-            console.log(reply)
             replyText += `<div class="comment">`
             replyText += `<div class="commentsInfo">`
             replyText += `<div class="profilePicture">`
@@ -581,7 +561,6 @@
     // 댓글 등록
     $('.replyRegisterButton').on('click', function () {
         let replyContent = $(this).prev().children('textarea').val();
-        console.log(replyContent)
         if (!replyContent) {
             alert("댓글 내용을 입력하지 않았습니다.")
             return;
