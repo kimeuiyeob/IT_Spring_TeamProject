@@ -28,9 +28,11 @@
                 <div style="width:736px">
                     <h3 id="miniTitle">기부내역</h3>
                     <div class="secWrapper">
-                        <div class="schoolImg">
-                            <img data-type="1-1" width="386px" height="auto"
-                                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQahV0-oS2Aq2g6lri5oICW5DbPtgb1Xa1Dew&usqp=CAU">
+                        <div class="schoolImg" th:object="${schoolImgs}">
+                            <img th:if="${schoolImgs.size == 0}" data-type="1-1" width="386px" height="auto"
+                                 src="/imgs/school/defaultSchoolImg.png">
+                            <img th:if="${schoolImgs.size > 0}" data-type="1-1" width="386px" height="auto"
+                                 th:src="'/file/display?fileName='+ *{get(0).filePath} + '/' + *{get(0).fileUuid} + '_' + *{get(0).fileName}">
                         </div>
                         <div class="schoolInfo">
                             <input type="hidden" id="userId" th:value="${schoolDTO.userId}">

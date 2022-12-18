@@ -162,7 +162,9 @@ var mainImage = document.querySelector('#mainImage');
 var mainImage = document.querySelector('#mainImage');
 
 $(".one").click(function () {
+    let tempMainImg = $("#mainImage").attr('src');
     $("#mainImage").attr('src', $(this).attr('src'));
+    $(this).attr('src',tempMainImg);
 })
 
 /*--------------------황지수----------------------------*/
@@ -317,6 +319,9 @@ function register(reply, callback, error) {
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(reply),
         success: function () {
+            $('.replyRegisterButton').css("background-color", "#fff")
+            $('.replyRegisterButton').css("border", "1px solid #fff")
+            $('.replyRegisterButton').css("color", "#b7b7b7")
             callback();
         },
         error: function (xhr, status, err) {
@@ -400,7 +405,6 @@ function serviceVisitDate(serviceDTO, callback, error) {
         data: JSON.stringify(serviceDTO),
         contentType: "application/json; charset=utf-8",
         success: function (data) {
-            console.log(data)
             if (data) {
                 alert("신청 완료!!")
             } else {
