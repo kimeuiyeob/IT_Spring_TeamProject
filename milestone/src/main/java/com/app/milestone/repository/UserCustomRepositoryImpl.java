@@ -33,6 +33,8 @@ public class UserCustomRepositoryImpl implements UserCustomRepository {
                 .fetch();
     }
 
+//    박해준
+//    입력한 userId와 같은 userId를 user테이블에 있는 userId 조회
     @Override
     public User findByUserId(Long userId) {
         return (User) jpaQueryFactory
@@ -42,6 +44,8 @@ public class UserCustomRepositoryImpl implements UserCustomRepository {
                 .fetch();
     }
 
+//    박해준
+//    전체 유저 중 입력한 이메일이 DB에 있는지 검사
     @Override
     public Optional<User> findByUserEmail(String userEmail) {
         return findAll().stream()
@@ -49,6 +53,8 @@ public class UserCustomRepositoryImpl implements UserCustomRepository {
                 .findFirst();
     }
 
+//    박해준
+//    전체 유저 조회
     @Override
     public List<User> findAll() {
         return jpaQueryFactory
@@ -61,6 +67,8 @@ public class UserCustomRepositoryImpl implements UserCustomRepository {
         store.clear();
     }
 
+//    박해준
+//    입력한 이메일과 입력한 비밀번호와 같은 userId를 찾는다
     @Override
     public Long findByUserEmailAndUserPassword(String userEmail, String userPassword) {
         return jpaQueryFactory

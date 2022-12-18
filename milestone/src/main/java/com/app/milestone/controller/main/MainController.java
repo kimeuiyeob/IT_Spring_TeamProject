@@ -13,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,27 +32,27 @@ public class MainController {
     private final FileService fileService;
     private final SessionManager sessionManager;
 
+    //    박해준
+//    일반회원 회원가입
     @PostMapping("/people")
     public String createPeople(PeopleDTO peopleDTO) {
-//        if (result.hasErrors()) {
-//            return "join/joinUser";
-//        }
+
         peopleService.createPeople(peopleDTO);
 
         return "redirect:/main/main";
     }
 
+    //    박해준
+//  보육원 회원 회원가입
     @PostMapping("/school")
     public String createSchool(SchoolDTO schoolDTO) {
-        log.info("=========================" + schoolDTO);
-//        if (result.hasErrors()) {
-//            return "join/joinSchool";
-//        }
         schoolService.createSchool(schoolDTO);
 
         return "redirect:/main/main";
     }
 
+    //    박해준
+    //    OAuth회원가입
     @PostMapping("/main/OAuth")
     public String createOAuth(@Valid PeopleDTO peopleDTO, BindingResult result) {
         if (result.hasErrors()) {
@@ -67,7 +66,7 @@ public class MainController {
     @GetMapping("main")
     public void main(HttpSession session, Model model) {
 //        HttpSession session = request.getSession();
-        Long userId = (Long)session.getAttribute("userId");
+        Long userId = (Long) session.getAttribute("userId");
 //        도움이 필요한 보육원
 //        model.addAttribute("fileDTO", fileService.showProfile(userId));
         model.addAttribute("moneys", moneyService.donationMoneyRanking());
@@ -79,10 +78,10 @@ public class MainController {
         }
     }
 
-    // 서블릿 HTTP 세션 사용
+    //박해준
+    //    로그인
     @PostMapping("/login")
     public String mainLogin(HttpServletRequest request, Model model) {
-        log.info("들어옴");
         // getSession(true) 를 사용하면 처음 들어온 사용자도 세션이 만들어지기 때문에 false로 받음
         HttpSession session = request.getSession(false);
         if (session == null) {
@@ -93,16 +92,13 @@ public class MainController {
         // Member 로 타입 캐스팅
         User loginMember = (User) session.getAttribute(SessionConst.LOGIN_MEMBER);
 
-        // 세션에 회원 데이터가 없으면 home
+        // 세션에 회원 데이터가 없으면 main페이지로
         if (loginMember == null) {
-            log.info("로그인 실패");
             return "main";
-
         }
-        log.info("유저 : " + loginMember.toString());
+
         // 세션이 유지되면 로그인으로 이동
         model.addAttribute("loginDTO", loginMember);
-        log.info("로그인 성공");
         return "main";
     }
 }
