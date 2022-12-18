@@ -21,6 +21,7 @@ public class NoticeCustomRepositoryImpl implements NoticeCustomRepository{
 
     private final JPAQueryFactory jpaQueryFactory;
 
+    //  공지사항 하나
     @Override
     public NoticeDTO findByNoticeId(Long noticeId){
         return jpaQueryFactory.select(new QNoticeDTO(
@@ -34,6 +35,7 @@ public class NoticeCustomRepositoryImpl implements NoticeCustomRepository{
                 .fetchOne();
     };
 
+    //  공지사항 목록 : 최신순
     @Override
     public List<NoticeDTO> findCreatedDate(Pageable pageable) {
         return jpaQueryFactory.select(new QNoticeDTO(
@@ -47,6 +49,7 @@ public class NoticeCustomRepositoryImpl implements NoticeCustomRepository{
                 .fetch();
     }
 
+    //  공지사항 목록 : 오래된순
     @Override
     public List<NoticeDTO> findCreatedDateAsc(Pageable pageable) {
         return jpaQueryFactory.select(new QNoticeDTO(
@@ -60,6 +63,7 @@ public class NoticeCustomRepositoryImpl implements NoticeCustomRepository{
                 .fetch();
     }
 
+    //  검색 총 페이지수
     @Override
     public Long countByCreatedDate(Pageable pageable, Search search) {
         return jpaQueryFactory.select(notice.count())
@@ -71,7 +75,24 @@ public class NoticeCustomRepositoryImpl implements NoticeCustomRepository{
                 .fetchOne();
     }
 
-    /*Notice 공지사항 찾아오기*/
+    //  검색 목록 : 작성일 최신순
+    @Override
+    public List<NoticeDTO> findBySearch(Pageable pageable, Search search) {
+        return jpaQueryFactory.select(new QNoticeDTO(
+                notice.noticeId,
+                notice.noticeTitle,
+                notice.noticeContent,
+                notice.createdDate
+        ))
+                .from(notice)
+                .where(
+                        titleContaining(search.getNoticeTitle())
+                )
+                .orderBy(notice.createdDate.desc())
+                .fetch();
+    }
+
+    //  검색 목록 : 작성일 오래된순
     @Override
     public List<NoticeDTO> findBySearchAsc(Pageable pageable, Search search) {
         return jpaQueryFactory.select(new QNoticeDTO(
@@ -104,23 +125,7 @@ public class NoticeCustomRepositoryImpl implements NoticeCustomRepository{
                 .fetch();
     }
 
-    @Override
-    public List<NoticeDTO> findBySearch(Pageable pageable, Search search) {
-        return jpaQueryFactory.select(new QNoticeDTO(
-                notice.noticeId,
-                notice.noticeTitle,
-                notice.noticeContent,
-                notice.createdDate
-        ))
-                .from(notice)
-                .where(
-                        titleContaining(search.getNoticeTitle())
-                )
-                .orderBy(notice.createdDate.desc())
-                .fetch();
-    }
-
-    //    제목 검색
+    //    제목검색 메소드
     private BooleanExpression titleContaining(String noticeTitle) {
         return StringUtils.hasText(noticeTitle) ? notice.noticeTitle.contains(noticeTitle) : null;
     }

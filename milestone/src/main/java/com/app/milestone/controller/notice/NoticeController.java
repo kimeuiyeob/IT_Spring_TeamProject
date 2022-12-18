@@ -19,18 +19,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class NoticeController {
     private final NoticeService noticeService;
 
-    /*==================================================================================================*/
     @GetMapping("notice")
     public void notice() {
     ;
     }
-    /*==================================================================================================*/
+
+    //  공지사항 목록페이지
     @GetMapping("/noticeList")
     public void noticeList(Long noticeId, Model model){
         model.addAttribute("notice",  noticeService.noticeInfo(noticeId));
         model.addAttribute("noticeAll" ,noticeService.selectNoticeAll());
     }
-    /*==================================================================================================*/
+
+    // 공지사항 작성 : 페이지 이동
     @PostMapping(value = "write")
     public String noticeWrite(NoticeDTO noticeDTO) {
         noticeService.registerNotice(noticeDTO);
