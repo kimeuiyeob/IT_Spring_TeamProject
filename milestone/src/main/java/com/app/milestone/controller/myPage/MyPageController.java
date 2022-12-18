@@ -26,6 +26,7 @@ public class MyPageController {
     private final UserService userService;
     private final WithdrawalService withdrawalService;
     private final ServiceService serviceService;
+
     private final DonationRepository donationRepository;
     private final FileRepository fileRepository;
     private final AlarmRepository alarmRepository;
@@ -192,7 +193,6 @@ public class MyPageController {
         ;
     }
 
-
     //회원 탈퇴
     @Transactional
     @PostMapping("/deleteUser")
@@ -201,48 +201,46 @@ public class MyPageController {
         HttpSession session = request.getSession();
         Long userId = (Long) session.getAttribute("userId");
         String type = (String) session.getAttribute("type");
+
         WithdrawalDTO withdrawalDTO = new WithdrawalDTO();
 
-        log.info("세션값 맞지? : " + userId);
+        log.info("세션값  : " + userId);
 
         /*withdrawal테이블에 새로운값 추가*/
-        withdrawalDTO.setCreatedDate(LocalDateTime.now());
         withdrawalDTO.setWithdrawalReason(reason);
+
         //user서비스에서 type people,school확인하려구 만든거
         if (type.equals("people")) {
             withdrawalDTO.setWithdrawalUserType("일반");
-            log.info("여기로왔니? 피플");
+            log.info("피플");
         } else if (type.equals("school")) {
             withdrawalDTO.setWithdrawalUserType("보육원");
-            log.info("여기로왔니? 보육원");
+            log.info("보육원");
         }
+
         //withdrawal테이블에 회원탈퇴 이유 저장
         withdrawalService.insertReason(withdrawalDTO);
 
+        return new RedirectView("/main/main");
+
+    }
+
+    @Transactional
+    @PostMapping("/deleteUser2")
+    public RedirectView deleteAndSave2(HttpServletRequest request) {
         //================================================================
-
-        donationRepository.deleteByPeopleUserId(userId);
-        donationRepository.deleteBySchoolUserId(userId);
-        alarmRepository.deleteByGiverUserId(userId);
-        alarmRepository.deleteByTakerUserId(userId);
-        fileRepository.deleteByUserId(userId);
-        replyRepository.deleteBySchoolUserId(userId);
-        replyRepository.deleteByUserUserId(userId);
-
-        //================================================================
-
         //연관관계 때문에 @OnDelete(action = OnDeleteAction.CASCADE) 사용하였지만
         //삭제가 잘안되어 하나하나 연관관계를 찾아 삭제시켜주었다.
+        HttpSession session = request.getSession();
 
-//        donationRepository.deleteById(userId);
-//        fileRepository.deleteByUserId(userId);
+        Long userId = (Long) session.getAttribute("userId");
 
+        withdrawalService.deleteEverything(userId);
+        //================================================================
         //해당 세션아이디 삭제
         userService.saveReasonAnddeleteUserID(userId);
         //세션값을 없앤다.
         session.removeAttribute("userId");
-
-        log.info("여기까지 왔습니다.1");
 
         return new RedirectView("/main/main");
     }

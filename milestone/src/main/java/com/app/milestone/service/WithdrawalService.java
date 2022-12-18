@@ -1,25 +1,28 @@
 package com.app.milestone.service;
 
-import com.app.milestone.domain.PeopleDTO;
-import com.app.milestone.domain.Search;
-import com.app.milestone.domain.TalentDTO;
 import com.app.milestone.domain.WithdrawalDTO;
-import com.app.milestone.entity.Talent;
 import com.app.milestone.entity.Withdrawal;
-import com.app.milestone.repository.WithdrawalRepository;
+import com.app.milestone.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class WithdrawalService {
+
     private final WithdrawalRepository withdrawalRepository;
+
+    private final DonationRepository donationRepository;
+    private final FileRepository fileRepository;
+    private final AlarmRepository alarmRepository;
+    private final ReplyRepository replyRepository;
 
     //    전체 탈퇴회원 목록(최신순)
     public List<WithdrawalDTO> withdrawalList(Pageable pageable){
@@ -55,10 +58,21 @@ public class WithdrawalService {
     }
 
     //회원탈퇴시 탈퇴이유 저장
+    @Transactional
     public void insertReason(WithdrawalDTO withdrawalDTO) {
         Withdrawal entity = withdrawalDTO.toEntity();
         withdrawalRepository.save(entity);
     }
 
+    @Transactional
+    public void deleteEverything(Long userId) {
+        donationRepository.deleteByPeopleUserId(userId);
+        donationRepository.deleteBySchoolUserId(userId);
+        alarmRepository.deleteByGiverUserId(userId);
+        alarmRepository.deleteByTakerUserId(userId);
+        fileRepository.deleteByUserId(userId);
+        replyRepository.deleteBySchoolUserId(userId);
+        replyRepository.deleteByUserUserId(userId);
+    }
 
 }
