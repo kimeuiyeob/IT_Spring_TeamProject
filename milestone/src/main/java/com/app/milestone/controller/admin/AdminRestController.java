@@ -13,6 +13,11 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import com.app.milestone.repository.AlarmRepository;
+import com.app.milestone.repository.DonationRepository;
+import com.app.milestone.repository.FileRepository;
+import com.app.milestone.repository.ReplyRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @RestController
@@ -90,6 +95,7 @@ public class AdminRestController {
 
     //   전체회원 중 일반회원 삭제
     @RequestMapping("/peopleDelete")
+    @Transactional
     public void deletePeople(HttpServletRequest request){
         String [] userIds = request.getParameterValues("chkArray");
         for (int i = 0; i<userIds.length; i++){
@@ -98,9 +104,12 @@ public class AdminRestController {
     }
 
     //   보육원회원 삭제
+    @Transactional
     @RequestMapping("/schoolDelete")
     public void deleteSchool(HttpServletRequest request){
         String [] userIds = request.getParameterValues("chkArray");
+
+
         for (int i = 0; i<userIds.length; i++){
             schoolService.deleteByUserId(Long.valueOf(userIds[i]));
         }
@@ -206,7 +215,8 @@ public class AdminRestController {
     }
 
     //     재능기부 삭제
-    @RequestMapping("/serviceDelete")
+    @RequestMapping("/talentDelete")
+    @Transactional
     public void deleteSchedule(HttpServletRequest request){
         String [] donationIds = request.getParameterValues("chkArray");
         for (int i = 0; i<donationIds.length; i++){

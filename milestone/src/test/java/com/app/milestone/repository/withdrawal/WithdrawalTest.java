@@ -1,5 +1,6 @@
 package com.app.milestone.repository.withdrawal;
 
+import com.app.milestone.domain.PeopleDTO;
 import com.app.milestone.domain.WithdrawalDTO;
 import com.app.milestone.entity.Withdrawal;
 import com.app.milestone.repository.WithdrawalRepository;
@@ -30,10 +31,28 @@ public class WithdrawalTest {
 //    회원탈퇴 저장
     @Test
     public void saveTest() {
+//        WithdrawalDTO withdrawalDTO = new WithdrawalDTO();
+//        withdrawalDTO.setWithdrawalReason("대체할 만한 서비스를 찾았어요");
+//        withdrawalDTO.setWithdrawalUserType("보육원");                   //사용자 형태
+//        withdrawalRepository.save(withdrawalDTO.toEntity());
+
+        String[] reasons = {"이용하고 싶은 서비스가 없어요", "서비스 퀄리티가 낮아요", "비매너 회원을 만났어요", "잦은 오류가 발생해요", "대체할 만한 서비스를 찾았어요"};
+        String[] types = {"보육원", "일반"};
+        for (int i = 0; i < 100; i++) {
+            try {
+                Thread.sleep(0);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         WithdrawalDTO withdrawalDTO = new WithdrawalDTO();
-        withdrawalDTO.setWithdrawalReason("대체할 만한 서비스를 찾았어요");
-        withdrawalDTO.setWithdrawalUserType("보육원");                   //사용자 형태
-        withdrawalRepository.save(withdrawalDTO.toEntity());
+            withdrawalDTO.setWithdrawalReason(reasons[i % 5]);
+            withdrawalDTO.setWithdrawalUserType(types[i % 2]);
+
+            withdrawalRepository.save(withdrawalDTO.toEntity());
+        }
+
+
+
     }
 
 //    회원탈퇴 검색어(사용자 형태, 탈퇴이유)로 찾기
