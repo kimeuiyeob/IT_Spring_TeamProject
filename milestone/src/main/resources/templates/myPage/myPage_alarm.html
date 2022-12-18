@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/css/myPage/myPageMain.css">
     <link rel="stylesheet" href="/css/myPage/myPageAside.css">
     <link rel="stylesheet" href="/css/myPage/public.css">
+    <link rel="stylesheet" href="/css/myPage/myPageAlarm.css">
     <link rel="icon" href="/imgs/fix/favicon.png">
 
     <title>알림함</title>
@@ -26,7 +27,6 @@
     }
     .listItem {
         border-bottom: 1px solid rgb(228, 229, 237);
-        background-color: rgb(255 252 238);
     }
 
     .items-name {
@@ -211,46 +211,31 @@
                 <div class="list flexCol">
                     <div class="margin-top-16"></div>
                     <div class="listItems flexBetween">
-                        <div class="items-names" style="padding-left: 4%;">보육원명</div>
+                        <div class="items-names" style="padding-left: 3%;">보육원명</div>
                         <div class="items-locations" style="width: 30%;padding-left: 5%;">알람 내용</div>
-                        <div class="items-dates"  style="padding-left: 6%;">휴대폰 번호</div>
+                        <div class="items-dates"  style="padding-left: 3%;">휴대폰 번호</div>
                         <div class="items-cancels">알림 확인</div>
                     </div>
-
-                    <div class="listItem flexBetween">
+                    <section class="listSection">
+                    <!--<div class="listItem flexBetween">
                         <div class="items-name flexCol">보육원보육원</div>
-                        <div class="items-location" style="width: 30%;">2022년 11월 11일</div>
+                        <div class="items-location" style="width: 30%;">재능기부를 2022-12-22에 신청 했습니다</div>
                         <div class="items-date flexCol">010-1234-5678</div>
                         <div class="items-cancel flexCol" style="padding-left: 30px;">확인</div>
-                    </div>
+                    </div>-->
 
-
+                    </section>
                     <!--===================================================-->
 
                     <!--==============페이징 처리=============================-->
-                    <div class="pageBtns flexPublic">
-                        <a class="pageBtn flexPublic">
-                            <svg class="prevNextBtn flexPublic">
-                                <path xmlns="http://www.w3.org/2000/svg"
-                                      d="M9.41421356,12 L15.7071068,5.70710678 C16.0976311,5.31658249 16.0976311,4.68341751 15.7071068,4.29289322 C15.3165825,3.90236893 14.6834175,3.90236893 14.2928932,4.29289322 L7.29289322,11.2928932 C6.90236893,11.6834175 6.90236893,12.3165825 7.29289322,12.7071068 L14.2928932,19.7071068 C14.6834175,20.0976311 15.3165825,20.0976311 15.7071068,19.7071068 C16.0976311,19.3165825 16.0976311,18.6834175 15.7071068,18.2928932 L9.41421356,12 Z"></path>
-                            </svg>
-                        </a>
-                        <code class="pageBtn flexPublic page">
-                            <div>1</div>
-                        </code>
-                        <a class="pageBtn flexPublic">
-                            <div>2</div>
-                        </a>
-                        <a class="pageBtn flexPublic">
-                            <div>3</div>
-                        </a>
-                        <a class="pageBtn flexPublic">
-                            <svg class="prevNextBtn flexPublic">
-                                <path xmlns="http://www.w3.org/2000/svg"
-                                      d="M9.41421356,12 L15.7071068,5.70710678 C16.0976311,5.31658249 16.0976311,4.68341751 15.7071068,4.29289322 C15.3165825,3.90236893 14.6834175,3.90236893 14.2928932,4.29289322 L7.29289322,11.2928932 C6.90236893,11.6834175 6.90236893,12.3165825 7.29289322,12.7071068 L14.2928932,19.7071068 C14.6834175,20.0976311 15.3165825,20.0976311 15.7071068,19.7071068 C16.0976311,19.3165825 16.0976311,18.6834175 15.7071068,18.2928932 L9.41421356,12 Z"
-                                      transform="translate(11.500000, 12.000000) scale(-1, 1) translate(-11.500000, -12.000000) "></path>
-                            </svg>
-                        </a>
+                    <div class="card-footer">
+                        <div class="empty-div"></div>
+                        <div class="paging-number-box">
+                            <div class="paging-number">
+                                <div class="paging-number-flex">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <!--===================================================-->
 

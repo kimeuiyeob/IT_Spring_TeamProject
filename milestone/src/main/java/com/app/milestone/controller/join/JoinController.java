@@ -30,6 +30,7 @@ public class JoinController {
     private final PeopleRepository peopleRepository;
     private final GoogleJoinSupportService googleJoinSupportService;
     private final NaverService naverService;
+    private final UserService userService;
 
     @GetMapping("/user")
     public String createPeople(Model model) {
@@ -50,6 +51,11 @@ public class JoinController {
             return "join/joinOAuth";
         }
         return "redirect:/kakao/logout";
+    }
+
+    @PostMapping(value = {"/checkEmail"})
+    public Long checkEmail(@RequestBody String userEmail) {
+        return userService.checkEmail(userEmail);
     }
 
     @GetMapping("/way")

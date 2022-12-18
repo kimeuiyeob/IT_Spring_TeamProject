@@ -18,6 +18,7 @@ public class MyPageRestController {
     private final ServiceService serviceService;
     private final TalentService talentService;
     private final LikeService likeService;
+    private final AlarmService alarmService;
 
     /*=============================================================================*/
     //마이페이지 재능기부 목록 수정
@@ -123,7 +124,7 @@ public class MyPageRestController {
 
     //    일정 취소
     @GetMapping(value = {"/serviceDelete/{donationId}"})
-    public void ServiceDelete(@PathVariable("donationId") Long donationId) {
+    public void serviceDelete(@PathVariable("donationId") Long donationId) {
         serviceService.deleteByDonationId(donationId);
     }
 
@@ -140,4 +141,38 @@ public class MyPageRestController {
     }
 
 
+    //    개인 알람 조회
+    @GetMapping(value = {"/peopleAlarm/{page}"})
+    public AlarmResp peopleAlarmList(HttpSession session, @PathVariable("page") Integer page) {
+        Long userId = (Long) session.getAttribute("userId");
+
+        log.info("====================================================");
+        log.info("======================들어옴=======================");
+        AlarmResp alarmResp = new AlarmResp();
+        Page<AlarmDTO> arAlarmDTO = alarmService.peopleAlarmList(userId, page);
+        alarmResp.setArAlarmDTO(arAlarmDTO);
+
+        return alarmResp;
+    }
+
+    //    알람 확인
+    @GetMapping(value = {"/checkAlarm/{alarmId}"})
+    public void alarmCheck(@PathVariable("alarmId") Long alarmId) {
+        log.info("나눌렀음?");
+        alarmService.updateAlarmCheck(alarmId);
+    }
+
+    //    보육원 알람 조회
+    @GetMapping(value = {"/schoolAlarm/{page}"})
+    public AlarmResp schoolAlarmList(HttpSession session, @PathVariable("page") Integer page) {
+        Long userId = (Long) session.getAttribute("userId");
+
+        log.info("====================================================");
+        log.info("======================들어옴=======================");
+        AlarmResp alarmResp = new AlarmResp();
+        Page<AlarmDTO> arAlarmDTO = alarmService.schoolAlarmList(userId, page);
+        alarmResp.setArAlarmDTO(arAlarmDTO);
+
+        return alarmResp;
+    }
 }

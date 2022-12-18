@@ -55,4 +55,8 @@ public class Alarm extends Period {
         this.item = item;
         this.checkAlarm = checkAlarm;
     }
+
+    public void updateCheckAlarm(Boolean checkAlarm){
+        this.checkAlarm = checkAlarm;
+    }
 }

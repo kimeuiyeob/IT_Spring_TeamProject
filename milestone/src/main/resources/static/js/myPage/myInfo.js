@@ -12,11 +12,7 @@ function email_check(email) {
 }
 
 $email.on("keyup", function () {
-    $warningMsg = $(this).next();
-    if (existingEmail == $email.val()) {
-        $warningMsg.hide();
-    }
-    joinSubmit();
+    $submitBtn.attr("disabled", existingEmail == $email.val())
 })
 
 $email.on('blur', function () {
@@ -43,8 +39,8 @@ $email.on('blur', function () {
     // $warningMsg.show();
     // $warningMsg.find(".warningMsg").css("color", "rgb(79 189 18)");
     // $warningMsg.find(".warningMsg").text('사용 가능한 이메일입니다.');
+    checkEmail($email.val(), duplicated)
     emailCheckFlag = true;
-    joinSubmit();
 });
 
 /*----------------------------이름 유효성 검사----------------------------*/
@@ -77,7 +73,7 @@ $name.on('blur', function () {
 })
 function checkEmail(userEmail, callback){
     $.ajax({
-        url: "/myPage/checkEmail",
+        url: "/myPageRest/checkEmail",
         type: "post",
         data: userEmail,
         contentType: "application/json; charset=utf-8",
