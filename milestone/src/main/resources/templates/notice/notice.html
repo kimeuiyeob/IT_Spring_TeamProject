@@ -111,7 +111,7 @@
 
             text += `<div class="noticeBox">`
 
-            text += `<img src="/imgs/notice/notice.png" class="noticeImgs" alt="이미지" width="20px" height="20px"/>`
+            text += `<img src="/imgs/notice/notice.png" style="margin-right: 5px;" class="noticeImgs" alt="이미지" width="20px" height="20px"/>`
 
             text += `<div style="padding-right:5px">`
             text += `</div>`
@@ -132,7 +132,7 @@
     function getNoticeList1(param, callback, error) {
         let queryString = "/" + param.page || 1;
         $.ajax({
-            url: "/noticeRest/listAsc" + queryString,
+            url: "/noticeRest/list" + queryString,
             type: "get",
             success: function (noticeResp, status, xhr) {
                 if (callback) {
