@@ -25,7 +25,9 @@ import static com.app.milestone.entity.QService.service;
 public class AlarmCustomRepositoryImpl implements AlarmCustomRepository {
     private final JPAQueryFactory jpaQueryFactory;
 
+    //====================황지수====================
     //    전체 알람
+    //  마이페이지에서 사용할 모든 알람을 가져와 페이징 처리를 할 수 있게 하였다.
     @Override
     public List<AlarmDTO> findAlarmByType(Long userId, Pageable pageable, String type) {
         return jpaQueryFactory.select(new QAlarmDTO(
@@ -47,7 +49,9 @@ public class AlarmCustomRepositoryImpl implements AlarmCustomRepository {
                 .fetch();
     }
 
+    //====================황지수====================
     //    안읽은 알람 전체
+    //  헤더에 있는 알람에 보여질 안읽은 알람을 조회 한다. 각 회원에 맞는 알람을 보여주기위해 동적쿼리를 사용했다.
     @Override
     public List<AlarmDTO> findNoneCheckAlarmByType(Long userId, String type) {
         return jpaQueryFactory.select(new QAlarmDTO(
@@ -67,7 +71,9 @@ public class AlarmCustomRepositoryImpl implements AlarmCustomRepository {
                 .fetch();
     }
 
-//    동적 쿼리로 사용자의 형태에 따라 조회
+    //====================황지수====================
+    //    동적 쿼리로 사용자의 형태에 따라 조회
+    //  알람 조회시 각회원에 따라 보여질 알람이 다르기 때문에 상황에 따른 조건문을 돌려준다.
     private BooleanExpression checkUserType(String type) {
         return type.equals("school") ? alarm.receiver.eq("school") : alarm.receiver.eq("people");
     }

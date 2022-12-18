@@ -1,3 +1,4 @@
+<!--황지수-->
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -318,6 +319,8 @@
     let sessionId = [[${session.userId}]];
     let schoolId = $('.userId').val();
 
+    // 보육원 회원 또는 비회원시 기부하기를 제한
+    // 댓글등록쪽에 값을 각 회원에 맞게 수정
     if (sessionId) {
         $('.display-none').show();
     }
@@ -330,10 +333,12 @@
         $('#donateVisit').hide();
 
     }
+    // 댓글등록쪽에 각 회원이 등록한 프로필 사진을 띄움
     if(userDTO.file){
         $('.replyProfile').attr("src", `/file/display?fileName=` + userDTO.file.filePath + `/` + userDTO.file.fileUuid + `_` + userDTO.file.fileName)
     }
 
+    // 보육원회원이 등록한 최대 5장의 사진을 화면에 보여줌
     showSchoolImg();
 
     //보육원 이미지추가와 모달이미지 추가
@@ -350,19 +355,7 @@
         $('#modalQR').children().attr("src",schoolDTO.schoolQR);
     }
 
-    // if (modelSchoolDTO || modelPeopleDTO) {
-    //     $('.display-none').show();
-    //     if(modelPeopleDTO){
-    //         $(".nickName").text(modelPeopleDTO.peopleNickname);
-    //         sessionId = modelPeopleDTO.userId;
-    //     }
-    //     if (modelSchoolDTO) {
-    //         $(".nickName").text(modelSchoolDTO.schoolName);
-    //         $('.donate').hide();
-    //         sessionId = modelPeopleDTO.userId;
-    //     }
-    // }
-
+    // 보육원에 대한 정보, 랭킹, 최근기부, 좋아요 개수, 댓글을 화면에 보여줌
     show();
 
     //보육원 정보
@@ -453,6 +446,7 @@
     let replyText = "";
     let lastReplyFlag;
 
+    //DB를 조회해 나온 댓글을 화면에 쏴줌
     function getReply(replys) {
         replyText = "";
         lastReplyFlag = replys.last;
@@ -548,6 +542,7 @@
         }, showReply)
     })
 
+    // 댓글 등록 버튼 활성화
     $('.reply').on('keyup', function () {
         if ($(this).val().length != 0) {
             $('.replyRegisterButton').css("background-color", "rgb(255, 212, 0)")
@@ -589,6 +584,7 @@
             alert("방문하실 날짜를 선택해 주세요.")
             return;
         }
+        console.log(saveDate)
         serviceVisitDate({
             userId: schoolId,
             serviceVisitDate: saveDate
@@ -598,20 +594,27 @@
     //  ======================페이지 이동 후 정보 뿌림=================
     //show!!
     function show() {
+        // 보육원에 대한 기부랭킹
         getRanking1({
             userId: schoolId
         }, getRanking)
+        // 보육원에 대한 최근기부
         getRecent1({
             userId: schoolId
         }, getRecent);
+        // 보육원 정보
         getInfo1({
             userId: schoolId
         }, getInfo);
+        // 보육원에 달린 댓글
         showReply();
+        // 보육원 좋아요 수
         showLikeCount();
+        // 로그인한 회원이 좋아요한 보육원인지를 확인후 빈하트를 채움
         getLikeSchoolList(clickLikeBtn);
     }
 
+    // 좋아요 수를 체크
     function showLikeCount(){
         getLikeCount(schoolId, likeCount);
     }

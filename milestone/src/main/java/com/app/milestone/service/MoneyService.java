@@ -30,7 +30,9 @@ public class MoneyService {
     private final FileRepository fileRepository;
     private final DonationService donationService;
 
+    //====================황지수====================
     //    전체 기부금 랭킹
+    //  기부금랭킹을 받아 각 등수에 해당하는 회원의 정보를 넣어 돌려준다.
     public List<Ranking> donationMoneyRanking() {
         List<Ranking> arRanking = new ArrayList<>();
         List<Tuple> rankingInfo = moneyRepository.sortByMoneyCash();
@@ -47,7 +49,9 @@ public class MoneyService {
         return arRanking;
     }
 
+    //====================황지수====================
     //  보육원 하나에 대한 기부랭킹
+    //  보육원 하나에 대한 기부랭킹을 받아 각 등수에 해당하는 회원의 정보를 넣어 돌려준다.
     public List<MoneyDTO> moneyDonationRankingForOneSchool(Long userId) {
         List<MoneyDTO> moneyDTOS = new ArrayList<>();
         List<Tuple> tuples = moneyRepository.moneyRankingByOne(userId);
@@ -62,7 +66,9 @@ public class MoneyService {
         return moneyDTOS;
     }
 
+    //====================황지수====================
     //    최근 기부
+    //  최근기부한 목록을 받아와 회원의 프로필사진 정보와 함께 돌려준다.
     public List<MoneyDTO> recentDonationList(Long userId) {
         List<MoneyDTO> list = moneyRepository.findByCreateDateByUserId(userId);
         for (MoneyDTO moneyDTO : list){
@@ -71,21 +77,19 @@ public class MoneyService {
         return list;
     }
 
+    //====================황지수====================
     //    결제
+    //  결제정보를 받아와 테이블에 저장한다. 저장시 상대측에 알람을 보내야 하기에 알람테이블에 값을 넣고 각 회원의 기부카운트를 다시 세어주어 증가
     @Transactional
     public void payment(Long userId, MoneyDTO moneyDTO) {
         int donationCount = 0;
         People people = peopleRepository.findById(userId).get();
         School school = schoolRepository.findById(moneyDTO.getUserId()).get();
 
-
-
         Money money = moneyDTO.toEntity();
         money.changePeople(people);
         money.changeSchool(school);
         money = moneyRepository.save(money);
-
-
 
         donationService.alarm(money);
         donationCount = donationRepository.countByPeopleUserId(userId);

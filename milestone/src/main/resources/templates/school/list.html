@@ -1,3 +1,4 @@
+<!--황지수-->
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -130,16 +131,13 @@
     const $location = $(".location");
     let sessionId = [[${userId}]];
     let sessionType = [[${session.type}]];
-    // console.log(sessionTest)
-    // console.log(sessionTest.type)
 
+    // 메인화면에서 검색을 했을 경우 검색값 저장
     let searchFromMain = [[${search.schoolName}]];
-    console.log(sessionId);
 
+    // 메인화면에서 검색한 값을 검색창에 띄움
     if (searchFromMain) {
         $('.schoolName').val(searchFromMain);
-        // $('input[name = "schoolName"]').val(searchFromMain);
-        // $('input[id = "schoolName"]').val(searchFromMain);
     }
 
     // 처음 목록 가져오기
@@ -172,6 +170,7 @@
 
     let pageInfo;
 
+    // DB에서 조회된 보육원의 정보들을 화면에 쏴줌
     function getList(schoolDTO) {
         let text = "";
         console.log(schoolDTO)
@@ -253,6 +252,7 @@
         $("#totalCountNumber").html(schoolDTO.totalElements)
     }
 
+    // 지역검색또는 보육원 이름으로 검색
     function search() {
         getList1({
             schoolAddress: save,
@@ -261,6 +261,7 @@
         }, getList);
     }
 
+    // 보육원 목록
     function show() {
         getList1({
             schoolAddress: save,
@@ -315,6 +316,7 @@
         $pagingBtnFlex.html(text);
     }
 
+    // 버튼 클릭시 화면 상단으로 이동
     $pagingBtnFlex.on('click', ".page-number-link", function (e) {
         e.preventDefault();
         window.scrollTo({top: 0})
@@ -330,14 +332,15 @@
         // $(this).css('color', '#009ef7');
     })
 
+    // 버튼 디자인
     $pagingBtnFlex.on('mouseout', "a.page-number-link", function () {
         $(this).css('background-color', '#fff');
         $(this).css('color', '#9a9ba7');
     })
 
-    window.onresize = function () {
-        document.location.reload();
-    };
+    // window.onresize = function () {
+    //     document.location.reload();
+    // };
 
     //    보육원 상세 이동
     $(".schoolList").on('click', '.donationButton', function (e) {
@@ -346,7 +349,7 @@
     })
 
     //=======================좋아요======================
-    //내가 좋아한 보육원
+    //내가 좋아한 보육원 빈하트 채우기
     function clickLikeBtn(likeSchoolList) {
         $('.donationButton').each(function () {
             let likeFlag;

@@ -1,3 +1,7 @@
+/*
+ * 황지수
+ * */
+
 package com.app.milestone.aspect;
 
 import com.app.milestone.domain.AlarmDTO;
@@ -20,6 +24,7 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.Arrays;
 
+//만들어둔 어노테이션을 구현한다.
 @Configuration
 @Aspect
 @RequiredArgsConstructor
@@ -28,15 +33,16 @@ public class AlarmAspect {
     private final AlarmRepository alarmRepository;
     private final SchoolRepository schoolRepository;
     private final PeopleRepository peopleRepository;
-
+//
     // 조인포인트 : 메소드가 실행되기 전 시점을 저장하는 곳
 //    .getArgs : 메소드실행시 인자 가져옴
+//    @After 어노테이션을 사용한 메소드가 먼저 실행 후 실행된다.
     @After("@annotation(com.app.milestone.aspect.Alarm)")
     public void saveAlarm(JoinPoint joinPoint) {
         AlarmDTO alarmDTO = new AlarmDTO();
 
+        //각 기부형태에 따라 메소드의 이름이 다르기 때문에 부득이 하게 조건문으로 기부형태를 구분하여 필요한 값을 알람테이블에 넣어주었다.
         if (Money.class.isInstance(joinPoint.getArgs()[0])) {
-//            alarmDTO = new AlarmDTO();
             Money money = Money.class.cast(joinPoint.getArgs()[0]);
             alarmDTO.setReceiver("school");
             alarmDTO.setItem(money.getMoneyCash() + "");
@@ -47,7 +53,6 @@ public class AlarmAspect {
             alarm.changeTaker(money.getSchool());
         }
         if (Service.class.isInstance(joinPoint.getArgs()[0])) {
-//            alarmDTO = new AlarmDTO();
             Service service = Service.class.cast(joinPoint.getArgs()[0]);
             String visitDate = service.getServiceVisitDate() + "";
             alarmDTO.setReceiver("school");
@@ -59,10 +64,8 @@ public class AlarmAspect {
             alarm.changeTaker(service.getSchool());
         }
         if (TalentDTO.class.isInstance(joinPoint.getArgs()[0])) {
-//            alarmDTO = new AlarmDTO();
             TalentDTO talentDTO = TalentDTO.class.cast(joinPoint.getArgs()[0]);
             String ableDate = talentDTO.getTalentAbleDate() + "";
-            log.info("============================"+ ableDate);
             alarmDTO.setReceiver("people");
             alarmDTO.setItem(ableDate.substring(0,ableDate.indexOf('T')));
             alarmDTO.setType("재능기부일");

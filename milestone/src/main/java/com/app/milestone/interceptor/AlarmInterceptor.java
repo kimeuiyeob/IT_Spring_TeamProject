@@ -1,3 +1,7 @@
+/*
+ * 황지수
+ * */
+
 package com.app.milestone.interceptor;
 
 import com.app.milestone.domain.AlarmDTO;
@@ -39,6 +43,7 @@ public class AlarmInterceptor implements HandlerInterceptor {
 //    }
 
     //    컨트롤러를 경유 한 후, 즉 화면(view)으로 결과를 전달하기 전에 실행되는 메소드
+    //  모든화면에서 항상 알림에 대한 조회가 필요하기 때문에 Interceptor를 사용하였다.
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         Long userId = (Long) request.getSession().getAttribute("userId");
