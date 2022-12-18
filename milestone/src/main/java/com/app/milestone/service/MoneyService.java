@@ -84,6 +84,9 @@ public class MoneyService {
         money.changePeople(people);
         money.changeSchool(school);
         money = moneyRepository.save(money);
+
+
+
         donationService.alarm(money);
         donationCount = donationRepository.countByPeopleUserId(userId);
         people.update(donationCount);
