@@ -24,6 +24,7 @@ import java.util.List;
 public class NoticeService {
     private final NoticeRepository noticeRepository;
 
+    //  공지사항 전체목록 및 검색목록 가져오기
     public Page<NoticeDTO> noticeListBySearch(Integer page, Search search) {
         if (page == null) page = 0;
         Pageable pageable = PageRequest.of(page, 7);
@@ -38,15 +39,14 @@ public class NoticeService {
 
         return notices;
     }
-    /*============================================================*/
-    //Notice상세페이지 왼쪽 최근세션7개 제목 가져오는 메소드
+
+    //  Notice상세페이지 왼쪽 최근세션7개 제목 가져오는 메소드
     public List<NoticeDTO> selectNoticeAll() {
         List<NoticeDTO> list = noticeRepository.selectNoticeAll();
         return list;
     }
 
-    /*============================================================*/
-    //Notice공지사항 글 가져오기
+    //  Notice공지사항 글 가져오기
     public Page<NoticeDTO> noticeListBySearchAsc(Integer page, Search search) {
         if (page == null) page = 0;
         Pageable pageable = PageRequest.of(page, 7);
@@ -82,7 +82,7 @@ public class NoticeService {
         noticeRepository.deleteById(noticeId);
     }
 
-    //    총 공지사항 목록 수
+    //    공지사항 검색 목록 수
     public Long noticeListCount(Pageable pageable, Search search) {
         return noticeRepository.countByCreatedDate(pageable, search);
     }

@@ -22,8 +22,9 @@ import javax.servlet.http.HttpServletRequest;
 public class NoticeRestController {
     private final NoticeService noticeService;
 
+    //  공지사항 검색 목록
     @GetMapping(value= {"/list/{page}", "/list/{page}/{noticeTitle}"})
-    public NoticeResp adminNoticeList(@PathVariable("page") Integer page, Search search, Model model) {
+    public NoticeResp adminNoticeList(@PathVariable("page") Integer page, Search search) {
         NoticeResp noticeResp = new NoticeResp();
         Pageable pageable = PageRequest.of(page, 7);
         Page<NoticeDTO> arNoticeDTO = noticeService.noticeListBySearch(page, search);
@@ -32,8 +33,9 @@ public class NoticeRestController {
         return noticeResp;
     }
 
+    // 공지사항 검색 목록2
     @GetMapping(value= {"/listAsc/{page}", "/listAsc/{page}/{noticeTitle}"})
-    public NoticeResp adminNoticeListAsc(@PathVariable("page") Integer page, Search search, Model model) {
+    public NoticeResp adminNoticeListAsc(@PathVariable("page") Integer page, Search search) {
         NoticeResp noticeResp = new NoticeResp();
         Pageable pageable = PageRequest.of(page, 7);
         Page<NoticeDTO> arNoticeDTO = noticeService.noticeListBySearchAsc(page, search);
@@ -42,6 +44,7 @@ public class NoticeRestController {
         return noticeResp;
     }
 
+    // 공지사항 여러개 삭제
     @RequestMapping("/noticeDelete")
     public void deleteNotice(HttpServletRequest request){
         String [] noticeIds = request.getParameterValues("chkArray");
@@ -50,11 +53,13 @@ public class NoticeRestController {
         }
     }
 
+    // 공지사항 하나
     @GetMapping(value = {"/info/{noticeId}"})
     public NoticeDTO info(@PathVariable("noticeId") Long noticeId) {
         return noticeService.noticeInfo(noticeId);
     }
 
+    // 공지사항 수정
     @GetMapping(value = {"/modify"})
     public NoticeDTO noticeModify(NoticeDTO noticeDTO){
         return noticeService.modifyNotice(noticeDTO);

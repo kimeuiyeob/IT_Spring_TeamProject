@@ -395,6 +395,8 @@ function getSchoolList(schoolResp) {
     let text = "";
     pageInfo = schoolResp.arSchoolDTO;
     schoolResp.arSchoolDTO.content.forEach(school => {
+        console.log("school여기ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ : "+JSON.stringify(school))
+
         text += `<tr>`
         text += `<th class="card-body-title-checkbox-padding" style="width: 3%; margin-top: 29px;padding-top: 0; padding-bottom: 31px;">`
         text += `<label class="card-body-title-user-checkbox">`
@@ -420,7 +422,7 @@ function getSchoolList(schoolResp) {
         text += `</div>`
         text += `</th>`
         text += `<th class="card-body-title-padding" style="width: 18%;">`
-        text += `<div class="donate-info-height">`+ school.userPhoneNumber+`</div>`
+        text += `<div class="donate-info-height">`+ school.schoolPhoneNumber+`</div>`
         text += `</th>`
         text += `<th class="card-body-title-padding" style="width: 17%;">`
         text += `<div class="donate-info-height user-type">`+'보육원'+`</div>`
