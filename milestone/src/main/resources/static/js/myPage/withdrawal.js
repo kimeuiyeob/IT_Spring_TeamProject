@@ -76,3 +76,27 @@ function deleteAndSave(reason) {
         }
     });
 }
+/*====================================================================*/
+$withdrawalBtn.on('click', function () {
+    deleteAndSave2(reason);
+})
+/*====================================================================*/
+function deleteAndSave2(reason) {
+    $.ajax({
+        url: "/mypage/deleteUser2",
+        type: "post",
+        data: JSON.stringify(reason),
+        contentType: "application/json; charset=utf-8",
+        success: function () {
+            location.href = "/main/main"
+            if (callback) {
+                callback();
+            }
+        },
+        error: function (xhr, status, err) {
+            if (error) {
+                error(err);
+            }
+        }
+    });
+}
