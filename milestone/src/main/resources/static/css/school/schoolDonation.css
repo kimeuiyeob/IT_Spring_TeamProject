@@ -50,6 +50,7 @@ body{
 }
 
 .secWrapper{
+    height: 90%;
     display: flex;
 }
 
