@@ -1,0 +1,62 @@
+/* -----------카드 푸더---------- */
+
+.card-footer {
+    display: flex;
+    height: 62px;
+}
+
+.empty-div {
+    width: 556px;
+    flex-grow: 1;
+}
+
+.paging-number {
+    margin-left: 6.5px;
+    padding: 13px 0;
+}
+
+.paging-number-flex {
+    display: flex;
+    font-size: 14px;
+
+}
+
+.page-number-padding {
+    height: 32.5px;
+    width: 32.5px;
+    margin-right: 6.5px;
+}
+
+.page-number-link {
+    border-radius: 7px;
+    display: flex;
+    box-sizing: border-box;
+    font-weight: 700;
+    color: #5e6278;
+    text-decoration: none;
+    height: 100%;
+    width: 100%;
+    padding: 5px 10px;
+    align-items: center;
+}
+
+.prev-page-prevArrow {
+    background: url('/imgs/admin/arrow.png') no-repeat;
+    background-size: 9px;
+    width: 9px;
+    height: 13px;
+    opacity: .5;
+    transform: scaleX(-1);
+}
+
+.next-page {
+    margin-right: 0 !important;
+}
+
+.prev-page-nextArrow {
+    background: url('/imgs/admin/arrow.png') no-repeat;
+    background-size: 9px;
+    width: 9px;
+    height: 13px;
+    opacity: 1;
+}

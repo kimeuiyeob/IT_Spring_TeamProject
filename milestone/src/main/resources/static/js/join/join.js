@@ -2,15 +2,20 @@
 const $email = $('#email');
 let emailFlag = false;
 let $warningMsg;
+const existingEmail = $email.val();
 
 function email_check(email) {
     var regex = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
     return (email != '' && email != 'undefined' && regex.test(email));
 }
+$email.on("keyup", function () {
+    $joinBtn.attr("disabled", existingEmail == $email.val())
+})
 
 $email.on('blur', function () {
     var email = $(this).val();
     $warningMsg = $(this).next();
+    $warningMsg.hide();
     if (email == '' || email == 'undefined') {
         $warningMsg.show();
         $warningMsg.find(".warningMsg").css("color", "rgb(255, 64, 43)");
@@ -26,12 +31,41 @@ $email.on('blur', function () {
         return false;
     }
 
-    $warningMsg.show();
-    $warningMsg.find(".warningMsg").css("color", "rgb(79 189 18)");
-    $warningMsg.find(".warningMsg").text('사용 가능한 이메일입니다.');
+    // $warningMsg.show();
+    // $warningMsg.find(".warningMsg").css("color", "rgb(79 189 18)");
+    // $warningMsg.find(".warningMsg").text('사용 가능한 이메일입니다.');
+    checkEmail($email.val(), duplicated)
     emailFlag = true;
 });
 
+function checkEmail(userEmail, callback){
+    $.ajax({
+        url: "/myPageRest/checkEmail",
+        type: "post",
+        data: userEmail,
+        contentType: "application/json; charset=utf-8",
+        success: function(userId){
+            console.log(userId)
+            callback(userId)
+        },
+        error: function (xhr, status, err) {
+            if (error) {
+                error(err);
+            }
+        }
+    })
+}
+
+// 이메일 중복일 경우 실행할 메소드
+function duplicated (userId){
+    console.log(userId)
+    if(userId){
+        $warningMsg.show();
+        $warningMsg.find(".warningMsg").css("color", "rgb(255, 64, 43)");
+        $warningMsg.find(".warningMsg").text('사용 중인 이메일 입니다.');
+        emailCheckFlag = false;
+    }
+}
 
 /*------------------------비밀번호 안썻을 때와 유효성 검사----------------------*/
 const $password = $('#password');

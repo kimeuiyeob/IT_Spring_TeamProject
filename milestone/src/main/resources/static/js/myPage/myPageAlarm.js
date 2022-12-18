@@ -1,79 +1,81 @@
-const modalCancel = $('.modalBtn').eq(0);
+/*==============확인 클릭시 배경 하얀색===============*/
 
-let cancelSchedule;
-
-
-$cancels.on('click', function () {
-    console.log("눌림")
-    cancelSchedule = $(this).parent();
-})
-//삭제 yes 버튼
-modalCancel.on('click', function () {
-    $modalWrap.hide();
-    body.css('overflow', 'auto');
-    cancelSchedule.remove();
+$('.listSection').on('click', '.items-cancel', function () {
+    // $('div.listItem').css({"background-color": "rgb(255 252 238)"});
     console.log("눌림");
-    deleteService(donationId);
+    var alarmId = $(this).closest('article').find('input[name="alarmId"]').val();
+    var checkAlarm = $(this).closest('article').find('input[name="checkAlarm"]').val();
+    console.log(alarmId);
+    console.log(checkAlarm);
+    console.log("alarmId : " + alarmId);
+
+    $.ajax({
+        url: "/myPageRest/checkAlarm/" + alarmId,
+        type: "get",
+        success: function () {
+            console.log("확인");
+            show()
+        }
+    })
+
 })
 
-let donationId;
 
-//일정 삭제
-function deleteService(donationId) {
-    console.log("donationId : " + donationId)
-    $.ajax({
-        url: "/myPageRest/serviceDelete/" + donationId,
-        type: "get",
-        success: function (result) {
-            alert("해당 일정이 삭제 되었습니다");
-            location.replace("peopleSchedule");
-        },
-    })
-}
-
-globalThis.serviceDate = '';
+// 화면에 알람 목록
 globalThis.page = 0;
 let $pagingBtnFlex = $('.paging-number-flex');
 let pageInfo;
 
 // 처음 목록 가져오기
 show();
-function getList(serviceResp) {
 
-    console.log(JSON.stringify(serviceResp));
+function getList(alarmResp) {
+
+    console.log(JSON.stringify(alarmResp));
 
     let text = "";
-    pageInfo = serviceResp.arServiceDTO;
-    serviceResp.arServiceDTO.content.forEach(services => {
+    pageInfo = alarmResp.arAlarmDTO;
+    alarmResp.arAlarmDTO.content.forEach(alarms => {
+        console.log("나와"+alarms.checkAlarm)
+
         text += `<article>`
-        text += `<div class="listItems flexBetween">`
-        text += `<input type="hidden" name="donationId" value="` + services.donationId + `">`
-        text += `<div class="items-name flexCol">` + services.schoolName + `</div>`
-        text += `<div class="items-location">` + (services.schoolAddress + services.schoolAddressDetail) + `</div>`
-        text += `<div class="items-date flexCol" >` + (services.serviceVisitDate.substr(0, 10)) + `</div>`
-        text += `<input type="hidden" id= "asd" name="serviceVisitDate" value="` + services.serviceVisitDate.substr(0, 10) + `">`
+        if (alarms.checkAlarm == true) {
+            console.log('true에 들어옴')
+            text += `<div style="background-color: white;" class="listItem flexBetween">`
+            text += `<input type="hidden" name="alarmId" value="` + alarms.alarmId + `">`
+            text += `<input  type="hidden" id="checkAlarm" name="checkAlarm" value="` + alarms.checkAlarm + `">`
+            text += `<div class="items-name flexCol">` + alarms.name + `</div>`
+            text += `<div class="items-location" style="width: 30%;">` + (alarms.type + ' ' + alarms.item + ' 에' +`<br>`+ ' 신청 하였습니다') + `</div>`
+            text += `<div class="items-date flexCol">` + alarms.phoneNumber + `</div>`
+            text += `<div class="items-cancel flexCol" style="padding-left: 30px; cursor: default; color: darkgray;">확인</div>`
+            text += `</div>`
+            text += `</article>`
+        } else {
+            console.log('false에 들어옴')
+            text += ` <div style="background-color: rgb(255 252 238);" class="listItem flexBetween">`
+            text += `<input type="hidden" name="alarmId" value="` + alarms.alarmId + `">`
+            text += `<input  type="hidden" id="checkAlarm" name="checkAlarm" value="` + alarms.checkAlarm + `">`
+            text += `<div class="items-name flexCol">` + alarms.name + `</div>`
+            text += `<div class="items-location" style="width: 30%;">` + (alarms.type + ' ' + alarms.item + ' 에' +`<br>`+ ' 신청 하였습니다') + `</div>`
+            text += `<div class="items-date flexCol">` + alarms.phoneNumber + `</div>`
+            text += `<div class="items-cancel flexCol" style="padding-left: 30px;">확인</div>`
+            text += `</div>`
+            text += `</article>`
+        }
 
-        globalThis.serviceDate = services.serviceVisitDate;
-        console.log(serviceDate);
-        console.log(globalThis.serviceDate);
-
-        text += `<div class="items-cancel flexCol">취소</div>`
-        text += `</div>`
-        text += `</article>`
     })
     $(".listSection").html(text)
     pageingBtn();
 }
-console.log(globalThis.serviceDate);
-function getListSend(param, callback, error) {
 
+function getListSend(param, callback, error) {
     let queryString = "/" + param.page || 1;
 
     console.log(JSON.stringify(param));
     console.log("queryString : " + queryString);
 
     $.ajax({
-        url: "/myPageRest/peopleSchedule" + queryString,
+        url: "/myPageRest/peopleAlarm" + queryString,
         type: "get",
         success: function (serviceResp, status, xhr) {
             if (callback) {
@@ -95,7 +97,10 @@ function show() {
     }, getList)
 }
 
-console.log(globalThis.serviceDate);
+
+
+
+
 /* 페이징 처리 */
 function pageingBtn() {
     let text = "";
