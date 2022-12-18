@@ -29,7 +29,7 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
 
     private final JPAQueryFactory jpaQueryFactory;
 
-    /*=============================================================================================================*/
+    /*========================================김의엽===========================================================*/
     // 재능기부 목록 (가능일자 ASC)
     @Override
     public List<TalentDTO> findAllByTalentAbleDate(Pageable pageable, Search search) {
@@ -58,20 +58,19 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
                 .leftJoin(file)
                 .on((file.user.userId.eq(talent.people.userId)))
                 .where(
-                        talentTitleContaining(search.getTalentTitle()),
-                        talentPlaceContaining(search.getTalentPlace()),
-                        talentCategoryContainingAll(search.getTalentCategory()) //카테고리 클릭시
+                        talentTitleContaining(search.getTalentTitle()), //제목
+                        talentPlaceContaining(search.getTalentPlace()), //지역
+                        talentCategoryContainingAll(search.getTalentCategory()) //카테고리
                 )
-                .where(talent.school.userId.isNull())
-                .orderBy(talent.talentAbleDate.asc())
+                .where(talent.school.userId.isNull())//보육원id가 null인것만 나오게 하기 -> null이 아니면 보육원이 신청한 재능목록
+                .orderBy(talent.talentAbleDate.asc()) //가능일자 순으로 정렬
                 .offset(pageable.getOffset()) //여기서부터 10개를 가져온다 <-10개는 아래 limit ex)2페이지면 10부터 10개
                 .limit(pageable.getPageSize()) //목록에 뿌릴갯수 -> 10을보냈으니까 10으로 limit걸어논거다.
                 .fetch();
     }
 
 
-    /*=============================================================================================================*/
-
+    /*===========================================김의엽===========================================================*/
     //마이페이지 나의 재능기부 목록
     @Override
     public List<TalentDTO> findAllTalentById(Pageable pageable, Long peopleId) {
@@ -96,17 +95,19 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
                 file.fileImageCheck,
                 file.fileType
         ))
-                .where(talent.people.userId.eq(peopleId))
+                .where(talent.people.userId.eq(peopleId)) //마이페이지 -> 세션값과 동일한거 불러오기
                 .from(talent)
                 .leftJoin(file)
-                .on((file.user.userId.eq(talent.people.userId)))
-                .orderBy(talent.talentAbleDate.asc())
-                .offset(pageable.getOffset())
-                .limit(pageable.getPageSize())
+                .on((file.user.userId.eq(talent.people.userId))) //마이페이지 -> 파일 userId동일한거 불러오기
+                .orderBy(talent.talentAbleDate.asc()) //가능일자순으로 정렬
+                .offset(pageable.getOffset())  //여기서부터 10개를 가져온다 <-10개는 아래 limit ex)2페이지면 10부터 10개
+                .limit(pageable.getPageSize()) //목록에 뿌릴갯수 -> 10을보냈으니까 10으로 limit걸어논거다.
                 .fetch();
     }
 
 
+    /*===========================================김의엽============================================================*/
+    //DonationId로 해당 재능목록 조회하기
     @Override
     public List<TalentDTO> findByDonationId(Long donationId) {
         return jpaQueryFactory.select(new QTalentDTO(
@@ -123,13 +124,13 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
                 talent.people.userName,
                 talent.people.userEmail
         ))
-                .where(talent.donationId.eq(donationId))
+                .where(talent.donationId.eq(donationId)) //donationId가 같은거 불러오기
                 .from(talent)
                 .fetch();
     }
 
 
-    /*=============================================================================================================*/
+    /*==========================================김의엽==============================================================*/
     //조건에 따른 보육원 수
     @Override
     public Long countByAbleDate(Pageable pageable, Search search) {
@@ -144,19 +145,18 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
                 .orderBy(talent.talentAbleDate.asc())
                 .fetchOne();
     }
-    /*=============================================================================================================*/
+
+    /*==========================================김의엽==============================================================*/
     //재능기부 목록 페이징
     @Override
     public Long countByAbleDate3(Pageable pageable, Search search) {
         return jpaQueryFactory.select(talent.count())
                 .from(talent)
                 .where(
-//                        보육원 이름 검색
                         talentTitleContaining(search.getTalentTitle()),
                         talentPlaceContaining(search.getTalentPlace()),
                         talentCategoryContainingAll(search.getTalentCategory())
                 )
-//                .where(talent.school.userId.isNotNull().and(talent.people.userId.isNotNull()))
                 .where(talent.school.userId.isNull())
                 .orderBy(talent.talentAbleDate.asc())
                 .fetchOne();
@@ -176,6 +176,7 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
 
     /*=============================================================================================================*/
     //  재능기부 랭킹 정렬
+
     @Override
     public List<Tuple> sortBytalentRank() {
         List<Tuple> tuples = new ArrayList<>();
@@ -203,7 +204,7 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
         return tuples;
     }
 
-    /*===============================================================================================================================================================================*/
+    /*============================================김의엽=============================================================*/
     @Override  //게시글 상세보기
     public List<TalentDTO> talentDetail(Long donationId) {
         return jpaQueryFactory.select(new QTalentDTO(
@@ -233,15 +234,17 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
                 .fetch();
     }
 
-
-    //============제목 검색==============//
+    /*============================================김의엽=============================================================*/
+    //제목 검색//
     private BooleanExpression talentTitleContaining(String talentTitle) { //booleanExpression은 null 일때 무시될 수 있고, and또는 or절을 통해서 조합을 할 수 있다.
         return StringUtils.hasText(talentTitle) ? talent.talentTitle.contains(talentTitle) : null;
     } //booleanExpression 조건문을 반환한다, null일때 메소드 사라진다.
     //talentTitle에값이 있다면  talent.talentTitle.contains(talentTitle) 이걸 where절에 반환하고 false면 null을 반환해서 where절의 talentTitleContaining 메소드를 삭제한다.
 
 
-    //============카테고리 전체===========//
+    /*============================================김의엽=============================================================*/
+    //카테고리 전체//
+    //교육,운동,음악,미술,IT 카테고리를 like를 통해서 불러온다.
     private BooleanBuilder talentCategoryContainingAll(String talentCategory) {
         if (talentCategory == null) {
             return null;
@@ -272,7 +275,9 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
         return booleanBuilder;
     }
 
-    //============지역 검색==============//
+    /*============================================김의엽=============================================================*/
+    //지역 검색//
+    //서울,인천,경기,강원,충청,전라,경상,제주 지역들을 like를 통해서 불러온다.
     private BooleanBuilder talentPlaceContaining(List<String> talentPlace) {
         if (talentPlace == null) {
             return null;
@@ -307,7 +312,6 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
         return booleanBuilder;
     }
 
-
 //          =========페이징 처리===========
 //          .offset(0) == 0부터 시작한다.
 //          .limit(10) == 10개 가져온다.
@@ -316,9 +320,6 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
 //          userPaging.isFirst(); == 첫번째 페이지
 //          userPaging.getContent(); == 1페이지에 있는 user List
 //          =============================
-
-    /*=================================================================================================*/
-    /*=================================================================================================*/
 
 
     /* 관리자 페이지=============================================================*/
@@ -386,15 +387,12 @@ public class TalentCustomRepositoryImpl implements TalentCustomRepository {
                         people.userId.eq(user.userId),
                         peopleNameAndEmailAndNicknameAndCategoryAndPlace(search.getKeyword()),
                         peopleNameAndEmailAndNicknameAndCategoryAndPlace2(search.getTalentCategory())
-//                        peopleNameAndEmailAndNicknameAndCategoryAndPlace3(search.getTalentPlaceOne())
                 )
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .orderBy(talent.createdDate.desc())
                 .fetch();
     }
-
-    ;
 
 
 }

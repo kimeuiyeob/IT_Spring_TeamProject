@@ -22,25 +22,27 @@ public class TalentController {
     private final TalentService talentService;
     private final FileService fileService;
 
+    /*========================================김의엽======================================*/
+    //제일 첫 화면 재능기부 페이지 경로
     @GetMapping("/talent")
     public String talentlist(HttpSession session, Model model) {
         Long userId = (Long) session.getAttribute("userId");
+
         FileDTO fileDTO = null;
 
-        log.info("세션값 잘갖고왔니?" + userId);
-
+        //세션아이디가 있을때는 showProfile을 통해 해당 user의 프로필사진을 불러온다.
         if(userId != null){
             model.addAttribute("picture","mypicture");
             fileDTO = fileService.showProfile(userId);
+
             if(fileDTO != null) {
                 model.addAttribute("talentPicture", fileDTO);
             }
         }
-
         return "/talent/talent";
     }
 
-    /*===============================================*/
+    /*========================================김의엽======================================*/
     //마이페이지 글 삭제 -> 페이지 이동연습 , 레스트로 바꿈, 사용하지 않음!!!
     @GetMapping("/delete")
     public String noticeList(Long donationId){
