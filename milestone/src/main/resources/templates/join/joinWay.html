@@ -15,7 +15,7 @@
 <body>
 <div class="joinWrap flexCol" style="margin-bottom: 100px;">
     <a class="joinHeader" th:href="@{/main/main}"><img src="/imgs/fix/logo.png" alt=""
-                                       style="width: 114px; height: 31.5px;"></a>
+                                                       style="width: 114px; height: 31.5px;"></a>
     <div class="joinBody flexCol">
         <div class="joinTitleWrap">
             3초안에 가입하고,
@@ -61,18 +61,20 @@
             </div>
         </a>
 
+        <div class="divisionLine">
+            <div class="emailWrap">
+                <a href="" class="snsBtn flexPublic"
+                   style="background-color : /*rgb(255, 253, 236)*/#e4e5ed; color:#333333;" th:href="@{/join/user}">
+                    <div class="flexPublic">
+                        <div>이메일로 가입하기</div>
+                    </div>
+                </a>
+            </div>
+        </div>
 
     </div>
-    <div class="divisionLine">
-        <div class="emailWrap">
-            <a href="" class="snsBtn flexPublic"
-               style="background-color : /*rgb(255, 253, 236)*/#e4e5ed; color:#333333;" th:href="@{/join/user}">
-                <div class="flexPublic">
-                    <div>이메일로 가입하기</div>
-                </div>
-            </a>
-        </div>
-    </div>
+
+
 </div>
 </div>
 </body>
