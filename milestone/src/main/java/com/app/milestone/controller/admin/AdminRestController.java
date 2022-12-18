@@ -99,7 +99,7 @@ public class AdminRestController {
     public void deletePeople(HttpServletRequest request){
         String [] userIds = request.getParameterValues("chkArray");
         for (int i = 0; i<userIds.length; i++){
-            peopleService.deleteByUserId(Long.valueOf(userIds[i]));
+            withdrawalService.deleteEverything(Long.valueOf(userIds[i]));
         }
     }
 
@@ -108,10 +108,8 @@ public class AdminRestController {
     @RequestMapping("/schoolDelete")
     public void deleteSchool(HttpServletRequest request){
         String [] userIds = request.getParameterValues("chkArray");
-
-
         for (int i = 0; i<userIds.length; i++){
-            schoolService.deleteByUserId(Long.valueOf(userIds[i]));
+            withdrawalService.deleteEverything(Long.valueOf(userIds[i]));
         }
     }
 
