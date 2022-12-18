@@ -1,3 +1,7 @@
+/*
+ * 황지수
+ * */
+
 package com.app.milestone.interceptor;
 
 import com.app.milestone.domain.AlarmDTO;
@@ -35,6 +39,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 //    }
 
     //    컨트롤러를 경유 한 후, 즉 화면(view)으로 결과를 전달하기 전에 실행되는 메소드
+    //  모든 화면에 존재하는 헤더에 프로필사진을 항상 불러와야 하기 때문에 각 컨트롤러에 쓸 필요없이 Interceptor로 프로필사진을 화면에 넘겨주었다.
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         Long userId = (Long) request.getSession().getAttribute("userId");

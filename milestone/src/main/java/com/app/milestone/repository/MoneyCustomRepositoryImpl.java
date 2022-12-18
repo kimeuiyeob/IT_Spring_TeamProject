@@ -26,7 +26,9 @@ import static com.app.milestone.entity.QUser.user;
 public class MoneyCustomRepositoryImpl implements MoneyCustomRepository {
     private final JPAQueryFactory jpaQueryFactory;
 
+    //====================황지수====================
     //    기부받은 내역
+    //  하나의 보육원에 대한 기부내역을 조회하여 최신 순으로 정렬
     @Override
     public List<MoneyDTO> findByCreateDateByUserId(Long userId) {
         return jpaQueryFactory.select(new QMoneyDTO(
@@ -45,7 +47,9 @@ public class MoneyCustomRepositoryImpl implements MoneyCustomRepository {
                 .fetch();
     }
 
+    //====================황지수====================
     //  전체 기부금 랭킹 정렬
+    //  개인회원별 기부금을 더하여 구성한 테이블을 반복문으로 기부금액이 큰순으로 정렬(Query Dsl에선 인라인뷰를 지원하지 않기때문)
     @Override
     public List<Tuple> sortByMoneyCash() {
         List<Tuple> tuples = new ArrayList<>();
@@ -73,7 +77,9 @@ public class MoneyCustomRepositoryImpl implements MoneyCustomRepository {
         return tuples;
     }
 
+    //====================황지수====================
     //  보육원 하나 기부금 랭킹 정렬
+    //  개인회원별 하나의 보육원에 해당하는 기부금 합을 구하여 반복문으로 기부금이 큰 순으로 정렬
     @Override
     public List<Tuple> moneyRankingByOne(Long userId) {
         List<Tuple> tuples = new ArrayList<>();

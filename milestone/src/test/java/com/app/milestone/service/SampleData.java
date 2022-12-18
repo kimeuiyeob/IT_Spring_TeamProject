@@ -51,7 +51,7 @@ public class SampleData {
         String[] nickNames = {"독수리", "흰개미", "고구마"};
         for (int i = 0; i < 105; i++) {
             try {
-                Thread.sleep(0);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -78,7 +78,7 @@ public class SampleData {
         String[] names = {"임장원", "임윤하", "임영웅", "김정국", "최은지", "정동원", "성시경", "조유진", "안예은", "이무진", "장원영", "이영지", "김민석", "강민경", "이찬원", "한동근", "김태연", "이청하", "이승윤", "홍승민", "정지민", "윤미래", "성효린", "송가인", "정승환", "이영현", "임윤아", "장민호", "최정훈", "황민현", "김다현", "김나영", "서인국", "박지원", "이석훈", "김채원", "양지은", "박효신", "김호중"};
         for (int i = 0; i < 107; i++) {
             try {
-                Thread.sleep(0);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -113,7 +113,7 @@ public class SampleData {
     public void moneyTest() {
         for (int i = 0; i < 270; i++) {
             // 기부자 피기부자 샘플
-            Long giver = Long.valueOf(random.nextInt(103) + 1);
+            Long giver = Long.valueOf(random.nextInt(103) + 2);
             Long taker = random.nextInt(106) + 106L;
 
             MoneyDTO moneyDTO = new MoneyDTO();
@@ -129,7 +129,7 @@ public class SampleData {
     public void visitTest() {
         for (int i = 0; i < 340; i++) {
             // 기부자 피기부자 샘플
-            Long giver = Long.valueOf(random.nextInt(103) + 1);
+            Long giver = Long.valueOf(random.nextInt(103) + 2);
             Long taker = random.nextInt(106) + 106L;
 
             ServiceDTO serviceDTO = new ServiceDTO();
@@ -151,7 +151,7 @@ public class SampleData {
 
         for (int i = 0; i < 132; i++) {
             // 기부자 샘플
-            giver = Long.valueOf(random.nextInt(103) + 1);
+            giver = Long.valueOf(random.nextInt(103) + 2);
             // 재능기부 데이터
             TalentDTO talentDTO = new TalentDTO();
             talentDTO.setTalentTitle(talentTitle[i % 5]);
@@ -249,11 +249,4 @@ public class SampleData {
         }
     }
 
-    @Test
-    public void test() {
-        int test = random.nextInt(12);
-        Long giver = Long.valueOf(random.nextInt(100));
-        log.info("" + giver);
-//        log.info(String.format("%014d",test));
-    }
 }

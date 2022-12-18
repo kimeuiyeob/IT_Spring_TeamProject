@@ -89,9 +89,10 @@ function callender() {
 
             /* 저장된 날짜 뿌려주기 */
             if (saveDate) {
-                let savedYear = saveDate.split('년')[0];
-                let savedMonth = saveDate.split('년')[1].split('월')[0];
-                let savedDate = saveDate.split('년')[1].split('월')[1].split('일')[0];
+                let dateTemp = saveDate.split('-');
+                let savedYear = dateTemp[0];
+                let savedMonth = dateTemp[1];
+                let savedDate = dateTemp[2];
                 if ($dateScope.eq(i).text() == savedDate) {
                     if (month == savedMonth) {
                         if (year == savedYear) {
@@ -183,7 +184,7 @@ const $tds = $('td');
 $tds.on('click', function () {
     $tds.find(".daysBackground").css("background-color", "transparent");
     saveDate = "";
-    var str = year + "-" + month + "-" + this.innerText + " 00:00:00";
+    var str = year + (month<10? "-0":"-") + month + (this.innerText<10? "-0":"-") + this.innerText + " 00:00:00";
     thisIsMonth = today.getMonth() + 1;
     thisIsYear = today.getFullYear();
 
@@ -194,7 +195,6 @@ $tds.on('click', function () {
             $(this).find(".daysBackground").css("background-color", "#ffd400");
             saveDate += str;
             checkC = true;
-            console.log('추가 : ' + saveDate);
         }
     }
 })
