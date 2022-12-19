@@ -1,0 +1,393 @@
+<!--황지수-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>main</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="/css/main/slide.css"/>
+    <link rel="stylesheet" href="/css/main/main.css"/>
+    <link rel="stylesheet" href="/css/fix/header.css"/>
+    <link rel="stylesheet" href="/css/fix/footer.css"/>
+    <link rel="stylesheet" href="/css/fix/menu.css"/>
+    <link rel="stylesheet" href="/css/fix/public.css"/>
+    <link rel="icon" href="/imgs/fix/favicon.png">
+</head>
+
+<body>
+<script th:inline="javascript">
+
+    const urlParams = new URLSearchParams(window.location.search);
+    if(urlParams.get("join")=='false') {
+        alert("이미회원가입이 되셨습니다.")
+    } else if(urlParams.get("login")=='false') {
+        alert("로그인이 실패하셨습니다.")
+    }else if(urlParams.get("join")=='true'){
+        alert("회원가입 되셨습니다.")
+    }
+    history.replaceState({}, null, location.pathname);
+
+</script>
+
+<header th:replace="/fix/header.html :: header"></header>
+<div class="main1">
+    <main class="main2">
+        <!--배너-->
+        <section class="banner1" id="mobile-banner1">
+            <div class="banner2" id="mobile-banner2">
+                <div class="bannerWrap">
+                    <section class="slide-text1" id="mobile-slide-text1">
+                        <h1 class="slide-text2">보육원 찾기 NO.1 마일스톤에서<br>기부하고싶은 보육원을 찾아보세요!</h1>
+                        <form class="search1" th:action="@{/school/list}">
+                            <div class="search2">
+                                <div class="search-text1">
+                                    <!-- =============================================================================== -->
+                                    <div style="margin: 0; padding: 0;
+                                list-style: none; box-sizing: border-box; ">
+                                        <div style=" display: flex;justify-content: center;
+                                    align-items: center;color: black;">
+                                            <div style="height: 55px; display: flex; justify-content: center;
+                                        align-items: flex-end; font-size: 1.6rem;">
+                                                <div>
+                                                    <h1 class="text"
+                                                        style="margin-bottom: 12px; font-size: 21px; color: white"></h1>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- =============================================================================== -->
+                                    <span style="white-space:pre;min-height:29px"></span>
+                                    <span class="search-text2 search-text3">|</span>
+                                </div>
+                                <label for="hero-search2">
+                                    <input name="schoolName" id="hero-search2" role="search" maxlength="15"
+                                           autocomplete="off"
+                                           autocorrect="off" autocapitalize="off" class="search4" value="">
+                                </label>
+                                <div class="search-icon1">
+                                    <span role="img" color="#ffffff" rotate="0" class="search-icon2">
+                                        <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"
+                                             aria-hidden="true" focusable="false" preserveAspectRatio="xMidYMid meet"
+                                             class="search-icon3">
+                                            <path xmlns="http://www.w3.org/2000/svg"
+                                                  d="M11.2307008,3.5 C15.5002489,3.5 18.9614015,6.96828437 18.9614015,11.24663 C18.9614015,13.0978372 18.3133954,14.7973826 17.2322825,16.1299241 L20.2742127,19.178378 C20.5762688,19.4810023 20.5764739,19.9714482 20.2746708,20.2738195 C19.9728678,20.5761908 19.4833433,20.5759857 19.1812873,20.2733614 L19.1812873,20.2733614 L16.1426973,17.2288066 C14.8071694,18.3312107 13.0960911,18.9932599 11.2307008,18.9932599 C6.96115262,18.9932599 3.5,15.5249756 3.5,11.24663 C3.5,6.96828437 6.96115262,3.5 11.2307008,3.5 Z M11.2307008,5.04932599 C7.81506225,5.04932599 5.04614015,7.82395349 5.04614015,11.24663 C5.04614015,14.6693064 7.81506225,17.4439339 11.2307008,17.4439339 C14.6463393,17.4439339 17.4152614,14.6693064 17.4152614,11.24663 C17.4152614,7.82395349 14.6463393,5.04932599 11.2307008,5.04932599 Z">
+                                            </path>
+                                        </svg>
+                                    </span>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="slide-text3" th:object="${schools}">
+                            <div class="slide-text4">
+                                <a th:href="*{get(0).userId}" class="slide-text5" style="display: flex">
+                                    #
+                                    <div th:text="*{get(0).schoolName}"></div>
+                                </a>
+                            </div>
+                            <div class="slide-text4">
+                                <a th:href="*{get(1).userId}" class="slide-text5" style="display: flex">
+                                    #
+                                    <div th:text="*{get(1).schoolName}"></div>
+                                </a>
+                            </div>
+                            <div class="slide-text4">
+                                <a th:href="*{get(2).userId}" class="slide-text5" style="display: flex">
+                                    #
+                                    <div th:text="*{get(2).schoolName}"></div>
+                                </a>
+                            </div>
+                        </div>
+                    </section>
+                    <div class="swiper mySwiper" id="mobile-mySwiper" style="margin: 0">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <a th:href="@{/introduce/introduce}"><img class="banner-imgs1"
+                                                                          src="/imgs/main/slide01.gif"></a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a th:href="@{/ranking/ranking}"><img class="banner-imgs1" src="/imgs/main/slide02.png"></a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a th:href="@{/school/list}"><img class="banner-imgs1" src="/imgs/main/slide03.png"></a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a th:href="@{/talent/talent}"><img class="banner-imgs1"
+                                                                    src="/imgs/main/slide04.png"></a>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="swiper-button-next" id="mobile-swiper-button-next"></div>
+                            <div class="swiper-button-prev" id="mobile-swiper-button-prev"></div>
+                        </div>
+                        <div class="swiper-pagination" id="mobile-swiper-pagination"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--기부랭킹-->
+        <section class="ranking1" id="mobile-ranking1">
+            <h1 class="ranking-title1" id="mobile-ranking-title1">
+                기부 랭킹을 만나보세요!
+            </h1>
+            <div class="ranking2" id="mobile-ranking2">
+                <div class="ranking-text1">
+                    기부금 랭킹
+                </div>
+                <nav>
+                    <ul class="ranking3">
+                        <th:block th:object="${moneys.get(i)}" th:each="i:${#numbers.sequence(0,8)}">
+                            <li class="ranking4" th:if="${i <= 3}">
+                                <a class="ranking5">
+                                    <div class="ranking6">
+                                        <span style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 48px; height: 48px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
+                                            <img class = "border-circle" alt="프로필 아이콘"
+                                                 th:if="*{file == null}"
+                                                 src="/imgs/fix/normalProfile.png" decoding="async" data-nimg="fixed"
+                                                 style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
+                                            <img alt="프로필 아이콘" th:if="*{file != null}"
+                                                 th:src="'/file/display?fileName='+ *{file.filePath} + '/' + *{file.fileUuid} + '_' + *{file.fileName}"
+                                                 decoding="async" data-nimg="fixed"
+                                                 style="border-radius: 50%; position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
+                                        </span>
+                                    </div>
+                                    <span class="ranking-text2" th:text="*{peopleNickname}"></span>
+                                </a>
+                            </li>
+                            <li class="ranking4 mobile-ranking4" th:if="${i > 3}">
+                                <a class="ranking5">
+                                    <div class="ranking6">
+                                        <span style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 48px; height: 48px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
+                                            <img class = "border-circle" alt="프로필 아이콘"
+                                                 th:if="*{file == null}"
+                                                 src="/imgs/fix/normalProfile.png" decoding="async" data-nimg="fixed"
+                                                 style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
+                                            <img class = "border-circle" alt="프로필 아이콘" th:if="*{file != null}"
+                                                 th:src="'/file/display?fileName='+ *{file.filePath} + '/' + *{file.fileUuid} + '_' + *{file.fileName}"
+                                                 decoding="async" data-nimg="fixed"
+                                                 style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
+                                        </span>
+                                    </div>
+                                    <span class="ranking-text2" th:text="*{peopleNickname}"></span>
+                                </a>
+                            </li>
+                        </th:block>
+                    </ul>
+                </nav>
+            </div>
+            <div class="ranking2">
+                <div class="ranking-text1">
+                    기부횟수 랭킹
+                </div>
+                <nav>
+                    <ul class="ranking3">
+                        <th:block th:object="${services.get(i)}" th:each="i:${#numbers.sequence(0,8)}">
+                            <li class="ranking4" th:if="${i <= 3}">
+                                <a class="ranking5">
+                                    <div class="ranking6">
+                                        <span style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 48px; height: 48px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
+                                            <img class = "border-circle" alt="프로필 아이콘"
+                                                 th:if="*{file == null}"
+                                                 src="/imgs/fix/normalProfile.png" decoding="async" data-nimg="fixed"
+                                                 style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
+                                            <img class = "border-circle" alt="프로필 아이콘" th:if="*{file != null}"
+                                                 th:src="'/file/display?fileName='+ *{file.filePath} + '/' + *{file.fileUuid} + '_' + *{file.fileName}"
+                                                 decoding="async" data-nimg="fixed"
+                                                 style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
+                                        </span>
+                                    </div>
+                                    <span class="ranking-text2" th:text="*{peopleNickname}">한예슬</span>
+                                </a>
+                            </li>
+                            <li class="ranking4 mobile-ranking4" th:if="${i > 3}">
+                                <a class="ranking5">
+                                    <div class="ranking6">
+                                        <span style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 48px; height: 48px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
+                                            <img class = "border-circle" alt="프로필 아이콘"
+                                                 th:if="*{file == null}"
+                                                 src="/imgs/fix/normalProfile.png" decoding="async" data-nimg="fixed"
+                                                 style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
+                                            <img class = "border-circle" alt="프로필 아이콘" th:if="*{file != null}"
+                                                 th:src="'/file/display?fileName='+ *{file.filePath} + '/' + *{file.fileUuid} + '_' + *{file.fileName}"
+                                                 decoding="async" data-nimg="fixed"
+                                                 style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
+                                        </span>
+                                    </div>
+                                    <span class="ranking-text2" th:text="*{peopleNickname}">한예슬</span>
+                                </a>
+                            </li>
+                        </th:block>
+                    </ul>
+                </nav>
+            </div>
+        </section>
+        <!--도움이 필요한 보육원-->
+        <section class="help1" id="mobile-help1">
+            <h2 class="help-title1" id="mobile-help-title1">
+                도움이 필요한 보육원 이에요!
+            </h2>
+            <div class="help2" th:object="${schools}">
+                <article class="help3">
+                    <a th:href="*{get(0).userId}" class="help4">
+                        <div class="help5" id="mobile-help5-1">
+                            <div class="help6" style="background-color: rgb(212, 220, 252);">
+                                <h5 class="help-text1" id="mobile-help-text1-1"
+                                    th:text="*{get(0).schoolAddress}"></h5>
+                                <h2 class="help-text2" id="mobile-help-text2-1"
+                                    th:text="*{get(0).schoolName}"></h2>
+                                <img class="help-img1" id="mobile-help-img1-1" src="/imgs/main/baby01.png">
+                            </div>
+                        </div>
+                    </a>
+                </article>
+                <article class="help3">
+                    <a th:href="*{get(1).userId}" class="help4">
+                        <div class="help5" id="mobile-help5-2">
+                            <div class="help6" style="background-color: rgb(244, 246, 159);">
+                                <h5 class="help-text1" id="mobile-help-text1-2"
+                                    th:text="*{get(1).schoolAddress}"></h5>
+                                <h2 class="help-text2" id="mobile-help-text2-2"
+                                    th:text="*{get(1).schoolName}"></h2>
+                                <img class="help-img1" id="mobile-help-img1-2" src="/imgs/main/baby02.png">
+                            </div>
+                        </div>
+                    </a>
+                </article>
+                <article class="help3">
+                    <a th:href="*{get(2).userId}" class="help4">
+                        <div class="help5" id="mobile-help5-3">
+                            <div class="help6" style="background-color: rgb(246, 201, 172);">
+                                <h5 class="help-text1" id="mobile-help-text1-3"
+                                    th:text="*{get(2).schoolAddress}"></h5>
+                                <h2 class="help-text2" id="mobile-help-text2-3"
+                                    th:text="*{get(2).schoolName}"></h2>
+                                <img class="help-img1" id="mobile-help-img1-3" src="/imgs/main/baby03.png">
+                            </div>
+                        </div>
+                    </a>
+                </article>
+                <article class="help3">
+                    <a th:href="*{get(3).userId}" class="help4">
+                        <div class="help5" id="mobile-help5-4">
+                            <div class="help6" style="background-color: rgb(215, 209, 251);">
+                                <h5 class="help-text1" id="mobile-help-text1-4"
+                                    th:text="*{get(3).schoolAddress}"></h5>
+                                <h2 class="help-text2" id="mobile-help-text2-4"
+                                    th:text="*{get(3).schoolName}"></h2>
+                                <img class="help-img1" id="mobile-help-img1-4" src="/imgs/main/baby04.png">
+                            </div>
+                        </div>
+                    </a>
+                </article>
+                <article class="help3" id="mobile-delete">
+                    <a th:href="*{get(4).userId}" class="help4">
+                        <div class="help5">
+                            <div class="help6" style="background-color: rgb(203, 224, 252);">
+                                <h5 class="help-text1" th:text="*{get(4).schoolAddress}"></h5>
+                                <h2 class="help-text2" th:text="*{get(4).schoolName}"></h2>
+                                <img class="help-img1" src="/imgs/main/baby05.png">
+                            </div>
+                        </div>
+                    </a>
+                </article>
+            </div>
+        </section>
+        <section class="video1" id="mobile-video1">
+            <div class="video2">
+                <div class="video3">
+                    <div class="video-text1" id="mobile-video-text1">
+                        <h1 class="video-text2" id="mobile-video-text2">
+                            내가 기부할 모든 보육원을<br>만날 수 있는 마일스톤!
+                        </h1>
+                        <h2 class="video-text3" id="mobile-video-text3">
+                            간편한 보육원 정보 검색!<br>그 동안 보육원 정보를 찾기 힘들어 망설였던 기부<br>다양한 검색방법으로 다양한 보육원을 만나보세요.
+                        </h2>
+                    </div>
+                    <div class="video4">
+                        <a data-video="ruXXj-3T2e4" id="video-id1" class="video-class1">
+                            <img style="border-radius: 8px;" id="mobile-video4 youtube-img1"
+                                 src="/imgs/main/youtube.jpeg">
+                        </a>
+                        <a data-video="ruXXj-3T2e4" id="video-id2" class="video-class2" style="border-radius: 8px">
+                            <iframe width="374" height="211" src="https://www.youtube.com/embed/fpDQDDst2HE?amp;mute=1"
+                                    title="YouTube video player" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen id="youtube1">
+                            </iframe>
+                        </a>
+                    </div>
+                    <div class="video_modal_popup">
+                    </div>
+                </div>
+                <div class="video-text4">
+                    <article class="video-text5" id="mobile-video-text5-1">
+                        <h3 class="video-text6" id="mobile-video-text6-1">
+                            편한 기부
+                        </h3>
+                        <h4 class="video-text7" id="mobile-video-text7-1">QR 코드로<br>빠르고 간편하게 기부해보세요!
+                        </h4>
+                        <div class="video-text8">
+                            <span style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 28px; height: 28px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
+                                <img alt="카드 0" srcset="/imgs/main/video1.png 1x" src="/imgs/main/video1.png"
+                                     decoding="async"
+                                     data-nimg="fixed"
+                                     style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
+                            </span>
+                        </div>
+                    </article>
+                    <article class="video-text5" id="mobile-video-text5-2">
+                        <h3 class="video-text6" id="mobile-video-text6-1">
+                            안전한 기부
+                        </h3>
+                        <h4 class="video-text7" id="mobile-video-text7-2">기부한 내 돈, 걱정되지 않나요?<br>실시간 기부 랭킹으로<br>즉시 확인시켜드려요!</h4>
+                        <div class="video-text8">
+                            <span style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 28px; height: 28px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
+                                <img alt="카드 1" srcset="/imgs/main/video2.png 1x" src="/imgs/main/video2.png"
+                                     decoding="async"
+                                     data-nimg="fixed"
+                                     style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
+                            </span>
+                        </div>
+                    </article>
+                    <article class="video-text5" id="mobile-video-text5-3">
+                        <h3 class="video-text6" id="mobile-video-text6-1">
+                            간단한 검색
+                        </h3>
+                        <h4 class="video-text7" id="mobile-video-text7-3">찾기 어려웠던 보육원 정보!<br>다양한 검색 방법으로<br>보육원의 정보를 볼 수 있습니다.</h4>
+                        <div class="video-text8">
+                            <span style="box-sizing: border-box; display: inline-block; overflow: hidden; width: 28px; height: 28px; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;">
+                                <img alt="카드 2" srcset="/imgs/main/video3.png 1x" src="/imgs/main/video3.png"
+                                     decoding="async"
+                                     data-nimg="fixed"
+                                     style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
+                            </span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+<footer th:replace="/fix/footer.html :: footer"></footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+<script src="/js/main/main.js"></script>
+<script src="/js/main/banner.js"></script>
+<script src="/js/fix/header.js"></script>
+<script src="/js/fix/footer.js"></script>
+<script th:inline="javascript">
+    // let fileDTO = [[${fileDTO}]];
+    // console.log(fileDTO)
+    // if (fileDTO) {
+    //     $('#login-profile9').css("background-image", `url(/file/display?fileName=` + fileDTO.filePath + `/s_` + fileDTO.fileUuid + "_" + fileDTO.fileName + `)`)
+    // } else if (!fileDTO) {
+    //     $('#login-profile9').css("background-image", `url(/imgs/myPage/normalProfile.png)`)
+    //     $('#login-profile9').css("background-size", "32px")
+    // }
+</script>
+</html>
