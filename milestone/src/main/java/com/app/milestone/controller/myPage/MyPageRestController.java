@@ -41,6 +41,7 @@ public class MyPageRestController {
     private final CertificationService certificationService;
     private final FileService fileService;
 
+//    이메일 중복검사
     @PostMapping(value = {"/checkEmail"})
     public Long checkEmail(@RequestBody String userEmail) {
         return userService.checkEmail(userEmail);

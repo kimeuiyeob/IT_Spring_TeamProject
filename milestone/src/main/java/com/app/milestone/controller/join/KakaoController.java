@@ -20,6 +20,7 @@ import javax.servlet.http.HttpSession;
 public class KakaoController {
     private final KakaoService kakaoService;
 
+//    카카오 회원가입, 토큰을 받아옴
     @ResponseBody
     @GetMapping("/login")
     public RedirectView kakaoCallback(@RequestParam String code, HttpSession session, RedirectAttributes redirectAttributes) throws Exception {
@@ -30,7 +31,7 @@ public class KakaoController {
         redirectAttributes.addAttribute("userEmail", kakaoService.getKakaoInfo(token));
         return new RedirectView("/join/OAuth");
     }
-
+//    카카오 로그아웃, 세션을 날려버린다
     @GetMapping("/logout")
     public RedirectView kakaoLogout(HttpSession session) {
         log.info("logout");
