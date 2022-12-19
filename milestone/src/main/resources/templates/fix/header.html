@@ -113,10 +113,11 @@
         <div class="button1 login-header-button1" id="mobile-button1">
             <div class="relative">
                 <button role="button" color="default" class="button2 button3" id="message-button"
-                        th:style="${session.userId != null ? 'display:block' : 'display:none'}">
+                        th:style="${session.userId != null && session.type != 'admin' ? 'display:block' : 'display:none'}">
                     <span class="button4 button3">알림</span>
                     <div class="redDot" th:if="${checkAlarm != null}"></div>
                 </button>
+                <h2 th:style="${session.type == 'admin' ? 'display:block' : 'display:none'}" id="admin-text">Milestone 관리자 입니다</h2>
                 <div class="message1" id="message-id1">
                     <div class="message2">
                         <ul class="message3 list1">
