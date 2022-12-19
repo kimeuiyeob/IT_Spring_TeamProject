@@ -868,3 +868,8 @@ input[type = 'checkbox']:checked + .checkboxCos {
     text-align: center;
 }
 
+#admin-text{
+    font: inherit;
+    margin-right: 7px;
+    font-size: 15px;
+}
