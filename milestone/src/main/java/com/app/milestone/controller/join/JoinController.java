@@ -32,18 +32,19 @@ public class JoinController {
     private final NaverService naverService;
     private final UserService userService;
 
+//    일반 회원 회원가입
     @GetMapping("/user")
     public String createPeople(Model model) {
         model.addAttribute("peopleDTO", new PeopleDTO());
         return "join/joinUser";
     }
-
+//    보육원 회원 회원가입
     @GetMapping("/school")
     public String createSchool(Model model) {
         model.addAttribute("schoolDTO", new SchoolDTO());
         return "join/joinSchool";
     }
-
+//    카카오 회원가입
     @GetMapping("/OAuth")
     public String createOAuth(Model model, HttpServletRequest request, HttpSession session) {
         model.addAttribute("peopleDTO", new PeopleDTO());
@@ -52,39 +53,39 @@ public class JoinController {
         }
         return "redirect:/kakao/logout";
     }
-
+//    이메일 중복검사
     @PostMapping(value = {"/checkEmail"})
     public Long checkEmail(@RequestBody String userEmail) {
         return userService.checkEmail(userEmail);
     }
-
+//    일반회원 가입 종류 선택
     @GetMapping("/way")
     public String way() {
         return "/join/joinWay";
     }
 
     ;
-
+//    로그아웃
     @GetMapping("/logout")
     public String logout() {
         return "/join/logout";
     }
 
     ;
-
+//    보육원가입인지 일반 가입인지 선택 창
     @GetMapping("/select")
     public String select() {
         return "/join/joinSelect";
     }
 
     ;
-
+//    OAuth로 이메일 받아서 가입하는 화면
     @GetMapping("/joinOauth")
     public String joinOauth(PeopleDTO peopleDTO) {
         return "join/joinOAuth";
     }
 
-
+//    휴대폰 인증 문자 발송
     @GetMapping("/phoneCheck")
     @ResponseBody
     public String sendSMS(@RequestParam("phone") String userPhoneNumber) { // 휴대폰 문자보내기
