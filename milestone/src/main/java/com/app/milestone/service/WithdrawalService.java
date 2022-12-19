@@ -24,16 +24,14 @@ public class WithdrawalService {
     private final AlarmRepository alarmRepository;
     private final ReplyRepository replyRepository;
 
-    //    전체 탈퇴회원 목록(최신순)
+    /*==========================정서림===========================*/
+    //    전체 탈퇴회원 목록
     public List<WithdrawalDTO> withdrawalList(Pageable pageable){
         return withdrawalRepository.findByCreatedDate(pageable);
     }
 
-    //  전체 탈퇴회원 목록(오래된 순)
-    public List<WithdrawalDTO> withdrawalListAsc(){
-        return withdrawalRepository.findByCreatedDateAsc();
-    }
-
+    /*==========================정서림===========================*/
+    //  탈퇴회원 검색목록
     public Page<WithdrawalDTO> withdrawalListSearch(Integer page, String reason) {
         if (page == null) page = 0;
         Pageable pageable = PageRequest.of(page, 7);
@@ -45,7 +43,7 @@ public class WithdrawalService {
         return withdrawal;
     }
 
-
+    /*==========================정서림===========================*/
     public Page<WithdrawalDTO> withdrawalListSearchAsc(Integer page, String reason) {
         if (page == null) page = 0;
         Pageable pageable = PageRequest.of(page, 7);
@@ -57,13 +55,14 @@ public class WithdrawalService {
         return withdrawal;
     }
 
-    //회원탈퇴시 탈퇴이유 저장
+    //  회원탈퇴시 탈퇴이유 저장
     @Transactional
     public void insertReason(WithdrawalDTO withdrawalDTO) {
         Withdrawal entity = withdrawalDTO.toEntity();
         withdrawalRepository.save(entity);
     }
 
+    //  탈퇴시 모든 정보삭제
     @Transactional
     public void deleteEverything(Long userId) {
         donationRepository.deleteByPeopleUserId(userId);
