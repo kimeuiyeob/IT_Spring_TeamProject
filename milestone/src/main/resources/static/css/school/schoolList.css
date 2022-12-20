@@ -380,6 +380,16 @@ h2.schoolName{
 
 /* 반응형============================================ */
 @media screen and (max-width: 768px) {
+    .location{
+        margin-right: 1px;
+        padding: 0 0;
+        width: 10vw;
+        justify-content: center;
+    }
+
+    .schoolImg>img {
+        width: 100%;
+    }
 
     div.wholePage {
         margin-bottom: 50px;

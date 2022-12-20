@@ -26,6 +26,8 @@ public class SampleData {
     @Autowired
     private SchoolService schoolService;
     @Autowired
+    private ReplyService replyService;
+    @Autowired
     private DonationRepository donationRepository;
     @Autowired
     private MoneyService moneyService;
@@ -43,29 +45,6 @@ public class SampleData {
 
     private Random random = new Random();
 
-    //    개인 샘플 데이터(105명)
-    @Test
-    public void savePeople() {
-        String[] names = {"이지은", "이승철", "윤도현", "이문세", "정은지", "김광석", "김세정", "김경호", "유인나", "유해진", "마동석", "정우성", "이정재", "유재석", "이광수", "송지효", "김종국", "정호석", "전소민", "한동석", "김유정", "김태희", "김태희", "한가인", "전지현", "성은지", "정재훈", "문승희", "홍준성", "홍수현", "김인영", "배다빈", "박종우", "김민혁"};
-//        log.info("==============================="+names.length);
-        String[] nickNames = {"독수리", "흰개미", "고구마"};
-        for (int i = 0; i < 105; i++) {
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            PeopleDTO peopleDTO = new PeopleDTO();
-            peopleDTO.setPeopleNickname(nickNames[i % 3] + i + "호");
-            peopleDTO.setUserEmail("qwe" + i + "@qwe.qwe");
-            peopleDTO.setUserName(names[i % 34]);
-            peopleDTO.setUserPassword("cXdlcjEyMzQh");
-            peopleDTO.setUserPhoneNumber("010" + String.format("%08d", random.nextInt(99999999)));
-
-            peopleRepository.save(peopleDTO.toEntity());
-        }
-    }
-
     //  보육원 샘플데이터 (107개)추가
     @Test
     public void saveSchool() {
@@ -78,7 +57,7 @@ public class SampleData {
         String[] names = {"임장원", "임윤하", "임영웅", "김정국", "최은지", "정동원", "성시경", "조유진", "안예은", "이무진", "장원영", "이영지", "김민석", "강민경", "이찬원", "한동근", "김태연", "이청하", "이승윤", "홍승민", "정지민", "윤미래", "성효린", "송가인", "정승환", "이영현", "임윤아", "장민호", "최정훈", "황민현", "김다현", "김나영", "서인국", "박지원", "이석훈", "김채원", "양지은", "박효신", "김호중"};
         for (int i = 0; i < 107; i++) {
             try {
-                Thread.sleep(500);
+                Thread.sleep(0);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -93,7 +72,7 @@ public class SampleData {
             schoolDTO.setSchoolBank(bank[random.nextInt(6)]);
             schoolDTO.setSchoolAccount(String.format("%014d", random.nextInt(100000000)));
             schoolDTO.setUserPhoneNumber("010" + String.format("%08d", random.nextInt(99999999)));
-            schoolDTO.setSchoolQR("https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=http://localhost:9999/school/donation?userId=" + (101 + i));
+            schoolDTO.setSchoolQR("https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=http://192.168.181.32:9999/login/login?prevSchoolId=" + (i+1));
             schoolDTO.setSchoolTitle("안녕하세요. " + schoolNames[i % 22] + "입니다.");
             schoolDTO.setSchoolContent("안녕하세요. " + schoolNames[i % 22] + "보육원입니다. " + contents[random.nextInt(5)]);
             schoolDTO.setUserEmail("asd" + i + "@asd.asd");
@@ -108,13 +87,55 @@ public class SampleData {
         }
     }
 
+    //    개인 샘플 데이터(105명)
+    @Test
+    public void savePeople() {
+        String[] names = {"이지은", "이승철", "윤도현", "이문세", "정은지", "김광석", "김세정", "김경호", "유인나", "유해진", "마동석", "정우성", "이정재", "유재석", "이광수", "송지효", "김종국", "정호석", "전소민", "한동석", "김유정", "김태희", "김태희", "한가인", "전지현", "성은지", "정재훈", "문승희", "홍준성", "홍수현", "김인영", "배다빈", "박종우", "김민혁"};
+//        log.info("==============================="+names.length);
+        String[] nickNames = {"독수리", "흰개미", "고구마"};
+        for (int i = 0; i < 105; i++) {
+            try {
+                Thread.sleep(0);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            PeopleDTO peopleDTO = new PeopleDTO();
+            peopleDTO.setPeopleNickname(nickNames[i % 3] + i + "호");
+            peopleDTO.setUserEmail("qwe" + i + "@qwe.qwe");
+            peopleDTO.setUserName(names[i % 34]);
+            peopleDTO.setUserPassword("cXdlcjEyMzQh");
+            peopleDTO.setUserPhoneNumber("010" + String.format("%08d", random.nextInt(99999999)));
+
+            peopleRepository.save(peopleDTO.toEntity());
+        }
+    }
+
+    //    댓글 샘플 데이터
+    @Test
+    public void replyTest() {
+        String[] replys = {"얼마전에 치킨사들고 방문했었는데 너무 뜻깊은 시간이었습니다","아이들이 치킨을 더 좋아할까요? 피자를 더 좋아할까요?","집에 전자레인지가 생겼는데 혹시 전자레인지 필요하신가요?","보육원에 음식을 사들고 가면 아이들과 같이 식사할 수 있나요?","아이들이 행복해하는 모습을 보니 제가 절로 행복해지네요","얼마전에 책장 정리하다보니 유아용 책이 많더라구요 유아용책도 도움이 될까요?","보육원 옆에 분식집을 운영하고 있습니다. 나중에 아이들과 놀러오세요.","날이 많이 추워서 롱패딩을 나누고 싶은데 어떻게 하면 되나요?"};
+        for (int i = 0; i < 1070; i++) {
+
+            // 기부자 피기부자 샘플
+            Long giver = Long.valueOf(random.nextInt(100) + 108);
+            Long taker = random.nextInt(105) + 1L;
+
+            ReplyDTO replyDTO = new ReplyDTO();
+            replyDTO.setSchoolUserId(taker);
+            replyDTO.setUserId(giver);
+            replyDTO.setReplyContent(replys[i%8]);
+
+            replyService.register(giver, replyDTO);
+        }
+    }
+
     //    기부금 샘플 데이터
     @Test
     public void moneyTest() {
         for (int i = 0; i < 270; i++) {
             // 기부자 피기부자 샘플
-            Long giver = Long.valueOf(random.nextInt(103) + 2);
-            Long taker = random.nextInt(106) + 106L;
+            Long giver = Long.valueOf(random.nextInt(100) + 108);
+            Long taker = random.nextInt(105) + 1L;
 
             MoneyDTO moneyDTO = new MoneyDTO();
             moneyDTO.setMoneyCash(random.nextInt((200) + 1) * 1000L);
@@ -129,8 +150,8 @@ public class SampleData {
     public void visitTest() {
         for (int i = 0; i < 340; i++) {
             // 기부자 피기부자 샘플
-            Long giver = Long.valueOf(random.nextInt(103) + 2);
-            Long taker = random.nextInt(106) + 106L;
+            Long giver = Long.valueOf(random.nextInt(100) + 108);
+            Long taker = random.nextInt(105) + 1L;
 
             ServiceDTO serviceDTO = new ServiceDTO();
             serviceDTO.setServiceVisitDate(LocalDateTime.of(2023, 1, random.nextInt(31) + 1, 0, 0, 0));
@@ -151,7 +172,7 @@ public class SampleData {
 
         for (int i = 0; i < 132; i++) {
             // 기부자 샘플
-            giver = Long.valueOf(random.nextInt(103) + 2);
+            giver = Long.valueOf(random.nextInt(100) + 108);
             // 재능기부 데이터
             TalentDTO talentDTO = new TalentDTO();
             talentDTO.setTalentTitle(talentTitle[i % 5]);
@@ -178,7 +199,7 @@ public class SampleData {
             if (i % 2 == 0) {
                 TalentDTO talentDTO = talentService.findByDonationId(talent.getDonationId());
 //              // 피기부자
-                Long takerId = random.nextInt(106) + 106L;
+                Long takerId = random.nextInt(105) + 1L;
                 // 피기부자 엔티티
                 School school = schoolService.selectSchoolId(takerId);
                 Talent talent1 = talentService.selectDonation(talentDTO);
