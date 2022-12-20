@@ -81,9 +81,21 @@ public class LoginController {
         return new RedirectView("/main/main");
     }
 
+//    //    로그인페이지
+//    @GetMapping("/login")
+//    public String loginForm(@ModelAttribute("loginDTO") LoginDTO loginDTO) {
+//        return "login/login";
+//    }
+
     //    로그인페이지
     @GetMapping("/login")
-    public String loginForm(@ModelAttribute("loginDTO") LoginDTO loginDTO) {
+    public String loginForm(@ModelAttribute("loginDTO") LoginDTO loginDTO, Long prevSchoolId, HttpServletRequest request) {
+        log.info("===================로긴============");
+        log.info("===================로긴============"+ prevSchoolId);
+        log.info("===================로긴============");
+        if(prevSchoolId != null){
+            request.getSession().setAttribute("prevSchoolId",prevSchoolId);
+        }
         return "login/login";
     }
 
@@ -92,6 +104,47 @@ public class LoginController {
         session.invalidate();
         return new RedirectView("/main/main");
     }
+
+//    //    로그인
+//    // 서블릿 HTTP 세션 사용
+//    @PostMapping("/login")
+//    public String login(@Valid @ModelAttribute("loginDTO") LoginDTO loginDTO, BindingResult bindingResult, HttpServletRequest request) {
+//        userService.login(loginDTO);
+//
+////        bindingResult.hasErrors() 값이 알맞은지 체크
+//        if (bindingResult.hasErrors()) {
+//            return "login/login";
+//        }
+//
+//        Long userId = userService.login(loginDTO);
+//
+////        userId가 null이라면 아이디 또는 비밀번호 오류로 다시 로그인 페이지로 보내준다
+//        if (userId == null) {
+//            bindingResult.reject("loginFail", "아이디 또는 비밀번호가 맞지 않습니다.");
+//            log.info("아이디 비번 오류");
+//            return "login/login";
+//        }
+//
+//        // 로그인 성공 처리
+//        // 세션이 있으면 있는 세션 반환, 없으면 신규 세션을 생성해서 반환
+//        // getSession() : 디폴트가 true, false는 세션이 없을 때 새로 만들지 않고 null을 반환
+//        HttpSession session = request.getSession();
+//        // 세션에 로그인 회원 정보 보관
+//        session.setAttribute("userId", userId);
+//
+////        user type구분
+//        if (userService.typeCheck(userId)) {
+//            session.setAttribute("type", "people");
+//        } else {
+//            session.setAttribute("type", "school");
+//        }
+//        if (userId == 1) {
+//            session.setAttribute("type", "admin");
+//        }
+//
+////        로그인 성공하면 main페이지로 보내준다
+//        return "redirect:/main/main";
+//    }
 
     //    로그인
     // 서블릿 HTTP 세션 사용
@@ -128,6 +181,11 @@ public class LoginController {
         }
         if (userId == 1) {
             session.setAttribute("type", "admin");
+        }
+        
+//        결제창으로 이동
+        if(request.getSession().getAttribute("prevSchoolId") != null){
+            return "redirect:/school/donation?userId="+request.getSession().getAttribute("prevSchoolId");
         }
 
 //        로그인 성공하면 main페이지로 보내준다

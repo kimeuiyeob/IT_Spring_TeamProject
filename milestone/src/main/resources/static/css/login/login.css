@@ -473,6 +473,7 @@ input[type='radio'], input[type='checkbox'] {
 
 .sns-login-btn-wrapper .row:not(:first-child) .sns-login-btn {
     text-align: left;
+    display: flex;
     padding-left: 89px;
 }
 
@@ -526,4 +527,48 @@ input[type='radio'], input[type='checkbox'] {
 
 #googleLoginBtn:hover {
     border: 1px solid rgb(199, 199, 199);
+}
+
+#milestoneLoginBtn{
+    padding-right: 54px;
+}
+
+@media screen and (max-width: 768px) {
+    html{
+        overflow-x: hidden;
+        width: 100%;
+    }
+
+    .container{
+        width: 100%;
+    }
+
+    .container .login-container{
+        width: 80%;
+    }
+
+    #login-footer{
+        min-width: 0;
+    }
+
+    #milestoneLoginBtn{
+        display: flex;
+        text-align: left;
+        justify-content: center;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .flexGrow{
+        padding-left: 30%;
+    }
+
+    .sns-login-btn-wrapper .row:not(:first-child) .sns-login-btn{
+        padding-left: 15px;
+        justify-content: center;
+    }
+
+    .testWrap{
+        width: 50%;
+    }
 }
